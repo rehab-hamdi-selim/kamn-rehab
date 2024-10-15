@@ -1,4 +1,4 @@
-# kamn 🔐
+# kamn 
 
 The most comprehensive sports application.
 
