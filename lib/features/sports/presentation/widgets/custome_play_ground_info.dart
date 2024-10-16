@@ -42,9 +42,8 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
                             .copyWith(fontSize: 16.h),
                         maxLines: maxLines,
                       ),
-                      Visibility(
-                        visible: isVisible,
-                        child: Positioned(
+                      if (isVisible)
+                        Positioned(
                           bottom:
                               0, // Ensure the container is aligned to the bottom
                           left: 0,
@@ -63,11 +62,10 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
                             ),
                           ),
                         ),
-                      ),
-                      Visibility(visible: isVisible, child: readMoreButton())
+                      if (isVisible) readMoreButton()
                     ],
                   ),
-                  Visibility(visible: !isVisible, child: readMoreButton())
+                  if (!isVisible) readMoreButton()
                 ],
               ),
             ),
