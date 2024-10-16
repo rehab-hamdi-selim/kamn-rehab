@@ -8,6 +8,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:read_more_less/read_more_less.dart';
 
 class CustomePlayGroundInfo extends StatelessWidget {
+  const CustomePlayGroundInfo({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,19 +23,69 @@ class CustomePlayGroundInfo extends StatelessWidget {
           verticalSpace(21.h),
           playGroundFeatures(),
           verticalSpace(12.h),
-          Expanded(
+          Flexible(
             child: SingleChildScrollView(
-              child: ReadMoreLess(
-                text:
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Nullam ac felis in elit ultrices facilisis non ac lacus. Fusce vel lacus sit amet metus tempus consequat. Curabitur nec nulla eu nisl varius dignissim id et justo. Nam viverra, justo at dapibus eleifend, ligula turpis dignissim erat, ut fringilla urna est nec nulla. Phasellus condimentum erat ut nisi ultrices scelerisque. Aenean tempor dolor at dui pulvinar, at auctor enim bibendum. Suspendisse at magna ut arcu elementum blandit. Proin molestie ante sed augue gravida, sit amet pharetra odio interdum.Morbi at nunc id tortor ullamcorper auctor. Integer varius lectus nec turpis posuere, ut volutpat leo gravida. Sed scelerisque est ac lorem sodales, eget gravida lectus malesuada. Cras a felis sapien. Integer in arcu ornare, bibendum leo at, ullamcorper metus. Nulla facilisi. Aliquam erat volutpat. Aenean tempor odio a felis suscipit, non ultricies dui aliquet.",
-                collapsedHeight: 300.h,
-                buttonTextStyle: TextStyles.font16blackRegular,
-                iconCollapsed: const SizedBox.shrink(),
-                iconExpanded: const SizedBox.shrink(),
+              child: Stack(
+                children: [
+                  ReadMoreLess(
+                    text:
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Nullam ac felis in elit ultrices facilisis non ac lacus. Fusce vel lacus sit amet metus tempus consequat. Curabitur nec nulla eu nisl varius dignissim id et justo. Nam viverra, justo at dapibus eleifend, ligula turpis dignissim erat, ut fringilla urna est nec nulla. Phasellus condimentum erat ut nisi ultrices scelerisque. Aenean tempor dolor at dui pulvinar, at auctor enim bibendum. Suspendisse at magna ut arcu elementum blandit. Proin molestie ante sed augue gravida, sit amet pharetra odio interdum.Morbi at nunc id tortor ullamcorper auctor. Integer varius lectus nec turpis posuere, ut volutpat leo gravida. Sed scelerisque est ac lorem sodales, eget gravida lectus malesuada. Cras a felis sapien. Integer in arcu ornare, bibendum leo at, ullamcorper metus. Nulla facilisi. Aliquam erat volutpat. Aenean tempor odio a felis suscipit, non ultricies dui aliquet.",
+                    collapsedHeight: 300.h,
+                    buttonTextStyle: TextStyles.font16blackRegular,
+                    iconCollapsed: const SizedBox.shrink(),
+                    iconExpanded: const SizedBox.shrink(),
+                  ),
+                  Positioned(
+                    bottom: 0, // Ensure the container is aligned to the bottom
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      height: 200.h,
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Color.fromARGB(0, 255, 255, 255),
+                            Colors.white,
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  readMoreButton()
+                ],
               ),
             ),
           )
         ],
+      ),
+    );
+  }
+
+  Positioned readMoreButton() {
+    return Positioned(
+      bottom: 20.h,
+      left: 0,
+      right: 0,
+      child: Align(
+        alignment: Alignment.center,
+        child: SizedBox(
+          width: 100.w,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              minimumSize: Size(80.w, 40.h),
+              side: const BorderSide(
+                color: Color(0xff4CD964),
+                width: 1,
+              ),
+              backgroundColor: const Color(0xffF6F6F6).withOpacity(0.65),
+              elevation: 0,
+            ),
+            onPressed: () {},
+            child: const Text("Read More"),
+          ),
+        ),
       ),
     );
   }

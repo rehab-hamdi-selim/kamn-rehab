@@ -6,6 +6,8 @@ import 'package:kamn/features/sports/presentation/widgets/custome_image_slide_sh
 import 'package:kamn/features/sports/presentation/widgets/custome_play_ground_info.dart';
 
 class GroundDetailsScreen extends StatelessWidget {
+  const GroundDetailsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +33,7 @@ class GroundDetailsScreen extends StatelessWidget {
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30),
                     )),
-                child: CustomePlayGroundInfo(),
+                child: const CustomePlayGroundInfo(),
               ),
             )
           ],

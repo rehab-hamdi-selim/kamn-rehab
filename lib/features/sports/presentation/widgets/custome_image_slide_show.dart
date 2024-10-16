@@ -4,14 +4,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 
 class CustomeImageSlideShow extends StatelessWidget {
-  List<String> imagesPath = [
-    'assets/images/ground_image.png',
-    'assets/images/ground_image.png',
-    'assets/images/ground_image.png',
-  ];
+  const CustomeImageSlideShow({super.key});
 
   @override
   Widget build(BuildContext context) {
+    List<String> imagesPath = [
+      'assets/images/ground_image.png',
+      'assets/images/ground_image.png',
+      'assets/images/ground_image.png',
+    ];
     return Stack(
       children: [
         // The Image Slideshow
@@ -22,6 +23,8 @@ class CustomeImageSlideShow extends StatelessWidget {
           initialPage: 0,
           indicatorColor: AppPallete.greenColor,
           indicatorBackgroundColor: AppPallete.lgGreyColor,
+          autoPlayInterval: 3000,
+          isLoop: true,
           children: imagesPath.map((path) {
             return Image.asset(
               path,
@@ -29,8 +32,6 @@ class CustomeImageSlideShow extends StatelessWidget {
               fit: BoxFit.cover,
             );
           }).toList(),
-          autoPlayInterval: 3000,
-          isLoop: true,
         ),
         Positioned(
           top: 20.h,
