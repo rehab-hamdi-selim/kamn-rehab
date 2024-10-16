@@ -736,14 +736,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.2"
-  read_more_less:
-    dependency: "direct main"
-    description:
-      name: read_more_less
-      sha256: b571da314d00a85063ca2068ad2380e1174db04abe84b59c8b8958477c038604
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   rive:
     dependency: "direct main"
     description:

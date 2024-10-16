@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:kamn/features/sports/presentation/widgets/custome_bottom_book.dart';
-import 'package:kamn/features/sports/presentation/widgets/custome_image_slide_show.dart';
-import 'package:kamn/features/sports/presentation/widgets/custome_play_ground_info.dart';
+import 'package:kamn/features/sports/presentation/widgets/ground_details/custome_bottom_book.dart';
+import 'package:kamn/features/sports/presentation/widgets/ground_details/custome_image_slide_show.dart';
+import 'package:kamn/features/sports/presentation/widgets/ground_details/custome_play_ground_info.dart';
 
 class GroundDetailsScreen extends StatelessWidget {
   const GroundDetailsScreen({super.key});
@@ -20,7 +20,7 @@ class GroundDetailsScreen extends StatelessWidget {
                 left: 0,
                 right: 0,
                 height: 346.h, // Image height
-                child: CustomeImageSlideShow()),
+                child: const CustomeImageSlideShow()),
             Positioned(
               bottom: 0, // Start from the bottom
               left: 0,

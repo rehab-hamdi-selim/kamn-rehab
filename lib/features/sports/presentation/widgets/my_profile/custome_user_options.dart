@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
-import 'package:kamn/features/sports/presentation/widgets/custome_menu_item.dart';
+import 'package:kamn/features/sports/presentation/widgets/my_profile/custome_menu_item.dart';
 
 class CustomeUserOptions extends StatelessWidget {
   const CustomeUserOptions({super.key});

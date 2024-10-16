@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
-import 'package:kamn/features/sports/presentation/widgets/custom_profile_top_bar.dart';
-import 'package:kamn/features/sports/presentation/widgets/custome_user_data.dart';
-import 'package:kamn/features/sports/presentation/widgets/custome_user_options.dart';
+import 'package:kamn/features/sports/presentation/widgets/my_profile/custom_profile_top_bar.dart';
+import 'package:kamn/features/sports/presentation/widgets/my_profile/custome_user_data.dart';
+import 'package:kamn/features/sports/presentation/widgets/my_profile/custome_user_options.dart';
 
 class MyProfileScreen extends StatelessWidget {
   const MyProfileScreen({super.key});
