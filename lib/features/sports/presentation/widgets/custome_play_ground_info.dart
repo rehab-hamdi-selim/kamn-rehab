@@ -7,9 +7,16 @@ import 'package:kamn/core/theme/style.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:read_more_less/read_more_less.dart';
 
-class CustomePlayGroundInfo extends StatelessWidget {
+class CustomePlayGroundInfo extends StatefulWidget {
   const CustomePlayGroundInfo({super.key});
 
+  @override
+  State<CustomePlayGroundInfo> createState() => _CustomePlayGroundInfoState();
+}
+
+class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
+  int maxLines = 10;
+  bool isVisible = true;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,35 +32,42 @@ class CustomePlayGroundInfo extends StatelessWidget {
           verticalSpace(12.h),
           Flexible(
             child: SingleChildScrollView(
-              child: Stack(
+              child: Column(
                 children: [
-                  ReadMoreLess(
-                    text:
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Nullam ac felis in elit ultrices facilisis non ac lacus. Fusce vel lacus sit amet metus tempus consequat. Curabitur nec nulla eu nisl varius dignissim id et justo. Nam viverra, justo at dapibus eleifend, ligula turpis dignissim erat, ut fringilla urna est nec nulla. Phasellus condimentum erat ut nisi ultrices scelerisque. Aenean tempor dolor at dui pulvinar, at auctor enim bibendum. Suspendisse at magna ut arcu elementum blandit. Proin molestie ante sed augue gravida, sit amet pharetra odio interdum.Morbi at nunc id tortor ullamcorper auctor. Integer varius lectus nec turpis posuere, ut volutpat leo gravida. Sed scelerisque est ac lorem sodales, eget gravida lectus malesuada. Cras a felis sapien. Integer in arcu ornare, bibendum leo at, ullamcorper metus. Nulla facilisi. Aliquam erat volutpat. Aenean tempor odio a felis suscipit, non ultricies dui aliquet.",
-                    collapsedHeight: 300.h,
-                    buttonTextStyle: TextStyles.font16blackRegular,
-                    iconCollapsed: const SizedBox.shrink(),
-                    iconExpanded: const SizedBox.shrink(),
-                  ),
-                  Positioned(
-                    bottom: 0, // Ensure the container is aligned to the bottom
-                    left: 0,
-                    right: 0,
-                    child: Container(
-                      height: 200.h,
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Color.fromARGB(0, 255, 255, 255),
-                            Colors.white,
-                          ],
+                  Stack(
+                    children: [
+                      Text(
+                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Nullam ac felis in elit ultrices facilisis non ac lacus. Fusce vel lacus sit amet metus tempus consequat. Curabitur nec nulla eu nisl varius dignissim id et justo. Nam viverra, justo at dapibus eleifend, ligula turpis dignissim erat, ut fringilla urna est nec nulla. Phasellus condimentum erat ut nisi ultrices scelerisque. Aenean tempor dolor at dui pulvinar, at auctor enim bibendum. Suspendisse at magna ut arcu elementum blandit. Proin molestie ante sed augue gravida, sit amet pharetra odio interdum.Morbi at nunc id tortor ullamcorper auctor. Integer varius lectus nec turpis posuere, ut volutpat leo gravida. Sed scelerisque est ac lorem sodales, eget gravida lectus malesuada. Cras a felis sapien. Integer in arcu ornare, bibendum leo at, ullamcorper metus. Nulla facilisi. Aliquam erat volutpat. Aenean tempor odio a felis suscipit, non ultricies dui aliquet.',
+                        style: TextStyles.font12blackRegular
+                            .copyWith(fontSize: 16.h),
+                        maxLines: maxLines,
+                      ),
+                      Visibility(
+                        visible: isVisible,
+                        child: Positioned(
+                          bottom:
+                              0, // Ensure the container is aligned to the bottom
+                          left: 0,
+                          right: 0,
+                          child: Container(
+                            height: 200.h,
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Color.fromARGB(0, 255, 255, 255),
+                                  Colors.white,
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                      Visibility(visible: isVisible, child: readMoreButton())
+                    ],
                   ),
-                  readMoreButton()
+                  Visibility(visible: !isVisible, child: readMoreButton())
                 ],
               ),
             ),
@@ -65,25 +79,39 @@ class CustomePlayGroundInfo extends StatelessWidget {
 
   Positioned readMoreButton() {
     return Positioned(
-      bottom: 20.h,
+      bottom: 0,
       left: 0,
       right: 0,
       child: Align(
         alignment: Alignment.center,
         child: SizedBox(
-          width: 100.w,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              minimumSize: Size(80.w, 40.h),
-              side: const BorderSide(
-                color: Color(0xff4CD964),
-                width: 1,
+          child: SizedBox(
+            height: 30.h,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                side: const BorderSide(
+                  color: AppPallete.lightGreenColor,
+                  width: 1,
+                ),
+                backgroundColor: const Color(0xffF6F6F6).withOpacity(0.65),
+                elevation: 0,
               ),
-              backgroundColor: const Color(0xffF6F6F6).withOpacity(0.65),
-              elevation: 0,
+              onPressed: () {
+                setState(() {
+                  if (maxLines <= 10) {
+                    maxLines = 1000;
+                    isVisible = false;
+                  } else {
+                    maxLines = 10;
+                    isVisible = true;
+                  }
+                });
+              },
+              child: Text(
+                maxLines > 10 ? "Show Less" : "Read More",
+                style: TextStyles.font16blackRegular,
+              ),
             ),
-            onPressed: () {},
-            child: const Text("Read More"),
           ),
         ),
       ),
