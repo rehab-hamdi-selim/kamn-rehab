@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
-import 'package:kamn/features/sports/presentation/widget/custom_profile_top_bar.dart';
-import 'package:kamn/features/sports/presentation/widget/profileHeader.dart';
-import 'package:kamn/features/sports/presentation/widget/profileMenu.dart';
+import 'package:kamn/features/sports/presentation/widgets/custom_profile_top_bar.dart';
+import 'package:kamn/features/sports/presentation/widgets/custome_user_data.dart';
+import 'package:kamn/features/sports/presentation/widgets/custome_user_options.dart';
 
 class MyProfileScreen extends StatelessWidget {
   const MyProfileScreen({super.key});
@@ -25,14 +25,15 @@ class MyProfileScreen extends StatelessWidget {
               children: [
                 verticalSpace(20),
                 const CustomProfileTopBar(),
-                const ProfileHeaderCustome(),
+                const Spacer(),
+                const CustomUserData(),
               ],
             ),
           ),
           // Profile Header Widget
           SizedBox(height: 16.h), // Responsive height
           const Expanded(
-            child: ProfileMenuCustome(), // Profile Menu Widget
+            child: CustomeUserOptions(), // Profile Menu Widget
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 40.h),

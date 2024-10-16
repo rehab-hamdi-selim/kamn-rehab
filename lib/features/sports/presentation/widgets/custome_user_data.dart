@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ProfileHeaderCustome extends StatelessWidget {
-  const ProfileHeaderCustome({super.key});
+class CustomUserData extends StatelessWidget {
+  const CustomUserData({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(top: 16, left: 16, right: 3, bottom: 16),
-      color: const Color(0xffA117F1),
+    return Padding(
+      padding: EdgeInsets.only(left: 12.w, right: 12.w, bottom: 24.h),
       child: Row(
         children: [
           CircleAvatar(

@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(375, 812),
+      designSize: const Size(375, 812),
       // Base size (can be the size of your design reference)
       minTextAdapt: true,
       builder: (context, child) {
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: MyProfileScreen(),
+          home: const MyProfileScreen(),
         );
       },
     );
