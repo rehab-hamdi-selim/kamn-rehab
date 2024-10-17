@@ -60,7 +60,7 @@ class CustomeBottomBook extends StatelessWidget {
     playGroundRef
         .add(PlaygroundModel(name: 'al hadra', address: 'alex', price: 250))
         .then((value) => print('playground added successfully'))
-        .catchError((error) => print(error.toString()));
+        .catchError((error) => print('error : ${error.toString()}'));
   }
 }
 
