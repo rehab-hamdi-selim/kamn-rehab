@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "949016351169",
+    "project_id": "kamn-5ad5c",
+    "storage_bucket": "kamn-5ad5c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949016351169:android:b33dc850e2556a8ef4df40",
+        "android_client_info": {
+          "package_name": "com.example.kamn"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQLHZLD_QLlJMBXUN1e_EH_wFQ0fjQ0Kc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
