@@ -43,8 +43,7 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
                       ),
                       if (isVisible)
                         Positioned(
-                          bottom:
-                              0, // Ensure the container is aligned to the bottom
+                          bottom: 0,
                           left: 0,
                           right: 0,
                           child: Container(
@@ -61,7 +60,17 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
                             ),
                           ),
                         ),
-                      if (isVisible) readMoreButton()
+                      if (isVisible)
+                        Positioned(
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            child: Align(
+                                alignment: Alignment.center,
+                                child: SizedBox(
+                                    child: SizedBox(
+                                        height: 30.h,
+                                        child: readMoreButton()))))
                     ],
                   ),
                   if (!isVisible) readMoreButton()
@@ -74,40 +83,35 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
     );
   }
 
-  Positioned readMoreButton() {
-    return Positioned(
-      bottom: 0,
-      left: 0,
-      right: 0,
-      child: Align(
-        alignment: Alignment.center,
+  Widget readMoreButton() {
+    return Align(
+      alignment: Alignment.center,
+      child: SizedBox(
         child: SizedBox(
-          child: SizedBox(
-            height: 30.h,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                side: const BorderSide(
-                  color: AppPallete.lightGreenColor,
-                  width: 1,
-                ),
-                backgroundColor: const Color(0xffF6F6F6).withOpacity(0.65),
-                elevation: 0,
+          height: 30.h,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              side: const BorderSide(
+                color: AppPallete.lightGreenColor,
+                width: 1,
               ),
-              onPressed: () {
-                setState(() {
-                  if (maxLines <= 10) {
-                    maxLines = 1000;
-                    isVisible = false;
-                  } else {
-                    maxLines = 10;
-                    isVisible = true;
-                  }
-                });
-              },
-              child: Text(
-                maxLines > 10 ? "Show Less" : "Read More",
-                style: TextStyles.font16blackRegular,
-              ),
+              backgroundColor: const Color(0xffF6F6F6).withOpacity(0.65),
+              elevation: 0,
+            ),
+            onPressed: () {
+              setState(() {
+                if (maxLines <= 10) {
+                  maxLines = 1000;
+                  isVisible = false;
+                } else {
+                  maxLines = 10;
+                  isVisible = true;
+                }
+              });
+            },
+            child: Text(
+              maxLines > 10 ? "Show Less" : "Read More",
+              style: TextStyles.font16blackRegular,
             ),
           ),
         ),
@@ -178,7 +182,7 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
                   Icon(
                     Icons.star,
                     color: AppPallete.yellowColor,
-                    size: 15.sp,
+                    size: 15.h,
                   )
                 ],
               ),

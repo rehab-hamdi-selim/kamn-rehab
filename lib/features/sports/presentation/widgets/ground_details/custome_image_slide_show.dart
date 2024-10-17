@@ -53,10 +53,10 @@ class CustomeImageSlideShow extends StatelessWidget {
                         color: AppPallete.ofWhiteColor),
                   ),
                 ),
-                const Icon(
+                Icon(
                   Icons.bookmark_border,
                   color: Colors.white,
-                  size: 30,
+                  size: 30.h,
                 )
               ],
             ),
