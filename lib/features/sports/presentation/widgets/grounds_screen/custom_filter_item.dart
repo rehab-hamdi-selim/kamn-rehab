@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/theme_data/app_palette.dart';
-import '../../../../core/theme_data/style.dart';
+import '../../../../../core/theme_data/app_palette.dart';
+import '../../../../../core/theme_data/style.dart';
 
 class CustomFilterItem extends StatelessWidget {
   final IconData? icon;
   final String text;
   final void Function()? onPressed;
   const CustomFilterItem({
-  super.key,
-  required this.icon,
-  required this.text,
-  required this.onPressed,
+    super.key,
+    required this.icon,
+    required this.text,
+    required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding:EdgeInsets.symmetric(horizontal: 10.w),
+      padding: EdgeInsets.symmetric(horizontal: 10.w),
       decoration: BoxDecoration(
-        color:AppPalette.lightGreenColor,
+        color: AppPalette.lightGreenColor,
         borderRadius: BorderRadius.circular(15.r),
         border: Border.all(
           color: AppPalette.greenColor,
@@ -41,7 +41,7 @@ class CustomFilterItem extends StatelessWidget {
             style: Style.font10BlackColorW400,
           ),
           IconButton(
-            onPressed:onPressed,
+            onPressed: onPressed,
             icon: Icon(
               Icons.cancel_outlined,
               color: AppPalette.grayColor,
