@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/const/constants.dart';
-import '../../../../core/helpers/spacer.dart';
-import '../../../../core/theme/app_pallete.dart';
-import '../../../../core/theme/style.dart';
-import '../../../../core/utils/app_images.dart';
-import '../widgets/grounds_widgets/custom_app_bar.dart';
-import '../widgets/grounds_widgets/custom_bottom.dart';
-import '../widgets/grounds_widgets/custom_filter_item.dart';
-import '../widgets/grounds_widgets/custom_ground_item.dart';
-import '../widgets/grounds_widgets/custom_reservation.dart';
-import '../widgets/grounds_widgets/custom_text_form_field.dart';
+import 'package:kamn/core/const/constants.dart';
+import 'package:kamn/core/helpers/spacer.dart';
+import 'package:kamn/core/theme_data/app_palette.dart';
+import 'package:kamn/core/theme_data/style.dart';
+import 'package:kamn/core/utils/app_images.dart';
+import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_filter_item.dart';
+import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_ground_item.dart';
+import '../widgets/grounds_screen/custom_app_bar.dart';
+import '../widgets/grounds_screen/custom_bottom.dart';
+import '../widgets/grounds_screen/custom_text_form_field.dart';
+import '../widgets/grounds_screen/custom_your_next_match_timer.dart';
 
-class GroupsScreen extends StatelessWidget {
-  const GroupsScreen({super.key});
+class GroundsScreen extends StatelessWidget {
+  const GroundsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     TextEditingController controller = TextEditingController();
     return Scaffold(
-      backgroundColor: AppPallete.whiteColor,
+      backgroundColor: AppPalette.backgroundColor,
       appBar: CustomAppBar.appBar(
         arrowFunction: () {},
         notificationIconFunction: () {},
@@ -33,7 +33,7 @@ class GroupsScreen extends StatelessWidget {
           children: [
             Text(
               Constants.groundsScreenTitle,
-              style: TextStyles.font30DarkGreenColorBold,
+              style: Style.font30DarkGreenColorBold,
             ),
             Row(
               children: [
@@ -51,7 +51,7 @@ class GroupsScreen extends StatelessWidget {
                   ),
                   onPressed: () {},
                   textBottom: 'Filter',
-                  textStyle: TextStyles.font12WhiteColorW400,
+                  textStyle: Style.font12WhiteColorW400,
                 ),
               ],
             ),
@@ -72,7 +72,21 @@ class GroupsScreen extends StatelessWidget {
                   itemCount: 5),
             ),
             verticalSpace(20),
-            const CustomReservation(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  Constants.reservation,
+                  style: Style.font15BlackColorBold,
+                ),
+                Text(
+                  Constants.showAll,
+                  style: Style.font10GrayColorW400,
+                ),
+              ],
+            ),
+            verticalSpace(10),
+            const CustomYourNextMatchTimer(),
             verticalSpace(20),
             Expanded(
                 child: ListView.separated(
