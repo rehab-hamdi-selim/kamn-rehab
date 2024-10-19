@@ -8,24 +8,23 @@ class CustomFilterItemServiceProvider extends StatelessWidget {
   final String text;
   final void Function()? onPressed;
   const CustomFilterItemServiceProvider({
-  super.key,
-  required this.icon,
-  required this.text,
-  required this.onPressed,
+    super.key,
+    required this.icon,
+    required this.text,
+    required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding:EdgeInsets.symmetric(horizontal: 10.w),
+      padding: EdgeInsets.symmetric(horizontal: 10.w),
       decoration: BoxDecoration(
-        color:AppPallete.lightGrayColor,
+        color: AppPallete.lightGrayColor,
         borderRadius: BorderRadius.circular(15.r),
-      
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.haceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Icon(
             icon,
@@ -37,7 +36,7 @@ class CustomFilterItemServiceProvider extends StatelessWidget {
             style: TextStyles.font10BlackColorW400,
           ),
           IconButton(
-            onPressed:onPressed,
+            onPressed: onPressed,
             icon: Icon(
               Icons.cancel_outlined,
               color: AppPallete.grayColor,

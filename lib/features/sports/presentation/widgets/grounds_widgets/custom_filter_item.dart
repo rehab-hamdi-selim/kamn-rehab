@@ -8,19 +8,19 @@ class CustomFilterItem extends StatelessWidget {
   final String text;
   final void Function()? onPressed;
   const CustomFilterItem({
-  super.key,
-  required this.icon,
-  required this.text,
-  required this.onPressed,
+    super.key,
+    required this.icon,
+    required this.text,
+    required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding:EdgeInsets.symmetric(horizontal: 10.w),
+      padding: EdgeInsets.symmetric(horizontal: 10.w),
       decoration: BoxDecoration(
-        color:AppPallete.lightGreenColor,
+        color: AppPallete.lightGreenColor,
         borderRadius: BorderRadius.circular(15.r),
         border: Border.all(
           color: AppPallete.greenColor,
@@ -28,7 +28,7 @@ class CustomFilterItem extends StatelessWidget {
         ),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.haceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Icon(
             icon,
@@ -40,7 +40,7 @@ class CustomFilterItem extends StatelessWidget {
             style: TextStyles.font10BlackColorW400,
           ),
           IconButton(
-            onPressed:onPressed,
+            onPressed: onPressed,
             icon: Icon(
               Icons.cancel_outlined,
               color: AppPallete.grayColor,

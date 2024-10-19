@@ -7,17 +7,17 @@ import '../../../../../core/theme/style.dart';
 import '../../../../../core/utils/app_images.dart';
 
 class CustomGroundItem extends StatelessWidget {
- final String imageUrl;
- final String placeText;
- final String location;
- final String rates;
- final String km;
- final String available;
- final String owner;
- final String price;
- final void Function()? favoriteOnTap;
+  final String imageUrl;
+  final String placeText;
+  final String location;
+  final String rates;
+  final String km;
+  final String available;
+  final String owner;
+  final String price;
+  final void Function()? favoriteOnTap;
 
- const CustomGroundItem({
+  const CustomGroundItem({
     super.key,
     required this.imageUrl,
     required this.favoriteOnTap,
@@ -33,7 +33,7 @@ class CustomGroundItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8.w,vertical: 8.h),
+      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
       decoration: BoxDecoration(
         color: AppPallete.whiteColor,
         borderRadius: BorderRadius.circular(15.r),
@@ -55,11 +55,11 @@ class CustomGroundItem extends StatelessWidget {
                   width: double.infinity,
                   height: 191.h,
                   placeholder: (context, url) => Image.asset(
-                    AppImages.groupsImage,
-                    fit: BoxFit.fill,
-                  ),
+                        AppImages.groupsImage,
+                        fit: BoxFit.fill,
+                      ),
                   errorWidget: (context, url, error) =>
-                  const Icon(Icons.error_outline, size: 40)),
+                      const Icon(Icons.error_outline, size: 40)),
             ),
             Positioned(
               top: 6,
@@ -72,7 +72,7 @@ class CustomGroundItem extends StatelessWidget {
                     shape: BoxShape.circle,
                     color: AppPallete.whiteColor,
                   ),
-                  child:  Center(
+                  child: Center(
                     child: Icon(
                       Icons.favorite_outline,
                       color: AppPallete.darkGrayColor,
@@ -110,7 +110,7 @@ class CustomGroundItem extends StatelessWidget {
           ],
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.haceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               children: [
@@ -126,7 +126,7 @@ class CustomGroundItem extends StatelessWidget {
                 ),
                 horizontalSpace(8),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 2.w,vertical: 2.h),
+                  padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
                   decoration: BoxDecoration(
                     color: AppPallete.whiteColor,
                     shape: BoxShape.circle,
@@ -139,17 +139,15 @@ class CustomGroundItem extends StatelessWidget {
                     height: 4.h,
                     width: 4.w,
                     decoration: const BoxDecoration(
-                        color: AppPallete.greenColor,
-                        shape: BoxShape.circle
-                    ),
+                        color: AppPallete.greenColor, shape: BoxShape.circle),
                   ),
                 ),
                 horizontalSpace(4),
                 Text(
-                 available ,
+                  available,
                   style: TextStyles.font7DartBlackColorW400,
                 ),
-               horizontalSpace(8),
+                horizontalSpace(8),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 4.w),
                   decoration: BoxDecoration(
@@ -161,7 +159,7 @@ class CustomGroundItem extends StatelessWidget {
                     ),
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.haceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         rates,
@@ -192,7 +190,6 @@ class CustomGroundItem extends StatelessWidget {
             ),
           ],
         ),
-
       ]),
     );
   }
