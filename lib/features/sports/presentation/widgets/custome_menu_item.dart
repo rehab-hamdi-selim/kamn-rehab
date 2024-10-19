@@ -1,21 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/theme/app_pallete.dart';
 
 class CustomeMenuItem extends StatelessWidget {
-  final IconData icon;
   final String title;
+  final String image;
 
   const CustomeMenuItem({
     super.key,
-    required this.icon,
+    required this.image,
     required this.title,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(icon, color: Colors.purple, size: 24.sp),
+      leading: ImageIcon(
+        AssetImage(image),
+        size: 22.73,
+        color: AppPallete.mainColor,
+      ),
+      //Icon(icon, color: Colors.purple, size: 24.sp),
       // Responsive icon size
       title: Text(
         title,
