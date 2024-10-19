@@ -23,9 +23,10 @@ class CustomeUserOptions extends StatelessWidget {
         const CustomeMenuItem(
             icon: Icons.group_add_outlined, title: "Invite Friends"),
         divider(25, 25),
-        const CustomeMenuItem(icon: Icons.question_mark, title: "My Order"),
+        const CustomeMenuItem(
+            icon: Icons.question_mark_rounded, title: "My Order"),
         divider(25, 25),
-        const CustomeMenuItem(icon: Icons.settings, title: "Settings"),
+        const CustomeMenuItem(icon: Icons.settings_outlined, title: "Settings"),
       ],
     );
   }

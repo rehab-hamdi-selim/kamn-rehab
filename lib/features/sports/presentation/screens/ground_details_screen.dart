@@ -20,7 +20,7 @@ class GroundDetailsScreen extends StatelessWidget {
                 left: 0,
                 right: 0,
                 height: 346.h, // Image height
-                child: CustomeImageSlideShow()),
+                child: const CustomeImageSlideShow()),
             Positioned(
               bottom: 0, // Start from the bottom
               left: 0,
