@@ -7,7 +7,7 @@ class CustomeMenuItem extends StatelessWidget {
   final String title;
   final String image;
 
-  const CustomeMenuItem({
+   const CustomeMenuItem({
     super.key,
     required this.image,
     required this.title,
@@ -18,7 +18,7 @@ class CustomeMenuItem extends StatelessWidget {
     return ListTile(
       leading: ImageIcon(
         AssetImage(image),
-        size: 22.73,
+        size: 22.73.h,
         color: AppPallete.mainColor,
       ),
       //Icon(icon, color: Colors.purple, size: 24.sp),
@@ -27,7 +27,7 @@ class CustomeMenuItem extends StatelessWidget {
         title,
         style: TextStyle(fontSize: 16.sp), // Responsive font size
       ),
-      trailing: Icon(Icons.arrow_forward_ios, size: 16.sp, color: Colors.grey),
+      trailing: Icon(Icons.arrow_forward_ios, size: 16.h, color: Colors.grey),
       // Responsive icon size
       onTap: () {
         // Handle the tap action here
