@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/core/constant/constant_string.dart';
-
+import '../../../../../core/const/constants.dart';
 import '../../../../../core/theme_data/app_palette.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -21,7 +20,7 @@ class CustomTextFormField extends StatelessWidget {
         contentPadding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
         filled: true,
         fillColor: AppPalette.lightGrayColor,
-        hintText: ConstantString.hintTextForSearch,
+        hintText: Constants.hintTextForSearch,
         hintStyle: const TextStyle(color: AppPalette.grayColor),
         prefixIcon: const Icon(
           Icons.search,

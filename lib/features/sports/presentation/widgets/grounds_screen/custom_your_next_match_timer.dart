@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/constant/constant_string.dart';
+import '../../../../../core/const/constants.dart';
 import '../../../../../core/theme_data/app_palette.dart';
 import '../../../../../core/theme_data/style.dart';
 
@@ -28,7 +28,7 @@ class CustomYourNextMatchTimer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            ConstantString.nextMatch,
+            Constants.nextMatch,
             style: Style.font15DarkGreenColorBold,
           ),
           Text(

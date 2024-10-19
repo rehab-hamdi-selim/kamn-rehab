@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:badges/badges.dart' as badges;
-import '../../../../../core/commen/widgets/sized_box_style.dart';
+import 'package:kamn/core/helpers/spacer.dart';
 import '../../../../../core/theme_data/app_palette.dart';
 import '../../../../../core/utils/app_images.dart';
 
@@ -15,7 +15,7 @@ class CustomAppBar {
       leadingWidth: 45.w,
       leading: Row(
         children: [
-          SizedBoxStyle.horizontal(18.w),
+          horizontalSpace(10),
           InkWell(
             onTap: arrowFunction,
             child: Container(
@@ -46,7 +46,7 @@ class CustomAppBar {
             ),
           ),
         ),
-        SizedBoxStyle.horizontal(10.w),
+        horizontalSpace(10),
         InkWell(
           onTap: profileFunction,
           child: const CircleAvatar(
@@ -54,7 +54,7 @@ class CustomAppBar {
             radius: 16.0,
           ),
         ),
-        SizedBoxStyle.horizontal(18.w),
+        horizontalSpace(10),
       ],
     );
   }

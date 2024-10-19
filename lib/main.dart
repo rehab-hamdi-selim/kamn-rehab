@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/features/sports/presentation/screens/grounds_screen.dart';
 import 'features/sports_service_providers/presentation/screens/service_provider_grounds_screen.dart';
 import 'features/sports_service_providers/presentation/screens/success_service_provider_screen.dart';
 import 'init_dependencies.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: const ServiceProviderGroundsScreen(),
+          home: const GroupsScreen(),
         ));
   }
 }
