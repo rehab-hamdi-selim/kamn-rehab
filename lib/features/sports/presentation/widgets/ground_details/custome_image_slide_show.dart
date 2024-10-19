@@ -48,14 +48,15 @@ class CustomeImageSlideShow extends StatelessWidget {
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: AppPallete.greenColor,
-                        border: Border.all(color: Colors.white, width: 1)),
+                        border:
+                            Border.all(color: AppPallete.whiteColor, width: 1)),
                     child: const Icon(Icons.arrow_back,
                         color: AppPallete.ofWhiteColor),
                   ),
                 ),
                 Icon(
                   Icons.bookmark_border,
-                  color: Colors.white,
+                  color: AppPallete.whiteColor,
                   size: 30.h,
                 )
               ],

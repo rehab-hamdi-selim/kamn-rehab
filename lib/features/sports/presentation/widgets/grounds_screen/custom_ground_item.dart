@@ -34,7 +34,7 @@ class CustomGroundItem extends StatelessWidget {
     return Container(
       width: 337.w,
       height: 197.h,
-      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
       decoration: BoxDecoration(
         color: AppPalette.backgroundColor,
         borderRadius: BorderRadius.circular(15.r),
