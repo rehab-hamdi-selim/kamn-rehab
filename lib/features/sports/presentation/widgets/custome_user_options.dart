@@ -23,6 +23,7 @@ class CustomeUserOptions extends StatelessWidget {
             image: ImageLinks.shoppingCartIcon, title: "My Store"),
         divider(25, 25), // Responsive indent
         verticalSpace(70),
+
         const CustomeMenuItem(
             image: ImageLinks.inviteFriendsIcon, title: "Invite Friends"),
         divider(25, 25),
