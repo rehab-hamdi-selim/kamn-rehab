@@ -5,35 +5,34 @@ import '../../../../core/helpers/spacer.dart';
 import '../../../../core/theme/app_pallete.dart';
 import '../../../../core/theme/style.dart';
 import '../../../../core/utils/app_images.dart';
-import '../widgets/grounds_widgets/custom_app_bar.dart';
-import '../widgets/grounds_widgets/custom_bottom.dart';
-import '../widgets/grounds_widgets/custom_filter_item.dart';
-import '../widgets/grounds_widgets/custom_ground_item.dart';
-import '../widgets/grounds_widgets/custom_reservation.dart';
-import '../widgets/grounds_widgets/custom_text_form_field.dart';
+import '../widgets/service_provider_grounds_widgets/custom_app_bar_service_provider.dart';
+import '../widgets/service_provider_grounds_widgets/custom_bottom_service_provider.dart';
+import '../widgets/service_provider_grounds_widgets/custom_filter_item_service_provider.dart';
+import '../widgets/service_provider_grounds_widgets/custom_ground_item_service_provider.dart';
+import '../widgets/service_provider_grounds_widgets/custom_text_form_field_service_provider.dart';
 
-class GroupsScreen extends StatelessWidget {
-  const GroupsScreen({super.key});
+class ServiceProviderGroundsScreen extends StatelessWidget {
+  const ServiceProviderGroundsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     TextEditingController controller = TextEditingController();
     return Scaffold(
       backgroundColor: AppPallete.whiteColor,
-      appBar: CustomAppBar.appBar(
+      appBar: CustomAppBarServiceProvider.appBar(
         arrowFunction: () {},
         notificationIconFunction: () {},
         profileFunction: () {},
         badgesIconFunction: () {},
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 19),
+        padding: EdgeInsets.symmetric(horizontal: 19.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               Constants.groundsScreenTitle,
-              style: TextStyles.font30DarkGreenColorBold,
+              style: TextStyles.font32BlackColormedium,
             ),
             Row(
               children: [
@@ -42,7 +41,7 @@ class GroupsScreen extends StatelessWidget {
                   controller: controller,
                 )),
                 horizontalSpace(5),
-                CustomBottom(
+                CustomBottomServiceProvider(
                   iconVisible: true,
                   iconWidget: Image.asset(
                     AppImages.filterImage,
@@ -53,6 +52,7 @@ class GroupsScreen extends StatelessWidget {
                   textBottom: 'Filter',
                   textStyle: TextStyles.font12WhiteColorW400,
                 ),
+            
               ],
             ),
             verticalSpace(10),
@@ -61,7 +61,7 @@ class GroupsScreen extends StatelessWidget {
               child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    return CustomFilterItem(
+                    return CustomFilterItemServiceProvider(
                         icon: Icons.location_on_outlined,
                         text: "Alexandria, Hadra",
                         onPressed: () {});
@@ -72,12 +72,17 @@ class GroupsScreen extends StatelessWidget {
                   itemCount: 5),
             ),
             verticalSpace(20),
-            const CustomReservation(),
-            verticalSpace(20),
             Expanded(
+              child:  Container(
+                width: 335.w,
+                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
+                decoration: BoxDecoration(
+                  color: AppPallete.lightGrayColor,
+                  borderRadius: BorderRadius.circular(15.r),
+                ),
                 child: ListView.separated(
                     itemBuilder: (context, index) {
-                      return CustomGroundItem(
+                      return CustomGroundItemServiceProvider(
                         imageUrl: "",
                         favoriteOnTap: () {},
                         placeText: "Hadra Stadium East .1",
@@ -90,9 +95,11 @@ class GroupsScreen extends StatelessWidget {
                       );
                     },
                     separatorBuilder: (context, index) {
-                      return verticalSpace(10);
+                      return verticalSpace(17.89);
                     },
-                    itemCount: 5))
+                    itemCount: 5),
+              ),
+            )
           ],
         ),
       ),

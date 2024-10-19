@@ -6,4 +6,6 @@ class ImageLinks {
   static const String appLogoBlack = 'assets/image/lockBlackLogo.png';
   static const String profile_picture = 'assets/images/profile_picture.png';
   static const String NotePencilIcon = "assets/images/NotePencil.png";
+  static const String serviceSuccessfullyAdded =
+      'assets/images/success_service.png';
 }
