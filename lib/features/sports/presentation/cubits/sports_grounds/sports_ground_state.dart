@@ -2,7 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 
-import '../../data/models/playground_model.dart';
+import '../../../data/models/playground_model.dart';
 
 enum SportsGroundsStatus { initial, loading, success, failure }
 
