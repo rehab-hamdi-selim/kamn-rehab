@@ -15,9 +15,11 @@ class CustomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.white,
       leading: Padding(
         padding: EdgeInsets.all(16.0.w),
-        child: const CircleAvatar(
+        child: CircleAvatar(
+          radius: 24.h, // Increased radius to make the CircleAvatar bigger
           backgroundColor: AppPallete.blackColor,
           child: Icon(
+            size: 10.h,
             Icons.arrow_back,
             color: AppPallete.whiteColor,
           ),

@@ -106,6 +106,7 @@ class CustomeServiceInfo extends StatelessWidget {
                   child: SvgPicture.asset(
                     'assets/icons/direction.svg',
                     width: 20.w,
+                    height: 20.h,
                     color: Colors.white,
                   ),
                 )

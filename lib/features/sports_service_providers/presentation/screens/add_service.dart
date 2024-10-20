@@ -24,12 +24,12 @@ class AddServiceScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              CustomeTextTitle(),
+              const CustomeTextTitle(),
               verticalSpace(19.h),
               CustomeImagePicker(),
               verticalSpace(7.h),
-              CustomeServiceInfo(),
-              CustomeFinishedButton(),
+              const CustomeServiceInfo(),
+              const CustomeFinishedButton(),
               verticalSpace(25.h),
             ],
           ),
