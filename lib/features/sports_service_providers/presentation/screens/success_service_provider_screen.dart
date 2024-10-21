@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/service_provider_grounds_widgets/custom_app_bar_service_provider.dart';
+import 'package:kamn/features/sports_service_providers/presentation/widgets/service_provider_grounds/custom_app_bar_service_provider.dart';
 import '../../../../core/const/constants.dart';
 import '../../../../core/const/image_links.dart';
 import '../../../../core/theme/app_pallete.dart';
 import '../../../../core/theme/style.dart';
-import '../widgets/service_provider_grounds_widgets/custom_bottom_service_provider.dart';
+import '../widgets/service_provider_grounds/custom_bottom_service_provider.dart';
 
 class SuccessServiceProviderScreen extends StatelessWidget {
   const SuccessServiceProviderScreen({super.key});
