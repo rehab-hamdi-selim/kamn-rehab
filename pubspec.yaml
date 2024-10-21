@@ -78,6 +78,7 @@ dependencies:
   #Flutter plugin for Cloud Firestore, a cloud-hosted, noSQL database with live synchronization 
   cloud_firestore: ^5.4.4
 
+  dotted_border: ^2.1.0
 
 
 
