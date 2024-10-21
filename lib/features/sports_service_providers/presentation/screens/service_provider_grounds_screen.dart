@@ -5,11 +5,11 @@ import '../../../../core/helpers/spacer.dart';
 import '../../../../core/theme/app_pallete.dart';
 import '../../../../core/theme/style.dart';
 import '../../../../core/utils/app_images.dart';
-import '../widgets/service_provider_grounds_widgets/custom_app_bar_service_provider.dart';
-import '../widgets/service_provider_grounds_widgets/custom_bottom_service_provider.dart';
-import '../widgets/service_provider_grounds_widgets/custom_filter_item_service_provider.dart';
-import '../widgets/service_provider_grounds_widgets/custom_ground_item_service_provider.dart';
-import '../widgets/service_provider_grounds_widgets/custom_text_form_field_service_provider.dart';
+import '../widgets/service_provider_grounds/custom_app_bar_service_provider.dart';
+import '../widgets/service_provider_grounds/custom_bottom_service_provider.dart';
+import '../widgets/service_provider_grounds/custom_filter_item_service_provider.dart';
+import '../widgets/service_provider_grounds/custom_ground_item_service_provider.dart';
+import '../widgets/service_provider_grounds/custom_text_form_field_service_provider.dart';
 
 class ServiceProviderGroundsScreen extends StatelessWidget {
   const ServiceProviderGroundsScreen({super.key});
@@ -52,7 +52,6 @@ class ServiceProviderGroundsScreen extends StatelessWidget {
                   textBottom: 'Filter',
                   textStyle: TextStyles.font12WhiteColorW400,
                 ),
-            
               ],
             ),
             verticalSpace(10),
@@ -73,7 +72,7 @@ class ServiceProviderGroundsScreen extends StatelessWidget {
             ),
             verticalSpace(20),
             Expanded(
-              child:  Container(
+              child: Container(
                 width: 335.w,
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
                 decoration: BoxDecoration(

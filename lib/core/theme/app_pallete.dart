@@ -25,6 +25,7 @@ class AppPallete {
   static const Color dartBlackColor = Color(0xff000000);
   static const Color grayColor = Color(0xff8E8E93);
   static const Color darkGrayColor = Color(0xff838383);
-
+  static const Color pinkyRed = Color(0xffED6868);
+  static const Color mainColor = Color(0xffA117F1);
   static const Color lightColor = Color(0xffF5F6F6);
 }

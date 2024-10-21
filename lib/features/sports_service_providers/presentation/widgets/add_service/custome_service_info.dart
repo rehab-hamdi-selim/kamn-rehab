@@ -5,8 +5,8 @@ import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/custome_dropdown_menu.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/custome_text_form_field.dart';
+import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_dropdown_menu.dart';
+import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_text_form_field.dart';
 
 class CustomeServiceInfo extends StatelessWidget {
   const CustomeServiceInfo({super.key});

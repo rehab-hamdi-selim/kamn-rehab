@@ -3,11 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:kamn/core/helpers/spacer.dart';
 
-import 'package:kamn/features/sports_service_providers/presentation/widgets/custome_app_bar.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/custome_finished_button.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/custome_image_picker.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/custome_service_info.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/custome_text_title.dart';
+import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_app_bar.dart';
+import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_finished_button.dart';
+import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_image_picker.dart';
+import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_service_info.dart';
+import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_text_title.dart';
 
 class AddServiceScreen extends StatelessWidget {
   const AddServiceScreen({super.key});
