@@ -2,22 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
+import 'package:kamn/features/sports/data/models/playground_model.dart';
 
 class CustomeImageSlideShow extends StatelessWidget {
-  const CustomeImageSlideShow({super.key});
+  CustomeImageSlideShow(this.imagesPath, {super.key});
+
+  List<dynamic> imagesPath = [];
 
   @override
   Widget build(BuildContext context) {
-    List<String> imagesPath = [
-      'assets/images/ground_image.png',
-      'assets/images/ground_image.png',
-      'assets/images/ground_image.png',
-    ];
     return Stack(
       children: [
         // The Image Slideshow
         ImageSlideshow(
-          indicatorBottomPadding: 70.h, // Padding for indicators
+          indicatorBottomPadding: 70.h,
+          // Padding for indicators
           width: double.infinity,
           height: 346.h,
           initialPage: 0,
