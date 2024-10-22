@@ -15,14 +15,14 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
   Future<void> getPlaygrounds() async {
     final result = await _sportsRepository.getPlaygrounds();
     result.fold(
-      (l) => emit(SportsGroundsState(
-        state: SportsGroundsStatus.failure,
-        erorrMessage: l.erorr,
-      )),
-      (r) => emit(SportsGroundsState(
-        state: SportsGroundsStatus.success,
-        playgrounds: r as List<PlaygroundModel>,
-      )),
+      (l)=> emit(SportsGroundsState(
+          state: SportsGroundsStatus.failure,
+          erorrMessage: l.erorr,
+        )),
+      (r)=>emit(SportsGroundsState(
+          state: SportsGroundsStatus.success,
+          playgrounds: r as List<PlaygroundModel>,
+        ))
     );
   }
 }
