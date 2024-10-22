@@ -128,7 +128,7 @@ class GroundsScreen extends StatelessWidget {
                         : Expanded(
                             child: ListView.separated(
                               itemBuilder: (context, index) {
-                                return CustomGroundItem(
+                                return InkWell(
                                   onTap: () {
                                     Navigator.push(
                                       context,
@@ -141,27 +141,29 @@ class GroundsScreen extends StatelessWidget {
                                       ),
                                     );
                                   },
-                                  imageUrl: state
-                                          .playgrounds![index].images.isEmpty
-                                      ? ''
-                                      : state.playgrounds![index].images.first
-                                          .toString(),
-                                  favoriteOnTap: () {},
-                                  placeText: state.playgrounds![index].name,
+                                  child: CustomGroundItem(
+                                    imageUrl: state
+                                            .playgrounds![index].images.isEmpty
+                                        ? ''
+                                        : state.playgrounds![index].images.first
+                                            .toString(),
+                                    favoriteOnTap: () {},
+                                    placeText: state.playgrounds![index].name,
 
-                                  ///TODO:
-                                  km: "2.7",
+                                    ///TODO:
+                                    km: "2.7",
 
-                                  ///TODO:
-                                  owner: "owner name",
-                                  location: state.playgrounds![index].address,
+                                    ///TODO:
+                                    owner: "owner name",
+                                    location: state.playgrounds![index].address,
 
-                                  ///TODO:
-                                  available: "available",
-                                  rates: state.playgrounds![index].rating
-                                      .toString(),
-                                  price: state.playgrounds![index].price
-                                      .toString(),
+                                    ///TODO:
+                                    available: "available",
+                                    rates: state.playgrounds![index].rating
+                                        .toString(),
+                                    price: state.playgrounds![index].price
+                                        .toString(),
+                                  ),
                                 );
                               },
                               separatorBuilder: (context, index) {

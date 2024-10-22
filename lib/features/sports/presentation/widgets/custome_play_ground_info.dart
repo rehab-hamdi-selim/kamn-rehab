@@ -214,7 +214,7 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
     return Row(
       children: [
         Expanded(
-          child: Text('Hadra Stadium East .1',
+          child: Text(widget.playgroundModel?.name ?? "",
               style: TextStyles.font24BlackRegular.copyWith(height: .85),
               maxLines: 2,
               overflow: TextOverflow.ellipsis),
