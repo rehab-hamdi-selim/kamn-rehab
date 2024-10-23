@@ -5,9 +5,12 @@ import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import "package:kamn/features/sports/data/models/playground_model.dart";
 
 class CustomePlayGroundInfo extends StatefulWidget {
-  const CustomePlayGroundInfo({super.key});
+  CustomePlayGroundInfo({required this.playgroundModel, super.key});
+
+  PlaygroundModel? playgroundModel;
 
   @override
   State<CustomePlayGroundInfo> createState() => _CustomePlayGroundInfoState();
@@ -16,6 +19,8 @@ class CustomePlayGroundInfo extends StatefulWidget {
 class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
   int maxLines = 10;
   bool isVisible = true;
+  PlaygroundModel? playgroundModel;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -36,7 +41,7 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
                   Stack(
                     children: [
                       Text(
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Nullam ac felis in elit ultrices facilisis non ac lacus. Fusce vel lacus sit amet metus tempus consequat. Curabitur nec nulla eu nisl varius dignissim id et justo. Nam viverra, justo at dapibus eleifend, ligula turpis dignissim erat, ut fringilla urna est nec nulla. Phasellus condimentum erat ut nisi ultrices scelerisque. Aenean tempor dolor at dui pulvinar, at auctor enim bibendum. Suspendisse at magna ut arcu elementum blandit. Proin molestie ante sed augue gravida, sit amet pharetra odio interdum.Morbi at nunc id tortor ullamcorper auctor. Integer varius lectus nec turpis posuere, ut volutpat leo gravida. Sed scelerisque est ac lorem sodales, eget gravida lectus malesuada. Cras a felis sapien. Integer in arcu ornare, bibendum leo at, ullamcorper metus. Nulla facilisi. Aliquam erat volutpat. Aenean tempor odio a felis suscipit, non ultricies dui aliquet.',
+                        "  ${widget.playgroundModel?.description}",
                         style: TextStyles.font12blackRegular
                             .copyWith(fontSize: 16.h),
                         maxLines: maxLines,
@@ -157,7 +162,7 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
         Row(
           children: [
             Text(
-              'Alexandria, Hadra',
+              playgroundModel?.address ?? "",
               style: TextStyles.font12GreenSemiBold,
             ),
             horizontalSpace(8.w),
@@ -209,7 +214,7 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
     return Row(
       children: [
         Expanded(
-          child: Text('Hadra Stadium East .1',
+          child: Text(widget.playgroundModel?.name ?? "",
               style: TextStyles.font24BlackRegular.copyWith(height: .85),
               maxLines: 2,
               overflow: TextOverflow.ellipsis),
