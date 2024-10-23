@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider/service_provider_cubit.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider/service_provider_state.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_dropdown_menu.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_text_form_field.dart';
 
@@ -13,46 +16,45 @@ class CustomeServiceInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController nameController = TextEditingController();
-    TextEditingController phoneController = TextEditingController();
-    TextEditingController addressController = TextEditingController();
-    TextEditingController sizeController = TextEditingController();
-    TextEditingController governateController = TextEditingController();
     return Column(
       children: [
         createField(
             title: Constants.fullName,
             hint: Constants.fullNameHint,
-            nameController: nameController,
+            nameController: context.read<ServiceProviderCubit>().nameController,
             iconPath: 'assets/icons/user.svg'),
         verticalSpace(16.h),
         createField(
             title: Constants.phone,
             hint: Constants.phoneHint,
-            nameController: phoneController,
+            nameController:
+                context.read<ServiceProviderCubit>().phoneController,
             iconPath: 'assets/icons/phone.svg'),
         verticalSpace(16.h),
         createField(
             title: Constants.address,
             hint: Constants.addressHint,
-            nameController: addressController,
+            nameController:
+                context.read<ServiceProviderCubit>().addressController,
             iconPath: 'assets/icons/location.svg',
+            context: context,
             showLocationIcon: true),
         verticalSpace(16.h),
         createField(
           title: Constants.groundSize,
           hint: Constants.groundSizeHint,
-          nameController: sizeController,
+          nameController: context.read<ServiceProviderCubit>().sizeController,
           iconPath: 'assets/icons/size.svg',
           explane: Constants.howManyPeople,
         ),
         verticalSpace(16.h),
         createMenu(
-            nameController: governateController,
+            nameController:
+                context.read<ServiceProviderCubit>().governateController,
             title: Constants.governate,
             hint: Constants.governateHint,
             iconPath: 'assets/icons/location.svg',
-            choices: ['alex', 'cairo', 'banha']),
+            choices: Constants.egyptGovernorates),
         verticalSpace(16.h),
       ],
     );
@@ -63,6 +65,7 @@ class CustomeServiceInfo extends StatelessWidget {
     required String title,
     required String hint,
     required String iconPath,
+    BuildContext? context,
     bool showLocationIcon = false,
     String? explane,
   }) {
@@ -101,13 +104,30 @@ class CustomeServiceInfo extends StatelessWidget {
               ),
               if (showLocationIcon) horizontalSpace(13.w),
               if (showLocationIcon)
-                CircleAvatar(
-                  backgroundColor: AppPallete.mainColor,
-                  child: SvgPicture.asset(
-                    'assets/icons/direction.svg',
-                    width: 20.w,
-                    height: 20.h,
-                    color: Colors.white,
+                InkWell(
+                  onTap: () {
+                    context?.read<ServiceProviderCubit>().getLocation();
+                  },
+                  child:
+                      BlocBuilder<ServiceProviderCubit, ServiceProviderState>(
+                    builder: (context, state) {
+                      return CircleAvatar(
+                        backgroundColor: AppPallete.mainColor,
+                        child: state.isLocationLoading
+                            ? const Padding(
+                                padding: EdgeInsets.all(10.0),
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                ),
+                              )
+                            : SvgPicture.asset(
+                                'assets/icons/direction.svg',
+                                width: 20.w,
+                                height: 20.h,
+                                color: Colors.white,
+                              ),
+                      );
+                    },
                   ),
                 )
             ],

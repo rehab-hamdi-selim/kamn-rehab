@@ -10,11 +10,7 @@ plugins {
 
 android {
     namespace = "com.example.kamn"
-<<<<<<< HEAD
-    compileSdk = 34
-=======
     compileSdk = flutter.compileSdkVersion
->>>>>>> origin/features/service_providers/service_provider_ground_ui_and_successfully_add_service_ui
     ndkVersion = "25.1.8937393"
 
     compileOptions {

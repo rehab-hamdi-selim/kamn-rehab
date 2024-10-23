@@ -1,77 +1,98 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:kamn/core/const/constants.dart';
+import 'package:kamn/core/helpers/spacer.dart';
 
 import 'package:kamn/core/theme/style.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider/service_provider_cubit.dart';
 
 class CustomeImagePicker extends StatefulWidget {
-  CustomeImagePicker({super.key});
+  const CustomeImagePicker({super.key});
 
   @override
   State<CustomeImagePicker> createState() => _CustomeImagePickerState();
 }
 
 class _CustomeImagePickerState extends State<CustomeImagePicker> {
-  List<File> selectedImageList = [];
-
   @override
   Widget build(BuildContext context) {
-    return DottedBorder(
-      borderType: BorderType.RRect,
-      radius: Radius.circular(10),
-      color: Colors.black,
-      strokeWidth: 1,
-      child: GestureDetector(
-        onTap: () {
-          getPhotoFromGallery();
-        },
-        child: Stack(
-          children: [
-            Container(
-              width: double.infinity,
-              height: 80.h,
-              color: Color(0xffF5F6F6),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        RichText(
+            textAlign: TextAlign.start,
+            text: TextSpan(
+                text: Constants.addImage,
+                style: TextStyles.fontInter14BlackMedium,
                 children: [
-                  Text(
-                    Constants.addImage,
-                    style: TextStyles.fontInter14BlackMedium,
-                  ),
-                  Text(
-                    textAlign: TextAlign.center,
-                    Constants.numOfImage,
+                  TextSpan(
+                    text: Constants.numOfImage,
                     style: TextStyles.fontInter10GreyLight,
-                  )
-                ],
-              ),
-            ),
-            Row(
-                children: selectedImageList.map((element) {
-              return Image.file(
-                element,
-                width: 100.w,
-                height: 80.h,
-                fit: BoxFit.cover,
-              );
-            }).toList())
-          ],
+                  ),
+                ])),
+        verticalSpace(10.w),
+        DottedBorder(
+          borderType: BorderType.RRect,
+          radius: const Radius.circular(10),
+          color: Colors.black,
+          strokeWidth: 1,
+          child: Row(
+            children: [
+              Row(
+                  children: context
+                      .read<ServiceProviderCubit>()
+                      .selectedImageList
+                      .map((element) {
+                return Stack(
+                  alignment: Alignment.topRight,
+                  children: [
+                    Container(
+                      width: 95.w,
+                      height: 85.w,
+                      margin: EdgeInsets.symmetric(horizontal: 5.w),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                            image: FileImage(
+                              element,
+                            ),
+                            fit: BoxFit.cover),
+                      ),
+                    ),
+                    Positioned(
+                        right: 5.w,
+                        child: InkWell(
+                            onTap: () {
+                              context
+                                  .read<ServiceProviderCubit>()
+                                  .removeImageFromList(element);
+                            },
+                            child: const Icon(Icons.cancel_outlined,
+                                color: Colors.white)))
+                  ],
+                );
+              }).toList()),
+              if (context
+                      .read<ServiceProviderCubit>()
+                      .selectedImageList
+                      .length <=
+                  2)
+                Expanded(
+                  child: GestureDetector(
+                      onTap: () {
+                        context
+                            .read<ServiceProviderCubit>()
+                            .getPhotoFromGallery();
+                      },
+                      child:
+                          SizedBox(height: 80.h, child: const Icon(Icons.add))),
+                )
+            ],
+          ),
         ),
-      ),
+      ],
     );
-  }
-
-  Future<void> getPhotoFromGallery() async {
-    if (selectedImageList.length <= 2) {
-      var image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (image != null)
-        setState(() {
-          selectedImageList.add(File(image.path));
-        });
-    }
   }
 }
