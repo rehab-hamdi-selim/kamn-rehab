@@ -34,7 +34,6 @@ class CustomeBottomBook extends StatelessWidget {
               ElevatedButton(
                   onPressed: () {
                     /// functoin to add playground to firestore
-                    addToFireStore();
                   },
                   child: Text(
                     Constants.bookNow,
@@ -45,37 +44,5 @@ class CustomeBottomBook extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  /// test function
-  void addToFireStore() {
-    final playGroundRef = FirebaseFirestore.instance
-        .collection('PlayGround')
-        .withConverter<PlaygroundModel>(
-          fromFirestore: (snapshot, options) =>
-              PlaygroundModel.fromJson(snapshot.data()),
-          toFirestore: (value, options) => value.toJson(),
-        );
-
-    playGroundRef
-        .add(PlaygroundModel(name: 'al hadra', address: 'alex', price: 250))
-        .then((value) => print('playground added successfully'))
-        .catchError((error) => print('error : ${error.toString()}'));
-  }
-}
-
-/// test class
-class PlaygroundModel {
-  String name;
-  String address;
-  double price;
-  PlaygroundModel(
-      {required this.name, required this.address, required this.price});
-
-  PlaygroundModel.fromJson(Map<String, dynamic>? map)
-      : this(name: map!['name'], address: map['address'], price: map['price']);
-
-  Map<String, dynamic> toJson() {
-    return {'name': name, 'address': address, 'price': price};
   }
 }

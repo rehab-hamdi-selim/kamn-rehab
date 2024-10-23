@@ -4,33 +4,35 @@ import 'package:flutter/foundation.dart';
 
 class PlaygroundModel {
   String? playgroundId;
-  String name;
-  double longitude;
-  double latitude;
-  String ownerId;
-  String address;
-  String status;
-  double rating;
-  double price;
-  String description;
-  List<String> images;
-  int size;
-  String govenrate;
+  String? name;
+  String? phone;
+  double? longitude;
+  double? latitude;
+  String? ownerId; //get from user credential
+  String? address;
+  String? status; // need to handel
+  double? rating; //calcolute from developer
+  double? price; // need to handel
+  String? description; // need to handel
+  List<String>? images;
+  int? size;
+  String? govenrate;
 
   PlaygroundModel({
     this.playgroundId,
-    required this.name,
-    required this.longitude,
-    required this.latitude,
-    required this.ownerId,
-    required this.address,
-    required this.status,
-    required this.rating,
-    required this.price,
-    required this.description,
-    required this.images,
-    required this.size,
-    required this.govenrate,
+    this.name,
+    this.phone,
+    this.longitude,
+    this.latitude,
+    this.ownerId,
+    this.address,
+    this.status,
+    this.rating,
+    this.price,
+    this.description,
+    this.images,
+    this.size,
+    this.govenrate,
   });
 
   Map<String, dynamic> toMap() {

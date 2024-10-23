@@ -1,24 +1,52 @@
 //init add_service_provider_to_firebase branch
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:kamn/core/const/firebase_collections.dart';
 import 'package:kamn/core/utils/try_and_catch.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_model.dart';
+import 'package:path/path.dart';
 
 abstract class ServiceProvidersRemoteDataSource {
-  void addServiceToFirestore(PlaygroundModel playground);
+  Future<void> addServiceToFirestore(PlaygroundModel playground);
+  Future<List<String>> addImagesToStorage(List<File> images);
 }
 
 class ServiceProvidersRemoteDataSourceImpl
     implements ServiceProvidersRemoteDataSource {
   FirebaseFirestore firestore;
-  ServiceProvidersRemoteDataSourceImpl({required this.firestore});
+  FirebaseStorage storage;
+  ServiceProvidersRemoteDataSourceImpl(
+      {required this.firestore, required this.storage});
 
   @override
   Future<void> addServiceToFirestore(PlaygroundModel playground) async {
-    executeTryAndCatchForDataLayer(() async {
+    return executeTryAndCatchForDataLayer(() async {
       var collRef = firestore.collection(FirebaseCollections.playgrounds);
-      playground.playgroundId = collRef.doc().id;
-      return await collRef.add(playground.toMap());
+      var docRef = collRef.doc();
+      playground.playgroundId = docRef.id;
+      return await docRef.set(playground.toMap());
+    });
+  }
+
+  @override
+  Future<List<String>> addImagesToStorage(List<File> images) async {
+    List<String> imagesUrl = [];
+
+    return executeTryAndCatchForDataLayer(() async {
+      for (var image in images) {
+        Reference firebaseStorageRef =
+            FirebaseStorage.instance.ref().child(basename(image.path));
+
+        UploadTask uploadTask = firebaseStorageRef.putFile(image);
+
+        TaskSnapshot taskSnapshot = await uploadTask;
+
+        String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+        imagesUrl.add(downloadUrl);
+      }
+      return imagesUrl;
     });
   }
 }

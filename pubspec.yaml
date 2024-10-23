@@ -79,7 +79,10 @@ dependencies:
   cloud_firestore: ^5.4.4
 
   dotted_border: ^2.1.0
-
+  firebase_storage: ^12.3.4
+  path: ^1.9.0
+  flutter_image_compress: ^2.3.0
+  location: ^7.0.1
 
 
 dev_dependencies:
