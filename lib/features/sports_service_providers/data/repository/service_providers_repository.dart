@@ -17,6 +17,7 @@ abstract class ServiceProvidersRepository {
 class ServiceProvidersRepositoryImpl implements ServiceProvidersRepository {
   ServiceProvidersRemoteDataSource dataSource;
   ServiceProvidersRepositoryImpl({required this.dataSource});
+  //TODO:Check connectivity  in executeTryAndCatchForRepository
   @override
   Future<Either<Faliure, void>> addServiceToFirestore(
       PlaygroundModel playground) async {

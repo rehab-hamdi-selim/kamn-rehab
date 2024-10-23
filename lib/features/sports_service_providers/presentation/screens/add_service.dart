@@ -29,6 +29,7 @@ class AddServiceScreen extends StatelessWidget {
       create: (context) => ServiceProviderCubit(
           repository: ServiceProvidersRepositoryImpl(
               dataSource: ServiceProvidersRemoteDataSourceImpl(
+                  //TODO:don`t inject the dependance in ui you must inject it in the GetIt and then use it there
                   storage: FirebaseStorage.instance,
                   firestore: FirebaseFirestore.instance))),
       child: BlocConsumer<ServiceProviderCubit, ServiceProviderState>(

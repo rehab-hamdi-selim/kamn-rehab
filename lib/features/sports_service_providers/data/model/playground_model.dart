@@ -12,8 +12,8 @@ class PlaygroundModel {
   String? address;
   String? status; // need to handel
   double? rating; //calcolute from developer
-  double? price; // need to handel
-  String? description; // need to handel
+  double? price; // need to handel  /*
+  String? description; // need to handel /*
   List<String>? images;
   int? size;
   String? govenrate;

@@ -9,24 +9,26 @@ import 'package:kamn/features/sports_service_providers/data/repository/service_p
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider/service_provider_state.dart';
 import 'package:location/location.dart';
 
+import '../../../../../core/utils/location_premission.dart';
+
 class ServiceProviderCubit extends Cubit<ServiceProviderState> {
   ServiceProviderCubit({required this.repository})
       : super(ServiceProviderState(state: ServiceProviderStatus.initial));
 
   ServiceProvidersRepository repository;
-
   List<File> selectedImageList = [];
   List<String> imagesUrl = [];
-
+//TODO: add validation to the inputs
+//TODO: dispose controllers before navigte to another screen
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController sizeController = TextEditingController();
   TextEditingController governateController = TextEditingController();
 
-  /// function to add playground object to firestore
   Future<void> addService() async {
     emit(ServiceProviderState(state: ServiceProviderStatus.loading));
+    //TODO:don`t fire function into another function you must fire first function and then depend on it`s state fire the second function
     await addImagesToStorage();
 
     var response = await repository.addServiceToFirestore(PlaygroundModel(
@@ -55,6 +57,8 @@ class ServiceProviderCubit extends Cubit<ServiceProviderState> {
     });
   }
 
+  //TODO: add getPhotoFromGallery to the core and make a new file name it image_picker_helper.dart
+  //that function must return image.path and then add it to the selectedImageList
   Future<void> getPhotoFromGallery() async {
     var image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image != null) {
@@ -99,34 +103,10 @@ class ServiceProviderCubit extends Cubit<ServiceProviderState> {
     });
   }
 
-  PermissionStatus? permissionGranted;
-  Location location = Location();
+  //TODO: add location to the core
   LocationData? locationData;
   double? longitude;
   double? latitude;
-
-  Future<bool> isPermissionGranted() async {
-    permissionGranted = await location.hasPermission();
-    if (permissionGranted == PermissionStatus.denied) {
-      permissionGranted = await location.requestPermission();
-      if (permissionGranted != PermissionStatus.granted) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  Future<bool> isServiceEnabled() async {
-    var serviceEnabled = await location.serviceEnabled();
-    if (!serviceEnabled) {
-      serviceEnabled = await location.requestService();
-      if (!serviceEnabled) {
-        return false;
-      }
-    }
-    return true;
-  }
-
   Future<void> getLocation() async {
     emit(ServiceProviderState(state: ServiceProviderStatus.locationLoading));
     if (!await isPermissionGranted()) {
