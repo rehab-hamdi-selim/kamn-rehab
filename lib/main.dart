@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'features/sports/presentation/screens/grounds_screen.dart';
@@ -5,9 +6,9 @@ import 'init_dependencies.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
+  await Firebase.initializeApp(
+      //options: DefaultFirebaseOptions.currentPlatform,
+      );
   await initDependencies();
   await ScreenUtil.ensureScreenSize();
   runApp(const MyApp());

@@ -1,9 +1,8 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:kamn/core/erorr/faliure.dart';
-
 import '../../../../core/utils/try_and_catch.dart';
-import '../../presentation/widgets/ground_details/custome_bottom_book.dart';
 import '../data_source/sports_remote_data_source.dart';
+import '../models/playground_model.dart';
 
 class SportsRepository {
   final SportsRemoteDataSource _remoteDataSource;
@@ -15,7 +14,7 @@ class SportsRepository {
           await _remoteDataSource.getPlaygrounds();
 
       final playgrounds =
-          rawData.map((data) => PlaygroundModel.fromJson(data)).toList();
+          rawData.map((data) => PlaygroundModel.fromMap(data)).toList();
 
       return playgrounds;
     });
