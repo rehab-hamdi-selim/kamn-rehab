@@ -33,7 +33,9 @@ class ServiceProviderCubit extends Cubit<ServiceProviderState> {
       name: nameController.text.trim(),
       phone: phoneController.text.trim(),
       address: addressController.text.trim(),
-      size: int.parse(sizeController.text.trim()),
+      size: sizeController.text.isNotEmpty
+          ? int.parse(sizeController.text.trim())
+          : 0,
       govenrate: governateController.text,
       images: imagesUrl,
       latitude: latitude,

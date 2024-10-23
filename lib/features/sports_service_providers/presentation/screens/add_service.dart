@@ -33,14 +33,13 @@ class AddServiceScreen extends StatelessWidget {
                   firestore: FirebaseFirestore.instance))),
       child: BlocConsumer<ServiceProviderCubit, ServiceProviderState>(
         listener: (context, state) {
-          if (state.successMessage == 'service added successfully') {
+          if (state.isSuccess) {
             hideLoading(context);
             navigationTo(context, const SuccessServiceProviderScreen());
-          }
-          if (state.isLoading) {
+          } else if (state.isLoading) {
             showLoadingAlert('Loading', context);
-          }
-          if (state.isFailure) {
+          } else if (state.isFailure) {
+            hideLoading(context);
             showSnackBar(context, state.erorrMessage!);
           }
         },

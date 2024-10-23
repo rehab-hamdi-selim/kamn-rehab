@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:kamn/core/erorr/faliure.dart';
 import 'package:kamn/core/utils/try_and_catch.dart';
@@ -18,16 +19,29 @@ class ServiceProvidersRepositoryImpl implements ServiceProvidersRepository {
   ServiceProvidersRepositoryImpl({required this.dataSource});
   @override
   Future<Either<Faliure, void>> addServiceToFirestore(
-      PlaygroundModel playground) {
-    return executeTryAndCatchForRepository(() {
-      return dataSource.addServiceToFirestore(playground);
-    });
+      PlaygroundModel playground) async {
+    var check = await Connectivity().checkConnectivity();
+    if (check.contains(ConnectivityResult.mobile) ||
+        check.contains(ConnectivityResult.wifi)) {
+      return executeTryAndCatchForRepository(() async {
+        return await dataSource.addServiceToFirestore(playground);
+      });
+    } else {
+      return Left(Faliure('no internet connection'));
+    }
   }
 
   @override
-  Future<Either<Faliure, List<String>>> addFImagesToStorage(List<File> images) {
-    return executeTryAndCatchForRepository(() async {
-      return dataSource.addImagesToStorage(images);
-    });
+  Future<Either<Faliure, List<String>>> addFImagesToStorage(
+      List<File> images) async {
+    var check = await Connectivity().checkConnectivity();
+    if (check.contains(ConnectivityResult.mobile) ||
+        check.contains(ConnectivityResult.wifi)) {
+      return executeTryAndCatchForRepository(() async {
+        return dataSource.addImagesToStorage(images);
+      });
+    } else {
+      return Left(Faliure('no internet connection'));
+    }
   }
 }
