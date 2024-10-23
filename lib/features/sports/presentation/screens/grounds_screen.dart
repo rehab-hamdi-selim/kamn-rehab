@@ -7,6 +7,7 @@ import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme_data/app_palette.dart';
 import 'package:kamn/core/theme_data/style.dart';
 import 'package:kamn/core/utils/app_images.dart';
+import 'package:kamn/features/sports/presentation/screens/ground_details_screen.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_filter_item.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_ground_item.dart';
 import '../../../../core/theme/app_pallete.dart';
@@ -127,22 +128,42 @@ class GroundsScreen extends StatelessWidget {
                         : Expanded(
                             child: ListView.separated(
                               itemBuilder: (context, index) {
-                                return CustomGroundItem(
-                                  imageUrl: state.playgrounds![index].images.isEmpty?''
-                                      :state.playgrounds![index].images.first.toString(),
-                                  favoriteOnTap: () {},
-                                  placeText: state.playgrounds![index].name,
-                                  ///TODO:
-                                  km: "2.7",
-                                  ///TODO:
-                                  owner: "owner name",
-                                  location: state.playgrounds![index].address,
-                                  ///TODO:
-                                  available: "available",
-                                  rates: state.playgrounds![index].rating
-                                      .toString(),
-                                  price: state.playgrounds![index].price
-                                      .toString(),
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            GroundDetailsScreen(
+                                          playgroundModel: state.playgrounds![
+                                              index], // Optional chaining
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: CustomGroundItem(
+                                    imageUrl: state
+                                            .playgrounds![index].images.isEmpty
+                                        ? ''
+                                        : state.playgrounds![index].images.first
+                                            .toString(),
+                                    favoriteOnTap: () {},
+                                    placeText: state.playgrounds![index].name,
+
+                                    ///TODO:
+                                    km: "2.7",
+
+                                    ///TODO:
+                                    owner: "owner name",
+                                    location: state.playgrounds![index].address,
+
+                                    ///TODO:
+                                    available: "available",
+                                    rates: state.playgrounds![index].rating
+                                        .toString(),
+                                    price: state.playgrounds![index].price
+                                        .toString(),
+                                  ),
                                 );
                               },
                               separatorBuilder: (context, index) {
