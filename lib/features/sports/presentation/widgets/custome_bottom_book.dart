@@ -26,7 +26,8 @@ class CustomeBottomBook extends StatelessWidget {
             children: [
               RichText(
                 text: TextSpan(
-                    text: playgroundModel?.price.toString(),
+                    text: playgroundModel?.price
+                        .toString(), //TODO: dont pass the all model to display one attribute like price
                     style: TextStyles.font32OfWhiteMedium,
                     children: [
                       TextSpan(

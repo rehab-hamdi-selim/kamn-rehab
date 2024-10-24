@@ -8,9 +8,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import "package:kamn/features/sports/data/models/playground_model.dart";
 
 class CustomePlayGroundInfo extends StatefulWidget {
-  CustomePlayGroundInfo({required this.playgroundModel, super.key});
+  const CustomePlayGroundInfo({required this.playgroundModel, super.key});
 
-  PlaygroundModel? playgroundModel;
+  final PlaygroundModel? playgroundModel;
 
   @override
   State<CustomePlayGroundInfo> createState() => _CustomePlayGroundInfoState();
