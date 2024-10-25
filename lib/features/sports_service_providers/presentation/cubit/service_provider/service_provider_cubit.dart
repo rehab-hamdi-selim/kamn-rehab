@@ -17,8 +17,7 @@ class ServiceProviderCubit extends Cubit<ServiceProviderState> {
   ServiceProvidersRepository repository;
   List<File> selectedImageList = [];
   List<String> imagesUrl = [];
-//TODO: add validation to the inputs /* done
-//TODO: dispose controllers before navigte to another screen /* done
+
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController addressController = TextEditingController();
@@ -29,7 +28,6 @@ class ServiceProviderCubit extends Cubit<ServiceProviderState> {
 
   Future<void> addService(PlaygroundModel playground) async {
     emit(ServiceProviderState(state: ServiceProviderStatus.loading));
-    //TODO:don`t fire function into another function you must fire first function and then depend on it`s state fire the second function /* done
     var response = await repository.addServiceToFirestore(playground);
     response.fold((error) {
       emit(ServiceProviderState(
@@ -41,7 +39,6 @@ class ServiceProviderCubit extends Cubit<ServiceProviderState> {
     });
   }
 
-  //TODO: add getPhotoFromGallery to the core and make a new file name it image_picker_helper.dart /* done
   //that function must return image.path and then add it to the selectedImageList
   Future<void> getPhotoFromGallery() async {
     var images = await pickImage();
@@ -58,6 +55,7 @@ class ServiceProviderCubit extends Cubit<ServiceProviderState> {
     }
   }
 
+  //TODO: i want to compress the images when pick it to avoid this function
   Future<void> compressImage() async {
     emit(ServiceProviderState(state: ServiceProviderStatus.loading));
     selectedImageList = await compressImages();
@@ -88,7 +86,6 @@ class ServiceProviderCubit extends Cubit<ServiceProviderState> {
     });
   }
 
-  //TODO: add location to the core /* done
   Map<String, double> coordinates = {};
   Future<void> getLocation() async {
     emit(ServiceProviderState(state: ServiceProviderStatus.locationLoading));
