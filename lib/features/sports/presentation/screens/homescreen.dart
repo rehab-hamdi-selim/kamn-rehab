@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
                 shape: BoxShape.circle, color: Colors.white),
             child: Icon(
               Icons.arrow_back,
-              color: Colors.black,
+              color: Colors.black ,
             ),
           ),
         ),
