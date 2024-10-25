@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
@@ -19,6 +20,7 @@ class CustomeDropdownMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownMenu(
+        menuHeight: 400.h,
         menuStyle: MenuStyle(
             backgroundColor: MaterialStateProperty.all(AppPallete.lightColor)),
         selectedTrailingIcon: const Icon(Icons.keyboard_arrow_up_outlined),

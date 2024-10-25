@@ -50,7 +50,9 @@ class SuccessServiceProviderScreen extends StatelessWidget {
                     horizontalSpace(7.1)
                   ],
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
                 textBottom: 'Check',
                 textStyle: TextStyles.font12WhiteColorW400,
               ),
