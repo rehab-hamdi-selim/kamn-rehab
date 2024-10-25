@@ -3,15 +3,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:kamn/features/sports/data/models/playground_model.dart';
 
 class CustomeBottomBook extends StatelessWidget {
-  const CustomeBottomBook({super.key});
+  const CustomeBottomBook({required this.playgroundModel, super.key});
+
+  final PlaygroundModel? playgroundModel;
 
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
-      color: Colors.white,
+      color: AppPallete.whiteColor,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(65),
@@ -24,7 +26,8 @@ class CustomeBottomBook extends StatelessWidget {
             children: [
               RichText(
                 text: TextSpan(
-                    text: '250 LE',
+                    text: playgroundModel?.price
+                        .toString(), //TODO: dont pass the all model to display one attribute like price
                     style: TextStyles.font32OfWhiteMedium,
                     children: [
                       TextSpan(
@@ -32,10 +35,7 @@ class CustomeBottomBook extends StatelessWidget {
                     ]),
               ),
               ElevatedButton(
-                  onPressed: () {
-                    /// functoin to add playground to firestore
-                    addToFireStore();
-                  },
+                  onPressed: () {},
                   child: Text(
                     Constants.bookNow,
                     style: TextStyles.font16greenSemiBold,
@@ -45,37 +45,5 @@ class CustomeBottomBook extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  /// test function
-  void addToFireStore() {
-    final playGroundRef = FirebaseFirestore.instance
-        .collection('PlayGround')
-        .withConverter<PlaygroundModel>(
-          fromFirestore: (snapshot, options) =>
-              PlaygroundModel.fromJson(snapshot.data()),
-          toFirestore: (value, options) => value.toJson(),
-        );
-
-    playGroundRef
-        .add(PlaygroundModel(name: 'al hadra', address: 'alex', price: 250))
-        .then((value) => print('playground added successfully'))
-        .catchError((error) => print('error : ${error.toString()}'));
-  }
-}
-
-/// test class
-class PlaygroundModel {
-  String name;
-  String address;
-  double price;
-  PlaygroundModel(
-      {required this.name, required this.address, required this.price});
-
-  PlaygroundModel.fromJson(Map<String, dynamic>? map)
-      : this(name: map!['name'], address: map['address'], price: map['price']);
-
-  Map<String, dynamic> toJson() {
-    return {'name': name, 'address': address, 'price': price};
   }
 }
