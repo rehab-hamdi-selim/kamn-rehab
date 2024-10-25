@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import "package:kamn/features/sports/data/models/playground_model.dart";
 import 'package:kamn/features/sports/presentation/widgets/ground_details/custome_bottom_book.dart';
-import 'package:kamn/features/sports/presentation/widgets/ground_details/custome_image_slide_show.dart';
 import 'package:kamn/features/sports/presentation/widgets/ground_details/custome_play_ground_info.dart';
+import 'package:kamn/features/sports/presentation/widgets/ground_details/custome_image_slide_show.dart';
 
 class GroundDetailsScreen extends StatelessWidget {
-  const GroundDetailsScreen({super.key});
+  const GroundDetailsScreen({super.key, required this.playgroundModel});
+  final PlaygroundModel playgroundModel;
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +21,12 @@ class GroundDetailsScreen extends StatelessWidget {
                 top: 0,
                 left: 0,
                 right: 0,
-                height: 346.h, // Image height
-                child: const CustomeImageSlideShow()),
+                height: 346.h,
+                // Image height
+                child: CustomeImageSlideShow(playgroundModel.images)),
             Positioned(
-              bottom: 0, // Start from the bottom
+              bottom: 0,
+              // Start from the bottom
               left: 0,
               right: 0,
               height: 440.h,
@@ -33,11 +37,15 @@ class GroundDetailsScreen extends StatelessWidget {
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30),
                     )),
-                child: const CustomePlayGroundInfo(),
+                child: CustomePlayGroundInfo(
+                  playgroundModel: playgroundModel,
+                ),
               ),
             )
           ],
         ),
-        bottomNavigationBar: const CustomeBottomBook());
+        bottomNavigationBar: CustomeBottomBook(
+          playgroundModel: playgroundModel,
+        ));
   }
 }
