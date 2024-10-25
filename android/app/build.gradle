@@ -11,6 +11,7 @@ plugins {
 android {
     namespace = "com.example.kamn"
     compileSdk = 34
+
     ndkVersion = "25.1.8937393"
 
     compileOptions {

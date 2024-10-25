@@ -36,6 +36,7 @@ class CustomeBottomBook extends StatelessWidget {
               ),
               ElevatedButton(
                   onPressed: () {},
+
                   child: Text(
                     Constants.bookNow,
                     style: TextStyles.font16greenSemiBold,
