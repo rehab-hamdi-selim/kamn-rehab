@@ -33,7 +33,8 @@ class ServiceProviderCubit extends Cubit<ServiceProviderState> {
     var response = await repository.addServiceToFirestore(playground);
     response.fold((error) {
       emit(ServiceProviderState(
-          state: ServiceProviderStatus.failure, erorrMessage: error.erorr));
+          state: ServiceProviderStatus.serviceFailed,
+          erorrMessage: error.erorr));
     }, (success) {
       emit(ServiceProviderState(
           state: ServiceProviderStatus.success,
@@ -44,24 +45,18 @@ class ServiceProviderCubit extends Cubit<ServiceProviderState> {
   //TODO: add getPhotoFromGallery to the core and make a new file name it image_picker_helper.dart /* done
   //that function must return image.path and then add it to the selectedImageList
   Future<void> getPhotoFromGallery() async {
-    var images = await pickImage();
-    if (images != null) {
-      selectedImageList = images;
+    var image = await pickImage();
+    if (image != null) {
+      selectedImageList.add(image);
       emit(ServiceProviderState(
           state: ServiceProviderStatus.imagePicked,
-          imagesList: images,
+          imagesList: selectedImageList,
           successMessage: 'image loaded sucessfully'));
     } else {
       emit(ServiceProviderState(
           state: ServiceProviderStatus.failure,
           erorrMessage: 'cancel image pick'));
     }
-  }
-
-  Future<void> compressImage() async {
-    emit(ServiceProviderState(state: ServiceProviderStatus.loading));
-    selectedImageList = await compressImages();
-    emit(ServiceProviderState(state: ServiceProviderStatus.imageCompressed));
   }
 
   void removeImageFromList(File image) {
@@ -81,10 +76,24 @@ class ServiceProviderCubit extends Cubit<ServiceProviderState> {
           erorrMessage: 'faild to upload images to firebase storage'));
     }, (success) {
       imagesUrl = success;
-
       emit(ServiceProviderState(
           state: ServiceProviderStatus.imageUploaded,
           successMessage: 'images added successfully to firebase storage'));
+    });
+  }
+
+  Future<void> deleteImagesFromStorage() async {
+    emit(ServiceProviderState(state: ServiceProviderStatus.loading));
+    var response = await repository.deleteImagesFromStorage(selectedImageList);
+
+    response.fold((error) {
+      emit(ServiceProviderState(
+          state: ServiceProviderStatus.failure,
+          erorrMessage: 'faild to upload images to firebase storage'));
+    }, (success) {
+      emit(ServiceProviderState(
+          state: ServiceProviderStatus.imageDeleted,
+          successMessage: 'images deleted successfully from firebase storage'));
     });
   }
 
@@ -99,5 +108,19 @@ class ServiceProviderCubit extends Cubit<ServiceProviderState> {
     }, (success) {
       emit(ServiceProviderState(state: ServiceProviderStatus.locationDetected));
     });
+  }
+
+  void disposeControllers() {
+    nameController.dispose();
+    phoneController.dispose();
+    addressController.dispose();
+    sizeController.dispose();
+    governateController.dispose();
+  }
+
+  @override
+  Future<void> close() {
+    disposeControllers();
+    return super.close();
   }
 }

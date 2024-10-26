@@ -14,6 +14,10 @@ class CustomeAddServicesBlocListner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void disposeController() {
+      context.read<ServiceProviderCubit>().disposeControllers();
+    }
+
     PlaygroundModel prepareData(BuildContext context) => PlaygroundModel(
           name: context.read<ServiceProviderCubit>().nameController.text.trim(),
           phone:
@@ -39,15 +43,14 @@ class CustomeAddServicesBlocListner extends StatelessWidget {
         );
     return BlocListener<ServiceProviderCubit, ServiceProviderState>(
       listener: (context, state) {
-        if (state.isImageCompressed) {
-          // when you merge the two function of pick image and compress image you will avoid this part
-          context.read<ServiceProviderCubit>().addImagesToStorage();
-        }
         if (state.isImageUploaded) {
           context.read<ServiceProviderCubit>().addService(prepareData(context));
         }
         if (state.isSuccess) {
           navigationTo(context, const SuccessServiceProviderScreen());
+        } else if (state.isServiceFailed) {
+          context.read<ServiceProviderCubit>().deleteImagesFromStorage();
+          showSnackBar(context, state.erorrMessage!);
         } else if (state.isFailure) {
           showSnackBar(context, state.erorrMessage!);
         }

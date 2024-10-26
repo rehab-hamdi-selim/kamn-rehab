@@ -20,56 +20,32 @@ class AddServiceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomeAddServicesBlocListner(
-        child: BlocBuilder<ServiceProviderCubit, ServiceProviderState>(
-      builder: (context, state) {
-        return Scaffold(
-          backgroundColor: Colors.white,
-          resizeToAvoidBottomInset: true,
-          appBar: CustomAppBarServiceProvider.appBar(
-            arrowFunction: () {},
-            notificationIconFunction: () {},
-            profileFunction: () {},
-            badgesIconFunction: () {},
+        child: Scaffold(
+      backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: true,
+      appBar: CustomAppBarServiceProvider.appBar(
+        arrowFunction: () {},
+        notificationIconFunction: () {},
+        profileFunction: () {},
+        badgesIconFunction: () {},
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 24.w),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const CustomeTextTitle(),
+              verticalSpace(19.h),
+              const CustomeImagePicker(),
+              verticalSpace(7.h),
+              const CustomeServiceInfo(),
+              const CustomeFinishedButton(),
+              verticalSpace(25.h),
+            ],
           ),
-          body: state.isLoading
-              ? const Center(
-                  child: CircularProgressIndicator(
-                    color: AppPallete.mainColor,
-                  ),
-                )
-              : Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        const CustomeTextTitle(),
-                        verticalSpace(19.h),
-                        CustomeImagePicker(
-                          selectedImages: state.imagesList ?? [],
-                          onRemoveImage: (image) {
-                            context
-                                .read<ServiceProviderCubit>()
-                                .removeImageFromList(image);
-                          },
-                          onAddImage: () {
-                            context
-                                .read<ServiceProviderCubit>()
-                                .getPhotoFromGallery();
-                          },
-                        ),
-                        verticalSpace(7.h),
-                        CustomeServiceInfo(
-                          isLoading: state.isLocationLoading,
-                        ),
-                        const CustomeFinishedButton(),
-                        verticalSpace(25.h),
-                      ],
-                    ),
-                  ),
-                ),
-        );
-      },
+        ),
+      ),
     ));
   }
 }

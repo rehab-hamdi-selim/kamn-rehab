@@ -5,13 +5,13 @@ import 'package:kamn/features/sports_service_providers/data/model/playground_mod
 enum ServiceProviderStatus {
   initial,
   loading,
-  locationLoading,
   success,
   failure,
+  serviceFailed,
   imagePicked,
   imageDeleted,
   imageUploaded,
-  imageCompressed,
+  locationLoading,
   locationDetected
 }
 
@@ -23,7 +23,7 @@ extension SportsGroundStateExtension on ServiceProviderState {
   bool get isImagePicked => state == ServiceProviderStatus.imagePicked;
   bool get isimageDeleted => state == ServiceProviderStatus.imageDeleted;
   bool get isImageUploaded => state == ServiceProviderStatus.imageUploaded;
-  bool get isImageCompressed => state == ServiceProviderStatus.imageCompressed;
+  bool get isServiceFailed => state == ServiceProviderStatus.serviceFailed;
   bool get isLocationDetected =>
       state == ServiceProviderStatus.locationDetected;
   bool get isLocationLoading => state == ServiceProviderStatus.locationLoading;
@@ -41,5 +41,5 @@ class ServiceProviderState {
       this.playgrounds,
       this.erorrMessage,
       this.successMessage,
-      this.imagesList});
+      this.imagesList = const []});
 }

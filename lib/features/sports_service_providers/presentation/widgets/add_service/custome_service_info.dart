@@ -13,8 +13,7 @@ import 'package:kamn/features/sports_service_providers/presentation/widgets/add_
 import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_text_form_field.dart';
 
 class CustomeServiceInfo extends StatelessWidget {
-  bool isLoading;
-  CustomeServiceInfo({super.key, required this.isLoading});
+  const CustomeServiceInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -117,21 +116,25 @@ class CustomeServiceInfo extends StatelessWidget {
                 onTap: () {
                   context?.read<ServiceProviderCubit>().getLocation();
                 },
-                child: CircleAvatar(
-                  backgroundColor: AppPallete.mainColor,
-                  child: isLoading
-                      ? const Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                          ),
-                        )
-                      : SvgPicture.asset(
-                          'assets/icons/direction.svg',
-                          width: 20.w,
-                          height: 20.h,
-                          color: Colors.white,
-                        ),
+                child: BlocBuilder<ServiceProviderCubit, ServiceProviderState>(
+                  builder: (context, state) {
+                    return CircleAvatar(
+                      backgroundColor: AppPallete.mainColor,
+                      child: state.isLocationLoading
+                          ? const Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                            )
+                          : SvgPicture.asset(
+                              'assets/icons/direction.svg',
+                              width: 20.w,
+                              height: 20.h,
+                              color: Colors.white,
+                            ),
+                    );
+                  },
                 ),
               )
           ],

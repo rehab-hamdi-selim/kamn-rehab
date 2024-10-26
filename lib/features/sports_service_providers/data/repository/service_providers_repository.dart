@@ -12,6 +12,7 @@ abstract class ServiceProvidersRepository {
   Future<Either<Faliure, void>> addServiceToFirestore(
       PlaygroundModel playground);
   Future<Either<Faliure, List<String>>> addFImagesToStorage(List<File> images);
+  Future<Either<Faliure, bool>> deleteImagesFromStorage(List<File> images);
 }
 
 class ServiceProvidersRepositoryImpl implements ServiceProvidersRepository {
@@ -31,6 +32,14 @@ class ServiceProvidersRepositoryImpl implements ServiceProvidersRepository {
       List<File> images) async {
     return executeTryAndCatchForRepository(() async {
       return dataSource.addImagesToStorage(images);
+    });
+  }
+
+  @override
+  Future<Either<Faliure, bool>> deleteImagesFromStorage(
+      List<File> images) async {
+    return executeTryAndCatchForRepository(() async {
+      return await dataSource.deleteImagesFromStorage(images);
     });
   }
 }

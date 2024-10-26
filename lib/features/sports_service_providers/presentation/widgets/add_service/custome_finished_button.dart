@@ -7,6 +7,7 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider/service_provider_cubit.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider/service_provider_state.dart';
 
 class CustomeFinishedButton extends StatelessWidget {
   const CustomeFinishedButton({super.key});
@@ -15,31 +16,47 @@ class CustomeFinishedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 76.w),
-      child: ElevatedButton(
-          style:
-              ElevatedButton.styleFrom(backgroundColor: AppPallete.blackColor),
-          onPressed: () {
-            if (context
-                    .read<ServiceProviderCubit>()
-                    .formKey
-                    .currentState
-                    ?.validate() ==
-                true) {
-              context.read<ServiceProviderCubit>().compressImage();
-            }
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.check_circle_outline,
-                  color: AppPallete.lightGreen),
-              horizontalSpace(7.w),
-              Text(
-                Constants.finish,
-                style: TextStyles.fontInter16WhiteMedium,
-              )
-            ],
-          )),
+      child: BlocBuilder<ServiceProviderCubit, ServiceProviderState>(
+        builder: (context, state) {
+          return ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  padding: state.isLoading
+                      ? const EdgeInsets.symmetric(vertical: 10)
+                      : null,
+                  disabledBackgroundColor: AppPallete.blackColor,
+                  backgroundColor: AppPallete.blackColor),
+              onPressed: state.isLoading
+                  ? null
+                  : () {
+                      if (context
+                              .read<ServiceProviderCubit>()
+                              .formKey
+                              .currentState
+                              ?.validate() ==
+                          true) {
+                        context
+                            .read<ServiceProviderCubit>()
+                            .addImagesToStorage();
+                      }
+                    },
+              child: state.isLoading
+                  ? const CircularProgressIndicator(
+                      color: AppPallete.whiteColor,
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.check_circle_outline,
+                            color: AppPallete.lightGreen),
+                        horizontalSpace(7.w),
+                        Text(
+                          Constants.finish,
+                          style: TextStyles.fontInter16WhiteMedium,
+                        )
+                      ],
+                    ));
+        },
+      ),
     );
   }
 }

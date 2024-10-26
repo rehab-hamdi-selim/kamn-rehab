@@ -11,6 +11,7 @@ import 'package:path/path.dart';
 abstract class ServiceProvidersRemoteDataSource {
   Future<void> addServiceToFirestore(PlaygroundModel playground);
   Future<List<String>> addImagesToStorage(List<File> images);
+  Future<bool> deleteImagesFromStorage(List<File> images);
 }
 
 class ServiceProvidersRemoteDataSourceImpl
@@ -23,7 +24,8 @@ class ServiceProvidersRemoteDataSourceImpl
   @override
   Future<void> addServiceToFirestore(PlaygroundModel playground) async {
     return executeTryAndCatchForDataLayer(() async {
-      var collRef = firestore.collection(FirebaseCollections.playgrounds);
+      var collRef =
+          firestore.collection(FirebaseCollections.playgroundsRequests);
       var docRef = collRef.doc();
       playground.playgroundId = docRef.id;
       return await docRef.set(playground.toMap());
@@ -47,6 +49,19 @@ class ServiceProvidersRemoteDataSourceImpl
         imagesUrl.add(downloadUrl);
       }
       return imagesUrl;
+    });
+  }
+
+  @override
+  Future<bool> deleteImagesFromStorage(List<File> images) async {
+    return executeTryAndCatchForDataLayer(() async {
+      for (var image in images) {
+        Reference firebaseStorageRef =
+            FirebaseStorage.instance.ref().child(basename(image.path));
+
+        await firebaseStorageRef.delete();
+      }
+      return true;
     });
   }
 }
