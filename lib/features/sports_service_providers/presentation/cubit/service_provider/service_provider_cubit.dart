@@ -2,14 +2,15 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:kamn/core/utils/image_picker.dart';
-import 'package:kamn/features/sports_service_providers/data/model/playground_model.dart';
-import 'package:kamn/features/sports_service_providers/data/repository/service_providers_repository.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider/service_provider_state.dart';
 import 'package:injectable/injectable.dart';
 
+import 'package:kamn/core/utils/image_picker.dart';
+import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
+import 'package:kamn/features/sports_service_providers/data/repository/service_providers_repository.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider/service_provider_state.dart';
+
 import '../../../../../core/utils/location.dart';
+
 @injectable
 class ServiceProviderCubit extends Cubit<ServiceProviderState> {
   ServiceProviderCubit({required this.repository})
@@ -107,6 +108,7 @@ class ServiceProviderCubit extends Cubit<ServiceProviderState> {
       emit(ServiceProviderState(
           state: ServiceProviderStatus.failure, erorrMessage: error.erorr));
     }, (success) {
+      coordinates = success;
       emit(ServiceProviderState(state: ServiceProviderStatus.locationDetected));
     });
   }

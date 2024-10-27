@@ -17,9 +17,9 @@ class AppRouter {
       case Routes.addServiceScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider<ServiceProviderCubit>(
-              create: (context) => getIt<ServiceProviderCubit>(),
-              child: const AddServiceScreen(),
-            ));
+                  create: (context) => getIt<ServiceProviderCubit>(),
+                  child: const AddServiceScreen(),
+                ));
       case Routes.groundDetailsScreen:
         return MaterialPageRoute(
             builder: (context) => const GroundDetailsScreen());
@@ -34,12 +34,12 @@ class AppRouter {
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(
-              body: Center(
-                child: Text(
-                  'No route defined for ${settings.name}',
-                ),
-              ),
-            ));
+                  body: Center(
+                    child: Text(
+                      'No route defined for ${settings.name}',
+                    ),
+                  ),
+                ));
     }
   }
 }

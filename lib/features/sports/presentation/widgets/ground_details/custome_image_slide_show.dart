@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/features/sports/data/models/playground_model.dart';
 
 class CustomeImageSlideShow extends StatelessWidget {
   CustomeImageSlideShow({super.key});
 
-  List<dynamic> imagesPath = [];
+  List<dynamic> imagesPath = ['assets/images/ground_image.png'];
 
   @override
   Widget build(BuildContext context) {

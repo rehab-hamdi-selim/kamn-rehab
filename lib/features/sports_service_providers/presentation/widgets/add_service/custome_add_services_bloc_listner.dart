@@ -4,7 +4,7 @@ import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider/service_provider_state.dart';
 
 import '../../../../../core/utils/navigation.dart';
-import '../../../data/model/playground_model.dart';
+import '../../../data/model/playground_request_model.dart';
 import '../../cubit/service_provider/service_provider_cubit.dart';
 import '../../screens/success_service_provider_screen.dart';
 

@@ -1,14 +1,14 @@
 //init add_service_provider_to_firebase branch
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:injectable/injectable.dart';
+import 'package:kamn/core/common/class/firebase_storage_services.dart';
+import 'package:kamn/core/common/class/firestore_services.dart';
 import 'package:kamn/core/const/firebase_collections.dart';
 import 'package:kamn/core/utils/try_and_catch.dart';
-import 'package:kamn/features/sports_service_providers/data/model/playground_model.dart';
+import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 import 'package:path/path.dart';
-import 'package:injectable/injectable.dart';
-
 
 abstract class ServiceProvidersRemoteDataSource {
   Future<void> addServiceToFirestore(PlaygroundRequestModel playground);
@@ -16,11 +16,11 @@ abstract class ServiceProvidersRemoteDataSource {
   Future<bool> deleteImagesFromStorage(List<File> images);
 }
 
-@Injectable(as:ServiceProvidersRemoteDataSource)
+@Injectable(as: ServiceProvidersRemoteDataSource)
 class ServiceProvidersRemoteDataSourceImpl
     implements ServiceProvidersRemoteDataSource {
-  FirebaseFirestore firestore;
-  FirebaseStorage storage;
+  FirestoreService firestore;
+  FirebaseStorageServices storage;
   ServiceProvidersRemoteDataSourceImpl(
       {required this.firestore, required this.storage});
 
