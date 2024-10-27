@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import '../../../../core/const/firebase_collections.dart';
-import '../../../../core/const/linksApi.dart';
 import '../../../../core/utils/try_and_catch.dart';
 
 abstract interface class SportsRemoteDataSource {

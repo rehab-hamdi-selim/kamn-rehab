@@ -15,6 +15,7 @@ class CustomGroundItem extends StatelessWidget {
   final String owner;
   final String price;
   final void Function()? favoriteOnTap;
+  //final void Function() onTap;
 
   const CustomGroundItem({
     super.key,
@@ -27,6 +28,7 @@ class CustomGroundItem extends StatelessWidget {
     required this.available,
     required this.rates,
     required this.price,
+    // required this.onTap,
   });
 
   @override

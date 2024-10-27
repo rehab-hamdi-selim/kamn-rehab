@@ -19,7 +19,7 @@ class Constants {
   static const pleaseComplete = 'please complete the following information ';
   static const addData = 'Add your data about your sevice';
   static const addImage = 'Add ground Images';
-  static const numOfImage = 'from 2, 3 images \n size 2mb';
+  static const numOfImage = ' (from 2, 3 images size 2mb)';
   static const fullName = 'Full name';
   static const phone = 'Phone';
   static const address = 'Service address';
@@ -39,4 +39,34 @@ class Constants {
   static const showAll = "show all";
   static const nextMatch = "Your next match will start at:";
   static const serviceSuccessfullyAdded = "Your service \nsuccessfully added";
+
+  static const List<String> egyptGovernorates = [
+    "Cairo",
+    "Giza",
+    "Alexandria",
+    "Qalyubia",
+    "Port Said",
+    "Suez",
+    "Ismailia",
+    "Aswan",
+    "Asyut",
+    "Beheira",
+    "Beni Suef",
+    "Dakahlia",
+    "Damietta",
+    "Faiyum",
+    "Gharbia",
+    "Kafr El Sheikh",
+    "Luxor",
+    "Matrouh",
+    "Minya",
+    "Monufia",
+    "New Valley",
+    "North Sinai",
+    "Red Sea",
+    "Qena",
+    "Sharqia",
+    "Sohag",
+    "South Sinai"
+  ];
 }
