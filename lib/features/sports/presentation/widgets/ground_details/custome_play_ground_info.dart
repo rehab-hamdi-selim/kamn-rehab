@@ -8,9 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import "package:kamn/features/sports/data/models/playground_model.dart";
 
 class CustomePlayGroundInfo extends StatefulWidget {
-  const CustomePlayGroundInfo({required this.playgroundModel, super.key});
-
-  final PlaygroundModel? playgroundModel;
+  const CustomePlayGroundInfo({super.key});
 
   @override
   State<CustomePlayGroundInfo> createState() => _CustomePlayGroundInfoState();
@@ -41,7 +39,7 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
                   Stack(
                     children: [
                       Text(
-                        "  ${widget.playgroundModel?.description}",
+                        "  sdfsdfs",
                         style: TextStyles.font12blackRegular
                             .copyWith(fontSize: 16.h),
                         maxLines: maxLines,
@@ -214,7 +212,7 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
     return Row(
       children: [
         Expanded(
-          child: Text(widget.playgroundModel?.name ?? "",
+          child: Text('sdfsdf',
               style: TextStyles.font24BlackRegular.copyWith(height: .85),
               maxLines: 2,
               overflow: TextOverflow.ellipsis),

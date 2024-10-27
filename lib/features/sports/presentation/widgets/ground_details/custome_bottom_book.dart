@@ -3,12 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/features/sports/data/models/playground_model.dart';
 
 class CustomeBottomBook extends StatelessWidget {
-  const CustomeBottomBook({required this.playgroundModel, super.key});
-
-  final PlaygroundModel? playgroundModel;
+  const CustomeBottomBook({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +23,7 @@ class CustomeBottomBook extends StatelessWidget {
             children: [
               RichText(
                 text: TextSpan(
-                    text: playgroundModel?.price
+                    text: '250'
                         .toString(), //TODO: dont pass the all model to display one attribute like price
                     style: TextStyles.font32OfWhiteMedium,
                     children: [
@@ -36,7 +33,6 @@ class CustomeBottomBook extends StatelessWidget {
               ),
               ElevatedButton(
                   onPressed: () {},
-
                   child: Text(
                     Constants.bookNow,
                     style: TextStyles.font16greenSemiBold,

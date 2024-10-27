@@ -7,13 +7,16 @@ import 'package:kamn/core/const/firebase_collections.dart';
 import 'package:kamn/core/utils/try_and_catch.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_model.dart';
 import 'package:path/path.dart';
+import 'package:injectable/injectable.dart';
+
 
 abstract class ServiceProvidersRemoteDataSource {
-  Future<void> addServiceToFirestore(PlaygroundModel playground);
+  Future<void> addServiceToFirestore(PlaygroundRequestModel playground);
   Future<List<String>> addImagesToStorage(List<File> images);
   Future<bool> deleteImagesFromStorage(List<File> images);
 }
 
+@Injectable(as:ServiceProvidersRemoteDataSource)
 class ServiceProvidersRemoteDataSourceImpl
     implements ServiceProvidersRemoteDataSource {
   FirebaseFirestore firestore;
@@ -22,7 +25,7 @@ class ServiceProvidersRemoteDataSourceImpl
       {required this.firestore, required this.storage});
 
   @override
-  Future<void> addServiceToFirestore(PlaygroundModel playground) async {
+  Future<void> addServiceToFirestore(PlaygroundRequestModel playground) async {
     return executeTryAndCatchForDataLayer(() async {
       var collRef =
           firestore.collection(FirebaseCollections.playgroundsRequests);

@@ -18,7 +18,8 @@ class CustomeAddServicesBlocListner extends StatelessWidget {
       context.read<ServiceProviderCubit>().disposeControllers();
     }
 
-    PlaygroundModel prepareData(BuildContext context) => PlaygroundModel(
+    PlaygroundRequestModel prepareData(BuildContext context) =>
+        PlaygroundRequestModel(
           name: context.read<ServiceProviderCubit>().nameController.text.trim(),
           phone:
               context.read<ServiceProviderCubit>().phoneController.text.trim(),

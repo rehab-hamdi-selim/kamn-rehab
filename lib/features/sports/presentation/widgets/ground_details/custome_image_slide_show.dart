@@ -5,7 +5,7 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
 
 class CustomeImageSlideShow extends StatelessWidget {
-  CustomeImageSlideShow(this.imagesPath, {super.key});
+  CustomeImageSlideShow({super.key});
 
   List<dynamic> imagesPath = [];
 

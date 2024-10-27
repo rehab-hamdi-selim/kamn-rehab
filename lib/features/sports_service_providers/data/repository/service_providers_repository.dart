@@ -7,21 +7,23 @@ import 'package:kamn/core/utils/try_and_catch.dart';
 import 'package:kamn/features/sports_service_providers/data/data_source/service_providers_remote_data_source.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_model.dart';
 import 'dart:async';
+import 'package:injectable/injectable.dart';
+
 
 abstract class ServiceProvidersRepository {
   Future<Either<Faliure, void>> addServiceToFirestore(
-      PlaygroundModel playground);
+      PlaygroundRequestModel playground);
   Future<Either<Faliure, List<String>>> addFImagesToStorage(List<File> images);
   Future<Either<Faliure, bool>> deleteImagesFromStorage(List<File> images);
 }
-
+@Injectable(as:ServiceProvidersRepository)
 class ServiceProvidersRepositoryImpl implements ServiceProvidersRepository {
   ServiceProvidersRemoteDataSource dataSource;
   ServiceProvidersRepositoryImpl({required this.dataSource});
   //TODO:Check connectivity  in executeTryAndCatchForRepository /* done
   @override
   Future<Either<Faliure, void>> addServiceToFirestore(
-      PlaygroundModel playground) {
+      PlaygroundRequestModel playground) {
     return executeTryAndCatchForRepository(() async {
       return await dataSource.addServiceToFirestore(playground);
     });

@@ -7,9 +7,10 @@ import 'package:kamn/core/utils/image_picker.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_model.dart';
 import 'package:kamn/features/sports_service_providers/data/repository/service_providers_repository.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider/service_provider_state.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../../../core/utils/location.dart';
-
+@injectable
 class ServiceProviderCubit extends Cubit<ServiceProviderState> {
   ServiceProviderCubit({required this.repository})
       : super(ServiceProviderState(state: ServiceProviderStatus.initial));
@@ -27,7 +28,7 @@ class ServiceProviderCubit extends Cubit<ServiceProviderState> {
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  Future<void> addService(PlaygroundModel playground) async {
+  Future<void> addService(PlaygroundRequestModel playground) async {
     emit(ServiceProviderState(state: ServiceProviderStatus.loading));
     //TODO:don`t fire function into another function you must fire first function and then depend on it`s state fire the second function /* done
     var response = await repository.addServiceToFirestore(playground);

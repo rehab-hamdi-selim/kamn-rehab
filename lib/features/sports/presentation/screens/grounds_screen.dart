@@ -135,9 +135,8 @@ class GroundsScreen extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => GroundDetailsScreen(
-                                    playgroundModel: state.playgrounds![index],
-                                  ),
+                                  builder: (context) =>
+                                      const GroundDetailsScreen(),
                                 ),
                               );
                             },
