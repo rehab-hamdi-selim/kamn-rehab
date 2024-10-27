@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:kamn/core/erorr/has_reach_end_exception.dart';
 import '../erorr/faliure.dart';
 import '../erorr/netowrk_exception.dart';
 
@@ -17,7 +18,13 @@ Future<Either<Faliure, T>> executeTryAndCatchForRepository<T>(
     return left(Faliure('Error parsing data: ${e.message}'));
   } on NoInternetException catch (e) {
     return left(Faliure(e.message));
-  } on TypeError catch (e) {
+  }
+  //
+  on HasReachEndException catch (e) {
+    return left(Faliure(e.message));
+  }
+  //
+  on TypeError catch (e) {
     return left(Faliure(
         'Type error: ${e.toString()}. This might be due to incorrect data structure.'));
   } on NoSuchMethodError catch (e) {
