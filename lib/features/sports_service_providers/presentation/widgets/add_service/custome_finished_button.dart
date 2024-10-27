@@ -19,7 +19,14 @@ class CustomeFinishedButton extends StatelessWidget {
           style:
               ElevatedButton.styleFrom(backgroundColor: AppPallete.blackColor),
           onPressed: () {
-            context.read<ServiceProviderCubit>().addService();
+            if (context
+                    .read<ServiceProviderCubit>()
+                    .formKey
+                    .currentState
+                    ?.validate() ==
+                true) {
+              context.read<ServiceProviderCubit>().compressImage();
+            }
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
