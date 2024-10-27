@@ -5,9 +5,11 @@ import 'package:injectable/injectable.dart';
 
 @singleton
 class FirebaseStorageServices {
-  final FirebaseStorage _storage;
+  late FirebaseStorage _storage;
 
-  FirebaseStorageServices(this._storage);
+  FirebaseStorageServices() {
+    _storage = FirebaseStorage.instance;
+  }
 
   FirebaseStorage get storage => _storage;
 

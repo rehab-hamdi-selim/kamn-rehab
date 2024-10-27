@@ -9,7 +9,7 @@ import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/features/sports/presentation/screens/grounds_screen.dart';
 import 'package:kamn/features/sports_service_providers/data/data_source/service_providers_remote_data_source.dart';
 import 'package:kamn/features/sports_service_providers/data/repository/service_providers_repository.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider/service_provider_cubit.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/add_service.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_grounds_screen.dart';
 import 'package:kamn/firebase_options.dart';
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        initialRoute: Routes.groundDetailsScreen,
+        initialRoute: Routes.serviceProviderGroundsScreen,
         onGenerateRoute: AppRouter.generateRoute,
       ),
     );

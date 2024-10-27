@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_state.dart';
 import '../../../../core/const/constants.dart';
 import '../../../../core/helpers/spacer.dart';
 import '../../../../core/theme/app_pallete.dart';
@@ -79,24 +82,29 @@ class ServiceProviderGroundsScreen extends StatelessWidget {
                   color: AppPallete.lightGrayColor,
                   borderRadius: BorderRadius.circular(15.r),
                 ),
-                child: ListView.separated(
-                    itemBuilder: (context, index) {
-                      return CustomGroundItemServiceProvider(
-                        imageUrl: "",
-                        favoriteOnTap: () {},
-                        placeText: "Hadra Stadium East .1",
-                        km: "2.7",
-                        owner: "mahmoud sayed",
-                        location: "Alexandria, Hadra",
-                        available: "Available",
-                        rates: "4.5",
-                        price: "250",
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return verticalSpace(17.89);
-                    },
-                    itemCount: 5),
+                child: BlocBuilder<ServiceProviderGroundsCubit,
+                    ServiceProviderGroundsState>(
+                  builder: (context, state) {
+                    return ListView.separated(
+                        itemBuilder: (context, index) {
+                          return CustomGroundItemServiceProvider(
+                            imageUrl: "",
+                            favoriteOnTap: () {},
+                            placeText: "Hadra Stadium East .1",
+                            km: "2.7",
+                            owner: "mahmoud sayed",
+                            location: "Alexandria, Hadra",
+                            available: "Available",
+                            rates: "4.5",
+                            price: "250",
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return verticalSpace(17.89);
+                        },
+                        itemCount: 5);
+                  },
+                ),
               ),
             )
           ],

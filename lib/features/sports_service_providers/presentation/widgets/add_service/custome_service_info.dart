@@ -7,8 +7,8 @@ import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/helpers/validators.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider/service_provider_cubit.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider/service_provider_state.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_state.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_dropdown_menu.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_text_form_field.dart';
 
@@ -18,14 +18,14 @@ class CustomeServiceInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: context.read<ServiceProviderCubit>().formKey,
+      key: context.read<AddServiceProviderCubit>().formKey,
       child: Column(
         children: [
           createField(
               title: Constants.fullName,
               hint: Constants.fullNameHint,
               nameController:
-                  context.read<ServiceProviderCubit>().nameController,
+                  context.read<AddServiceProviderCubit>().nameController,
               iconPath: 'assets/icons/user.svg',
               validator: emptyValidator),
           verticalSpace(16.h),
@@ -33,7 +33,7 @@ class CustomeServiceInfo extends StatelessWidget {
               title: Constants.phone,
               hint: Constants.phoneHint,
               nameController:
-                  context.read<ServiceProviderCubit>().phoneController,
+                  context.read<AddServiceProviderCubit>().phoneController,
               iconPath: 'assets/icons/phone.svg',
               validator: phoneValidator),
           verticalSpace(16.h),
@@ -41,7 +41,7 @@ class CustomeServiceInfo extends StatelessWidget {
               title: Constants.address,
               hint: Constants.addressHint,
               nameController:
-                  context.read<ServiceProviderCubit>().addressController,
+                  context.read<AddServiceProviderCubit>().addressController,
               iconPath: 'assets/icons/location.svg',
               context: context,
               showLocationIcon: true,
@@ -50,7 +50,8 @@ class CustomeServiceInfo extends StatelessWidget {
           createField(
             title: Constants.groundSize,
             hint: Constants.groundSizeHint,
-            nameController: context.read<ServiceProviderCubit>().sizeController,
+            nameController:
+                context.read<AddServiceProviderCubit>().sizeController,
             iconPath: 'assets/icons/size.svg',
             explane: Constants.howManyPeople,
             validator: numbersValidator,
@@ -58,7 +59,7 @@ class CustomeServiceInfo extends StatelessWidget {
           verticalSpace(16.h),
           createMenu(
               nameController:
-                  context.read<ServiceProviderCubit>().governateController,
+                  context.read<AddServiceProviderCubit>().governateController,
               title: Constants.governate,
               hint: Constants.governateHint,
               iconPath: 'assets/icons/location.svg',
@@ -114,9 +115,10 @@ class CustomeServiceInfo extends StatelessWidget {
             if (showLocationIcon)
               InkWell(
                 onTap: () {
-                  context?.read<ServiceProviderCubit>().getLocation();
+                  context?.read<AddServiceProviderCubit>().getLocation();
                 },
-                child: BlocBuilder<ServiceProviderCubit, ServiceProviderState>(
+                child: BlocBuilder<AddServiceProviderCubit,
+                    AddServiceProviderState>(
                   builder: (context, state) {
                     return CircleAvatar(
                       backgroundColor: AppPallete.mainColor,

@@ -6,8 +6,8 @@ import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 
-import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider/service_provider_cubit.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider/service_provider_state.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_state.dart';
 
 class CustomeFinishedButton extends StatelessWidget {
   const CustomeFinishedButton({super.key});
@@ -16,7 +16,7 @@ class CustomeFinishedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 76.w),
-      child: BlocBuilder<ServiceProviderCubit, ServiceProviderState>(
+      child: BlocBuilder<AddServiceProviderCubit, AddServiceProviderState>(
         builder: (context, state) {
           return ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -29,13 +29,13 @@ class CustomeFinishedButton extends StatelessWidget {
                   ? null
                   : () {
                       if (context
-                              .read<ServiceProviderCubit>()
+                              .read<AddServiceProviderCubit>()
                               .formKey
                               .currentState
                               ?.validate() ==
                           true) {
                         context
-                            .read<ServiceProviderCubit>()
+                            .read<AddServiceProviderCubit>()
                             .addImagesToStorage();
                       }
                     },

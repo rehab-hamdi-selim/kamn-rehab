@@ -53,6 +53,8 @@ class PlaygroundRequestModel {
       'images': images,
       'size': size,
       'govenrate': govenrate,
+      'state': state,
+      'comment': comment,
     };
   }
 
@@ -71,6 +73,8 @@ class PlaygroundRequestModel {
       images: List<String>.from(map['images']),
       size: map['size']?.toInt() ?? 0,
       govenrate: map['govenrate'] ?? '',
+      state: map['state'] ?? '',
+      comment: map['comment'] ?? '',
     );
   }
 

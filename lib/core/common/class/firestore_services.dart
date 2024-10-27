@@ -3,9 +3,11 @@ import 'package:injectable/injectable.dart';
 
 @singleton
 class FirestoreService {
-  final FirebaseFirestore _firestore;
+  late FirebaseFirestore _firestore;
 
-  FirestoreService(this._firestore);
+  FirestoreService() {
+    _firestore = FirebaseFirestore.instance;
+  }
 
   FirebaseFirestore get firestore => _firestore;
 

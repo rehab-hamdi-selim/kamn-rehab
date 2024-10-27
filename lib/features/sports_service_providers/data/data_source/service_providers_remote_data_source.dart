@@ -19,16 +19,16 @@ abstract class ServiceProvidersRemoteDataSource {
 @Injectable(as: ServiceProvidersRemoteDataSource)
 class ServiceProvidersRemoteDataSourceImpl
     implements ServiceProvidersRemoteDataSource {
-  FirestoreService firestore;
-  FirebaseStorageServices storage;
+  FirestoreService firestoreServices;
+  FirebaseStorageServices storageServies;
   ServiceProvidersRemoteDataSourceImpl(
-      {required this.firestore, required this.storage});
+      {required this.firestoreServices, required this.storageServies});
 
   @override
   Future<void> addServiceToFirestore(PlaygroundRequestModel playground) async {
     return executeTryAndCatchForDataLayer(() async {
-      var collRef =
-          firestore.collection(FirebaseCollections.playgroundsRequests);
+      var collRef = firestoreServices.firestore
+          .collection(FirebaseCollections.playgroundsRequests);
       var docRef = collRef.doc();
       playground.playgroundId = docRef.id;
       return await docRef.set(playground.toMap());
@@ -42,7 +42,7 @@ class ServiceProvidersRemoteDataSourceImpl
     return executeTryAndCatchForDataLayer(() async {
       for (var image in images) {
         Reference firebaseStorageRef =
-            FirebaseStorage.instance.ref().child(basename(image.path));
+            storageServies.storage.ref().child(basename(image.path));
 
         UploadTask uploadTask = firebaseStorageRef.putFile(image);
 
@@ -60,7 +60,7 @@ class ServiceProvidersRemoteDataSourceImpl
     return executeTryAndCatchForDataLayer(() async {
       for (var image in images) {
         Reference firebaseStorageRef =
-            FirebaseStorage.instance.ref().child(basename(image.path));
+            storageServies.storage.ref().child(basename(image.path));
 
         await firebaseStorageRef.delete();
       }

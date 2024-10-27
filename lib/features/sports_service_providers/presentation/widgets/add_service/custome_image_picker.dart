@@ -6,8 +6,8 @@ import 'package:kamn/core/helpers/spacer.dart';
 
 import 'package:kamn/core/theme/style.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider/service_provider_cubit.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider/service_provider_state.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_state.dart';
 
 class CustomeImagePicker extends StatelessWidget {
   const CustomeImagePicker({
@@ -38,7 +38,7 @@ class CustomeImagePicker extends StatelessWidget {
           radius: const Radius.circular(10),
           color: Colors.black,
           strokeWidth: 1,
-          child: BlocBuilder<ServiceProviderCubit, ServiceProviderState>(
+          child: BlocBuilder<AddServiceProviderCubit, AddServiceProviderState>(
             builder: (context, state) {
               return Row(
                 children: [
@@ -63,7 +63,7 @@ class CustomeImagePicker extends StatelessWidget {
                             right: 5.w,
                             child: InkWell(
                               onTap: () => context
-                                  .read<ServiceProviderCubit>()
+                                  .read<AddServiceProviderCubit>()
                                   .removeImageFromList(element),
                               child: const Icon(
                                 Icons.cancel_outlined,
@@ -79,7 +79,7 @@ class CustomeImagePicker extends StatelessWidget {
                     Expanded(
                       child: GestureDetector(
                         onTap: context
-                            .read<ServiceProviderCubit>()
+                            .read<AddServiceProviderCubit>()
                             .getPhotoFromGallery,
                         child: SizedBox(
                           height: 80.h,
