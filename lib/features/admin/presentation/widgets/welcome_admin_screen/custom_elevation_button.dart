@@ -27,9 +27,9 @@ class CustomWelcomeElevationButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: AppPallete.mainColor, // Background color
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(15),
           ),
-          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -37,14 +37,14 @@ class CustomWelcomeElevationButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text('Next', style: TextStyles.font24WhiteInterColorMedium),
-            // SizedBox(width: 8),
-            verticalSpace(8),
-
-            Icon(
-              color: AppPallete.whiteColor,
-              weight: 600,
-              size: 25,
-              Icons.arrow_forward,
+            const Padding(
+              padding: EdgeInsets.all(6.0),
+              child: Icon(
+                color: AppPallete.whiteColor,
+                weight: 600,
+                size: 25,
+                Icons.arrow_forward_rounded,
+              ),
             ),
           ],
         ),
