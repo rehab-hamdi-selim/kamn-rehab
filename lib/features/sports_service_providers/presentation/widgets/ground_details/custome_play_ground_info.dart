@@ -6,11 +6,12 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import "package:kamn/features/sports/data/models/playground_model.dart";
+import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 
 class CustomePlayGroundInfo extends StatefulWidget {
   const CustomePlayGroundInfo({required this.playgroundModel, super.key});
 
-  final PlaygroundModel? playgroundModel;
+  final PlaygroundRequestModel? playgroundModel;
 
   @override
   State<CustomePlayGroundInfo> createState() => _CustomePlayGroundInfoState();
@@ -19,7 +20,6 @@ class CustomePlayGroundInfo extends StatefulWidget {
 class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
   int maxLines = 10;
   bool isVisible = true;
-  PlaygroundModel? playgroundModel;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,7 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
 
   Positioned readMoreButton() {
     return Positioned(
-      bottom: 0,
+      bottom: 10,
       left: 0,
       right: 0,
       child: Align(
@@ -162,7 +162,7 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
         Row(
           children: [
             Text(
-              playgroundModel?.address ?? "",
+              widget.playgroundModel?.address ?? "",
               style: TextStyles.font12GreenSemiBold,
             ),
             horizontalSpace(8.w),

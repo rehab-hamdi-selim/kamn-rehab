@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/features/sports/data/models/playground_model.dart';
 
 class CustomeImageSlideShow extends StatelessWidget {
   CustomeImageSlideShow(this.imagesPath, {super.key});
@@ -25,7 +24,7 @@ class CustomeImageSlideShow extends StatelessWidget {
           autoPlayInterval: 3000,
           isLoop: true,
           children: imagesPath.map((path) {
-            return Image.asset(
+            return Image.network(
               path,
               width: double.infinity,
               fit: BoxFit.cover,

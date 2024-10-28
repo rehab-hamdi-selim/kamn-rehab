@@ -17,18 +17,18 @@ class AppRouter {
         return MaterialPageRoute(builder: (context) => const MyProfileScreen());
       case Routes.addServiceScreen:
         return MaterialPageRoute(
-            builder: (context) => BlocProvider(
+            builder: (context) => BlocProvider<AddServiceProviderCubit>(
                   create: (context) => getIt<AddServiceProviderCubit>(),
                   child: const AddServiceScreen(),
                 ));
-      case Routes.groundDetailsScreen:
-        return MaterialPageRoute(
-            builder: (context) => const GroundDetailsScreen());
+      // case Routes.groundDetailsScreen:
+      //   return MaterialPageRoute(
+      //       builder: (context) => const GroundDetailsScreen());
       case Routes.groundsScreen:
         return MaterialPageRoute(builder: (context) => const GroundsScreen());
       case Routes.serviceProviderGroundsScreen:
         return MaterialPageRoute(
-            builder: (context) => BlocProvider(
+            builder: (context) => BlocProvider<ServiceProviderGroundsCubit>(
                   create: (context) => getIt<ServiceProviderGroundsCubit>(),
                   child: const ServiceProviderGroundsScreen(),
                 ));

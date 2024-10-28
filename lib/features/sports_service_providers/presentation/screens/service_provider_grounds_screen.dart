@@ -1,8 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/di/di.dart';
+import 'package:kamn/core/utils/navigation.dart';
+import 'package:kamn/features/sports/data/models/playground_model.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_ground_details/service_provider_ground_details_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_state.dart';
+import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_ground_details_screen.dart';
 import '../../../../core/const/constants.dart';
 import '../../../../core/helpers/spacer.dart';
 import '../../../../core/theme/app_pallete.dart';
@@ -84,25 +91,38 @@ class ServiceProviderGroundsScreen extends StatelessWidget {
                 ),
                 child: BlocBuilder<ServiceProviderGroundsCubit,
                     ServiceProviderGroundsState>(
+                  bloc: context.read<ServiceProviderGroundsCubit>()
+                    ..getPlaygroundsRequests,
+                  buildWhen: (previous, current) => current.isSuccess,
                   builder: (context, state) {
-                    return ListView.separated(
-                        itemBuilder: (context, index) {
-                          return CustomGroundItemServiceProvider(
-                            imageUrl: "",
-                            favoriteOnTap: () {},
-                            placeText: "Hadra Stadium East .1",
-                            km: "2.7",
-                            owner: "mahmoud sayed",
-                            location: "Alexandria, Hadra",
-                            available: "Available",
-                            rates: "4.5",
-                            price: "250",
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return verticalSpace(17.89);
-                        },
-                        itemCount: 5);
+                    return state.isLoading
+                        ? const Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : ListView.separated(
+                            itemBuilder: (context, index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  navigationTo(
+                                      context,
+                                      BlocProvider(
+                                        create: (context) => getIt<
+                                            ServiceProviderGroundDetailsCubit>(),
+                                        child:
+                                            ServiceProviderGroundDetailsScreen(
+                                                playgroundModel:
+                                                    state.playgrounds![index]),
+                                      ));
+                                },
+                                child: CustomGroundItemServiceProvider(
+                                  playgroundRequest: state.playgrounds![index],
+                                ),
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return verticalSpace(17.89);
+                            },
+                            itemCount: state.playgrounds!.length);
                   },
                 ),
               ),

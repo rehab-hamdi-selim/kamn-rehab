@@ -7,19 +7,30 @@ import 'package:kamn/features/sports_service_providers/presentation/cubit/servic
 class ServiceProviderGroundsCubit extends Cubit<ServiceProviderGroundsState> {
   ServiceProviderGroundsCubit({required this.repository})
       : super(ServiceProviderGroundsState(
-            state: ServiceProviderGroundsStatus.initial));
+            state: ServiceProviderGroundsStatus.initial)) {
+    getPlaygroundsRequests();
+  }
   ServiceProviderGroundsRepository repository;
 
-  Future<void> getPlaygrounds() async {
+  Future<void> getPlaygroundsRequests() async {
+    emit(ServiceProviderGroundsState(
+        state: ServiceProviderGroundsStatus.loading));
+    print("here");
     final result = await repository.getPlaygroundsRequests();
-    result.fold(
-        (error) => emit(ServiceProviderGroundsState(
-              state: ServiceProviderGroundsStatus.failure,
-              erorrMessage: error.erorr,
-            )),
-        (success) => emit(ServiceProviderGroundsState(
-              state: ServiceProviderGroundsStatus.success,
-              playgrounds: success,
-            )));
+    result.fold((error) {
+      print('@@@@@@@@@@@@@@@${error.erorr}');
+
+      emit(ServiceProviderGroundsState(
+        state: ServiceProviderGroundsStatus.failure,
+        erorrMessage: error.erorr,
+      ));
+    }, (success) {
+      print('%%%%%%%%%%%%%%%%%%');
+
+      emit(ServiceProviderGroundsState(
+        state: ServiceProviderGroundsStatus.success,
+        playgrounds: success,
+      ));
+    });
   }
 }
