@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-class PlaygroundModel {
+class PlaygroundRequestModel {
   String? playgroundId;
   String? name;
   String? phone;
@@ -17,23 +17,26 @@ class PlaygroundModel {
   List<String>? images;
   int? size;
   String? govenrate;
+  String? state;
+  String? comment;
 
-  PlaygroundModel({
-    this.playgroundId,
-    this.name,
-    this.phone,
-    this.longitude,
-    this.latitude,
-    this.ownerId,
-    this.address,
-    this.status,
-    this.rating,
-    this.price,
-    this.description,
-    this.images,
-    this.size,
-    this.govenrate,
-  });
+  PlaygroundRequestModel(
+      {this.playgroundId,
+      this.name,
+      this.phone,
+      this.longitude,
+      this.latitude,
+      this.ownerId,
+      this.address,
+      this.status,
+      this.rating,
+      this.price,
+      this.description,
+      this.images,
+      this.size,
+      this.govenrate,
+      this.state,
+      this.comment});
 
   Map<String, dynamic> toMap() {
     return {
@@ -50,11 +53,13 @@ class PlaygroundModel {
       'images': images,
       'size': size,
       'govenrate': govenrate,
+      'state': state,
+      'comment': comment,
     };
   }
 
-  factory PlaygroundModel.fromMap(Map<String, dynamic> map) {
-    return PlaygroundModel(
+  factory PlaygroundRequestModel.fromMap(Map<String, dynamic> map) {
+    return PlaygroundRequestModel(
       playgroundId: map['playgroundId'] ?? '',
       name: map['name'] ?? '',
       longitude: map['longitude']?.toDouble() ?? 0.0,
@@ -68,15 +73,17 @@ class PlaygroundModel {
       images: List<String>.from(map['images']),
       size: map['size']?.toInt() ?? 0,
       govenrate: map['govenrate'] ?? '',
+      state: map['state'] ?? '',
+      comment: map['comment'] ?? '',
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory PlaygroundModel.fromJson(String source) =>
-      PlaygroundModel.fromMap(json.decode(source));
+  factory PlaygroundRequestModel.fromJson(String source) =>
+      PlaygroundRequestModel.fromMap(json.decode(source));
 
-  PlaygroundModel copyWith({
+  PlaygroundRequestModel copyWith({
     String? playgroundId,
     String? name,
     double? longitude,
@@ -91,7 +98,7 @@ class PlaygroundModel {
     int? size,
     String? govenrate,
   }) {
-    return PlaygroundModel(
+    return PlaygroundRequestModel(
       playgroundId: playgroundId ?? this.playgroundId,
       name: name ?? this.name,
       longitude: longitude ?? this.longitude,
@@ -117,7 +124,7 @@ class PlaygroundModel {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is PlaygroundModel &&
+    return other is PlaygroundRequestModel &&
         other.playgroundId == playgroundId &&
         other.name == name &&
         other.longitude == longitude &&
