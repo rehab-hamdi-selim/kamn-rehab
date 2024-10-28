@@ -25,7 +25,8 @@ class AppRouter {
       //   return MaterialPageRoute(
       //       builder: (context) => const GroundDetailsScreen());
       case Routes.groundsScreen:
-        return MaterialPageRoute(builder: (context) => const GroundsScreen());
+        return MaterialPageRoute(
+            builder: (context) => const ServiceProviderGroundsScreen());
       case Routes.serviceProviderGroundsScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider<ServiceProviderGroundsCubit>(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
+import 'package:kamn/core/routing/routes.dart';
+import 'package:kamn/core/utils/navigation.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/service_provider_grounds/custom_app_bar_service_provider.dart';
 import '../../../../core/const/constants.dart';
 import '../../../../core/const/image_links.dart';
@@ -51,7 +53,8 @@ class SuccessServiceProviderScreen extends StatelessWidget {
                   ],
                 ),
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.of(context)
+                      .pushNamed(Routes.serviceProviderGroundsScreen);
                 },
                 textBottom: 'Check',
                 textStyle: TextStyles.font12WhiteColorW400,

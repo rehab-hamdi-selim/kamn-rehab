@@ -31,6 +31,7 @@ class ServiceProvidersRemoteDataSourceImpl
           .collection(FirebaseCollections.playgroundsRequests);
       var docRef = collRef.doc();
       playground.playgroundId = docRef.id;
+      playground.state = 'pending';
       return await docRef.set(playground.toMap());
     });
   }

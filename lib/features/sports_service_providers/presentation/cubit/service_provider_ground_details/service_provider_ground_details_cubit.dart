@@ -25,7 +25,7 @@ class ServiceProviderGroundDetailsCubit
     }, (sucess) {
       emit(ServiceProviderGroundDetailsState(
           state: ServiceProviderGroundDetailsStatus.success,
-          successMessage: 'this play ground accepted '));
+          successMessage: 'this play ground accepted'));
     });
   }
 
