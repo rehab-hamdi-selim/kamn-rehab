@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
 
-@singleton
+@lazySingleton
 class FirebaseStorageServices {
   late FirebaseStorage _storage;
 

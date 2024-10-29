@@ -7,6 +7,7 @@ import 'package:kamn/core/common/class/firebase_storage_services.dart';
 import 'package:kamn/core/common/class/firestore_services.dart';
 import 'package:kamn/core/const/firebase_collections.dart';
 import 'package:kamn/core/utils/try_and_catch.dart';
+import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 import 'package:path/path.dart';
 
@@ -14,6 +15,10 @@ abstract class ServiceProvidersRemoteDataSource {
   Future<void> addServiceToFirestore(PlaygroundRequestModel playground);
   Future<List<String>> addImagesToStorage(List<File> images);
   Future<bool> deleteImagesFromStorage(List<File> images);
+  Future<List<Map<String, dynamic>>> getPlaygroundsRequests();
+  Future<void> addToFiresore(PlaygroundModel playgroundModel);
+  Future<void> updateState(
+      PlaygroundRequestModel playgroundModel, Map<String, dynamic> data);
 }
 
 @Injectable(as: ServiceProvidersRemoteDataSource)
@@ -66,6 +71,34 @@ class ServiceProvidersRemoteDataSourceImpl
         await firebaseStorageRef.delete();
       }
       return true;
+    });
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> getPlaygroundsRequests() {
+    return executeTryAndCatchForDataLayer(() async {
+      var querySnapshot = await firestoreServices
+          .getData(FirebaseCollections.playgroundsRequests);
+      return querySnapshot.docs
+          .map((doc) => doc.data() as Map<String, dynamic>)
+          .toList();
+    });
+  }
+
+  @override
+  Future<void> addToFiresore(PlaygroundModel playgroundModel) {
+    return executeTryAndCatchForDataLayer(() async {
+      return await firestoreServices.addData(
+          FirebaseCollections.playgrounds, playgroundModel.toMap());
+    });
+  }
+
+  @override
+  Future<void> updateState(
+      PlaygroundRequestModel playgroundModel, Map<String, dynamic> data) {
+    return executeTryAndCatchForDataLayer(() async {
+      return await firestoreServices.updateData(
+          FirebaseCollections.playgroundsRequests, playgroundModel, data);
     });
   }
 }

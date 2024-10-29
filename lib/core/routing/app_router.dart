@@ -30,7 +30,8 @@ class AppRouter {
       case Routes.serviceProviderGroundsScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider<ServiceProviderGroundsCubit>(
-                  create: (context) => getIt<ServiceProviderGroundsCubit>(),
+                  create: (context) => getIt<ServiceProviderGroundsCubit>()
+                    ..getPlaygroundsRequests(),
                   child: const ServiceProviderGroundsScreen(),
                 ));
       case Routes.successServiceProviderScreen:
