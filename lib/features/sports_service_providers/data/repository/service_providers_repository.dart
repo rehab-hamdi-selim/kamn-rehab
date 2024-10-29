@@ -16,7 +16,8 @@ abstract class ServiceProvidersRepository {
   Future<Either<Faliure, bool>> deleteImagesFromStorage(List<File> images);
   Future<Either<Faliure, List<PlaygroundRequestModel>>>
       getPlaygroundsRequests();
-  Future<Either<Faliure, void>> addToFirebase(PlaygroundModel playground);
+  Future<Either<Faliure, void>> addWithTransactionToFirebase(
+      PlaygroundModel playground);
   Future<Either<Faliure, void>> updateState(
       PlaygroundRequestModel playground, Map<String, dynamic> data);
 }
@@ -62,9 +63,10 @@ class ServiceProvidersRepositoryImpl implements ServiceProvidersRepository {
   }
 
   @override
-  Future<Either<Faliure, void>> addToFirebase(PlaygroundModel playground) {
+  Future<Either<Faliure, void>> addWithTransactionToFirebase(
+      PlaygroundModel playground) {
     return executeTryAndCatchForRepository(() async {
-      return await dataSource.addToFiresore(playground);
+      return await dataSource.addWithTransactionToFirebase(playground);
     });
   }
 

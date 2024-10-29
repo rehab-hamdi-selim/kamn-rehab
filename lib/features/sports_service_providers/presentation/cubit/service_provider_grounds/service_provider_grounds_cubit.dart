@@ -7,7 +7,9 @@ import 'package:kamn/features/sports_service_providers/presentation/cubit/servic
 class ServiceProviderGroundsCubit extends Cubit<ServiceProviderGroundsState> {
   ServiceProviderGroundsCubit({required this.repository})
       : super(ServiceProviderGroundsState(
-            state: ServiceProviderGroundsStatus.initial));
+            state: ServiceProviderGroundsStatus.initial)) {
+    getPlaygroundsRequests();
+  }
   ServiceProvidersRepository repository;
 
   Future<void> getPlaygroundsRequests() async {

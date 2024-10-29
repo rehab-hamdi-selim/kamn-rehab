@@ -8,9 +8,16 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../features/sports/data/data_source/sports_remote_data_source.dart'
+    as _i575;
+import '../../features/sports/data/repositories/sports_repository.dart'
+    as _i379;
+import '../../features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart'
+    as _i1033;
 import '../../features/sports_service_providers/data/data_source/service_providers_remote_data_source.dart'
     as _i1047;
 import '../../features/sports_service_providers/data/repository/service_providers_repository.dart'
@@ -46,6 +53,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i542.ServiceProvidersRepository>(() =>
         _i542.ServiceProvidersRepositoryImpl(
             dataSource: gh<_i1047.ServiceProvidersRemoteDataSource>()));
+    gh.factory<_i575.SportsRemoteDataSource>(() =>
+        _i575.SportsRemoteDataSourceImpl(
+            firestore: gh<_i974.FirebaseFirestore>()));
+    gh.factory<_i379.SportsRepository>(() => _i379.SportsRepository(
+        remoteDataSource: gh<_i575.SportsRemoteDataSource>()));
     gh.factory<_i252.AddServiceProviderCubit>(() =>
         _i252.AddServiceProviderCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
@@ -55,6 +67,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i692.ServiceProviderGroundDetailsCubit>(() =>
         _i692.ServiceProviderGroundDetailsCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
+    gh.factory<_i1033.SportsGroundsCubit>(() => _i1033.SportsGroundsCubit(
+        sportsRepository: gh<_i379.SportsRepository>()));
     return this;
   }
 }

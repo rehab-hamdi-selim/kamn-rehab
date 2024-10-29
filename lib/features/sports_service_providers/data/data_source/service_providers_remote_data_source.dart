@@ -16,7 +16,7 @@ abstract class ServiceProvidersRemoteDataSource {
   Future<List<String>> addImagesToStorage(List<File> images);
   Future<bool> deleteImagesFromStorage(List<File> images);
   Future<List<Map<String, dynamic>>> getPlaygroundsRequests();
-  Future<void> addToFiresore(PlaygroundModel playgroundModel);
+  Future<void> addWithTransactionToFirebase(PlaygroundModel playgroundModel);
   Future<void> updateState(
       PlaygroundRequestModel playgroundModel, Map<String, dynamic> data);
 }
@@ -86,10 +86,19 @@ class ServiceProvidersRemoteDataSourceImpl
   }
 
   @override
-  Future<void> addToFiresore(PlaygroundModel playgroundModel) {
+  Future<void> addWithTransactionToFirebase(PlaygroundModel playgroundModel) {
     return executeTryAndCatchForDataLayer(() async {
-      return await firestoreServices.addData(
-          FirebaseCollections.playgrounds, playgroundModel.toMap());
+      await firestoreServices.firestore.runTransaction((transaction) async {
+        var deletedDocRef = firestoreServices.firestore
+            .collection(FirebaseCollections.playgroundsRequests)
+            .doc(playgroundModel.playgroundId);
+        var addedDocRef = firestoreServices.firestore
+            .collection(FirebaseCollections.playgrounds)
+            .doc();
+        playgroundModel.playgroundId = addedDocRef.id;
+        transaction.delete(deletedDocRef);
+        transaction.set(addedDocRef, playgroundModel.toMap());
+      });
     });
   }
 

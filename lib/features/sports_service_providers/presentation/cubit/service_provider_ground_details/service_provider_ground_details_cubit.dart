@@ -17,7 +17,7 @@ class ServiceProviderGroundDetailsCubit
 
   TextEditingController commentController = TextEditingController();
   Future<void> accept(PlaygroundModel playground) async {
-    var response = await repository.addToFirebase(playground);
+    var response = await repository.addWithTransactionToFirebase(playground);
     response.fold((error) {
       emit(ServiceProviderGroundDetailsState(
           state: ServiceProviderGroundDetailsStatus.failure,
