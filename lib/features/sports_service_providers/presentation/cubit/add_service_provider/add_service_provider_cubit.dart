@@ -44,8 +44,6 @@ class AddServiceProviderCubit extends Cubit<AddServiceProviderState> {
     });
   }
 
-  //TODO: add getPhotoFromGallery to the core and make a new file name it image_picker_helper.dart /* done
-  //that function must return image.path and then add it to the selectedImageList
   Future<void> getPhotoFromGallery() async {
     var image = await pickImage();
     if (image != null) {
@@ -99,7 +97,6 @@ class AddServiceProviderCubit extends Cubit<AddServiceProviderState> {
     });
   }
 
-  //TODO: add location to the core /* done
   Map<String, double> coordinates = {};
   Future<void> getLocation() async {
     emit(AddServiceProviderState(

@@ -43,7 +43,7 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
-    gh.singleton<_i304.FirebaseStorageServices>(
+    gh.lazySingleton<_i304.FirebaseStorageServices>(
         () => _i304.FirebaseStorageServices());
     gh.singleton<_i158.FirestoreService>(() => _i158.FirestoreService());
     gh.factory<_i1047.ServiceProvidersRemoteDataSource>(
