@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/routing/routes.dart';
-import 'package:kamn/features/sports/presentation/screens/ground_details_screen.dart';
-import 'package:kamn/features/sports/presentation/screens/grounds_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/my_profile_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart';
@@ -31,7 +29,7 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => BlocProvider<ServiceProviderGroundsCubit>(
                   create: (context) => getIt<ServiceProviderGroundsCubit>()
-                    ..getPlaygroundsRequests(),
+                    ..getPlaygroundsRequests,
                   child: const ServiceProviderGroundsScreen(),
                 ));
       case Routes.successServiceProviderScreen:

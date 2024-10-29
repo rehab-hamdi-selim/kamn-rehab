@@ -14,10 +14,6 @@ class CustomeAddServicesBlocListner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void disposeController() {
-      context.read<AddServiceProviderCubit>().disposeControllers();
-    }
-
     PlaygroundRequestModel prepareData(BuildContext context) =>
         PlaygroundRequestModel(
           name: context

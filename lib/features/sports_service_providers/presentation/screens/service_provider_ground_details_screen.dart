@@ -47,7 +47,7 @@ class ServiceProviderGroundDetailsScreen extends StatelessWidget {
                       ),
                     ),
                     CustomeBottomBook(
-                      playgroundModel: playgroundModel,
+                      playgroundRequestModel: playgroundModel,
                     ),
                   ],
                 ),

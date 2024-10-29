@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_ground_details/service_provider_ground_details_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/ground_details/custome_bottom_sheet.dart';
-import 'package:kamn/main.dart';
 
 class CustomeBottomBook extends StatelessWidget {
-  const CustomeBottomBook({required this.playgroundModel, super.key});
+  const CustomeBottomBook({required this.playgroundRequestModel, super.key});
 
-  final PlaygroundRequestModel playgroundModel;
+  final PlaygroundRequestModel playgroundRequestModel;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +42,7 @@ class CustomeBottomBook extends StatelessWidget {
                     constraints: BoxConstraints(maxHeight: 300.h),
                     context: context,
                     builder: (context) => CustomeBottomSheet(
-                          playgroundModel: playgroundModel,
+                          playgroundModel: playgroundRequestModel,
                         ));
               },
               child: Text(
@@ -55,9 +53,8 @@ class CustomeBottomBook extends StatelessWidget {
               )),
           ElevatedButton(
               onPressed: () {
-                context
-                    .read<ServiceProviderGroundDetailsCubit>()
-                    .accept(PlaygroundModel.fromMap(playgroundModel.toMap()));
+                context.read<ServiceProviderGroundDetailsCubit>().accept(
+                    PlaygroundModel.fromMap(playgroundRequestModel.toMap()));
               },
               child: Text(
                 'Accept',

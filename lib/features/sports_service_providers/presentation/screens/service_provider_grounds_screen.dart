@@ -98,35 +98,39 @@ class ServiceProviderGroundsScreen extends StatelessWidget {
                       ..getPlaygroundsRequests,
                     buildWhen: (previous, current) => current.isSuccess,
                     builder: (context, state) {
-                      return state.isLoading
-                          ? const Center(
-                              child: CircularProgressIndicator(),
-                            )
-                          : ListView.separated(
-                              itemBuilder: (context, index) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    navigationTo(
-                                        context,
-                                        BlocProvider(
-                                          create: (context) => getIt<
-                                              ServiceProviderGroundDetailsCubit>(),
-                                          child:
-                                              ServiceProviderGroundDetailsScreen(
-                                                  playgroundModel: state
-                                                      .playgrounds![index]),
-                                        ));
-                                  },
-                                  child: CustomGroundItemServiceProvider(
-                                    playgroundRequest:
-                                        state.playgrounds![index],
-                                  ),
-                                );
+                      if (state.isInitial || state.isLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+
+                      final playgrounds = state.playgrounds ?? [];
+
+                      if (playgrounds.isEmpty) return const SizedBox.shrink();
+
+                      return ListView.separated(
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                navigationTo(
+                                    context,
+                                    BlocProvider(
+                                      create: (context) => getIt<
+                                          ServiceProviderGroundDetailsCubit>(),
+                                      child: ServiceProviderGroundDetailsScreen(
+                                          playgroundModel:
+                                              state.playgrounds![index]),
+                                    ));
                               },
-                              separatorBuilder: (context, index) {
-                                return verticalSpace(17.89);
-                              },
-                              itemCount: state.playgrounds!.length);
+                              child: CustomGroundItemServiceProvider(
+                                playgroundRequest: state.playgrounds![index],
+                              ),
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return verticalSpace(17.89);
+                          },
+                          itemCount: state.playgrounds!.length);
                     },
                   ),
                 ),
