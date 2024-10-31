@@ -94,8 +94,6 @@ class ServiceProviderGroundsScreen extends StatelessWidget {
                   ),
                   child: BlocBuilder<ServiceProviderGroundsCubit,
                       ServiceProviderGroundsState>(
-                    bloc: context.read<ServiceProviderGroundsCubit>()
-                      ..getPlaygroundsRequests,
                     buildWhen: (previous, current) => current.isSuccess,
                     builder: (context, state) {
                       if (state.isInitial || state.isLoading) {
