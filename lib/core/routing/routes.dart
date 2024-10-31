@@ -1,8 +1,10 @@
 class Routes {
-  static const String onBoardingScreen = '/onBoardingScreen';
-  static const String loginScreen = '/loginScreen';
-  static const String homeScreen = '/homeScreen';
-  static const String attendanceScreen = '/attendanceScreen';
-  static const String faceScreen = '/faceScreen';
-  static const String profileScreen = '/profileScreen';
+  static const String addServiceScreen = '/addServiceScreen';
+  static const String successServiceProviderScreen =
+      '/successServiceProviderScreen';
+  static const String groundDetailsScreen = '/groundDetailsScreen';
+  static const String groundsScreen = '/groundsScreen';
+  static const String myProfileScreen = '/myProfileScreen';
+  static const String serviceProviderGroundsScreen =
+      '/serviceProviderGroundsScreen';
 }

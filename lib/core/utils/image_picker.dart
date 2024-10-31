@@ -3,14 +3,17 @@ import 'dart:io';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 
-List<File> selectedImageList = [];
-Future<List<File>?> pickImage() async {
+Future<File?> pickImage() async {
   try {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (image != null) {
-      selectedImageList.add(File(image.path));
-      return selectedImageList;
+      final compressedPickedImage = await compressImages(image);
+      if (compressedPickedImage != null) {
+        return compressedPickedImage;
+      } else {
+        return null;
+      }
     } else {
       return null;
     }
@@ -19,17 +22,15 @@ Future<List<File>?> pickImage() async {
   }
 }
 
-Future<List<File>> compressImages() async {
-  for (int i = 0; i < selectedImageList.length; i++) {
-    final compressedImageBytes = await FlutterImageCompress.compressWithFile(
-      selectedImageList[i].path,
-      quality: 70,
-    );
-
-    if (compressedImageBytes != null) {
-      selectedImageList[i] =
-          await selectedImageList[i].writeAsBytes(compressedImageBytes);
-    }
+Future<File?> compressImages(XFile image) async {
+  final compressedImageBytes = await FlutterImageCompress.compressWithFile(
+    image.path,
+    quality: 70,
+  );
+  File compressedImage = File(image.path);
+  if (compressedImageBytes != null) {
+    compressedImage = await compressedImage.writeAsBytes(compressedImageBytes);
+    return compressedImage;
   }
-  return selectedImageList;
+  return null;
 }
