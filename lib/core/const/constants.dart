@@ -12,21 +12,32 @@ class Constants {
   static const available = 'Available';
   static const bookNow = 'Book Now';
   static const logout = 'Logout';
+  static const login = 'Login';
+  static const forgetPassword = 'forget apssword';
+  static const signUp = 'Sign Up';
+  static const password = 'password';
   static const myProfile = 'My Profile';
   static const phoneNumber = '+1 654 785 4462';
   static const userName = 'Mahmoud Sayed';
   static const userEmail = 'josphamdes@gmail.com';
   static const pleaseComplete = 'please complete the following information ';
+  static const pleasePassword = 'please enter your password ';
+  static const pleaseName = 'please enter your name';
   static const addData = 'Add your data about your sevice';
   static const addImage = 'Add ground Images';
   static const numOfImage = ' (from 2, 3 images size 2mb)';
   static const fullName = 'Full name';
+  static const name = ' Name';
   static const phone = 'Phone';
   static const address = 'Service address';
   static const groundSize = 'Ground Size';
   static const governate = 'Governate';
   static const fullNameHint = ' Enter your full name';
+  static const nameHint = ' Enter your  name';
+  static const passwordHint = ' Enter your  password';
   static const phoneHint = ' Enter your phone number';
+  static const passwordShouldBe = 'password should be >6 & <30';
+
   static const addressHint = 'Enter service address';
   static const groundSizeHint = ' Enter ground Size';
   static const governateHint = ' Choose governate';
@@ -39,6 +50,7 @@ class Constants {
   static const showAll = "show all";
   static const nextMatch = "Your next match will start at:";
   static const serviceSuccessfullyAdded = "Your service \nsuccessfully added";
+  static const welcomeToManagementSystem = 'Welcome to\nManagement System';
 
   static const List<String> egyptGovernorates = [
     "Cairo",
