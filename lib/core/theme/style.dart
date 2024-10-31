@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/font_weight_helper.dart';
+import 'package:kamn/core/theme_data/app_palette.dart';
 
 class TextStyles {
   static TextStyle font12GrayMedium = TextStyle(
@@ -173,4 +174,14 @@ class TextStyles {
       color: Colors.white,
       fontWeight: FontWeightHelper.medium,
       fontSize: 16.h);
+  static TextStyle font24BlackInterColorMedium = TextStyle(
+      fontFamily: "Inter",
+      color: AppPalette.blackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 24.h);
+  static TextStyle font24WhiteInterColorMedium = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.whiteColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 24.h);
 }

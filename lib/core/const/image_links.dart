@@ -8,4 +8,6 @@ class ImageLinks {
   static const String NotePencilIcon = "assets/images/NotePencil.png";
   static const String serviceSuccessfullyAdded =
       'assets/images/success_service.png';
+  static const String welcomeImg = 'assets/images/welcomeImg.png';
+  static const String loginLogo = "assets/images/loginLogo.png";
 }
