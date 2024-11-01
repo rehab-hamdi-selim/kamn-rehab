@@ -9,6 +9,7 @@ import 'package:kamn/features/sports_service_providers/presentation/cubit/add_se
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/add_service.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_grounds_screen.dart';
+import 'package:kamn/features/sports_service_providers/presentation/screens/service_selection_screen.dart';
 
 class AppRouter {
   static Route generateRoute(RouteSettings settings) {
@@ -19,7 +20,7 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => BlocProvider<AddServiceProviderCubit>(
                   create: (context) => getIt<AddServiceProviderCubit>(),
-                  child: const AddServiceScreen(),
+                  child: AddServiceScreen(),
                 ));
       // case Routes.groundDetailsScreen:
       //   return MaterialPageRoute(
@@ -40,6 +41,9 @@ class AppRouter {
       case Routes.successServiceProviderScreen:
         return MaterialPageRoute(
             builder: (context) => const ServiceProviderGroundsScreen());
+      case Routes.serviceSelection:
+        return MaterialPageRoute(
+            builder: (context) => const ServiceSelectionScreen());
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(
