@@ -7,4 +7,5 @@ class Routes {
   static const String myProfileScreen = '/myProfileScreen';
   static const String serviceProviderGroundsScreen =
       '/serviceProviderGroundsScreen';
+  static const String editServiceScreen = '/editServiceScreen';
 }

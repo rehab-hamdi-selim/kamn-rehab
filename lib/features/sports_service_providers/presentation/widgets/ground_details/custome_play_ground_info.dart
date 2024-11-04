@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/constants.dart';
+import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import "package:kamn/features/sports/data/models/playground_model.dart";
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/edit_service_provider/edit_service_provider_cubit.dart';
+import 'package:kamn/features/sports_service_providers/presentation/screens/edit_service_screen.dart';
 
 class CustomePlayGroundInfo extends StatefulWidget {
   const CustomePlayGroundInfo({required this.playgroundModel, super.key});
@@ -198,7 +201,19 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
                 backgroundColor: AppPallete.greenColor.withOpacity(.07),
                 side: BorderSide(
                     color: AppPallete.greenColor.withOpacity(.3), width: 1)),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          BlocProvider<EditServiceProviderCubit>(
+                            create: (context) =>
+                                getIt<EditServiceProviderCubit>(),
+                            child: EditServiceScreen(
+                              playground: widget.playgroundModel!,
+                            ),
+                          )));
+            },
             label: Text(
               Constants.directions,
               style: TextStyles.font14GreenRegular,

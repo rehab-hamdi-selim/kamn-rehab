@@ -6,13 +6,14 @@ import 'package:kamn/core/helpers/spacer.dart';
 
 import 'package:kamn/core/theme/style.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_state.dart';
 
-class CustomeImagePicker extends StatelessWidget {
-  const CustomeImagePicker({
-    super.key,
-  });
+import 'package:kamn/features/sports_service_providers/presentation/cubit/edit_service_provider/edit_service_provider_cubit.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/edit_service_provider/edit_service_provider_state.dart';
+
+class CustomeGroundImagePicker extends StatelessWidget {
+  final List<String> groundImages;
+  bool isInit = false;
+  CustomeGroundImagePicker({super.key, required this.groundImages});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class CustomeImagePicker extends StatelessWidget {
         RichText(
           textAlign: TextAlign.start,
           text: TextSpan(
-            text: Constants.addImage,
+            text: Constants.addGroundImage,
             style: TextStyles.fontInter14BlackMedium,
             children: [
               TextSpan(
@@ -38,12 +39,17 @@ class CustomeImagePicker extends StatelessWidget {
           radius: const Radius.circular(10),
           color: Colors.black,
           strokeWidth: 1,
-          child: BlocBuilder<AddServiceProviderCubit, AddServiceProviderState>(
+          child:
+              BlocBuilder<EditServiceProviderCubit, EditServiceProviderState>(
             builder: (context, state) {
+              if (state.groundImagesList!.isEmpty && !isInit) {
+                state.groundImagesList = groundImages;
+                isInit = true;
+              }
               return Row(
                 children: [
                   Row(
-                    children: state.imagesList!.map((element) {
+                    children: state.groundImagesList!.map((element) {
                       return Stack(
                         alignment: Alignment.topRight,
                         children: [
@@ -54,7 +60,9 @@ class CustomeImagePicker extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
                               image: DecorationImage(
-                                image: FileImage(element),
+                                image: element is String
+                                    ? NetworkImage(element)
+                                    : FileImage(element),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -63,7 +71,7 @@ class CustomeImagePicker extends StatelessWidget {
                             right: 5.w,
                             child: InkWell(
                               onTap: () => context
-                                  .read<AddServiceProviderCubit>()
+                                  .read<EditServiceProviderCubit>()
                                   .removeImageFromList(element),
                               child: const Icon(
                                 Icons.cancel_outlined,
@@ -75,12 +83,12 @@ class CustomeImagePicker extends StatelessWidget {
                       );
                     }).toList(),
                   ),
-                  if (state.imagesList!.length <= 2)
+                  if (state.groundImagesList!.length <= 2)
                     Expanded(
                       child: GestureDetector(
-                        onTap: context
-                            .read<AddServiceProviderCubit>()
-                            .getPhotoFromGallery,
+                        onTap: () => context
+                            .read<EditServiceProviderCubit>()
+                            .getPhotoFromGallery(),
                         child: SizedBox(
                           height: 80.h,
                           child: const Icon(Icons.add),

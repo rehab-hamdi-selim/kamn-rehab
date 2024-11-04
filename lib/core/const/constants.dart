@@ -24,7 +24,10 @@ class Constants {
   static const pleasePassword = 'please enter your password ';
   static const pleaseName = 'please enter your name';
   static const addData = 'Add your data about your sevice';
-  static const addImage = 'Add ground Images';
+  static const editData = 'Edit your data about your sevice';
+  static const addGroundImage = 'Add ground Images';
+  static const addOwnershipImage = 'Add Land ownership images';
+  static const detailsClear = ' (make sure every detail is clear)';
   static const numOfImage = ' (from 2, 3 images size 2mb)';
   static const fullName = 'Full name';
   static const name = ' Name';
@@ -32,6 +35,8 @@ class Constants {
   static const address = 'Service address';
   static const groundSize = 'Ground Size';
   static const governate = 'Governate';
+  static const price = 'Price per hour';
+  static const priceHint = 'Enter ground price';
   static const fullNameHint = ' Enter your full name';
   static const nameHint = ' Enter your  name';
   static const passwordHint = ' Enter your  password';
@@ -43,6 +48,9 @@ class Constants {
   static const governateHint = ' Choose governate';
   static const howManyPeople = '  (how many people can fit)';
   static const finish = 'Finish';
+  static const inUse = 'In use';
+  static const underRepairs = 'Under Repairs';
+  static const availability = 'Availability';
 
   static const groundsScreenTitle = "Football";
   static const hintTextForSearch = "Search for a stadium";

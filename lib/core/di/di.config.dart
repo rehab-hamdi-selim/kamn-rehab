@@ -24,6 +24,8 @@ import '../../features/sports_service_providers/data/repository/service_provider
     as _i542;
 import '../../features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart'
     as _i252;
+import '../../features/sports_service_providers/presentation/cubit/edit_service_provider/edit_service_provider_cubit.dart'
+    as _i773;
 import '../../features/sports_service_providers/presentation/cubit/service_provider_ground_details/service_provider_ground_details_cubit.dart'
     as _i692;
 import '../../features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart'
@@ -66,6 +68,9 @@ extension GetItInjectableX on _i174.GetIt {
             repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i692.ServiceProviderGroundDetailsCubit>(() =>
         _i692.ServiceProviderGroundDetailsCubit(
+            repository: gh<_i542.ServiceProvidersRepository>()));
+    gh.factory<_i773.EditServiceProviderCubit>(() =>
+        _i773.EditServiceProviderCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i1033.SportsGroundsCubit>(() => _i1033.SportsGroundsCubit(
         sportsRepository: gh<_i379.SportsRepository>()));

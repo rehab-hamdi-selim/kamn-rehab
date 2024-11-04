@@ -29,9 +29,8 @@ class ServiceProviderGroundDetailsCubit
     });
   }
 
-  Future<void> decline(
-      PlaygroundRequestModel playground, Map<String, dynamic> data) async {
-    var response = await repository.updateState(playground, data);
+  Future<void> decline(String playgroundId, Map<String, dynamic> data) async {
+    var response = await repository.updateState(playgroundId, data);
     response.fold((error) {
       emit(ServiceProviderGroundDetailsState(
           state: ServiceProviderGroundDetailsStatus.failure,

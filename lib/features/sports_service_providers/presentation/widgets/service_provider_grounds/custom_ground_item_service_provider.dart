@@ -32,7 +32,9 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15.r),
               ),
               child: CachedNetworkImage(
-                  imageUrl: playgroundRequest.images![0],
+                  imageUrl: playgroundRequest.groundImages?.isNotEmpty == true
+                      ? playgroundRequest.groundImages![0] ?? ''
+                      : '',
                   imageBuilder: (context, imageProvider) => Container(
                         width: double.infinity,
                         height: 191.h,
@@ -48,8 +50,11 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
                       width: double.infinity,
                       height: 191.h,
                       child: const Center(child: CircularProgressIndicator())),
-                  errorWidget: (context, url, error) =>
-                      const Icon(Icons.error_outline, size: 40)),
+                  errorWidget: (context, url, error) => SizedBox(
+                      width: double.infinity,
+                      height: 191.h,
+                      child: const Center(
+                          child: Icon(Icons.error_outline, size: 40)))),
             ),
             Positioned(
               top: 6,
