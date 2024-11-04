@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/const/constants.dart';
-import '../../../../../core/theme_data/app_palette.dart';
+import '../../../../../core/theme/app_pallete.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
@@ -15,28 +15,28 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      cursorColor: AppPalette.darkGreenColor,
+      cursorColor: AppPallete.greenColor,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
         filled: true,
-        fillColor: AppPalette.lightGrayColor,
+        fillColor: AppPallete.lightGrayColor,
         hintText: Constants.hintTextForSearch,
-        hintStyle: const TextStyle(color: AppPalette.grayColor),
+        hintStyle: const TextStyle(color: AppPallete.grayColor),
         prefixIcon: const Icon(
           Icons.search,
-          color: AppPalette.grayColor,
+          color: AppPallete.grayColor,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),
-          borderSide: const BorderSide(color: AppPalette.lightGrayColor),
+          borderSide: const BorderSide(color: AppPallete.lightGrayColor),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),
-          borderSide: const BorderSide(color: AppPalette.lightGrayColor),
+          borderSide: const BorderSide(color: AppPallete.lightGrayColor),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),
-          borderSide: const BorderSide(color: AppPalette.darkGreenColor),
+          borderSide: const BorderSide(color: AppPallete.greenColor),
         ),
       ),
       onChanged: onChange,

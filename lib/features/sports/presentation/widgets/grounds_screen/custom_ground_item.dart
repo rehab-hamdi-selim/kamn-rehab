@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
-import '../../../../../core/theme_data/app_palette.dart';
-import '../../../../../core/theme_data/style.dart';
+import '../../../../../core/theme/app_pallete.dart';
+import '../../../../../core/theme/style.dart';
 import '../../../../../core/utils/app_images.dart';
 
 class CustomGroundItem extends StatelessWidget {
@@ -38,10 +38,10 @@ class CustomGroundItem extends StatelessWidget {
       height: 197.h,
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
       decoration: BoxDecoration(
-        color: AppPalette.backgroundColor,
+        color: AppPallete.whiteColor,
         borderRadius: BorderRadius.circular(15.r),
         border: Border.all(
-          color: AppPalette.lightGreenColor,
+          color: AppPallete.lightGreenColorWithOpacity07,
           width: 1.w,
         ),
       ),
@@ -68,12 +68,12 @@ class CustomGroundItem extends StatelessWidget {
                   padding: EdgeInsets.all(2.h.w),
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    color: AppPalette.backgroundColor,
+                    color: AppPallete.whiteColor,
                   ),
                   child: Center(
                     child: Icon(
                       Icons.favorite_outline,
-                      color: AppPalette.darkGrayColor,
+                      color: AppPallete.darkGrayColor,
                       size: 20.sp,
                     ),
                   ),
@@ -92,12 +92,12 @@ class CustomGroundItem extends StatelessWidget {
                 children: [
                   Text(
                     placeText,
-                    style: Style.font16DartBlackColorW400,
+                    style: TextStyles.font16DartBlackColorW400,
                   ),
                   horizontalSpace(8),
                   Text(
                     "$km km",
-                    style: Style.font10DarkGreenColorW400,
+                    style: TextStyles.font10DarkGreenColorW400,
                   ),
                 ],
               ),
@@ -105,11 +105,11 @@ class CustomGroundItem extends StatelessWidget {
                 children: [
                   Text(
                     "Owner: ",
-                    style: Style.font10BlackColorW400,
+                    style: TextStyles.font10BlackColorW400,
                   ),
                   Text(
                     owner,
-                    style: Style.font10DarkGreenColorW400,
+                    style: TextStyles.font10DarkGreenColorW400,
                   ),
                 ],
               ),
@@ -121,22 +121,22 @@ class CustomGroundItem extends StatelessWidget {
                       Icon(
                         Icons.location_on_outlined,
                         size: 12.h,
-                        color: AppPalette.grayColor,
+                        color: AppPallete.grayColor,
                       ),
                       horizontalSpace(4),
                       Text(
                         location,
-                        style: Style.font10GrayColorW400,
+                        style: TextStyles.font10GrayColorW400,
                       ),
                       horizontalSpace(8),
                       Container(
                         padding: EdgeInsets.symmetric(
                             horizontal: 2.w, vertical: 2.h),
                         decoration: BoxDecoration(
-                          color: AppPalette.backgroundColor,
+                          color: AppPallete.whiteColor,
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: AppPalette.greenColor,
+                            color: AppPallete.lightGreenColor,
                             width: 1.w,
                           ),
                         ),
@@ -144,23 +144,23 @@ class CustomGroundItem extends StatelessWidget {
                           height: 4.h,
                           width: 4.w,
                           decoration: const BoxDecoration(
-                              color: AppPalette.greenColor,
+                              color: AppPallete.lightGreenColor,
                               shape: BoxShape.circle),
                         ),
                       ),
                       horizontalSpace(4),
                       Text(
                         available,
-                        style: Style.font7DartBlackColorW400,
+                        style: TextStyles.font7DartBlackColorW400,
                       ),
                       horizontalSpace(8),
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 4.w),
                         decoration: BoxDecoration(
-                          color: AppPalette.backgroundColor,
+                          color: AppPallete.whiteColor,
                           borderRadius: BorderRadius.circular(15.r),
                           border: Border.all(
-                            color: AppPalette.greenColor,
+                            color: AppPallete.lightGreenColor,
                             width: 1.w,
                           ),
                         ),
@@ -169,12 +169,12 @@ class CustomGroundItem extends StatelessWidget {
                           children: [
                             Text(
                               rates,
-                              style: Style.font10GrayColorW400,
+                              style: TextStyles.font10GrayColorW400,
                             ),
                             Icon(
                               Icons.star,
                               size: 12.h,
-                              color: AppPalette.yellowColor,
+                              color: AppPallete.yellowColor,
                             ),
                           ],
                         ),
@@ -186,11 +186,11 @@ class CustomGroundItem extends StatelessWidget {
                     children: [
                       Text(
                         "$price LE",
-                        style: Style.font16DartBlackColorW400,
+                        style: TextStyles.font16DartBlackColorW400,
                       ),
                       Text(
                         "/hr",
-                        style: Style.font10BlackColorW400,
+                        style: TextStyles.font10BlackColorW400,
                       ),
                     ],
                   ),

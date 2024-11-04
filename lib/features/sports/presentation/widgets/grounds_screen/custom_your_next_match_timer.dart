@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/const/constants.dart';
-import '../../../../../core/theme_data/app_palette.dart';
-import '../../../../../core/theme_data/style.dart';
+import '../../../../../core/theme/app_pallete.dart';
+import '../../../../../core/theme/style.dart';
 
 class CustomYourNextMatchTimer extends StatelessWidget {
   const CustomYourNextMatchTimer({
@@ -17,10 +17,10 @@ class CustomYourNextMatchTimer extends StatelessWidget {
       alignment: Alignment.center,
       padding: EdgeInsets.symmetric(horizontal: 19.w),
       decoration: BoxDecoration(
-        color: AppPalette.lightGreenColor,
+        color: AppPallete.lightGreenColorWithOpacity07,
         borderRadius: BorderRadius.circular(15.r),
         border: Border.all(
-          color: AppPalette.greenColor,
+          color: AppPallete.lightGreenColor,
           width: 1.w,
         ),
       ),
@@ -29,11 +29,11 @@ class CustomYourNextMatchTimer extends StatelessWidget {
         children: [
           Text(
             Constants.nextMatch,
-            style: Style.font15DarkGreenColorBold,
+            style: TextStyles.font15DarkGreenColorBold,
           ),
           Text(
             "00 : 52 : 36",
-            style: Style.font15DarkGreenColorBold,
+            style: TextStyles.font15DarkGreenColorBold,
           ),
         ],
       ),

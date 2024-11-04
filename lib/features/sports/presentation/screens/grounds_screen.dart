@@ -4,19 +4,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
-import 'package:kamn/core/theme_data/app_palette.dart';
-import 'package:kamn/core/theme_data/style.dart';
 import 'package:kamn/core/utils/app_images.dart';
 import 'package:kamn/features/sports/presentation/screens/ground_details_screen.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_filter_item.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_ground_item.dart';
+import '../../../../core/theme/app_pallete.dart';
+import '../../../../core/theme/style.dart';
 import '../../data/data_source/sports_remote_data_source.dart';
 import '../../data/repositories/sports_repository.dart';
+import '../../domain/usecases/sports_usecase.dart';
 import '../cubits/sports_grounds/sports_ground_cubit.dart';
 import '../cubits/sports_grounds/sports_ground_state.dart';
 import '../widgets/grounds_screen/custom_app_bar.dart';
 import '../widgets/grounds_screen/custom_bottom.dart';
 import '../widgets/grounds_screen/custom_grounds_bloc_listner.dart';
+import '../widgets/grounds_screen/custom_show_bottom_sheet_filter.dart';
 import '../widgets/grounds_screen/custom_text_form_field.dart';
 import '../widgets/grounds_screen/custom_your_next_match_timer.dart';
 
@@ -28,17 +30,17 @@ class GroundsScreen extends StatelessWidget {
     TextEditingController controller = TextEditingController();
     return BlocProvider(
         create: (context) => SportsGroundsCubit(
-              sportsRepository: SportsRepository(
+              sportsUsecase:SportsUsecase( SportsRepositoryIpml(
                 ///TODO: dependance injection will be in the get it
                 remoteDataSource: SportsRemoteDataSourceImpl(
                   firestore: FirebaseFirestore.instance,
                 ),
-              ),
+              ),)
             )..getPlaygrounds(),
         //Dont miss bloc listner
         child: CustomGroundsBlocListner(
           child: Scaffold(
-            backgroundColor: AppPalette.backgroundColor,
+            backgroundColor: AppPallete.whiteColor,
             appBar: CustomAppBar.appBar(
               arrowFunction: () {},
               notificationIconFunction: () {},
@@ -52,7 +54,7 @@ class GroundsScreen extends StatelessWidget {
                 children: [
                   Text(
                     Constants.groundsScreenTitle,
-                    style: Style.font30DarkGreenColorBold,
+                    style: TextStyles.font30DarkGreenColorBold,
                   ),
                   Row(
                     children: [
@@ -61,16 +63,37 @@ class GroundsScreen extends StatelessWidget {
                         controller: controller,
                       )),
                       horizontalSpace(5),
-                      CustomBottom(
-                        iconVisible: true,
-                        iconWidget: Image.asset(
-                          AppImages.filterImage,
-                          width: 15.w,
-                          height: 15.h,
-                        ),
-                        onPressed: () {},
-                        textBottom: 'Filter',
-                        textStyle: Style.font12WhiteColorW400,
+                      BlocBuilder<SportsGroundsCubit, SportsGroundsState>(
+                        builder: (context, state) {
+                          return CustomBottom(
+                            iconVisible: true,
+                            iconWidget: Image.asset(
+                              AppImages.filterImage,
+                              width: 15.w,
+                              height: 15.h,
+                            ),
+                            onPressed: () {
+                              var cubit = SportsGroundsCubit.get(context);
+                              showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                builder: (context) => Container(
+                                  padding: EdgeInsets.only(
+                                    bottom: MediaQuery.of(context)
+                                        .viewInsets
+                                        .bottom,
+                                  ),
+                                  child: CustomShowBottomSheetFilter(
+                                    distance: cubit.distanceCubit.toDouble(),
+                                    applyFilter: cubit.applyFilter,
+                                  ),
+                                ),
+                              );
+                            },
+                            textBottom: 'Filter',
+                            textStyle: TextStyles.font12WhiteColorW400,
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -96,11 +119,11 @@ class GroundsScreen extends StatelessWidget {
                     children: [
                       Text(
                         Constants.reservation,
-                        style: Style.font15BlackColorBold,
+                        style: TextStyles.font15BlackColorBold,
                       ),
                       Text(
                         Constants.showAll,
-                        style: Style.font10GrayColorW400,
+                        style: TextStyles.font10GrayColorW400,
                       ),
                     ],
                   ),
@@ -122,7 +145,7 @@ class GroundsScreen extends StatelessWidget {
                         child: Center(
                           child: Text(
                             "Grounds Not Found",
-                            style: Style.font16DartBlackColorW400,
+                            style: TextStyles.font16DartBlackColorW400,
                           ),
                         ),
                       );

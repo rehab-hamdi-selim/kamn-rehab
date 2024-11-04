@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:kamn/core/helpers/spacer.dart';
-import '../../../../../core/theme_data/app_palette.dart';
+import '../../../../../core/theme/app_pallete.dart';
 import '../../../../../core/utils/app_images.dart';
 
 class CustomAppBar {
@@ -12,7 +11,9 @@ class CustomAppBar {
       required Function()? badgesIconFunction,
       required Function()? profileFunction}) {
     return AppBar(
-      leadingWidth: 45.w,
+      elevation: 0,
+      backgroundColor:Colors.transparent ,//AppPallete.whiteColor,
+      leadingWidth: 45,
       leading: Row(
         children: [
           horizontalSpace(10),
@@ -20,13 +21,13 @@ class CustomAppBar {
             onTap: arrowFunction,
             child: Container(
               decoration: const BoxDecoration(
-                color: AppPalette.darkGreenColor,
+                color: AppPallete.greenColor,
                 shape: BoxShape.circle,
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.arrow_back_rounded,
-                size: 24.h,
-                color: AppPalette.lightGrayColor,
+                size: 24,
+                color: AppPallete.lightGrayColor,
               ),
             ),
           ),
@@ -36,13 +37,13 @@ class CustomAppBar {
         badges.Badge(
           ignorePointer: false,
           onTap: notificationIconFunction,
-          position: badges.BadgePosition.topEnd(top: 10.h, end: 10.w),
+          position: badges.BadgePosition.topEnd(top: 10, end: 10),
           showBadge: true,
           child: IconButton(
             onPressed: badgesIconFunction,
-            icon: Icon(
+            icon: const Icon(
               Icons.notifications_none_outlined,
-              size: 32.h,
+              size: 32,
             ),
           ),
         ),

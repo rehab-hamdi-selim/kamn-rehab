@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../../core/theme_data/app_palette.dart';
-import '../../../../../core/theme_data/style.dart';
+import '../../../../../core/theme/app_pallete.dart';
+import '../../../../../core/theme/style.dart';
 
 class CustomFilterItem extends StatelessWidget {
   final IconData? icon;
@@ -21,10 +20,10 @@ class CustomFilterItem extends StatelessWidget {
       alignment: Alignment.center,
       padding: EdgeInsets.symmetric(horizontal: 10.w),
       decoration: BoxDecoration(
-        color: AppPalette.lightGreenColor,
+        color: AppPallete.lightGreenColorWithOpacity07,
         borderRadius: BorderRadius.circular(15.r),
         border: Border.all(
-          color: AppPalette.greenColor,
+          color: AppPallete.lightGreenColor,
           width: 1.w,
         ),
       ),
@@ -33,19 +32,19 @@ class CustomFilterItem extends StatelessWidget {
         children: [
           Icon(
             icon,
-            size: 12.sp,
-            color: AppPalette.darkGreenColor,
+            size: 12.h,
+            color: AppPallete.greenColor,
           ),
           Text(
             text,
-            style: Style.font10BlackColorW400,
+            style: TextStyles.font10BlackColorW400,
           ),
           IconButton(
             onPressed: onPressed,
             icon: Icon(
               Icons.cancel_outlined,
-              color: AppPalette.grayColor,
-              size: 12.sp,
+              color: AppPallete.grayColor,
+              size: 12.h,
             ),
           ),
         ],
