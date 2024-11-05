@@ -16,6 +16,21 @@ class ServiceProviderGroundDetailsCubit
   ServiceProvidersRepository repository;
 
   TextEditingController commentController = TextEditingController();
+
+  int maxLines = 10;
+  bool isVisible = true;
+  void onPressReadMore() {
+    if (maxLines <= 10) {
+      maxLines = 1000;
+      isVisible = false;
+    } else {
+      maxLines = 10;
+      isVisible = true;
+    }
+    emit(ServiceProviderGroundDetailsState(
+        state: ServiceProviderGroundDetailsStatus.textExtended));
+  }
+
   Future<void> accept(PlaygroundModel playground) async {
     var response = await repository.addWithTransactionToFirebase(playground);
     response.fold((error) {
