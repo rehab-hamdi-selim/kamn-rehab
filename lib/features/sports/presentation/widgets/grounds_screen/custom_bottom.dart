@@ -5,6 +5,7 @@ import '../../../../../core/theme/app_pallete.dart';
 class CustomBottom extends StatelessWidget {
   final Function() onPressed;
   final String textBottom;
+  final double maxSize;
   final TextStyle textStyle;
   final bool iconVisible;
   final Widget iconWidget;
@@ -16,6 +17,7 @@ class CustomBottom extends StatelessWidget {
     this.backgroundColor,
     required this.textStyle,
     this.iconVisible = false,
+    this.maxSize=40,
     this.iconWidget=const SizedBox(),
   });
 
@@ -27,10 +29,12 @@ class CustomBottom extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(50.r),
         ),
-        minimumSize: Size(0, 40.h)
+        minimumSize: Size(0, maxSize.h)
       ),
       onPressed: onPressed,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Visibility(
               visible: iconVisible,

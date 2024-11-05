@@ -3,10 +3,12 @@ import 'package:kamn/core/erorr/faliure.dart';
 import '../../../../core/utils/try_and_catch.dart';
 import '../data_source/sports_remote_data_source.dart';
 import '../models/playground_model.dart';
-
-class SportsRepository {
+abstract interface class  SportsRepository {
+  Future<Either<Faliure, List<PlaygroundModel>?>> getPlaygrounds();
+}
+class SportsRepositoryIpml implements SportsRepository {
   final SportsRemoteDataSource _remoteDataSource;
-  SportsRepository({required SportsRemoteDataSource remoteDataSource})
+  SportsRepositoryIpml({required SportsRemoteDataSource remoteDataSource})
       : _remoteDataSource = remoteDataSource;
   Future<Either<Faliure, List<PlaygroundModel>?>> getPlaygrounds() async {
     return executeTryAndCatchForRepository(() async {

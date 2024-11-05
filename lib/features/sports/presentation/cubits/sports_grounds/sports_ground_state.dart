@@ -4,13 +4,14 @@ import 'package:flutter/foundation.dart';
 
 import '../../../data/models/playground_model.dart';
 
-enum SportsGroundsStatus { initial, loading, success, failure }
+enum SportsGroundsStatus { initial, loading, success, failure,onChanged,filtter }
 
 extension SportsGroundStateExtension on SportsGroundsState {
   bool get isInitial => state == SportsGroundsStatus.initial;
   bool get isLoading => state == SportsGroundsStatus.loading;
   bool get isSuccess => state == SportsGroundsStatus.success;
   bool get isFailure => state == SportsGroundsStatus.failure;
+  bool get isFiltter => state == SportsGroundsStatus.filtter;
 }
 
 class SportsGroundsState {

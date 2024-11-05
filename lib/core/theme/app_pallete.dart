@@ -28,4 +28,5 @@ class AppPallete {
   static const Color pinkyRed = Color(0xffED6868);
   static const Color mainColor = Color(0xffA117F1);
   static const Color lightColor = Color(0xffF5F6F6);
+  static Color lightGreenColorWithOpacity07 = const Color(0xff4CD964).withOpacity(0.07);
 }
