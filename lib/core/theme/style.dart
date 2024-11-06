@@ -92,6 +92,21 @@ class TextStyles {
       fontSize: 20.h);
 
   //
+  static TextStyle fontRoboto24MediumBlack = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 24.h);
+  static TextStyle fontRoboto16RegularBlack = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 16.h);
+  static TextStyle fontRoboto10RegularGray = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.grayColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 10.h);
 
   static TextStyle font30DarkGreenColorBold = TextStyle(
       fontFamily: "Roboto",

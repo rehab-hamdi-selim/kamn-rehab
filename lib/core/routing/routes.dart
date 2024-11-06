@@ -5,6 +5,7 @@ class Routes {
   static const String groundDetailsScreen = '/groundDetailsScreen';
   static const String groundsScreen = '/groundsScreen';
   static const String myProfileScreen = '/myProfileScreen';
+  static const String serviceSelection = '/serviceSelection';
   static const String serviceProviderGroundsScreen =
       '/serviceProviderGroundsScreen';
 }

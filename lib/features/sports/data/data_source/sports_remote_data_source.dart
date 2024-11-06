@@ -6,7 +6,8 @@ import '../../../../core/utils/try_and_catch.dart';
 abstract interface class SportsRemoteDataSource {
   Future<List<Map<String, dynamic>>> getPlaygrounds();
 }
-@Injectable(as :SportsRemoteDataSource)
+
+@Injectable(as: SportsRemoteDataSource)
 class SportsRemoteDataSourceImpl implements SportsRemoteDataSource {
   final FirebaseFirestore _firestore;
   SportsRemoteDataSourceImpl({required FirebaseFirestore firestore})

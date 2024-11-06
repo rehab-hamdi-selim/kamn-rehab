@@ -6,21 +6,21 @@ import '../../../../../core/theme/app_pallete.dart';
 import '../../../../../core/utils/app_images.dart';
 
 class CustomAppBarServiceProvider {
- static AppBar appBar({
-   required Function()? arrowFunction,
-   required Function()? notificationIconFunction,
-   required Function()? badgesIconFunction,
-   required Function()? profileFunction
-}){
+  static AppBar appBar(
+      {required Function()? arrowFunction,
+      required Function()? notificationIconFunction,
+      required Function()? badgesIconFunction,
+      required Function()? profileFunction}) {
     return AppBar(
       leadingWidth: 45.w,
       elevation: 0,
+      surfaceTintColor: AppPallete.whiteColor,
       backgroundColor: AppPallete.whiteColor,
-      leading:Row(
+      leading: Row(
         children: [
           horizontalSpace(18.w),
           InkWell(
-            onTap:arrowFunction,
+            onTap: arrowFunction,
             child: Container(
               decoration: const BoxDecoration(
                 color: AppPallete.accentBlackColor,
@@ -39,7 +39,7 @@ class CustomAppBarServiceProvider {
         badges.Badge(
           ignorePointer: false,
           onTap: notificationIconFunction,
-          position: badges.BadgePosition.topEnd(top: 10.h,end: 10.w),
+          position: badges.BadgePosition.topEnd(top: 10.h, end: 10.w),
           showBadge: true,
           child: IconButton(
             onPressed: badgesIconFunction,
