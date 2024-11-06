@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/helpers/spacer.dart';
+import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
@@ -162,15 +163,8 @@ class CustomePlayGroundInfo extends StatelessWidget {
         ),
         ElevatedButton.icon(
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => BlocProvider(
-                            create: (context) =>
-                                getIt<EditServiceProviderCubit>(),
-                            child:
-                                EditServiceScreen(playground: playgroundModel!),
-                          )));
+              Navigator.pushNamed(context, Routes.editServiceScreen,
+                  arguments: playgroundModel);
             },
             icon: SvgPicture.asset('assets/icons/edit.svg'),
             style: ElevatedButton.styleFrom(

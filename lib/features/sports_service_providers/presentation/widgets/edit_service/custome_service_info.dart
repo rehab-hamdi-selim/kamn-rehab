@@ -18,25 +18,10 @@ import 'package:kamn/features/sports_service_providers/presentation/widgets/edit
 class CustomeServiceInfo extends StatelessWidget {
   PlaygroundRequestModel playground;
   CustomeServiceInfo({super.key, required this.playground});
-  void initValue(BuildContext context) {
-    context.read<EditServiceProviderCubit>().nameController.text =
-        playground.name ?? '';
-    context.read<EditServiceProviderCubit>().phoneController.text =
-        playground.phone ?? '';
-    context.read<EditServiceProviderCubit>().addressController.text =
-        playground.address ?? '';
-    context.read<EditServiceProviderCubit>().sizeController.text =
-        playground.size.toString();
-    context.read<EditServiceProviderCubit>().priceController.text =
-        playground.price!.toStringAsFixed(0);
-    context.read<EditServiceProviderCubit>().governateController.text =
-        playground.govenrate ?? '';
-    context.read<EditServiceProviderCubit>().statusOption = playground.status;
-  }
 
   @override
   Widget build(BuildContext context) {
-    initValue(context);
+    context.read<EditServiceProviderCubit>().initValue(playground);
     return Form(
       key: context.read<EditServiceProviderCubit>().formKey,
       child: Column(

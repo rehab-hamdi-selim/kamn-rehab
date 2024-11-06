@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/ground_details/custome_bottom_book.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/ground_details/custome_ground_details_bloc_listner.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/ground_details/custome_image_slide_show.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/ground_details/custome_play_ground_info.dart';
+import 'package:kamn/features/sports_service_providers/presentation/widgets/service_provider_ground_details/custome_bottom_book.dart';
+import 'package:kamn/features/sports_service_providers/presentation/widgets/service_provider_ground_details/custome_ground_details_bloc_listner.dart';
+import 'package:kamn/features/sports_service_providers/presentation/widgets/service_provider_ground_details/custome_image_slide_show.dart';
+import 'package:kamn/features/sports_service_providers/presentation/widgets/service_provider_ground_details/custome_play_ground_info.dart';
 
 class ServiceProviderGroundDetailsScreen extends StatelessWidget {
   const ServiceProviderGroundDetailsScreen(
