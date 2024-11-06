@@ -17,6 +17,8 @@ class ServiceProviderGroundsCubit extends Cubit<ServiceProviderGroundsState> {
         state: ServiceProviderGroundsStatus.loading));
     final result = await repository.getPlaygroundsRequests();
     result.fold((error) {
+      print(error.erorr);
+
       emit(ServiceProviderGroundsState(
         state: ServiceProviderGroundsStatus.failure,
         erorrMessage: error.erorr,

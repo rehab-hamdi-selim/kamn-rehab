@@ -7,26 +7,45 @@ import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/helpers/validators.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_state.dart';
+import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
+
+import 'package:kamn/features/sports_service_providers/presentation/cubit/edit_service_provider/edit_service_provider_cubit.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/edit_service_provider/edit_service_provider_state.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_dropdown_menu.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_radio_button.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_text_form_field.dart';
+import 'package:kamn/features/sports_service_providers/presentation/widgets/edit_service/custome_radio_button.dart';
 
 class CustomeServiceInfo extends StatelessWidget {
-  const CustomeServiceInfo({super.key});
+  PlaygroundRequestModel playground;
+  CustomeServiceInfo({super.key, required this.playground});
+  void initValue(BuildContext context) {
+    context.read<EditServiceProviderCubit>().nameController.text =
+        playground.name ?? '';
+    context.read<EditServiceProviderCubit>().phoneController.text =
+        playground.phone ?? '';
+    context.read<EditServiceProviderCubit>().addressController.text =
+        playground.address ?? '';
+    context.read<EditServiceProviderCubit>().sizeController.text =
+        playground.size.toString();
+    context.read<EditServiceProviderCubit>().priceController.text =
+        playground.price!.toStringAsFixed(0);
+    context.read<EditServiceProviderCubit>().governateController.text =
+        playground.govenrate ?? '';
+    context.read<EditServiceProviderCubit>().statusOption = playground.status;
+  }
 
   @override
   Widget build(BuildContext context) {
+    initValue(context);
     return Form(
-      key: context.read<AddServiceProviderCubit>().formKey,
+      key: context.read<EditServiceProviderCubit>().formKey,
       child: Column(
         children: [
           createField(
               title: Constants.fullName,
               hint: Constants.fullNameHint,
               nameController:
-                  context.read<AddServiceProviderCubit>().nameController,
+                  context.read<EditServiceProviderCubit>().nameController,
               iconPath: 'assets/icons/user.svg',
               validator: emptyValidator),
           verticalSpace(16.h),
@@ -34,7 +53,7 @@ class CustomeServiceInfo extends StatelessWidget {
               title: Constants.phone,
               hint: Constants.phoneHint,
               nameController:
-                  context.read<AddServiceProviderCubit>().phoneController,
+                  context.read<EditServiceProviderCubit>().phoneController,
               iconPath: 'assets/icons/phone.svg',
               validator: phoneValidator),
           verticalSpace(16.h),
@@ -42,7 +61,7 @@ class CustomeServiceInfo extends StatelessWidget {
               title: Constants.address,
               hint: Constants.addressHint,
               nameController:
-                  context.read<AddServiceProviderCubit>().addressController,
+                  context.read<EditServiceProviderCubit>().addressController,
               iconPath: 'assets/icons/location.svg',
               context: context,
               showLocationIcon: true,
@@ -52,7 +71,7 @@ class CustomeServiceInfo extends StatelessWidget {
             title: Constants.groundSize,
             hint: Constants.groundSizeHint,
             nameController:
-                context.read<AddServiceProviderCubit>().sizeController,
+                context.read<EditServiceProviderCubit>().sizeController,
             iconPath: 'assets/icons/size.svg',
             explane: Constants.howManyPeople,
             validator: numbersValidator,
@@ -62,7 +81,7 @@ class CustomeServiceInfo extends StatelessWidget {
             title: Constants.price,
             hint: Constants.priceHint,
             nameController:
-                context.read<AddServiceProviderCubit>().priceController,
+                context.read<EditServiceProviderCubit>().priceController,
             iconPath: 'assets/icons/price.svg',
             validator: numbersValidator,
           ),
@@ -71,7 +90,7 @@ class CustomeServiceInfo extends StatelessWidget {
           verticalSpace(16.h),
           createMenu(
               nameController:
-                  context.read<AddServiceProviderCubit>().governateController,
+                  context.read<EditServiceProviderCubit>().governateController,
               title: Constants.governate,
               hint: Constants.governateHint,
               iconPath: 'assets/icons/location.svg',
@@ -152,10 +171,10 @@ class CustomeServiceInfo extends StatelessWidget {
             if (showLocationIcon)
               InkWell(
                 onTap: () {
-                  context?.read<AddServiceProviderCubit>().getLocation();
+                  context?.read<EditServiceProviderCubit>().getLocation();
                 },
-                child: BlocBuilder<AddServiceProviderCubit,
-                    AddServiceProviderState>(
+                child: BlocBuilder<EditServiceProviderCubit,
+                    EditServiceProviderState>(
                   builder: (context, state) {
                     return CircleAvatar(
                       backgroundColor: AppPallete.blackColor,

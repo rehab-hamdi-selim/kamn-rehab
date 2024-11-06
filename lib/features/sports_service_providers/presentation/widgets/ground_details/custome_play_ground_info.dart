@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:kamn/core/const/constants.dart';
+import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import "package:kamn/features/sports/data/models/playground_model.dart";
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/edit_service_provider/edit_service_provider_cubit.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_ground_details/service_provider_ground_details_cubit.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_ground_details/service_provider_ground_details_state.dart';
+import 'package:kamn/features/sports_service_providers/presentation/screens/edit_service_screen.dart';
 
-class CustomePlayGroundInfo extends StatefulWidget {
+class CustomePlayGroundInfo extends StatelessWidget {
   const CustomePlayGroundInfo({required this.playgroundModel, super.key});
 
   final PlaygroundRequestModel? playgroundModel;
-
-  @override
-  State<CustomePlayGroundInfo> createState() => _CustomePlayGroundInfoState();
-}
-
-class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
-  int maxLines = 10;
-  bool isVisible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -28,25 +25,28 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
       child: Column(
         children: [
           verticalSpace(38.h),
-          playGroundName(),
-          verticalSpace(5.h),
-          playGroundDirection(),
+          playGroundName(context),
           verticalSpace(21.h),
           playGroundFeatures(),
           verticalSpace(12.h),
           Flexible(
             child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Stack(
+              child: BlocBuilder<ServiceProviderGroundDetailsCubit,
+                  ServiceProviderGroundDetailsState>(
+                builder: (context, state) {
+                  return Stack(
                     children: [
                       Text(
-                        "  ${widget.playgroundModel?.description}",
+                        "  ${playgroundModel?.description}",
                         style: TextStyles.font12blackRegular
                             .copyWith(fontSize: 16.h),
-                        maxLines: maxLines,
+                        maxLines: context
+                            .read<ServiceProviderGroundDetailsCubit>()
+                            .maxLines,
                       ),
-                      if (isVisible)
+                      if (context
+                          .read<ServiceProviderGroundDetailsCubit>()
+                          .isVisible)
                         Positioned(
                           bottom:
                               0, // Ensure the container is aligned to the bottom
@@ -66,11 +66,13 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
                             ),
                           ),
                         ),
-                      if (isVisible) readMoreButton()
+                      if (context
+                          .read<ServiceProviderGroundDetailsCubit>()
+                          .isVisible)
+                        readMoreButton(context)
                     ],
-                  ),
-                  if (!isVisible) readMoreButton()
-                ],
+                  );
+                },
               ),
             ),
           )
@@ -79,7 +81,7 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
     );
   }
 
-  Positioned readMoreButton() {
+  Positioned readMoreButton(BuildContext context) {
     return Positioned(
       bottom: 10,
       left: 0,
@@ -99,18 +101,12 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
                 elevation: 0,
               ),
               onPressed: () {
-                setState(() {
-                  if (maxLines <= 10) {
-                    maxLines = 1000;
-                    isVisible = false;
-                  } else {
-                    maxLines = 10;
-                    isVisible = true;
-                  }
-                });
+                context
+                    .read<ServiceProviderGroundDetailsCubit>()
+                    .onPressReadMore();
               },
               child: Text(
-                maxLines > 10 ? "Show Less" : "Read More",
+                "Read More",
                 style: TextStyles.font16blackRegular,
               ),
             ),
@@ -155,83 +151,41 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
     );
   }
 
-  Row playGroundDirection() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            Text(
-              widget.playgroundModel?.address ?? "",
-              style: TextStyles.font12GreenSemiBold,
-            ),
-            horizontalSpace(8.w),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 5.w),
-              decoration: BoxDecoration(
-                  border: Border.all(
-                    color: AppPallete.greenColor.withOpacity(.3),
-                  ),
-                  borderRadius: BorderRadius.circular(5)),
-              child: Row(
-                children: [
-                  Text(
-                    '4.5',
-                    style: TextStyles.font12GreyRegular,
-                  ),
-                  horizontalSpace(6.w),
-                  Icon(
-                    Icons.star,
-                    color: AppPallete.yellowColor,
-                    size: 15.sp,
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
-        SizedBox(
-          height: 32.h,
-          child: ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(
-                elevation: 0,
-                backgroundColor: AppPallete.greenColor.withOpacity(.07),
-                side: BorderSide(
-                    color: AppPallete.greenColor.withOpacity(.3), width: 1)),
-            onPressed: () {},
-            label: Text(
-              Constants.directions,
-              style: TextStyles.font14GreenRegular,
-            ),
-            icon: SvgPicture.asset('assets/icons/direction.svg'),
-          ),
-        )
-      ],
-    );
-  }
-
-  Row playGroundName() {
+  Row playGroundName(BuildContext context) {
     return Row(
       children: [
         Expanded(
-          child: Text(widget.playgroundModel?.name ?? "",
+          child: Text(playgroundModel?.name ?? "",
               style: TextStyles.font24BlackRegular.copyWith(height: .85),
               maxLines: 2,
               overflow: TextOverflow.ellipsis),
         ),
-        Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Image.asset('assets/images/user.png'),
-              horizontalSpace(3.w),
-              Text(
-                'mahmoudsayed',
-                style: TextStyles.font13BlackRegular,
-              )
-            ],
-          ),
-        )
+        ElevatedButton.icon(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => BlocProvider(
+                            create: (context) =>
+                                getIt<EditServiceProviderCubit>(),
+                            child:
+                                EditServiceScreen(playground: playgroundModel!),
+                          )));
+            },
+            icon: SvgPicture.asset('assets/icons/edit.svg'),
+            style: ElevatedButton.styleFrom(
+              elevation: 0,
+              backgroundColor: AppPallete.lightBlackColor.withOpacity(.07),
+              shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                      color: AppPallete.lightBlackColor.withOpacity(.3),
+                      width: 1),
+                  borderRadius: BorderRadius.circular(30.w)),
+            ),
+            label: Text(
+              'edit',
+              style: TextStyles.font14RobotoLightBlackColorRegular,
+            ))
       ],
     );
   }

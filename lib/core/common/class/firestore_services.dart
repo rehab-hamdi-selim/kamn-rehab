@@ -20,11 +20,8 @@ class FirestoreService {
     await _firestore.collection(collectionPath).add(data);
   }
 
-  Future<void> updateData(String collectionPath,
-      PlaygroundRequestModel playground, Map<String, dynamic> data) async {
-    await _firestore
-        .collection(collectionPath)
-        .doc(playground.playgroundId)
-        .update(data);
+  Future<void> updateData(String collectionPath, String playgroundId,
+      Map<String, dynamic> data) async {
+    await _firestore.collection(collectionPath).doc(playgroundId).update(data);
   }
 }
