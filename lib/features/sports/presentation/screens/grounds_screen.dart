@@ -8,6 +8,7 @@ import 'package:kamn/core/utils/app_images.dart';
 import 'package:kamn/features/sports/presentation/screens/ground_details_screen.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_filter_item.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_ground_item.dart';
+import '../../../../core/helpers/geolocator_helper.dart';
 import '../../../../core/theme/app_pallete.dart';
 import '../../../../core/theme/style.dart';
 import '../../data/data_source/sports_remote_data_source.dart';
@@ -29,16 +30,18 @@ class GroundsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController controller = TextEditingController();
     return BlocProvider(
-        create: (context) => SportsGroundsCubit(
-              sportsUsecase:SportsUsecase( SportsRepositoryIpml(
-                ///TODO: dependance injection will be in the get it
-                remoteDataSource: SportsRemoteDataSourceImpl(
-                  firestore: FirebaseFirestore.instance,
-                ),
-              ),)
-            )..getPlaygrounds(),
-        //Dont miss bloc listner
-        child: CustomGroundsBlocListner(
+      create: (context) => SportsGroundsCubit(
+        sportsUsecase: SportsUsecase(
+          sportsRepository: SportsRepositoryIpml(
+            remoteDataSource: SportsRemoteDataSourceImpl(
+              firestore: FirebaseFirestore.instance,
+            ),
+          ),
+          geolocatorHelper: GeolocatorHelper(),
+        ),
+      )..getPlaygrounds(),
+      child: Builder(
+        builder: (context) => CustomGroundsBlocListner(
           child: Scaffold(
             backgroundColor: AppPallete.whiteColor,
             appBar: CustomAppBar.appBar(
@@ -63,37 +66,35 @@ class GroundsScreen extends StatelessWidget {
                         controller: controller,
                       )),
                       horizontalSpace(5),
-                      BlocBuilder<SportsGroundsCubit, SportsGroundsState>(
-                        builder: (context, state) {
-                          return CustomBottom(
-                            iconVisible: true,
-                            iconWidget: Image.asset(
-                              AppImages.filterImage,
-                              width: 15.w,
-                              height: 15.h,
-                            ),
-                            onPressed: () {
-                              var cubit = SportsGroundsCubit.get(context);
-                              showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                builder: (context) => Container(
-                                  padding: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context)
-                                        .viewInsets
-                                        .bottom,
-                                  ),
-                                  child: CustomShowBottomSheetFilter(
-                                    distance: cubit.distanceCubit.toDouble(),
-                                    applyFilter: cubit.applyFilter,
-                                  ),
+
+                      // you dont need to make a bloc builder here
+                      CustomBottom(
+                        iconVisible: true,
+                        iconWidget: Image.asset(
+                          AppImages.filterImage,
+                          width: 15.w,
+                          height: 15.h,
+                        ),
+                        onPressed: () {
+                          var cubit = context.read<SportsGroundsCubit>();
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            builder: (bottomSheetContext) => BlocProvider.value(
+                              value: cubit,
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                  bottom: MediaQuery.of(bottomSheetContext)
+                                      .viewInsets
+                                      .bottom,
                                 ),
-                              );
-                            },
-                            textBottom: 'Filter',
-                            textStyle: TextStyles.font12WhiteColorW400,
+                                child: const CustomShowBottomSheetFilter(),
+                              ),
+                            ),
                           );
                         },
+                        textBottom: 'Filter',
+                        textStyle: TextStyles.font12WhiteColorW400,
                       ),
                     ],
                   ),
@@ -132,7 +133,6 @@ class GroundsScreen extends StatelessWidget {
                   verticalSpace(20),
                   BlocBuilder<SportsGroundsCubit, SportsGroundsState>(
                       builder: (context, state) {
-                    //Dont miss to add the empty list check and initial chack
                     if (state.isLoading || state.isInitial) {
                       return const Center(
                         child: CircularProgressIndicator.adaptive(),
@@ -198,6 +198,8 @@ class GroundsScreen extends StatelessWidget {
               ),
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

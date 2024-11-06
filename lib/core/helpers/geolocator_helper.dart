@@ -75,7 +75,7 @@ class GeolocatorHelper {
     ));
   }
 
-  static double distanceBetween({
+  double distanceBetween({
     required double startLatitude,
     required double startLongitude,
     required double endLatitude,
@@ -96,7 +96,8 @@ class ErrorMessage extends StatelessWidget {
   final Function? callback;
   final String? buttonText;
 
-  ErrorMessage({required this.text, this.callback, this.buttonText});
+  const ErrorMessage(
+      {super.key, required this.text, this.callback, this.buttonText});
 
   @override
   Widget build(BuildContext context) {

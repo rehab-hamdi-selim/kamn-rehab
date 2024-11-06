@@ -9,7 +9,8 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
       : _sportsUsecase = sportsUsecase,
         super(SportsGroundsState(state: SportsGroundsStatus.initial));
 
-  static SportsGroundsCubit get(context) => BlocProvider.of(context);
+  //don't ever but context in the cubit
+  //static SportsGroundsCubit get(context) => BlocProvider.of(context);
 
   //init getPlaygrounds_from_firebase branch
 
@@ -51,6 +52,12 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
             )));
     emit(state.copyWith(
       state: SportsGroundsStatus.filtter,
+    ));
+  }
+
+  void changeLocationFilter(double distance) {
+    emit(state.copyWith(
+      distanceFilterValue: distance,
     ));
   }
 }
