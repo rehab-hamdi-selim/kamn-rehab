@@ -33,7 +33,7 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
               ),
               child: CachedNetworkImage(
                   imageUrl: playgroundRequest.groundImages?.isNotEmpty == true
-                      ? playgroundRequest.groundImages![0] ?? ''
+                      ? playgroundRequest.groundImages![0]
                       : '',
                   imageBuilder: (context, imageProvider) => Container(
                         width: double.infinity,

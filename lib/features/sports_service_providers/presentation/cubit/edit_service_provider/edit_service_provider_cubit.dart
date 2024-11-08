@@ -150,4 +150,14 @@ class EditServiceProviderCubit extends Cubit<EditServiceProviderState> {
     disposeControllers();
     return super.close();
   }
+
+  void initValue(PlaygroundRequestModel playground) {
+    nameController.text = playground.name ?? '';
+    phoneController.text = playground.phone ?? '';
+    addressController.text = playground.address ?? '';
+    sizeController.text = playground.size.toString();
+    priceController.text = playground.price!.toStringAsFixed(0);
+    governateController.text = playground.govenrate ?? '';
+    statusOption = playground.status;
+  }
 }

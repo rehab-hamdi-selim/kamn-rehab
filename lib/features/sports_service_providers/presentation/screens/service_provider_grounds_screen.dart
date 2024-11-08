@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/di/di.dart';
+import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/utils/navigation.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_ground_details/service_provider_ground_details_cubit.dart';
@@ -110,15 +111,9 @@ class ServiceProviderGroundsScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {
-                                navigationTo(
-                                    context,
-                                    BlocProvider(
-                                      create: (context) => getIt<
-                                          ServiceProviderGroundDetailsCubit>(),
-                                      child: ServiceProviderGroundDetailsScreen(
-                                          playgroundModel:
-                                              state.playgrounds![index]),
-                                    ));
+                                Navigator.pushNamed(context,
+                                    Routes.serviceProviderGroundDetailsScreen,
+                                    arguments: playgrounds[index]);
                               },
                               child: CustomGroundItemServiceProvider(
                                 playgroundRequest: state.playgrounds![index],
