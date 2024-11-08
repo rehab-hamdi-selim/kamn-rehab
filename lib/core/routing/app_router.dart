@@ -25,7 +25,9 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => BlocProvider<AddServiceProviderCubit>(
                   create: (context) => getIt<AddServiceProviderCubit>(),
-                  child: AddServiceScreen(),
+                  child: const AddServiceScreen(
+                    type: '',
+                  ),
                 ));
       // case Routes.groundDetailsScreen:
       //   return MaterialPageRoute(
