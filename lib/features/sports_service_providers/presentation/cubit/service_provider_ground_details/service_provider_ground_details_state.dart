@@ -5,6 +5,7 @@ enum ServiceProviderGroundDetailsStatus {
   loading,
   success,
   failure,
+  textExtended
 }
 
 extension SportsGroundStateExtension on ServiceProviderGroundDetailsState {
@@ -12,6 +13,8 @@ extension SportsGroundStateExtension on ServiceProviderGroundDetailsState {
   bool get isLoading => state == ServiceProviderGroundDetailsStatus.loading;
   bool get isSuccess => state == ServiceProviderGroundDetailsStatus.success;
   bool get isFailure => state == ServiceProviderGroundDetailsStatus.failure;
+  bool get isTextExtended =>
+      state == ServiceProviderGroundDetailsStatus.textExtended;
 }
 
 class ServiceProviderGroundDetailsState {

@@ -13,24 +13,31 @@ class CustomeImageSlideShow extends StatelessWidget {
     return Stack(
       children: [
         // The Image Slideshow
-        ImageSlideshow(
-          indicatorBottomPadding: 70.h,
-          // Padding for indicators
-          width: double.infinity,
-          height: 346.h,
-          initialPage: 0,
-          indicatorColor: AppPallete.greenColor,
-          indicatorBackgroundColor: AppPallete.lgGreyColor,
-          autoPlayInterval: 3000,
-          isLoop: true,
-          children: imagesPath.map((path) {
-            return Image.network(
-              path,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            );
-          }).toList(),
-        ),
+        if (imagesPath.isNotEmpty)
+          ImageSlideshow(
+            indicatorBottomPadding: 70.h,
+            // Padding for indicators
+            width: double.infinity,
+            height: 346.h,
+            initialPage: 0,
+            indicatorColor: AppPallete.greenColor,
+            indicatorBackgroundColor: AppPallete.lgGreyColor,
+            autoPlayInterval: 3000,
+            isLoop: true,
+            children: imagesPath.map((path) {
+              return Image.network(
+                path,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              );
+            }).toList(),
+          ),
+        if (imagesPath.isEmpty)
+          SizedBox(
+            width: double.infinity,
+            height: 346.h,
+            child: const Center(child: Icon(Icons.error_outline, size: 40)),
+          ),
         Positioned(
           top: 20.h,
           left: 20.w,

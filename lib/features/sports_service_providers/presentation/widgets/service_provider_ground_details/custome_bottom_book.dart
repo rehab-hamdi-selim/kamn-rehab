@@ -6,7 +6,7 @@ import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_ground_details/service_provider_ground_details_cubit.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/ground_details/custome_bottom_sheet.dart';
+import 'package:kamn/features/sports_service_providers/presentation/widgets/service_provider_ground_details/custome_bottom_sheet.dart';
 
 class CustomeBottomBook extends StatelessWidget {
   const CustomeBottomBook({required this.playgroundRequestModel, super.key});

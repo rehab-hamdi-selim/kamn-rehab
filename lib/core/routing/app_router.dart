@@ -5,9 +5,14 @@ import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/sports/presentation/screens/grounds_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/my_profile_screen.dart';
+import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/edit_service_provider/edit_service_provider_cubit.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_ground_details/service_provider_ground_details_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/add_service.dart';
+import 'package:kamn/features/sports_service_providers/presentation/screens/edit_service_screen.dart';
+import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_ground_details_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_grounds_screen.dart';
 
 class AppRouter {
@@ -40,6 +45,25 @@ class AppRouter {
       case Routes.successServiceProviderScreen:
         return MaterialPageRoute(
             builder: (context) => const ServiceProviderGroundsScreen());
+      case Routes.editServiceScreen:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider<EditServiceProviderCubit>(
+                  create: (context) => getIt<EditServiceProviderCubit>(),
+                  child: EditServiceScreen(
+                    playground: settings.arguments as PlaygroundRequestModel,
+                  ),
+                ));
+      case Routes.serviceProviderGroundDetailsScreen:
+        return MaterialPageRoute(
+            builder: (context) =>
+                BlocProvider<ServiceProviderGroundDetailsCubit>(
+                  create: (context) =>
+                      getIt<ServiceProviderGroundDetailsCubit>(),
+                  child: ServiceProviderGroundDetailsScreen(
+                    playgroundModel:
+                        settings.arguments as PlaygroundRequestModel,
+                  ),
+                ));
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(

@@ -7,12 +7,13 @@ import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/features/admin/presentation/widgets/login_screen/custom_elevation_button.dart';
-import 'package:kamn/features/admin/presentation/widgets/login_screen/custom_text_form_feild.dart';
 import 'package:kamn/features/admin/presentation/widgets/login_screen/custom_text_form_name.dart';
 import 'package:kamn/features/admin/presentation/widgets/login_screen/custom_text_form_password.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = 'login screen';
+
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -72,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       textAlign: TextAlign.end,
                     ),
                     verticalSpace(200),
-                    CustomElevationButton(),
+                    const CustomElevationButton(),
                   ],
                 ),
               ),
