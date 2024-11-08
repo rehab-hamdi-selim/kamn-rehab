@@ -58,6 +58,17 @@ class Constants {
   static const showAll = "show all";
   static const nextMatch = "Your next match will start at:";
   static const serviceSuccessfullyAdded = "Your service \nsuccessfully added";
+  static const whichSportYouServe = "Which Sport you want to service?";
+  static const teamPlay = "Team play";
+  static const fourOrMore = "4 or more players";
+  static const individualPlay = "Individual play";
+  static const oneOrMore = "1 or more player";
+  static const football = "Football";
+  static const basketball = "Basketball";
+  static const tennis = "Tennis";
+  static const volleyball = "Volleyball";
+  static const skyDiving = "Sky Diving";
+  static const swimming = "Swimming";
   static const welcomeToManagementSystem = 'Welcome to\nManagement System';
 
   static const List<String> egyptGovernorates = [

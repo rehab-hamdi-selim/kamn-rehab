@@ -12,39 +12,40 @@ import 'package:kamn/features/sports_service_providers/presentation/widgets/serv
 import '../widgets/add_service/custome_add_services_bloc_listner.dart';
 
 class AddServiceScreen extends StatelessWidget {
-  const AddServiceScreen({super.key});
+  final String? type;
+  const AddServiceScreen({super.key, this.type});
 
   @override
   Widget build(BuildContext context) {
     return CustomeAddServicesBlocListner(
+        type: type ?? '',
         child: Scaffold(
-      backgroundColor: Colors.white,
-      resizeToAvoidBottomInset: true,
-      appBar: CustomAppBarServiceProvider.appBar(
-        arrowFunction: () {},
-        notificationIconFunction: () {},
-        profileFunction: () {},
-        badgesIconFunction: () {},
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const CustomeTextTitle(),
-              verticalSpace(19.h),
-              const CustomeGroundImagePicker(),
-              verticalSpace(16.h),
-              const CustomeOwnershipImagePicker(),
-              verticalSpace(7.h),
-              const CustomeServiceInfo(),
-              const CustomeFinishedButton(),
-              verticalSpace(25.h),
-            ],
+          backgroundColor: Colors.white,
+          resizeToAvoidBottomInset: true,
+          appBar: CustomAppBarServiceProvider.appBar(
+            arrowFunction: () {},
+            notificationIconFunction: () {},
+            profileFunction: () {},
+            badgesIconFunction: () {},
+
           ),
-        ),
-      ),
-    ));
+          body: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const CustomeTextTitle(),
+                  verticalSpace(19.h),
+                  const CustomeImagePicker(),
+                  verticalSpace(7.h),
+                  const CustomeServiceInfo(),
+                  const CustomeFinishedButton(),
+                  verticalSpace(25.h),
+                ],
+              ),
+            ),
+          ),
+        ));
   }
 }
