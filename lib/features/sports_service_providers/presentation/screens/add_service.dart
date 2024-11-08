@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 
 import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_finished_button.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_image_picker.dart';
+import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_ground_image_picker.dart';
+import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_ownership_image_picker.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_service_info.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_text_title.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/service_provider_grounds/custom_app_bar_service_provider.dart';
@@ -26,6 +27,7 @@ class AddServiceScreen extends StatelessWidget {
             notificationIconFunction: () {},
             profileFunction: () {},
             badgesIconFunction: () {},
+
           ),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.w),

@@ -12,26 +12,45 @@ class Constants {
   static const available = 'Available';
   static const bookNow = 'Book Now';
   static const logout = 'Logout';
+  static const login = 'Login';
+  static const forgetPassword = 'forget apssword';
+  static const signUp = 'Sign Up';
+  static const password = 'password';
   static const myProfile = 'My Profile';
   static const phoneNumber = '+1 654 785 4462';
   static const userName = 'Mahmoud Sayed';
   static const userEmail = 'josphamdes@gmail.com';
   static const pleaseComplete = 'please complete the following information ';
+  static const pleasePassword = 'please enter your password ';
+  static const pleaseName = 'please enter your name';
   static const addData = 'Add your data about your sevice';
-  static const addImage = 'Add ground Images';
+  static const editData = 'Edit your data about your sevice';
+  static const addGroundImage = 'Add ground Images';
+  static const addOwnershipImage = 'Add Land ownership images';
+  static const detailsClear = ' (make sure every detail is clear)';
   static const numOfImage = ' (from 2, 3 images size 2mb)';
   static const fullName = 'Full name';
+  static const name = ' Name';
   static const phone = 'Phone';
   static const address = 'Service address';
   static const groundSize = 'Ground Size';
   static const governate = 'Governate';
+  static const price = 'Price per hour';
+  static const priceHint = 'Enter ground price';
   static const fullNameHint = ' Enter your full name';
+  static const nameHint = ' Enter your  name';
+  static const passwordHint = ' Enter your  password';
   static const phoneHint = ' Enter your phone number';
+  static const passwordShouldBe = 'password should be >6 & <30';
+
   static const addressHint = 'Enter service address';
   static const groundSizeHint = ' Enter ground Size';
   static const governateHint = ' Choose governate';
   static const howManyPeople = '  (how many people can fit)';
   static const finish = 'Finish';
+  static const inUse = 'In use';
+  static const underRepairs = 'Under Repairs';
+  static const availability = 'Availability';
 
   static const groundsScreenTitle = "Football";
   static const hintTextForSearch = "Search for a stadium";
@@ -50,6 +69,7 @@ class Constants {
   static const volleyball = "Volleyball";
   static const skyDiving = "Sky Diving";
   static const swimming = "Swimming";
+  static const welcomeToManagementSystem = 'Welcome to\nManagement System';
 
   static const List<String> egyptGovernorates = [
     "Cairo",

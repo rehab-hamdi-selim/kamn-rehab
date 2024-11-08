@@ -22,14 +22,20 @@ class AppPallete {
   static const Color pinkColor = Color(0xffFF725E);
   static const Color voiletteColor = Color(0xffFF725E);
   static const Color lightBlueColor = Color(0xff7392F9);
+  static const Color lightOrangeColor = Color(0xffFFC73C);
+  static const Color deepOrangeColor = Color(0xffFF9D00);
+  static const Color lightPinkColor = Color(0xffFFAFAF);
+  static const Color pureRedColor = Color(0xffFF0000);
 
   static const Color lightGrayColor = Color(0xffF6F6F6);
   static const Color accentBlackColor = Color(0xff1F1F1F);
   static const Color blackColor2 = Color(0xff0D1634);
   static const Color dartBlackColor = Color(0xff000000);
+  static const Color lightBlackColor = Color(0xff222222);
   static const Color grayColor = Color(0xff8E8E93);
   static const Color darkGrayColor = Color(0xff838383);
   static const Color pinkyRed = Color(0xffED6868);
   static const Color mainColor = Color(0xffA117F1);
   static const Color lightColor = Color(0xffF5F6F6);
+  static const Color dartBlurGrayColor = Color(0xff424867);
 }

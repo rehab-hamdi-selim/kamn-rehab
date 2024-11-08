@@ -14,11 +14,10 @@ import 'package:path/path.dart';
 abstract class ServiceProvidersRemoteDataSource {
   Future<void> addServiceToFirestore(PlaygroundRequestModel playground);
   Future<List<String>> addImagesToStorage(List<File> images);
-  Future<bool> deleteImagesFromStorage(List<File> images);
+  Future<bool> deleteImagesFromStorage(List<String> images);
   Future<List<Map<String, dynamic>>> getPlaygroundsRequests();
   Future<void> addWithTransactionToFirebase(PlaygroundModel playgroundModel);
-  Future<void> updateState(
-      PlaygroundRequestModel playgroundModel, Map<String, dynamic> data);
+  Future<void> updateState(String playgroundId, Map<String, dynamic> data);
 }
 
 @Injectable(as: ServiceProvidersRemoteDataSource)
@@ -62,11 +61,10 @@ class ServiceProvidersRemoteDataSourceImpl
   }
 
   @override
-  Future<bool> deleteImagesFromStorage(List<File> images) async {
+  Future<bool> deleteImagesFromStorage(List<String> images) async {
     return executeTryAndCatchForDataLayer(() async {
       for (var image in images) {
-        Reference firebaseStorageRef =
-            storageServies.storage.ref().child(basename(image.path));
+        Reference firebaseStorageRef = storageServies.storage.refFromURL(image);
 
         await firebaseStorageRef.delete();
       }
@@ -103,11 +101,10 @@ class ServiceProvidersRemoteDataSourceImpl
   }
 
   @override
-  Future<void> updateState(
-      PlaygroundRequestModel playgroundModel, Map<String, dynamic> data) {
+  Future<void> updateState(String playgroundId, Map<String, dynamic> data) {
     return executeTryAndCatchForDataLayer(() async {
       return await firestoreServices.updateData(
-          FirebaseCollections.playgroundsRequests, playgroundModel, data);
+          FirebaseCollections.playgroundsRequests, playgroundId, data);
     });
   }
 }

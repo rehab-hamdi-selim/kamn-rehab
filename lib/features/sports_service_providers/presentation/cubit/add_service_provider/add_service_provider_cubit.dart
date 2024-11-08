@@ -17,81 +17,117 @@ class AddServiceProviderCubit extends Cubit<AddServiceProviderState> {
       : super(AddServiceProviderState(state: AddServiceProviderStatus.initial));
 
   ServiceProvidersRepository repository;
-  List<File> selectedImageList = [];
-  List<String> imagesUrl = [];
-//TODO: add validation to the inputs /* done
-//TODO: dispose controllers before navigte to another screen /* done
+  List<File> groundSelectedImageList = [];
+  List<File> ownershipSelectedImageList = [];
+
+  List<String> ownershipImagesUrl = [];
+  List<String> groundImagesUrl = [];
+
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController sizeController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
   TextEditingController governateController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  String? statusOption;
+  void onChangeStatusSelection(String newOption) {
+    if (statusOption == newOption) {
+      return;
+    }
+    statusOption = newOption;
+    emit(state.copyWith(state: AddServiceProviderStatus.availabilityChanged));
+  }
+
   Future<void> addService(PlaygroundRequestModel playground) async {
-    emit(AddServiceProviderState(state: AddServiceProviderStatus.loading));
-    //TODO:don`t fire function into another function you must fire first function and then depend on it`s state fire the second function /* done
+    emit(state.copyWith(state: AddServiceProviderStatus.loading));
     var response = await repository.addServiceToFirestore(playground);
     response.fold((error) {
-      emit(AddServiceProviderState(
+      emit(state.copyWith(
           state: AddServiceProviderStatus.serviceFailed,
           erorrMessage: error.erorr));
     }, (success) {
-      emit(AddServiceProviderState(
+      emit(state.copyWith(
           state: AddServiceProviderStatus.success,
           successMessage: 'service added successfully'));
     });
   }
 
-  Future<void> getPhotoFromGallery() async {
+  Future<void> getPhotoFromGallery(bool isGroundImage) async {
     var image = await pickImage();
     if (image != null) {
-      selectedImageList.add(image);
-      emit(AddServiceProviderState(
-          state: AddServiceProviderStatus.imagePicked,
-          imagesList: selectedImageList,
-          successMessage: 'image loaded sucessfully'));
+      if (isGroundImage) {
+        groundSelectedImageList.add(image);
+        emit(state.copyWith(
+            state: AddServiceProviderStatus.imagePicked,
+            groundImagesList: groundSelectedImageList,
+            successMessage: 'image loaded sucessfully'));
+      } else {
+        ownershipSelectedImageList.add(image);
+        emit(state.copyWith(
+            state: AddServiceProviderStatus.imagePicked,
+            ownershipImagesList: ownershipSelectedImageList,
+            successMessage: 'image loaded sucessfully'));
+      }
     } else {
-      emit(AddServiceProviderState(
+      emit(state.copyWith(
           state: AddServiceProviderStatus.failure,
           erorrMessage: 'cancel image pick'));
     }
   }
 
-  void removeImageFromList(File image) {
-    selectedImageList.remove(image);
-    emit(AddServiceProviderState(
-        state: AddServiceProviderStatus.imageDeleted,
-        imagesList: selectedImageList));
+  void removeImageFromList(File image, bool isGroundImage) {
+    if (isGroundImage) {
+      groundSelectedImageList.remove(image);
+      emit(state.copyWith(
+          state: AddServiceProviderStatus.imageDeleted,
+          groundImagesList: groundSelectedImageList));
+    } else {
+      ownershipSelectedImageList.remove(image);
+      emit(state.copyWith(
+          state: AddServiceProviderStatus.imageDeleted,
+          ownershipImagesList: ownershipSelectedImageList));
+    }
   }
 
   Future<void> addImagesToStorage() async {
-    emit(AddServiceProviderState(state: AddServiceProviderStatus.loading));
-    var response = await repository.addFImagesToStorage(selectedImageList);
+    emit(state.copyWith(state: AddServiceProviderStatus.loading));
+    var groundResponse =
+        await repository.addImagesToStorage(groundSelectedImageList);
 
-    response.fold((error) {
-      emit(AddServiceProviderState(
+    groundResponse.fold((error) {
+      emit(state.copyWith(
           state: AddServiceProviderStatus.failure,
           erorrMessage: 'faild to upload images to firebase storage'));
-    }, (success) {
-      imagesUrl = success;
-      emit(AddServiceProviderState(
-          state: AddServiceProviderStatus.imageUploaded,
-          successMessage: 'images added successfully to firebase storage'));
+    }, (success) async {
+      groundImagesUrl = success;
+      var ownershipResponse =
+          await repository.addImagesToStorage(ownershipSelectedImageList);
+      ownershipResponse.fold((error) {
+        emit(state.copyWith(
+            state: AddServiceProviderStatus.failure,
+            erorrMessage: 'faild to upload images to firebase storage'));
+      }, (success2) {
+        ownershipImagesUrl = success2;
+        emit(state.copyWith(
+            state: AddServiceProviderStatus.imageUploaded,
+            successMessage: 'images added successfully to firebase storage'));
+      });
     });
   }
 
   Future<void> deleteImagesFromStorage() async {
-    emit(AddServiceProviderState(state: AddServiceProviderStatus.loading));
-    var response = await repository.deleteImagesFromStorage(selectedImageList);
+    emit(state.copyWith(state: AddServiceProviderStatus.loading));
+    var response = await repository.deleteImagesFromStorage(groundImagesUrl);
 
     response.fold((error) {
-      emit(AddServiceProviderState(
+      emit(state.copyWith(
           state: AddServiceProviderStatus.failure,
           erorrMessage: 'faild to upload images to firebase storage'));
     }, (success) {
-      emit(AddServiceProviderState(
+      emit(state.copyWith(
           state: AddServiceProviderStatus.imageDeleted,
           successMessage: 'images deleted successfully from firebase storage'));
     });
@@ -99,16 +135,14 @@ class AddServiceProviderCubit extends Cubit<AddServiceProviderState> {
 
   Map<String, double> coordinates = {};
   Future<void> getLocation() async {
-    emit(AddServiceProviderState(
-        state: AddServiceProviderStatus.locationLoading));
+    emit(state.copyWith(state: AddServiceProviderStatus.locationLoading));
     var response = await getLocationCoordinates();
     response.fold((error) {
-      emit(AddServiceProviderState(
+      emit(state.copyWith(
           state: AddServiceProviderStatus.failure, erorrMessage: error.erorr));
     }, (success) {
       coordinates = success;
-      emit(AddServiceProviderState(
-          state: AddServiceProviderStatus.locationDetected));
+      emit(state.copyWith(state: AddServiceProviderStatus.locationDetected));
     });
   }
 
@@ -118,6 +152,7 @@ class AddServiceProviderCubit extends Cubit<AddServiceProviderState> {
     addressController.dispose();
     sizeController.dispose();
     governateController.dispose();
+    priceController.dispose();
   }
 
   @override

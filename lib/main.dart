@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         initialRoute: Routes.serviceSelection,
+
         onGenerateRoute: AppRouter.generateRoute,
       ),
     );

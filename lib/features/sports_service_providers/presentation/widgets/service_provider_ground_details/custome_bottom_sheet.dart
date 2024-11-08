@@ -58,7 +58,7 @@ class CustomeBottomSheet extends StatelessWidget {
                   onPressed: () {
                     context
                         .read<ServiceProviderGroundDetailsCubit>()
-                        .decline(playgroundModel, {
+                        .decline(playgroundModel.playgroundId!, {
                       'comment': context
                           .read<ServiceProviderGroundDetailsCubit>()
                           .commentController

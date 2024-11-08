@@ -16,12 +16,14 @@ class PlaygroundRequestModel {
   double? rating; //calcolute from developer
   double? price; // need to handel  /*
   String? description; // need to handel /*
-  List<String>? images;
+  List<String>? groundImages;
+  List<String>? ownershipImages;
   int? size;
   String? govenrate;
   String? state;
   String? comment;
   String? type;
+
   PlaygroundRequestModel({
     this.playgroundId,
     this.name,
@@ -35,11 +37,13 @@ class PlaygroundRequestModel {
     this.price,
     this.description,
     this.images,
+
     this.size,
     this.govenrate,
     this.state,
     this.comment,
     this.type,
+
   });
 
   PlaygroundRequestModel copyWith({
@@ -55,11 +59,13 @@ class PlaygroundRequestModel {
     ValueGetter<double?>? price,
     ValueGetter<String?>? description,
     ValueGetter<List<String>?>? images,
+
     ValueGetter<int?>? size,
     ValueGetter<String?>? govenrate,
     ValueGetter<String?>? state,
     ValueGetter<String?>? comment,
     ValueGetter<String?>? type,
+
   }) {
     return PlaygroundRequestModel(
       playgroundId: playgroundId != null ? playgroundId() : this.playgroundId,
@@ -74,11 +80,13 @@ class PlaygroundRequestModel {
       price: price != null ? price() : this.price,
       description: description != null ? description() : this.description,
       images: images != null ? images() : this.images,
+
       size: size != null ? size() : this.size,
       govenrate: govenrate != null ? govenrate() : this.govenrate,
       state: state != null ? state() : this.state,
       comment: comment != null ? comment() : this.comment,
       type: type != null ? type() : this.type,
+
     );
   }
 
@@ -95,7 +103,8 @@ class PlaygroundRequestModel {
       'rating': rating,
       'price': price,
       'description': description,
-      'images': images,
+      'groundImages': groundImages,
+      'ownershipImages': ownershipImages,
       'size': size,
       'govenrate': govenrate,
       'state': state,
@@ -118,11 +127,13 @@ class PlaygroundRequestModel {
       price: map['price']?.toDouble(),
       description: map['description'],
       images: List<String>.from(map['images']),
+
       size: map['size']?.toInt(),
       govenrate: map['govenrate'],
       state: map['state'],
       comment: map['comment'],
       type: map['type'],
+
     );
   }
 
@@ -134,6 +145,7 @@ class PlaygroundRequestModel {
   @override
   String toString() {
     return 'PlaygroundRequestModel(playgroundId: $playgroundId, name: $name, phone: $phone, longitude: $longitude, latitude: $latitude, ownerId: $ownerId, address: $address, status: $status, rating: $rating, price: $price, description: $description, images: $images, size: $size, govenrate: $govenrate, state: $state, comment: $comment, type: $type)';
+
   }
 
   @override
@@ -153,12 +165,14 @@ class PlaygroundRequestModel {
         other.rating == rating &&
         other.price == price &&
         other.description == description &&
-        listEquals(other.images, images) &&
+        listEquals(other.groundImages, groundImages) &&
+        listEquals(other.ownershipImages, ownershipImages) &&
         other.size == size &&
         other.govenrate == govenrate &&
         other.state == state &&
         other.comment == comment &&
         other.type == type;
+
   }
 
   @override
@@ -174,11 +188,13 @@ class PlaygroundRequestModel {
         rating.hashCode ^
         price.hashCode ^
         description.hashCode ^
-        images.hashCode ^
+        groundImages.hashCode ^
+        ownershipImages.hashCode ^
         size.hashCode ^
         govenrate.hashCode ^
         state.hashCode ^
         comment.hashCode ^
         type.hashCode;
+
   }
 }

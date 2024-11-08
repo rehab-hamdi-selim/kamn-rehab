@@ -51,6 +51,7 @@ class CustomeAddServicesBlocListner extends StatelessWidget {
           status: "under develop",
           type: type,
         );
+
     return BlocListener<AddServiceProviderCubit, AddServiceProviderState>(
       listener: (context, state) {
         if (state.isImageUploaded) {

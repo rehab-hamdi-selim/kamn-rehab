@@ -8,4 +8,7 @@ class Routes {
   static const String serviceSelection = '/serviceSelection';
   static const String serviceProviderGroundsScreen =
       '/serviceProviderGroundsScreen';
+  static const String serviceProviderGroundDetailsScreen =
+      '/serviceProviderGroundDetailsScreen';
+  static const String editServiceScreen = '/editServiceScreen';
 }
