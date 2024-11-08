@@ -11,9 +11,12 @@ import 'init_dependencies.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  configureDependencies();
+
   await initDependencies();
   await ScreenUtil.ensureScreenSize();
   runApp(const MyApp());
@@ -35,14 +38,9 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: BlocProvider(
-          create: (context) => ServiceProviderCubit(
-              repository: ServiceProvidersRepositoryImpl(
-                  dataSource: ServiceProvidersRemoteDataSourceImpl(
-                      storage: FirebaseStorage.instance,
-                      firestore: FirebaseFirestore.instance))),
-          child: const AddServiceScreen(),
-        ),
+        initialRoute: Routes.serviceSelection,
+
+        onGenerateRoute: AppRouter.generateRoute,
       ),
     );
   }

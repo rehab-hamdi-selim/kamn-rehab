@@ -2,15 +2,20 @@ import 'dart:io';
 
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 
-List<File> selectedImageList = [];
-Future<List<File>?> pickImage() async {
+Future<File?> pickImage() async {
   try {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (image != null) {
-      selectedImageList.add(File(image.path));
-      return selectedImageList;
+      final compressedPickedImage = await compressImages(image);
+      if (compressedPickedImage != null) {
+        return compressedPickedImage;
+      } else {
+        return null;
+      }
     } else {
       return null;
     }
@@ -19,17 +24,36 @@ Future<List<File>?> pickImage() async {
   }
 }
 
-Future<List<File>> compressImages() async {
-  for (int i = 0; i < selectedImageList.length; i++) {
-    final compressedImageBytes = await FlutterImageCompress.compressWithFile(
-      selectedImageList[i].path,
-      quality: 70,
-    );
+Future<File?> compressImages(XFile image) async {
+  final tempDir = await getTemporaryDirectory();
+  final targetPath =
+      join(tempDir.path, "${DateTime.now().millisecondsSinceEpoch}.jpg");
 
-    if (compressedImageBytes != null) {
-      selectedImageList[i] =
-          await selectedImageList[i].writeAsBytes(compressedImageBytes);
+  var compressedImage = await compress(image, targetPath);
+  if (compressedImage != null) {
+    double imageSize = compressedImage.lengthSync() / (1024 * 1024); // in MB
+    if (imageSize > 2) {
+      compressedImage = await compress(image, targetPath);
     }
+    return compressedImage;
   }
-  return selectedImageList;
+  return null;
+}
+
+Future<File?> compress(XFile image, String targetPath) async {
+  final compressedImageBytes = await FlutterImageCompress.compressWithFile(
+    image.path,
+    quality: 70,
+    minWidth: 800,
+    minHeight: 600,
+  );
+
+  if (compressedImageBytes != null) {
+    File compressedImage = File(targetPath);
+    await compressedImage.writeAsBytes(compressedImageBytes);
+
+    return compressedImage;
+  }
+
+  return null;
 }

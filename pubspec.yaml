@@ -41,7 +41,7 @@ dependencies:
   bloc: ^8.1.2
   fpdart: ^1.1.0
   # for dependency injection
-  get_it: ^7.7.0
+  get_it: ^8.0.1
 
   #for image
   image_picker: ^1.1.2
@@ -84,6 +84,8 @@ dependencies:
   flutter_image_compress: ^2.3.0
   location: ^7.0.1
   connectivity_plus: ^6.1.0
+  injectable: ^2.5.0
+  path_provider: ^2.1.5
 
 
 dev_dependencies:
@@ -96,6 +98,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^4.0.0
+  injectable_generator: ^2.6.2
+  build_runner: ^2.4.13
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -125,10 +129,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: CircularSpotifyText
+      fonts:
+        - asset: assets\fonts\CircularSpotifyTxT-Bold.ttf
+          weight: 500
+    
+
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

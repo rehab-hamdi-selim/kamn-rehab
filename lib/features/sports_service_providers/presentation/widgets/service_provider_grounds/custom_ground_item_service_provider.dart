@@ -1,34 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 import '../../../../../core/helpers/spacer.dart';
 import '../../../../../core/theme/app_pallete.dart';
 import '../../../../../core/theme/style.dart';
 import '../../../../../core/utils/app_images.dart';
 
 class CustomGroundItemServiceProvider extends StatelessWidget {
-  final String imageUrl;
-  final String placeText;
-  final String location;
-  final String rates;
-  final String km;
-  final String available;
-  final String owner;
-  final String price;
-  final void Function()? favoriteOnTap;
+  PlaygroundRequestModel playgroundRequest;
 
-  const CustomGroundItemServiceProvider({
-    super.key,
-    required this.imageUrl,
-    required this.favoriteOnTap,
-    required this.placeText,
-    required this.km,
-    required this.owner,
-    required this.location,
-    required this.available,
-    required this.rates,
-    required this.price,
-  });
+  CustomGroundItemServiceProvider({super.key, required this.playgroundRequest});
 
   @override
   Widget build(BuildContext context) {
@@ -50,22 +32,35 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15.r),
               ),
               child: CachedNetworkImage(
-                  imageUrl: imageUrl,
-                  fit: BoxFit.fill,
-                  width: double.infinity,
-                  height: 191.h,
-                  placeholder: (context, url) => Image.asset(
-                        AppImages.groupsImage,
-                        fit: BoxFit.fill,
+                  imageUrl: playgroundRequest.groundImages?.isNotEmpty == true
+                      ? playgroundRequest.groundImages![0]
+                      : '',
+                  imageBuilder: (context, imageProvider) => Container(
+                        width: double.infinity,
+                        height: 191.h,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
-                  errorWidget: (context, url, error) =>
-                      const Icon(Icons.error_outline, size: 40)),
+                  placeholder: (context, url) => SizedBox(
+                      width: double.infinity,
+                      height: 191.h,
+                      child: const Center(child: CircularProgressIndicator())),
+                  errorWidget: (context, url, error) => SizedBox(
+                      width: double.infinity,
+                      height: 191.h,
+                      child: const Center(
+                          child: Icon(Icons.error_outline, size: 40)))),
             ),
             Positioned(
               top: 6,
               right: 6,
               child: InkWell(
-                onTap: favoriteOnTap,
+                onTap: () {},
                 child: Container(
                   padding: EdgeInsets.all(2.h.w),
                   decoration: const BoxDecoration(
@@ -87,12 +82,12 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
         Row(
           children: [
             Text(
-              placeText,
+              playgroundRequest.name ?? '',
               style: TextStyles.font16DartBlackColorW400,
             ),
             horizontalSpace(8),
             Text(
-              "$km km",
+              "2 km",
               style: TextStyles.font10DarkGreenColorW400,
             ),
           ],
@@ -104,7 +99,7 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
               style: TextStyles.font10BlackColorW400,
             ),
             Text(
-              owner,
+              '',
               style: TextStyles.font10DarkGreenColorW400,
             ),
           ],
@@ -121,7 +116,7 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
                 ),
                 horizontalSpace(4),
                 Text(
-                  location,
+                  playgroundRequest.address ?? "",
                   style: TextStyles.font10GrayColorW400,
                 ),
                 horizontalSpace(8),
@@ -144,7 +139,7 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
                 ),
                 horizontalSpace(4),
                 Text(
-                  available,
+                  'available',
                   style: TextStyles.font7DartBlackColorW400,
                 ),
                 horizontalSpace(8),
@@ -162,7 +157,7 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        rates,
+                        '5',
                         style: TextStyles.font10GrayColorW400,
                       ),
                       Icon(
@@ -179,7 +174,7 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  "$price LE",
+                  "250 LE",
                   style: TextStyles.font16DartBlackColorW400,
                 ),
                 Text(
