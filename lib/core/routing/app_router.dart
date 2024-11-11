@@ -7,11 +7,13 @@ import 'package:kamn/features/sports/presentation/screens/grounds_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/my_profile_screen.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/available_dates/available_dates_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/edit_service_provider/edit_service_provider_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_ground_details/service_provider_ground_details_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/add_service.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/edit_service_screen.dart';
+import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_available_dates.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_ground_details_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_grounds_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_selection_screen.dart';
@@ -69,6 +71,14 @@ class AppRouter {
                   child: ServiceProviderGroundDetailsScreen(
                     playgroundModel:
                         settings.arguments as PlaygroundRequestModel,
+                  ),
+                ));
+      case Routes.serviceProviderAvailableDates:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<AvailableDatesCubit>(),
+                  child: ServiceProviderAvailableDates(
+                    playgroundId: settings.arguments as String,
                   ),
                 ));
       default:

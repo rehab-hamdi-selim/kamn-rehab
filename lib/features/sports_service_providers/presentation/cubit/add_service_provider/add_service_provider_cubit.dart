@@ -51,6 +51,7 @@ class AddServiceProviderCubit extends Cubit<AddServiceProviderState> {
     }, (success) {
       emit(state.copyWith(
           state: AddServiceProviderStatus.success,
+          playground: success,
           successMessage: 'service added successfully'));
     });
   }
