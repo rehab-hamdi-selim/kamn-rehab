@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_state.dart';
 
@@ -65,7 +66,8 @@ class CustomeAddServicesBlocListner extends StatelessWidget {
               .addService(prepareData(context));
         }
         if (state.isSuccess) {
-          navigationTo(context, const SuccessServiceProviderScreen());
+          Navigator.pushNamed(context, Routes.serviceProviderAvailableDates,
+              arguments: state.playground?.playgroundId);
         } else if (state.isServiceFailed) {
           context.read<AddServiceProviderCubit>().deleteImagesFromStorage();
           showSnackBar(context, state.erorrMessage!);
