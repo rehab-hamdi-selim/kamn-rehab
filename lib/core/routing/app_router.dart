@@ -17,6 +17,7 @@ import 'package:kamn/features/sports_service_providers/presentation/screens/serv
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_ground_details_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_grounds_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_selection_screen.dart';
+import 'package:kamn/features/sports_service_providers/presentation/screens/success_service_provider_screen.dart';
 
 class AppRouter {
   static Route generateRoute(RouteSettings settings) {
@@ -50,7 +51,7 @@ class AppRouter {
                 ));
       case Routes.successServiceProviderScreen:
         return MaterialPageRoute(
-            builder: (context) => const ServiceProviderGroundsScreen());
+            builder: (context) => const SuccessServiceProviderScreen());
       case Routes.serviceSelection:
         return MaterialPageRoute(
             builder: (context) => const ServiceSelectionScreen());

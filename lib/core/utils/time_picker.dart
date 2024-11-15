@@ -12,7 +12,7 @@ Future<TimeOfDay?> selectTime(BuildContext context) async {
   }
 }
 
-List<String> calculateIntervals(
+List<String>? calculateIntervals(
     TimeOfDay startTime, TimeOfDay endTime, int period) {
   final start = DateTime(DateTime.now().year, DateTime.now().month,
       DateTime.now().day, startTime.hour, startTime.minute);
@@ -24,6 +24,9 @@ List<String> calculateIntervals(
   for (DateTime time = start; time.isBefore(end); time = time.add(interval)) {
     intervals.add("${time.hour}:${time.minute.toString().padLeft(2, '0')}");
   }
-
-  return intervals;
+  if (intervals.isNotEmpty) {
+    return intervals;
+  } else {
+    return null;
+  }
 }

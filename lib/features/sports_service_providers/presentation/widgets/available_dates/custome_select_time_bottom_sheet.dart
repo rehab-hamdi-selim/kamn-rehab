@@ -23,7 +23,7 @@ class CustomeSelectTimeBottomSheet extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                      'Start Time:  ${cubit.startTime?.format(context) ?? 'Not set'}'),
+                      'Start Time:  ${state.startAt?.format(context) ?? 'Not set'}'),
                   IconButton(
                       icon: const Icon(Icons.access_time),
                       onPressed: () async {
@@ -36,7 +36,7 @@ class CustomeSelectTimeBottomSheet extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                      'End Time:  ${cubit.endTime?.format(context) ?? 'Not set'}'),
+                      'End Time:  ${state.endAt?.format(context) ?? 'Not set'}'),
                   IconButton(
                       icon: const Icon(Icons.access_time),
                       onPressed: () async {
@@ -51,7 +51,7 @@ class CustomeSelectTimeBottomSheet extends StatelessWidget {
                 decoration:
                     const InputDecoration(labelText: 'Period (in minutes)'),
                 onChanged: (value) {
-                  cubit.period = int.tryParse(value) ?? 60;
+                  state.peroid = int.tryParse(value) ?? 60;
                 },
               ),
               const SizedBox(height: 16),

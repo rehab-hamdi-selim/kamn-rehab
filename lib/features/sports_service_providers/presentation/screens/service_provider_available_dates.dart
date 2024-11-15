@@ -70,7 +70,8 @@ class ServiceProviderAvailableDates extends StatelessWidget {
                         ],
                       ),
                       Wrap(runSpacing: 10, spacing: 10, children: [
-                        if (state.intervials != null) ...[
+                        if (state.intervials != null &&
+                            state.intervials!.isNotEmpty) ...[
                           ...state.intervials!.map(
                             (interval) => CustomeAvailableInterval(
                               interval: interval,
