@@ -16,6 +16,10 @@ import 'package:kamn/features/sports_service_providers/presentation/screens/serv
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_grounds_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_selection_screen.dart';
 
+import '../../features/authantication/presentation/screens/on_boarding_screen.dart';
+import '../../features/authantication/presentation/screens/sign_in_screen.dart';
+import '../../features/authantication/presentation/screens/sign_up_screen.dart';
+
 class AppRouter {
   static Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -51,6 +55,15 @@ class AppRouter {
       case Routes.serviceSelection:
         return MaterialPageRoute(
             builder: (context) => const ServiceSelectionScreen());
+      case Routes.signInScreen:
+        return MaterialPageRoute(
+            builder: (context) => const SignInScreen());
+      case Routes.signUpScreen:
+        return MaterialPageRoute(
+            builder: (context) => const SignUpScreen());
+      case Routes.onBoardingScreen:
+        return MaterialPageRoute(
+            builder: (context) => const OnBoardingScreen());
       case Routes.editServiceScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider<EditServiceProviderCubit>(
