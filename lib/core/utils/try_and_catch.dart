@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fpdart/fpdart.dart';
 import '../erorr/faliure.dart';
 import '../erorr/netowrk_exception.dart';
@@ -47,7 +48,15 @@ Future<T> executeTryAndCatchForDataLayer<T>(Future<T> Function() action) async {
     } else {
       throw NoInternetException();
     }
-  } on FirebaseException catch (e) {
+  } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        throw 'No user found for that email.';
+      } else if (e.code == 'wrong-password') {
+        throw 'Wrong password provided for that user.';
+      }
+      throw 'An error occurred while signing in: ${e.message}';
+    }
+   on FirebaseException catch (e) {
     throw 'Firebase error: ${e.code} - ${e.message ?? 'An unknown Firebase error occurred'}';
   } on TimeoutException catch (e) {
     throw 'Operation timed out: ${e.message}';
