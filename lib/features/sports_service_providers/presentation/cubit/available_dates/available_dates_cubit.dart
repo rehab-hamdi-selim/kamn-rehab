@@ -82,8 +82,7 @@ class AvailableDatesCubit extends Cubit<AvailableDatesState> {
     }
   }
 
-  Future<void> onSubmit(
-      String playgroundId, Map<String, List<String>> data) async {
+  Future<void> onSubmit(String playgroundId, Map<String, dynamic> data) async {
     emit(state.copyWith(state: AvailableDatesStatus.loading));
     var response = await repository.updateState(playgroundId, data);
     response.fold((error) {

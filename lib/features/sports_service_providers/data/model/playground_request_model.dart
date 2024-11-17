@@ -19,6 +19,7 @@ class PlaygroundRequestModel {
   List<String>? groundImages;
   List<String>? ownershipImages;
   int? size;
+  List<String>? availableTime;
   String? govenrate;
   String? state;
   String? comment;
@@ -34,6 +35,7 @@ class PlaygroundRequestModel {
     this.rating,
     this.price,
     this.description,
+    this.availableTime,
     this.groundImages,
     this.ownershipImages,
     this.size,
@@ -56,6 +58,7 @@ class PlaygroundRequestModel {
     ValueGetter<String?>? description,
     ValueGetter<List<String>?>? groundImages,
     ValueGetter<List<String>?>? ownershipImages,
+    ValueGetter<List<String>>? availableTime,
     ValueGetter<int?>? size,
     ValueGetter<String?>? govenrate,
     ValueGetter<String?>? state,
@@ -76,6 +79,8 @@ class PlaygroundRequestModel {
       groundImages: groundImages != null ? groundImages() : this.groundImages,
       ownershipImages:
           ownershipImages != null ? ownershipImages() : this.ownershipImages,
+      availableTime:
+          availableTime != null ? availableTime() : this.availableTime,
       size: size != null ? size() : this.size,
       govenrate: govenrate != null ? govenrate() : this.govenrate,
       state: state != null ? state() : this.state,
@@ -95,6 +100,7 @@ class PlaygroundRequestModel {
       'status': status,
       'rating': rating,
       'price': price,
+      'available_time': availableTime,
       'description': description,
       'groundImages': groundImages,
       'ownershipImages': ownershipImages,
@@ -118,6 +124,7 @@ class PlaygroundRequestModel {
       rating: map['rating']?.toDouble(),
       price: map['price']?.toDouble(),
       description: map['description'],
+      availableTime: map['available_time'],
       groundImages: List<String>.from(map['groundImages']),
       ownershipImages: List<String>.from(map['ownershipImages']),
       size: map['size']?.toInt(),

@@ -13,4 +13,5 @@ class Routes {
   static const String editServiceScreen = '/editServiceScreen';
   static const String serviceProviderAvailableDates =
       '/serviceProviderAvailableDates';
+  static const String pickTimeReservationScreen = '/pickTimeReservationScreen';
 }
