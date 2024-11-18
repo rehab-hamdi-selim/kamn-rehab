@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/routing/routes.dart';
+import 'package:kamn/features/authantication/presentation/screens/on_boarding_screen.dart';
 import 'package:kamn/firebase_options.dart';
 import 'package:kamn/features/authantication/presentation/screens/sign_in_screen.dart';
 import 'package:kamn/test_login.dart';
+
+import 'features/authantication/presentation/screens/sign_up_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,7 +63,7 @@ class MyApp extends StatelessWidget {
               return const LogoutScreen(); // User is logged in
             }
 
-            return const SignInScreen(); // User is not logged in
+            return const SignUpScreen(); // User is not logged in
           },
         ),
       ),
