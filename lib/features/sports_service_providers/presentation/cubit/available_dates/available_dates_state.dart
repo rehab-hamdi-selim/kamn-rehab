@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
-enum AvailableDatesStatus { initial, loading, success, failure, intervalsCalc }
+enum AvailableDatesStatus {
+  initial,
+  loading,
+  success,
+  failure,
+  intervalsCalc,
+  intervalSelected
+}
 
 extension SportsGroundStateExtension on AvailableDatesState {
   bool get isInitial => state == AvailableDatesStatus.initial;
@@ -8,6 +15,7 @@ extension SportsGroundStateExtension on AvailableDatesState {
   bool get isSuccess => state == AvailableDatesStatus.success;
   bool get isFailure => state == AvailableDatesStatus.failure;
   bool get isIntervalsClac => state == AvailableDatesStatus.intervalsCalc;
+  bool get isIntervalSelected => state == AvailableDatesStatus.intervalSelected;
 }
 
 class AvailableDatesState {
@@ -15,6 +23,7 @@ class AvailableDatesState {
   TimeOfDay? startAt;
   TimeOfDay? endAt;
   List<String>? intervials;
+  int peroid;
   final String? erorrMessage;
   final String? successMessage;
 
@@ -24,6 +33,7 @@ class AvailableDatesState {
     this.endAt,
     this.intervials,
     this.startAt,
+    this.peroid = 60,
     this.successMessage,
   });
   AvailableDatesState copyWith({
@@ -31,6 +41,7 @@ class AvailableDatesState {
     TimeOfDay? startAt,
     TimeOfDay? endAt,
     List<String>? intervials,
+    int? peroid,
     String? erorrMessage,
     String? successMessage,
   }) {
@@ -39,6 +50,7 @@ class AvailableDatesState {
       erorrMessage: erorrMessage ?? this.erorrMessage,
       startAt: startAt ?? this.startAt,
       intervials: intervials ?? this.intervials,
+      peroid: peroid ?? this.peroid,
       endAt: endAt ?? this.endAt,
       successMessage: successMessage ?? this.successMessage,
     );

@@ -14,12 +14,6 @@ class AvailableDatesCubit extends Cubit<AvailableDatesState> {
 
   ServiceProvidersRepository repository;
 
-  TimeOfDay? startTime;
-
-  TimeOfDay? endTime;
-
-  int period = 60;
-  List<String> intervals = [];
   bool isOpened = false;
   bool isSelectAll = false;
   List<String> selectedIntervals = [];
@@ -30,24 +24,23 @@ class AvailableDatesCubit extends Cubit<AvailableDatesState> {
     } else {
       selectedIntervals.add(interval);
     }
-    emit(state.copyWith(state: AvailableDatesStatus.initial));
+    emit(state.copyWith(state: AvailableDatesStatus.intervalSelected));
   }
 
   void onSelectAll(bool isSelectAll) {
     if (isSelectAll) {
-      selectedIntervals.addAll(intervals);
+      selectedIntervals.addAll(state.intervials ?? []);
     } else {
       selectedIntervals.clear();
     }
     this.isSelectAll = isSelectAll;
 
-    emit(state.copyWith(state: AvailableDatesStatus.initial));
+    emit(state.copyWith(state: AvailableDatesStatus.intervalSelected));
   }
 
   void setStartTime(TimeOfDay? value) {
     if (value != null) {
-      startTime = value;
-      emit(state.copyWith(startAt: startTime));
+      emit(state.copyWith(startAt: value));
     } else {
       emit(state.copyWith(
           state: AvailableDatesStatus.failure,
@@ -57,8 +50,7 @@ class AvailableDatesCubit extends Cubit<AvailableDatesState> {
 
   void setEndTime(TimeOfDay? value) {
     if (value != null) {
-      endTime = value;
-      emit(state.copyWith(endAt: endTime));
+      emit(state.copyWith(endAt: value));
     } else {
       emit(state.copyWith(
           state: AvailableDatesStatus.failure,
@@ -67,27 +59,37 @@ class AvailableDatesCubit extends Cubit<AvailableDatesState> {
   }
 
   void calculateIntervails() {
-    if (startTime != null && endTime != null) {
-      intervals = calculateIntervals(startTime!, endTime!, period);
-      emit(state.copyWith(
-          state: AvailableDatesStatus.success, intervials: intervals));
+    List<String>? clacIntervails;
+    if (state.startAt != null && state.endAt != null) {
+      clacIntervails =
+          calculateIntervals(state.startAt!, state.endAt!, state.peroid);
+      if (clacIntervails != null) {
+        emit(state.copyWith(
+            state: AvailableDatesStatus.intervalsCalc,
+            intervials: clacIntervails));
+      } else {
+        emit(state.copyWith(
+            state: AvailableDatesStatus.failure,
+            intervials: [],
+            erorrMessage: 'error on selecting dates please check it'));
+      }
     } else {
-      startTime = const TimeOfDay(hour: 0, minute: 0);
-      endTime = const TimeOfDay(hour: 24, minute: 0);
-      intervals = calculateIntervals(startTime!, endTime!, period);
+      clacIntervails = calculateIntervals(const TimeOfDay(hour: 0, minute: 0),
+          const TimeOfDay(hour: 24, minute: 0), 60);
       emit(state.copyWith(
-          state: AvailableDatesStatus.intervalsCalc, intervials: intervals));
+          state: AvailableDatesStatus.intervalsCalc,
+          intervials: clacIntervails));
     }
   }
 
-  Future<void> onSubmit(
-      String playgroundId, Map<String, List<String>> data) async {
+  Future<void> onSubmit(String playgroundId, Map<String, dynamic> data) async {
     emit(state.copyWith(state: AvailableDatesStatus.loading));
     var response = await repository.updateState(playgroundId, data);
     response.fold((error) {
       emit(state.copyWith(
-          state: AvailableDatesStatus.failure,
-          erorrMessage: 'faild to add times '));
+        state: AvailableDatesStatus.failure,
+        erorrMessage: 'faild to add times ',
+      ));
     }, (success) {
       emit(state.copyWith(
           state: AvailableDatesStatus.success,

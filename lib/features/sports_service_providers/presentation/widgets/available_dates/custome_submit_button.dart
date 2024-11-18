@@ -31,7 +31,11 @@ class CustomeSubmitButton extends StatelessWidget {
                   ? null
                   : () {
                       cubit.onSubmit(playgroundId, {
-                        'available_time': cubit.selectedIntervals,
+                        'available_time': {
+                          for (var interval in cubit.selectedIntervals)
+                            interval: 'unselect'
+                        },
+                        'peroid': state.peroid,
                       });
                     },
               child: state.isLoading

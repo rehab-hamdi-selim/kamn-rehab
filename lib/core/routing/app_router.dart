@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/routing/routes.dart';
+import 'package:kamn/features/sports/data/models/playground_model.dart';
+import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/sports/presentation/screens/grounds_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/my_profile_screen.dart';
+import 'package:kamn/features/sports/presentation/screens/pick_time_for_reservation_screen.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/available_dates/available_dates_cubit.dart';
@@ -17,6 +20,7 @@ import 'package:kamn/features/sports_service_providers/presentation/screens/serv
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_ground_details_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_grounds_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_selection_screen.dart';
+import 'package:kamn/features/sports_service_providers/presentation/screens/success_service_provider_screen.dart';
 
 class AppRouter {
   static Route generateRoute(RouteSettings settings) {
@@ -38,7 +42,8 @@ class AppRouter {
       case Routes.groundsScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-                  create: (context) => getIt<SportsGroundsCubit>(),
+                  create: (context) =>
+                      getIt<SportsGroundsCubit>()..getPlaygrounds(),
                   child: const GroundsScreen(),
                 ));
       case Routes.serviceProviderGroundsScreen:
@@ -50,7 +55,7 @@ class AppRouter {
                 ));
       case Routes.successServiceProviderScreen:
         return MaterialPageRoute(
-            builder: (context) => const ServiceProviderGroundsScreen());
+            builder: (context) => const SuccessServiceProviderScreen());
       case Routes.serviceSelection:
         return MaterialPageRoute(
             builder: (context) => const ServiceSelectionScreen());
@@ -79,6 +84,14 @@ class AppRouter {
                   create: (context) => getIt<AvailableDatesCubit>(),
                   child: ServiceProviderAvailableDates(
                     playgroundId: settings.arguments as String,
+                  ),
+                ));
+      case Routes.pickTimeReservationScreen:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<PickTimeForReservationCubit>(),
+                  child: PickTimeForReservationScreen(
+                    playground: settings.arguments as PlaygroundModel,
                   ),
                 ));
       default:
