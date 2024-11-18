@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_state.dart';
-import 'package:kamn/features/sports/presentation/screens/pick_time_for_reservation_screen.dart';
 
 class CustomePickIntervalForReservation extends StatelessWidget {
   const CustomePickIntervalForReservation(
@@ -87,7 +86,7 @@ class CustomePickIntervalForReservation extends StatelessWidget {
                   child: Center(
                     child: Text(
                       interval,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                       ),
