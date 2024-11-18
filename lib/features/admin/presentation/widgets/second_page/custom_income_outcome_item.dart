@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 
 class CustomIncomeOutcomeItem extends StatelessWidget {
   const CustomIncomeOutcomeItem(
-      {super.key, required this.text, required this.money});
+      {super.key,
+      required this.text,
+      required this.money,
+      required this.increase});
 
   final String text;
   final String money;
+  final double increase;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,11 +30,7 @@ class CustomIncomeOutcomeItem extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.person_add_alt_1,
-                  color: AppPallete.blackColor,
-                  size: 20.w,
-                ),
+                SvgPicture.asset('assets/icons/UserPlus.svg'),
                 horizontalSpace(8),
                 Text(
                   text,
@@ -37,7 +38,7 @@ class CustomIncomeOutcomeItem extends StatelessWidget {
                 ),
                 const Spacer(),
                 const Icon(
-                  Icons.list,
+                  Icons.more_vert,
                   size: 12,
                 )
               ],
@@ -50,16 +51,23 @@ class CustomIncomeOutcomeItem extends StatelessWidget {
             verticalSpace(10.h),
             Row(
               children: [
-                const Icon(
-                  Icons.arrow_downward_outlined,
+                Icon(
+                  increase < 0
+                      ? Icons.arrow_circle_down_rounded
+                      : Icons.arrow_circle_up_rounded,
                   size: 9,
-                  color: AppPallete.redColor,
+                  color: increase < 0
+                      ? AppPallete.redColor
+                      : AppPallete.greenColor,
                 ),
                 RichText(
                   text: TextSpan(
-                      text: '2.5 % ',
-                      style: TextStyles.fontInter9LightGreyMudium
-                          .copyWith(color: AppPallete.redColor),
+                      text: '${increase.abs()}% ',
+                      style: TextStyles.fontInter9LightGreyMudium.copyWith(
+                        color: increase < 0
+                            ? AppPallete.redColor
+                            : AppPallete.greenColor,
+                      ),
                       children: [
                         TextSpan(
                           text: 'Less than last month',

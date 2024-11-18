@@ -7,7 +7,9 @@ class CustomExpactedEarningChartData extends StatelessWidget {
 
   static const List<Color> gradientColors = [
     AppPallete.blueColor,
-    Colors.white
+    AppPallete.blueColor,
+    AppPallete.whiteColor,
+    AppPallete.whiteColor
   ];
   static const List<FlSpot> spots = [
     FlSpot(0, 3),
@@ -24,7 +26,8 @@ class CustomExpactedEarningChartData extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return AspectRatio(
+      aspectRatio: 1.90,
       child: LineChart(LineChartData(
         minX: 0,
         maxX: 11,
@@ -35,7 +38,7 @@ class CustomExpactedEarningChartData extends StatelessWidget {
             spots: spots,
             isCurved: true, //For Line Curve
             color: AppPallete.blueColor,
-            barWidth: 3, // Size Of Line
+            barWidth: 3.72, // Size Of Line
             isStrokeCapRound: true,
             dotData: const FlDotData(
               show: false,

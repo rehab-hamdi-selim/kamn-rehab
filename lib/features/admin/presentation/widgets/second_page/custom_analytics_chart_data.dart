@@ -1,5 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 
 class CustomAnalyticsChartData extends StatelessWidget {
@@ -18,7 +20,8 @@ class CustomAnalyticsChartData extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        Expanded(
+        AspectRatio(
+          aspectRatio: 1.60,
           child: BarChart(
             BarChartData(
               maxY: maxY,
@@ -90,13 +93,13 @@ class CustomAnalyticsChartData extends StatelessWidget {
       barRods: [
         BarChartRodData(
           toY: y1,
-          color: Colors.blue,
-          width: 7,
+          color: AppPallete.lightBlueColor2,
+          width: 8.74.w,
         ),
         BarChartRodData(
           toY: y2,
-          color: Colors.black,
-          width: 7,
+          color: AppPallete.accentBlackColor,
+          width: 8.74.w,
         ),
       ],
     );

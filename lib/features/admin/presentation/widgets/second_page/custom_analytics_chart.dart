@@ -11,8 +11,9 @@ class CustomAnalyticsChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 10,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      elevation: 2.79,
+      shape:
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.61.r)),
       color: AppPallete.whiteColor,
       child: Padding(
         padding:
@@ -29,15 +30,15 @@ class CustomAnalyticsChart extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                       border: Border.all(
-                        color: AppPallete.lgGreyColor,
+                        color: AppPallete.ligtGreyColor.withOpacity(0.3),
                       ),
-                      borderRadius: BorderRadius.circular(15)),
+                      borderRadius: BorderRadius.circular(12.r)),
                   padding:
                       EdgeInsets.symmetric(horizontal: 10.h, vertical: 7.w),
                   child: Row(
                     children: [
                       Icon(
-                        Icons.filter_list_alt,
+                        Icons.filter_alt_outlined,
                         color: AppPallete.blackColor,
                         size: 10.h,
                       ),
@@ -50,9 +51,9 @@ class CustomAnalyticsChart extends StatelessWidget {
                   ),
                 ),
                 horizontalSpace(33.w),
-                const Icon(
-                  Icons.list,
-                  size: 12,
+                Icon(
+                  Icons.more_vert,
+                  size: 12.87.h,
                 ),
               ],
             ),
@@ -62,7 +63,7 @@ class CustomAnalyticsChart extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                       color: AppPallete.lightBlueColor2,
-                      borderRadius: BorderRadius.circular(20)),
+                      borderRadius: BorderRadius.circular(20.r)),
                   width: 5.83.w,
                   height: 5.83.h,
                 ),
@@ -87,7 +88,20 @@ class CustomAnalyticsChart extends StatelessWidget {
               ],
             ),
             verticalSpace(43.h),
-            Expanded(child: CustomAnalyticsChartData()),
+            CustomAnalyticsChartData(),
+            verticalSpace(7.h),
+            Container(
+              decoration: BoxDecoration(
+                  border: Border.all(
+                    color: AppPallete.ligtGreyColor.withOpacity(0.25),
+                  ),
+                  borderRadius: BorderRadius.circular(9.9.r)),
+              padding: EdgeInsets.symmetric(horizontal: 17.h, vertical: 8.w),
+              child: Text(
+                'more',
+                style: TextStyles.fontInter8BlackRegular,
+              ),
+            ),
           ],
         ),
       ),
