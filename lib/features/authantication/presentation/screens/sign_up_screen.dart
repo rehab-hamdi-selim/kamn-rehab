@@ -45,16 +45,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SignUpCubit(
-          signUpRepository: SignUpRepository(
-              remoteDataSource:
-                  SignUpDataSourceImpl(firestore: FirebaseFirestore.instance))),
+          signUpRepository: SignUpRepositoryImpl(
+        firestore: FirebaseFirestore.instance,
+        signUpDataSource:
+            SignUpDataSourceImpl(firestore: FirebaseFirestore.instance),
+      )),
       child: BlocConsumer<SignUpCubit, SignUpState>(
         listener: (context, state) {
           // TODO: implement listener
           if (state.isFailure) {
             showSnackBar(context, state.erorrMessage ?? "");
+            print(state.erorrMessage);
           } else if (state.isSuccess) {
-            print('success');
+            showSnackBar(context, "Sign Up Successfully");
             //  Navigator.pushNamedAndRemoveUntil(context,
             //                       Routes.,
             //                       (Route<dynamic> route) => false,
@@ -171,11 +174,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               keyboardType: TextInputType.visiblePassword,
                               suffixIcon: IconButton(
                                 onPressed: () {
-                                  context.read<SignUpCubit>().changeVisiblePassword();
+                                  context
+                                      .read<SignUpCubit>()
+                                      .changeVisiblePassword();
                                 },
-                                icon:  Icon(
-                                  state.isVisiblePassword==true?
-                                  Icons.remove_red_eye_outlined:Icons.visibility_off_outlined,
+                                icon: Icon(
+                                  state.isVisiblePassword == true
+                                      ? Icons.remove_red_eye_outlined
+                                      : Icons.visibility_off_outlined,
                                   color: AppPallete.accentBlackColor2,
                                 ),
                               ),
@@ -190,7 +196,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               validator: (String? value) {
                                 if (value == null || value.trim().isEmpty) {
                                   return "please enter your Confirm Password";
-                                }else if (value != passwordController!.text) {
+                                } else if (value != passwordController!.text) {
                                   return "Password and Confirm Password must be same";
                                 }
                                 return null;
@@ -200,11 +206,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               obscureText: state.isVisiblePasswordConfirm,
                               suffixIcon: IconButton(
                                 onPressed: () {
-                                   context.read<SignUpCubit>().changeVisibleConfirmPassword();
+                                  context
+                                      .read<SignUpCubit>()
+                                      .changeVisibleConfirmPassword();
                                 },
-                                icon:  Icon(
-                                  state.isVisiblePasswordConfirm==true?
-                                  Icons.remove_red_eye_outlined:Icons.visibility_off_outlined,
+                                icon: Icon(
+                                  state.isVisiblePasswordConfirm == true
+                                      ? Icons.remove_red_eye_outlined
+                                      : Icons.visibility_off_outlined,
                                   color: AppPallete.accentBlackColor2,
                                 ),
                               ),
@@ -216,14 +225,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 Text(
                                   'By creating an account, you agree to our',
                                   style: TextStyles
-                                      .font11RobotoAccentBlackColor2Regular.copyWith(fontSize: 10.h),
+                                      .font11RobotoAccentBlackColor2Regular
+                                      .copyWith(fontSize: 10.h),
                                 ),
                                 InkWell(
                                     onTap: () {},
                                     child: Text(
                                       'Term & Conditions',
                                       style: TextStyles
-                                          .font11RobotoBlueColorRegular.copyWith(fontSize: 10.h),
+                                          .font11RobotoBlueColorRegular
+                                          .copyWith(fontSize: 10.h),
                                     )),
                               ],
                             ),

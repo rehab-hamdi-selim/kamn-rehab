@@ -20,20 +20,21 @@ class SignInDataSourceImpl implements SignInDataSource {
   Future<Map<String, dynamic>> signInDataSource(
       {required String email, required String password}) async {
     return await executeTryAndCatchForDataLayer(() async {
-      await FirebaseAuth.instance
+      return await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) {
+        //  String? idToken =  value.user!.getIdToken();
+
         final String uid = value.user?.uid ?? "";
 
         if (uid.isEmpty) {
           throw "Failed to create user: UID is null.";
         }
         var querySnapshot = _userCollection.doc(value.user!.uid);
-        querySnapshot.get().then((value) {
+        return querySnapshot.get().then((value) {
           return value.data() as Map<String, dynamic>;
         });
       });
-      throw "Firebase error";
     });
   }
 }

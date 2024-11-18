@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
@@ -6,7 +5,6 @@ import 'package:kamn/features/sports_service_providers/data/model/playground_req
 import 'package:kamn/features/sports_service_providers/presentation/widgets/edit_service/custome_edit_services_bloc_listner.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/edit_service/custome_finished_button.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/edit_service/custome_ground_image_picker.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/edit_service/custome_service_info.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/edit_service/custome_text_title.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/service_provider_grounds/custom_app_bar_service_provider.dart';
 
@@ -38,7 +36,7 @@ class EditServiceScreen extends StatelessWidget {
                   CustomeGroundImagePicker(
                       groundImages: playground.groundImages!),
                   verticalSpace(7.h),
-                  CustomeServiceInfo(playground: playground),
+                  // CustomeServiceInfo(playground: playground),
                   CustomeFinishedButton(
                     playground: playground,
                   ),

@@ -56,11 +56,9 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => const ServiceSelectionScreen());
       case Routes.signInScreen:
-        return MaterialPageRoute(
-            builder: (context) => const SignInScreen());
+        return MaterialPageRoute(builder: (context) => const SignInScreen());
       case Routes.signUpScreen:
-        return MaterialPageRoute(
-            builder: (context) => const SignUpScreen());
+        return MaterialPageRoute(builder: (context) => const SignUpScreen());
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
             builder: (context) => const OnBoardingScreen());

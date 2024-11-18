@@ -2,48 +2,38 @@
 import 'dart:convert';
 
 class AuthUserModel {
-  final String name;
-  final String type;
-  final String userId;
+  final String uid;
   final String email;
+  final String name;
+  final DateTime createdAt;
+  // Add any other fields you need
 
   AuthUserModel({
-    required this.type,
-    required this.userId,
+    required this.uid,
     required this.email,
     required this.name,
+    required this.createdAt,
   });
 
-  AuthUserModel copyWith({
-    String? name,
-    String? userId,
-    String? email,
-    String? type,
-  }) {
-    return AuthUserModel(
-      name: name ?? this.name,
-      type: type ?? this.type,
-      userId: userId ?? this.userId,
-      email: email ?? this.email,
-    );
-  }
-
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'name': name,
-      'longitude': type,
-      'userId': userId,
+    return {
+      'uid': uid,
       'email': email,
+      'name': name,
+      'createdAt': createdAt.toIso8601String(),
+      // Add any other fields
     };
   }
 
   factory AuthUserModel.fromMap(Map<String, dynamic> map) {
     return AuthUserModel(
-      name: map['name'] as String? ?? 'Unknown',
-      type: map['type'] as String?? "Unknown",
-      userId: map['userId'] as String? ?? 'No userId provided',
-      email:  map['email'] as String? ?? 'No email provided',
-      );
+      uid: map['uid'] ?? '',
+      email: map['email'] ?? '',
+      name: map['name'] ?? '',
+      createdAt:
+          DateTime.parse(map['createdAt'] ?? DateTime.now().toIso8601String()),
+      // Add any other fields
+    );
   }
 
   String toJson() => json.encode(toMap());
@@ -53,22 +43,19 @@ class AuthUserModel {
 
   @override
   String toString() =>
-      'UserModel(name: $name,type: $type,userId: $userId,email: $email,)';
+      'UserModel(uid: $uid,email: $email,name: $name,createdAt: $createdAt,)';
 
   @override
   bool operator ==(covariant AuthUserModel other) {
     if (identical(this, other)) return true;
 
-    return other.name == name &&
-        other.type == type &&
-        other.userId == userId &&
-        other.email == email ;
+    return other.uid == uid &&
+        other.email == email &&
+        other.name == name &&
+        other.createdAt == createdAt;
   }
 
   @override
   int get hashCode =>
-      name.hashCode ^
-      type.hashCode ^
-      userId.hashCode ^
-      email.hashCode ;
+      uid.hashCode ^ email.hashCode ^ name.hashCode ^ createdAt.hashCode;
 }

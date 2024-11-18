@@ -1,23 +1,63 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/core/erorr/faliure.dart';
-import '../../../../core/utils/try_and_catch.dart';
-import '../data_source/sign_up_data_source.dart';
-import '../model/auth_user_model.dart';
+import 'package:kamn/core/utils/try_and_catch.dart';
+import 'package:kamn/features/authantication/data/data_source/sign_up_data_source.dart';
+import 'package:kamn/features/authantication/data/model/auth_user_model.dart';
 
-@injectable
-class SignUpRepository {
-  final SignUpDataSource _remoteDataSource;
-  SignUpRepository({required SignUpDataSource remoteDataSource})
-      : _remoteDataSource = remoteDataSource;
-  Future<Either<Faliure, AuthUserModel?>> signUp({required String email, required String password,required String name,}) async {
-    return executeTryAndCatchForRepository(() async {
-      final Map<String, dynamic> rawData =
-          await _remoteDataSource.signUpDataSource(email: email, password:password,name: name);
+abstract interface class SignUpRepository {
+  Future<Either<Faliure, AuthUserModel>> signUp({
+    required String email,
+    required String password,
+    required String name,
+  });
+}
 
-      final userModel =AuthUserModel.fromMap(rawData);
+@Injectable(as: SignUpRepository)
+class SignUpRepositoryImpl implements SignUpRepository {
+  final SignUpDataSource _signUpDataSource;
+  final FirebaseFirestore _firestore;
 
-      return userModel;
+  SignUpRepositoryImpl({
+    required SignUpDataSource signUpDataSource,
+    required FirebaseFirestore firestore,
+  })  : _signUpDataSource = signUpDataSource,
+        _firestore = firestore;
+
+  @override
+  Future<Either<Faliure, AuthUserModel>> signUp({
+    required String email,
+    required String password,
+    required String name,
+  }) async {
+    return await executeTryAndCatchForRepository(() async {
+      final userCredential = await _signUpDataSource.signUpDataSource(
+        email: email,
+        password: password,
+        name: name,
+      );
+
+      // if (userCredential.user == null) {
+      //   throw FirebaseAuthException(code: "user-not-found");
+      // }
+
+      // Create AuthUserModel from UserCredential
+      final authUserModel = AuthUserModel(
+        uid: userCredential.user!.uid,
+        email: email,
+        name: name,
+        createdAt: DateTime.now(),
+      );
+
+      // Store additional user data in Firestore
+      await _firestore
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .set(authUserModel.toMap());
+
+      return authUserModel;
     });
   }
 }

@@ -27,7 +27,7 @@ class OnBoardingScreen extends StatelessWidget {
                     CustomPaint(
                       size: Size(
                           width,
-                          (width * 2.2674772036474162)
+                          (width * 1.5)
                               .toDouble()), //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
                       painter: RPSCustomPainter(),
                     ),

@@ -46,7 +46,8 @@ class _SignInScreenState extends State<SignInScreen> {
         listener: (context, state) {
           // TODO: implement listener
           if (state.isFailure) {
-            showSnackBar(context,state.erorrMessage??"");
+            print(state.erorrMessage);
+            showSnackBar(context, state.erorrMessage ?? "");
           } else if (state.isSuccess) {
             print('success');
             //  Navigator.pushNamedAndRemoveUntil(context,
@@ -142,12 +143,14 @@ class _SignInScreenState extends State<SignInScreen> {
                               obscureText: state.isVisible,
                               suffixIcon: IconButton(
                                 onPressed: () {
-                                  context.read<SignInCubit>().changeVisiblePassword();
-
+                                  context
+                                      .read<SignInCubit>()
+                                      .changeVisiblePassword();
                                 },
-                                icon:  Icon(
-                                  state.isVisible==true?
-                                  Icons.remove_red_eye_outlined:Icons.visibility_off_outlined,
+                                icon: Icon(
+                                  state.isVisible == true
+                                      ? Icons.remove_red_eye_outlined
+                                      : Icons.visibility_off_outlined,
                                   color: AppPallete.accentBlackColor2,
                                 ),
                               ),
@@ -179,21 +182,21 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                       Column(
                         children: [
-                          state.isLoading ? 
-                          const CircularProgressIndicator(
-                            color: AppPallete.darkVividVioletColor,
-                          ):
-                          CustomButton(
-                            buttonText: 'Sign In',
-                            onTapButton: () {
-                              if (_formKey.currentState!.validate()) {
-                                context.read<SignInCubit>().signIn(
-                                 email: emailController!.text,
-                                 password:  passwordController!.text, 
-                                );
-                              }
-                            },
-                          ),
+                          state.isLoading
+                              ? const CircularProgressIndicator(
+                                  color: AppPallete.darkVividVioletColor,
+                                )
+                              : CustomButton(
+                                  buttonText: 'Sign In',
+                                  onTapButton: () {
+                                    if (_formKey.currentState!.validate()) {
+                                      context.read<SignInCubit>().signIn(
+                                            email: emailController!.text,
+                                            password: passwordController!.text,
+                                          );
+                                    }
+                                  },
+                                ),
                           SizedBox(
                             height: 20.h,
                           ),
@@ -207,11 +210,11 @@ class _SignInScreenState extends State<SignInScreen> {
                               ),
                               InkWell(
                                 onTap: () {
-                                   Navigator.pushNamedAndRemoveUntil(
-                                  context,
-                                  Routes.signUpScreen,
-                                  (Route<dynamic> route) => false,
-                                );
+                                  Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    Routes.signUpScreen,
+                                    (Route<dynamic> route) => false,
+                                  );
                                 },
                                 child: Text(
                                   'Sign Up',
