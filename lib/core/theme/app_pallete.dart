@@ -9,6 +9,7 @@ class AppPallete {
   static const Color blackColor = Colors.black;
 
   static const Color greyColor = Color(0xff8E8E93);
+  static const Color ligtGreyColor = Color(0xffBBBBBB);
   static const Color redColor = Color(0xffE83333);
   static const Color greenColor = Color(0xff016F13);
   static const Color lightGreenColor = Color(0xff4CD964);
@@ -38,4 +39,6 @@ class AppPallete {
   static const Color mainColor = Color(0xffA117F1);
   static const Color lightColor = Color(0xffF5F6F6);
   static const Color dartBlurGrayColor = Color(0xff424867);
+  static const Color blueColor = Color(0xff0B3DEF);
+  static const Color lightBlueColor2 = Color(0xff2563EB);
 }

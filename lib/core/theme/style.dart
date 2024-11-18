@@ -108,6 +108,11 @@ class TextStyles {
       color: AppPallete.grayColor,
       fontWeight: FontWeightHelper.regular,
       fontSize: 10.h);
+  static TextStyle fontRoboto26BoldBlack = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.bold,
+      fontSize: 26.h);
 
   static TextStyle font12CircularSpotifyTextBlackMedium = TextStyle(
       fontFamily: "CircularSpotifyText",
@@ -169,6 +174,11 @@ class TextStyles {
       color: AppPallete.grayColor,
       fontWeight: FontWeightHelper.regular,
       fontSize: 10.h);
+  static TextStyle fontInter8BlackRegular = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 8.87.h);
   static TextStyle fontInter14GreyRegular = TextStyle(
       fontFamily: "Inter",
       color: AppPallete.greyColor,
@@ -183,6 +193,21 @@ class TextStyles {
       fontFamily: "Inter",
       color: AppPallete.greyColor,
       fontWeight: FontWeightHelper.light,
+      fontSize: 10.h);
+  static TextStyle fontInter9LightGreyMudium = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.ligtGreyColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 9.h);
+  static TextStyle fontInter9BlackLight = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.light,
+      fontSize: 9.h);
+  static TextStyle fontInter10LightGreySemiBold = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.ligtGreyColor,
+      fontWeight: FontWeightHelper.semiBold,
       fontSize: 10.h);
   static TextStyle fontInter14BlackMedium = TextStyle(
       fontFamily: "Inter",
@@ -209,4 +234,9 @@ class TextStyles {
       color: AppPallete.whiteColor,
       fontWeight: FontWeightHelper.medium,
       fontSize: 24.h);
+  static TextStyle font13BlackInterColorSemiBold = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.accentBlackColor,
+      fontWeight: FontWeightHelper.semiBold,
+      fontSize: 13.h);
 }
