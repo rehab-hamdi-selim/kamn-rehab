@@ -1,14 +1,15 @@
+import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:kamn/core/helpers/bloc_observer.dart';
 import 'package:kamn/firebase_options.dart';
 import 'init_dependencies.dart';
-
-import 'mvp/view/playground_screen_mvp.dart';
+import 'mvc/view/playgrounds_screen_mvc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -16,6 +17,8 @@ void main() async {
   await initDependencies();
   //configureDependencies();
   await ScreenUtil.ensureScreenSize();
+  // Calling Bloc Observer
+  Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
 
@@ -35,9 +38,10 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const PlaygroundsScreenMVP(),
+
         // initialRoute: Routes.serviceSelection,
         // onGenerateRoute: AppRouter.generateRoute,
+        home: const PlayGroundsScreenMVC(),
       ),
     );
   }

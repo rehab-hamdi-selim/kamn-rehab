@@ -5,15 +5,16 @@ import '../../../../core/helpers/spacer.dart';
 import '../../features/sports/data/models/playground_model.dart';
 import '../../init_dependencies.dart';
 
-class GetGroundsScreenMVC extends StatefulWidget {
-  final GetGroundsControllerMVC controller;
-  const GetGroundsScreenMVC({super.key, required this.controller});
+class PlayGroundsScreenMVC extends StatefulWidget {
+  const PlayGroundsScreenMVC({
+    super.key,
+  });
 
   @override
-  State<GetGroundsScreenMVC> createState() => GetGroundsScreenMVCState();
+  State<PlayGroundsScreenMVC> createState() => PlayGroundsScreenMVCState();
 }
 
-class GetGroundsScreenMVCState extends State<GetGroundsScreenMVC> {
+class PlayGroundsScreenMVCState extends State<PlayGroundsScreenMVC> {
   late GetGroundsControllerMVC controller;
 
   List<PlaygroundModel> playgrounds = [];

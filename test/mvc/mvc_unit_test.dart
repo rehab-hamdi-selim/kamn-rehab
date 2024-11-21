@@ -87,8 +87,8 @@ void main() {
     ];
 
     // إنشاء الشاشة واستدعاء الدالة
-    final screen = GetGroundsScreenMVC(controller: mockController);
-    final state = screen.createState() as GetGroundsScreenMVCState;
+    final screen = PlayGroundsScreenMVC(controller: mockController);
+    final state = screen.createState() as PlayGroundsScreenMVCState;
     await state.getPlaygroundsRequests();
 
     // التحقق من النتيجة
