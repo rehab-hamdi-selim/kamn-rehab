@@ -46,8 +46,8 @@ void main() {
     when(mockController.getPlaygroundsRequests())
         .thenAnswer((_) async => mockPlaygrounds);
 
-    await tester.pumpWidget(MaterialApp(
-      home: PlayGroundsScreenMVC(controller: mockController),
+    await tester.pumpWidget(const MaterialApp(
+      home: PlayGroundsScreenMVC(),
     ));
 
     await tester.pump(); // Wait for the async call to complete

@@ -87,7 +87,7 @@ void main() {
     ];
 
     // إنشاء الشاشة واستدعاء الدالة
-    final screen = PlayGroundsScreenMVC(controller: mockController);
+    const screen = PlayGroundsScreenMVC();
     final state = screen.createState() as PlayGroundsScreenMVCState;
     await state.getPlaygroundsRequests();
 
