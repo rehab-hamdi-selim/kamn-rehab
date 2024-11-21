@@ -59,3 +59,20 @@ Future<T> executeTryAndCatchForDataLayer<T>(Future<T> Function() action) async {
     throw 'An unexpected error occurred: ${e.toString()}';
   }
 }
+
+Future<T> executeTryAndCatchForDataLayerForTest<T>(
+    Future<T> Function() action) async {
+  try {
+    return await action();
+  } on FirebaseException catch (e) {
+    throw 'Firebase error: ${e.code} - ${e.message ?? 'An unknown Firebase error occurred'}';
+  } on TimeoutException catch (e) {
+    throw 'Operation timed out: ${e.message}';
+  } on SocketException catch (e) {
+    throw 'Network error: ${e.message}';
+  } on FormatException catch (e) {
+    throw 'Error parsing data: ${e.message}';
+  } catch (e) {
+    throw 'An unexpected error occurred: ${e.toString()}';
+  }
+}

@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class PlaygroundModel {
   final String name;
   final double longitude;
@@ -112,8 +114,7 @@ class PlaygroundModel {
 
   @override
   bool operator ==(covariant PlaygroundModel other) {
-    if (identical(this, other)) return true;
-
+    const listEquality = ListEquality();
     return other.name == name &&
         other.address == address &&
         other.price == price &&
@@ -124,7 +125,7 @@ class PlaygroundModel {
         other.ownerId == ownerId &&
         other.playgroundId == playgroundId &&
         other.status == status &&
-        other.images == images &&
+        listEquality.equals(other.images, images) && // مقارنة القوائم
         other.rating == rating &&
         other.size == size;
   }

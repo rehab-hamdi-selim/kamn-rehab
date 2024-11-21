@@ -1,11 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/core/di/di.dart';
-import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/firebase_options.dart';
+import 'init_dependencies.dart';
 
-import 'core/routing/app_router.dart';
+import 'mvp/view/playground_screen_mvp.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +12,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  configureDependencies();
+
+  await initDependencies();
+  //configureDependencies();
   await ScreenUtil.ensureScreenSize();
   runApp(const MyApp());
 }
@@ -34,8 +35,9 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        initialRoute: Routes.serviceSelection,
-        onGenerateRoute: AppRouter.generateRoute,
+        home: const PlaygroundsScreenMVP(),
+        // initialRoute: Routes.serviceSelection,
+        // onGenerateRoute: AppRouter.generateRoute,
       ),
     );
   }

@@ -9,14 +9,14 @@ abstract interface class SportsRemoteDataSource {
 
 @Injectable(as: SportsRemoteDataSource)
 class SportsRemoteDataSourceImpl implements SportsRemoteDataSource {
-  final FirebaseFirestore _firestore;
+  final FirebaseFirestore firestore;
   SportsRemoteDataSourceImpl({required FirebaseFirestore firestore})
-      : _firestore = firestore;
+      : firestore = firestore;
   CollectionReference get _playGroundCollection =>
-      _firestore.collection(FirebaseCollections.playgrounds);
+      firestore.collection(FirebaseCollections.playgrounds);
   @override
   Future<List<Map<String, dynamic>>> getPlaygrounds() async {
-    return executeTryAndCatchForDataLayer(() async {
+    return executeTryAndCatchForDataLayerForTest(() async {
       var querySnapshot = await _playGroundCollection.get();
       return querySnapshot.docs
           .map((doc) => doc.data() as Map<String, dynamic>)
