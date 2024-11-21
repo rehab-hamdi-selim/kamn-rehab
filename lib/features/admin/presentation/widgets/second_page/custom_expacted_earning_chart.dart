@@ -10,54 +10,57 @@ class CustomExpactedEarningChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 2.79,
-      shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.61.r)),
-      color: AppPallete.whiteColor,
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(right: 21.4.w, top: 20.47.h),
-            child: Align(
-              alignment: Alignment.bottomRight,
-              child: Container(
-                width: 40.h,
-                height: 40.w,
-                decoration: BoxDecoration(
-                    color: AppPallete.whiteGreyColor,
-                    borderRadius: BorderRadius.circular(6.51.r)),
-                child: const Icon(
-                  Icons.bar_chart,
+    return AspectRatio(
+      aspectRatio: 0.91,
+      child: Card(
+        elevation: 2.79,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18.61.r)),
+        color: AppPallete.whiteColor,
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(right: 21.4.w, top: 20.47.h),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Container(
+                  width: 40.h,
+                  height: 40.w,
+                  decoration: BoxDecoration(
+                      color: AppPallete.whiteGreyColor,
+                      borderRadius: BorderRadius.circular(6.51.r)),
+                  child: const Icon(
+                    Icons.bar_chart,
+                  ),
                 ),
               ),
             ),
-          ),
-          Text(
-            'Expacted Earning',
-            style: TextStyles.font13BlackRegular,
-          ),
-          verticalSpace(9.31.h),
-          Text(
-            '\$620',
-            style: TextStyles.fontRoboto26BoldBlack,
-          ),
-          verticalSpace(9.31.h),
-          Container(
-            height: 27.92.h,
-            width: 67.w,
-            decoration: BoxDecoration(
-                color: AppPallete.blueColor,
-                borderRadius: BorderRadius.circular(30.r)),
-            child: Center(
-              child: Text(
-                '+2.15%',
-                style: TextStyles.font14White70,
+            Text(
+              'Expacted Earning',
+              style: TextStyles.font13BlackRegular,
+            ),
+            verticalSpace(9.31.h),
+            Text(
+              '\$620',
+              style: TextStyles.fontRoboto26BoldBlack,
+            ),
+            verticalSpace(9.31.h),
+            Container(
+              height: 27.92.h,
+              width: 67.w,
+              decoration: BoxDecoration(
+                  color: AppPallete.blueColor,
+                  borderRadius: BorderRadius.circular(30.r)),
+              child: Center(
+                child: Text(
+                  '+2.15%',
+                  style: TextStyles.font14White70,
+                ),
               ),
             ),
-          ),
-          const CustomExpactedEarningChartData(),
-        ],
+            const CustomExpactedEarningChartData(),
+          ],
+        ),
       ),
     );
   }

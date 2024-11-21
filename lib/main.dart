@@ -1,7 +1,9 @@
+import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/di/di.dart';
+import 'package:kamn/core/helpers/bloc_observer.dart';
 import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/features/admin/presentation/screens/second_page/second_page.dart';
 import 'package:kamn/firebase_options.dart';
@@ -10,12 +12,12 @@ import 'core/routing/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   configureDependencies();
   await ScreenUtil.ensureScreenSize();
+  Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
 

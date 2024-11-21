@@ -1,41 +1,26 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
+import 'package:kamn/features/admin/presentation/cubits/second_page_cubit/second_page_cubit.dart';
 
 class CustomExpactedEarningChartData extends StatelessWidget {
   const CustomExpactedEarningChartData({super.key});
-
   static const List<Color> gradientColors = [
     AppPallete.blueColor,
-    AppPallete.blueColor,
-    AppPallete.whiteColor,
     AppPallete.whiteColor
-  ];
-  static const List<FlSpot> spots = [
-    FlSpot(0, 3),
-    FlSpot(1, 3),
-    FlSpot(2, 3),
-    FlSpot(3, 3),
-    FlSpot(2, 2),
-    FlSpot(2.6, 2),
-    FlSpot(4.9, 5),
-    FlSpot(6.8, 3.1),
-    FlSpot(8, 4),
-    FlSpot(9.5, 3),
-    FlSpot(11, 4),
   ];
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 1.90,
       child: LineChart(LineChartData(
-        minX: 0,
-        maxX: 11,
-        minY: 0,
-        maxY: 6,
+        minX: SecondPageCubit.get(context).chartDataModel.minX,
+        maxX: SecondPageCubit.get(context).chartDataModel.maxX,
+        minY: SecondPageCubit.get(context).chartDataModel.minY,
+        maxY: SecondPageCubit.get(context).chartDataModel.maxY,
         lineBarsData: [
           LineChartBarData(
-            spots: spots,
+            spots: SecondPageCubit.get(context).chartDataModel.spots,
             isCurved: true, //For Line Curve
             color: AppPallete.blueColor,
             barWidth: 3.72, // Size Of Line

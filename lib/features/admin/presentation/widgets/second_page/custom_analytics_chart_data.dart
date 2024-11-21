@@ -1,19 +1,10 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/features/admin/presentation/cubits/second_page_cubit/second_page_cubit.dart';
 
 class CustomAnalyticsChartData extends StatelessWidget {
-  CustomAnalyticsChartData({super.key});
-
-  late List<BarChartGroupData> items = [
-    makeGroupData(0, 75, 100),
-    makeGroupData(1, 160, 140),
-    makeGroupData(2, 190, 160),
-    makeGroupData(3, 200, 220),
-  ];
-  final double maxY = 250;
+  const CustomAnalyticsChartData({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +15,7 @@ class CustomAnalyticsChartData extends StatelessWidget {
           aspectRatio: 1.60,
           child: BarChart(
             BarChartData(
-              maxY: maxY,
+              maxY: SecondPageCubit.get(context).chartDataModel.maxY2,
               //  Show Title
               titlesData: FlTitlesData(
                 show: true,
@@ -44,7 +35,8 @@ class CustomAnalyticsChartData extends StatelessWidget {
                   sideTitles: SideTitles(
                     showTitles: true,
                     reservedSize: 33,
-                    interval: 50,
+                    interval:
+                        SecondPageCubit.get(context).chartDataModel.interval,
                     getTitlesWidget: leftTitles,
                   ),
                 ),
@@ -56,7 +48,7 @@ class CustomAnalyticsChartData extends StatelessWidget {
               ),
 
               // Number of Item
-              barGroups: items,
+              barGroups: SecondPageCubit.get(context).chartDataModel.items,
               // Apear Line in Chart
               gridData: const FlGridData(show: false),
             ),
@@ -83,25 +75,6 @@ class CustomAnalyticsChartData extends StatelessWidget {
         'weak ${xValue.toInt() + 1}',
         style: TextStyles.fontInter11GreyMedium,
       ),
-    );
-  }
-
-  BarChartGroupData makeGroupData(int x, double y1, double y2) {
-    return BarChartGroupData(
-      barsSpace: 4,
-      x: x,
-      barRods: [
-        BarChartRodData(
-          toY: y1,
-          color: AppPallete.lightBlueColor2,
-          width: 8.74.w,
-        ),
-        BarChartRodData(
-          toY: y2,
-          color: AppPallete.accentBlackColor,
-          width: 8.74.w,
-        ),
-      ],
     );
   }
 }
