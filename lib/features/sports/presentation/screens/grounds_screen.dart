@@ -132,19 +132,19 @@ class GroundsScreen extends StatelessWidget {
                           );
                         },
                         child: CustomGroundItem(
-                          imageUrl: state.playgrounds![index].images.isEmpty
+                          imageUrl: state.playgrounds![index].images!.isEmpty
                               ? ''
-                              : state.playgrounds![index].images.first
+                              : state.playgrounds![index].images!.first
                                   .toString(),
                           favoriteOnTap: () {},
-                          placeText: state.playgrounds![index].name,
+                          placeText: state.playgrounds![index].name!,
 
                           ///TODO:
                           km: "2.7",
 
                           ///TODO:
                           owner: "owner name",
-                          location: state.playgrounds![index].address,
+                          location: state.playgrounds![index].address!,
 
                           ///TODO:
                           available: "available",

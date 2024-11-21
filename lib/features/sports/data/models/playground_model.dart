@@ -5,22 +5,21 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 class PlaygroundModel {
-  final String name;
-  final double longitude;
-  final double latitude;
-  final String address;
-  final String description;
-  final String govenrate;
-  final String ownerId;
-  String playgroundId;
-  final String status;
-  Map<String, String>? availableTime;
-  int? peroid;
-
-  final List images;
-  final double price;
-  final double rating;
-  final double size;
+  final String? name;
+  final double? longitude;
+  final double? latitude;
+  final String? address;
+  final String? description;
+  final String? govenrate;
+  final String? ownerId;
+  String? playgroundId;
+  final String? status;
+  Map<String, Map<String, dynamic>?>? availableTime;
+  num? peroid;
+  final List? images;
+  final num? price;
+  final num? rating;
+  final num? size;
   PlaygroundModel({
     required this.name,
     required this.longitude,
@@ -49,12 +48,12 @@ class PlaygroundModel {
     String? ownerId,
     String? playgroundId,
     String? status,
-    ValueGetter<Map<String, String>?>? availableTime,
-    ValueGetter<int?>? peroid,
+    ValueGetter<Map<String, Map<String, dynamic>?>?>? availableTime,
+    ValueGetter<num?>? peroid,
     List? images,
-    double? price,
-    double? rating,
-    double? size,
+    num? price,
+    num? rating,
+    num? size,
   }) {
     return PlaygroundModel(
       name: name ?? this.name,
@@ -78,41 +77,56 @@ class PlaygroundModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'name': name,
-      'longitude': longitude,
-      'latitude': latitude,
+      'images': images,
       'address': address,
+      'latitude': latitude,
+      'longitude': longitude,
+      'rating': rating,
       'description': description,
-      'govenrate': govenrate,
       'ownerId': ownerId,
+      'peroid': peroid,
+      'govenrate': govenrate,
+      'available_time': availableTime?.map(
+        (day, times) => MapEntry(
+          day,
+          times?.map(
+            (time, status) => MapEntry(time, status),
+          ),
+        ),
+      ),
+      'size': size,
+      'price': price,
+      'name': name,
       'playgroundId': playgroundId,
       'status': status,
-      'available_time': availableTime,
-      'peroid': peroid,
-      'images': images,
-      'price': price,
-      'rating': rating,
-      'size': size,
     };
   }
 
   factory PlaygroundModel.fromMap(Map<String, dynamic> map) {
     return PlaygroundModel(
-      name: map['name'] ?? '',
-      longitude: map['longitude']?.toDouble() ?? 0.0,
-      latitude: map['latitude']?.toDouble() ?? 0.0,
+      images: List<String>.from(map['images'] ?? []),
       address: map['address'] ?? '',
+      latitude: map['latitude']?.toDouble() ?? 0.0,
+      longitude: map['longitude']?.toDouble() ?? 0.0,
+      rating: map['rating']?.toDouble() ?? 0,
       description: map['description'] ?? '',
-      govenrate: map['govenrate'] ?? '',
       ownerId: map['ownerId'] ?? '',
+      peroid: map['peroid'] ?? 0,
+      govenrate: map['govenrate'] ?? '',
+      availableTime: (map['available_time'] as Map<String, dynamic>?)?.map(
+            (day, times) => MapEntry(
+              day,
+              (times as Map<String, dynamic>).map(
+                (time, status) => MapEntry(time, status as String),
+              ),
+            ),
+          ) ??
+          {},
+      size: map['size'] ?? 0,
+      price: map['price'] ?? 0,
+      name: map['name'] ?? '',
       playgroundId: map['playgroundId'] ?? '',
       status: map['status'] ?? '',
-      availableTime: Map<String, String>.from(map['available_time'] ?? {}),
-      peroid: map['peroid']?.toInt(),
-      images: List.from(map['images']),
-      price: map['price']?.toDouble() ?? 0.0,
-      rating: map['rating']?.toDouble() ?? 0.0,
-      size: map['size']?.toDouble() ?? 0.0,
     );
   }
 
@@ -166,4 +180,55 @@ class PlaygroundModel {
         rating.hashCode ^
         size.hashCode;
   }
+}
+
+class Intervals {
+  String date;
+  String status;
+  Intervals({
+    required this.date,
+    required this.status,
+  });
+
+  Intervals copyWith({
+    String? date,
+    String? status,
+  }) {
+    return Intervals(
+      date: date ?? this.date,
+      status: status ?? this.status,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'date': date,
+      'status': status,
+    };
+  }
+
+  factory Intervals.fromMap(Map<String, dynamic> map) {
+    return Intervals(
+      date: map['date'] ?? '',
+      status: map['status'] ?? '',
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Intervals.fromJson(String source) =>
+      Intervals.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'Intervals(date: $date, status: $status)';
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is Intervals && other.date == date && other.status == status;
+  }
+
+  @override
+  int get hashCode => date.hashCode ^ status.hashCode;
 }
