@@ -30,6 +30,31 @@ class SignUpCubit extends Cubit<SignUpState> {
             )));
   }
 
+    Future<void> setData( {required AuthUserModel authUserModel}) async {
+    final result = await _signUpRepository.setUser(authUserModel: authUserModel);
+    result.fold(
+        (l) => emit(state.copyWith(
+              state: SignUpStatus.failureSaveData,
+              erorrMessage: l.erorr,
+            )),
+        (r) => emit(state.copyWith(
+              state: SignUpStatus.successSaveData,
+            )));
+  }
+
+  
+    Future<void> deleteUser( {required String uid}) async {
+    final result = await _signUpRepository.deleteUser(uid: uid);
+    result.fold(
+        (l) => emit(state.copyWith(
+              state: SignUpStatus.failureDeleteUser,
+              erorrMessage: l.erorr,
+            )),
+        (r) => emit(state.copyWith(
+              state: SignUpStatus.successDeleteUser,
+            )));
+  }
+
   changeVisiblePassword() {
     emit(state.copyWith(
         state: SignUpStatus.VisiblePassword,

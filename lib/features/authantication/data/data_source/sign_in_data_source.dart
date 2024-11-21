@@ -5,8 +5,10 @@ import '../../../../core/const/firebase_collections.dart';
 import '../../../../core/utils/try_and_catch.dart';
 
 abstract interface class SignInDataSource {
-  Future<Map<String, dynamic>> signInDataSource(
+  Future<UserCredential> signInDataSource(
       {required String email, required String password});
+  Future<Map<String, dynamic>> getUserDataSource(
+      {required String uid});
 }
 
 @Injectable(as: SignInDataSource)
@@ -17,24 +19,34 @@ class SignInDataSourceImpl implements SignInDataSource {
   CollectionReference get _userCollection =>
       _firestore.collection(FirebaseCollections.users);
   @override
-  Future<Map<String, dynamic>> signInDataSource(
+  Future<UserCredential> signInDataSource(
       {required String email, required String password}) async {
     return await executeTryAndCatchForDataLayer(() async {
       return await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) {
-        //  String? idToken =  value.user!.getIdToken();
+          .signInWithEmailAndPassword(email: email, password: password);
+        //   .then((value) {
+        // //  String? idToken =  value.user!.getIdToken();
 
-        final String uid = value.user?.uid ?? "";
+        // final String uid = value.user?.uid ?? "";
 
-        if (uid.isEmpty) {
-          throw "Failed to create user: UID is null.";
-        }
-        var querySnapshot = _userCollection.doc(value.user!.uid);
-        return querySnapshot.get().then((value) {
-          return value.data() as Map<String, dynamic>;
-        });
-      });
+        // if (uid.isEmpty) {
+        //   throw "Failed to create user: UID is null.";
+        // }
+        // var querySnapshot = _userCollection.doc(value.user!.uid);
+        // return querySnapshot.get().then((value) {
+        //   return value.data() as Map<String, dynamic>;
+        // });
+      // });
+    });
+  }
+
+
+    @override
+  Future<Map<String, dynamic>> getUserDataSource(
+      {required String uid}) async {
+    return await executeTryAndCatchForDataLayer(() async {
+      var querySnapshot = await  _userCollection.doc(uid).get();
+      return querySnapshot.data() as Map<String, dynamic>;
     });
   }
 }

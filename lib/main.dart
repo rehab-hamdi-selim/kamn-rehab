@@ -9,6 +9,7 @@ import 'package:kamn/firebase_options.dart';
 import 'package:kamn/features/authantication/presentation/screens/sign_in_screen.dart';
 import 'package:kamn/test_login.dart';
 
+import 'core/routing/app_router.dart';
 import 'features/authantication/presentation/screens/sign_up_screen.dart';
 
 void main() async {
@@ -66,6 +67,7 @@ class MyApp extends StatelessWidget {
             return const SignUpScreen(); // User is not logged in
           },
         ),
+        onGenerateRoute: AppRouter.generateRoute,
       ),
     );
   }

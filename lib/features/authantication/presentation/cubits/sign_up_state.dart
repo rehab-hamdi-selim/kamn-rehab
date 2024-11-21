@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:kamn/features/authantication/data/model/auth_user_model.dart';
-enum SignUpStatus { initial, loading, success, failure, VisiblePassword,VisiblePasswordConfirm }
+enum SignUpStatus { initial, loading, success, failure, VisiblePassword,VisiblePasswordConfirm,successSaveData,failureSaveData,successDeleteUser,failureDeleteUser }
 
 extension SignInStateExtension on SignUpState {
   bool get isInitial => state == SignUpStatus.initial;
@@ -9,6 +9,11 @@ extension SignInStateExtension on SignUpState {
   bool get isFailure => state == SignUpStatus.failure;
   bool get isVisiblePassword => state == SignUpStatus.VisiblePassword;
   bool get isVisiblePasswordConfirm => state == SignUpStatus.VisiblePasswordConfirm;
+  bool get isSuccessSaveData => state == SignUpStatus.successSaveData;
+  bool get isFailureSaveData => state == SignUpStatus.failureSaveData;
+  bool get isSuccessDeleteUser => state == SignUpStatus.successDeleteUser;
+  bool get isFailureDeleteUser => state == SignUpStatus.failureDeleteUser;
+
 
 }
 

@@ -22,6 +22,20 @@ class SignInCubit extends Cubit<SignInState> {
             )),
         (r) => emit(state.copyWith(
               state: SignInStatus.success,
+              uid: r as String,
+
+            )));
+  }
+
+   Future<void> getUser({required String uid}) async {
+    final result = await _signInRepository.getUser(uid: uid);
+    result.fold(
+        (l) => emit(state.copyWith(
+              state: SignInStatus.failureGetData,
+              erorrMessage: l.erorr,
+            )),
+        (r) => emit(state.copyWith(
+              state: SignInStatus.successGetData,
               userModel: r as AuthUserModel,
 
             )));

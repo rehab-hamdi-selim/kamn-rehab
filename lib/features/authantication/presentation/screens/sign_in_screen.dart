@@ -49,6 +49,14 @@ class _SignInScreenState extends State<SignInScreen> {
             print(state.erorrMessage);
             showSnackBar(context, state.erorrMessage ?? "");
           } else if (state.isSuccess) {
+            context.read<SignInCubit>().getUser(uid:state.uid??"") ;
+            print('success');
+          } 
+          if (state.isFailureGetData) {
+            print(state.erorrMessage);
+            showSnackBar(context, state.erorrMessage ?? "");
+          } else if (state.isSuccessGetData) {
+            ///TODO: navigate to home screen
             print('success');
             //  Navigator.pushNamedAndRemoveUntil(context,
             //                       Routes.,
