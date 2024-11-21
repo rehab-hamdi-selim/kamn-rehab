@@ -17,6 +17,7 @@ void main() async {
   );
   configureDependencies();
   await ScreenUtil.ensureScreenSize();
+  // Calling Bloc Observer
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
