@@ -38,9 +38,8 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        // initialRoute: Routes.serviceSelection,
-        // onGenerateRoute: AppRouter.generateRoute,
-        home: SecondPage(),
+        initialRoute: Routes.secondPage,
+        onGenerateRoute: AppRouter.generateRoute,
       ),
     );
   }
