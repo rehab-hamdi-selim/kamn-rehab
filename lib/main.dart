@@ -7,6 +7,7 @@ import 'package:kamn/core/helpers/bloc_observer.dart';
 import 'package:kamn/firebase_options.dart';
 import 'init_dependencies.dart';
 import 'mvc/view/playgrounds_screen_mvc.dart';
+import 'mvp/view/playground_screen_mvp.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
 
         // initialRoute: Routes.serviceSelection,
         // onGenerateRoute: AppRouter.generateRoute,
-        home: const PlayGroundsScreenMVC(),
+        home: const PlaygroundsScreenMVP(),
       ),
     );
   }

@@ -7,11 +7,9 @@ class GetGroundsControllerMVC {
   GetGroundsControllerMVC({required this.dataSource});
 
   Future<List<PlaygroundModel>> getPlaygroundsRequests() async {
-    // return dataSource.getPlaygroundsRequests().then((value) {
-    //   return value.where((element) => element.state == 'pending').toList();
-    // }
-
-    // );
+    return dataSource.getPlaygroundsRequests().then((value) {
+      return value.where((element) => element.price > 1000).toList();
+    });
 
     return dataSource.getPlaygroundsRequests();
   }

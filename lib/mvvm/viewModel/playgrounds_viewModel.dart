@@ -19,7 +19,7 @@ class PlaygroundsViewModel {
 
   // دالة لتحميل البيانات
   Future<void> fetchPlaygroundsRequests() async {
-    _setLoading(true); // تشغيل حالة التحميل
+    setLoading(true); // تشغيل حالة التحميل
     _setErrorMessage(null); // تصفية الأخطاء
 
     try {
@@ -30,7 +30,7 @@ class PlaygroundsViewModel {
     } catch (error) {
       _setErrorMessage(error.toString());
     } finally {
-      _setLoading(false); // إيقاف حالة التحميل
+      setLoading(false); // إيقاف حالة التحميل
     }
   }
 
@@ -40,7 +40,7 @@ class PlaygroundsViewModel {
   }
 
   // تحديث حالة التحميل
-  void _setLoading(bool value) {
+  void setLoading(bool value) {
     _isLoading = value;
   }
 

@@ -23,7 +23,7 @@ class _PlaygroundsScreenStateMVVM extends State<PlaygroundsScreenMVVM> {
   }
 
   Future<void> _loadData() async {
-    // viewModel.setLoading(true);
+    viewModel.setLoading(true);
     setState(() {});
     await viewModel.fetchPlaygroundsRequests();
     setState(() {}); // إعادة بناء الواجهة
