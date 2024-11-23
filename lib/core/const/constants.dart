@@ -6,6 +6,8 @@ class Constants {
     'Entertainment',
   ];
 
+  static const overview = 'Overview';
+  static const salesOverView = 'Salesoverview';
   static const noConnectionErrorMessage = 'Not connected to a network!';
   static const directions = 'Dirextions';
   static const playGroundFeatures = 'Playground Features';
