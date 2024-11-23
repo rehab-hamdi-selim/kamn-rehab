@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/helpers/bloc_observer.dart';
 import 'package:kamn/core/routing/routes.dart';
+import 'package:kamn/features/admin/presentation/screens/first_analytics_page/first_analytics_page.dart';
 import 'package:kamn/features/admin/presentation/screens/second_page/second_page.dart';
 import 'package:kamn/firebase_options.dart';
 
@@ -39,9 +40,9 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        // initialRoute: Routes.serviceSelection,
-        // onGenerateRoute: AppRouter.generateRoute,
-        home: SecondPage(),
+        initialRoute: Routes.analyticsfirstpage,
+        onGenerateRoute: AppRouter.generateRoute,
+        // home: FirstAnalyticsPage(),
       ),
     );
   }
