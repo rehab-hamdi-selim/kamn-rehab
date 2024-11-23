@@ -70,6 +70,7 @@ class Constants {
   static const skyDiving = "Sky Diving";
   static const swimming = "Swimming";
   static const welcomeToManagementSystem = 'Welcome to\nManagement System';
+  static const financialReports = 'Financial Reports';
 
   static const List<String> egyptGovernorates = [
     "Cairo",
