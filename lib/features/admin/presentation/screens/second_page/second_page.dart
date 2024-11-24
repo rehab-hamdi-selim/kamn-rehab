@@ -33,7 +33,7 @@ class SecondPage extends StatelessWidget {
               ),
             ),
           ),
-          body: state is GetChartDataLoading
+          body: state.inLoading
               ? const Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
@@ -45,15 +45,10 @@ class SecondPage extends StatelessWidget {
                           const CustomExpactedEarningChart(),
                           const CustomAnalyticsChart(),
                           verticalSpace(18.h),
-                          InkWell(
-                            onTap: () {
-                              SecondPageCubit.get(context).getChartData();
-                            },
-                            child: const CustomIncomeOutcomeItem(
-                              text: 'Income',
-                              money: '345,334 EGP',
-                              increase: -2,
-                            ),
+                          const CustomIncomeOutcomeItem(
+                            text: 'Income',
+                            money: '345,334 EGP',
+                            increase: -2,
                           ),
                           verticalSpace(18.h),
                           const CustomIncomeOutcomeItem(
