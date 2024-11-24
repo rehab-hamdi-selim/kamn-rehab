@@ -43,6 +43,7 @@ class MyApp extends StatelessWidget {
         initialRoute: Routes.analyticsfirstpage,
         onGenerateRoute: AppRouter.generateRoute,
         // home: FirstAnalyticsPage(),
+    
       ),
     );
   }

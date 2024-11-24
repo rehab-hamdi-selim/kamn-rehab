@@ -1,13 +1,18 @@
-abstract class SecondPageState {}
+import 'package:kamn/features/admin/data/models/chart_data_model.dart';
 
-final class SecondPageCubitInitial extends SecondPageState {}
+enum SecondPageStatus { intial, loading, success, failure }
 
-final class GetChartDataLoading extends SecondPageState {}
+// Ask What is State
+extension SecondPageExtension on SecondPageState {
+  bool get inInitial => state == SecondPageStatus.intial;
+  bool get inLoading => state == SecondPageStatus.loading;
+  bool get inSuccess => state == SecondPageStatus.success;
+  bool get inFailure => state == SecondPageStatus.failure;
+}
 
-final class GetChartDataSuccess extends SecondPageState {}
-
-final class GetChartDataError extends SecondPageState {
-  final String error;
-
-  GetChartDataError({required this.error});
+class SecondPageState {
+  final SecondPageStatus? state;
+  final ChartDataModel? data;
+  final String? erorrMessage;
+  SecondPageState({this.state, this.data, this.erorrMessage});
 }
