@@ -16,6 +16,8 @@ import '../../features/admin/data/data_source/second_page_data_source.dart'
     as _i746;
 import '../../features/admin/data/repository/second_page_repository.dart'
     as _i173;
+import '../../features/admin/domain/use_case/second_page_use_case.dart'
+    as _i396;
 import '../../features/admin/presentation/cubits/second_page_cubit/second_page_cubit.dart'
     as _i608;
 import '../../features/sports/data/data_source/sports_remote_data_source.dart'
@@ -65,8 +67,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i542.ServiceProvidersRepository>(() =>
         _i542.ServiceProvidersRepositoryImpl(
             dataSource: gh<_i1047.ServiceProvidersRemoteDataSource>()));
-    gh.factory<_i608.SecondPageCubit>(() =>
-        _i608.SecondPageCubit(repository: gh<_i173.SecondPageRepository>()));
+    gh.factory<_i396.SecondPageUseCase>(() => _i396.SecondPageUseCaseImpl(
+        repository: gh<_i173.SecondPageRepository>()));
+    gh.factory<_i608.SecondPageCubit>(() => _i608.SecondPageCubit(
+          repository: gh<_i173.SecondPageRepository>(),
+          dataFilter: gh<_i396.SecondPageUseCase>(),
+        ));
     gh.factory<_i575.SportsRemoteDataSource>(() =>
         _i575.SportsRemoteDataSourceImpl(
             firestore: gh<_i974.FirebaseFirestore>()));
