@@ -10,14 +10,18 @@ class SignInRepository {
   final SignInDataSource _remoteDataSource;
   SignInRepository({required SignInDataSource remoteDataSource})
       : _remoteDataSource = remoteDataSource;
-  Future<Either<Faliure, AuthUserModel?>> signIn({required String email, required String password}) async {
+  Future<Either<Faliure, String?>> signIn({required String email, required String password}) async {
     return executeTryAndCatchForRepository(() async {
-      final Map<String, dynamic> rawData =
-          await _remoteDataSource.signInDataSource(email: email, password:password);
+      final userCredential =  await _remoteDataSource.signInDataSource(email: email, password:password);
+      return userCredential.user!.uid;
+    });
+  }
 
-      final userModel =AuthUserModel.fromMap(rawData);
-
-      return userModel;
+ Future<Either<Faliure, AuthUserModel?>> getUser(
+      {required String uid}) async {
+    return executeTryAndCatchForRepository(() async {
+      final authUserModel =  await _remoteDataSource.getUserDataSource(uid:  uid);
+     return AuthUserModel.fromMap(authUserModel);
     });
   }
 }

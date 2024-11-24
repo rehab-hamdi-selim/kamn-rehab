@@ -57,12 +57,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
             showSnackBar(context, state.erorrMessage ?? "");
             print(state.erorrMessage);
           } else if (state.isSuccess) {
+            context.read<SignUpCubit>().setData(authUserModel: state.userModel!);
             showSnackBar(context, "Sign Up Successfully");
+          }else if (state.isFailureSaveData) {
+            state.erorrMessage;
+            context.read<SignUpCubit>().deleteUser(uid: state.userModel?.uid??"");
+            ///TODO: delete account
+            showSnackBar(context, state.erorrMessage??"error");
+          }else if (state.isSuccessSaveData) {
+            showSnackBar(context, "save data Successfully");
+            ///TODO: navigate to home screen
+           
             //  Navigator.pushNamedAndRemoveUntil(context,
             //                       Routes.,
             //                       (Route<dynamic> route) => false,
             //                     );
           }
+
         },
         builder: (context, state) {
           return Scaffold(

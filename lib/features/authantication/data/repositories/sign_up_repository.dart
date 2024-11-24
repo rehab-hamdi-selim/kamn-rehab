@@ -13,6 +13,10 @@ abstract interface class SignUpRepository {
     required String password,
     required String name,
   });
+  Future<Either<Faliure, void>> setUser(
+      {required AuthUserModel authUserModel}) ;
+        Future<Either<Faliure, void>> deleteUser(
+      {required String uid});
 }
 
 @Injectable(as: SignUpRepository)
@@ -52,12 +56,31 @@ class SignUpRepositoryImpl implements SignUpRepository {
       );
 
       // Store additional user data in Firestore
-      await _firestore
-          .collection('users')
-          .doc(userCredential.user!.uid)
-          .set(authUserModel.toMap());
+      // await _firestore
+      //     .collection('users')
+      //     .doc(userCredential.user!.uid)
+      //     .set(authUserModel.toMap());
 
       return authUserModel;
     });
   }
+
+  @override
+  Future<Either<Faliure, void>> setUser(
+      {required AuthUserModel authUserModel}) async {
+    return await executeTryAndCatchForRepository(() async {
+       await _signUpDataSource.setUserDataSource( authUserModel: authUserModel);
+     
+    });
+  }
+
+    @override
+  Future<Either<Faliure, void>> deleteUser(
+      {required String uid}) async {
+    return await executeTryAndCatchForRepository(() async {
+       await _signUpDataSource.deleteUserAccountDataSource( uid: uid);
+     
+    });
+  }
+
 }
