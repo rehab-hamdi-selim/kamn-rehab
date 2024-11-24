@@ -11,5 +11,6 @@ class Routes {
   static const String serviceProviderGroundDetailsScreen =
       '/serviceProviderGroundDetailsScreen';
   static const String editServiceScreen = '/editServiceScreen';
+  static const String analyticsfirstpage = '/analyticsfirstpage';
   static const String secondPage = '/secondPage';
 }
