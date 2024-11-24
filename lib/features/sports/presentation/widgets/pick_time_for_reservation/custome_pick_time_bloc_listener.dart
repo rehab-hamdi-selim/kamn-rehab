@@ -19,12 +19,11 @@ class CustomePickTimeBlocListener extends StatelessWidget {
         PickTimeForReservationState>(
       listener: (context, state) {
         if (state.isSuccess) {
-          Map<String, dynamic> updates = {};
-
-          for (var interval in cubit.selectedIntervals) {
-            updates['available_time.$interval'] = 'selected';
-          }
-          cubit.updateAvailableTimeForGround(playground.playgroundId, updates);
+          cubit.updateAvailableTimeForGround(
+              playground.playgroundId!, cubit.updates);
+        }
+        if (state.isFailureUpdate) {
+          cubit.deleteReservation(state.reservation!);
         }
         if (state.isAvailabledTimeUpdated) {
           Navigator.pushNamed(context, Routes.groundsScreen);

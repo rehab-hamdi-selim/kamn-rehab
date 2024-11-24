@@ -7,7 +7,7 @@ class ReservationModel {
   String? userId;
   String? groundId;
   DateTime? date;
-  double? price;
+  num? price;
   String? startAt;
   String? endAt;
   ReservationModel({
@@ -25,7 +25,7 @@ class ReservationModel {
     ValueGetter<String?>? userId,
     ValueGetter<String?>? groundId,
     ValueGetter<DateTime?>? date,
-    ValueGetter<double?>? price,
+    ValueGetter<num?>? price,
     ValueGetter<String?>? startAt,
     ValueGetter<String?>? endAt,
   }) {
@@ -61,7 +61,7 @@ class ReservationModel {
       date: map['date'] != null
           ? DateTime.fromMillisecondsSinceEpoch(map['date'])
           : null,
-      price: map['price']?.toDouble(),
+      price: map['price']?.toInt(),
       startAt: map['startAt'],
       endAt: map['endAt'],
     );

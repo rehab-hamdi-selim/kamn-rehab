@@ -7,8 +7,9 @@ import '../../../../core/utils/try_and_catch.dart';
 
 abstract interface class SportsRemoteDataSource {
   Future<List<Map<String, dynamic>>> getPlaygrounds();
-  Future<void> submitReservation(ReservationModel reservation);
+  Future<ReservationModel> submitReservation(ReservationModel reservation);
   Future<void> updateState(String playgroundId, Map<String, dynamic> data);
+  Future<void> delete(ReservationModel reservation);
 }
 
 @Injectable(as: SportsRemoteDataSource)
@@ -28,13 +29,14 @@ class SportsRemoteDataSourceImpl implements SportsRemoteDataSource {
   }
 
   @override
-  Future<void> submitReservation(ReservationModel reservation) {
+  Future<ReservationModel> submitReservation(ReservationModel reservation) {
     return executeTryAndCatchForDataLayer(() async {
       var docRef = firestoreService.firestore
           .collection(FirebaseCollections.reservation)
           .doc();
       reservation.reservationId = docRef.id;
       await docRef.set(reservation.toMap());
+      return reservation;
     });
   }
 
@@ -43,6 +45,16 @@ class SportsRemoteDataSourceImpl implements SportsRemoteDataSource {
     return executeTryAndCatchForDataLayer(() async {
       return await firestoreService.updateData(
           FirebaseCollections.playgrounds, playgroundId, data);
+    });
+  }
+
+  @override
+  Future<void> delete(ReservationModel reservation) {
+    return executeTryAndCatchForDataLayer(() async {
+      var docRef = firestoreService.firestore
+          .collection(FirebaseCollections.reservation)
+          .doc(reservation.reservationId);
+      return await docRef.delete();
     });
   }
 }

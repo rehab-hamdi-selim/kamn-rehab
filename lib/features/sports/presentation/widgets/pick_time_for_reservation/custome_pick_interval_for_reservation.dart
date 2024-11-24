@@ -18,17 +18,15 @@ class CustomePickIntervalForReservation extends StatelessWidget {
       return cubit.selectedIntervals.contains(interval);
     }
 
-    return GestureDetector(
-      onTap: () {
-        if (status == 'unSelect') {
-          cubit.onIntervalSelection(interval);
-        }
-      },
-      child:
-          BlocBuilder<PickTimeForReservationCubit, PickTimeForReservationState>(
-        builder: (context, state) {
-          return status == 'unSelect'
-              ? Container(
+    return BlocBuilder<PickTimeForReservationCubit,
+        PickTimeForReservationState>(
+      builder: (context, state) {
+        return status == 'unSelected'
+            ? GestureDetector(
+                onTap: () {
+                  cubit.onIntervalSelection(interval);
+                },
+                child: Container(
                   margin: const EdgeInsets.symmetric(vertical: 8),
                   padding: const EdgeInsets.all(16),
                   width: 100.w,
@@ -94,7 +92,7 @@ class CustomePickIntervalForReservation extends StatelessWidget {
                   ),
                 );
         },
-      ),
-    );
+      );
+    
   }
 }
