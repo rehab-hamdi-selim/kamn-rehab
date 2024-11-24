@@ -65,7 +65,6 @@ extension GetItInjectableX on _i174.GetIt {
           firestoreServices: gh<_i158.FirestoreService>(),
           storageServies: gh<_i304.FirebaseStorageServices>(),
         ));
-    gh.lazySingleton<_i158.FirestoreService>(() => _i158.FirestoreService());
     gh.factory<_i746.SecondPageDataSource>(() => _i746.SecondPageDataSourceImpl(
         firestore: gh<_i158.FirestoreService>()));
     gh.factory<_i1047.ServiceProvidersRemoteDataSource>(
@@ -93,12 +92,7 @@ extension GetItInjectableX on _i174.GetIt {
         _i209.AnalyticsCubit(repository: gh<_i724.AnalyticsRepository>()));
     gh.factory<_i379.SportsRepository>(() => _i379.SportsRepository(
         remoteDataSource: gh<_i575.SportsRemoteDataSource>()));
-    gh.factory<_i773.EditServiceProviderCubit>(() =>
-        _i773.EditServiceProviderCubit(
-            repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i692.ServiceProviderGroundDetailsCubit>(() =>
-        _i692.ServiceProviderGroundDetailsCubit(
-            repository: gh<_i542.ServiceProvidersRepository>()));
+
     gh.factory<_i252.AddServiceProviderCubit>(() =>
         _i252.AddServiceProviderCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
