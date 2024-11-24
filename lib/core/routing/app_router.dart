@@ -1,7 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/routing/routes.dart';
+import 'package:kamn/features/admin/data/data_source/second_page_data_source.dart';
+import 'package:kamn/features/admin/data/repository/second_page_repository.dart';
+import 'package:kamn/features/admin/presentation/cubits/second_page_cubit/second_page_cubit.dart';
+import 'package:kamn/features/admin/presentation/screens/second_page/second_page.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/sports/presentation/screens/grounds_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/my_profile_screen.dart';
@@ -70,6 +75,11 @@ class AppRouter {
                         settings.arguments as PlaygroundRequestModel,
                   ),
                 ));
+      case Routes.secondPage:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider<SecondPageCubit>(
+                create: (context) => getIt<SecondPageCubit>()..getChartData(),
+                child: const SecondPage()));
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(
