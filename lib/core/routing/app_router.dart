@@ -78,11 +78,7 @@ class AppRouter {
       case Routes.secondPage:
         return MaterialPageRoute(
             builder: (context) => BlocProvider<SecondPageCubit>(
-                create: (context) => SecondPageCubit(
-                    repository: SecondPageRepositoryImpl(
-                        secondPageDataSource: SecondPageDataSourceImpl(
-                            firestore: FirebaseFirestore.instance)))
-                  ..getChartData(),
+                create: (context) => getIt<SecondPageCubit>()..getChartData(),
                 child: const SecondPage()));
       default:
         return MaterialPageRoute(

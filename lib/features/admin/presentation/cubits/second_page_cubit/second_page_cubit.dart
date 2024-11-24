@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:kamn/features/admin/data/repository/second_page_repository.dart';
 import 'package:kamn/features/admin/presentation/cubits/second_page_cubit/second_page_state.dart';
 
+@injectable
 class SecondPageCubit extends Cubit<SecondPageState> {
   SecondPageCubit({required this.repository})
       : super(SecondPageState(state: SecondPageStatus.intial));

@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:injectable/injectable.dart';
 import 'package:kamn/core/erorr/faliure.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/utils/try_and_catch.dart';
@@ -13,6 +14,7 @@ abstract class SecondPageRepository {
   ChartDataModel getChartData(AnalyticsModel data);
 }
 
+@Injectable(as: SecondPageRepository)
 class SecondPageRepositoryImpl implements SecondPageRepository {
   final SecondPageDataSource secondPageDataSource;
   SecondPageRepositoryImpl({required this.secondPageDataSource});
