@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/core/erorr/faliure.dart';
@@ -13,22 +12,18 @@ abstract interface class SignUpRepository {
     required String password,
     required String name,
   });
-  Future<Either<Faliure, void>> setUser(
-      {required AuthUserModel authUserModel}) ;
-        Future<Either<Faliure, void>> deleteUser(
-      {required String uid});
+  Future<Either<Faliure, void>> setUser({required AuthUserModel authUserModel});
+  Future<Either<Faliure, void>> deleteUser({required String uid});
 }
 
 @Injectable(as: SignUpRepository)
 class SignUpRepositoryImpl implements SignUpRepository {
   final SignUpDataSource _signUpDataSource;
-  final FirebaseFirestore _firestore;
 
   SignUpRepositoryImpl({
     required SignUpDataSource signUpDataSource,
     required FirebaseFirestore firestore,
-  })  : _signUpDataSource = signUpDataSource,
-        _firestore = firestore;
+  }) : _signUpDataSource = signUpDataSource;
 
   @override
   Future<Either<Faliure, AuthUserModel>> signUp({
@@ -69,18 +64,14 @@ class SignUpRepositoryImpl implements SignUpRepository {
   Future<Either<Faliure, void>> setUser(
       {required AuthUserModel authUserModel}) async {
     return await executeTryAndCatchForRepository(() async {
-       await _signUpDataSource.setUserDataSource( authUserModel: authUserModel);
-     
+      await _signUpDataSource.setUserDataSource(authUserModel: authUserModel);
     });
   }
 
-    @override
-  Future<Either<Faliure, void>> deleteUser(
-      {required String uid}) async {
+  @override
+  Future<Either<Faliure, void>> deleteUser({required String uid}) async {
     return await executeTryAndCatchForRepository(() async {
-       await _signUpDataSource.deleteUserAccountDataSource( uid: uid);
-     
+      await _signUpDataSource.deleteUserAccountDataSource(uid: uid);
     });
   }
-
 }

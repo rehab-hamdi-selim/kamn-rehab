@@ -8,10 +8,10 @@ import '../../../../core/utils/try_and_catch.dart';
 abstract interface class SignUpDataSource {
   Future<UserCredential> signUpDataSource(
       {required String email, required String password, required String name});
-      Future<void> setUserDataSource(
-      {required AuthUserModel authUserModel});
-  Future<void> deleteUserAccountDataSource(
-      {required String uid,}) ;
+  Future<void> setUserDataSource({required AuthUserModel authUserModel});
+  Future<void> deleteUserAccountDataSource({
+    required String uid,
+  });
 }
 
 @Injectable(as: SignUpDataSource)
@@ -46,19 +46,19 @@ class SignUpDataSourceImpl implements SignUpDataSource {
     });
   }
 
-    @override
-  Future<void> setUserDataSource(
-      {required AuthUserModel authUserModel}) async {
-     return await executeTryAndCatchForDataLayer(() async {
-          _userCollection.doc(authUserModel.uid)
-              .set(authUserModel.toMap());});
+  @override
+  Future<void> setUserDataSource({required AuthUserModel authUserModel}) async {
+    return await executeTryAndCatchForDataLayer(() async {
+      _userCollection.doc(authUserModel.uid).set(authUserModel.toMap());
+    });
   }
 
-      @override
-  Future<void> deleteUserAccountDataSource(
-      {required String uid,}) async {
-     return await executeTryAndCatchForDataLayer(() async {
-          _userCollection.doc(uid).delete();});
+  @override
+  Future<void> deleteUserAccountDataSource({
+    required String uid,
+  }) async {
+    return await executeTryAndCatchForDataLayer(() async {
+      _auth.currentUser?.delete();
+    });
   }
-
 }

@@ -3,7 +3,6 @@ import 'package:injectable/injectable.dart';
 import 'package:kamn/features/authantication/presentation/cubits/sign_up_state.dart';
 import '../../data/model/auth_user_model.dart';
 import '../../data/repositories/sign_up_repository.dart';
-import 'sign_in_state.dart';
 
 @injectable
 class SignUpCubit extends Cubit<SignUpState> {
@@ -30,8 +29,9 @@ class SignUpCubit extends Cubit<SignUpState> {
             )));
   }
 
-    Future<void> setData( {required AuthUserModel authUserModel}) async {
-    final result = await _signUpRepository.setUser(authUserModel: authUserModel);
+  Future<void> setData({required AuthUserModel authUserModel}) async {
+    final result =
+        await _signUpRepository.setUser(authUserModel: authUserModel);
     result.fold(
         (l) => emit(state.copyWith(
               state: SignUpStatus.failureSaveData,
@@ -42,8 +42,7 @@ class SignUpCubit extends Cubit<SignUpState> {
             )));
   }
 
-  
-    Future<void> deleteUser( {required String uid}) async {
+  Future<void> deleteUser({required String uid}) async {
     final result = await _signUpRepository.deleteUser(uid: uid);
     result.fold(
         (l) => emit(state.copyWith(
