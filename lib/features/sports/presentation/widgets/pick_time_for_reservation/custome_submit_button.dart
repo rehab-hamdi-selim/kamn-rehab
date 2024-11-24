@@ -25,16 +25,7 @@ class CustomeSubmitButton extends StatelessWidget {
               disabledBackgroundColor: AppPallete.blackColor,
               backgroundColor: AppPallete.blackColor),
           onPressed: () {
-            cubit.selectedIntervals.sort();
-            DateTime lastTime =
-                DateFormat.Hm().parse(cubit.selectedIntervals.last);
-            lastTime = lastTime.add(Duration(minutes: playground.peroid ?? 60));
-            cubit.onSubmitReservation(ReservationModel(
-                groundId: playground.playgroundId,
-                date: DateTime.now(),
-                startAt: cubit.selectedIntervals.first,
-                endAt: DateFormat.jm().format(lastTime),
-                price: playground.price));
+            cubit.onSubmitReservation(perpareReservation(cubit));
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -49,5 +40,18 @@ class CustomeSubmitButton extends StatelessWidget {
             ],
           )),
     );
+  }
+
+  ReservationModel perpareReservation(PickTimeForReservationCubit cubit) {
+    cubit.selectedIntervals.sort();
+    DateTime lastTime = DateFormat.Hm().parse(cubit.selectedIntervals.last);
+    lastTime =
+        lastTime.add(Duration(minutes: playground.peroid?.toInt() ?? 60));
+    return ReservationModel(
+        groundId: playground.playgroundId,
+        date: DateTime.now(),
+        startAt: cubit.selectedIntervals.first,
+        endAt: DateFormat.jm().format(lastTime),
+        price: playground.price);
   }
 }

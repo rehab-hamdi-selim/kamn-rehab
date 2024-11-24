@@ -19,17 +19,15 @@ class CustomePickIntervalForReservation extends StatelessWidget {
       return cubit.selectedIntervals.contains(interval);
     }
 
-    return GestureDetector(
-      onTap: () {
-        if (status == 'unSelect') {
-          cubit.onIntervalSelection(interval);
-        }
-      },
-      child:
-          BlocBuilder<PickTimeForReservationCubit, PickTimeForReservationState>(
-        builder: (context, state) {
-          return status == 'unSelect'
-              ? Container(
+    return BlocBuilder<PickTimeForReservationCubit,
+        PickTimeForReservationState>(
+      builder: (context, state) {
+        return status == 'unSelected'
+            ? GestureDetector(
+                onTap: () {
+                  cubit.onIntervalSelection(interval);
+                },
+                child: Container(
                   margin: const EdgeInsets.symmetric(vertical: 8),
                   padding: const EdgeInsets.all(16),
                   width: 100.w,
@@ -65,37 +63,37 @@ class CustomePickIntervalForReservation extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
-              : Container(
-                  margin: const EdgeInsets.symmetric(vertical: 8),
-                  padding: const EdgeInsets.all(16),
-                  width: 100.w,
-                  decoration: BoxDecoration(
+                ),
+              )
+            : Container(
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                padding: const EdgeInsets.all(16),
+                width: 100.w,
+                decoration: BoxDecoration(
+                  color: Colors.redAccent,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
                     color: Colors.redAccent,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: Colors.redAccent,
-                      width: 2,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          blurRadius: 4,
-                          spreadRadius: 1)
-                    ],
+                    width: 2,
                   ),
-                  child: Center(
-                    child: Text(
-                      interval,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        blurRadius: 4,
+                        spreadRadius: 1)
+                  ],
+                ),
+                child: Center(
+                  child: Text(
+                    interval,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                );
-        },
-      ),
+                ),
+              );
+      },
     );
   }
 }

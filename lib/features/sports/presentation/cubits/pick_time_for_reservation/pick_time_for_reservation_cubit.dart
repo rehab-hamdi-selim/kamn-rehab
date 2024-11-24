@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
 import 'package:kamn/features/sports/data/repositories/sports_repository.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_state.dart';
@@ -11,12 +12,17 @@ class PickTimeForReservationCubit extends Cubit<PickTimeForReservationState> {
             state: PickTimeForReservationStatus.initial));
   SportsRepository repository;
   List<String> selectedIntervals = [];
+  Map<String, dynamic> updates = {};
 
   void onIntervalSelection(String interval) {
     if (selectedIntervals.contains(interval)) {
       selectedIntervals.remove(interval);
+      updates.remove(
+          'available_time.${DateFormat.E().format(state.selectedDate!)}.$interval');
     } else {
       selectedIntervals.add(interval);
+      updates['available_time.${DateFormat.E().format(state.selectedDate!)}.$interval'] =
+          'selected';
     }
     emit(state.copyWith(state: PickTimeForReservationStatus.intervalSelected));
   }
@@ -29,7 +35,8 @@ class PickTimeForReservationCubit extends Cubit<PickTimeForReservationState> {
           state: PickTimeForReservationStatus.failure,
           erorrMessage: error.erorr));
     }, (success) {
-      emit(state.copyWith(state: PickTimeForReservationStatus.success));
+      emit(state.copyWith(
+          state: PickTimeForReservationStatus.success, reservation: success));
     });
   }
 
@@ -40,11 +47,26 @@ class PickTimeForReservationCubit extends Cubit<PickTimeForReservationState> {
     var response = await repository.updateState(playgroundId, data);
     response.fold((error) {
       emit(state.copyWith(
-          state: PickTimeForReservationStatus.failure,
+          state: PickTimeForReservationStatus.failureUpdate,
           erorrMessage: error.erorr));
     }, (success) {
       emit(state.copyWith(
           state: PickTimeForReservationStatus.availabledTimeUpdated));
     });
+  }
+
+  deleteReservation(ReservationModel reservation) async {
+    var response = await repository.delete(reservation);
+    response.fold((error) {
+      emit(state.copyWith(
+          state: PickTimeForReservationStatus.failure,
+          erorrMessage: error.erorr));
+    }, (succress) {});
+  }
+
+  void onDaySelected(DateTime newDay) {
+    emit(state.copyWith(
+        state: PickTimeForReservationStatus.loading, selectedDate: newDay));
+    print(DateFormat.E().format(state.selectedDate!));
   }
 }
