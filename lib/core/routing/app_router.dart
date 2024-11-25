@@ -9,6 +9,7 @@ import 'package:kamn/features/admin/data/data_source/second_page_data_source.dar
 import 'package:kamn/features/admin/data/repository/second_page_repository.dart';
 import 'package:kamn/features/admin/presentation/cubits/second_page_cubit/second_page_cubit.dart';
 import 'package:kamn/features/admin/presentation/screens/second_page/second_page.dart';
+import 'package:kamn/features/payment/presentation/screens/payment_options_screen.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/sports/presentation/screens/grounds_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/my_profile_screen.dart';
@@ -88,6 +89,9 @@ class AppRouter {
             builder: (context) => BlocProvider<SecondPageCubit>(
                 create: (context) => getIt<SecondPageCubit>()..getChartData(),
                 child: const SecondPage()));
+      case Routes.paymentOptionsScreen:
+        return MaterialPageRoute(
+            builder: (context) => const PaymentOptionsScreen());
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(

@@ -124,6 +124,11 @@ class TextStyles {
       color: AppPallete.darkGreenColor,
       fontWeight: FontWeightHelper.bold,
       fontSize: 30.h);
+  static TextStyle font30DarkGreenColorMedium = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.darkGreenColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 30.h);
   static TextStyle font14RobotoLightBlackColorRegular = TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.lightBlackColor,
@@ -149,6 +154,11 @@ class TextStyles {
       color: AppPallete.whiteColor,
       fontWeight: FontWeightHelper.regular,
       fontSize: 12.h);
+  static TextStyle fontRoboto12DarkGreyMedium = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.darkGreyColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 12.h);
   static TextStyle font10BlackColorW400 = TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.accentBlackColor,
@@ -158,6 +168,16 @@ class TextStyles {
       fontFamily: "Roboto",
       color: AppPallete.accentBlackColor,
       fontWeight: FontWeightHelper.bold,
+      fontSize: 15.h);
+  static TextStyle font15BlackColorMedium = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.accentBlackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 15.h);
+  static TextStyle font15BlackColorRegular = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.accentBlackColor,
+      fontWeight: FontWeightHelper.regular,
       fontSize: 15.h);
   static TextStyle font16DartBlackColorW400 = TextStyle(
       fontFamily: "Roboto",
