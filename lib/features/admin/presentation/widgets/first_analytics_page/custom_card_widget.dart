@@ -1,10 +1,9 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomCardWidget extends StatelessWidget {
-  CustomCardWidget({
+  const CustomCardWidget({
+    super.key,
     this.backgroundcolor,
     this.title,
     this.prficon,
@@ -17,15 +16,15 @@ class CustomCardWidget extends StatelessWidget {
     this.number,
     this.percentage,
   });
-  Color? backgroundcolor, iconcolor, percntagecolor;
-  String? title, number, percentage;
-  Icon? prficon, sufficon;
-  double? height, width;
-  Bool? bercentagestatus;
+  final Color? backgroundcolor, iconcolor, percntagecolor;
+  final String? title, number, percentage;
+  final Icon? prficon, sufficon;
+  final double? height, width;
+  final bool? bercentagestatus;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 6),
+      padding: const EdgeInsets.symmetric(vertical: 6),
       child: Container(
         height: height?.h,
         width: width?.w,
@@ -39,7 +38,7 @@ class CustomCardWidget extends StatelessWidget {
             color: backgroundcolor,
             surfaceTintColor: Colors.white,
             child: Padding(
-              padding: EdgeInsets.all(14),
+              padding: const EdgeInsets.all(14),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +50,7 @@ class CustomCardWidget extends StatelessWidget {
                         Icons.shopping_cart_outlined,
                         color: iconcolor,
                       ),
-                      Spacer(
+                      const Spacer(
                         flex: 1,
                       ),
                       Text(
@@ -59,10 +58,10 @@ class CustomCardWidget extends StatelessWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 10.h),
                       ),
-                      Spacer(
+                      const Spacer(
                         flex: 25,
                       ),
-                      Icon(Icons.more_vert)
+                      const Icon(Icons.more_vert)
                     ],
                   ),
                   Text(
@@ -72,7 +71,7 @@ class CustomCardWidget extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.arrow_circle_down_outlined,
                         size: 11,
                         color: Colors.red,
