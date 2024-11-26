@@ -10,6 +10,7 @@ import 'package:kamn/features/admin/data/repository/second_page_repository.dart'
 import 'package:kamn/features/admin/presentation/cubits/second_page_cubit/second_page_cubit.dart';
 import 'package:kamn/features/admin/presentation/screens/second_page/second_page.dart';
 import 'package:kamn/features/payment/presentation/screens/payment_options_screen.dart';
+import 'package:kamn/features/payment/presentation/screens/proceed_payment_screen.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/sports/presentation/screens/grounds_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/my_profile_screen.dart';
@@ -92,6 +93,9 @@ class AppRouter {
       case Routes.paymentOptionsScreen:
         return MaterialPageRoute(
             builder: (context) => const PaymentOptionsScreen());
+      case Routes.proceedPaymentScreen:
+        return MaterialPageRoute(
+            builder: (context) => const ProceedPaymentScreen());
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(
