@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/features/payment/presentation/widgets/payment_options/custom_button.dart';
 import 'package:kamn/features/payment/presentation/widgets/proceed_payment/custom_price_payment_details.dart';
 import 'package:kamn/features/payment/presentation/widgets/proceed_payment/custom_proceed_payment_details.dart';

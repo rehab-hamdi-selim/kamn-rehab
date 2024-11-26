@@ -73,7 +73,7 @@ class Constants {
   static const swimming = "Swimming";
   static const welcomeToManagementSystem = 'Welcome to\nManagement System';
   static const financialReports = 'Financial Reports';
-  static const paymentOptions = 'Choose payment option';
+  static const paymentOptions = 'Choose payment\noption';
 
   static const List<String> egyptGovernorates = [
     "Cairo",

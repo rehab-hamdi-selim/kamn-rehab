@@ -10,8 +10,7 @@ class CustomPaymentText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          EdgeInsets.only(left: 27.w, right: 95.w, top: 20.h, bottom: 24.h),
+      padding: EdgeInsets.only(left: 27.w, top: 20.h, bottom: 24.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
