@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/icon_links.dart';
 import 'package:kamn/core/helpers/spacer.dart';
-import 'package:kamn/features/payment/presentation/widgets/payment_options/payment_options_item.dart';
+import 'package:kamn/features/payment/presentation/widgets/payment_options/custom_payment_options_item.dart';
 
-class PaymentOptionsList extends StatelessWidget {
-  const PaymentOptionsList({super.key});
+class CustomPaymentOptionsList extends StatelessWidget {
+  const CustomPaymentOptionsList({super.key});
   static const List paymentIcons = [
     IconLinks.wallet,
     IconLinks.bank,
@@ -25,7 +25,7 @@ class PaymentOptionsList extends StatelessWidget {
       itemBuilder: (context, index) {
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 19.w),
-          child: PaymentOptionsItem(
+          child: CustomPaymentOptionsItem(
             onTap: () {
               print('Hallo');
             },

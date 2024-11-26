@@ -4,8 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 
-class PaymentOptionsItem extends StatelessWidget {
-  const PaymentOptionsItem(
+class CustomPaymentOptionsItem extends StatelessWidget {
+  const CustomPaymentOptionsItem(
       {super.key,
       required this.paymentIcon,
       required this.isSelected,

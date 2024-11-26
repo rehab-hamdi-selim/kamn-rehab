@@ -4,8 +4,8 @@ import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/style.dart';
 
-class PaymentText extends StatelessWidget {
-  const PaymentText({super.key});
+class CustomPaymentText extends StatelessWidget {
+  const CustomPaymentText({super.key});
 
   @override
   Widget build(BuildContext context) {
