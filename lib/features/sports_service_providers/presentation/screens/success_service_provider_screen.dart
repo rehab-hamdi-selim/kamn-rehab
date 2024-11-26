@@ -54,7 +54,7 @@ class SuccessServiceProviderScreen extends StatelessWidget {
                 ),
                 onPressed: () {
                   Navigator.of(context)
-                      .pushNamed(Routes.serviceProviderGroundsScreen);
+                      .pushNamed(Routes.chooseServiceCategoryScreen);
                 },
                 textBottom: 'Check',
                 textStyle: TextStyles.font12WhiteColorW400,

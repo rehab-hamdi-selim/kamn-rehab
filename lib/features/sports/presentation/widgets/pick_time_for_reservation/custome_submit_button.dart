@@ -52,6 +52,7 @@ class CustomeSubmitButton extends StatelessWidget {
         date: DateTime.now(),
         startAt: cubit.selectedIntervals.first,
         endAt: DateFormat.jm().format(lastTime),
+        status: 'pending',
         price: playground.price);
   }
 }

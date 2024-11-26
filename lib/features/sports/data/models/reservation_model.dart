@@ -10,6 +10,7 @@ class ReservationModel {
   num? price;
   String? startAt;
   String? endAt;
+  String? status;
   ReservationModel({
     this.reservationId,
     this.userId,
@@ -18,6 +19,7 @@ class ReservationModel {
     this.price,
     this.startAt,
     this.endAt,
+    this.status,
   });
 
   ReservationModel copyWith({
@@ -28,6 +30,7 @@ class ReservationModel {
     ValueGetter<num?>? price,
     ValueGetter<String?>? startAt,
     ValueGetter<String?>? endAt,
+    ValueGetter<String?>? status,
   }) {
     return ReservationModel(
       reservationId:
@@ -38,6 +41,7 @@ class ReservationModel {
       price: price != null ? price() : this.price,
       startAt: startAt != null ? startAt() : this.startAt,
       endAt: endAt != null ? endAt() : this.endAt,
+      status: status != null ? status() : this.status,
     );
   }
 
@@ -50,6 +54,7 @@ class ReservationModel {
       'price': price,
       'startAt': startAt,
       'endAt': endAt,
+      'status': status,
     };
   }
 
@@ -61,9 +66,10 @@ class ReservationModel {
       date: map['date'] != null
           ? DateTime.fromMillisecondsSinceEpoch(map['date'])
           : null,
-      price: map['price']?.toInt(),
+      price: map['price'],
       startAt: map['startAt'],
       endAt: map['endAt'],
+      status: map['status'],
     );
   }
 
@@ -74,7 +80,7 @@ class ReservationModel {
 
   @override
   String toString() {
-    return 'ReservationModel(reservationId: $reservationId, userId: $userId, groundId: $groundId, date: $date, price: $price, startAt: $startAt, endAt: $endAt)';
+    return 'ReservationModel(reservationId: $reservationId, userId: $userId, groundId: $groundId, date: $date, price: $price, startAt: $startAt, endAt: $endAt, status: $status)';
   }
 
   @override
@@ -88,7 +94,8 @@ class ReservationModel {
         other.date == date &&
         other.price == price &&
         other.startAt == startAt &&
-        other.endAt == endAt;
+        other.endAt == endAt &&
+        other.status == status;
   }
 
   @override
@@ -99,6 +106,7 @@ class ReservationModel {
         date.hashCode ^
         price.hashCode ^
         startAt.hashCode ^
-        endAt.hashCode;
+        endAt.hashCode ^
+        status.hashCode;
   }
 }
