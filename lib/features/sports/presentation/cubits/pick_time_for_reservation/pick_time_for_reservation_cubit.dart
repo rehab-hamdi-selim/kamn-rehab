@@ -18,10 +18,10 @@ class PickTimeForReservationCubit extends Cubit<PickTimeForReservationState> {
     if (selectedIntervals.contains(interval)) {
       selectedIntervals.remove(interval);
       updates.remove(
-          'available_time.${DateFormat.E().format(state.selectedDate!)}.$interval');
+          'available_time.${DateFormat.E().format(state.selectedDate ?? DateTime.now())}.$interval');
     } else {
       selectedIntervals.add(interval);
-      updates['available_time.${DateFormat.E().format(state.selectedDate!)}.$interval'] =
+      updates['available_time.${DateFormat.E().format(state.selectedDate ?? DateTime.now())}.$interval'] =
           'selected';
     }
     emit(state.copyWith(state: PickTimeForReservationStatus.intervalSelected));
