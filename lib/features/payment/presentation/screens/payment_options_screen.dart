@@ -41,6 +41,7 @@ class PaymentOptionsScreen extends StatelessWidget {
       ),
       bottomNavigationBar: CustomButton(
         onTap: () {},
+        text: 'Select Payment',
       ),
     );
   }

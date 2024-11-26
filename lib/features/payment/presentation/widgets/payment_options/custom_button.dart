@@ -5,9 +5,9 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.onTap});
+  const CustomButton({super.key, required this.onTap, required this.text});
   final VoidCallback onTap;
-
+  final String text;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,12 +15,12 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
               backgroundColor: AppPallete.darkGreenColor,
-              padding: EdgeInsets.symmetric(horizontal: 85.w, vertical: 14.h),
+              padding: EdgeInsets.symmetric(vertical: 14.h),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(60.r))),
           onPressed: onTap,
           child: Text(
-            'Select Payment',
+            text,
             style: TextStyles.fontRoboto24MediumWhite,
           )),
     );
