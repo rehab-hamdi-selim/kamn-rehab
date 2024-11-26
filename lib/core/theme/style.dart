@@ -98,6 +98,11 @@ class TextStyles {
       color: AppPallete.blackColor,
       fontWeight: FontWeightHelper.medium,
       fontSize: 24.h);
+  static TextStyle fontRoboto24MediumWhite = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.whiteColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 24.h);
   static TextStyle fontRoboto16RegularBlack = TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.blackColor,
