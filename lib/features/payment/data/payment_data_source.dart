@@ -125,26 +125,14 @@ class PaymobManager implements PaymentManager {
       "https://accept.paymob.com/api/acceptance/payments/pay",
       data: {
         "source": {
-          "identifier": walletMobileNumber, // Mobile number linked to wallet
+          "identifier": walletMobileNumber,
           "subtype": "WALLET",
         },
         "payment_token": paymentKey,
       },
     );
-
-    // Check if redirect URL exists
-
-    // Extract the redirect URL from the response
     String redirectUrl = response.data['redirect_url'];
     return redirectUrl;
-  }
-
-// دالة التكوين للدوال غير المتزامنة (Async Composition Function)
-  Future<T> Function(T) composeAsyncFunctions<T>(
-    Future<T> Function(T) f,
-    Future<T> Function(T) g,
-  ) {
-    return (T x) async => await g(await f(x));
   }
 
   @override
@@ -163,14 +151,4 @@ class PaymobManager implements PaymentManager {
         paymentKey: paymentKey, walletMobileNumber: walletMobileNumber);
     return redirectUrl;
   }
-}
-
-class paymentInitData {
-  String amount;
-  String currency;
-  String integrationId;
-  paymentInitData(
-      {required this.amount,
-      required this.currency,
-      required this.integrationId});
 }
