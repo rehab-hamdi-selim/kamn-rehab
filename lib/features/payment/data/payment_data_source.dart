@@ -2,8 +2,7 @@ import 'package:dio/dio.dart';
 
 // Abstract payment interface
 abstract class PaymentManager {
-  Future<String> getPaymentKey(
-      int amount, String currency, String integrationId);
+  Future<String> getPaymentKey(int amount, String currency, int integrationId);
 
   // Protected abstract methods that implementations should provide
   Future<String> getAuthenticationToken();
@@ -17,7 +16,7 @@ abstract class PaymentManager {
     required String orderId,
     required String amount,
     required String currency,
-    required String integrationId,
+    required int integrationId,
   });
   Future<String> paymentWithCard(String amount, String currency);
 
@@ -27,9 +26,16 @@ abstract class PaymentManager {
 
 // PayMob concrete implementation
 class PaymobManager implements PaymentManager {
+  String APIKEY =
+      "ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2T1RRNE1UZ3hMQ0p1WVcxbElqb2lhVzVwZEdsaGJDSjkuT0VPZkVWbGtrQ0JrRm1rRlNoV1RQWF92U21IWkE3b3NQZjVYZ2VzallHY3o5ZTJMaVpjVUpGcE04SzVpaGNxTGFnMjMtN0VsMVpJVi0zNUU0cUM1VUE=";
+
+  int integrationid = 4422085;
+  int mobileWalletintegrationid = 4422362;
+
+  String redirectMobileWalletUrl = "";
   @override
   Future<String> getPaymentKey(
-      int amount, String currency, String integrationId) async {
+      int amount, String currency, int integrationId) async {
     try {
       String authToken = await getAuthenticationToken();
 
@@ -56,9 +62,7 @@ class PaymobManager implements PaymentManager {
   Future<String> getAuthenticationToken() async {
     final Response response =
         await Dio().post("https://accept.paymob.com/api/auth/tokens", data: {
-      "api_key":
-          //TODO:API KEY
-          "KConstants.apiKey",
+      "api_key": APIKEY,
     });
     return response.data["token"];
   }
@@ -86,7 +90,7 @@ class PaymobManager implements PaymentManager {
     required String orderId,
     required String amount,
     required String currency,
-    required String integrationId,
+    required int integrationId,
   }) async {
     final Response response = await Dio()
         .post("https://accept.paymob.com/api/acceptance/payment_keys", data: {
@@ -138,7 +142,7 @@ class PaymobManager implements PaymentManager {
   @override
   Future<String> paymentWithCard(String amount, String currency) async {
     String paymentKey =
-        await getPaymentKey(int.parse(amount), currency, "integrationId");
+        await getPaymentKey(int.parse(amount), currency, integrationid);
     return paymentKey;
   }
 
@@ -146,7 +150,7 @@ class PaymobManager implements PaymentManager {
   Future<String> paymentWithMobileWallet(
       String amount, String currency, String walletMobileNumber) async {
     String paymentKey =
-        await getPaymentKey(int.parse(amount), currency, "integrationId");
+        await getPaymentKey(int.parse(amount), currency, integrationid);
     String redirectUrl = await _getWalletRedirectUrl(
         paymentKey: paymentKey, walletMobileNumber: walletMobileNumber);
     return redirectUrl;
