@@ -13,4 +13,6 @@ class Routes {
   static const String editServiceScreen = '/editServiceScreen';
   static const String analyticsfirstpage = '/analyticsfirstpage';
   static const String secondPage = '/secondPage';
+  static const String paymentOptionsScreen = '/paymentOptionsScreen';
+  static const String proceedPaymentScreen = '/proceedPaymentScreen';
 }
