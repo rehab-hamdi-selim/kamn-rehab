@@ -9,6 +9,7 @@ import 'package:kamn/features/admin/data/data_source/second_page_data_source.dar
 import 'package:kamn/features/admin/data/repository/second_page_repository.dart';
 import 'package:kamn/features/admin/presentation/cubits/second_page_cubit/second_page_cubit.dart';
 import 'package:kamn/features/admin/presentation/screens/second_page/second_page.dart';
+import 'package:kamn/features/payment/presentation/screens/debit_credit_card_screen.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/sports/presentation/screens/grounds_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/my_profile_screen.dart';
@@ -32,6 +33,8 @@ class AppRouter {
               create: (context) => getIt<AnalyticsCubit>(),
               child: FirstAnalyticsPage()),
         );
+      case Routes.debitCreditCardPage:
+        return MaterialPageRoute(builder: (context) => DebitCreditCardScreen());
       case Routes.myProfileScreen:
         return MaterialPageRoute(builder: (context) => const MyProfileScreen());
       case Routes.addServiceScreen:
