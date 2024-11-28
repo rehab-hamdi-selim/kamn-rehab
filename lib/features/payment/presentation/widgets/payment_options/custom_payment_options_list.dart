@@ -25,7 +25,7 @@ class CustomPaymentOptionsList extends StatelessWidget {
           ),
         );
       },
-      separatorBuilder: (context, index) => verticalSpace(20.h),
+      separatorBuilder: (context, index) => verticalSpace(17.h),
       itemCount: paymentIcons.length,
     );
   }

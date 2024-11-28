@@ -19,6 +19,7 @@ class CustomPaymentOptionsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 25.w),
       tileColor: AppPallete.ofWhiteColor,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
