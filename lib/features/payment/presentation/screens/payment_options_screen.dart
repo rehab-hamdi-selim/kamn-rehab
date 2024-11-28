@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/core/const/icon_links.dart';
+
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/features/payment/presentation/cubits/payment_options_cubit/payment_options_cubit.dart';
+import 'package:kamn/features/payment/presentation/cubits/payment_options_cubit/payment_options_state.dart';
 import 'package:kamn/features/payment/presentation/widgets/payment_options/custom_button.dart';
 import 'package:kamn/features/payment/presentation/widgets/payment_options/custom_payment_options_list.dart';
 import 'package:kamn/features/payment/presentation/widgets/payment_options/custom_payment_text.dart';
@@ -11,27 +13,6 @@ import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_
 
 class PaymentOptionsScreen extends StatelessWidget {
   const PaymentOptionsScreen({super.key});
-
-  static const List paymentIcons = [
-    IconLinks.wallet,
-    IconLinks.bank,
-    IconLinks.google,
-    IconLinks.paypal,
-  ];
-  static const List paymentName = [
-    'Debit / Credit Card',
-    'Bank Account',
-    'Google pay',
-    'PayPal'
-  ];
-  static const List paymentIcons2 = [
-    IconLinks.wallet,
-    IconLinks.fawry,
-  ];
-  static const List paymentName2 = [
-    'Wallet',
-    'Fawry',
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -49,22 +30,15 @@ class PaymentOptionsScreen extends StatelessWidget {
           const SliverToBoxAdapter(
             child: CustomPaymentText(),
           ),
-          const CustomPaymentOptionsList(
-            paymentIcons: paymentIcons,
-            paymentName: paymentName,
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.only(left: 25.w, top: 40.h, bottom: 25.h),
-              child: Text(
-                'New Added',
-                style: TextStyles.font15BlackColorMedium,
-              ),
-            ),
-          ),
-          const CustomPaymentOptionsList(
-            paymentIcons: paymentIcons2,
-            paymentName: paymentName2,
+          BlocBuilder<PaymentOptionsCubit, PaymentOptionsState>(
+            builder: (context, state) {
+              return CustomPaymentOptionsList(
+                paymentOptions: PaymentOptionsCubit.paymentOptions,
+                currentOption: PaymentOptionsCubit.get(context).currentOption,
+                itemOnTap: (index) =>
+                    PaymentOptionsCubit.get(context).changePaymentOption(index),
+              );
+            },
           ),
           SliverToBoxAdapter(child: verticalSpace(10.h)),
         ],
