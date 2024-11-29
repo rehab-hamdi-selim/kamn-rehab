@@ -15,6 +15,7 @@ import 'package:kamn/features/sports_service_providers/presentation/cubit/edit_s
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_ground_details/service_provider_ground_details_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/add_service.dart';
+import 'package:kamn/features/sports_service_providers/presentation/screens/choose_service_category_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/edit_service_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_available_dates.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_ground_details_screen.dart';
@@ -46,19 +47,26 @@ class AppRouter {
                       getIt<SportsGroundsCubit>()..getPlaygrounds(),
                   child: const GroundsScreen(),
                 ));
-      case Routes.serviceProviderGroundsScreen:
+      case Routes.chooseServiceCategoryScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider<ServiceProviderGroundsCubit>(
-                  create: (context) => getIt<ServiceProviderGroundsCubit>()
-                    ..getPlaygroundsRequests,
-                  child: const ServiceProviderGroundsScreen(),
+                  create: (context) => getIt<ServiceProviderGroundsCubit>(),
+                  child: const ChooseServiceCategoryScreen(),
+                ));
+      case Routes.serviceProviderGroundsScreen:
+        return MaterialPageRoute(
+            builder: (context) => ServiceProviderGroundsScreen(
+                  type: settings.arguments as String,
                 ));
       case Routes.successServiceProviderScreen:
         return MaterialPageRoute(
             builder: (context) => const SuccessServiceProviderScreen());
       case Routes.serviceSelection:
         return MaterialPageRoute(
-            builder: (context) => const ServiceSelectionScreen());
+            builder: (context) => BlocProvider<AddServiceProviderCubit>(
+                  create: (context) => getIt<AddServiceProviderCubit>(),
+                  child: const ServiceSelectionScreen(),
+                ));
       case Routes.editServiceScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider<EditServiceProviderCubit>(

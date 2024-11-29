@@ -24,7 +24,8 @@ import '../widgets/service_provider_grounds/custom_ground_item_service_provider.
 import '../widgets/service_provider_grounds/custom_text_form_field_service_provider.dart';
 
 class ServiceProviderGroundsScreen extends StatelessWidget {
-  const ServiceProviderGroundsScreen({super.key});
+  final String type;
+  const ServiceProviderGroundsScreen({super.key, required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,7 @@ class ServiceProviderGroundsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                Constants.groundsScreenTitle,
+                type,
                 style: TextStyles.font32BlackColormedium,
               ),
               Row(
@@ -103,9 +104,12 @@ class ServiceProviderGroundsScreen extends StatelessWidget {
                         );
                       }
 
-                      final playgrounds = state.playgrounds ?? [];
+                      final playgrounds = state.playgrounds![type] ?? [];
 
-                      if (playgrounds.isEmpty) return const SizedBox.shrink();
+                      if (playgrounds.isEmpty)
+                        return Center(
+                            child:
+                                const Text('no such data for this category'));
 
                       return ListView.separated(
                           itemBuilder: (context, index) {
@@ -116,14 +120,14 @@ class ServiceProviderGroundsScreen extends StatelessWidget {
                                     arguments: playgrounds[index]);
                               },
                               child: CustomGroundItemServiceProvider(
-                                playgroundRequest: state.playgrounds![index],
+                                playgroundRequest: playgrounds[index],
                               ),
                             );
                           },
                           separatorBuilder: (context, index) {
                             return verticalSpace(17.89);
                           },
-                          itemCount: state.playgrounds!.length);
+                          itemCount: playgrounds.length);
                     },
                   ),
                 ),

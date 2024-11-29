@@ -14,4 +14,6 @@ class Routes {
   static const String serviceProviderAvailableDates =
       '/serviceProviderAvailableDates';
   static const String pickTimeReservationScreen = '/pickTimeReservationScreen';
+  static const String chooseServiceCategoryScreen =
+      '/chooseServiceCategoryScreen';
 }
