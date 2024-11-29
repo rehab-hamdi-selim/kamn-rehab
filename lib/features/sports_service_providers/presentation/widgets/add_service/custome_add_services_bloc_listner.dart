@@ -11,7 +11,9 @@ import '../../screens/success_service_provider_screen.dart';
 
 class CustomeAddServicesBlocListner extends StatelessWidget {
   final Widget child;
-  const CustomeAddServicesBlocListner({super.key, required this.child});
+  final String type;
+  const CustomeAddServicesBlocListner(
+      {super.key, required this.child, required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +59,8 @@ class CustomeAddServicesBlocListner extends StatelessWidget {
             description: "under develop",
             status: context.read<AddServiceProviderCubit>().statusOption,
             ownershipImages:
-                context.read<AddServiceProviderCubit>().ownershipImagesUrl);
+                context.read<AddServiceProviderCubit>().ownershipImagesUrl,
+            type: type);
     return BlocListener<AddServiceProviderCubit, AddServiceProviderState>(
       listener: (context, state) {
         if (state.isImageUploaded) {

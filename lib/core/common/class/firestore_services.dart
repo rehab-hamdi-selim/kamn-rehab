@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 
 @lazySingleton
 class FirestoreService {

@@ -48,10 +48,11 @@ class CustomeSubmitButton extends StatelessWidget {
     lastTime =
         lastTime.add(Duration(minutes: playground.peroid?.toInt() ?? 60));
     return ReservationModel(
-        groundId: playground.playgroundId,
+        ground: playground.toMap(),
         date: DateTime.now(),
         startAt: cubit.selectedIntervals.first,
         endAt: DateFormat.jm().format(lastTime),
+        status: 'pending',
         price: playground.price);
   }
 }

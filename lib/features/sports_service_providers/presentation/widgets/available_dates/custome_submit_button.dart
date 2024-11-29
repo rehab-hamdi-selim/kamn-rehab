@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,8 +34,11 @@ class CustomeSubmitButton extends StatelessWidget {
                   : () {
                       cubit.onSubmit(playgroundId, {
                         'available_time': {
-                          for (var interval in cubit.selectedIntervals)
-                            interval: 'unselect'
+                          for (var day in WeekDays.values)
+                            day.name: {
+                              for (var interval in cubit.selectedIntervals)
+                                interval: 'unselected'
+                            }
                         },
                         'peroid': state.peroid,
                       });
@@ -58,4 +63,14 @@ class CustomeSubmitButton extends StatelessWidget {
       ),
     );
   }
+}
+
+enum WeekDays {
+  Fri,
+  Sat,
+  Sun,
+  Mon,
+  Tue,
+  Wed,
+  Thu,
 }

@@ -18,7 +18,7 @@ extension SportsGroundStateExtension on ServiceProviderGroundsState {
 
 class ServiceProviderGroundsState {
   final ServiceProviderGroundsStatus state;
-  final List<PlaygroundRequestModel>? playgrounds;
+  final Map<String, List<PlaygroundRequestModel>>? playgrounds;
   final String? erorrMessage;
   final String? successMessage;
 
