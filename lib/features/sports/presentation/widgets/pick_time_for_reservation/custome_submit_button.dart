@@ -12,7 +12,9 @@ import 'package:intl/intl.dart';
 
 class CustomeSubmitButton extends StatelessWidget {
   final PlaygroundModel playground;
-  const CustomeSubmitButton({super.key, required this.playground});
+  final DateTime selectedDate;
+  const CustomeSubmitButton(
+      {super.key, required this.playground, required this.selectedDate});
 
   @override
   Widget build(BuildContext context) {
@@ -42,16 +44,39 @@ class CustomeSubmitButton extends StatelessWidget {
     );
   }
 
-  ReservationModel perpareReservation(PickTimeForReservationCubit cubit) {
+  ReservationModel perpareReservation(
+    PickTimeForReservationCubit cubit,
+  ) {
     cubit.selectedIntervals.sort();
     DateTime lastTime = DateFormat.Hm().parse(cubit.selectedIntervals.last);
+    lastTime = lastTime.copyWith(
+        year: selectedDate.year,
+        month: selectedDate.month,
+        day: selectedDate.day);
+
     lastTime =
         lastTime.add(Duration(minutes: playground.peroid?.toInt() ?? 60));
+    DateTime startTime = DateFormat.Hm().parse(cubit.selectedIntervals.first);
+    startTime = startTime.copyWith(
+        year: selectedDate.year,
+        month: selectedDate.month,
+        day: selectedDate.day);
+
     return ReservationModel(
         ground: playground.toMap(),
         date: DateTime.now(),
-        startAt: cubit.selectedIntervals.first,
-        endAt: DateFormat.jm().format(lastTime),
+        startAt: startTime,
+        endAt: lastTime,
+        sessions: cubit.selectedIntervals.map((element) {
+          DateTime start = DateFormat.Hm().parse(element);
+          start = start.copyWith(
+              year: selectedDate.year,
+              month: selectedDate.month,
+              day: selectedDate.day);
+          return Session(
+              startAt: start,
+              endAt: start.add(Duration(minutes: playground.peroid!.toInt())));
+        }).toList(),
         status: 'pending',
         price: playground.price);
   }

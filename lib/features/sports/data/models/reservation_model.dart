@@ -1,7 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/widgets.dart';
-import 'package:kamn/features/sports/data/models/playground_model.dart';
+import 'package:flutter/foundation.dart';
 
 class ReservationModel {
   String? reservationId;
@@ -9,9 +8,10 @@ class ReservationModel {
   Map<String, dynamic>? ground;
   DateTime? date;
   num? price;
-  String? startAt;
-  String? endAt;
+  DateTime? startAt;
+  DateTime? endAt;
   String? status;
+  List<Session>? sessions;
   ReservationModel({
     this.reservationId,
     this.userId,
@@ -21,6 +21,7 @@ class ReservationModel {
     this.startAt,
     this.endAt,
     this.status,
+    this.sessions,
   });
 
   ReservationModel copyWith({
@@ -29,9 +30,10 @@ class ReservationModel {
     ValueGetter<Map<String, dynamic>?>? ground,
     ValueGetter<DateTime?>? date,
     ValueGetter<num?>? price,
-    ValueGetter<String?>? startAt,
-    ValueGetter<String?>? endAt,
+    ValueGetter<DateTime?>? startAt,
+    ValueGetter<DateTime?>? endAt,
     ValueGetter<String?>? status,
+    ValueGetter<List<Session>?>? intervals,
   }) {
     return ReservationModel(
       reservationId:
@@ -43,6 +45,7 @@ class ReservationModel {
       startAt: startAt != null ? startAt() : this.startAt,
       endAt: endAt != null ? endAt() : this.endAt,
       status: status != null ? status() : this.status,
+      sessions: intervals != null ? intervals() : this.sessions,
     );
   }
 
@@ -53,9 +56,10 @@ class ReservationModel {
       'ground': ground,
       'date': date?.millisecondsSinceEpoch,
       'price': price,
-      'startAt': startAt,
-      'endAt': endAt,
+      'startAt': startAt?.millisecondsSinceEpoch,
+      'endAt': endAt?.millisecondsSinceEpoch,
       'status': status,
+      'intervals': sessions?.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -63,14 +67,21 @@ class ReservationModel {
     return ReservationModel(
       reservationId: map['reservationId'],
       userId: map['userId'],
-      ground: map['ground'],
+      ground: Map<String, dynamic>.from(map['ground']),
       date: map['date'] != null
           ? DateTime.fromMillisecondsSinceEpoch(map['date'])
           : null,
       price: map['price'],
-      startAt: map['startAt'],
-      endAt: map['endAt'],
+      startAt: map['startAt'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['startAt'])
+          : null,
+      endAt: map['endAt'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['endAt'])
+          : null,
       status: map['status'],
+      sessions: map['intervals'] != null
+          ? List<Session>.from(map['intervals']?.map((x) => Session.fromMap(x)))
+          : null,
     );
   }
 
@@ -81,7 +92,7 @@ class ReservationModel {
 
   @override
   String toString() {
-    return 'ReservationModel(reservationId: $reservationId, userId: $userId, groundId: $ground, date: $date, price: $price, startAt: $startAt, endAt: $endAt, status: $status)';
+    return 'ReservationModel(reservationId: $reservationId, userId: $userId, ground: $ground, date: $date, price: $price, startAt: $startAt, endAt: $endAt, status: $status, intervals: $sessions)';
   }
 
   @override
@@ -91,12 +102,13 @@ class ReservationModel {
     return other is ReservationModel &&
         other.reservationId == reservationId &&
         other.userId == userId &&
-        other.ground == ground &&
+        mapEquals(other.ground, ground) &&
         other.date == date &&
         other.price == price &&
         other.startAt == startAt &&
         other.endAt == endAt &&
-        other.status == status;
+        other.status == status &&
+        listEquals(other.sessions, sessions);
   }
 
   @override
@@ -108,6 +120,58 @@ class ReservationModel {
         price.hashCode ^
         startAt.hashCode ^
         endAt.hashCode ^
-        status.hashCode;
+        status.hashCode ^
+        sessions.hashCode;
   }
+}
+
+class Session {
+  DateTime startAt;
+  DateTime endAt;
+  Session({
+    required this.startAt,
+    required this.endAt,
+  });
+
+  Session copyWith({
+    DateTime? startAt,
+    DateTime? endAt,
+  }) {
+    return Session(
+      startAt: startAt ?? this.startAt,
+      endAt: endAt ?? this.endAt,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'startAt': startAt.millisecondsSinceEpoch,
+      'endAt': endAt.millisecondsSinceEpoch,
+    };
+  }
+
+  factory Session.fromMap(Map<String, dynamic> map) {
+    return Session(
+      startAt: DateTime.fromMillisecondsSinceEpoch(map['startAt']),
+      endAt: DateTime.fromMillisecondsSinceEpoch(map['endAt']),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Session.fromJson(String source) =>
+      Session.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'Interval(startAt: $startAt, endAt: $endAt)';
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is Session && other.startAt == startAt && other.endAt == endAt;
+  }
+
+  @override
+  int get hashCode => startAt.hashCode ^ endAt.hashCode;
 }

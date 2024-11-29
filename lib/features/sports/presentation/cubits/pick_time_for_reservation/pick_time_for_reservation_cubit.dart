@@ -9,7 +9,9 @@ import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservati
 class PickTimeForReservationCubit extends Cubit<PickTimeForReservationState> {
   PickTimeForReservationCubit({required this.repository})
       : super(PickTimeForReservationState(
-            state: PickTimeForReservationStatus.initial));
+            state: PickTimeForReservationStatus.initial)) {
+    getAllReservation();
+  }
   SportsRepository repository;
   List<String> selectedIntervals = [];
   Map<String, dynamic> updates = {};
@@ -55,18 +57,35 @@ class PickTimeForReservationCubit extends Cubit<PickTimeForReservationState> {
     });
   }
 
-  deleteReservation(ReservationModel reservation) async {
+  Future<void> deleteReservation(ReservationModel reservation) async {
     var response = await repository.delete(reservation);
     response.fold((error) {
       emit(state.copyWith(
           state: PickTimeForReservationStatus.failure,
           erorrMessage: error.erorr));
-    }, (succress) {});
+    }, (success) {
+      emit(state.copyWith(
+          state: PickTimeForReservationStatus.reservationDeleted));
+    });
   }
 
   void onDaySelected(DateTime newDay) {
     emit(state.copyWith(
         state: PickTimeForReservationStatus.loading, selectedDate: newDay));
-    print(DateFormat.E().format(state.selectedDate!));
+  }
+
+  Future<void> getAllReservation() async {
+    var response = await repository.getAllReservation();
+    response.fold((error) {
+      print(error.erorr);
+      emit(state.copyWith(
+          state: PickTimeForReservationStatus.failure,
+          erorrMessage: error.erorr));
+    }, (success) {
+      print(success);
+      emit(state.copyWith(
+          state: PickTimeForReservationStatus.reservationLoaded,
+          reservationList: success));
+    });
   }
 }

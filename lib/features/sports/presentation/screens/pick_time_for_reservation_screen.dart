@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
+import 'package:kamn/features/sports/data/models/reservation_model.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_state.dart';
 import 'package:kamn/features/sports/presentation/widgets/pick_time_for_reservation/custome_pick_interval_for_reservation.dart';
@@ -19,25 +20,28 @@ class PickTimeForReservationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomePickTimeBlocListener(
       playground: playground,
-      child:
-          BlocBuilder<PickTimeForReservationCubit, PickTimeForReservationState>(
-        builder: (context, state) {
-          return Scaffold(
-              backgroundColor: Colors.white,
-              resizeToAvoidBottomInset: true,
-              appBar: CustomAppBarServiceProvider.appBar(
-                arrowFunction: () {},
-                notificationIconFunction: () {},
-                profileFunction: () {},
-                badgesIconFunction: () {},
-              ),
-              body: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: SingleChildScrollView(
-                    child: Column(
+      child: Scaffold(
+          backgroundColor: Colors.white,
+          resizeToAvoidBottomInset: true,
+          appBar: CustomAppBarServiceProvider.appBar(
+            arrowFunction: () {},
+            notificationIconFunction: () {},
+            profileFunction: () {},
+            badgesIconFunction: () {},
+          ),
+          body: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SingleChildScrollView(
+                child: BlocBuilder<PickTimeForReservationCubit,
+                    PickTimeForReservationState>(
+                  builder: (context, state) {
+                    List<ReservationModel> reservationList =
+                        state.reservationList ?? [];
+
+                    return Column(
                       children: [
                         TableCalendar(
-                          firstDay: DateTime.utc(2010, 10, 16),
+                          firstDay: DateTime.now(),
                           lastDay: DateTime.utc(2030, 3, 14),
                           focusedDay: state.selectedDate ?? DateTime.now(),
                           selectedDayPredicate: (day) =>
@@ -61,9 +65,9 @@ class PickTimeForReservationScreen extends StatelessWidget {
                                   .entries
                                   .map((entry) {
                                 return CustomePickIntervalForReservation(
-                                  interval: entry.key,
-                                  status: entry.value,
-                                );
+                                    interval: entry.key,
+                                    isPicked: isInside(reservationList,
+                                        entry.key, state.selectedDate));
                               }),
                             ] else
                               const Center(
@@ -72,12 +76,30 @@ class PickTimeForReservationScreen extends StatelessWidget {
                         ),
                         CustomeSubmitButton(
                           playground: playground,
+                          selectedDate: state.selectedDate ?? DateTime.now(),
                         ),
                       ],
-                    ),
-                  )));
-        },
-      ),
+                    );
+                  },
+                ),
+              ))),
     );
+  }
+
+  isInside(List<ReservationModel> reservationList, String key,
+      DateTime? selectedDate) {
+    return reservationList
+        .where((element) {
+          return DateFormat('yyyy-MM-dd').format(element.startAt!) ==
+              DateFormat('yyyy-MM-dd').format(selectedDate ?? DateTime.now());
+        })
+        .toList()
+        .where((element) {
+          return element.sessions!.any((element) {
+            return DateFormat('HH:mm').format(element.startAt) == key;
+          });
+        })
+        .toList()
+        .isNotEmpty;
   }
 }

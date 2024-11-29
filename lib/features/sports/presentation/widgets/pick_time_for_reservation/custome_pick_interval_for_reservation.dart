@@ -7,10 +7,10 @@ import 'package:kamn/features/sports/presentation/screens/pick_time_for_reservat
 
 class CustomePickIntervalForReservation extends StatelessWidget {
   const CustomePickIntervalForReservation(
-      {super.key, required this.interval, required this.status});
+      {super.key, required this.interval, required this.isPicked});
 
   final String interval;
-  final String status;
+  final bool isPicked;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class CustomePickIntervalForReservation extends StatelessWidget {
     return BlocBuilder<PickTimeForReservationCubit,
         PickTimeForReservationState>(
       builder: (context, state) {
-        return status == 'unSelected'
+        return !isPicked
             ? GestureDetector(
                 onTap: () {
                   cubit.onIntervalSelection(interval);
