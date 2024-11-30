@@ -11,11 +11,15 @@ import 'package:kamn/features/payment/presentation/widgets/payment_options/custo
 import 'package:kamn/features/payment/presentation/widgets/payment_options/custom_payment_text.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_app_bar.dart';
 
+import '../../../../core/di/di.dart';
+import '../cubits/payment_options_cubit/payment_options_view_model.dart';
+
 class PaymentOptionsScreen extends StatelessWidget {
   const PaymentOptionsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final paymentOptionsViewModel = getIt<PaymentOptionsViewModel>();
     return Scaffold(
       backgroundColor: AppPallete.whiteColor,
       appBar: CustomAppBar.appBar(
@@ -33,8 +37,8 @@ class PaymentOptionsScreen extends StatelessWidget {
           BlocBuilder<PaymentOptionsCubit, PaymentOptionsState>(
             builder: (context, state) {
               return CustomPaymentOptionsList(
-                paymentOptions: PaymentOptionsCubit.paymentOptions,
-                currentOption: PaymentOptionsCubit.get(context).currentOption,
+                paymentOptions: paymentOptionsViewModel.paymentOptions,
+                currentOption: state.currentOption,
                 itemOnTap: (index) =>
                     PaymentOptionsCubit.get(context).changePaymentOption(index),
               );
