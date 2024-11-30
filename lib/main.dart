@@ -42,7 +42,6 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         initialRoute: Routes.addServiceScreen,
-        initialRoute: Routes.paymentOptionsScreen,
         onGenerateRoute: AppRouter.generateRoute,
         // home: FirstAnalyticsPage(),
       ),

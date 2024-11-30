@@ -88,44 +88,38 @@ extension GetItInjectableX on _i174.GetIt {
             dataSource: gh<_i1047.ServiceProvidersRemoteDataSource>()));
     gh.factory<_i396.SecondPageUseCase>(() => _i396.SecondPageUseCaseImpl(
         repository: gh<_i173.SecondPageRepository>()));
+    gh.factory<_i137.PickTimeForReservationCubit>(() =>
+        _i137.PickTimeForReservationCubit(
+            repository: gh<_i379.SportsRepository>()));
     gh.factory<_i724.AnalyticsRepository>(() => _i724.AnalyticsRepositoryImpl(
         dataSource: gh<_i418.AnalyticsDataSource>()));
+    gh.factory<_i1033.SportsGroundsCubit>(() => _i1033.SportsGroundsCubit(
+        sportsRepository: gh<_i379.SportsRepository>()));
     gh.factory<_i608.SecondPageCubit>(() => _i608.SecondPageCubit(
           repository: gh<_i173.SecondPageRepository>(),
           dataFilter: gh<_i396.SecondPageUseCase>(),
         ));
+    gh.factory<_i209.AnalyticsCubit>(() =>
+        _i209.AnalyticsCubit(repository: gh<_i724.AnalyticsRepository>()));
     gh.factory<_i575.SportsRemoteDataSource>(() =>
         _i575.SportsRemoteDataSourceImpl(
             firestoreService: gh<_i158.FirestoreService>()));
-            firestore: gh<_i974.FirebaseFirestore>()));
-    gh.factory<_i209.AnalyticsCubit>(() =>
-        _i209.AnalyticsCubit(repository: gh<_i724.AnalyticsRepository>()));
-    gh.factory<_i379.SportsRepository>(() => _i379.SportsRepository(
+    gh.factory<_i379.SportsRepositoryImpl>(() => _i379.SportsRepositoryImpl(
         remoteDataSource: gh<_i575.SportsRemoteDataSource>()));
+    gh.factory<_i786.GetServicesFromFirebaseUsecase>(() =>
+        _i786.GetServicesFromFirebaseUsecase(
+            repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i773.EditServiceProviderCubit>(() =>
         _i773.EditServiceProviderCubit(
-            repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i252.AddServiceProviderCubit>(() =>
-        _i252.AddServiceProviderCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i731.AvailableDatesCubit>(() => _i731.AvailableDatesCubit(
         repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i773.EditServiceProviderCubit>(() =>
-        _i773.EditServiceProviderCubit(
+    gh.factory<_i252.AddServiceProviderCubit>(() =>
+        _i252.AddServiceProviderCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i692.ServiceProviderGroundDetailsCubit>(() =>
         _i692.ServiceProviderGroundDetailsCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i786.GetServicesFromFirebaseUsecase>(() =>
-        _i786.GetServicesFromFirebaseUsecase(
-            repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i379.SportsRepository>(() => _i379.SportsRepositoryImpl(
-        remoteDataSource: gh<_i575.SportsRemoteDataSource>()));
-    gh.factory<_i137.PickTimeForReservationCubit>(() =>
-        _i137.PickTimeForReservationCubit(
-            repository: gh<_i379.SportsRepository>()));
-    gh.factory<_i1033.SportsGroundsCubit>(() => _i1033.SportsGroundsCubit(
-        sportsRepository: gh<_i379.SportsRepository>()));
     gh.factory<_i987.ServiceProviderGroundsCubit>(() =>
         _i987.ServiceProviderGroundsCubit(
             getPlaygroundUsecase: gh<_i786.GetServicesFromFirebaseUsecase>()));
