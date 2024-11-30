@@ -15,7 +15,7 @@ abstract class SportsRepository {
   Future<Either<Faliure, void>> delete(ReservationModel reservation);
 }
 
-@Injectable(as: SportsRepository)
+@injectable
 class SportsRepositoryImpl implements SportsRepository {
   final SportsRemoteDataSource _remoteDataSource;
   SportsRepositoryImpl({required SportsRemoteDataSource remoteDataSource})
