@@ -62,37 +62,37 @@ class CustomePickIntervalForReservation extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
-              : Container(
-                  margin: const EdgeInsets.symmetric(vertical: 8),
-                  padding: const EdgeInsets.all(16),
-                  width: 100.w,
-                  decoration: BoxDecoration(
+                ),
+              )
+            : Container(
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                padding: const EdgeInsets.all(16),
+                width: 100.w,
+                decoration: BoxDecoration(
+                  color: Colors.redAccent,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
                     color: Colors.redAccent,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: Colors.redAccent,
-                      width: 2,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          blurRadius: 4,
-                          spreadRadius: 1)
-                    ],
+                    width: 2,
                   ),
-                  child: Center(
-                    child: Text(
-                      interval,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        blurRadius: 4,
+                        spreadRadius: 1)
+                  ],
+                ),
+                child: Center(
+                  child: Text(
+                    interval,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                );
-        },
-      );
-    
+                ),
+              );
+      },
+    );
   }
 }
