@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_state.dart';
 
@@ -10,7 +11,9 @@ import '../../screens/success_service_provider_screen.dart';
 
 class CustomeAddServicesBlocListner extends StatelessWidget {
   final Widget child;
-  const CustomeAddServicesBlocListner({super.key, required this.child});
+  final String type;
+  const CustomeAddServicesBlocListner(
+      {super.key, required this.child, required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +59,8 @@ class CustomeAddServicesBlocListner extends StatelessWidget {
             description: "under develop",
             status: context.read<AddServiceProviderCubit>().statusOption,
             ownershipImages:
-                context.read<AddServiceProviderCubit>().ownershipImagesUrl);
+                context.read<AddServiceProviderCubit>().ownershipImagesUrl,
+            type: type);
     return BlocListener<AddServiceProviderCubit, AddServiceProviderState>(
       listener: (context, state) {
         if (state.isImageUploaded) {
@@ -65,7 +69,8 @@ class CustomeAddServicesBlocListner extends StatelessWidget {
               .addService(prepareData(context));
         }
         if (state.isSuccess) {
-          navigationTo(context, const SuccessServiceProviderScreen());
+          Navigator.pushNamed(context, Routes.serviceProviderAvailableDates,
+              arguments: state.playground?.playgroundId);
         } else if (state.isServiceFailed) {
           context.read<AddServiceProviderCubit>().deleteImagesFromStorage();
           showSnackBar(context, state.erorrMessage!);

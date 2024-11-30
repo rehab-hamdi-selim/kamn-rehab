@@ -11,6 +11,7 @@ import 'package:kamn/features/admin/presentation/screens/second_page/second_page
 import 'package:kamn/firebase_options.dart';
 
 import 'core/routing/app_router.dart';
+import 'features/sports_service_providers/presentation/screens/service_provider_available_dates.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
+        initialRoute: Routes.addServiceScreen,
         initialRoute: Routes.paymentOptionsScreen,
         onGenerateRoute: AppRouter.generateRoute,
         // home: FirstAnalyticsPage(),

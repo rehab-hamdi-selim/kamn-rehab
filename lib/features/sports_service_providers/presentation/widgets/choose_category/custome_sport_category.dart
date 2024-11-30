@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kamn/core/di/di.dart';
+import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart';
-import 'package:kamn/features/sports_service_providers/presentation/screens/add_service.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart';
+import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_grounds_screen.dart';
 
 class CustomeSportCategory extends StatelessWidget {
   final String title;
@@ -22,11 +22,10 @@ class CustomeSportCategory extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (_) => BlocProvider.value(
-                      value: context.read<AddServiceProviderCubit>(),
-                      child: AddServiceScreen(
-                        type: title,
-                      ),
-                    )));
+                    value: context.read<ServiceProviderGroundsCubit>(),
+                    child: ServiceProviderGroundsScreen(
+                      type: title,
+                    ))));
       },
       child: Container(
         height: 100.h,

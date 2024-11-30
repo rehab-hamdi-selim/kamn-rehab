@@ -19,9 +19,12 @@ class PlaygroundRequestModel {
   List<String>? groundImages;
   List<String>? ownershipImages;
   int? size;
+  Map<String, Map<String, dynamic>?>? availableTime;
+  num? peroid;
   String? govenrate;
   String? state;
   String? comment;
+  String? type;
   PlaygroundRequestModel({
     this.playgroundId,
     this.name,
@@ -37,9 +40,12 @@ class PlaygroundRequestModel {
     this.groundImages,
     this.ownershipImages,
     this.size,
+    this.availableTime,
+    this.peroid,
     this.govenrate,
     this.state,
     this.comment,
+    this.type,
   });
 
   PlaygroundRequestModel copyWith({
@@ -57,9 +63,12 @@ class PlaygroundRequestModel {
     ValueGetter<List<String>?>? groundImages,
     ValueGetter<List<String>?>? ownershipImages,
     ValueGetter<int?>? size,
+    ValueGetter<Map<String, Map<String, dynamic>?>?>? availableTime,
     ValueGetter<String?>? govenrate,
+    ValueGetter<num?>? peroid,
     ValueGetter<String?>? state,
     ValueGetter<String?>? comment,
+    ValueGetter<String?>? type,
   }) {
     return PlaygroundRequestModel(
       playgroundId: playgroundId != null ? playgroundId() : this.playgroundId,
@@ -77,9 +86,12 @@ class PlaygroundRequestModel {
       ownershipImages:
           ownershipImages != null ? ownershipImages() : this.ownershipImages,
       size: size != null ? size() : this.size,
+      availableTime:
+          availableTime != null ? availableTime() : this.availableTime,
       govenrate: govenrate != null ? govenrate() : this.govenrate,
       state: state != null ? state() : this.state,
       comment: comment != null ? comment() : this.comment,
+      type: type != null ? type() : this.type,
     );
   }
 
@@ -99,9 +111,18 @@ class PlaygroundRequestModel {
       'groundImages': groundImages,
       'ownershipImages': ownershipImages,
       'size': size,
+      'available_time': availableTime?.map(
+        (day, times) => MapEntry(
+          day,
+          times?.map(
+            (time, status) => MapEntry(time, status),
+          ),
+        ),
+      ),
       'govenrate': govenrate,
       'state': state,
       'comment': comment,
+      'type': type,
     };
   }
 
@@ -121,9 +142,19 @@ class PlaygroundRequestModel {
       groundImages: List<String>.from(map['groundImages']),
       ownershipImages: List<String>.from(map['ownershipImages']),
       size: map['size']?.toInt(),
+      availableTime: (map['available_time'] as Map<String, dynamic>?)?.map(
+            (day, times) => MapEntry(
+              day,
+              (times as Map<String, dynamic>).map(
+                (time, status) => MapEntry(time, status as String),
+              ),
+            ),
+          ) ??
+          {},
       govenrate: map['govenrate'],
       state: map['state'],
       comment: map['comment'],
+      type: map['type'],
     );
   }
 
@@ -134,13 +165,12 @@ class PlaygroundRequestModel {
 
   @override
   String toString() {
-    return 'PlaygroundRequestModel(playgroundId: $playgroundId, name: $name, phone: $phone, longitude: $longitude, latitude: $latitude, ownerId: $ownerId, address: $address, status: $status, rating: $rating, price: $price, description: $description, groundImages: $groundImages, ownershipImages: $ownershipImages, size: $size, govenrate: $govenrate, state: $state, comment: $comment)';
+    return 'PlaygroundRequestModel(playgroundId: $playgroundId, name: $name, phone: $phone, longitude: $longitude, latitude: $latitude, ownerId: $ownerId, address: $address, status: $status, rating: $rating, price: $price, description: $description, groundImages: $groundImages, ownershipImages: $ownershipImages, size: $size, availableTime: $availableTime, govenrate: $govenrate, state: $state, comment: $comment, type: $type)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    final listEquals = const DeepCollectionEquality().equals;
 
     return other is PlaygroundRequestModel &&
         other.playgroundId == playgroundId &&
@@ -157,9 +187,11 @@ class PlaygroundRequestModel {
         listEquals(other.groundImages, groundImages) &&
         listEquals(other.ownershipImages, ownershipImages) &&
         other.size == size &&
+        mapEquals(other.availableTime, availableTime) &&
         other.govenrate == govenrate &&
         other.state == state &&
-        other.comment == comment;
+        other.comment == comment &&
+        other.type == type;
   }
 
   @override
@@ -178,8 +210,10 @@ class PlaygroundRequestModel {
         groundImages.hashCode ^
         ownershipImages.hashCode ^
         size.hashCode ^
+        availableTime.hashCode ^
         govenrate.hashCode ^
         state.hashCode ^
-        comment.hashCode;
+        comment.hashCode ^
+        type.hashCode;
   }
 }
