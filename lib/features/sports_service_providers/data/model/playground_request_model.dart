@@ -128,33 +128,39 @@ class PlaygroundRequestModel {
 
   factory PlaygroundRequestModel.fromMap(Map<String, dynamic> map) {
     return PlaygroundRequestModel(
-      playgroundId: map['playgroundId'],
-      name: map['name'],
-      phone: map['phone'],
-      longitude: map['longitude']?.toDouble(),
-      latitude: map['latitude']?.toDouble(),
-      ownerId: map['ownerId'],
-      address: map['address'],
-      status: map['status'],
-      rating: map['rating']?.toDouble(),
-      price: map['price']?.toDouble(),
-      description: map['description'],
-      groundImages: List<String>.from(map['groundImages']),
-      ownershipImages: List<String>.from(map['ownershipImages']),
-      size: map['size']?.toInt(),
+      playgroundId: map['playgroundId'] ?? '',
+      name: map['name'] ?? '',
+      phone: map['phone'] ?? '',
+      longitude: map['longitude']?.toDouble() ?? 0.0,
+      latitude: map['latitude']?.toDouble() ?? 0.0,
+      ownerId: map['ownerId'] ?? '',
+      address: map['address'] ?? '',
+      status: map['status'] ?? '',
+      rating: map['rating']?.toDouble() ?? 0.0,
+      price: map['price']?.toDouble() ?? 0.0,
+      description: map['description'] ?? '',
+      groundImages: List<String>.from(map['groundImages'] ?? []),
+      ownershipImages: List<String>.from(map['ownershipImages'] ?? []),
+      size: map['size']?.toInt() ?? 0,
       availableTime: (map['available_time'] as Map<String, dynamic>?)?.map(
-            (day, times) => MapEntry(
-              day,
-              (times as Map<String, dynamic>).map(
-                (time, status) => MapEntry(time, status as String),
-              ),
-            ),
+            (day, times) {
+              if (times is Map<String, dynamic>) {
+                return MapEntry(
+                  day,
+                  times.map(
+                    (time, status) => MapEntry(time, status as String),
+                  ),
+                );
+              } else {
+                return MapEntry(day, null);
+              }
+            },
           ) ??
           {},
-      govenrate: map['govenrate'],
-      state: map['state'],
-      comment: map['comment'],
-      type: map['type'],
+      govenrate: map['govenrate'] ?? '',
+      state: map['state'] ?? '',
+      comment: map['comment'] ?? '',
+      type: map['type'] ?? '',
     );
   }
 

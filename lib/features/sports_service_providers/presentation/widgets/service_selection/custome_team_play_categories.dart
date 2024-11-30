@@ -17,29 +17,45 @@ class CustomeTeamPlayCategories extends StatelessWidget {
       decoration: BoxDecoration(
           color: AppPallete.lightGrayColor,
           borderRadius: BorderRadius.circular(20.h)),
-      child: Column(
-        children: [
-          CustomeSportCategory(
-            color: AppPallete.greenColor,
-            title: Constants.football,
-          ),
-          verticalSpace(10.h),
-          CustomeSportCategory(
-            color: AppPallete.pinkColor,
-            title: Constants.basketball,
-          ),
-          verticalSpace(10.h),
-          CustomeSportCategory(
-            color: AppPallete.orangeColor,
-            title: Constants.tennis,
-          ),
-          verticalSpace(10.h),
-          CustomeSportCategory(
-            color: AppPallete.yellowColor,
-            title: Constants.volleyball,
-          ),
-        ],
+      child: SizedBox(
+        height: 400.0.h,
+        child: ListView.separated(
+          itemCount: SportsCategories.sportsCategories.length,
+          separatorBuilder: (context, index) => verticalSpace(10.h),
+          itemBuilder: (context, index) {
+            final category = SportsCategories.sportsCategories[index];
+            return CustomeSportCategory(
+              color: category.color,
+              title: category.title,
+            );
+          },
+        ),
       ),
     );
   }
+}
+
+class SportsCategories {
+  final String title;
+  final Color color;
+
+  SportsCategories({required this.title, required this.color});
+
+  static List<SportsCategories> sportsCategories = [
+    SportsCategories(
+        title: SportsType.football.name, color: AppPallete.greenColor),
+    SportsCategories(
+        title: SportsType.basketball.name, color: AppPallete.pinkColor),
+    SportsCategories(
+        title: SportsType.tennis.name, color: AppPallete.pinkColor),
+    SportsCategories(
+        title: SportsType.volleyball.name, color: AppPallete.yellowColor),
+  ];
+}
+
+enum SportsType {
+  football,
+  basketball,
+  tennis,
+  volleyball,
 }

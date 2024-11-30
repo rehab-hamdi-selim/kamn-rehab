@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        initialRoute: Routes.addServiceScreen,
+        initialRoute: Routes.groundsScreen,
         onGenerateRoute: AppRouter.generateRoute,
       ),
     );

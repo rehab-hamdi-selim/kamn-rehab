@@ -56,6 +56,7 @@ Future<T> executeTryAndCatchForDataLayer<T>(Future<T> Function() action) async {
   } on FormatException catch (e) {
     throw 'Error parsing data: ${e.message}';
   } catch (e) {
+    print(e);
     throw 'An unexpected error occurred: ${e.toString()}';
   }
 }
