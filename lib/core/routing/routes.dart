@@ -16,4 +16,8 @@ class Routes {
   static const String pickTimeReservationScreen = '/pickTimeReservationScreen';
   static const String chooseServiceCategoryScreen =
       '/chooseServiceCategoryScreen';
+  static const String analyticsfirstpage = '/analyticsfirstpage';
+  static const String secondPage = '/secondPage';
+  static const String paymentOptionsScreen = '/paymentOptionsScreen';
+  static const String proceedPaymentScreen = '/proceedPaymentScreen';
 }
