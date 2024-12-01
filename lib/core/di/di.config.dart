@@ -97,14 +97,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i575.SportsRemoteDataSource>(() =>
         _i575.SportsRemoteDataSourceImpl(
             firestoreService: gh<_i158.FirestoreService>()));
-            firestore: gh<_i974.FirebaseFirestore>()));
+
     gh.factory<_i209.AnalyticsCubit>(() =>
         _i209.AnalyticsCubit(repository: gh<_i724.AnalyticsRepository>()));
-    gh.factory<_i379.SportsRepository>(() => _i379.SportsRepository(
+    gh.factory<_i379.SportsRepository>(() => _i379.SportsRepositoryImpl(
         remoteDataSource: gh<_i575.SportsRemoteDataSource>()));
-    gh.factory<_i773.EditServiceProviderCubit>(() =>
-        _i773.EditServiceProviderCubit(
-            repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i252.AddServiceProviderCubit>(() =>
         _i252.AddServiceProviderCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
@@ -119,8 +116,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i786.GetServicesFromFirebaseUsecase>(() =>
         _i786.GetServicesFromFirebaseUsecase(
             repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i379.SportsRepository>(() => _i379.SportsRepositoryImpl(
-        remoteDataSource: gh<_i575.SportsRemoteDataSource>()));
+
     gh.factory<_i137.PickTimeForReservationCubit>(() =>
         _i137.PickTimeForReservationCubit(
             repository: gh<_i379.SportsRepository>()));
