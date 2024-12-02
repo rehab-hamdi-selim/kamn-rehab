@@ -16,29 +16,28 @@ class CustomBottom extends StatelessWidget {
     this.backgroundColor,
     required this.textStyle,
     this.iconVisible = false,
-    this.iconWidget=const SizedBox(),
+    this.iconWidget = const SizedBox(),
   });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor:backgroundColor ?? AppPallete.darkGreenColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50.r),
-        ),
-        minimumSize: Size(0, 40.h)
-      ),
+          backgroundColor: backgroundColor ?? AppPallete.darkGreenColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50.r),
+          ),
+          minimumSize: Size(0, 40.h)),
       onPressed: onPressed,
       child: Row(
         children: [
           Visibility(
-              visible: iconVisible,
-              child: iconWidget,
+            visible: iconVisible,
+            child: iconWidget,
           ),
           Text(
             textBottom,
-            style:textStyle ,
+            style: textStyle,
           ),
         ],
       ),

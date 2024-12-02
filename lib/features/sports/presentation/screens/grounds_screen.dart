@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
+import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme_data/app_palette.dart';
 import 'package:kamn/core/theme_data/style.dart';
 import 'package:kamn/core/utils/app_images.dart';
@@ -30,13 +31,14 @@ class GroundsScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppPalette.backgroundColor,
         appBar: CustomAppBar.appBar(
+          backGroundColor: AppPallete.whiteColor,
           arrowFunction: () {},
           notificationIconFunction: () {},
           profileFunction: () {},
           badgesIconFunction: () {},
         ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 19),
+          padding: EdgeInsets.symmetric(horizontal: 19.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
