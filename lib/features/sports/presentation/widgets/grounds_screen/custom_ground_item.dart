@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
+import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_favorite_button.dart';
 import '../../../../../core/theme_data/app_palette.dart';
 import '../../../../../core/theme_data/style.dart';
 import '../../../../../core/utils/app_images.dart';
@@ -34,8 +35,6 @@ class CustomGroundItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 337.w,
-      height: 197.h,
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
       decoration: BoxDecoration(
         color: AppPalette.backgroundColor,
@@ -62,24 +61,10 @@ class CustomGroundItem extends StatelessWidget {
             Positioned(
               top: 6,
               right: 6,
-              child: InkWell(
-                onTap: favoriteOnTap,
-                child: Container(
-                  padding: EdgeInsets.all(2.h.w),
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppPalette.backgroundColor,
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Icons.favorite_outline,
-                      color: AppPalette.darkGrayColor,
-                      size: 20.sp,
-                    ),
-                  ),
-                ),
+              child: CustomFavoriteButton(
+                favoriteOnTap: favoriteOnTap,
               ),
-            )
+            ),
           ],
         ),
         verticalSpace(3),

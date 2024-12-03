@@ -123,6 +123,11 @@ class TextStyles {
       color: AppPallete.gray2,
       fontWeight: FontWeightHelper.regular,
       fontSize: 10.h);
+  static TextStyle fontCircularSpotify10Medium = TextStyle(
+      fontFamily: "CircularSpotifyText",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 10.h);
   static TextStyle fontRoboto26BoldBlack = TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.blackColor,
