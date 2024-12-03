@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/helpers/spacer.dart';
 import '../../../../../core/theme/app_pallete.dart';
 
 class CustomBottom extends StatelessWidget {
@@ -21,25 +22,29 @@ class CustomBottom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor ?? AppPallete.darkGreenColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50.r),
-          ),
-          minimumSize: Size(0, 40.h)),
-      onPressed: onPressed,
-      child: Row(
-        children: [
-          Visibility(
-            visible: iconVisible,
-            child: iconWidget,
-          ),
-          Text(
-            textBottom,
-            style: textStyle,
-          ),
-        ],
+    return InkWell(
+      onTap: onPressed,
+      child: Container(
+        width: 66.w,
+        height: 30.h,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20.r),
+          color: backgroundColor ?? AppPallete.darkGreenColor,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Visibility(
+              visible: iconVisible,
+              child: iconWidget,
+            ),
+            horizontalSpace(5.w),
+            Text(
+              textBottom,
+              style: textStyle,
+            ),
+          ],
+        ),
       ),
     );
   }

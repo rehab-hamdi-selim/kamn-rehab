@@ -10,6 +10,7 @@ import 'package:kamn/core/theme_data/style.dart';
 import 'package:kamn/core/utils/app_images.dart';
 import 'package:kamn/features/sports/presentation/screens/ground_details_screen.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_filter_item.dart';
+import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_filter_section.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_ground_item.dart';
 import '../../data/data_source/sports_remote_data_source.dart';
 import '../../data/repositories/sports_repository.dart';
@@ -26,7 +27,6 @@ class GroundsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController controller = TextEditingController();
     return CustomGroundsBlocListner(
       child: Scaffold(
         backgroundColor: AppPalette.backgroundColor,
@@ -46,26 +46,7 @@ class GroundsScreen extends StatelessWidget {
                 Constants.groundsScreenTitle,
                 style: Style.font30DarkGreenColorBold,
               ),
-              Row(
-                children: [
-                  Expanded(
-                      child: CustomTextFormField(
-                    controller: controller,
-                  )),
-                  horizontalSpace(5),
-                  CustomBottom(
-                    iconVisible: true,
-                    iconWidget: Image.asset(
-                      AppImages.filterImage,
-                      width: 15.w,
-                      height: 15.h,
-                    ),
-                    onPressed: () {},
-                    textBottom: 'Filter',
-                    textStyle: Style.font12WhiteColorW400,
-                  ),
-                ],
-              ),
+              const CustomFilterSection(),
               verticalSpace(10),
               SizedBox(
                 height: 30.h,
@@ -82,7 +63,7 @@ class GroundsScreen extends StatelessWidget {
                     },
                     itemCount: 5),
               ),
-              verticalSpace(20),
+              verticalSpace(21.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -96,7 +77,7 @@ class GroundsScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              verticalSpace(10),
+              verticalSpace(5.h),
               const CustomYourNextMatchTimer(),
               verticalSpace(20),
               BlocBuilder<SportsGroundsCubit, SportsGroundsState>(
