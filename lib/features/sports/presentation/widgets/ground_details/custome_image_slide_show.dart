@@ -2,27 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/features/sports/data/models/playground_model.dart';
 
 class CustomeImageSlideShow extends StatelessWidget {
-  CustomeImageSlideShow(this.imagesPath, {super.key});
+  const CustomeImageSlideShow({required this.imagesPath, super.key});
 
-  List<dynamic> imagesPath = [];
+  final List<dynamic> imagesPath;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // The Image Slideshow
         ImageSlideshow(
-            indicatorBottomPadding: 70.h,
-            // Padding for indicators
+            indicatorBottomPadding: 100.h,
             width: double.infinity,
             height: 346.h,
             initialPage: 0,
             indicatorColor: AppPallete.greenColor,
             indicatorBackgroundColor: AppPallete.lgGreyColor,
-            autoPlayInterval: 3000,
+            autoPlayInterval: imagesPath.length == 1 ? null : 3000,
             isLoop: true,
             children: imagesPath.isNotEmpty
                 ? imagesPath.map((path) {
@@ -40,7 +37,6 @@ class CustomeImageSlideShow extends StatelessWidget {
                           child: Icon(Icons.error_outline, size: 40)),
                     ),
                   ]),
-
         Positioned(
           top: 20.h,
           left: 20.w,

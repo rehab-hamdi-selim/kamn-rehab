@@ -8,7 +8,6 @@ import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart';
-import 'package:intl/intl.dart';
 
 class CustomeSubmitButton extends StatelessWidget {
   final PlaygroundModel playground;
@@ -47,35 +46,21 @@ class CustomeSubmitButton extends StatelessWidget {
   ReservationModel perpareReservation(
     PickTimeForReservationCubit cubit,
   ) {
-    cubit.selectedIntervals.sort();
-    DateTime lastTime = DateFormat.Hm().parse(cubit.selectedIntervals.last);
-    lastTime = lastTime.copyWith(
-        year: selectedDate.year,
-        month: selectedDate.month,
-        day: selectedDate.day);
-
-    lastTime =
-        lastTime.add(Duration(minutes: playground.peroid?.toInt() ?? 60));
-    DateTime startTime = DateFormat.Hm().parse(cubit.selectedIntervals.first);
-    startTime = startTime.copyWith(
-        year: selectedDate.year,
-        month: selectedDate.month,
-        day: selectedDate.day);
+    List<DateTime> selectedDateList =
+        cubit.viewModel.selectedIntervals.entries.expand((entry) {
+      return entry.value;
+    }).toList();
+    selectedDateList.sort((a, b) => a.compareTo(b));
 
     return ReservationModel(
-        ground: playground.toMap(),
+        ground: playground,
         date: DateTime.now(),
-        startAt: startTime,
-        endAt: lastTime,
-        sessions: cubit.selectedIntervals.map((element) {
-          DateTime start = DateFormat.Hm().parse(element);
-          start = start.copyWith(
-              year: selectedDate.year,
-              month: selectedDate.month,
-              day: selectedDate.day);
+        startAt: selectedDateList.first,
+        endAt: selectedDateList.last,
+        sessions: selectedDateList.map((start) {
           return Session(
               startAt: start,
-              endAt: start.add(Duration(minutes: playground.peroid!.toInt())));
+              endAt: start.add(Duration(minutes: playground.period!.toInt())));
         }).toList(),
         status: 'pending',
         price: playground.price);

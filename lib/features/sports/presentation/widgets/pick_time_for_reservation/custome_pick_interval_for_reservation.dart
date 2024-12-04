@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_state.dart';
-import 'package:kamn/features/sports/presentation/screens/pick_time_for_reservation_screen.dart';
 
 class CustomePickIntervalForReservation extends StatelessWidget {
   const CustomePickIntervalForReservation(
-      {super.key, required this.interval, required this.isPicked});
+      {super.key,
+      required this.interval,
+      required this.isPicked,
+      required this.day});
 
-  final String interval;
+  final DateTime interval;
   final bool isPicked;
+  final String day;
 
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<PickTimeForReservationCubit>();
-    bool isSelected(String interval) {
-      return cubit.selectedIntervals.contains(interval);
-    }
 
     return BlocBuilder<PickTimeForReservationCubit,
         PickTimeForReservationState>(
@@ -25,21 +26,24 @@ class CustomePickIntervalForReservation extends StatelessWidget {
         return !isPicked
             ? GestureDetector(
                 onTap: () {
-                  cubit.onIntervalSelection(interval);
+                  cubit.onIntervalSelection(interval, day);
                 },
                 child: Container(
                   margin: const EdgeInsets.symmetric(vertical: 8),
                   padding: const EdgeInsets.all(16),
                   width: 100.w,
                   decoration: BoxDecoration(
-                    color:
-                        isSelected(interval) ? Colors.blueAccent : Colors.white,
+                    color: cubit.viewModel.isSelected(interval, day)
+                        ? Colors.blueAccent
+                        : Colors.white,
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
-                      color: isSelected(interval) ? Colors.blue : Colors.grey,
+                      color: cubit.viewModel.isSelected(interval, day)
+                          ? Colors.blue
+                          : Colors.grey,
                       width: 2,
                     ),
-                    boxShadow: isSelected(interval)
+                    boxShadow: cubit.viewModel.isSelected(interval, day)
                         ? [
                             BoxShadow(
                                 color: Colors.blue.withOpacity(0.3),
@@ -55,10 +59,11 @@ class CustomePickIntervalForReservation extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      interval,
+                      DateFormat('HH:mm').format(interval),
                       style: TextStyle(
-                        color:
-                            isSelected(interval) ? Colors.white : Colors.black,
+                        color: cubit.viewModel.isSelected(interval, day)
+                            ? Colors.white
+                            : Colors.black,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -85,8 +90,8 @@ class CustomePickIntervalForReservation extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    interval,
-                    style: TextStyle(
+                    DateFormat('HH:mm').format(interval),
+                    style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                     ),

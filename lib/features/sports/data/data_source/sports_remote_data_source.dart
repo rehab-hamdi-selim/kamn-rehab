@@ -17,8 +17,8 @@ abstract interface class SportsRemoteDataSource {
 class SportsRemoteDataSourceImpl implements SportsRemoteDataSource {
   final FirestoreService firestoreService;
   SportsRemoteDataSourceImpl({required this.firestoreService});
-  CollectionReference get _playGroundCollection =>
-      firestoreService.firestore.collection(FirebaseCollections.playgrounds);
+  CollectionReference get _playGroundCollection => firestoreService.firestore
+      .collection(FirebaseCollections.playgroundsRequests);
   @override
   Future<List<Map<String, dynamic>>> getPlaygrounds() async {
     return executeTryAndCatchForDataLayer(() async {

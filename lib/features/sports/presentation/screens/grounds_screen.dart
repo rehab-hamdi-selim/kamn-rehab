@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,8 +9,6 @@ import 'package:kamn/core/utils/app_images.dart';
 import 'package:kamn/features/sports/presentation/screens/ground_details_screen.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_filter_item.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_ground_item.dart';
-import '../../data/data_source/sports_remote_data_source.dart';
-import '../../data/repositories/sports_repository.dart';
 import '../cubits/sports_grounds/sports_ground_cubit.dart';
 import '../cubits/sports_grounds/sports_ground_state.dart';
 import '../widgets/grounds_screen/custom_app_bar.dart';
@@ -132,9 +129,10 @@ class GroundsScreen extends StatelessWidget {
                           );
                         },
                         child: CustomGroundItem(
-                          imageUrl: state.playgrounds![index].images!.isEmpty
+                          imageUrl: state
+                                  .playgrounds![index].groundImages!.isEmpty
                               ? ''
-                              : state.playgrounds![index].images!.first
+                              : state.playgrounds![index].groundImages!.first
                                   .toString(),
                           favoriteOnTap: () {},
                           placeText: state.playgrounds![index].name!,

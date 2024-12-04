@@ -1,11 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
+
+import 'package:kamn/features/sports/data/models/playground_model.dart';
 
 class ReservationModel {
   String? reservationId;
   String? userId;
-  Map<String, dynamic>? ground;
+  PlaygroundModel? ground;
   DateTime? date;
   num? price;
   DateTime? startAt;
@@ -27,13 +30,13 @@ class ReservationModel {
   ReservationModel copyWith({
     ValueGetter<String?>? reservationId,
     ValueGetter<String?>? userId,
-    ValueGetter<Map<String, dynamic>?>? ground,
+    ValueGetter<PlaygroundModel?>? ground,
     ValueGetter<DateTime?>? date,
     ValueGetter<num?>? price,
     ValueGetter<DateTime?>? startAt,
     ValueGetter<DateTime?>? endAt,
     ValueGetter<String?>? status,
-    ValueGetter<List<Session>?>? intervals,
+    ValueGetter<List<Session>?>? sessions,
   }) {
     return ReservationModel(
       reservationId:
@@ -45,7 +48,7 @@ class ReservationModel {
       startAt: startAt != null ? startAt() : this.startAt,
       endAt: endAt != null ? endAt() : this.endAt,
       status: status != null ? status() : this.status,
-      sessions: intervals != null ? intervals() : this.sessions,
+      sessions: sessions != null ? sessions() : this.sessions,
     );
   }
 
@@ -53,13 +56,13 @@ class ReservationModel {
     return {
       'reservationId': reservationId,
       'userId': userId,
-      'ground': ground,
+      'ground': ground?.toMap(),
       'date': date?.millisecondsSinceEpoch,
       'price': price,
       'startAt': startAt?.millisecondsSinceEpoch,
       'endAt': endAt?.millisecondsSinceEpoch,
       'status': status,
-      'intervals': sessions?.map((x) => x.toMap()).toList(),
+      'sessions': sessions?.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -67,7 +70,8 @@ class ReservationModel {
     return ReservationModel(
       reservationId: map['reservationId'],
       userId: map['userId'],
-      ground: Map<String, dynamic>.from(map['ground']),
+      ground:
+          map['ground'] != null ? PlaygroundModel.fromMap(map['ground']) : null,
       date: map['date'] != null
           ? DateTime.fromMillisecondsSinceEpoch(map['date'])
           : null,
@@ -79,8 +83,8 @@ class ReservationModel {
           ? DateTime.fromMillisecondsSinceEpoch(map['endAt'])
           : null,
       status: map['status'],
-      sessions: map['intervals'] != null
-          ? List<Session>.from(map['intervals']?.map((x) => Session.fromMap(x)))
+      sessions: map['sessions'] != null
+          ? List<Session>.from(map['sessions']?.map((x) => Session.fromMap(x)))
           : null,
     );
   }
@@ -92,7 +96,7 @@ class ReservationModel {
 
   @override
   String toString() {
-    return 'ReservationModel(reservationId: $reservationId, userId: $userId, ground: $ground, date: $date, price: $price, startAt: $startAt, endAt: $endAt, status: $status, intervals: $sessions)';
+    return 'ReservationModel(reservationId: $reservationId, userId: $userId, ground: $ground, date: $date, price: $price, startAt: $startAt, endAt: $endAt, status: $status, sessions: $sessions)';
   }
 
   @override
@@ -102,7 +106,7 @@ class ReservationModel {
     return other is ReservationModel &&
         other.reservationId == reservationId &&
         other.userId == userId &&
-        mapEquals(other.ground, ground) &&
+        other.ground == ground &&
         other.date == date &&
         other.price == price &&
         other.startAt == startAt &&

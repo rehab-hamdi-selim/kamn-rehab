@@ -5,6 +5,7 @@ import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_state.dart';
+import 'package:kamn/features/sports/presentation/widgets/pick_time_for_reservation/custome_choose_pick_time.dart';
 import 'package:kamn/features/sports/presentation/widgets/pick_time_for_reservation/custome_pick_interval_for_reservation.dart';
 import 'package:kamn/features/sports/presentation/widgets/pick_time_for_reservation/custome_pick_time_bloc_listener.dart';
 import 'package:kamn/features/sports/presentation/widgets/pick_time_for_reservation/custome_submit_button.dart';
@@ -19,7 +20,6 @@ class PickTimeForReservationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomePickTimeBlocListener(
-      playground: playground,
       child: Scaffold(
           backgroundColor: Colors.white,
           resizeToAvoidBottomInset: true,
@@ -35,9 +35,6 @@ class PickTimeForReservationScreen extends StatelessWidget {
                 child: BlocBuilder<PickTimeForReservationCubit,
                     PickTimeForReservationState>(
                   builder: (context, state) {
-                    List<ReservationModel> reservationList =
-                        state.reservationList ?? [];
-
                     return Column(
                       children: [
                         TableCalendar(
@@ -52,28 +49,8 @@ class PickTimeForReservationScreen extends StatelessWidget {
                                 .onDaySelected(selectedDay);
                           },
                         ),
-                        const Text('Select the time you want :',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Wrap(
-                          runSpacing: 10,
-                          spacing: 10,
-                          children: [
-                            if (playground.availableTime!.isNotEmpty) ...[
-                              ...playground
-                                  .availableTime![DateFormat.E().format(
-                                      state.selectedDate ?? DateTime.now())]!
-                                  .entries
-                                  .map((entry) {
-                                return CustomePickIntervalForReservation(
-                                    interval: entry.key,
-                                    isPicked: isInside(reservationList,
-                                        entry.key, state.selectedDate));
-                              }),
-                            ] else
-                              const Center(
-                                  child: Text('No intervals calculated')),
-                          ],
-                        ),
+                        CustomeChoosePickTime(
+                            availableTime: playground.availableTime!),
                         CustomeSubmitButton(
                           playground: playground,
                           selectedDate: state.selectedDate ?? DateTime.now(),
@@ -84,22 +61,5 @@ class PickTimeForReservationScreen extends StatelessWidget {
                 ),
               ))),
     );
-  }
-
-  isInside(List<ReservationModel> reservationList, String key,
-      DateTime? selectedDate) {
-    return reservationList
-        .where((element) {
-          return DateFormat('yyyy-MM-dd').format(element.startAt!) ==
-              DateFormat('yyyy-MM-dd').format(selectedDate ?? DateTime.now());
-        })
-        .toList()
-        .where((element) {
-          return element.sessions!.any((element) {
-            return DateFormat('HH:mm').format(element.startAt) == key;
-          });
-        })
-        .toList()
-        .isNotEmpty;
   }
 }

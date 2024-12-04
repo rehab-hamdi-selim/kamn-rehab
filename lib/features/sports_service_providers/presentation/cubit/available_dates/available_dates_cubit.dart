@@ -16,22 +16,32 @@ class AvailableDatesCubit extends Cubit<AvailableDatesState> {
 
   bool isOpened = false;
   bool isSelectAll = false;
-  List<String> selectedIntervals = [];
+  Map<String, List<DateTime>> selectedIntervals = {};
 
-  void onIntervalSelection(String interval) {
-    if (selectedIntervals.contains(interval)) {
-      selectedIntervals.remove(interval);
+  void onIntervalSelection(DateTime interval, String day) {
+    if (selectedIntervals.containsKey(day)) {
+      if (selectedIntervals[day]!.contains(interval)) {
+        selectedIntervals[day]!.remove(interval);
+      } else {
+        selectedIntervals[day]!.add(interval);
+      }
     } else {
-      selectedIntervals.add(interval);
+      selectedIntervals[day] = [];
+      selectedIntervals[day]!.add(interval);
     }
     emit(state.copyWith(state: AvailableDatesStatus.intervalSelected));
   }
 
-  void onSelectAll(bool isSelectAll) {
-    if (isSelectAll) {
-      selectedIntervals.addAll(state.intervials ?? []);
+  void onSelectAll(bool isSelectAll, String day) {
+    if (selectedIntervals.containsKey(day)) {
+      if (isSelectAll) {
+        selectedIntervals[day]!.addAll(state.intervials ?? []);
+      } else {
+        selectedIntervals[day]!.clear();
+      }
     } else {
-      selectedIntervals.clear();
+      selectedIntervals[day] = [];
+      selectedIntervals[day]!.addAll(state.intervials ?? []);
     }
     this.isSelectAll = isSelectAll;
 
@@ -59,10 +69,10 @@ class AvailableDatesCubit extends Cubit<AvailableDatesState> {
   }
 
   void calculateIntervails() {
-    List<String>? clacIntervails;
+    List<DateTime>? clacIntervails;
     if (state.startAt != null && state.endAt != null) {
       clacIntervails =
-          calculateIntervals(state.startAt!, state.endAt!, state.peroid);
+          calculateIntervals(state.startAt!, state.endAt!, state.period);
       if (clacIntervails != null) {
         emit(state.copyWith(
             state: AvailableDatesStatus.intervalsCalc,
