@@ -15,8 +15,7 @@ import 'package:table_calendar/table_calendar.dart';
 
 class PickTimeForReservationScreen extends StatelessWidget {
   final PlaygroundModel playground;
-  PickTimeForReservationScreen({super.key, required this.playground});
-  bool isSelected = false;
+  const PickTimeForReservationScreen({super.key, required this.playground});
   @override
   Widget build(BuildContext context) {
     return CustomePickTimeBlocListener(

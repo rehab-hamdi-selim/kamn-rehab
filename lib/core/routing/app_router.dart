@@ -1,9 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart';
+import 'package:kamn/features/admin/presentation/cubits/first_page_cupit/analytics_cubit.dart';
+import 'package:kamn/features/admin/presentation/screens/first_analytics_page/first_analytics_page.dart';
+import 'package:kamn/features/admin/data/data_source/second_page_data_source.dart';
+import 'package:kamn/features/admin/data/repository/second_page_repository.dart';
+import 'package:kamn/features/admin/presentation/cubits/second_page_cubit/second_page_cubit.dart';
+import 'package:kamn/features/admin/presentation/screens/second_page/second_page.dart';
+import 'package:kamn/features/payment/presentation/cubits/payment_options_cubit/payment_options_cubit.dart';
+import 'package:kamn/features/payment/presentation/screens/payment_options_screen.dart';
+import 'package:kamn/features/payment/presentation/screens/proceed_payment_screen.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/sports/presentation/screens/grounds_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/my_profile_screen.dart';
@@ -26,6 +36,12 @@ import 'package:kamn/features/sports_service_providers/presentation/screens/succ
 class AppRouter {
   static Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.analyticsfirstpage:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider<AnalyticsCubit>(
+              create: (context) => getIt<AnalyticsCubit>(),
+              child: FirstAnalyticsPage()),
+        );
       case Routes.myProfileScreen:
         return MaterialPageRoute(builder: (context) => const MyProfileScreen());
       case Routes.addServiceScreen:
@@ -106,6 +122,21 @@ class AppRouter {
                     playground: settings.arguments as PlaygroundModel,
                   ),
                 ));
+
+      case Routes.secondPage:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider<SecondPageCubit>(
+                create: (context) => getIt<SecondPageCubit>()..getChartData(),
+                child: const SecondPage()));
+      case Routes.paymentOptionsScreen:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider<PaymentOptionsCubit>(
+                  create: (context) => PaymentOptionsCubit(),
+                  child: const PaymentOptionsScreen(),
+                ));
+      case Routes.proceedPaymentScreen:
+        return MaterialPageRoute(
+            builder: (context) => const ProceedPaymentScreen());
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(

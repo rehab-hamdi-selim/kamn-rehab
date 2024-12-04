@@ -38,7 +38,7 @@ class EditServiceScreen extends StatelessWidget {
                   CustomeGroundImagePicker(
                       groundImages: playground.groundImages!),
                   verticalSpace(7.h),
-                  CustomeServiceInfo(playground: playground),
+                  //  CustomeServiceInfo(playground: playground),
                   CustomeFinishedButton(
                     playground: playground,
                   ),
