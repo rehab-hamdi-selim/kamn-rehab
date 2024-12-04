@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
+import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_avaliable_button.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_favorite_button.dart';
+import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_ground_details.dart';
+import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_price_section.dart';
+import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_rate_section.dart';
 import '../../../../../core/theme_data/app_palette.dart';
 import '../../../../../core/theme_data/style.dart';
 import '../../../../../core/utils/app_images.dart';
@@ -68,117 +73,38 @@ class CustomGroundItem extends StatelessWidget {
           ],
         ),
         verticalSpace(3),
+        CustomGroundDetails(owner: owner, km: km),
         Padding(
           padding: const EdgeInsets.only(bottom: 3.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              verticalSpace(1.2.h),
+              Text(
+                placeText,
+                style: TextStyles.font16DartBlackColorCircularSpotifyTextW400,
+              ),
               Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Icon(
+                    Icons.location_on_outlined,
+                    size: 12.h,
+                    color: AppPalette.grayColor,
+                  ),
+                  horizontalSpace(1),
                   Text(
-                    placeText,
-                    style: Style.font16DartBlackColorW400,
+                    location,
+                    style: Style.font10GrayColorW400,
                   ),
                   horizontalSpace(8),
-                  Text(
-                    "$km km",
-                    style: Style.font10DarkGreenColorW400,
+                  CustomAvaliableButton(
+                    available: available,
                   ),
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
-                    "Owner: ",
-                    style: Style.font10BlackColorW400,
-                  ),
-                  Text(
-                    owner,
-                    style: Style.font10DarkGreenColorW400,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.location_on_outlined,
-                        size: 12.h,
-                        color: AppPalette.grayColor,
-                      ),
-                      horizontalSpace(4),
-                      Text(
-                        location,
-                        style: Style.font10GrayColorW400,
-                      ),
-                      horizontalSpace(8),
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 2.w, vertical: 2.h),
-                        decoration: BoxDecoration(
-                          color: AppPalette.backgroundColor,
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: AppPalette.greenColor,
-                            width: 1.w,
-                          ),
-                        ),
-                        child: Container(
-                          height: 4.h,
-                          width: 4.w,
-                          decoration: const BoxDecoration(
-                              color: AppPalette.greenColor,
-                              shape: BoxShape.circle),
-                        ),
-                      ),
-                      horizontalSpace(4),
-                      Text(
-                        available,
-                        style: Style.font7DartBlackColorW400,
-                      ),
-                      horizontalSpace(8),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 4.w),
-                        decoration: BoxDecoration(
-                          color: AppPalette.backgroundColor,
-                          borderRadius: BorderRadius.circular(15.r),
-                          border: Border.all(
-                            color: AppPalette.greenColor,
-                            width: 1.w,
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              rates,
-                              style: Style.font10GrayColorW400,
-                            ),
-                            Icon(
-                              Icons.star,
-                              size: 12.h,
-                              color: AppPalette.yellowColor,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        "$price LE",
-                        style: Style.font16DartBlackColorW400,
-                      ),
-                      Text(
-                        "/hr",
-                        style: Style.font10BlackColorW400,
-                      ),
-                    ],
-                  ),
+                  horizontalSpace(8),
+                  CustomRateSection(rates: rates),
+                  const Spacer(),
+                  CustomPriceSection(price: price),
                 ],
               ),
             ],
