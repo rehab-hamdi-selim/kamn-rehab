@@ -9,10 +9,14 @@ class CustomFilterTextFormField extends StatelessWidget {
       {super.key,
       required this.txt,
       required this.controller,
-      required this.sufficIcon});
+      required this.sufficIcon,
+      required this.hintText,
+      required this.textInputType});
   final String txt;
   final TextEditingController controller;
-  final IconData sufficIcon;
+  final IconData? sufficIcon;
+  final String hintText;
+  final TextInputType textInputType;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -26,12 +30,13 @@ class CustomFilterTextFormField extends StatelessWidget {
         SizedBox(
           height: 38.h,
           child: TextFormField(
+              keyboardType: textInputType,
               controller: controller,
               cursorColor: AppPallete.darkGreenColor,
               decoration: InputDecoration(
                 contentPadding:
                     EdgeInsets.only(left: 15.w, right: 15.w, bottom: 10.h),
-                hintText: controller.text,
+                hintText: hintText,
                 hintStyle: TextStyles.font12LightGreyColorregular,
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(31.r),

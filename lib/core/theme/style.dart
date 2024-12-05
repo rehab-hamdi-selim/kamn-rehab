@@ -118,6 +118,11 @@ class TextStyles {
       color: AppPallete.blackColor,
       fontWeight: FontWeightHelper.regular,
       fontSize: 16.h);
+  static TextStyle fontRoboto13SemiBoldGreen = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.greenColor,
+      fontWeight: FontWeightHelper.semiBold,
+      fontSize: 13.h);
   static TextStyle fontRoboto10RegularGray = TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.grayColor,
