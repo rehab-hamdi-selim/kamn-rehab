@@ -224,6 +224,11 @@ class TextStyles {
       color: AppPallete.dartBlackColor,
       fontWeight: FontWeightHelper.regular,
       fontSize: 16.h);
+  static TextStyle font16GreyColorW400 = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.greyColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 16.h);
   static TextStyle font7DartBlackColorW400 = TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.dartBlackColor,
