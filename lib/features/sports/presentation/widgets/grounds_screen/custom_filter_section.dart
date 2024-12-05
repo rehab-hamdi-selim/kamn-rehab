@@ -7,6 +7,7 @@ import 'package:kamn/core/theme_data/style.dart';
 import 'package:kamn/core/utils/app_images.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_bottom.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_bottom_sheet_top_section.dart';
+import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_filter_text_form_field.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_text_form_field.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -40,18 +41,28 @@ class CustomFilterSection extends StatelessWidget {
                   height: MediaQuery.sizeOf(context).height / 1.5,
                   padding: EdgeInsets.only(top: 15.h, left: 10.w, right: 10.w),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        height: 6.h,
-                        width: 70.w,
-                        decoration: BoxDecoration(
-                            color: AppPallete.lgGreyColor,
-                            borderRadius: BorderRadius.circular(30.r)),
+                      Center(
+                        child: Container(
+                          height: 6.h,
+                          width: 70.w,
+                          decoration: BoxDecoration(
+                              color: AppPallete.lgGreyColor,
+                              borderRadius: BorderRadius.circular(30.r)),
+                        ),
                       ),
                       verticalSpace(17.h),
                       CustomBottomSheetTopSection(
                           resetButton: () {}, closeSheet: () {}),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 13.w),
+                        child: CustomFilterTextFormField(
+                          controller: TextEditingController(),
+                          sufficIcon: Icons.location_on_outlined,
+                          txt: 'Locations',
+                        ),
+                      ),
                     ],
                   ),
                 );

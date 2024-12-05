@@ -96,6 +96,11 @@ class TextStyles {
       color: AppPallete.ofWhiteColor,
       fontWeight: FontWeightHelper.medium,
       fontSize: 20.h);
+  static TextStyle font2OfaccentBlackMediumRoboto = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.accentBlackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 20.h);
 
   //
   static TextStyle fontRoboto24MediumBlack = TextStyle(
@@ -320,4 +325,9 @@ class TextStyles {
       color: AppPallete.accentBlackColor,
       fontWeight: FontWeightHelper.semiBold,
       fontSize: 13.h);
+  static TextStyle font12LightGreyColorregular = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.ligtGreyColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 12.h);
 }
