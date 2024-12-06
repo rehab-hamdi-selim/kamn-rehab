@@ -14,4 +14,8 @@ class Routes {
   static const String analyticsfirstpage = '/analyticsfirstpage';
   static const String debitCreditCardPage = '/debitCreditCardPage';
   static const String secondPage = '/secondPage';
+  static const String trackGroundResrvations = '/trackGroundReservations';
+
+  static const String trackGroundResrvationsDetail =
+      '/trackGroundReservationsDetails';
 }

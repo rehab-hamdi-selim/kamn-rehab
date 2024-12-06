@@ -10,6 +10,7 @@ import 'package:kamn/features/admin/data/repository/second_page_repository.dart'
 import 'package:kamn/features/admin/presentation/cubits/second_page_cubit/second_page_cubit.dart';
 import 'package:kamn/features/admin/presentation/screens/second_page/second_page.dart';
 import 'package:kamn/features/payment/presentation/screens/debit_credit_card_screen.dart';
+import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/sports/presentation/screens/grounds_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/my_profile_screen.dart';
@@ -18,11 +19,15 @@ import 'package:kamn/features/sports_service_providers/presentation/cubit/add_se
 import 'package:kamn/features/sports_service_providers/presentation/cubit/edit_service_provider/edit_service_provider_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_ground_details/service_provider_ground_details_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/track_ground_reservation_details/track_ground_reservation_details_cubit.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/track_ground_reservations/track_ground_reservations_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/add_service.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/edit_service_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_ground_details_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_grounds_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_selection_screen.dart';
+import 'package:kamn/features/sports_service_providers/presentation/screens/track_ground_reservation_detail_screen.dart';
+import 'package:kamn/features/sports_service_providers/presentation/screens/track_ground_reservations_screen.dart';
 
 class AppRouter {
   static Route generateRoute(RouteSettings settings) {
@@ -35,6 +40,24 @@ class AppRouter {
         );
       case Routes.debitCreditCardPage:
         return MaterialPageRoute(builder: (context) => DebitCreditCardScreen());
+      case Routes.trackGroundResrvations:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider<TrackGroundReservationsCubit>(
+                  create: (context) => getIt<TrackGroundReservationsCubit>()
+                    ..getPlaygroundsByOwnerId('testOwner49'),
+                  child: const TrackGroundReservationsScreen(),
+                ));
+      case Routes.trackGroundResrvationsDetail:
+        return MaterialPageRoute(
+            builder: (context) =>
+                BlocProvider<TrackGroundReservationsDetailsCubit>(
+                  create: (context) =>
+                      getIt<TrackGroundReservationsDetailsCubit>()
+                        ..getPlaygroundsDetailsById('zuQkYty1ma0ZML7gMGgz'),
+                  child: TrackGroundReservationDetail(
+                    playgroundModel: settings.arguments as PlaygroundModel,
+                  ),
+                ));
       case Routes.myProfileScreen:
         return MaterialPageRoute(builder: (context) => const MyProfileScreen());
       case Routes.addServiceScreen:
@@ -58,7 +81,7 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => BlocProvider<ServiceProviderGroundsCubit>(
                   create: (context) => getIt<ServiceProviderGroundsCubit>()
-                    ..getPlaygroundsRequests,
+                    ..getPlaygroundsRequests(),
                   child: const ServiceProviderGroundsScreen(),
                 ));
       case Routes.successServiceProviderScreen:

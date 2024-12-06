@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        initialRoute: Routes.analyticsfirstpage,
+        initialRoute: Routes.trackGroundResrvations,
         onGenerateRoute: AppRouter.generateRoute,
         // home: FirstAnalyticsPage(),
       ),
