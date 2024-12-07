@@ -16,6 +16,7 @@ class CustomGroundsBlocListner extends StatelessWidget {
         if (state.isFailure) {
           showSnackBar(
               context, state.erorrMessage ?? "There is un expected error");
+          print(state.erorrMessage);
         }
       },
       child: child,

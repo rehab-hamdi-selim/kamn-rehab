@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:kamn/core/helpers/spacer.dart';
+import 'package:kamn/core/theme/app_pallete.dart';
 import '../../../../../core/theme_data/app_palette.dart';
 import '../../../../../core/utils/app_images.dart';
 
 class CustomAppBar {
-  static AppBar appBar(
-      {required Function()? arrowFunction,
-      required Function()? notificationIconFunction,
-      required Function()? badgesIconFunction,
-      required Function()? profileFunction}) {
+  static AppBar appBar({
+    required Function()? arrowFunction,
+    required Function()? notificationIconFunction,
+    required Function()? badgesIconFunction,
+    required Function()? profileFunction,
+    Color? backGroundColor,
+  }) {
     return AppBar(
+      backgroundColor: backGroundColor,
       leadingWidth: 45.w,
       leading: Row(
         children: [

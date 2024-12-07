@@ -13,7 +13,8 @@ import 'package:kamn/features/sports_service_providers/data/model/playground_req
 import 'package:path/path.dart';
 
 abstract class ServiceProvidersRemoteDataSource {
-  Future<void> addServiceToFirestore(PlaygroundRequestModel playground);
+  Future<PlaygroundRequestModel> addServiceToFirestore(
+      PlaygroundRequestModel playground);
   Future<List<String>> addImagesToStorage(List<File> images);
   Future<bool> deleteImagesFromStorage(List<String> images);
   Future<List<Map<String, dynamic>>> getPlaygroundsByOwnerId(String ownerId);
@@ -33,14 +34,16 @@ class ServiceProvidersRemoteDataSourceImpl
       {required this.firestoreServices, required this.storageServies});
 
   @override
-  Future<void> addServiceToFirestore(PlaygroundRequestModel playground) async {
+  Future<PlaygroundRequestModel> addServiceToFirestore(
+      PlaygroundRequestModel playground) async {
     return executeTryAndCatchForDataLayer(() async {
       var collRef = firestoreServices.firestore
           .collection(FirebaseCollections.playgroundsRequests);
       var docRef = collRef.doc();
       playground.playgroundId = docRef.id;
       playground.state = 'pending';
-      return await docRef.set(playground.toMap());
+      await docRef.set(playground.toMap());
+      return playground;
     });
   }
 

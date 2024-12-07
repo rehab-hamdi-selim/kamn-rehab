@@ -10,7 +10,7 @@ import 'package:kamn/features/sports_service_providers/data/model/playground_req
 import 'dart:async';
 
 abstract class ServiceProvidersRepository {
-  Future<Either<Faliure, void>> addServiceToFirestore(
+  Future<Either<Faliure, PlaygroundRequestModel>> addServiceToFirestore(
       PlaygroundRequestModel playground);
   Future<Either<Faliure, List<String>>> addImagesToStorage(List<File> images);
   Future<Either<Faliure, bool>> deleteImagesFromStorage(List<String> images);
@@ -32,7 +32,7 @@ class ServiceProvidersRepositoryImpl implements ServiceProvidersRepository {
   ServiceProvidersRepositoryImpl({required this.dataSource});
   //TODO:Check connectivity  in executeTryAndCatchForRepository /* done
   @override
-  Future<Either<Faliure, void>> addServiceToFirestore(
+  Future<Either<Faliure, PlaygroundRequestModel>> addServiceToFirestore(
       PlaygroundRequestModel playground) {
     return executeTryAndCatchForRepository(() async {
       return await dataSource.addServiceToFirestore(playground);

@@ -10,6 +10,7 @@ import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/firebase_options.dart';
 
 import 'core/routing/app_router.dart';
+import 'features/sports_service_providers/presentation/screens/service_provider_available_dates.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
