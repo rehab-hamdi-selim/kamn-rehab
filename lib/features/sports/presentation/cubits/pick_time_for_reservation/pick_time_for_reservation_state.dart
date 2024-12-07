@@ -7,7 +7,9 @@ enum PickTimeForReservationStatus {
   failure,
   failureUpdate,
   intervalSelected,
-  availabledTimeUpdated
+  availabledTimeUpdated,
+  reservationDeleted,
+  reservationLoaded
 }
 
 extension PickTimeForReservationStateExtension on PickTimeForReservationState {
@@ -15,6 +17,10 @@ extension PickTimeForReservationStateExtension on PickTimeForReservationState {
   bool get isLoading => state == PickTimeForReservationStatus.loading;
   bool get isSuccess => state == PickTimeForReservationStatus.success;
   bool get isFailure => state == PickTimeForReservationStatus.failure;
+  bool get isReservationDelete =>
+      state == PickTimeForReservationStatus.reservationDeleted;
+  bool get isReservationLoaded =>
+      state == PickTimeForReservationStatus.reservationLoaded;
   bool get isFailureUpdate =>
       state == PickTimeForReservationStatus.failureUpdate;
   bool get isAvailabledTimeUpdated =>
@@ -28,23 +34,27 @@ class PickTimeForReservationState {
   final String? erorrMessage;
   final DateTime? selectedDate;
   final ReservationModel? reservation;
+  final List<ReservationModel>? reservationList;
 
   PickTimeForReservationState(
       {required this.state,
       this.erorrMessage,
       this.selectedDate,
-      this.reservation});
+      this.reservation,
+      this.reservationList});
 
   PickTimeForReservationState copyWith(
       {PickTimeForReservationStatus? state,
       String? erorrMessage,
       DateTime? selectedDate,
-      ReservationModel? reservation}) {
+      ReservationModel? reservation,
+      List<ReservationModel>? reservationList}) {
     return PickTimeForReservationState(
       state: state ?? this.state,
       erorrMessage: erorrMessage ?? this.erorrMessage,
       selectedDate: selectedDate ?? this.selectedDate,
       reservation: reservation ?? this.reservation,
+      reservationList: reservationList ?? this.reservationList,
     );
   }
 }

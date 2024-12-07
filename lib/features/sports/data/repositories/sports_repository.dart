@@ -13,6 +13,7 @@ abstract class SportsRepository {
   Future<Either<Faliure, void>> updateState(
       String playgroundId, Map<String, dynamic> data);
   Future<Either<Faliure, void>> delete(ReservationModel reservation);
+  Future<Either<Faliure, List<ReservationModel>>> getAllReservation();
 }
 
 @Injectable(as: SportsRepository)
@@ -53,6 +54,16 @@ class SportsRepositoryImpl implements SportsRepository {
   Future<Either<Faliure, void>> delete(ReservationModel reservation) {
     return executeTryAndCatchForRepository(() async {
       return await _remoteDataSource.delete(reservation);
+    });
+  }
+
+  @override
+  Future<Either<Faliure, List<ReservationModel>>> getAllReservation() {
+    return executeTryAndCatchForRepository(() async {
+      var response = await _remoteDataSource.getAllReservation();
+      return response.map((element) {
+        return ReservationModel.fromMap(element);
+      }).toList();
     });
   }
 }

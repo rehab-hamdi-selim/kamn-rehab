@@ -10,14 +10,15 @@ abstract interface class SportsRemoteDataSource {
   Future<ReservationModel> submitReservation(ReservationModel reservation);
   Future<void> updateState(String playgroundId, Map<String, dynamic> data);
   Future<void> delete(ReservationModel reservation);
+  Future<List<Map<String, dynamic>>> getAllReservation();
 }
 
 @Injectable(as: SportsRemoteDataSource)
 class SportsRemoteDataSourceImpl implements SportsRemoteDataSource {
   final FirestoreService firestoreService;
   SportsRemoteDataSourceImpl({required this.firestoreService});
-  CollectionReference get _playGroundCollection =>
-      firestoreService.firestore.collection(FirebaseCollections.playgrounds);
+  CollectionReference get _playGroundCollection => firestoreService.firestore
+      .collection(FirebaseCollections.playgroundsRequests);
   @override
   Future<List<Map<String, dynamic>>> getPlaygrounds() async {
     return executeTryAndCatchForDataLayer(() async {
@@ -55,6 +56,17 @@ class SportsRemoteDataSourceImpl implements SportsRemoteDataSource {
           .collection(FirebaseCollections.reservation)
           .doc(reservation.reservationId);
       return await docRef.delete();
+    });
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> getAllReservation() {
+    return executeTryAndCatchForDataLayer(() async {
+      var querySnapshot =
+          await firestoreService.getData(FirebaseCollections.reservation);
+      return querySnapshot.docs.map((element) {
+        return element.data() as Map<String, dynamic>;
+      }).toList();
     });
   }
 }

@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/available_dates/available_dates_cubit.dart';
 
 class CustomeAvailableInterval extends StatelessWidget {
-  const CustomeAvailableInterval({
-    super.key,
-    required this.interval,
-  });
+  const CustomeAvailableInterval(
+      {super.key, required this.interval, required this.day});
 
-  final String interval;
+  final DateTime interval;
+  final String day;
 
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<AvailableDatesCubit>();
-    bool isSelected(String interval) {
-      return cubit.selectedIntervals.contains(interval);
+
+    bool isSelected(DateTime interval) {
+      if (cubit.selectedIntervals.containsKey(day)) {
+        return cubit.selectedIntervals[day]!.contains(interval);
+      }
+      return false;
     }
 
     return GestureDetector(
       onTap: () {
-        cubit.onIntervalSelection(interval);
+        cubit.onIntervalSelection(interval, day);
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8),
@@ -49,7 +53,7 @@ class CustomeAvailableInterval extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            interval,
+            DateFormat('HH:mm').format(interval),
             style: TextStyle(
               color: isSelected(interval) ? Colors.white : Colors.black,
               fontWeight: FontWeight.bold,

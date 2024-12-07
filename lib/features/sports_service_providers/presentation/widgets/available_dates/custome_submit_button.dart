@@ -7,6 +7,7 @@ import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 
 import 'package:kamn/features/sports_service_providers/presentation/cubit/available_dates/available_dates_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/available_dates/available_dates_state.dart';
@@ -32,16 +33,15 @@ class CustomeSubmitButton extends StatelessWidget {
               onPressed: state.isLoading
                   ? null
                   : () {
-                      cubit.onSubmit(playgroundId, {
-                        'available_time': {
-                          for (var day in WeekDays.values)
-                            day.name: {
-                              for (var interval in cubit.selectedIntervals)
-                                interval: 'unselected'
-                            }
+                      cubit.onSubmit(
+                        playgroundId,
+                        {
+                          'available_time':
+                              AvailableTime(data: cubit.selectedIntervals)
+                                  .toMap(),
+                          'period': state.period,
                         },
-                        'peroid': state.peroid,
-                      });
+                      );
                     },
               child: state.isLoading
                   ? const CircularProgressIndicator(

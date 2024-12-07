@@ -8,11 +8,12 @@ import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart';
-import 'package:intl/intl.dart';
 
 class CustomeSubmitButton extends StatelessWidget {
   final PlaygroundModel playground;
-  const CustomeSubmitButton({super.key, required this.playground});
+  final DateTime selectedDate;
+  const CustomeSubmitButton(
+      {super.key, required this.playground, required this.selectedDate});
 
   @override
   Widget build(BuildContext context) {
@@ -42,16 +43,25 @@ class CustomeSubmitButton extends StatelessWidget {
     );
   }
 
-  ReservationModel perpareReservation(PickTimeForReservationCubit cubit) {
-    cubit.selectedIntervals.sort();
-    DateTime lastTime = DateFormat.Hm().parse(cubit.selectedIntervals.last);
-    lastTime =
-        lastTime.add(Duration(minutes: playground.peroid?.toInt() ?? 60));
+  ReservationModel perpareReservation(
+    PickTimeForReservationCubit cubit,
+  ) {
+    List<DateTime> selectedDateList =
+        cubit.viewModel.selectedIntervals.entries.expand((entry) {
+      return entry.value;
+    }).toList();
+    selectedDateList.sort((a, b) => a.compareTo(b));
+
     return ReservationModel(
-        ground: playground.toMap(),
+        ground: playground,
         date: DateTime.now(),
-        startAt: cubit.selectedIntervals.first,
-        endAt: DateFormat.jm().format(lastTime),
+        startAt: selectedDateList.first,
+        endAt: selectedDateList.last,
+        sessions: selectedDateList.map((start) {
+          return Session(
+              startAt: start,
+              endAt: start.add(Duration(minutes: playground.period!.toInt())));
+        }).toList(),
         status: 'pending',
         price: playground.price);
   }

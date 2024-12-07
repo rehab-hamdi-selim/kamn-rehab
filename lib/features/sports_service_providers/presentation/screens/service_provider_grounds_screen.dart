@@ -100,9 +100,10 @@ class ServiceProviderGroundsScreen extends StatelessWidget {
 
                       final playgrounds = state.playgrounds![type] ?? [];
 
-                      if (playgrounds.isEmpty)
+                      if (playgrounds.isEmpty) {
                         return const Center(
                             child: Text('no such data for this category'));
+                      }
 
                       return ListView.separated(
                           itemBuilder: (context, index) {

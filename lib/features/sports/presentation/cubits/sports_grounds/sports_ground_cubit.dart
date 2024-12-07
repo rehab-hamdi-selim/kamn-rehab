@@ -12,8 +12,6 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
       : _sportsRepository = sportsRepository,
         super(SportsGroundsState(state: SportsGroundsStatus.initial));
 
-  //init getPlaygrounds_from_firebase branch
-
   Future<void> getPlaygrounds() async {
     final result = await _sportsRepository.getPlaygrounds();
     result.fold(

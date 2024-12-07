@@ -39,10 +39,19 @@ class ChooseServiceCategoryScreen extends StatelessWidget {
                 Padding(
                   padding:
                       EdgeInsets.symmetric(vertical: 25.h, horizontal: 65.w),
-                  child: Text(
-                    textAlign: TextAlign.center,
-                    Constants.whichSportYouServe,
-                    style: TextStyles.fontRoboto24MediumBlack,
+                  child: Column(
+                    children: [
+                      Text(
+                        textAlign: TextAlign.center,
+                        Constants.yourServices,
+                        style: TextStyles.font32BlackColormedium,
+                      ),
+                      Text(
+                          textAlign: TextAlign.center,
+                          Constants.chooseYourAddedServices,
+                          style:
+                              TextStyles.font14CircularSpotifyTextGrayRegalur),
+                    ],
                   ),
                 ),
                 CustomeTitleText(
