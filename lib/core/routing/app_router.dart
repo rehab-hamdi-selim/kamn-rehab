@@ -16,9 +16,9 @@ import 'package:kamn/features/sports_service_providers/presentation/screens/serv
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_grounds_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_selection_screen.dart';
 
-import '../../features/authantication/presentation/screens/on_boarding_screen.dart';
-import '../../features/authantication/presentation/screens/sign_in_screen.dart';
-import '../../features/authantication/presentation/screens/sign_up_screen.dart';
+import '../../features/authentication/presentation/screens/on_boarding_screen.dart';
+import '../../features/authentication/presentation/screens/sign_in_screen.dart';
+import '../../features/authentication/presentation/screens/sign_up_screen.dart';
 
 class AppRouter {
   static Route generateRoute(RouteSettings settings) {

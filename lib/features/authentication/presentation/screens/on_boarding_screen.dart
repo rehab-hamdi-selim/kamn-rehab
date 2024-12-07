@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:kamn/features/authantication/presentation/widgets/on_boarding/custom_logo_paint.dart';
+import 'package:kamn/features/authentication/presentation/widgets/on_boarding/custom_logo_paint.dart';
 
 import '../../../../core/routing/routes.dart';
 import '../widgets/Custom_hader.dart';

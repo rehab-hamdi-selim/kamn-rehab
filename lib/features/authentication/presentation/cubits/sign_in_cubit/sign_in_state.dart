@@ -1,7 +1,17 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:kamn/features/authantication/data/model/auth_user_model.dart';
-enum SignInStatus { initial, 
-loading, success, failure,visible,successGetData,failureGetData }
+
+import '../../../../../core/common/entities/user_model.dart';
+
+enum SignInStatus {
+  initial,
+  loading,
+  success,
+  failure,
+  visible,
+  successGetData,
+  failureGetData,
+  successSignOut
+}
 
 extension SignInStateExtension on SignInState {
   bool get isInitial => state == SignInStatus.initial;
@@ -11,15 +21,16 @@ extension SignInStateExtension on SignInState {
   bool get isVisible => state == SignInStatus.visible;
   bool get isSuccessGetData => state == SignInStatus.successGetData;
   bool get isFailureGetData => state == SignInStatus.failureGetData;
+  bool get isSuccessSignOut => state == SignInStatus.successSignOut;
 }
 
 class SignInState {
   final SignInStatus state;
-  final AuthUserModel? userModel;
+  final UserModel? userModel;
   final String? erorrMessage;
   final String? uid;
   final bool isVisible;
-  SignInState( {
+  SignInState({
     required this.state,
     this.userModel,
     this.erorrMessage,
@@ -29,7 +40,7 @@ class SignInState {
 
   SignInState copyWith({
     SignInStatus? state,
-    AuthUserModel? userModel,
+    UserModel? userModel,
     String? erorrMessage,
     bool? isVisible,
     String? uid,
@@ -38,7 +49,7 @@ class SignInState {
       state: state ?? this.state,
       userModel: userModel ?? this.userModel,
       erorrMessage: erorrMessage ?? this.erorrMessage,
-      isVisible: isVisible?? this.isVisible,
+      isVisible: isVisible ?? this.isVisible,
       uid: uid ?? this.uid,
     );
   }
@@ -52,13 +63,17 @@ class SignInState {
     if (identical(this, other)) return true;
 
     return other.state == state &&
-        other.userModel== userModel &&
-        other.erorrMessage == erorrMessage
-        && other.isVisible == isVisible
-        && other.uid == uid;
+        other.userModel == userModel &&
+        other.erorrMessage == erorrMessage &&
+        other.isVisible == isVisible &&
+        other.uid == uid;
   }
 
   @override
   int get hashCode =>
-      state.hashCode ^ userModel.hashCode ^ erorrMessage.hashCode^ isVisible.hashCode ^ uid.hashCode;
+      state.hashCode ^
+      userModel.hashCode ^
+      erorrMessage.hashCode ^
+      isVisible.hashCode ^
+      uid.hashCode;
 }
