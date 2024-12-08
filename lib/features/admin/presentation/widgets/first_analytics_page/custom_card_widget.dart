@@ -39,7 +39,6 @@ class CustomCardWidget extends StatelessWidget {
             surfaceTintColor: Colors.white,
             child: Padding(
               padding: const EdgeInsets.all(14),
-              padding: const EdgeInsets.all(14),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +51,6 @@ class CustomCardWidget extends StatelessWidget {
                         color: iconcolor,
                       ),
                       const Spacer(
-                      const Spacer(
                         flex: 1,
                       ),
                       Text(
@@ -60,7 +58,6 @@ class CustomCardWidget extends StatelessWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 10.h),
                       ),
-                      const Spacer(
                       const Spacer(
                         flex: 25,
                       ),

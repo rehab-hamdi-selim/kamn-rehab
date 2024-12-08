@@ -33,7 +33,7 @@ class TrackGroundReservationDetail extends StatelessWidget {
                 right: 0,
                 height: 346.h,
                 // Image height
-                child: CustomeImageSlideShow(playgroundModel.images)),
+                child: CustomeImageSlideShow(playgroundModel.images!)),
             Positioned(
               bottom: 0,
               // Start from the bottom

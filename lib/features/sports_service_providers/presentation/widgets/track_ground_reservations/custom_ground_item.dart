@@ -31,8 +31,8 @@ class CustomGroundItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15.r),
               ),
               child: CachedNetworkImage(
-                  imageUrl: playground.images.isNotEmpty == true
-                      ? playground.images[0]
+                  imageUrl: playground.images?.isNotEmpty == true
+                      ? playground.images![0]
                       : '',
                   imageBuilder: (context, imageProvider) => Container(
                         width: double.infinity,
@@ -81,7 +81,7 @@ class CustomGroundItem extends StatelessWidget {
         Row(
           children: [
             Text(
-              playground.name,
+              playground.name!,
               style: TextStyles.font16DartBlackColorW400,
             ),
             horizontalSpace(8),
@@ -115,7 +115,7 @@ class CustomGroundItem extends StatelessWidget {
                 ),
                 horizontalSpace(4),
                 Text(
-                  playground.address,
+                  playground.address!,
                   style: TextStyles.font10GrayColorW400,
                 ),
                 horizontalSpace(8),
@@ -173,7 +173,7 @@ class CustomGroundItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  '${playground.price.toInt()}',
+                  '${playground.price!.toInt()}',
                   style: TextStyles.font16DartBlackColorW400,
                 ),
                 Text(

@@ -99,9 +99,6 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => ServiceProviderGroundsScreen(
                   type: settings.arguments as String,
-                  create: (context) => getIt<ServiceProviderGroundsCubit>()
-                    ..getPlaygroundsRequests(),
-                  child: const ServiceProviderGroundsScreen(),
                 ));
       case Routes.successServiceProviderScreen:
         return MaterialPageRoute(
