@@ -17,7 +17,12 @@ class Routes {
   static const String chooseServiceCategoryScreen =
       '/chooseServiceCategoryScreen';
   static const String analyticsfirstpage = '/analyticsfirstpage';
+  static const String debitCreditCardPage = '/debitCreditCardPage';
   static const String secondPage = '/secondPage';
+  static const String trackGroundResrvations = '/trackGroundReservations';
+
+  static const String trackGroundResrvationsDetail =
+      '/trackGroundReservationsDetails';
   static const String paymentOptionsScreen = '/paymentOptionsScreen';
   static const String proceedPaymentScreen = '/proceedPaymentScreen';
 }
