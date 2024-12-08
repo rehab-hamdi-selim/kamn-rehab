@@ -17,8 +17,6 @@ import '../../features/admin/data/data_source/second_page_data_source.dart'
     as _i746;
 import '../../features/admin/data/repository/analytics_repository.dart'
     as _i724;
-import '../../features/admin/data/repository/analytics_repository.dart'
-    as _i724;
 import '../../features/admin/data/repository/second_page_repository.dart'
     as _i173;
 import '../../features/admin/domain/use_case/second_page_use_case.dart'
@@ -94,8 +92,6 @@ extension GetItInjectableX on _i174.GetIt {
             dataSource: gh<_i1047.ServiceProvidersRemoteDataSource>()));
     gh.factory<_i396.SecondPageUseCase>(() => _i396.SecondPageUseCaseImpl(
         repository: gh<_i173.SecondPageRepository>()));
-    gh.factory<_i396.SecondPageUseCase>(() => _i396.SecondPageUseCaseImpl(
-        repository: gh<_i173.SecondPageRepository>()));
     gh.factory<_i137.PickTimeForReservationCubit>(() =>
         _i137.PickTimeForReservationCubit(
             repository: gh<_i379.SportsRepository>()));
@@ -114,25 +110,25 @@ extension GetItInjectableX on _i174.GetIt {
             firestoreService: gh<_i158.FirestoreService>()));
     gh.factory<_i379.SportsRepositoryImpl>(() => _i379.SportsRepositoryImpl(
         remoteDataSource: gh<_i575.SportsRemoteDataSource>()));
-    gh.factory<_i786.GetServicesFromFirebaseUsecase>(() =>
-        _i786.GetServicesFromFirebaseUsecase(
+    gh.factory<_i278.TrackGroundReservationsCubit>(() =>
+        _i278.TrackGroundReservationsCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i773.EditServiceProviderCubit>(() =>
         _i773.EditServiceProviderCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i731.AvailableDatesCubit>(() => _i731.AvailableDatesCubit(
         repository: gh<_i542.ServiceProvidersRepository>()));
+    gh.factory<_i692.ServiceProviderGroundDetailsCubit>(() =>
+        _i692.ServiceProviderGroundDetailsCubit(
+            repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i252.AddServiceProviderCubit>(() =>
         _i252.AddServiceProviderCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i987.ServiceProviderGroundsCubit>(() =>
-        _i987.ServiceProviderGroundsCubit(
-            repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i278.TrackGroundReservationsCubit>(() =>
-        _i278.TrackGroundReservationsCubit(
-            repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i38.TrackGroundReservationsDetailsCubit>(() =>
         _i38.TrackGroundReservationsDetailsCubit(
+            repository: gh<_i542.ServiceProvidersRepository>()));
+    gh.factory<_i786.GetServicesFromFirebaseUsecase>(() =>
+        _i786.GetServicesFromFirebaseUsecase(
             repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i987.ServiceProviderGroundsCubit>(() =>
         _i987.ServiceProviderGroundsCubit(
