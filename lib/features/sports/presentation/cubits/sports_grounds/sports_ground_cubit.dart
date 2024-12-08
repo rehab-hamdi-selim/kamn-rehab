@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kamn/features/sports/data/models/filter_model.dart';
 import 'package:kamn/features/sports/domain/usecase/sports_ground_usecase.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_state.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_view_model.dart';
@@ -52,6 +54,11 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
         erorrMessage: error.erorr,
       ));
     }, (success) {
+      addFilterItem(
+          distance: distance,
+          location: location,
+          maxPrice: maxPrice,
+          minPrice: minPrice);
       emit(SportsGroundsState(
         state: SportsGroundsStatus.success,
         playgrounds: success,
@@ -67,6 +74,54 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
     emit(SportsGroundsState(
       state: SportsGroundsStatus.changeDistance,
     ));
+  }
+
+  void deleteFilterItem({required int index}) {
+    switch (SportsGroundViewModel.filterData[index]!.icon) {
+      case Icons.location_on_outlined:
+        SportsGroundViewModel.loactionController.clear();
+        break;
+      case Icons.monetization_on_outlined:
+        SportsGroundViewModel.maxPriceController.clear();
+        SportsGroundViewModel.minPriceController.clear();
+        break;
+      default:
+        SportsGroundViewModel.distance = 0;
+    }
+    SportsGroundViewModel.filterData
+        .remove(SportsGroundViewModel.filterData[index]);
+
+    filterPlayGroundData(
+      location: SportsGroundViewModel.loactionController.text,
+      maxPrice: SportsGroundViewModel.minPriceController.text != ''
+          ? int.parse(SportsGroundViewModel.maxPriceController.text)
+          : null,
+      distance: SportsGroundViewModel.distance,
+      minPrice: SportsGroundViewModel.minPriceController.text != ''
+          ? int.parse(SportsGroundViewModel.minPriceController.text)
+          : null,
+    );
+  }
+
+  void addFilterItem(
+      {num? maxPrice, num? minPrice, String? location, double? distance}) {
+    SportsGroundViewModel.filterData = [
+      if (location!.isNotEmpty)
+        FilterModel(
+          icon: Icons.location_on_outlined,
+          title: location,
+        ),
+      if (maxPrice != null || minPrice != null)
+        FilterModel(
+          icon: Icons.monetization_on_outlined,
+          title: '${minPrice ?? 0} - ${maxPrice ?? 0}',
+        ),
+      if (distance != null && distance != 0)
+        FilterModel(
+          icon: Icons.social_distance,
+          title: '${(SportsGroundViewModel.distance * 100).round()}',
+        ),
+    ];
   }
 // TODO Calculate Disy=tance to show it
   // Future<double> claculateDistance({

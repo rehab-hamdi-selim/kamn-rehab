@@ -30,20 +30,20 @@ class CustomDataFilterSection extends StatelessWidget {
           children: [
             Expanded(
               child: CustomFilterTextFormField(
-                controller: SportsGroundViewModel.maxPriceController,
-                textInputType: TextInputType.number,
+                controller: SportsGroundViewModel.minPriceController,
                 sufficIcon: null,
-                hintText: 'max',
+                textInputType: TextInputType.number,
+                hintText: 'min',
                 txt: 'Price Range',
               ),
             ),
             horizontalSpace(7.w),
             Expanded(
               child: CustomFilterTextFormField(
-                controller: SportsGroundViewModel.minPriceController,
-                sufficIcon: null,
+                controller: SportsGroundViewModel.maxPriceController,
                 textInputType: TextInputType.number,
-                hintText: 'min',
+                sufficIcon: null,
+                hintText: 'max',
                 txt: '',
               ),
             ),

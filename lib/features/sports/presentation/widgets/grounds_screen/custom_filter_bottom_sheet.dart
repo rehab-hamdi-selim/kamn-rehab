@@ -44,13 +44,13 @@ class CustomFilterBottomSheet extends StatelessWidget {
                   SportsGroundsCubit.get(context).filterPlayGroundData(
                     location: SportsGroundViewModel.loactionController.text,
                     maxPrice:
-                        SportsGroundViewModel.minPriceController.text != ''
+                        SportsGroundViewModel.minPriceController.text.isNotEmpty
                             ? int.parse(
                                 SportsGroundViewModel.maxPriceController.text)
                             : null,
                     distance: SportsGroundViewModel.distance,
                     minPrice:
-                        SportsGroundViewModel.minPriceController.text != ''
+                        SportsGroundViewModel.minPriceController.text.isNotEmpty
                             ? int.parse(
                                 SportsGroundViewModel.minPriceController.text)
                             : null,
