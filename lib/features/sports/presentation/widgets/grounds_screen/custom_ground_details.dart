@@ -5,9 +5,14 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 
 class CustomGroundDetails extends StatelessWidget {
-  const CustomGroundDetails({super.key, required this.owner, required this.km});
+  const CustomGroundDetails(
+      {super.key,
+      required this.owner,
+      required this.km,
+      required this.groundSize});
   final String owner;
   final String km;
+  final num groundSize;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -30,7 +35,7 @@ class CustomGroundDetails extends StatelessWidget {
         ),
         horizontalSpace(13.w),
         Text(
-          'Ground Size 5',
+          'Ground Size $groundSize',
           style: TextStyles.fontCircularSpotify8Regular,
         ),
       ],

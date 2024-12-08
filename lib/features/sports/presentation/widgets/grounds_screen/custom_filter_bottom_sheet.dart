@@ -3,13 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/features/payment/presentation/widgets/payment_options/custom_button.dart';
+import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
+import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_view_model.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_bottom_sheet_top_section.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_data_filter_section.dart';
-import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_distance_filter.dart';
 
 class CustomFilterBottomSheet extends StatelessWidget {
   const CustomFilterBottomSheet({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,17 +28,35 @@ class CustomFilterBottomSheet extends StatelessWidget {
               ),
             ),
             verticalSpace(17.h),
-            CustomBottomSheetTopSection(resetButton: () {}, closeSheet: () {}),
+            CustomBottomSheetTopSection(
+                resetButton: () {},
+                closeSheet: () {
+                  Navigator.pop(context);
+                }),
             verticalSpace(20.h),
             Padding(
                 padding: EdgeInsets.symmetric(horizontal: 13.w),
                 child: const CustomDataFilterSection()),
-            verticalSpace(25.h),
-            const CustomDistanceFilter(),
             SizedBox(
               width: double.infinity,
               child: CustomButton(
-                onTap: () {},
+                onTap: () {
+                  SportsGroundsCubit.get(context).filterPlayGroundData(
+                    location: SportsGroundViewModel.loactionController.text,
+                    maxPrice:
+                        SportsGroundViewModel.minPriceController.text != ''
+                            ? int.parse(
+                                SportsGroundViewModel.maxPriceController.text)
+                            : null,
+                    distance: SportsGroundViewModel.distance,
+                    minPrice:
+                        SportsGroundViewModel.minPriceController.text != ''
+                            ? int.parse(
+                                SportsGroundViewModel.minPriceController.text)
+                            : null,
+                  );
+                  Navigator.pop(context);
+                },
                 text: 'Apply Filter',
               ),
             )

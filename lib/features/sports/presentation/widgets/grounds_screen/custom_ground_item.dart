@@ -19,6 +19,7 @@ class CustomGroundItem extends StatelessWidget {
   final String available;
   final String owner;
   final String price;
+  final num groundSize;
   final void Function()? favoriteOnTap;
   //final void Function() onTap;
 
@@ -33,6 +34,7 @@ class CustomGroundItem extends StatelessWidget {
     required this.available,
     required this.rates,
     required this.price,
+    required this.groundSize,
     // required this.onTap,
   });
 
@@ -53,7 +55,11 @@ class CustomGroundItem extends StatelessWidget {
           favoriteOnTap: favoriteOnTap,
         ),
         verticalSpace(3),
-        CustomGroundDetails(owner: owner, km: km),
+        CustomGroundDetails(
+          owner: owner,
+          km: km,
+          groundSize: groundSize,
+        ),
         verticalSpace(1.2.h),
         Text(
           placeText,

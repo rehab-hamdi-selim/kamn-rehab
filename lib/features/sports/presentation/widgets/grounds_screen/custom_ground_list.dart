@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/helpers/spacer.dart';
+import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme_data/style.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_state.dart';
@@ -16,17 +17,21 @@ class CustomGroundList extends StatelessWidget {
         builder: (context, state) {
       //Dont miss to add the empty list check and initial chack
       if (state.isLoading || state.isInitial) {
-        return const Center(
-          child: CircularProgressIndicator.adaptive(),
+        return const Expanded(
+          child: Center(
+            child: CircularProgressIndicator(
+              color: AppPallete.greenColor,
+            ),
+          ),
         );
       }
-      final grounds = state.playgrounds ?? [];
-      if (grounds.isEmpty) {
-        return SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
+      if (state.playgrounds == null ||
+          state.playgrounds!.isEmpty ||
+          state.isFailure) {
+        return Expanded(
           child: Center(
             child: Text(
-              "Grounds Not Found",
+              "Opps, No PlayGrounds Found",
               style: Style.font16DartBlackColorW400,
             ),
           ),
@@ -47,6 +52,7 @@ class CustomGroundList extends StatelessWidget {
                 );
               },
               child: CustomGroundItem(
+                groundSize: state.playgrounds![index].size ?? 0,
                 imageUrl: state.playgrounds![index].images!.isEmpty
                     ? ''
                     : state.playgrounds![index].images!.first.toString(),

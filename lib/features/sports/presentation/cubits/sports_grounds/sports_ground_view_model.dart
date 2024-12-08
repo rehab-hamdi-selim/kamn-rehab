@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
 
-@injectable
 class SportsGroundViewModel {
-  var searchController = TextEditingController();
-  var loactionController = TextEditingController();
-  var dateController = TextEditingController();
-  var maxPriceController = TextEditingController();
-  var minPriceController = TextEditingController();
+  static var searchController = TextEditingController();
+  static var loactionController = TextEditingController();
+  static var dateController = TextEditingController();
+  static var maxPriceController = TextEditingController();
+  static var minPriceController = TextEditingController();
+  static var distance = 0.0;
 }
