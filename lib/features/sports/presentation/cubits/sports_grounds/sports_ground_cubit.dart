@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kamn/core/utils/location.dart';
 import 'package:kamn/features/sports/data/models/filter_model.dart';
 import 'package:kamn/features/sports/domain/usecase/sports_ground_usecase.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_state.dart';
@@ -123,14 +124,14 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
         ),
     ];
   }
-// TODO Calculate Disy=tance to show it
-  // Future<double> claculateDistance({
-  //   double? goundLatitude,
-  //   double? groundLongitude,
-  // }) async {
-  //   var userLocation = await getUserLocation();
-  //   return Geolocator.distanceBetween(goundLatitude!, groundLongitude!,
-  //           userLocation['latitude']!, userLocation['longitude']!) /
-  //       1000;
-  // }
+
+  void getUserLocation() async {
+    var response = await getLocationCoordinates();
+    Map<String, double> data = {};
+    response.fold((error) {}, (success) {
+      data = success;
+    });
+    SportsGroundViewModel.userLatitude = data['latitude']!;
+    SportsGroundViewModel.userLongitude = data['longitude']!;
+  }
 }

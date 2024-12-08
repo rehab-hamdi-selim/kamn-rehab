@@ -8,5 +8,7 @@ class SportsGroundViewModel {
   static var maxPriceController = TextEditingController();
   static var minPriceController = TextEditingController();
   static var distance = 0.0;
+  static var userLatitude = 0.0;
+  static var userLongitude = 0.0;
   static List<FilterModel?> filterData = [];
 }
