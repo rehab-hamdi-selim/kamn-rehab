@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_state.dart';
-import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_view_model.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_filter_item.dart';
 
 class CustomFilterProperties extends StatelessWidget {
@@ -16,14 +15,28 @@ class CustomFilterProperties extends StatelessWidget {
         return Column(
           children: [
             SizedBox(
-              height: SportsGroundViewModel.filterItem.isEmpty ? 0 : 30.h,
+              height: SportsGroundsCubit.get(context)
+                      .sportsGroundViewModel
+                      .filterItem
+                      .isEmpty
+                  ? 0
+                  : 30.h,
               child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    if (SportsGroundViewModel.filterItem[index] != null) {
+                    if (SportsGroundsCubit.get(context)
+                            .sportsGroundViewModel
+                            .filterItem[index] !=
+                        null) {
                       return CustomFilterItem(
-                          icon: SportsGroundViewModel.filterItem[index]!.icon,
-                          text: SportsGroundViewModel.filterItem[index]!.title,
+                          icon: SportsGroundsCubit.get(context)
+                              .sportsGroundViewModel
+                              .filterItem[index]!
+                              .icon,
+                          text: SportsGroundsCubit.get(context)
+                              .sportsGroundViewModel
+                              .filterItem[index]!
+                              .title,
                           onPressed: () {
                             SportsGroundsCubit.get(context)
                                 .deleteFilterItem(index: index);
@@ -32,9 +45,15 @@ class CustomFilterProperties extends StatelessWidget {
                     return Container();
                   },
                   separatorBuilder: (context, index) => horizontalSpace(5),
-                  itemCount: SportsGroundViewModel.filterItem.length),
+                  itemCount: SportsGroundsCubit.get(context)
+                      .sportsGroundViewModel
+                      .filterItem
+                      .length),
             ),
-            SportsGroundViewModel.filterItem.isEmpty
+            SportsGroundsCubit.get(context)
+                    .sportsGroundViewModel
+                    .filterItem
+                    .isEmpty
                 ? verticalSpace(0.h)
                 : verticalSpace(21.h)
           ],

@@ -6,7 +6,6 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme_data/style.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_state.dart';
-import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_view_model.dart';
 import 'package:kamn/features/sports/presentation/screens/ground_details_screen.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_ground_item.dart';
 
@@ -60,7 +59,7 @@ class CustomGroundList extends StatelessWidget {
                     : state.playgrounds![index].images!.first.toString(),
                 favoriteOnTap: () {},
                 placeText: state.playgrounds![index].name!,
-                km: '${(Geolocator.distanceBetween(SportsGroundViewModel.userLatitude, SportsGroundViewModel.userLongitude, state.playgrounds![index].latitude!, state.playgrounds![index].longitude!) / 1000).round()}',
+                km: '${(Geolocator.distanceBetween(SportsGroundsCubit.get(context).sportsGroundViewModel.userLatitude, SportsGroundsCubit.get(context).sportsGroundViewModel.userLongitude, state.playgrounds![index].latitude!, state.playgrounds![index].longitude!) / 1000).round()}',
 
                 owner: state.playgrounds![index].ownerId!,
                 location: state.playgrounds![index].address!,

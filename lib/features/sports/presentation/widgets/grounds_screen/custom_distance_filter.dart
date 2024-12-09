@@ -5,7 +5,6 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_state.dart';
-import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_view_model.dart';
 
 class CustomDistanceFilter extends StatelessWidget {
   const CustomDistanceFilter({super.key});
@@ -25,14 +24,16 @@ class CustomDistanceFilter extends StatelessWidget {
                     style: TextStyles.font2OfaccentBlackMediumRoboto,
                   ),
                   Text(
-                    '${(SportsGroundViewModel.distance * 100).round()} km',
+                    '${(SportsGroundsCubit.get(context).sportsGroundViewModel.distance * 100).round()} km',
                     style: TextStyles.fontRoboto13SemiBoldGreen,
                   )
                 ],
               ),
             ),
             Slider(
-              value: SportsGroundViewModel.distance,
+              value: SportsGroundsCubit.get(context)
+                  .sportsGroundViewModel
+                  .distance,
               onChanged: (value) {
                 SportsGroundsCubit.get(context).changeDistance(value);
               },

@@ -4,7 +4,6 @@ import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/features/payment/presentation/widgets/payment_options/custom_button.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
-import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_view_model.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_bottom_sheet_top_section.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_data_filter_section.dart';
 
@@ -43,18 +42,33 @@ class CustomFilterBottomSheet extends StatelessWidget {
               child: CustomButton(
                 onTap: () {
                   SportsGroundsCubit.get(context).filterPlayGroundData(
-                    location: SportsGroundViewModel.loactionController.text,
-                    maxPrice:
-                        SportsGroundViewModel.maxPriceController.text.isNotEmpty
-                            ? int.parse(
-                                SportsGroundViewModel.maxPriceController.text)
-                            : null,
-                    distance: SportsGroundViewModel.distance,
-                    minPrice:
-                        SportsGroundViewModel.minPriceController.text.isNotEmpty
-                            ? int.parse(
-                                SportsGroundViewModel.minPriceController.text)
-                            : null,
+                    location: SportsGroundsCubit.get(context)
+                        .sportsGroundViewModel
+                        .loactionController
+                        .text,
+                    maxPrice: SportsGroundsCubit.get(context)
+                            .sportsGroundViewModel
+                            .maxPriceController
+                            .text
+                            .isNotEmpty
+                        ? int.parse(SportsGroundsCubit.get(context)
+                            .sportsGroundViewModel
+                            .maxPriceController
+                            .text)
+                        : null,
+                    distance: SportsGroundsCubit.get(context)
+                        .sportsGroundViewModel
+                        .distance,
+                    minPrice: SportsGroundsCubit.get(context)
+                            .sportsGroundViewModel
+                            .minPriceController
+                            .text
+                            .isNotEmpty
+                        ? int.parse(SportsGroundsCubit.get(context)
+                            .sportsGroundViewModel
+                            .minPriceController
+                            .text)
+                        : null,
                   );
                   Navigator.pop(context);
                 },

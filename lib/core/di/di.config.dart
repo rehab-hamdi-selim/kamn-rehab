@@ -37,6 +37,8 @@ import '../../features/sports/presentation/cubits/pick_time_for_reservation/pick
     as _i137;
 import '../../features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart'
     as _i1033;
+import '../../features/sports/presentation/cubits/sports_grounds/sports_ground_view_model.dart'
+    as _i16;
 import '../../features/sports_service_providers/data/data_source/service_providers_remote_data_source.dart'
     as _i1047;
 import '../../features/sports_service_providers/data/repository/service_providers_repository.dart'
@@ -69,6 +71,7 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i805.PaymentOptionsViewModel>(
         () => _i805.PaymentOptionsViewModel());
+    gh.factory<_i16.SportsGroundViewModel>(() => _i16.SportsGroundViewModel());
     gh.lazySingleton<_i304.FirebaseStorageServices>(
         () => _i304.FirebaseStorageServices());
     gh.lazySingleton<_i158.FirestoreService>(() => _i158.FirestoreService());
@@ -128,6 +131,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1033.SportsGroundsCubit>(() => _i1033.SportsGroundsCubit(
           sportsRepository: gh<_i379.SportsRepository>(),
           sportsGroundUsecase: gh<_i561.SportsGroundUsecase>(),
+          sportsGroundViewModel: gh<_i16.SportsGroundViewModel>(),
         ));
     return this;
   }

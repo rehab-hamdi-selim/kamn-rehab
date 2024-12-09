@@ -4,7 +4,7 @@ import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme_data/style.dart';
 import 'package:kamn/core/utils/app_images.dart';
-import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_view_model.dart';
+import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_bottom.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_filter_bottom_sheet.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_text_form_field.dart';
@@ -17,7 +17,9 @@ class CustomFilterSection extends StatelessWidget {
       children: [
         Expanded(
             child: CustomTextFormField(
-          controller: SportsGroundViewModel.searchController,
+          controller: SportsGroundsCubit.get(context)
+              .sportsGroundViewModel
+              .searchController,
         )),
         horizontalSpace(5),
         CustomBottom(

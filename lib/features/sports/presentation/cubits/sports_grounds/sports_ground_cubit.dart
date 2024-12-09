@@ -13,14 +13,17 @@ import '../../../data/models/playground_model.dart';
 class SportsGroundsCubit extends Cubit<SportsGroundsState> {
   final SportsRepository _sportsRepository;
   final SportsGroundUsecase _sportsGroundUsecase;
+  final SportsGroundViewModel sportsGroundViewModel;
   SportsGroundsCubit(
       {required SportsRepository sportsRepository,
-      required SportsGroundUsecase sportsGroundUsecase})
+      required SportsGroundUsecase sportsGroundUsecase,
+      required this.sportsGroundViewModel})
       : _sportsRepository = sportsRepository,
         _sportsGroundUsecase = sportsGroundUsecase,
         super(SportsGroundsState(state: SportsGroundsStatus.initial));
 
   static SportsGroundsCubit get(context) => BlocProvider.of(context);
+
   //init getPlaygrounds_from_firebase branch
 
   Future<void> getPlaygrounds() async {
@@ -71,57 +74,57 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
     emit(state.copyWith(
         state: SportsGroundsStatus
             .loading)); // Why Should Change State to do new state ?????
-    SportsGroundViewModel.distance = value;
+    sportsGroundViewModel.distance = value;
     emit(state.copyWith(state: SportsGroundsStatus.changeDistance));
   }
 
   void deleteFilterItem({required int index}) {
-    switch (SportsGroundViewModel.filterItem[index]!.icon) {
+    switch (sportsGroundViewModel.filterItem[index]!.icon) {
       case Icons.location_on_outlined:
-        SportsGroundViewModel.loactionController.clear();
+        sportsGroundViewModel.loactionController.clear();
         break;
       case Icons.monetization_on_outlined:
-        SportsGroundViewModel.maxPriceController.clear();
-        SportsGroundViewModel.minPriceController.clear();
+        sportsGroundViewModel.maxPriceController.clear();
+        sportsGroundViewModel.minPriceController.clear();
         break;
       default:
-        SportsGroundViewModel.distance = 0;
+        sportsGroundViewModel.distance = 0;
     }
-    SportsGroundViewModel.filterItem
-        .remove(SportsGroundViewModel.filterItem[index]);
+    sportsGroundViewModel.filterItem
+        .remove(sportsGroundViewModel.filterItem[index]);
 
     filterPlayGroundData(
-      location: SportsGroundViewModel.loactionController.text,
-      maxPrice: SportsGroundViewModel.minPriceController.text != ''
-          ? int.parse(SportsGroundViewModel.maxPriceController.text)
+      location: sportsGroundViewModel.loactionController.text,
+      maxPrice: sportsGroundViewModel.minPriceController.text != ''
+          ? int.parse(sportsGroundViewModel.maxPriceController.text)
           : null,
-      distance: SportsGroundViewModel.distance,
-      minPrice: SportsGroundViewModel.minPriceController.text != ''
-          ? int.parse(SportsGroundViewModel.minPriceController.text)
+      distance: sportsGroundViewModel.distance,
+      minPrice: sportsGroundViewModel.minPriceController.text != ''
+          ? int.parse(sportsGroundViewModel.minPriceController.text)
           : null,
     );
   }
 
   void resetFilter() {
-    SportsGroundViewModel.distance = 0;
-    SportsGroundViewModel.loactionController.clear();
-    SportsGroundViewModel.maxPriceController.clear();
-    SportsGroundViewModel.minPriceController.clear();
+    sportsGroundViewModel.distance = 0;
+    sportsGroundViewModel.loactionController.clear();
+    sportsGroundViewModel.maxPriceController.clear();
+    sportsGroundViewModel.minPriceController.clear();
     filterPlayGroundData(
-      location: SportsGroundViewModel.loactionController.text,
-      maxPrice: SportsGroundViewModel.minPriceController.text != ''
-          ? int.parse(SportsGroundViewModel.maxPriceController.text)
+      location: sportsGroundViewModel.loactionController.text,
+      maxPrice: sportsGroundViewModel.minPriceController.text != ''
+          ? int.parse(sportsGroundViewModel.maxPriceController.text)
           : null,
-      distance: SportsGroundViewModel.distance,
-      minPrice: SportsGroundViewModel.minPriceController.text != ''
-          ? int.parse(SportsGroundViewModel.minPriceController.text)
+      distance: sportsGroundViewModel.distance,
+      minPrice: sportsGroundViewModel.minPriceController.text != ''
+          ? int.parse(sportsGroundViewModel.minPriceController.text)
           : null,
     );
   }
 
   void addFilterItem(
       {num? maxPrice, num? minPrice, String? location, double? distance}) {
-    SportsGroundViewModel.filterItem = [
+    sportsGroundViewModel.filterItem = [
       if (location!.isNotEmpty)
         FilterModel(
           icon: Icons.location_on_outlined,
@@ -135,7 +138,7 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
       if (distance != null && distance != 0)
         FilterModel(
           icon: Icons.route_outlined,
-          title: '${(SportsGroundViewModel.distance * 100).round()} Km away',
+          title: '${(sportsGroundViewModel.distance * 100).round()} Km away',
         ),
     ];
   }
@@ -146,7 +149,13 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
     response.fold((error) {}, (success) {
       data = success;
     });
-    SportsGroundViewModel.userLatitude = data['latitude']!;
-    SportsGroundViewModel.userLongitude = data['longitude']!;
+    sportsGroundViewModel.userLatitude = data['latitude']!;
+    sportsGroundViewModel.userLongitude = data['longitude']!;
+  }
+
+  @override
+  Future<void> close() {
+    sportsGroundViewModel.dispoe();
+    return super.close();
   }
 }
