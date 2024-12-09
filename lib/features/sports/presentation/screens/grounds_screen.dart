@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/core/theme_data/app_palette.dart';
 import 'package:kamn/core/theme_data/style.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_filter_properties.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_filter_section.dart';
@@ -19,7 +18,7 @@ class GroundsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomGroundsBlocListner(
       child: Scaffold(
-        backgroundColor: AppPalette.backgroundColor,
+        backgroundColor: AppPallete.whiteColor,
         appBar: CustomAppBar.appBar(
           backGroundColor: AppPallete.whiteColor,
           arrowFunction: () {},
@@ -39,7 +38,6 @@ class GroundsScreen extends StatelessWidget {
               const CustomFilterSection(),
               verticalSpace(10),
               const CustomFilterProperties(),
-              verticalSpace(21.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

@@ -13,24 +13,31 @@ class CustomFilterProperties extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SportsGroundsCubit, SportsGroundsState>(
       builder: (context, state) {
-        return SizedBox(
-          height: SportsGroundViewModel.filterData.isEmpty ? 0 : 30.h,
-          child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                if (SportsGroundViewModel.filterData[index] != null) {
-                  return CustomFilterItem(
-                      icon: SportsGroundViewModel.filterData[index]!.icon,
-                      text: SportsGroundViewModel.filterData[index]!.title,
-                      onPressed: () {
-                        SportsGroundsCubit.get(context)
-                            .deleteFilterItem(index: index);
-                      });
-                }
-                return Container();
-              },
-              separatorBuilder: (context, index) => horizontalSpace(5),
-              itemCount: SportsGroundViewModel.filterData.length),
+        return Column(
+          children: [
+            SizedBox(
+              height: SportsGroundViewModel.filterItem.isEmpty ? 0 : 30.h,
+              child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    if (SportsGroundViewModel.filterItem[index] != null) {
+                      return CustomFilterItem(
+                          icon: SportsGroundViewModel.filterItem[index]!.icon,
+                          text: SportsGroundViewModel.filterItem[index]!.title,
+                          onPressed: () {
+                            SportsGroundsCubit.get(context)
+                                .deleteFilterItem(index: index);
+                          });
+                    }
+                    return Container();
+                  },
+                  separatorBuilder: (context, index) => horizontalSpace(5),
+                  itemCount: SportsGroundViewModel.filterItem.length),
+            ),
+            SportsGroundViewModel.filterItem.isEmpty
+                ? verticalSpace(0.h)
+                : verticalSpace(21.h)
+          ],
         );
       },
     );

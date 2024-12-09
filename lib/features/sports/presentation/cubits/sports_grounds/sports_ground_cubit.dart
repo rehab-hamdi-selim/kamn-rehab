@@ -68,17 +68,15 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
   }
 
   void changeDistance(double value) {
-    emit(SportsGroundsState(
+    emit(state.copyWith(
         state: SportsGroundsStatus
             .loading)); // Why Should Change State to do new state ?????
     SportsGroundViewModel.distance = value;
-    emit(SportsGroundsState(
-      state: SportsGroundsStatus.changeDistance,
-    ));
+    emit(state.copyWith(state: SportsGroundsStatus.changeDistance));
   }
 
   void deleteFilterItem({required int index}) {
-    switch (SportsGroundViewModel.filterData[index]!.icon) {
+    switch (SportsGroundViewModel.filterItem[index]!.icon) {
       case Icons.location_on_outlined:
         SportsGroundViewModel.loactionController.clear();
         break;
@@ -89,9 +87,26 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
       default:
         SportsGroundViewModel.distance = 0;
     }
-    SportsGroundViewModel.filterData
-        .remove(SportsGroundViewModel.filterData[index]);
+    SportsGroundViewModel.filterItem
+        .remove(SportsGroundViewModel.filterItem[index]);
 
+    filterPlayGroundData(
+      location: SportsGroundViewModel.loactionController.text,
+      maxPrice: SportsGroundViewModel.minPriceController.text != ''
+          ? int.parse(SportsGroundViewModel.maxPriceController.text)
+          : null,
+      distance: SportsGroundViewModel.distance,
+      minPrice: SportsGroundViewModel.minPriceController.text != ''
+          ? int.parse(SportsGroundViewModel.minPriceController.text)
+          : null,
+    );
+  }
+
+  void resetFilter() {
+    SportsGroundViewModel.distance = 0;
+    SportsGroundViewModel.loactionController.clear();
+    SportsGroundViewModel.maxPriceController.clear();
+    SportsGroundViewModel.minPriceController.clear();
     filterPlayGroundData(
       location: SportsGroundViewModel.loactionController.text,
       maxPrice: SportsGroundViewModel.minPriceController.text != ''
@@ -106,7 +121,7 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
 
   void addFilterItem(
       {num? maxPrice, num? minPrice, String? location, double? distance}) {
-    SportsGroundViewModel.filterData = [
+    SportsGroundViewModel.filterItem = [
       if (location!.isNotEmpty)
         FilterModel(
           icon: Icons.location_on_outlined,
@@ -115,12 +130,12 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
       if (maxPrice != null || minPrice != null)
         FilterModel(
           icon: Icons.monetization_on_outlined,
-          title: '${minPrice ?? 0} - ${maxPrice ?? 0}',
+          title: '${minPrice ?? 0} - ${maxPrice ?? 'max'} LE',
         ),
       if (distance != null && distance != 0)
         FilterModel(
-          icon: Icons.social_distance,
-          title: '${(SportsGroundViewModel.distance * 100).round()}',
+          icon: Icons.route_outlined,
+          title: '${(SportsGroundViewModel.distance * 100).round()} Km away',
         ),
     ];
   }

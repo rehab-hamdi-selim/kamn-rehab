@@ -19,13 +19,6 @@ class CustomDataFilterSection extends StatelessWidget {
           textInputType: TextInputType.text,
         ),
         verticalSpace(25.h),
-        CustomFilterTextFormField(
-            controller: SportsGroundViewModel.dateController,
-            sufficIcon: Icons.date_range,
-            hintText: 'Monday, 16 Sep 2024 / 6 am - 7 am',
-            txt: 'Dates & Time',
-            textInputType: TextInputType.datetime),
-        verticalSpace(25.h),
         Row(
           children: [
             Expanded(

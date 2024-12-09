@@ -28,11 +28,12 @@ class CustomFilterBottomSheet extends StatelessWidget {
               ),
             ),
             verticalSpace(17.h),
-            CustomBottomSheetTopSection(
-                resetButton: () {},
-                closeSheet: () {
-                  Navigator.pop(context);
-                }),
+            CustomBottomSheetTopSection(resetButton: () {
+              SportsGroundsCubit.get(context).resetFilter();
+              Navigator.pop(context);
+            }, closeSheet: () {
+              Navigator.pop(context);
+            }),
             verticalSpace(20.h),
             Padding(
                 padding: EdgeInsets.symmetric(horizontal: 13.w),
@@ -44,7 +45,7 @@ class CustomFilterBottomSheet extends StatelessWidget {
                   SportsGroundsCubit.get(context).filterPlayGroundData(
                     location: SportsGroundViewModel.loactionController.text,
                     maxPrice:
-                        SportsGroundViewModel.minPriceController.text.isNotEmpty
+                        SportsGroundViewModel.maxPriceController.text.isNotEmpty
                             ? int.parse(
                                 SportsGroundViewModel.maxPriceController.text)
                             : null,

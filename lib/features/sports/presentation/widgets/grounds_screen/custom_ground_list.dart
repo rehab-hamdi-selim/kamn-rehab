@@ -17,7 +17,6 @@ class CustomGroundList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SportsGroundsCubit, SportsGroundsState>(
         builder: (context, state) {
-      //Dont miss to add the empty list check and initial chack
       if (state.isLoading || state.isInitial) {
         return const Expanded(
           child: Center(
@@ -41,6 +40,7 @@ class CustomGroundList extends StatelessWidget {
       }
       return Expanded(
         child: ListView.separated(
+          physics: const BouncingScrollPhysics(),
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {
@@ -62,8 +62,7 @@ class CustomGroundList extends StatelessWidget {
                 placeText: state.playgrounds![index].name!,
                 km: '${(Geolocator.distanceBetween(SportsGroundViewModel.userLatitude, SportsGroundViewModel.userLongitude, state.playgrounds![index].latitude!, state.playgrounds![index].longitude!) / 1000).round()}',
 
-                ///TODO:
-                owner: "owner name",
+                owner: state.playgrounds![index].ownerId!,
                 location: state.playgrounds![index].address!,
 
                 ///TODO:
