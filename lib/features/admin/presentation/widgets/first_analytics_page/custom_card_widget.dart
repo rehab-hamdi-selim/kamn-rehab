@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomCardWidget extends StatelessWidget {
-  CustomCardWidget({
+  const CustomCardWidget({
     super.key,
     this.backgroundcolor,
     this.title,
@@ -16,11 +16,11 @@ class CustomCardWidget extends StatelessWidget {
     this.number,
     this.percentage,
   });
-  Color? backgroundcolor, iconcolor, percntagecolor;
-  String? title, number, percentage;
-  Icon? prficon, sufficon;
-  double? height, width;
-  bool? bercentagestatus;
+  final Color? backgroundcolor, iconcolor, percntagecolor;
+  final String? title, number, percentage;
+  final Icon? prficon, sufficon;
+  final double? height, width;
+  final bool? bercentagestatus;
   @override
   Widget build(BuildContext context) {
     return Padding(

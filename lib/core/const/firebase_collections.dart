@@ -4,4 +4,5 @@ class FirebaseCollections {
   static const String playgroundsRequests = 'playgrounds Requests';
   static const String reservation = 'reservation';
   static const String analyticsdata = 'analyticsdata';
+  static const String reservations = 'reservation';
 }
