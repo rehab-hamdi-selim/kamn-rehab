@@ -13,6 +13,13 @@ class SportsGroundViewModel {
   var userLongitude = 0.0;
   List<FilterModel?> filterItem = [];
 
+  void resetViewModel() {
+    distance = 0;
+    loactionController.clear();
+    maxPriceController.clear();
+    minPriceController.clear();
+  }
+
   void dispoe() {
     searchController.dispose();
     loactionController.dispose();

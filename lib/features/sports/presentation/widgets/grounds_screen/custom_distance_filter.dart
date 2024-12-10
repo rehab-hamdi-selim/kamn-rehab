@@ -10,8 +10,12 @@ class CustomDistanceFilter extends StatelessWidget {
   const CustomDistanceFilter({super.key});
   @override
   Widget build(BuildContext context) {
+    final sportsGroundCubit = SportsGroundsCubit.get(context);
     return BlocBuilder<SportsGroundsCubit, SportsGroundsState>(
       builder: (context, state) {
+        final distance = state.distance ?? 0.0;
+        final distanceInKm = (distance * 100).round();
+
         return Column(
           children: [
             Padding(
@@ -24,18 +28,18 @@ class CustomDistanceFilter extends StatelessWidget {
                     style: TextStyles.font2OfaccentBlackMediumRoboto,
                   ),
                   Text(
-                    '${(SportsGroundsCubit.get(context).sportsGroundViewModel.distance * 100).round()} km',
+                    '$distanceInKm km',
                     style: TextStyles.fontRoboto13SemiBoldGreen,
                   )
                 ],
               ),
             ),
             Slider(
-              value: SportsGroundsCubit.get(context)
-                  .sportsGroundViewModel
-                  .distance,
+              value: distance,
+              min: 0.0,
+              max: 1.0,
               onChanged: (value) {
-                SportsGroundsCubit.get(context).changeDistance(value);
+                sportsGroundCubit.changeDistance(value);
               },
               thumbColor: AppPallete.greenColor,
               activeColor: AppPallete.greenColor,

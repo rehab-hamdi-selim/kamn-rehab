@@ -9,12 +9,12 @@ class CustomDataFilterSection extends StatelessWidget {
   const CustomDataFilterSection({super.key});
   @override
   Widget build(BuildContext context) {
+    final sportsGroundViewModel =
+        SportsGroundsCubit.get(context).sportsGroundViewModel;
     return Column(
       children: [
         CustomFilterTextFormField(
-          controller: SportsGroundsCubit.get(context)
-              .sportsGroundViewModel
-              .loactionController,
+          controller: sportsGroundViewModel.loactionController,
           sufficIcon: Icons.location_on_outlined,
           hintText: 'Alexandria, Hadra',
           txt: 'Locations',
@@ -25,9 +25,7 @@ class CustomDataFilterSection extends StatelessWidget {
           children: [
             Expanded(
               child: CustomFilterTextFormField(
-                controller: SportsGroundsCubit.get(context)
-                    .sportsGroundViewModel
-                    .minPriceController,
+                controller: sportsGroundViewModel.minPriceController,
                 sufficIcon: null,
                 textInputType: TextInputType.number,
                 hintText: 'min',
@@ -37,9 +35,7 @@ class CustomDataFilterSection extends StatelessWidget {
             horizontalSpace(7.w),
             Expanded(
               child: CustomFilterTextFormField(
-                controller: SportsGroundsCubit.get(context)
-                    .sportsGroundViewModel
-                    .maxPriceController,
+                controller: sportsGroundViewModel.maxPriceController,
                 textInputType: TextInputType.number,
                 sufficIcon: null,
                 hintText: 'max',

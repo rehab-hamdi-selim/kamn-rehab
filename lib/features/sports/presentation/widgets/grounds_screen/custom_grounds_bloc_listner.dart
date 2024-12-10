@@ -13,6 +13,9 @@ class CustomGroundsBlocListner extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<SportsGroundsCubit, SportsGroundsState>(
       listener: (context, state) {
+        if (state.state == SportsGroundsStatus.initial) {
+          SportsGroundsCubit.get(context).getPlaygrounds();
+        }
         if (state.isFailure) {
           showSnackBar(
               context, state.erorrMessage ?? "There is un expected error");

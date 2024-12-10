@@ -11,6 +11,9 @@ class CustomFilterBottomSheet extends StatelessWidget {
   const CustomFilterBottomSheet({super.key});
   @override
   Widget build(BuildContext context) {
+    final sportsGroundViewModel =
+        SportsGroundsCubit.get(context).sportsGroundViewModel;
+    final sportsGroundCubit = SportsGroundsCubit.get(context);
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 5.w),
       child: SingleChildScrollView(
@@ -27,12 +30,11 @@ class CustomFilterBottomSheet extends StatelessWidget {
               ),
             ),
             verticalSpace(17.h),
-            CustomBottomSheetTopSection(resetButton: () {
-              SportsGroundsCubit.get(context).resetFilter();
-              Navigator.pop(context);
-            }, closeSheet: () {
-              Navigator.pop(context);
-            }),
+            CustomBottomSheetTopSection(
+                resetButton: () {
+                  sportsGroundCubit.resetFilter();
+                },
+                closeSheet: () {}),
             verticalSpace(20.h),
             Padding(
                 padding: EdgeInsets.symmetric(horizontal: 13.w),
@@ -41,34 +43,19 @@ class CustomFilterBottomSheet extends StatelessWidget {
               width: double.infinity,
               child: CustomButton(
                 onTap: () {
-                  SportsGroundsCubit.get(context).filterPlayGroundData(
-                    location: SportsGroundsCubit.get(context)
-                        .sportsGroundViewModel
-                        .loactionController
-                        .text,
-                    maxPrice: SportsGroundsCubit.get(context)
-                            .sportsGroundViewModel
-                            .maxPriceController
-                            .text
-                            .isNotEmpty
-                        ? int.parse(SportsGroundsCubit.get(context)
-                            .sportsGroundViewModel
-                            .maxPriceController
-                            .text)
-                        : null,
-                    distance: SportsGroundsCubit.get(context)
-                        .sportsGroundViewModel
-                        .distance,
-                    minPrice: SportsGroundsCubit.get(context)
-                            .sportsGroundViewModel
-                            .minPriceController
-                            .text
-                            .isNotEmpty
-                        ? int.parse(SportsGroundsCubit.get(context)
-                            .sportsGroundViewModel
-                            .minPriceController
-                            .text)
-                        : null,
+                  sportsGroundCubit.filterPlayGroundData(
+                    location: sportsGroundViewModel.loactionController.text,
+                    maxPrice:
+                        sportsGroundViewModel.maxPriceController.text.isNotEmpty
+                            ? int.parse(
+                                sportsGroundViewModel.maxPriceController.text)
+                            : null,
+                    distance: sportsGroundViewModel.distance,
+                    minPrice:
+                        sportsGroundViewModel.minPriceController.text.isNotEmpty
+                            ? int.parse(
+                                sportsGroundViewModel.minPriceController.text)
+                            : null,
                   );
                   Navigator.pop(context);
                 },

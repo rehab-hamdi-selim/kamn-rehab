@@ -24,19 +24,18 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
 
   static SportsGroundsCubit get(context) => BlocProvider.of(context);
 
-  //init getPlaygrounds_from_firebase branch
-
   Future<void> getPlaygrounds() async {
     final result = await _sportsRepository.getPlaygrounds();
     result.fold(
         (l) => emit(SportsGroundsState(
               state: SportsGroundsStatus.failure,
               erorrMessage: l.erorr,
-            )),
-        (r) => emit(SportsGroundsState(
-              state: SportsGroundsStatus.success,
-              playgrounds: r as List<PlaygroundModel>,
-            )));
+            )), (r) {
+      emit(SportsGroundsState(
+        state: SportsGroundsStatus.success,
+        playgrounds: r as List<PlaygroundModel>,
+      ));
+    });
   }
 
   Future<void> filterPlayGroundData(
@@ -71,11 +70,7 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
   }
 
   void changeDistance(double value) {
-    emit(state.copyWith(
-        state: SportsGroundsStatus
-            .loading)); // Why Should Change State to do new state ?????
-    sportsGroundViewModel.distance = value;
-    emit(state.copyWith(state: SportsGroundsStatus.changeDistance));
+    emit(state.copyWith(distance: value));
   }
 
   void deleteFilterItem({required int index}) {
@@ -106,20 +101,8 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
   }
 
   void resetFilter() {
-    sportsGroundViewModel.distance = 0;
-    sportsGroundViewModel.loactionController.clear();
-    sportsGroundViewModel.maxPriceController.clear();
-    sportsGroundViewModel.minPriceController.clear();
-    filterPlayGroundData(
-      location: sportsGroundViewModel.loactionController.text,
-      maxPrice: sportsGroundViewModel.minPriceController.text != ''
-          ? int.parse(sportsGroundViewModel.maxPriceController.text)
-          : null,
-      distance: sportsGroundViewModel.distance,
-      minPrice: sportsGroundViewModel.minPriceController.text != ''
-          ? int.parse(sportsGroundViewModel.minPriceController.text)
-          : null,
-    );
+    sportsGroundViewModel.resetViewModel();
+    emit(state.copyWith(state: SportsGroundsStatus.initial));
   }
 
   void addFilterItem(
