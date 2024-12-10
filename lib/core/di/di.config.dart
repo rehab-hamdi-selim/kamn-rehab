@@ -8,6 +8,8 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
+import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -25,6 +27,18 @@ import '../../features/admin/presentation/cubits/first_page_cupit/analytics_cubi
     as _i209;
 import '../../features/admin/presentation/cubits/second_page_cubit/second_page_cubit.dart'
     as _i608;
+import '../../features/authentication/data/data_source/auth_remote_data_source.dart'
+    as _i21;
+import '../../features/authentication/data/repositories/auth_repository.dart'
+    as _i935;
+import '../../features/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart'
+    as _i670;
+import '../../features/authentication/presentation/cubits/sign_in_cubit/sign_in_view_model.dart'
+    as _i361;
+import '../../features/authentication/presentation/cubits/sign_up_cubit/sign_up_cubit.dart'
+    as _i531;
+import '../../features/authentication/presentation/cubits/sign_up_cubit/sign_up_view_model.dart'
+    as _i22;
 import '../../features/payment/presentation/cubits/payment_options_cubit/payment_options_view_model.dart'
     as _i805;
 import '../../features/sports/data/data_source/sports_remote_data_source.dart'
@@ -90,6 +104,10 @@ extension GetItInjectableX on _i174.GetIt {
               firestoreServices: gh<_i158.FirestoreService>(),
               storageServies: gh<_i304.FirebaseStorageServices>(),
             ));
+    gh.factory<_i21.AuthRemoteDataSource>(() => _i21.AuthRemoteDataSourceImpl(
+          firestore: gh<_i974.FirebaseFirestore>(),
+          auth: gh<_i59.FirebaseAuth>(),
+        ));
     gh.factory<_i173.SecondPageRepository>(() => _i173.SecondPageRepositoryImpl(
         secondPageDataSource: gh<_i746.SecondPageDataSource>()));
     gh.factory<_i542.ServiceProvidersRepository>(() =>
@@ -97,6 +115,8 @@ extension GetItInjectableX on _i174.GetIt {
             dataSource: gh<_i1047.ServiceProvidersRemoteDataSource>()));
     gh.factory<_i396.SecondPageUseCase>(() => _i396.SecondPageUseCaseImpl(
         repository: gh<_i173.SecondPageRepository>()));
+    gh.factory<_i935.AuthRepository>(() => _i935.AuthRepositoryImpl(
+        authDataSource: gh<_i21.AuthRemoteDataSource>()));
     gh.factory<_i724.AnalyticsRepository>(() => _i724.AnalyticsRepositoryImpl(
         dataSource: gh<_i418.AnalyticsDataSource>()));
     gh.factory<_i608.SecondPageCubit>(() => _i608.SecondPageCubit(
@@ -110,35 +130,32 @@ extension GetItInjectableX on _i174.GetIt {
             firestoreService: gh<_i158.FirestoreService>()));
     gh.factory<_i786.GetServicesFromFirebaseUsecase>(() =>
         _i786.GetServicesFromFirebaseUsecase(
-
-    gh.factory<_i379.SportsRepositoryImpl>(() => _i379.SportsRepositoryImpl(
-        remoteDataSource: gh<_i575.SportsRemoteDataSource>()));
-    gh.factory<_i278.TrackGroundReservationsCubit>(() =>
-        _i278.TrackGroundReservationsCubit(
-
             repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i252.AddServiceProviderCubit>(() =>
         _i252.AddServiceProviderCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i731.AvailableDatesCubit>(() => _i731.AvailableDatesCubit(
         repository: gh<_i542.ServiceProvidersRepository>()));
-
     gh.factory<_i773.EditServiceProviderCubit>(() =>
         _i773.EditServiceProviderCubit(
-
+            repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i692.ServiceProviderGroundDetailsCubit>(() =>
         _i692.ServiceProviderGroundDetailsCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i252.AddServiceProviderCubit>(() =>
-        _i252.AddServiceProviderCubit(
-
+    gh.factory<_i278.TrackGroundReservationsCubit>(() =>
+        _i278.TrackGroundReservationsCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i38.TrackGroundReservationsDetailsCubit>(() =>
         _i38.TrackGroundReservationsDetailsCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i786.GetServicesFromFirebaseUsecase>(() =>
-        _i786.GetServicesFromFirebaseUsecase(
-            repository: gh<_i542.ServiceProvidersRepository>()));
+    gh.factory<_i670.SignInCubit>(() => _i670.SignInCubit(
+          authRepository: gh<_i935.AuthRepository>(),
+          signInViewModel: gh<_i361.SignInViewModel>(),
+        ));
+    gh.factory<_i531.SignUpCubit>(() => _i531.SignUpCubit(
+          authRepository: gh<_i935.AuthRepository>(),
+          signUpViewModel: gh<_i22.SignUpViewModel>(),
+        ));
     gh.factory<_i379.SportsRepository>(() => _i379.SportsRepositoryImpl(
         remoteDataSource: gh<_i575.SportsRemoteDataSource>()));
     gh.factory<_i137.PickTimeForReservationCubit>(() =>

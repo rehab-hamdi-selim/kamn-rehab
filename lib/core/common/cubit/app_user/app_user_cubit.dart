@@ -35,7 +35,7 @@ class AppUserCubit extends Cubit<AppUserState> {
     final res = await SecureStorageHelper.isUserLoggedIn();
     res.fold(
         (l) => emit(state.copyWith(
-              state: AppUserStates.Failure,
+              state: AppUserStates.IsNotLoggedIn,
               errorMessage: l,
             )),
         (r) => emit(state.copyWith(state: AppUserStates.IsLoggedIn)));

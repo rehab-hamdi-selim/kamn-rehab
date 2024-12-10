@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bloc/bloc.dart';
@@ -26,29 +25,16 @@ import 'features/authentication/presentation/screens/sign_up_screen.dart';
 
 import 'features/sports_service_providers/presentation/screens/service_provider_available_dates.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // Check if user is logged in and get token
-  final currentUser = FirebaseAuth.instance.currentUser;
-  if (currentUser != null) {
-    // Get the token
-    final token = await currentUser.getIdToken();
-    print('User is logged in');
-    print('User ID: ${currentUser.uid}');
-    print('User Email: ${currentUser.email}');
-    print('User Token: $token');
-  } else {
-    print('No user is logged in');
-  }
-
+  // Configure dependencies before using GetIt
   configureDependencies();
+
   await ScreenUtil.ensureScreenSize();
-  // Calling Bloc Observer
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
@@ -73,22 +59,15 @@ class MyApp extends StatelessWidget {
           ),
           home: BlocBuilder<AppUserCubit, AppUserState>(
             builder: (context, state) {
-              if (state.state == AppUserStates.Initial) {
+              if (state.isInitial()) {
                 return BlocProvider(
-                  create: (context) => SignUpCubit(
-                    authRepository: AuthRepositoryImpl(
-                      authDataSource: AuthRemoteDataSourceImpl(
-                        firestore: FirebaseFirestore.instance,
-                      ),
-                    ),
-                    signUpViewModel: SignUpViewModel(),
-                  ),
+                  create: (context) => getIt<SignUpCubit>(),
                   child: const SignUpScreen(),
                 );
               }
 
               if (state.isIsLoggedIn()) {
-                return const LogoutScreen(); // Your home screen when user is logged in
+                return const LogoutScreen();
               } else if (state.isIsNotLoggedIn()) {
                 return const SignInScreen();
               } else {
@@ -104,10 +83,6 @@ class MyApp extends StatelessWidget {
           ),
           onGenerateRoute: AppRouter.generateRoute,
         ),
-
-        initialRoute: Routes.groundsScreen,
-
-
       ),
     );
   }
