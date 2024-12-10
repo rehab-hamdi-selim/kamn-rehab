@@ -1,61 +1,48 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'user.dart';
-
 class UserModel {
-  final int id;
-  final String name;
+  final String uid;
   final String email;
-  final int level;
-  final int state;
-  final int round;
+  final String name;
+  final DateTime createdAt;
   UserModel({
-    required this.id,
-    required this.name,
+    required this.uid,
     required this.email,
-    required this.level,
-    required this.state,
-    required this.round,
+    required this.name,
+    required this.createdAt,
   });
+  // Add any other fields you need
 
   UserModel copyWith({
-    int? id,
-    String? name,
+    String? uid,
     String? email,
-    int? level,
-    int? state,
-    int? round,
+    String? name,
+    DateTime? createdAt,
   }) {
     return UserModel(
-      id: id ?? this.id,
-      name: name ?? this.name,
+      uid: uid ?? this.uid,
       email: email ?? this.email,
-      level: level ?? this.level,
-      state: state ?? this.state,
-      round: round ?? this.round,
+      name: name ?? this.name,
+      createdAt: createdAt ?? this.createdAt,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'user_id': id,
-      'user_name': name,
-      'user_email': email,
-      'level': level,
-      'user_state': state,
-      'user_round': round,
+      'uid': uid,
+      'email': email,
+      'name': name,
+      'createdAt': createdAt.millisecondsSinceEpoch,
     };
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      id: map['user_id'] as int,
-      name: map['user_name'] as String,
-      email: map['user_email'] as String,
-      level: map['user_level'] as int,
-      state: map['user_state'] as int,
-      round: map['user_round'] as int,
+      uid: map['uid'] as String,
+      email: map['email'] as String,
+      name: map['name'] as String,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt'] as int),
     );
   }
 
@@ -66,28 +53,21 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, email: $email, level: $level, state: $state, round: $round)';
+    return 'UserModel(uid: $uid, email: $email, name: $name, createdAt: $createdAt)';
   }
 
   @override
   bool operator ==(covariant UserModel other) {
     if (identical(this, other)) return true;
 
-    return other.id == id &&
-        other.name == name &&
+    return other.uid == uid &&
         other.email == email &&
-        other.level == level &&
-        other.state == state &&
-        other.round == round;
+        other.name == name &&
+        other.createdAt == createdAt;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        name.hashCode ^
-        email.hashCode ^
-        level.hashCode ^
-        state.hashCode ^
-        round.hashCode;
+    return uid.hashCode ^ email.hashCode ^ name.hashCode ^ createdAt.hashCode;
   }
 }

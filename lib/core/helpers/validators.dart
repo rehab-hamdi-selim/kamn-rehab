@@ -30,3 +30,24 @@ String? numbersValidator(String? value) {
   }
   return null;
 }
+
+String? emailValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your email';
+    }
+    // RegEx to validate email format
+    if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+      return 'Please enter a valid email address';
+    }
+    return null; // Validation passed
+  }
+  
+String? passwordValidator(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'Please enter your password';
+  }
+  if (!RegExp(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$').hasMatch(value)) {
+    return 'Password must be at least 8 characters,\ninclude an uppercase letter,\n number, and symbol';
+  }
+  return null;
+ }

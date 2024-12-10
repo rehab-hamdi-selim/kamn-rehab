@@ -39,6 +39,10 @@ import 'package:kamn/features/sports_service_providers/presentation/screens/trac
 import 'package:kamn/features/sports_service_providers/presentation/screens/track_ground_reservations_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/success_service_provider_screen.dart';
 
+import '../../features/authentication/presentation/screens/on_boarding_screen.dart';
+import '../../features/authentication/presentation/screens/sign_in_screen.dart';
+import '../../features/authentication/presentation/screens/sign_up_screen.dart';
+
 class AppRouter {
   static Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -106,10 +110,17 @@ class AppRouter {
             builder: (context) => const SuccessServiceProviderScreen());
       case Routes.serviceSelection:
         return MaterialPageRoute(
-            builder: (context) => BlocProvider<AddServiceProviderCubit>(
-                  create: (context) => getIt<AddServiceProviderCubit>(),
-                  child: const ServiceSelectionScreen(),
-                ));
+
+            builder: (context) => const ServiceSelectionScreen());
+      case Routes.signInScreen:
+        return MaterialPageRoute(builder: (context) => const SignInScreen());
+      case Routes.signUpScreen:
+        return MaterialPageRoute(builder: (context) => const SignUpScreen());
+      case Routes.onBoardingScreen:
+        return MaterialPageRoute(
+            builder: (context) => const OnBoardingScreen());
+
+         
       case Routes.editServiceScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider<EditServiceProviderCubit>(
