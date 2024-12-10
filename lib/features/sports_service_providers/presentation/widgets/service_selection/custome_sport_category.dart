@@ -21,8 +21,8 @@ class CustomeSportCategory extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => BlocProvider<AddServiceProviderCubit>(
-                      create: (context) => getIt<AddServiceProviderCubit>(),
+                builder: (_) => BlocProvider.value(
+                      value: context.read<AddServiceProviderCubit>(),
                       child: AddServiceScreen(
                         type: title,
                       ),

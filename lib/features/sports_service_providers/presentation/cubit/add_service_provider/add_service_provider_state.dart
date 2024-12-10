@@ -35,7 +35,7 @@ extension AddServiceProviderStateExtension on AddServiceProviderState {
 
 class AddServiceProviderState {
   final AddServiceProviderStatus state;
-  final List<PlaygroundRequestModel>? playgrounds;
+  final PlaygroundRequestModel? playground;
   final String? erorrMessage;
   final String? successMessage;
   final List<File>? groundImagesList;
@@ -43,21 +43,21 @@ class AddServiceProviderState {
 
   AddServiceProviderState(
       {required this.state,
-      this.playgrounds,
+      this.playground,
       this.erorrMessage,
       this.successMessage,
       this.groundImagesList = const [],
       this.ownershipImagesList = const []});
   AddServiceProviderState copyWith(
       {AddServiceProviderStatus? state,
-      List<PlaygroundRequestModel>? playgrounds,
+      PlaygroundRequestModel? playground,
       String? erorrMessage,
       String? successMessage,
       List<File>? groundImagesList,
       List<File>? ownershipImagesList}) {
     return AddServiceProviderState(
         state: state ?? this.state,
-        playgrounds: playgrounds ?? this.playgrounds,
+        playground: playground ?? this.playground,
         erorrMessage: erorrMessage ?? this.erorrMessage,
         successMessage: successMessage ?? this.successMessage,
         groundImagesList: groundImagesList ?? this.groundImagesList,

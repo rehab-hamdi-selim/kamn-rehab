@@ -10,12 +10,16 @@ import 'package:kamn/features/sports_service_providers/data/model/playground_req
 import 'dart:async';
 
 abstract class ServiceProvidersRepository {
-  Future<Either<Faliure, void>> addServiceToFirestore(
+  Future<Either<Faliure, PlaygroundRequestModel>> addServiceToFirestore(
       PlaygroundRequestModel playground);
   Future<Either<Faliure, List<String>>> addImagesToStorage(List<File> images);
   Future<Either<Faliure, bool>> deleteImagesFromStorage(List<String> images);
   Future<Either<Faliure, List<PlaygroundRequestModel>>>
       getPlaygroundsRequests();
+  Future<Either<Faliure, List<PlaygroundModel>>> getPlaygroundsByOwnerId(
+      String ownerId);
+  Future<Either<Faliure, List<Map<String, dynamic>>>>
+      getPlaygroundsReservationDetailsById(String playgroundId);
   Future<Either<Faliure, void>> addWithTransactionToFirebase(
       PlaygroundModel playground);
   Future<Either<Faliure, void>> updateState(
@@ -28,7 +32,7 @@ class ServiceProvidersRepositoryImpl implements ServiceProvidersRepository {
   ServiceProvidersRepositoryImpl({required this.dataSource});
   //TODO:Check connectivity  in executeTryAndCatchForRepository /* done
   @override
-  Future<Either<Faliure, void>> addServiceToFirestore(
+  Future<Either<Faliure, PlaygroundRequestModel>> addServiceToFirestore(
       PlaygroundRequestModel playground) {
     return executeTryAndCatchForRepository(() async {
       return await dataSource.addServiceToFirestore(playground);
@@ -63,6 +67,17 @@ class ServiceProvidersRepositoryImpl implements ServiceProvidersRepository {
   }
 
   @override
+  Future<Either<Faliure, List<PlaygroundModel>>> getPlaygroundsByOwnerId(
+      String ownerId) {
+    return executeTryAndCatchForRepository(() async {
+      var data = await dataSource.getPlaygroundsByOwnerId(ownerId);
+      return data.map((value) {
+        return PlaygroundModel.fromMap(value);
+      }).toList();
+    });
+  }
+
+  @override
   Future<Either<Faliure, void>> addWithTransactionToFirebase(
       PlaygroundModel playground) {
     return executeTryAndCatchForRepository(() async {
@@ -75,6 +90,16 @@ class ServiceProvidersRepositoryImpl implements ServiceProvidersRepository {
       String playgroundId, Map<String, dynamic> data) {
     return executeTryAndCatchForRepository(() async {
       return await dataSource.updateState(playgroundId, data);
+    });
+  }
+
+  @override
+  Future<Either<Faliure, List<Map<String, dynamic>>>>
+      getPlaygroundsReservationDetailsById(String playgroundId) {
+    return executeTryAndCatchForRepository(() async {
+      var data =
+          await dataSource.getPlaygroundsReservationDetailsById(playgroundId);
+      return data;
     });
   }
 }

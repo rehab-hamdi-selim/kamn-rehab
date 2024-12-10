@@ -1,5 +1,8 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:bloc/bloc.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,10 +10,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/core/di/di.dart';
+import 'package:kamn/core/helpers/bloc_observer.dart';
 import 'package:kamn/core/routing/routes.dart';
+
 import 'package:kamn/firebase_options.dart';
 import 'package:kamn/test_login.dart';
 import 'core/routing/app_router.dart';
+
 import 'features/authentication/data/data_source/auth_remote_data_source.dart';
 import 'features/authentication/data/repositories/auth_repository.dart';
 import 'features/authentication/presentation/cubits/sign_up_cubit/sign_up_cubit.dart';
@@ -18,9 +24,11 @@ import 'features/authentication/presentation/cubits/sign_up_cubit/sign_up_view_m
 import 'features/authentication/presentation/screens/sign_in_screen.dart';
 import 'features/authentication/presentation/screens/sign_up_screen.dart';
 
+import 'features/sports_service_providers/presentation/screens/service_provider_available_dates.dart';
+
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -40,6 +48,8 @@ void main() async {
 
   configureDependencies();
   await ScreenUtil.ensureScreenSize();
+  // Calling Bloc Observer
+  Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
 
@@ -94,6 +104,10 @@ class MyApp extends StatelessWidget {
           ),
           onGenerateRoute: AppRouter.generateRoute,
         ),
+
+        initialRoute: Routes.groundsScreen,
+
+
       ),
     );
   }

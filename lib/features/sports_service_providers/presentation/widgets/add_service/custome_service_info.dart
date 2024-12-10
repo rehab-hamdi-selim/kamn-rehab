@@ -189,7 +189,7 @@ class CustomeServiceInfo extends StatelessWidget {
       required String iconPath,
       required List<String> choices}) {
     return SizedBox(
-      height: 81.h,
+      height: 82.h,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

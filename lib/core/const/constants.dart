@@ -6,6 +6,8 @@ class Constants {
     'Entertainment',
   ];
 
+  static const overview = 'Overview';
+  static const salesOverView = 'Salesoverview';
   static const noConnectionErrorMessage = 'Not connected to a network!';
   static const directions = 'Dirextions';
   static const playGroundFeatures = 'Playground Features';
@@ -70,6 +72,8 @@ class Constants {
   static const skyDiving = "Sky Diving";
   static const swimming = "Swimming";
   static const welcomeToManagementSystem = 'Welcome to\nManagement System';
+  static const financialReports = 'Financial Reports';
+  static const paymentOptions = 'Choose payment\noption';
 
   static const List<String> egyptGovernorates = [
     "Cairo",
