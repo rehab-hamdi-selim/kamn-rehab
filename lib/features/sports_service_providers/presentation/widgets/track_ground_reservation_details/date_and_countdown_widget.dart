@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -9,11 +7,12 @@ import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 
 class DateAndCountdownWidget extends StatelessWidget {
   final Map<String, dynamic> data;
-  DateAndCountdownWidget({required this.data});
+  const DateAndCountdownWidget({super.key, required this.data});
   @override
   Widget build(BuildContext context) {
-    DateTime end = DateTime.fromMillisecondsSinceEpoch(data['endAt'] * 1000);
-    int endTime = end.millisecondsSinceEpoch + 1000;
+    DateTime start =
+        DateTime.fromMillisecondsSinceEpoch(data['startAt'] * 1000);
+    int startTime = start.millisecondsSinceEpoch + 1000;
     return RPadding(
       padding: const EdgeInsets.only(top: 8),
       child: Container(
@@ -21,7 +20,7 @@ class DateAndCountdownWidget extends StatelessWidget {
             color: AppPallete.whiteGreenColor,
             borderRadius: BorderRadius.circular(30.r)),
         child: RPadding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Row(
             children: [
               const Icon(Icons.calendar_month_outlined),
@@ -35,9 +34,9 @@ class DateAndCountdownWidget extends StatelessWidget {
                     DateFormat('EEEE, dd MMM yyyy').format(
                         (DateTime.fromMillisecondsSinceEpoch(
                             data['startAt'] as int))),
-                    style: TextStyle(color: AppPallete.greenColor),
+                    style: const TextStyle(color: AppPallete.greenColor),
                   ),
-                  Text('6:30 PM to 7:30 PM',
+                  const Text('6:30 PM to 7:30 PM',
                       style: TextStyle(color: AppPallete.greenColor))
                 ],
               ),
@@ -45,10 +44,10 @@ class DateAndCountdownWidget extends StatelessWidget {
                 flex: 9,
               ),
               CountdownTimer(
-                endTime: endTime,
+                endTime: startTime,
                 widgetBuilder: (_, time) {
                   if (time == null) {
-                    return Text('Game over');
+                    return const Text('Game over');
                   }
                   return Text(
                       '${(time.days == null) ? 0 : time.days}:${(time.hours == null) ? 0 : time.hours}:${(time.min == null) ? 0 : time.min}:${(time.sec == null) ? 0 : time.sec}',
