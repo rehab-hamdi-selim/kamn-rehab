@@ -11,6 +11,8 @@ import 'package:kamn/features/admin/data/data_source/second_page_data_source.dar
 import 'package:kamn/features/admin/data/repository/second_page_repository.dart';
 import 'package:kamn/features/admin/presentation/cubits/second_page_cubit/second_page_cubit.dart';
 import 'package:kamn/features/admin/presentation/screens/second_page/second_page.dart';
+import 'package:kamn/features/payment/presentation/screens/debit_credit_card_screen.dart';
+import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/payment/presentation/cubits/payment_options_cubit/payment_options_cubit.dart';
 import 'package:kamn/features/payment/presentation/screens/payment_options_screen.dart';
 import 'package:kamn/features/payment/presentation/screens/proceed_payment_screen.dart';
@@ -24,6 +26,8 @@ import 'package:kamn/features/sports_service_providers/presentation/cubit/availa
 import 'package:kamn/features/sports_service_providers/presentation/cubit/edit_service_provider/edit_service_provider_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_ground_details/service_provider_ground_details_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/track_ground_reservation_details/track_ground_reservation_details_cubit.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/track_ground_reservations/track_ground_reservations_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/add_service.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/choose_service_category_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/edit_service_screen.dart';
@@ -31,6 +35,8 @@ import 'package:kamn/features/sports_service_providers/presentation/screens/serv
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_ground_details_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_grounds_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_selection_screen.dart';
+import 'package:kamn/features/sports_service_providers/presentation/screens/track_ground_reservation_detail_screen.dart';
+import 'package:kamn/features/sports_service_providers/presentation/screens/track_ground_reservations_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/success_service_provider_screen.dart';
 
 class AppRouter {
@@ -42,6 +48,26 @@ class AppRouter {
               create: (context) => getIt<AnalyticsCubit>(),
               child: FirstAnalyticsPage()),
         );
+      case Routes.debitCreditCardPage:
+        return MaterialPageRoute(builder: (context) => DebitCreditCardScreen());
+      case Routes.trackGroundResrvations:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider<TrackGroundReservationsCubit>(
+                  create: (context) => getIt<TrackGroundReservationsCubit>()
+                    ..getPlaygroundsByOwnerId('testOwner49'),
+                  child: const TrackGroundReservationsScreen(),
+                ));
+      case Routes.trackGroundResrvationsDetail:
+        return MaterialPageRoute(
+            builder: (context) =>
+                BlocProvider<TrackGroundReservationsDetailsCubit>(
+                  create: (context) =>
+                      getIt<TrackGroundReservationsDetailsCubit>()
+                        ..getPlaygroundsDetailsById('zuQkYty1ma0ZML7gMGgz'),
+                  child: TrackGroundReservationDetail(
+                    playgroundModel: settings.arguments as PlaygroundModel,
+                  ),
+                ));
       case Routes.myProfileScreen:
         return MaterialPageRoute(builder: (context) => const MyProfileScreen());
       case Routes.addServiceScreen:
