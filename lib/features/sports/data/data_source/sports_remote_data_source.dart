@@ -21,7 +21,7 @@ class SportsRemoteDataSourceImpl implements SportsRemoteDataSource {
   @override
   Future<List<Map<String, dynamic>>> getPlaygrounds() async {
     return executeTryAndCatchForDataLayer(() async {
-      var querySnapshot = await _playGroundCollection.get();
+      var querySnapshot = await _playGroundCollection.limit(3).get();
       return querySnapshot.docs
           .map((doc) => doc.data() as Map<String, dynamic>)
           .toList();
