@@ -16,13 +16,16 @@ import '../widgets/service_provider_grounds/custom_bottom_service_provider.dart'
 import '../widgets/service_provider_grounds/custom_filter_item_service_provider.dart';
 import '../widgets/service_provider_grounds/custom_ground_item_service_provider.dart';
 import '../widgets/service_provider_grounds/custom_text_form_field_service_provider.dart';
+import 'package:flutter_debouncer/flutter_debouncer.dart';
 
 class ServiceProviderGroundsScreen extends StatelessWidget {
   final String type;
-  const ServiceProviderGroundsScreen({super.key, required this.type});
+  ServiceProviderGroundsScreen({super.key, required this.type});
+  final Debouncer debouncer = Debouncer();
 
   @override
   Widget build(BuildContext context) {
+    var cubit = context.read<ServiceProviderGroundsCubit>();
     TextEditingController controller = TextEditingController();
     return CustomeGroundsBlocListner(
       child: Scaffold(
@@ -46,6 +49,13 @@ class ServiceProviderGroundsScreen extends StatelessWidget {
                 children: [
                   Expanded(
                       child: CustomTextFormField(
+                    onChange: (value) {
+                      debouncer.debounce(
+                          duration: const Duration(milliseconds: 800),
+                          onDebounce: () {
+                            cubit.searchByQuery(value, type);
+                          });
+                    },
                     controller: controller,
                   )),
                   horizontalSpace(5),
@@ -103,6 +113,11 @@ class ServiceProviderGroundsScreen extends StatelessWidget {
                       if (playgrounds.isEmpty) {
                         return const Center(
                             child: Text('no such data for this category'));
+                      }
+                      if (state.isLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        );
                       }
 
                       return ListView.separated(

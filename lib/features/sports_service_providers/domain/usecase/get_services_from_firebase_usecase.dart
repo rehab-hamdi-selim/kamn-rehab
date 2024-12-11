@@ -20,7 +20,6 @@ class GetServicesFromFirebaseUsecase {
           success,
           (PlaygroundRequestModel playground) => playground.type ?? 'null',
         );
-        print(filtteredData);
         return Right(filtteredData);
       },
     );

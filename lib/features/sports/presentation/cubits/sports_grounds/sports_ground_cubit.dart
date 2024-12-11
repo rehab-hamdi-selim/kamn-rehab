@@ -13,15 +13,33 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
         super(SportsGroundsState(state: SportsGroundsStatus.initial));
 
   Future<void> getPlaygrounds() async {
+    emit(state.copyWith(state: SportsGroundsStatus.loading));
     final result = await _sportsRepository.getPlaygrounds();
     result.fold(
-        (l) => emit(SportsGroundsState(
+        (l) => emit(state.copyWith(
               state: SportsGroundsStatus.failure,
               erorrMessage: l.erorr,
             )),
-        (r) => emit(SportsGroundsState(
+        (r) => emit(state.copyWith(
               state: SportsGroundsStatus.success,
               playgrounds: r as List<PlaygroundModel>,
             )));
+  }
+
+  Future<void> searchByQuery(String query) async {
+    emit(state.copyWith(state: SportsGroundsStatus.loading));
+
+    final result = await _sportsRepository.searchByQuery(query);
+    result.fold((l) {
+      emit(state.copyWith(
+        state: SportsGroundsStatus.failure,
+        erorrMessage: l.erorr,
+      ));
+    }, (r) {
+      emit(state.copyWith(
+        state: SportsGroundsStatus.success,
+        playgrounds: r as List<PlaygroundModel>,
+      ));
+    });
   }
 }

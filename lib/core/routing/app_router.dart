@@ -61,7 +61,7 @@ class AppRouter {
             builder: (context) => BlocProvider(
                   create: (context) =>
                       getIt<SportsGroundsCubit>()..getPlaygrounds(),
-                  child: const GroundsScreen(),
+                  child: GroundsScreen(),
                 ));
       case Routes.chooseServiceCategoryScreen:
         return MaterialPageRoute(

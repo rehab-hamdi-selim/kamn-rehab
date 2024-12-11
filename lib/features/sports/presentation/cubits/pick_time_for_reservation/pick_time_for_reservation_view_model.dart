@@ -28,7 +28,7 @@ class PickTimeForReservationViewModel {
           List<Session> sessions = reservation.sessions ?? [];
           return sessions.any((session) {
             return DateFormat('yyyy-MM-dd').format(session.startAt) ==
-                DateFormat('yyyy-MM-dd').format(selectedDate!);
+                DateFormat('yyyy-MM-dd').format(selectedDate);
           });
         })
         .toList()

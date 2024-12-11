@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_debouncer/flutter_debouncer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
@@ -18,11 +19,12 @@ import '../widgets/grounds_screen/custom_text_form_field.dart';
 import '../widgets/grounds_screen/custom_your_next_match_timer.dart';
 
 class GroundsScreen extends StatelessWidget {
-  const GroundsScreen({super.key});
-
+  GroundsScreen({super.key});
+  final Debouncer debouncer = Debouncer();
   @override
   Widget build(BuildContext context) {
     TextEditingController controller = TextEditingController();
+    var cubit = context.read<SportsGroundsCubit>();
     return CustomGroundsBlocListner(
       child: Scaffold(
         backgroundColor: AppPalette.backgroundColor,
@@ -45,6 +47,13 @@ class GroundsScreen extends StatelessWidget {
                 children: [
                   Expanded(
                       child: CustomTextFormField(
+                    onChange: (value) {
+                      debouncer.debounce(
+                          duration: const Duration(milliseconds: 800),
+                          onDebounce: () {
+                            cubit.searchByQuery(value);
+                          });
+                    },
                     controller: controller,
                   )),
                   horizontalSpace(5),
@@ -97,7 +106,7 @@ class GroundsScreen extends StatelessWidget {
               BlocBuilder<SportsGroundsCubit, SportsGroundsState>(
                   builder: (context, state) {
                 //Dont miss to add the empty list check and initial chack
-                if (state.isLoading || state.isInitial) {
+                if (state.isLoading) {
                   return const Center(
                     child: CircularProgressIndicator.adaptive(),
                   );

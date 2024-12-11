@@ -19,6 +19,7 @@ abstract class ServiceProvidersRemoteDataSource {
   Future<List<Map<String, dynamic>>> getPlaygroundsRequests();
   Future<void> addWithTransactionToFirebase(PlaygroundModel playgroundModel);
   Future<void> updateState(String playgroundId, Map<String, dynamic> data);
+  Future<List<Map<String, dynamic>>> searchByQuery(String query, String type);
 }
 
 @Injectable(as: ServiceProvidersRemoteDataSource)
@@ -108,6 +109,36 @@ class ServiceProvidersRemoteDataSourceImpl
     return executeTryAndCatchForDataLayer(() async {
       return await firestoreServices.updateData(
           FirebaseCollections.playgroundsRequests, playgroundId, data);
+    });
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> searchByQuery(String query, String type) {
+    return executeTryAndCatchForDataLayer(() async {
+      List<String> seenIds = [];
+      final nameQuery = firestoreServices.firestore
+          .collection(FirebaseCollections.playgroundsRequests)
+          .where('name', isGreaterThanOrEqualTo: query)
+          .where('name', isLessThan: '$query\uf8ff')
+          .get();
+      final addressQuery = firestoreServices.firestore
+          .collection(FirebaseCollections.playgroundsRequests)
+          .where('address', isGreaterThanOrEqualTo: query)
+          .where('address', isLessThan: '$query\uf8ff')
+          .get();
+      final results = await Future.wait([nameQuery, addressQuery]);
+      return results.expand((querySnapshot) {
+        return querySnapshot.docs
+            .where((doc) {
+              if (!seenIds.contains(doc.id)) {
+                seenIds.add(doc.id);
+                return true;
+              }
+              return false;
+            })
+            .map((doc) => doc.data())
+            .toList();
+      }).toList();
     });
   }
 }

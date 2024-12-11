@@ -6,7 +6,8 @@ import '../../../../../core/theme/app_pallete.dart';
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final void Function(String)? onChange;
- const CustomTextFormField({super.key,
+  const CustomTextFormField({
+    super.key,
     required this.controller,
     this.onChange,
   });
@@ -14,28 +15,28 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      cursorColor:AppPallete.darkGreenColor ,
+      cursorColor: AppPallete.darkGreenColor,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(vertical: 10.h,horizontal: 10.w),
+        contentPadding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
         filled: true,
         fillColor: AppPallete.lightGrayColor,
         hintText: Constants.hintTextForSearch,
         hintStyle: const TextStyle(color: AppPallete.grayColor),
-        prefixIcon: const Icon(Icons.search,color: AppPallete.grayColor,),
+        prefixIcon: const Icon(
+          Icons.search,
+          color: AppPallete.grayColor,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),
-          borderSide:
-          const BorderSide(color: AppPallete.lightGrayColor),
+          borderSide: const BorderSide(color: AppPallete.lightGrayColor),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),
-          borderSide:
-          const BorderSide(color: AppPallete.lightGrayColor),
+          borderSide: const BorderSide(color: AppPallete.lightGrayColor),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),
-          borderSide:
-          const BorderSide(color: AppPallete.darkGreenColor),
+          borderSide: const BorderSide(color: AppPallete.darkGreenColor),
         ),
       ),
       onChanged: onChange,
