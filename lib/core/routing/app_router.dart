@@ -97,20 +97,23 @@ class AppRouter {
       case Routes.chooseServiceCategoryScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider<ServiceProviderGroundsCubit>(
-                  create: (context) => getIt<ServiceProviderGroundsCubit>(),
+                  create: (context) => getIt<ServiceProviderGroundsCubit>()
+                    ..getPlaygroundsRequests(),
                   child: const ChooseServiceCategoryScreen(),
                 ));
       case Routes.serviceProviderGroundsScreen:
         return MaterialPageRoute(
-            builder: (context) => ServiceProviderGroundsScreen(
-                  type: settings.arguments as String,
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<ServiceProviderGroundsCubit>(),
+                  child: ServiceProviderGroundsScreen(
+                    type: settings.arguments as String,
+                  ),
                 ));
       case Routes.successServiceProviderScreen:
         return MaterialPageRoute(
             builder: (context) => const SuccessServiceProviderScreen());
       case Routes.serviceSelection:
         return MaterialPageRoute(
-
             builder: (context) => const ServiceSelectionScreen());
       case Routes.signInScreen:
         return MaterialPageRoute(builder: (context) => const SignInScreen());
@@ -120,7 +123,6 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => const OnBoardingScreen());
 
-         
       case Routes.editServiceScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider<EditServiceProviderCubit>(

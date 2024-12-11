@@ -12,8 +12,8 @@ import '../widgets/grounds_screen/custom_grounds_bloc_listner.dart';
 import '../widgets/grounds_screen/custom_your_next_match_timer.dart';
 
 class GroundsScreen extends StatelessWidget {
-  const GroundsScreen({super.key});
-
+  GroundsScreen({super.key});
+  final Debouncer debouncer = Debouncer();
   @override
   Widget build(BuildContext context) {
     return CustomGroundsBlocListner(

@@ -5,6 +5,7 @@ import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/core/utils/show_snack_bar.dart';
 
 import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_state.dart';
@@ -14,6 +15,7 @@ class CustomeFinishedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = context.read<AddServiceProviderCubit>();
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 76.w),
       child: BlocBuilder<AddServiceProviderCubit, AddServiceProviderState>(
@@ -28,15 +30,13 @@ class CustomeFinishedButton extends StatelessWidget {
               onPressed: state.isLoading
                   ? null
                   : () {
-                      if (context
-                              .read<AddServiceProviderCubit>()
-                              .formKey
-                              .currentState
-                              ?.validate() ==
-                          true) {
-                        context
-                            .read<AddServiceProviderCubit>()
-                            .addImagesToStorage();
+                      if (cubit.formKey.currentState?.validate() == true) {
+                        if (cubit.ownershipSelectedImageList.isNotEmpty) {
+                          cubit.addImagesToStorage();
+                        } else {
+                          showSnackBar(context,
+                              "Erorr ownership paper is empty please , sure you add at least one ");
+                        }
                       }
                     },
               child: state.isLoading

@@ -22,16 +22,15 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
         _sportsGroundUsecase = sportsGroundUsecase,
         super(SportsGroundsState(state: SportsGroundsStatus.initial));
 
-  static SportsGroundsCubit get(context) => BlocProvider.of(context);
-
   Future<void> getPlaygrounds() async {
+    emit(state.copyWith(state: SportsGroundsStatus.loading));
     final result = await _sportsRepository.getPlaygrounds();
     result.fold(
-        (l) => emit(SportsGroundsState(
+        (l) => emit(state.copyWith(
               state: SportsGroundsStatus.failure,
               erorrMessage: l.erorr,
             )), (r) {
-      emit(SportsGroundsState(
+      emit(state.copyWith(
         state: SportsGroundsStatus.success,
         playgrounds: r as List<PlaygroundModel>,
       ));
@@ -140,5 +139,22 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
   Future<void> close() {
     sportsGroundViewModel.dispoe();
     return super.close();
+  }
+
+  Future<void> searchByQuery(String query) async {
+    emit(state.copyWith(state: SportsGroundsStatus.loading));
+
+    final result = await _sportsRepository.searchByQuery(query);
+    result.fold((l) {
+      emit(state.copyWith(
+        state: SportsGroundsStatus.failure,
+        erorrMessage: l.erorr,
+      ));
+    }, (r) {
+      emit(state.copyWith(
+        state: SportsGroundsStatus.success,
+        playgrounds: r as List<PlaygroundModel>,
+      ));
+    });
   }
 }

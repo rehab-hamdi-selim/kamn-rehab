@@ -2,131 +2,138 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
+
+import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 
 class PlaygroundModel {
-  final String? name;
-  final double? longitude;
-  final double? latitude;
-  final String? address;
-  final String? description;
-  final String? govenrate;
-  final String? ownerId;
   String? playgroundId;
-  final String? status;
-  Map<String, Map<String, dynamic>?>? availableTime;
-  num? peroid;
-  final List? images;
-  final num? price;
-  final num? rating;
-  final num? size;
+  String? name;
+  String? phone;
+  double? longitude;
+  double? latitude;
+  String? ownerId; //get from user credential
+  String? address;
+  String? status; // need to handel
+  double? rating; //calcolute from developer
+  double? price; // need to handel  /*
+  String? description; // need to handel /*
+  List<String>? groundImages;
+  List<String>? ownershipImages;
+  int? size;
+  AvailableTime? availableTime;
+  num? period;
+  String? govenrate;
+  String? type;
   PlaygroundModel({
-    required this.name,
-    required this.longitude,
-    required this.latitude,
-    required this.address,
-    required this.description,
-    required this.govenrate,
-    required this.ownerId,
-    required this.playgroundId,
-    required this.status,
+    this.playgroundId,
+    this.name,
+    this.phone,
+    this.longitude,
+    this.latitude,
+    this.ownerId,
+    this.address,
+    this.status,
+    this.rating,
+    this.price,
+    this.description,
+    this.groundImages,
+    this.ownershipImages,
+    this.size,
     this.availableTime,
-    this.peroid,
-    required this.images,
-    required this.price,
-    required this.rating,
-    required this.size,
+    this.period,
+    this.govenrate,
+    this.type,
   });
 
   PlaygroundModel copyWith({
-    String? name,
-    double? longitude,
-    double? latitude,
-    String? address,
-    String? description,
-    String? govenrate,
-    String? ownerId,
-    String? playgroundId,
-    String? status,
-    ValueGetter<Map<String, Map<String, dynamic>?>?>? availableTime,
-    ValueGetter<num?>? peroid,
-    List? images,
-    num? price,
-    num? rating,
-    num? size,
+    ValueGetter<String?>? playgroundId,
+    ValueGetter<String?>? name,
+    ValueGetter<String?>? phone,
+    ValueGetter<double?>? longitude,
+    ValueGetter<double?>? latitude,
+    ValueGetter<String?>? ownerId,
+    ValueGetter<String?>? address,
+    ValueGetter<String?>? status,
+    ValueGetter<double?>? rating,
+    ValueGetter<double?>? price,
+    ValueGetter<String?>? description,
+    ValueGetter<List<String>?>? groundImages,
+    ValueGetter<List<String>?>? ownershipImages,
+    ValueGetter<int?>? size,
+    ValueGetter<AvailableTime?>? availableTime,
+    ValueGetter<num?>? period,
+    ValueGetter<String?>? govenrate,
+    ValueGetter<String?>? type,
   }) {
     return PlaygroundModel(
-      name: name ?? this.name,
-      longitude: longitude ?? this.longitude,
-      latitude: latitude ?? this.latitude,
-      address: address ?? this.address,
-      description: description ?? this.description,
-      govenrate: govenrate ?? this.govenrate,
-      ownerId: ownerId ?? this.ownerId,
-      playgroundId: playgroundId ?? this.playgroundId,
-      status: status ?? this.status,
+      playgroundId: playgroundId != null ? playgroundId() : this.playgroundId,
+      name: name != null ? name() : this.name,
+      phone: phone != null ? phone() : this.phone,
+      longitude: longitude != null ? longitude() : this.longitude,
+      latitude: latitude != null ? latitude() : this.latitude,
+      ownerId: ownerId != null ? ownerId() : this.ownerId,
+      address: address != null ? address() : this.address,
+      status: status != null ? status() : this.status,
+      rating: rating != null ? rating() : this.rating,
+      price: price != null ? price() : this.price,
+      description: description != null ? description() : this.description,
+      groundImages: groundImages != null ? groundImages() : this.groundImages,
+      ownershipImages:
+          ownershipImages != null ? ownershipImages() : this.ownershipImages,
+      size: size != null ? size() : this.size,
       availableTime:
           availableTime != null ? availableTime() : this.availableTime,
-      peroid: peroid != null ? peroid() : this.peroid,
-      images: images ?? this.images,
-      price: price ?? this.price,
-      rating: rating ?? this.rating,
-      size: size ?? this.size,
+      period: period != null ? period() : this.period,
+      govenrate: govenrate != null ? govenrate() : this.govenrate,
+      type: type != null ? type() : this.type,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'images': images,
-      'address': address,
-      'latitude': latitude,
-      'longitude': longitude,
-      'rating': rating,
-      'description': description,
-      'ownerId': ownerId,
-      'peroid': peroid,
-      'govenrate': govenrate,
-      'available_time': availableTime?.map(
-        (day, times) => MapEntry(
-          day,
-          times?.map(
-            (time, status) => MapEntry(time, status),
-          ),
-        ),
-      ),
-      'size': size,
-      'price': price,
-      'name': name,
       'playgroundId': playgroundId,
+      'name': name,
+      'phone': phone,
+      'longitude': longitude,
+      'latitude': latitude,
+      'ownerId': ownerId,
+      'address': address,
       'status': status,
+      'rating': rating,
+      'price': price,
+      'description': description,
+      'groundImages': groundImages,
+      'ownershipImages': ownershipImages,
+      'size': size,
+      'available_time': availableTime?.toMap(),
+      'period': period,
+      'govenrate': govenrate,
+      'type': type,
     };
   }
 
   factory PlaygroundModel.fromMap(Map<String, dynamic> map) {
     return PlaygroundModel(
-      images: List<String>.from(map['images'] ?? []),
-      address: map['address'] ?? '',
-      latitude: map['latitude']?.toDouble() ?? 0.0,
-      longitude: map['longitude']?.toDouble() ?? 0.0,
-      rating: map['rating']?.toDouble() ?? 0,
-      description: map['description'] ?? '',
-      ownerId: map['ownerId'] ?? '',
-      peroid: map['peroid'] ?? 0,
-      govenrate: map['govenrate'] ?? '',
-      availableTime: (map['available_time'] as Map<String, dynamic>?)?.map(
-            (day, times) => MapEntry(
-              day,
-              (times as Map<String, dynamic>).map(
-                (time, status) => MapEntry(time, status as String),
-              ),
-            ),
-          ) ??
-          {},
-      size: map['size'] ?? 0,
-      price: map['price'] ?? 0,
-      name: map['name'] ?? '',
-      playgroundId: map['playgroundId'] ?? '',
-      status: map['status'] ?? '',
+      playgroundId: map['playgroundId'],
+      name: map['name'],
+      phone: map['phone'],
+      longitude: map['longitude']?.toDouble(),
+      latitude: map['latitude']?.toDouble(),
+      ownerId: map['ownerId'],
+      address: map['address'],
+      status: map['status'],
+      rating: map['rating']?.toDouble(),
+      price: map['price']?.toDouble(),
+      description: map['description'],
+      groundImages: List<String>.from(map['groundImages']),
+      ownershipImages: List<String>.from(map['ownershipImages']),
+      size: map['size']?.toInt(),
+      availableTime: map['available_time'] != null
+          ? AvailableTime.fromMap(map['available_time'])
+          : null,
+      period: map['period'],
+      govenrate: map['govenrate'],
+      type: map['type'],
     );
   }
 
@@ -137,7 +144,7 @@ class PlaygroundModel {
 
   @override
   String toString() {
-    return 'PlaygroundModel(name: $name, longitude: $longitude, latitude: $latitude, address: $address, description: $description, govenrate: $govenrate, ownerId: $ownerId, playgroundId: $playgroundId, status: $status, availableTime: $availableTime, peroid: $peroid, images: $images, price: $price, rating: $rating, size: $size)';
+    return 'PlaygroundModel(playgroundId: $playgroundId, name: $name, phone: $phone, longitude: $longitude, latitude: $latitude, ownerId: $ownerId, address: $address, status: $status, rating: $rating, price: $price, description: $description, groundImages: $groundImages, ownershipImages: $ownershipImages, size: $size, availableTime: $availableTime, peroid: $period, govenrate: $govenrate, type: $type)';
   }
 
   @override
@@ -145,90 +152,45 @@ class PlaygroundModel {
     if (identical(this, other)) return true;
 
     return other is PlaygroundModel &&
+        other.playgroundId == playgroundId &&
         other.name == name &&
+        other.phone == phone &&
         other.longitude == longitude &&
         other.latitude == latitude &&
-        other.address == address &&
-        other.description == description &&
-        other.govenrate == govenrate &&
         other.ownerId == ownerId &&
-        other.playgroundId == playgroundId &&
+        other.address == address &&
         other.status == status &&
-        mapEquals(other.availableTime, availableTime) &&
-        other.peroid == peroid &&
-        listEquals(other.images, images) &&
-        other.price == price &&
         other.rating == rating &&
-        other.size == size;
+        other.price == price &&
+        other.description == description &&
+        listEquals(other.groundImages, groundImages) &&
+        listEquals(other.ownershipImages, ownershipImages) &&
+        other.size == size &&
+        other.availableTime == availableTime &&
+        other.period == period &&
+        other.govenrate == govenrate &&
+        other.type == type;
   }
 
   @override
   int get hashCode {
-    return name.hashCode ^
+    return playgroundId.hashCode ^
+        name.hashCode ^
+        phone.hashCode ^
         longitude.hashCode ^
         latitude.hashCode ^
-        address.hashCode ^
-        description.hashCode ^
-        govenrate.hashCode ^
         ownerId.hashCode ^
-        playgroundId.hashCode ^
+        address.hashCode ^
         status.hashCode ^
-        availableTime.hashCode ^
-        peroid.hashCode ^
-        images.hashCode ^
-        price.hashCode ^
         rating.hashCode ^
-        size.hashCode;
+        price.hashCode ^
+        description.hashCode ^
+        groundImages.hashCode ^
+        ownershipImages.hashCode ^
+        size.hashCode ^
+        availableTime.hashCode ^
+        period.hashCode ^
+        govenrate.hashCode ^
+        type.hashCode;
   }
-}
-
-class Intervals {
-  String date;
-  String status;
-  Intervals({
-    required this.date,
-    required this.status,
-  });
-
-  Intervals copyWith({
-    String? date,
-    String? status,
-  }) {
-    return Intervals(
-      date: date ?? this.date,
-      status: status ?? this.status,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'date': date,
-      'status': status,
-    };
-  }
-
-  factory Intervals.fromMap(Map<String, dynamic> map) {
-    return Intervals(
-      date: map['date'] ?? '',
-      status: map['status'] ?? '',
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Intervals.fromJson(String source) =>
-      Intervals.fromMap(json.decode(source));
-
-  @override
-  String toString() => 'Intervals(date: $date, status: $status)';
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is Intervals && other.date == date && other.status == status;
-  }
-
-  @override
-  int get hashCode => date.hashCode ^ status.hashCode;
 }
