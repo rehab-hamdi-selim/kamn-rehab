@@ -23,6 +23,7 @@ class SignUpScreen extends StatelessWidget {
 
         return CustomeSignUpListner(
           child: Scaffold(
+            backgroundColor: AppPallete.whiteColor,
             body: SafeArea(
               child: SingleChildScrollView(
                 child: Form(

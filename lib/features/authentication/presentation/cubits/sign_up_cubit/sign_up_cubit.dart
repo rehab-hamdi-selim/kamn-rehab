@@ -44,11 +44,12 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   Future<void> setData({required UserModel userModel}) async {
     final result = await _authRepository.setUser(userModel: userModel);
-    result.fold(
-        (l) => emit(state.copyWith(
-              state: SignUpStatus.failureSaveData,
-              erorrMessage: l.erorr,
-            )),
+    result.fold((l) {
+      emit(state.copyWith(
+        state: SignUpStatus.failureSaveData,
+        erorrMessage: l.erorr,
+      ));
+    },
         (r) => emit(state.copyWith(
               state: SignUpStatus.successSaveData,
             )));

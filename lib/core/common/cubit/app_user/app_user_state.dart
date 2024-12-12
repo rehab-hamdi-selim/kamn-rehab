@@ -4,17 +4,17 @@ import 'dart:convert';
 import '../../entities/user_model.dart';
 
 enum AppUserStates {
-  Initial,
-  Failure,
-  IsNotLoggedIn,
-  IsLoggedIn,
+  initial,
+  failure,
+  notLoggedIn,
+  loggedIn,
 }
 
 extension AppUserStateExtension on AppUserState {
-  bool isInitial() => state == AppUserStates.Initial;
-  bool isIsLoggedIn() => state == AppUserStates.IsLoggedIn;
-  bool isIsNotLoggedIn() => state == AppUserStates.IsNotLoggedIn;
-  bool isFailure() => state == AppUserStates.Failure;
+  bool isInitial() => state == AppUserStates.initial;
+  bool isLoggedIn() => state == AppUserStates.loggedIn;
+  bool isNotLoggedIn() => state == AppUserStates.notLoggedIn;
+  bool isFailure() => state == AppUserStates.failure;
 }
 
 class AppUserState {

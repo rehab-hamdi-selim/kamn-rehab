@@ -11,6 +11,7 @@ import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/helpers/bloc_observer.dart';
 import 'package:kamn/core/routing/routes.dart';
+import 'package:kamn/features/authentication/presentation/screens/on_boarding_screen.dart';
 
 import 'package:kamn/firebase_options.dart';
 import 'package:kamn/test_login.dart';
@@ -57,29 +58,16 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: BlocBuilder<AppUserCubit, AppUserState>(
-            builder: (context, state) {
-              if (state.isInitial()) {
-                return BlocProvider(
-                  create: (context) => getIt<SignUpCubit>(),
-                  child: const SignUpScreen(),
-                );
+          home: BlocListener<AppUserCubit, AppUserState>(
+            listener: (context, state) {
+              if (state.isLoggedIn()) {
+                Navigator.pushNamed(context, Routes.groundsScreen);
+              } else if (state.isNotLoggedIn()) {
+                Navigator.pushNamed(context, Routes.groundsScreen);
               }
-
-              if (state.isIsLoggedIn()) {
-                return const LogoutScreen();
-              } else if (state.isIsNotLoggedIn()) {
-                return const SignInScreen();
-              } else {
-                return const Scaffold(
-                  body: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              }
-
               // Loading state or other states
             },
+            child: const OnBoardingScreen(),
           ),
           onGenerateRoute: AppRouter.generateRoute,
         ),

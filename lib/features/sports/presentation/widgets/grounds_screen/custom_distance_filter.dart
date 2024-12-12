@@ -10,7 +10,8 @@ class CustomDistanceFilter extends StatelessWidget {
   const CustomDistanceFilter({super.key});
   @override
   Widget build(BuildContext context) {
-    final sportsGroundCubit = SportsGroundsCubit.get(context);
+    final sportsGroundCubit = context.read<SportsGroundsCubit>();
+
     return BlocBuilder<SportsGroundsCubit, SportsGroundsState>(
       builder: (context, state) {
         final distance = state.distance ?? 0.0;

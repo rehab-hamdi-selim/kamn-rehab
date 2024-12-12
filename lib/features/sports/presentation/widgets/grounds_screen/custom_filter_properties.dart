@@ -11,7 +11,8 @@ class CustomFilterProperties extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sportsGroundViewModel =
-        SportsGroundsCubit.get(context).sportsGroundViewModel;
+        context.read<SportsGroundsCubit>().sportsGroundViewModel;
+
     return BlocBuilder<SportsGroundsCubit, SportsGroundsState>(
       builder: (context, state) {
         return Column(
@@ -26,7 +27,8 @@ class CustomFilterProperties extends StatelessWidget {
                           icon: sportsGroundViewModel.filterItem[index]!.icon,
                           text: sportsGroundViewModel.filterItem[index]!.title,
                           onPressed: () {
-                            SportsGroundsCubit.get(context)
+                            context
+                                .read<SportsGroundsCubit>()
                                 .deleteFilterItem(index: index);
                           });
                     }

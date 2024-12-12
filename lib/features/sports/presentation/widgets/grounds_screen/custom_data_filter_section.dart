@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
@@ -10,7 +11,7 @@ class CustomDataFilterSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sportsGroundViewModel =
-        SportsGroundsCubit.get(context).sportsGroundViewModel;
+        context.read<SportsGroundsCubit>().sportsGroundViewModel;
     return Column(
       children: [
         CustomFilterTextFormField(

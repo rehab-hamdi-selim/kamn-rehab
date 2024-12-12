@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/features/authentication/presentation/screens/sign_in_screen.dart';
+import 'package:kamn/features/sports/data/models/playground_model.dart';
+import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_avaliable_button.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_ground_details.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_ground_image.dart';
@@ -11,35 +16,14 @@ import '../../../../../core/theme_data/app_palette.dart';
 import '../../../../../core/theme_data/style.dart';
 
 class CustomGroundItem extends StatelessWidget {
-  final String imageUrl;
-  final String placeText;
-  final String location;
-  final String rates;
-  final String km;
-  final String available;
-  final String owner;
-  final String price;
-  final num groundSize;
-  final void Function()? favoriteOnTap;
+  final PlaygroundModel playground;
   //final void Function() onTap;
 
-  const CustomGroundItem({
-    super.key,
-    required this.imageUrl,
-    required this.favoriteOnTap,
-    required this.placeText,
-    required this.km,
-    required this.owner,
-    required this.location,
-    required this.available,
-    required this.rates,
-    required this.price,
-    required this.groundSize,
-    // required this.onTap,
-  });
+  const CustomGroundItem({super.key, required this.playground});
 
   @override
   Widget build(BuildContext context) {
+    print((Geolocator.distanceBetween(30, 20, 30, 15) / 1000).round());
     return Padding(
       padding: EdgeInsets.only(bottom: 12.h),
       child: Container(
@@ -54,17 +38,17 @@ class CustomGroundItem extends StatelessWidget {
         ),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           CustomGroundImage(
-            favoriteOnTap: favoriteOnTap,
+            favoriteOnTap: () {},
           ),
           verticalSpace(3),
           CustomGroundDetails(
-            owner: owner,
-            km: km,
-            groundSize: groundSize,
+            owner: playground.name ?? "",
+            km: '2.7',
+            groundSize: playground.size!.toInt(),
           ),
           verticalSpace(1.2.h),
           Text(
-            placeText,
+            playground.address ?? '',
             style: TextStyles.font16DartBlackColorCircularSpotifyTextW400,
           ),
           Row(
@@ -77,17 +61,17 @@ class CustomGroundItem extends StatelessWidget {
               ),
               horizontalSpace(1),
               Text(
-                location,
+                playground.address ?? '',
                 style: Style.font10GrayColorW400,
               ),
               horizontalSpace(8),
               CustomAvaliableButton(
-                available: available,
+                available: playground.status ?? '',
               ),
               horizontalSpace(8),
-              CustomRateSection(rates: rates),
+              CustomRateSection(rates: playground.rating.toString()),
               const Spacer(),
-              CustomPriceSection(price: price),
+              CustomPriceSection(price: playground.price.toString()),
             ],
           )
         ]),

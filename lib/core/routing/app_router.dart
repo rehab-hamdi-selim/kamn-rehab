@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/routing/routes.dart';
+import 'package:kamn/features/authentication/presentation/cubits/sign_up_cubit/sign_up_cubit.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart';
 import 'package:kamn/features/admin/presentation/cubits/first_page_cupit/analytics_cubit.dart';
@@ -38,6 +39,7 @@ import 'package:kamn/features/sports_service_providers/presentation/screens/serv
 import 'package:kamn/features/sports_service_providers/presentation/screens/track_ground_reservation_detail_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/track_ground_reservations_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/success_service_provider_screen.dart';
+import 'package:kamn/test_login.dart';
 
 import '../../features/authentication/presentation/screens/on_boarding_screen.dart';
 import '../../features/authentication/presentation/screens/sign_in_screen.dart';
@@ -92,7 +94,7 @@ class AppRouter {
                   create: (context) => getIt<SportsGroundsCubit>()
                     ..getPlaygrounds()
                     ..getUserLocation(),
-                  child: const GroundsScreen(),
+                  child: GroundsScreen(),
                 ));
       case Routes.chooseServiceCategoryScreen:
         return MaterialPageRoute(
@@ -118,7 +120,11 @@ class AppRouter {
       case Routes.signInScreen:
         return MaterialPageRoute(builder: (context) => const SignInScreen());
       case Routes.signUpScreen:
-        return MaterialPageRoute(builder: (context) => const SignUpScreen());
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<SignUpCubit>(),
+                  child: const SignUpScreen(),
+                ));
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
             builder: (context) => const OnBoardingScreen());
@@ -173,6 +179,8 @@ class AppRouter {
       case Routes.proceedPaymentScreen:
         return MaterialPageRoute(
             builder: (context) => const ProceedPaymentScreen());
+      case Routes.logOut:
+        return MaterialPageRoute(builder: (context) => const LogoutScreen());
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(

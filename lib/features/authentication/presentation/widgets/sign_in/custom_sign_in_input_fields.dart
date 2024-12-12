@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/helpers/spacer.dart';
 import '../../../../../core/helpers/validators.dart';
 import '../../../../../core/theme/app_pallete.dart';
 import '../../../../../core/theme/style.dart';
@@ -28,6 +29,7 @@ class CustomSignInInputFields extends StatelessWidget {
             "Email",
             style: TextStyles.font17RobotoAccentBlackColor2Regular,
           ),
+          verticalSpace(5.h),
           CustomTextFormFeld(
             validator: emailValidator,
             hintText: "Enter your email",
@@ -43,6 +45,7 @@ class CustomSignInInputFields extends StatelessWidget {
             "Password",
             style: TextStyles.font17RobotoAccentBlackColor2Regular,
           ),
+          verticalSpace(5.h),
           BlocBuilder<SignInCubit, SignInState>(
             builder: (context, state) {
               return CustomTextFormFeld(

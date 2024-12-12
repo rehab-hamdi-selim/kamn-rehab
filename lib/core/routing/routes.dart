@@ -28,4 +28,5 @@ class Routes {
       '/trackGroundReservationsDetails';
   static const String paymentOptionsScreen = '/paymentOptionsScreen';
   static const String proceedPaymentScreen = '/proceedPaymentScreen';
+  static const String logOut = '/logOut';
 }

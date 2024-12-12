@@ -7,7 +7,7 @@ import '../data_source/sports_remote_data_source.dart';
 import '../models/playground_model.dart';
 
 abstract class SportsRepository {
-  Future<Either<Faliure, List<PlaygroundModel>?>> getPlaygrounds();
+  Future<Either<Faliure, List<PlaygroundModel>>> getPlaygrounds();
   Future<Either<Faliure, ReservationModel>> submitReservation(
       ReservationModel reservation);
   Future<Either<Faliure, void>> updateState(
@@ -23,15 +23,12 @@ class SportsRepositoryImpl implements SportsRepository {
   SportsRepositoryImpl({required SportsRemoteDataSource remoteDataSource})
       : _remoteDataSource = remoteDataSource;
   @override
-  Future<Either<Faliure, List<PlaygroundModel>?>> getPlaygrounds() async {
+  Future<Either<Faliure, List<PlaygroundModel>>> getPlaygrounds() async {
     return executeTryAndCatchForRepository(() async {
-      final List<Map<String, dynamic>> rawData =
-          await _remoteDataSource.getPlaygrounds();
-
-      final playgrounds =
-          rawData.map((data) => PlaygroundModel.fromMap(data)).toList();
-
-      return playgrounds;
+      var data = await _remoteDataSource.getPlaygrounds();
+      return data.map((value) {
+        return PlaygroundModel.fromMap(value);
+      }).toList();
     });
   }
 

@@ -13,7 +13,6 @@ import '../widgets/grounds_screen/custom_your_next_match_timer.dart';
 
 class GroundsScreen extends StatelessWidget {
   GroundsScreen({super.key});
-  final Debouncer debouncer = Debouncer();
   @override
   Widget build(BuildContext context) {
     return CustomGroundsBlocListner(
@@ -35,7 +34,7 @@ class GroundsScreen extends StatelessWidget {
                 Constants.groundsScreenTitle,
                 style: Style.font30DarkGreenColorBold,
               ),
-              const CustomFilterSection(),
+              CustomFilterSection(),
               verticalSpace(10),
               const CustomFilterProperties(),
               Row(

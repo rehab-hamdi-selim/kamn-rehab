@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/core/utils/location.dart';
 import 'package:kamn/features/sports/data/models/filter_model.dart';
+import 'package:kamn/features/sports/domain/usecase/get_sports_from_firebase_usecase.dart';
 import 'package:kamn/features/sports/domain/usecase/sports_ground_usecase.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_state.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_view_model.dart';
@@ -11,28 +12,29 @@ import '../../../data/models/playground_model.dart';
 
 @injectable
 class SportsGroundsCubit extends Cubit<SportsGroundsState> {
-  final SportsRepository _sportsRepository;
-  final SportsGroundUsecase _sportsGroundUsecase;
+  final SportsRepository sportsRepository;
+  final SportsGroundUsecase sportsGroundUsecase;
+  final GetSportsFromFirebaseUsecase getSportsFromFirebaseUsecase;
   final SportsGroundViewModel sportsGroundViewModel;
   SportsGroundsCubit(
-      {required SportsRepository sportsRepository,
-      required SportsGroundUsecase sportsGroundUsecase,
+      {required this.sportsRepository,
+      required this.sportsGroundUsecase,
+      required this.getSportsFromFirebaseUsecase,
       required this.sportsGroundViewModel})
-      : _sportsRepository = sportsRepository,
-        _sportsGroundUsecase = sportsGroundUsecase,
-        super(SportsGroundsState(state: SportsGroundsStatus.initial));
+      : super(SportsGroundsState(state: SportsGroundsStatus.initial));
 
   Future<void> getPlaygrounds() async {
     emit(state.copyWith(state: SportsGroundsStatus.loading));
-    final result = await _sportsRepository.getPlaygrounds();
+    final result = await sportsRepository.getPlaygrounds();
     result.fold(
         (l) => emit(state.copyWith(
               state: SportsGroundsStatus.failure,
               erorrMessage: l.erorr,
             )), (r) {
+      print(r.length);
       emit(state.copyWith(
         state: SportsGroundsStatus.success,
-        playgrounds: r as List<PlaygroundModel>,
+        playgrounds: r,
       ));
     });
   }
@@ -45,7 +47,7 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
     emit(SportsGroundsState(
       state: SportsGroundsStatus.loading,
     ));
-    final result = await _sportsGroundUsecase.filterGoundData(
+    final result = await sportsGroundUsecase.filterGoundData(
         distance: distance,
         location: location,
         maxPrice: maxPrice,
@@ -144,7 +146,7 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
   Future<void> searchByQuery(String query) async {
     emit(state.copyWith(state: SportsGroundsStatus.loading));
 
-    final result = await _sportsRepository.searchByQuery(query);
+    final result = await sportsRepository.searchByQuery(query);
     result.fold((l) {
       emit(state.copyWith(
         state: SportsGroundsStatus.failure,

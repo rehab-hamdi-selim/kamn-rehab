@@ -62,6 +62,7 @@ class Constants {
   static const serviceSuccessfullyAdded = "Your service \nsuccessfully added";
   static const whichSportYouServe = "Which Sport you want to service?";
   static const yourServices = "Your Services";
+  static const chooseYourGame = "Choose your game";
   static const chooseYourAddedServices = "Choose your added services";
   static const teamPlay = "Team play";
   static const fourOrMore = "4 or more players";
