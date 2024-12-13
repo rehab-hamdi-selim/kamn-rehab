@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bloc/bloc.dart';
@@ -25,7 +24,6 @@ import 'features/authentication/presentation/screens/sign_in_screen.dart';
 import 'features/authentication/presentation/screens/sign_up_screen.dart';
 
 import 'features/sports_service_providers/presentation/screens/service_provider_available_dates.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -104,10 +102,6 @@ class MyApp extends StatelessWidget {
           ),
           onGenerateRoute: AppRouter.generateRoute,
         ),
-
-        initialRoute: Routes.groundsScreen,
-
-
       ),
     );
   }

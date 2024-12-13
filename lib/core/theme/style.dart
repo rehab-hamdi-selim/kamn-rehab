@@ -109,11 +109,11 @@ class TextStyles {
       fontWeight: FontWeightHelper.medium,
       fontSize: 24.h);
 
-
-  static TextStyle fontRoboto24BoldBlack = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.lightBlackColor2,
-      fontWeight: FontWeightHelper.bold,
+  static TextStyle fontRoboto24BoldBlack = const TextStyle(
+    fontFamily: "Roboto",
+    color: AppPallete.lightBlackColor2,
+    fontWeight: FontWeightHelper.bold,
+  );
 
   static TextStyle fontRoboto24MediumWhite = TextStyle(
       fontFamily: "Roboto",
@@ -211,10 +211,10 @@ class TextStyles {
       color: AppPallete.blueColor,
       fontWeight: FontWeightHelper.regular,
       fontSize: 11.98.h);
-  static TextStyle font14RobotoWhiteColorBold = TextStyle(
+  static TextStyle font14RobotoWhiteColorBold = const TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.whiteColor,
-      fontWeight: FontWeightHelper.bold,
+      fontWeight: FontWeightHelper.bold);
 
   static TextStyle font14RobotoBlackColorRegular = TextStyle(
       fontFamily: "Roboto",
@@ -241,10 +241,10 @@ class TextStyles {
       color: AppPallete.whiteColor,
       fontWeight: FontWeightHelper.regular,
       fontSize: 12.h);
-  static TextStyle font12lightBlackColor2Bold = TextStyle(
+  static TextStyle font12lightBlackColor2Bold = const TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.lightBlackColor2,
-      fontWeight: FontWeightHelper.bold,
+      fontWeight: FontWeightHelper.bold);
 
   static TextStyle fontRoboto12DarkGreyMedium = TextStyle(
       fontFamily: "Roboto",
