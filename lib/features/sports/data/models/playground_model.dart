@@ -14,7 +14,7 @@ class PlaygroundModel {
   final String? ownerId;
   String? playgroundId;
   final String? status;
-  Map<String, Map<String, dynamic>?>? availableTime;
+  Map<dynamic, dynamic>? availableTime;
   num? peroid;
   final List? images;
   final num? price;
@@ -48,7 +48,7 @@ class PlaygroundModel {
     String? ownerId,
     String? playgroundId,
     String? status,
-    ValueGetter<Map<String, Map<String, dynamic>?>?>? availableTime,
+    ValueGetter<Map<String, List<DateTime>?>?>? availableTime,
     ValueGetter<num?>? peroid,
     List? images,
     num? price,
@@ -87,11 +87,11 @@ class PlaygroundModel {
       'peroid': peroid,
       'govenrate': govenrate,
       'available_time': availableTime?.map(
-        (day, times) => MapEntry(
-          day,
-          times?.map(
-            (time, status) => MapEntry(time, status),
-          ),
+        (key, dateTimeList) => MapEntry(
+          key,
+          dateTimeList
+              ?.map((dateTime) => dateTime.millisecondsSinceEpoch)
+              .toList(),
         ),
       ),
       'size': size,
@@ -113,15 +113,17 @@ class PlaygroundModel {
       ownerId: map['ownerId'] ?? '',
       peroid: map['peroid'] ?? 0,
       govenrate: map['govenrate'] ?? '',
-      availableTime: (map['available_time'] as Map<String, dynamic>?)?.map(
-            (day, times) => MapEntry(
-              day,
-              (times as Map<String, dynamic>).map(
-                (time, status) => MapEntry(time, status as String),
+      availableTime: map['available_time'] != null
+          ? (map['available_time'])?.map(
+              (key, list) => MapEntry(
+                key,
+                (list as List<dynamic>)
+                    .map((millis) =>
+                        DateTime.fromMillisecondsSinceEpoch(millis as int))
+                    .toList(),
               ),
-            ),
-          ) ??
-          {},
+            )
+          : null,
       size: map['size'] ?? 0,
       price: map['price'] ?? 0,
       name: map['name'] ?? '',

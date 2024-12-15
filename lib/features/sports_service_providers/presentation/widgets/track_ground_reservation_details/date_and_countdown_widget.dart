@@ -4,14 +4,14 @@ import 'package:intl/intl.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/font_weight_helper.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
+import 'package:kamn/features/sports/data/models/reservation_model.dart';
 
 class DateAndCountdownWidget extends StatelessWidget {
-  final Map<String, dynamic> data;
+  final Session data;
   const DateAndCountdownWidget({super.key, required this.data});
   @override
   Widget build(BuildContext context) {
-    DateTime start =
-        DateTime.fromMillisecondsSinceEpoch(data['startAt'] * 1000);
+    DateTime start = data.startAt;
     int startTime = start.millisecondsSinceEpoch + 1000;
     return RPadding(
       padding: const EdgeInsets.only(top: 8),
@@ -31,9 +31,7 @@ class DateAndCountdownWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    DateFormat('EEEE, dd MMM yyyy').format(
-                        (DateTime.fromMillisecondsSinceEpoch(
-                            data['startAt'] as int))),
+                    DateFormat('EEEE, dd MMM yyyy').format(data.startAt),
                     style: const TextStyle(color: AppPallete.greenColor),
                   ),
                   const Text('6:30 PM to 7:30 PM',

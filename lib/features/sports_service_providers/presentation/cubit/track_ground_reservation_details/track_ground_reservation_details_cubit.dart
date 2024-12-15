@@ -19,6 +19,7 @@ class TrackGroundReservationsDetailsCubit
         state: TrackGroundsReservationDetailsStatus.loading));
     final result =
         await repository.getPlaygroundsReservationDetailsById(playgroundId);
+    print('${result},resultt');
     result.fold((error) {
       print(error.erorr);
 

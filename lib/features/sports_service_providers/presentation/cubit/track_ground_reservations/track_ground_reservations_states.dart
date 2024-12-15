@@ -1,4 +1,5 @@
 import 'package:kamn/features/sports/data/models/playground_model.dart';
+import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 
 enum TrackGroundsStatus {
   initial,
@@ -16,7 +17,7 @@ extension TrackGroundsStateExtension on TrackGroundsState {
 
 class TrackGroundsState {
   final TrackGroundsStatus state;
-  final List<PlaygroundModel>? playgrounds;
+  final List<PlaygroundRequestModel>? playgrounds;
   final String? erorrMessage;
   final String? successMessage;
 

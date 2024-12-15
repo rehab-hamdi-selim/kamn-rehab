@@ -94,12 +94,10 @@ class ServiceProvidersRemoteDataSourceImpl
   Future<List<Map<String, dynamic>>> getPlaygroundsByOwnerId(String ownerId) {
     return executeTryAndCatchForDataLayer(() async {
       var querySnapshot = await FirebaseFirestore.instance
-          .collection(FirebaseCollections.playgrounds)
+          .collection(FirebaseCollections.playgroundsRequests)
           .where('ownerId', isEqualTo: ownerId)
           .get();
-      return querySnapshot.docs
-          .map((doc) => doc.data() as Map<String, dynamic>)
-          .toList();
+      return querySnapshot.docs.map((doc) => doc.data()).toList();
     });
   }
 
@@ -136,9 +134,7 @@ class ServiceProvidersRemoteDataSourceImpl
           .collection(FirebaseCollections.reservations)
           .where('ground.playgroundId', isEqualTo: playgroundId)
           .get();
-      return querySnapshot.docs
-          .map((doc) => doc.data() as Map<String, dynamic>)
-          .toList();
+      return querySnapshot.docs.map((doc) => doc.data()).toList();
     });
   }
 }

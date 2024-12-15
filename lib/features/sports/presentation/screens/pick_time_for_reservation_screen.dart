@@ -57,11 +57,9 @@ class PickTimeForReservationScreen extends StatelessWidget {
                               ...playground
                                   .availableTime![DateFormat.E().format(
                                       state.selectedDate ?? DateTime.now())]!
-                                  .entries
                                   .map((entry) {
                                 return CustomePickIntervalForReservation(
-                                  interval: entry.key,
-                                  status: entry.value,
+                                  interval: DateFormat.Hm().format(entry),
                                 );
                               }),
                             ] else

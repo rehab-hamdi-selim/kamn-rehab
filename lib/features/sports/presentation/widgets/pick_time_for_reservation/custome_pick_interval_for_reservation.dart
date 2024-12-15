@@ -5,11 +5,10 @@ import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservati
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_state.dart';
 
 class CustomePickIntervalForReservation extends StatelessWidget {
-  const CustomePickIntervalForReservation(
-      {super.key, required this.interval, required this.status});
+  const CustomePickIntervalForReservation({super.key, required this.interval});
 
   final String interval;
-  final String status;
+  final String status = 'unSelected';
 
   @override
   Widget build(BuildContext context) {

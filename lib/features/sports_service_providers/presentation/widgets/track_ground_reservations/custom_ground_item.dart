@@ -2,12 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
+import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 import '../../../../../core/helpers/spacer.dart';
 import '../../../../../core/theme/app_pallete.dart';
 import '../../../../../core/theme/style.dart';
 
 class CustomGroundItem extends StatelessWidget {
-  PlaygroundModel playground;
+  PlaygroundRequestModel playground;
 
   CustomGroundItem({super.key, required this.playground});
 
@@ -31,8 +32,8 @@ class CustomGroundItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15.r),
               ),
               child: CachedNetworkImage(
-                  imageUrl: playground.images?.isNotEmpty == true
-                      ? playground.images![0]
+                  imageUrl: playground.groundImages?.isNotEmpty == true
+                      ? playground.groundImages![0]
                       : '',
                   imageBuilder: (context, imageProvider) => Container(
                         width: double.infinity,

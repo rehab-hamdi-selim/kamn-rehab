@@ -8,6 +8,7 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/font_weight_helper.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
+import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/track_ground_reservation_details/track_ground_reservation_details_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/track_ground_reservation_details/track_ground_reservation_details_states.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/service_provider_ground_details/custome_image_slide_show.dart';
@@ -17,7 +18,7 @@ import 'package:kamn/features/sports_service_providers/presentation/widgets/trac
 class TrackGroundReservationDetail extends StatelessWidget {
   const TrackGroundReservationDetail(
       {super.key, required this.playgroundModel});
-  final PlaygroundModel playgroundModel;
+  final PlaygroundRequestModel playgroundModel;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class TrackGroundReservationDetail extends StatelessWidget {
                 right: 0,
                 height: 346.h,
                 // Image height
-                child: CustomeImageSlideShow(playgroundModel.images!)),
+                child: CustomeImageSlideShow(playgroundModel.groundImages!)),
             Positioned(
               bottom: 0,
               // Start from the bottom
@@ -56,6 +57,7 @@ class TrackGroundReservationDetail extends StatelessWidget {
                         child: CircularProgressIndicator(),
                       );
                     } else {
+                      print('adhamspsp');
                       print(state.playgroundsReservationDetails);
                     }
                     return Column(children: [
