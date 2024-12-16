@@ -20,6 +20,7 @@ import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_g
 import 'package:kamn/features/sports/presentation/screens/grounds_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/my_profile_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/pick_time_for_reservation_screen.dart';
+import 'package:kamn/features/sports/presentation/screens/view_resrvation_screen.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/available_dates/available_dates_cubit.dart';
@@ -110,7 +111,6 @@ class AppRouter {
             builder: (context) => const SuccessServiceProviderScreen());
       case Routes.serviceSelection:
         return MaterialPageRoute(
-
             builder: (context) => const ServiceSelectionScreen());
       case Routes.signInScreen:
         return MaterialPageRoute(builder: (context) => const SignInScreen());
@@ -120,7 +120,6 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => const OnBoardingScreen());
 
-         
       case Routes.editServiceScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider<EditServiceProviderCubit>(
@@ -171,6 +170,9 @@ class AppRouter {
       case Routes.proceedPaymentScreen:
         return MaterialPageRoute(
             builder: (context) => const ProceedPaymentScreen());
+      case Routes.viewResrvationScreen:
+        return MaterialPageRoute(
+            builder: (context) => const ViewResrvationScreen());
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(
