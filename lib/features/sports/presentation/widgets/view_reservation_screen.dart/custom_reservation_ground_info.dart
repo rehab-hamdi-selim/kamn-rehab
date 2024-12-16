@@ -5,8 +5,16 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 
 class CustomReservationGroundInfo extends StatelessWidget {
-  const CustomReservationGroundInfo({super.key});
-
+  const CustomReservationGroundInfo(
+      {super.key,
+      required this.ownreName,
+      required this.address,
+      required this.rate,
+      required this.review});
+  final String ownreName;
+  final String address;
+  final double rate;
+  final int review;
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -26,7 +34,7 @@ class CustomReservationGroundInfo extends StatelessWidget {
                 minVerticalPadding: 0,
                 contentPadding: const EdgeInsets.all(0),
                 title: Text(
-                  'mahmoud sayed',
+                  ownreName,
                   style: TextStyles.fontCircularSpotify8Regular
                       .copyWith(color: AppPallete.lightColor),
                 ),
@@ -42,7 +50,7 @@ class CustomReservationGroundInfo extends StatelessWidget {
                 minVerticalPadding: 0,
                 contentPadding: const EdgeInsets.symmetric(horizontal: 11),
                 title: Text(
-                  'Alexandria, Hadra',
+                  address,
                   style: TextStyles.fontCircularSpotify8Regular
                       .copyWith(color: AppPallete.lightColor),
                 ),
@@ -58,7 +66,7 @@ class CustomReservationGroundInfo extends StatelessWidget {
                 contentPadding: const EdgeInsets.all(0),
                 horizontalTitleGap: 4,
                 title: Text(
-                  '4.6 (123 reviews)',
+                  '$rate ($review reviews)',
                   style: TextStyles.fontCircularSpotify8Regular
                       .copyWith(color: AppPallete.lightColor),
                 ),

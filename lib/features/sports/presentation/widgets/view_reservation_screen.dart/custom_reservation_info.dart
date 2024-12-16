@@ -6,8 +6,16 @@ import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/style.dart';
 
 class CustomReservationInfo extends StatelessWidget {
-  const CustomReservationInfo({super.key});
-
+  const CustomReservationInfo(
+      {super.key,
+      required this.date,
+      required this.timeToStart,
+      required this.timeToEnd,
+      required this.price});
+  final String date;
+  final String timeToStart;
+  final String timeToEnd;
+  final double price;
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -28,7 +36,7 @@ class CustomReservationInfo extends StatelessWidget {
                 ),
                 horizontalSpace(2.85),
                 Text(
-                  'Monday, 16 Sep 2024\n6:30 PM to 7:30 PM',
+                  '$date\n$timeToStart to $timeToEnd',
                   style: TextStyles.fontCircularSpotify10Regular,
                 ),
               ],
@@ -36,7 +44,7 @@ class CustomReservationInfo extends StatelessWidget {
             const Spacer(),
             RichText(
                 text: TextSpan(
-                    text: '250 LE ',
+                    text: '$price LE',
                     style: TextStyles.fontCircularSpotify18Medium,
                     children: [
                   TextSpan(

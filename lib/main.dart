@@ -57,30 +57,31 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: BlocBuilder<AppUserCubit, AppUserState>(
-            builder: (context, state) {
-              if (state.isInitial()) {
-                return BlocProvider(
-                  create: (context) => getIt<SignUpCubit>(),
-                  child: const SignUpScreen(),
-                );
-              }
+          // home: BlocBuilder<AppUserCubit, AppUserState>(
+          //   builder: (context, state) {
+          //     if (state.isInitial()) {
+          //       return BlocProvider(
+          //         create: (context) => getIt<SignUpCubit>(),
+          //         child: const SignUpScreen(),
+          //       );
+          //     }
 
-              if (state.isIsLoggedIn()) {
-                return const LogoutScreen();
-              } else if (state.isIsNotLoggedIn()) {
-                return const SignInScreen();
-              } else {
-                return const Scaffold(
-                  body: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              }
+          //     if (state.isIsLoggedIn()) {
+          //       return const LogoutScreen();
+          //     } else if (state.isIsNotLoggedIn()) {
+          //       return const SignInScreen();
+          //     } else {
+          //       return const Scaffold(
+          //         body: Center(
+          //           child: CircularProgressIndicator(),
+          //         ),
+          //       );
+          //     }
 
-              // Loading state or other states
-            },
-          ),
+          //     // Loading state or other states
+          //   },
+          // ),
+          initialRoute: Routes.viewResrvationScreen,
           onGenerateRoute: AppRouter.generateRoute,
         ),
       ),

@@ -1,23 +1,12 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kamn/core/const/constants.dart';
-import 'package:kamn/core/const/icon_links.dart';
-import 'package:kamn/core/const/image_links.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/core/theme_data/app_palette.dart';
 import 'package:kamn/core/theme_data/style.dart';
-import 'package:kamn/core/utils/app_images.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_app_bar.dart';
-import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_bottom.dart';
-import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_filter_properties.dart';
-import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_filter_section.dart';
-import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_text_form_field.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_your_next_match_timer.dart';
+import 'package:kamn/features/sports/presentation/widgets/pick_time_for_reservation/custom_reservation_filter_item.dart';
 import 'package:kamn/features/sports/presentation/widgets/view_reservation_screen.dart/custom_reservation_filter.dart';
 import 'package:kamn/features/sports/presentation/widgets/view_reservation_screen.dart/custom_reservation_list.dart';
 
@@ -46,7 +35,7 @@ class ViewResrvationScreen extends StatelessWidget {
             ),
             const CustomReservationFilter(),
             verticalSpace(10),
-            // const CustomFilterProperties(),
+            const CustomReservationFilterItem(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
