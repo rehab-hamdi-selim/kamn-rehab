@@ -47,7 +47,10 @@ class SecureStorageHelper {
   static Future<Either<String, bool>> isUserLoggedIn() async {
     try {
       final userData = await _storage.read(key: _userKey);
-      return Right(userData != null);
+      if (userData != null) {
+        return const Right(true);
+      }
+      return const Left('User is not logged in');
     } catch (e) {
       return Left(e.toString());
     }

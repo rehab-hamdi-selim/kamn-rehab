@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/features/authentication/presentation/cubits/sign_up_cubit/sign_up_state.dart';
 import 'package:kamn/features/authentication/presentation/widgets/sign_up/custome_upper_text.dart';
 
+import '../../../../core/common/cubit/firebase_remoteconfig.dart/firebase_remoteconfig_cubit.dart';
+import '../../../../core/common/cubit/firebase_remoteconfig.dart/firebase_remoteconfig_state.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/app_pallete.dart';
 

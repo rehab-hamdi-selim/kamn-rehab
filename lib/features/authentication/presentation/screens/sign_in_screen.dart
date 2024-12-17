@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/common/cubit/firebase_remoteconfig.dart/firebase_remoteconfig_cubit.dart';
+import '../../../../core/common/cubit/firebase_remoteconfig.dart/firebase_remoteconfig_state.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/app_pallete.dart';
 import '../../data/data_source/auth_remote_data_source.dart';
@@ -40,6 +43,12 @@ class SignInScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      BlocBuilder<FirebaseRemoteConfigCubit,
+                          FirebaseRemoteConfigState>(
+                        builder: (context, state) {
+                          return Text(state.configValues?['test'] ?? 'def');
+                        },
+                      ),
                       CustomSignInInputFields(viewModel: viewModel),
                       SizedBox(height: 27.h),
                       Column(
@@ -77,7 +86,9 @@ class SignInScreen extends StatelessWidget {
                             },
                           ),
                           SizedBox(height: 22.h),
-                          FacebookButton(onTapButton: () {}),
+                          FacebookButton(onTapButton: () {
+                            FirebaseCrashlytics.instance.crash();
+                          }),
                         ],
                       ),
                     ],

@@ -61,6 +61,8 @@ import '../../features/sports_service_providers/presentation/cubit/track_ground_
     as _i278;
 import '../common/class/firebase_storage_services.dart' as _i304;
 import '../common/class/firestore_services.dart' as _i158;
+import '../../core/common/cubit/firebase_remoteconfig.dart/firebase_remoteconfig_cubit.dart'
+    as _i305;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -112,9 +114,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i278.TrackGroundReservationsCubit>(() =>
         _i278.TrackGroundReservationsCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i252.AddServiceProviderCubit>(() =>
-        _i252.AddServiceProviderCubit(
-            repository: gh<_i542.ServiceProvidersRepository>()));
+
     gh.factory<_i731.AvailableDatesCubit>(() => _i731.AvailableDatesCubit(
         repository: gh<_i542.ServiceProvidersRepository>()));
 
@@ -142,6 +142,8 @@ extension GetItInjectableX on _i174.GetIt {
           sportsGroundUsecase: gh<_i561.SportsGroundUsecase>(),
           sportsGroundViewModel: gh<_i16.SportsGroundViewModel>(),
         ));
+    gh.factory<_i305.FirebaseRemoteConfigCubit>(
+        () => _i305.FirebaseRemoteConfigCubit());
     return this;
   }
 }
