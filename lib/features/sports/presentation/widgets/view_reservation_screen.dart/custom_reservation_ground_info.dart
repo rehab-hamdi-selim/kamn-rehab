@@ -13,7 +13,7 @@ class CustomReservationGroundInfo extends StatelessWidget {
       required this.review});
   final String ownreName;
   final String address;
-  final double rate;
+  final num rate;
   final int review;
   @override
   Widget build(BuildContext context) {

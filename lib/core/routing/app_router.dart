@@ -17,6 +17,7 @@ import 'package:kamn/features/payment/presentation/cubits/payment_options_cubit/
 import 'package:kamn/features/payment/presentation/screens/payment_options_screen.dart';
 import 'package:kamn/features/payment/presentation/screens/proceed_payment_screen.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
+import 'package:kamn/features/sports/presentation/cubits/view_reservation/view_reservation_cubit.dart';
 import 'package:kamn/features/sports/presentation/screens/grounds_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/my_profile_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/pick_time_for_reservation_screen.dart';
@@ -172,7 +173,11 @@ class AppRouter {
             builder: (context) => const ProceedPaymentScreen());
       case Routes.viewResrvationScreen:
         return MaterialPageRoute(
-            builder: (context) => const ViewResrvationScreen());
+            builder: (context) => BlocProvider<ViewReservationCubit>(
+                  create: (context) =>
+                      getIt<ViewReservationCubit>()..getResevation(),
+                  child: const ViewResrvationScreen(),
+                ));
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(

@@ -21,12 +21,12 @@ class CustomReservationItem extends StatelessWidget {
   final String groundName;
   final String ownreName;
   final String address;
-  final double rate;
+  final num rate;
   final int review;
   final String date;
   final String timeToStart;
   final String timeToEnd;
-  final double price;
+  final num price;
   @override
   Widget build(BuildContext context) {
     return Padding(

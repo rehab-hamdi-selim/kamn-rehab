@@ -15,7 +15,7 @@ class CustomReservationInfo extends StatelessWidget {
   final String date;
   final String timeToStart;
   final String timeToEnd;
-  final double price;
+  final num price;
   @override
   Widget build(BuildContext context) {
     return Positioned(

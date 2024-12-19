@@ -53,6 +53,8 @@ import '../../features/sports/presentation/cubits/sports_grounds/sports_ground_c
     as _i1033;
 import '../../features/sports/presentation/cubits/sports_grounds/sports_ground_view_model.dart'
     as _i16;
+import '../../features/sports/presentation/cubits/view_reservation/view_reservation_cubit.dart'
+    as _i410;
 import '../../features/sports_service_providers/data/data_source/service_providers_remote_data_source.dart'
     as _i1047;
 import '../../features/sports_service_providers/data/repository/service_providers_repository.dart'
@@ -162,6 +164,8 @@ extension GetItInjectableX on _i174.GetIt {
         _i137.PickTimeForReservationCubit(
             repository: gh<_i379.SportsRepository>()));
     gh.factory<_i561.SportsGroundUsecase>(() => _i561.SportsGroundUsecase(
+        sportsRepository: gh<_i379.SportsRepository>()));
+    gh.factory<_i410.ViewReservationCubit>(() => _i410.ViewReservationCubit(
         sportsRepository: gh<_i379.SportsRepository>()));
     gh.factory<_i987.ServiceProviderGroundsCubit>(() =>
         _i987.ServiceProviderGroundsCubit(
