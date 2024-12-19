@@ -10,7 +10,7 @@ import '../widgets/sign_up/custome_already_have_an_account_row.dart';
 import '../widgets/sign_up/custome_sign_up_input_fields.dart';
 import '../widgets/sign_up/custome_sign_up_listner.dart';
 import '../widgets/sign_up/custome_upper_text.dart';
-import '../widgets/sign_up/facebook_button.dart';
+import '../widgets/sign_up/google_button.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -72,7 +72,7 @@ class SignUpScreen extends StatelessWidget {
                             },
                           ),
                           SizedBox(height: 22.h),
-                          FacebookButton(onTapButton: () {}),
+                          GoogleButton(onTapButton: () {}),
                         ],
                       ),
                     ],

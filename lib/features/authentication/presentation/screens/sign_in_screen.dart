@@ -13,7 +13,7 @@ import '../widgets/custom_button.dart';
 import '../widgets/sign_in/custom_dont_have_account_row.dart';
 import '../widgets/sign_in/custom_sign_in_input_fields.dart';
 import '../widgets/sign_in/custom_sign_in_listener.dart';
-import '../widgets/sign_up/facebook_button.dart';
+import '../widgets/sign_up/google_button.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -77,7 +77,7 @@ class SignInScreen extends StatelessWidget {
                             },
                           ),
                           SizedBox(height: 22.h),
-                          FacebookButton(onTapButton: () {}),
+                          GoogleButton(onTapButton: () {}),
                         ],
                       ),
                     ],
