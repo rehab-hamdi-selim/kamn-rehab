@@ -10,7 +10,7 @@ import 'package:kamn/features/sports_service_providers/presentation/cubit/servic
 import 'package:kamn/features/sports_service_providers/presentation/widgets/choose_category/custome_individual_play_categories.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/choose_category/custome_team_play_categories.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/choose_category/custome_title_text.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/service_provider_grounds/custom_app_bar_service_provider.dart';
+import 'package:kamn/core/utils/custom_app_bar_service_provider.dart';
 
 class ChooseServiceCategoryScreen extends StatelessWidget {
   const ChooseServiceCategoryScreen({super.key});
@@ -27,6 +27,7 @@ class ChooseServiceCategoryScreen extends StatelessWidget {
       child: Scaffold(
           backgroundColor: AppPallete.whiteColor,
           appBar: CustomAppBarServiceProvider.appBar(
+            color: AppPallete.whiteColor,
             arrowFunction: () {},
             notificationIconFunction: () {},
             profileFunction: () {},

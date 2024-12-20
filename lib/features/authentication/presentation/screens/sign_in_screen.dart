@@ -70,7 +70,7 @@ class SignInScreen extends StatelessWidget {
                             onTap: () {
                               Navigator.pushNamed(
                                 context,
-                                Routes.signUpScreen,
+                                Routes.userTypeSelectionScreen,
                               );
                             },
                           ),

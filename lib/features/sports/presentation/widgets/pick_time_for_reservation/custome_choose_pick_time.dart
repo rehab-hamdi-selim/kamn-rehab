@@ -32,7 +32,9 @@ class CustomeChoosePickTime extends StatelessWidget {
                   if (availableTime != null &&
                       availableTime!
                               .data![DateFormat.E().format(selectedDate)] !=
-                          null) ...[
+                          null &&
+                      (state.isIntervalSelected ||
+                          state.isReservationLoaded)) ...[
                     ...availableTime!
                         .data![DateFormat.E().format(selectedDate)]!
                         .map((interval) {
@@ -46,7 +48,11 @@ class CustomeChoosePickTime extends StatelessWidget {
                                   first: interval, second: selectedDate),
                               selectedDate));
                     }),
-                  ] else
+                  ] else if (state.isLoading)
+                    const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  else
                     const Center(
                         child: Text('No intervals provides at this day ')),
                 ],

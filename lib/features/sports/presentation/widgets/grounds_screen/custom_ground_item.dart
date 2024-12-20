@@ -23,7 +23,19 @@ class CustomGroundItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print((Geolocator.distanceBetween(30, 20, 30, 15) / 1000).round());
+    var distance = (Geolocator.distanceBetween(
+                playground.latitude ?? 0,
+                playground.longitude ?? 0,
+                context
+                    .read<SportsGroundsCubit>()
+                    .sportsGroundViewModel
+                    .userLatitude,
+                context
+                    .read<SportsGroundsCubit>()
+                    .sportsGroundViewModel
+                    .userLongitude) /
+            1000)
+        .round();
     return Padding(
       padding: EdgeInsets.only(bottom: 12.h),
       child: Container(
@@ -38,17 +50,18 @@ class CustomGroundItem extends StatelessWidget {
         ),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           CustomGroundImage(
+            images: playground.groundImages ?? [],
             favoriteOnTap: () {},
           ),
           verticalSpace(3),
           CustomGroundDetails(
             owner: playground.name ?? "",
-            km: '2.7',
+            km: distance.toString(),
             groundSize: playground.size!.toInt(),
           ),
           verticalSpace(1.2.h),
           Text(
-            playground.address ?? '',
+            playground.name ?? '',
             style: TextStyles.font16DartBlackColorCircularSpotifyTextW400,
           ),
           Row(

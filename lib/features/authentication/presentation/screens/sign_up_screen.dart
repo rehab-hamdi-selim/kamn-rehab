@@ -13,7 +13,8 @@ import '../widgets/sign_up/custome_upper_text.dart';
 import '../widgets/sign_up/facebook_button.dart';
 
 class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+  const SignUpScreen({super.key, required this.userType});
+  final String userType;
 
   @override
   Widget build(BuildContext context) {
@@ -50,13 +51,13 @@ class SignUpScreen extends StatelessWidget {
                                             .currentState!
                                             .validate()) {
                                           cubit.signUp(
-                                            name: cubit.signUpViewModel
-                                                .nameController!.text,
-                                            email: cubit.signUpViewModel
-                                                .emailController!.text,
-                                            password: cubit.signUpViewModel
-                                                .passwordController!.text,
-                                          );
+                                              name: cubit.signUpViewModel
+                                                  .nameController!.text,
+                                              email: cubit.signUpViewModel
+                                                  .emailController!.text,
+                                              password: cubit.signUpViewModel
+                                                  .passwordController!.text,
+                                              type: userType);
                                         }
                                       },
                                     );

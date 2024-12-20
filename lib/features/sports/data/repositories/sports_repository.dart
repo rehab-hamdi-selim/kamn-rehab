@@ -14,6 +14,8 @@ abstract class SportsRepository {
       String playgroundId, Map<String, dynamic> data);
   Future<Either<Faliure, void>> delete(ReservationModel reservation);
   Future<Either<Faliure, List<ReservationModel>>> getAllReservation();
+  Future<Either<Faliure, List<ReservationModel>>>
+      getSpecificReservationsByGroundId(String groundId, DateTime selectedDate);
   Future<Either<Faliure, List<PlaygroundModel>?>> searchByQuery(String query);
 }
 
@@ -75,6 +77,19 @@ class SportsRepositoryImpl implements SportsRepository {
           rawData.map((data) => PlaygroundModel.fromMap(data)).toList();
 
       return playgrounds;
+    });
+  }
+
+  @override
+  Future<Either<Faliure, List<ReservationModel>>>
+      getSpecificReservationsByGroundId(
+          String groundId, DateTime selectedDate) {
+    return executeTryAndCatchForRepository(() async {
+      var response = await _remoteDataSource.getSpecificReservationsByGroundId(
+          groundId, selectedDate);
+      return response.map((element) {
+        return ReservationModel.fromMap(element);
+      }).toList();
     });
   }
 }

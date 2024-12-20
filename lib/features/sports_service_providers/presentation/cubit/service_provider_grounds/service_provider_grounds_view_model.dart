@@ -9,19 +9,19 @@ import 'package:kamn/core/theme/app_pallete.dart';
 class ServiceProviderGroundsViewModel {
   List<SportDetail> teamSportList = [
     SportDetail(
-      TeamSport.Football.name,
+      TeamSport.football.displayName,
       AppPallete.greenColor,
     ),
     SportDetail(
-      TeamSport.Basketball.name,
+      TeamSport.basketball.displayName,
       AppPallete.pinkColor,
     ),
     SportDetail(
-      TeamSport.Tennis.name,
+      TeamSport.tennis.displayName,
       AppPallete.orangeColor,
     ),
     SportDetail(
-      TeamSport.Volleyball.name,
+      TeamSport.volleyball.displayName,
       AppPallete.yellowColor,
     ),
   ];
@@ -38,10 +38,10 @@ class ServiceProviderGroundsViewModel {
 }
 
 enum TeamSport {
-  Football,
-  Basketball,
-  Tennis,
-  Volleyball,
+  football,
+  basketball,
+  tennis,
+  volleyball,
 }
 
 class SportDetail {
@@ -63,6 +63,21 @@ extension IndividualSportExtension on IndividualSport {
         return "Sky Diving";
       case IndividualSport.swimming:
         return "Swimming";
+    }
+  }
+}
+
+extension TeamSportExtension on TeamSport {
+  String get displayName {
+    switch (this) {
+      case TeamSport.football:
+        return "Football";
+      case TeamSport.basketball:
+        return "Basketball";
+      case TeamSport.volleyball:
+        return "Volleyball";
+      case TeamSport.tennis:
+        return "Tennis";
     }
   }
 }

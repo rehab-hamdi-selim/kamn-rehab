@@ -77,6 +77,18 @@ class Constants {
   static const welcomeToManagementSystem = 'Welcome to\nManagement System';
   static const financialReports = 'Financial Reports';
   static const paymentOptions = 'Choose payment\noption';
+  static const termsAndConditions = 'Terms and Conditions';
+  static const termsAndConditionsContent = '''1. Introduction
+
+Welcome to KAMN. By using our services, you agree to the following Terms of Service. Please read them carefully.
+
+2. Payment Process
+
+When paying by Visa, please note that the transaction may take between 24 to 48 hours to process, depending on your bank. This timeframe also applies in case of refunds, as the processing duration is subject to the policies of the bank you are using.
+
+3. Refund Policy
+
+If you request a refund, the processing time will follow the same timeframe as outlined in Section 2, taking between 24 to 48 hours based on your bank’s processing rules.''';
 
   static const List<String> egyptGovernorates = [
     "Cairo",

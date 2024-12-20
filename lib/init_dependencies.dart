@@ -21,5 +21,5 @@ Future<void> initDependencies() async {
 
   Bloc.observer = MyBlocObserver();
 
-  serviceLocator.registerLazySingleton(() => AppUserCubit());
+  // serviceLocator.registerLazySingleton(() => AppUserCubit());
 }

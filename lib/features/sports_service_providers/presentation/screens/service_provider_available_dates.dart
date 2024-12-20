@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
+import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/available_dates/available_dates_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/available_dates/available_dates_state.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/available_dates/custome_available_dates_bloc_listener.dart';
@@ -9,7 +10,7 @@ import 'package:kamn/features/sports_service_providers/presentation/widgets/avai
 import 'package:kamn/features/sports_service_providers/presentation/widgets/available_dates/custome_choose_available_dates.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/available_dates/custome_select_time_bottom_sheet.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/available_dates/custome_submit_button.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/service_provider_grounds/custom_app_bar_service_provider.dart';
+import 'package:kamn/core/utils/custom_app_bar_service_provider.dart';
 
 class ServiceProviderAvailableDates extends StatelessWidget {
   final String playgroundId;
@@ -32,6 +33,7 @@ class ServiceProviderAvailableDates extends StatelessWidget {
           backgroundColor: Colors.white,
           resizeToAvoidBottomInset: true,
           appBar: CustomAppBarServiceProvider.appBar(
+            color: AppPallete.whiteColor,
             arrowFunction: () {},
             notificationIconFunction: () {},
             profileFunction: () {},

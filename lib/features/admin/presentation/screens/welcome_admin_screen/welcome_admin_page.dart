@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/const/image_links.dart';
 import 'package:kamn/core/helpers/spacer.dart';
-import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/features/admin/presentation/screens/login_screen/login.dart';
 import 'package:kamn/features/admin/presentation/widgets/welcome_admin_screen/custom_elevation_button.dart';
 
 class WelcomeAdminPage extends StatelessWidget {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:kamn/core/helpers/spacer.dart';
+import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme_data/style.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
@@ -43,14 +44,8 @@ class CustomGroundList extends StatelessWidget {
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => GroundDetailsScreen(
-                      playgroundModel: state.playgrounds![index],
-                    ),
-                  ),
-                );
+                Navigator.pushNamed(context, Routes.groundDetailsScreen,
+                    arguments: state.playgrounds![index]);
               },
               child: CustomGroundItem(playground: state.playgrounds![index]),
             );

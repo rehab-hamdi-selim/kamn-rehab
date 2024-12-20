@@ -24,14 +24,6 @@ class PickTimeForReservationViewModel {
   isInside(List<ReservationModel> reservationList, DateTime interval,
       DateTime selectedDate) {
     return reservationList
-        .where((reservation) {
-          List<Session> sessions = reservation.sessions ?? [];
-          return sessions.any((session) {
-            return DateFormat('yyyy-MM-dd').format(session.startAt) ==
-                DateFormat('yyyy-MM-dd').format(selectedDate);
-          });
-        })
-        .toList()
         .where((element) {
           return element.sessions!.any((element) {
             return DateFormat('yyyy-MM-ddHH:mm').format(element.startAt) ==

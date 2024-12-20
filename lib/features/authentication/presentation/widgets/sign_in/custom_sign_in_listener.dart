@@ -18,13 +18,10 @@ class CustomSignInListener extends StatelessWidget {
         if (state.isFailure) {
           showSnackBar(context, state.erorrMessage ?? "");
         } else if (state.isSuccess) {
-          print("start");
           signInCubit.getUser(uid: state.uid ?? "");
         } else if (state.isSuccessGetData) {
-          print('start2');
           appUserCubit.saveUserData(state.userModel);
         } else if (state.isFailureGetData) {
-          print('finish');
           signInCubit.signOut();
         }
       },

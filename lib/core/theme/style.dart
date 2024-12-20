@@ -10,6 +10,11 @@ class TextStyles {
       color: AppPallete.greyFontColor,
       fontWeight: FontWeightHelper.medium,
       fontSize: 12.77.h);
+  static TextStyle font7InterDimGraySemiBold = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.dimGrayColor,
+      fontWeight: FontWeightHelper.semiBold,
+      fontSize: 10.h);
 
   static TextStyle font24BlackRegular = TextStyle(
       fontFamily: "Roboto",

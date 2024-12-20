@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/constants.dart';
+import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/core/utils/custom_app_bar.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_state.dart';
 import 'package:kamn/features/sports/presentation/widgets/choose_sports_category/custome_individual_play_categories.dart';
 import 'package:kamn/features/sports/presentation/widgets/choose_sports_category/custome_team_play_categories.dart';
 import 'package:kamn/features/sports/presentation/widgets/choose_sports_category/custome_title_text.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/service_provider_grounds/custom_app_bar_service_provider.dart';
+import 'package:kamn/core/utils/custom_app_bar_service_provider.dart';
 
 class ChooseSportsCategoryScreen extends StatelessWidget {
   const ChooseSportsCategoryScreen({super.key});
@@ -25,10 +27,10 @@ class ChooseSportsCategoryScreen extends StatelessWidget {
         },
         child: Scaffold(
             backgroundColor: AppPallete.whiteColor,
-            appBar: CustomAppBarServiceProvider.appBar(
-              arrowFunction: () {},
+            appBar: CustomAppBar.appBar(
+              color: AppPallete.whiteColor,
+              context: context,
               notificationIconFunction: () {},
-              profileFunction: () {},
               badgesIconFunction: () {},
             ),
             body: SingleChildScrollView(

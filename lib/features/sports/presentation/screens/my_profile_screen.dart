@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
+import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
+import 'package:kamn/core/utils/custom_app_bar.dart';
 import 'package:kamn/features/sports/presentation/widgets/my_profile/custom_profile_top_bar.dart';
 import 'package:kamn/features/sports/presentation/widgets/my_profile/custome_user_data.dart';
 import 'package:kamn/features/sports/presentation/widgets/my_profile/custome_user_options.dart';
+import 'package:kamn/core/utils/custom_app_bar_service_provider.dart';
 
 import '../../../../core/theme/app_pallete.dart';
 import '../../../../core/theme/style.dart';
@@ -14,57 +19,54 @@ class MyProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppPallete.whiteColor,
-      body: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-                color: AppPallete.vividVioletColor,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(24.r),
-                    bottomRight: Radius.circular(24.r))),
-            height: 196.h,
-            child: Column(
-              children: [
-                verticalSpace(20),
-                const CustomProfileTopBar(),
-                const Spacer(),
-                const CustomUserData(),
-              ],
+    return BlocListener<AppUserCubit, AppUserState>(
+      listener: (context, state) {
+        if (state.isSignOut()) {
+          context.read<AppUserCubit>().signOut();
+        }
+      },
+      child: Scaffold(
+        appBar: CustomAppBar.appBar(
+            color: AppPallete.blackColor,
+            context: context,
+            notificationIconFunction: () {},
+            badgesIconFunction: () {},
+            title: "My Profile"),
+        backgroundColor: AppPallete.whiteColor,
+        body: Column(
+          children: [
+            const CustomUserData(),
+            SizedBox(height: 16.h), // Responsive height
+            const Expanded(
+              child: CustomeUserOptions(), // Updated to use alias
             ),
-          ),
-          // Profile Header Widget
-          SizedBox(height: 16.h), // Responsive height
-          const Expanded(
-            child: CustomeUserOptions(), // Updated to use alias
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 40.h),
-            child: SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  // Logout action
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  padding: EdgeInsets.symmetric(vertical: 12.h),
-                  // Adjust button size
-                  shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(20.r), // Adjust border radius
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 35.w, vertical: 25.h),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    context.read<AppUserCubit>().signOutFromFireStore();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppPallete.blackColor,
+                    padding: EdgeInsets.symmetric(vertical: 12.h),
+                    // Adjust button size
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(51.r), // Adjust border radius
+                    ),
                   ),
-                ),
-                child: Text(
-                  Constants.logout,
-                  style:
-                      TextStyles.font2OfWhiteMediumRoboto, // Adjust font size
+                  child: Text(
+                    Constants.logout,
+                    style:
+                        TextStyles.font2OfWhiteMediumRoboto, // Adjust font size
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

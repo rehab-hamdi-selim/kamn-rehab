@@ -1,26 +1,29 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kamn/core/common/class/custom_splash_screen.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/features/authentication/presentation/cubits/sign_up_cubit/sign_up_cubit.dart';
+import 'package:kamn/features/authentication/presentation/screens/user_type_selection_screen.dart';
+import 'package:kamn/features/payment/presentation/cubits/procced_payment_cubit/procced_payment_cubit.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
+import 'package:kamn/features/sports/data/models/reservation_model.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart';
 import 'package:kamn/features/admin/presentation/cubits/first_page_cupit/analytics_cubit.dart';
 import 'package:kamn/features/admin/presentation/screens/first_analytics_page/first_analytics_page.dart';
-import 'package:kamn/features/admin/data/data_source/second_page_data_source.dart';
-import 'package:kamn/features/admin/data/repository/second_page_repository.dart';
 import 'package:kamn/features/admin/presentation/cubits/second_page_cubit/second_page_cubit.dart';
 import 'package:kamn/features/admin/presentation/screens/second_page/second_page.dart';
 import 'package:kamn/features/payment/presentation/screens/debit_credit_card_screen.dart';
-import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/payment/presentation/cubits/payment_options_cubit/payment_options_cubit.dart';
 import 'package:kamn/features/payment/presentation/screens/payment_options_screen.dart';
 import 'package:kamn/features/payment/presentation/screens/proceed_payment_screen.dart';
+import 'package:kamn/features/sports/presentation/cubits/reservation_details_cubit/reservation_details_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
+import 'package:kamn/features/sports/presentation/screens/ground_details_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/grounds_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/my_profile_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/pick_time_for_reservation_screen.dart';
+import 'package:kamn/features/sports/presentation/screens/reservation_details_screen.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/available_dates/available_dates_cubit.dart';
@@ -54,8 +57,20 @@ class AppRouter {
               create: (context) => getIt<AnalyticsCubit>(),
               child: FirstAnalyticsPage()),
         );
+      case Routes.userTypeSelectionScreen:
+        return MaterialPageRoute(
+          builder: (context) => const UserTypeSelectionScreen(),
+        );
+      case Routes.groundDetailsScreen:
+        return MaterialPageRoute(
+          builder: (context) => GroundDetailsScreen(
+            playgroundModel: settings.arguments as PlaygroundModel,
+          ),
+        );
       case Routes.debitCreditCardPage:
-        return MaterialPageRoute(builder: (context) => DebitCreditCardScreen());
+        return MaterialPageRoute(
+            builder: (context) => DebitCreditCardScreen(
+                reservationModel: settings.arguments as ReservationModel));
       case Routes.trackGroundResrvations:
         return MaterialPageRoute(
             builder: (context) => BlocProvider<TrackGroundReservationsCubit>(
@@ -78,23 +93,19 @@ class AppRouter {
         return MaterialPageRoute(builder: (context) => const MyProfileScreen());
       case Routes.addServiceScreen:
         return MaterialPageRoute(
-            builder: (context) => BlocProvider<AddServiceProviderCubit>(
-                  create: (context) => getIt<AddServiceProviderCubit>(),
-                  child: const AddServiceScreen(
-                    type: '',
+            builder: (_) => BlocProvider.value(
+                  value: getIt<AddServiceProviderCubit>(),
+                  child: AddServiceScreen(
+                    type: settings.arguments as String,
                   ),
                 ));
-      //
-      // case Routes.groundDetailsScreen:
-      //   return MaterialPageRoute(
-      //       builder: (context) => const GroundDetailsScreen());
       case Routes.groundsScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                   create: (context) => getIt<SportsGroundsCubit>()
                     ..getPlaygrounds()
                     ..getUserLocation(),
-                  child: GroundsScreen(),
+                  child: const GroundsScreen(),
                 ));
       case Routes.chooseServiceCategoryScreen:
         return MaterialPageRoute(
@@ -116,14 +127,19 @@ class AppRouter {
             builder: (context) => const SuccessServiceProviderScreen());
       case Routes.serviceSelection:
         return MaterialPageRoute(
-            builder: (context) => const ServiceSelectionScreen());
+            builder: (context) => BlocProvider<AddServiceProviderCubit>(
+                  create: (context) => getIt<AddServiceProviderCubit>(),
+                  child: const ServiceSelectionScreen(),
+                ));
       case Routes.signInScreen:
         return MaterialPageRoute(builder: (context) => const SignInScreen());
       case Routes.signUpScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                   create: (context) => getIt<SignUpCubit>(),
-                  child: const SignUpScreen(),
+                  child: SignUpScreen(
+                    userType: settings.arguments as String,
+                  ),
                 ));
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
@@ -159,7 +175,10 @@ class AppRouter {
       case Routes.pickTimeReservationScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-                  create: (context) => getIt<PickTimeForReservationCubit>(),
+                  create: (context) => getIt<PickTimeForReservationCubit>()
+                    ..getSpecificReservationsByGroundId(
+                        (settings.arguments as PlaygroundModel).playgroundId!,
+                        DateTime.now()),
                   child: PickTimeForReservationScreen(
                     playground: settings.arguments as PlaygroundModel,
                   ),
@@ -174,13 +193,32 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => BlocProvider<PaymentOptionsCubit>(
                   create: (context) => PaymentOptionsCubit(),
-                  child: const PaymentOptionsScreen(),
+                  child: PaymentOptionsScreen(
+                      reservationModel: settings.arguments as ReservationModel),
                 ));
       case Routes.proceedPaymentScreen:
         return MaterialPageRoute(
-            builder: (context) => const ProceedPaymentScreen());
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<ProccedPaymentCubit>(),
+                  child: ProceedPaymentScreen(
+                    reservationModel: settings.arguments as ReservationModel,
+                  ),
+                ));
       case Routes.logOut:
         return MaterialPageRoute(builder: (context) => const LogoutScreen());
+      case Routes.splashScreen:
+        return MaterialPageRoute(
+            builder: (context) => const CustomSplashScreen());
+      case Routes.reservationScreen:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<ReservationDetailsCubit>(),
+                  child: ReservationDetailsScreen(
+                    reservation: settings.arguments != null
+                        ? settings.arguments as ReservationModel
+                        : ReservationModel(),
+                  ),
+                ));
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(

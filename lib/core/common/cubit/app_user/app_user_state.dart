@@ -1,20 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
 
 import '../../entities/user_model.dart';
 
-enum AppUserStates {
-  initial,
-  failure,
-  notLoggedIn,
-  loggedIn,
-}
+enum AppUserStates { initial, failure, notLoggedIn, loggedIn, signOut }
 
 extension AppUserStateExtension on AppUserState {
   bool isInitial() => state == AppUserStates.initial;
   bool isLoggedIn() => state == AppUserStates.loggedIn;
   bool isNotLoggedIn() => state == AppUserStates.notLoggedIn;
   bool isFailure() => state == AppUserStates.failure;
+  bool isSignOut() => state == AppUserStates.signOut;
 }
 
 class AppUserState {

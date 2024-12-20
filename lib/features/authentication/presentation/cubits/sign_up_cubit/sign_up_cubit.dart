@@ -19,14 +19,12 @@ class SignUpCubit extends Cubit<SignUpState> {
     required String email,
     required String password,
     required String name,
+    required String type,
   }) async {
     emit(state.copyWith(state: SignUpStatus.loading));
 
     final result = await _authRepository.signUp(
-      email: email,
-      password: password,
-      name: name,
-    );
+        email: email, password: password, name: name, type: type);
 
     result.fold(
       (l) => emit(state.copyWith(

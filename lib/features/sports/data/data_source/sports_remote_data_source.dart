@@ -11,6 +11,8 @@ abstract interface class SportsRemoteDataSource {
   Future<void> updateState(String playgroundId, Map<String, dynamic> data);
   Future<void> delete(ReservationModel reservation);
   Future<List<Map<String, dynamic>>> getAllReservation();
+  Future<List<Map<String, dynamic>>> getSpecificReservationsByGroundId(
+      String groundId, DateTime selectedDate);
   Future<List<Map<String, dynamic>>> searchByQuery(String query);
 }
 
@@ -23,7 +25,7 @@ class SportsRemoteDataSourceImpl implements SportsRemoteDataSource {
   @override
   Future<List<Map<String, dynamic>>> getPlaygrounds() async {
     return executeTryAndCatchForDataLayer(() async {
-      var querySnapshot = await _playGroundCollection.limit(3).get();
+      var querySnapshot = await _playGroundCollection.get();
       return querySnapshot.docs
           .map((doc) => doc.data() as Map<String, dynamic>)
           .toList();
@@ -98,6 +100,26 @@ class SportsRemoteDataSourceImpl implements SportsRemoteDataSource {
             .map((doc) => doc.data())
             .toList();
       }).toList();
+    });
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> getSpecificReservationsByGroundId(
+      String groundId, DateTime selectedDate) {
+    return executeTryAndCatchForDataLayer(() async {
+      int startOfDay =
+          DateTime(selectedDate.year, selectedDate.month, selectedDate.day)
+              .millisecondsSinceEpoch;
+      int endOfDay = DateTime(selectedDate.year, selectedDate.month,
+              selectedDate.day, 23, 59, 59)
+          .millisecondsSinceEpoch;
+      var querySnapshot = await firestoreService.firestore
+          .collection(FirebaseCollections.reservation)
+          .where('ground.playgroundId', isEqualTo: groundId)
+          .where('startAt', isGreaterThanOrEqualTo: startOfDay)
+          .where('startAt', isLessThan: endOfDay)
+          .get();
+      return querySnapshot.docs.map((doc) => doc.data()).toList();
     });
   }
 }

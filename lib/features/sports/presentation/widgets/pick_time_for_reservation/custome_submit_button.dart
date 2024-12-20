@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
+import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart';
+import 'package:path/path.dart';
 
 class CustomeSubmitButton extends StatelessWidget {
   final PlaygroundModel playground;
@@ -26,7 +30,13 @@ class CustomeSubmitButton extends StatelessWidget {
               disabledBackgroundColor: AppPallete.blackColor,
               backgroundColor: AppPallete.blackColor),
           onPressed: () {
-            cubit.onSubmitReservation(perpareReservation(cubit));
+            // cubit.onSubmitReservation(perpareReservation(cubit));
+            if (cubit.viewModel.selectedIntervals.isNotEmpty) {
+              Navigator.pushNamed(context, Routes.paymentOptionsScreen,
+                  arguments: perpareReservation(context, cubit));
+            } else {
+              showSnackBar(context, 'At least select one interval');
+            }
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -44,6 +54,7 @@ class CustomeSubmitButton extends StatelessWidget {
   }
 
   ReservationModel perpareReservation(
+    BuildContext context,
     PickTimeForReservationCubit cubit,
   ) {
     List<DateTime> selectedDateList =
@@ -56,13 +67,15 @@ class CustomeSubmitButton extends StatelessWidget {
         ground: playground,
         date: DateTime.now(),
         startAt: selectedDateList.first,
-        endAt: selectedDateList.last,
+        endAt: selectedDateList.last
+            .add(Duration(minutes: playground.period!.toInt())),
         sessions: selectedDateList.map((start) {
           return Session(
               startAt: start,
               endAt: start.add(Duration(minutes: playground.period!.toInt())));
         }).toList(),
         status: 'pending',
-        price: playground.price);
+        price: playground.price,
+        userId: context.read<AppUserCubit>().state.user?.uid);
   }
 }

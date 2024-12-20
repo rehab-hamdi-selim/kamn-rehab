@@ -10,9 +10,7 @@ class PickTimeForReservationCubit extends Cubit<PickTimeForReservationState> {
   PickTimeForReservationCubit(
       {required this.repository, required this.viewModel})
       : super(PickTimeForReservationState(
-            state: PickTimeForReservationStatus.initial)) {
-    getAllReservation();
-  }
+            state: PickTimeForReservationStatus.initial));
   SportsRepository repository;
   PickTimeForReservationViewModel viewModel;
 
@@ -27,6 +25,8 @@ class PickTimeForReservationCubit extends Cubit<PickTimeForReservationState> {
       viewModel.selectedIntervals[day] = [];
       viewModel.selectedIntervals[day]!.add(interval);
     }
+    viewModel.selectedIntervals.removeWhere((key, value) => value.isEmpty);
+
     emit(state.copyWith(state: PickTimeForReservationStatus.intervalSelected));
   }
 
@@ -67,6 +67,22 @@ class PickTimeForReservationCubit extends Cubit<PickTimeForReservationState> {
           state: PickTimeForReservationStatus.failure,
           erorrMessage: error.erorr));
     }, (success) {
+      emit(state.copyWith(
+          state: PickTimeForReservationStatus.reservationLoaded,
+          reservationList: success));
+    });
+  }
+
+  Future<void> getSpecificReservationsByGroundId(
+      String groundId, DateTime selectedDate) async {
+    var response = await repository.getSpecificReservationsByGroundId(
+        groundId, selectedDate);
+    response.fold((error) {
+      emit(state.copyWith(
+          state: PickTimeForReservationStatus.failure,
+          erorrMessage: error.erorr));
+    }, (success) {
+      print(success);
       emit(state.copyWith(
           state: PickTimeForReservationStatus.reservationLoaded,
           reservationList: success));
