@@ -63,7 +63,6 @@ import '../common/class/firebase_storage_services.dart' as _i304;
 import '../common/class/firestore_services.dart' as _i158;
 
 extension GetItInjectableX on _i174.GetIt {
-// initializes the registration of main-scope dependencies inside of GetIt
   _i174.GetIt init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
@@ -110,37 +109,26 @@ extension GetItInjectableX on _i174.GetIt {
             firestoreService: gh<_i158.FirestoreService>()));
     gh.factory<_i786.GetServicesFromFirebaseUsecase>(() =>
         _i786.GetServicesFromFirebaseUsecase(
-
-    gh.factory<_i379.SportsRepositoryImpl>(() => _i379.SportsRepositoryImpl(
+            repository: gh<_i542.ServiceProvidersRepository>()));
+    gh.factory<_i379.SportsRepository>(() => _i379.SportsRepositoryImpl(
         remoteDataSource: gh<_i575.SportsRemoteDataSource>()));
     gh.factory<_i278.TrackGroundReservationsCubit>(() =>
         _i278.TrackGroundReservationsCubit(
-
             repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i252.AddServiceProviderCubit>(() =>
         _i252.AddServiceProviderCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i731.AvailableDatesCubit>(() => _i731.AvailableDatesCubit(
         repository: gh<_i542.ServiceProvidersRepository>()));
-
     gh.factory<_i773.EditServiceProviderCubit>(() =>
         _i773.EditServiceProviderCubit(
-
+            repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i692.ServiceProviderGroundDetailsCubit>(() =>
         _i692.ServiceProviderGroundDetailsCubit(
-            repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i252.AddServiceProviderCubit>(() =>
-        _i252.AddServiceProviderCubit(
-
             repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i38.TrackGroundReservationsDetailsCubit>(() =>
         _i38.TrackGroundReservationsDetailsCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i786.GetServicesFromFirebaseUsecase>(() =>
-        _i786.GetServicesFromFirebaseUsecase(
-            repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i379.SportsRepository>(() => _i379.SportsRepositoryImpl(
-        remoteDataSource: gh<_i575.SportsRemoteDataSource>()));
     gh.factory<_i137.PickTimeForReservationCubit>(() =>
         _i137.PickTimeForReservationCubit(
             repository: gh<_i379.SportsRepository>()));
