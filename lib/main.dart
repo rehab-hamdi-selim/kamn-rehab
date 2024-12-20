@@ -13,6 +13,7 @@ import 'package:kamn/firebase_options.dart';
 import 'core/routing/app_router.dart';
 import 'features/payment/presentation/screens/pay.dart';
 import 'features/payment/presentation/screens/pay_web_view.dart';
+import 'features/payment/presentation/screens/pay_web_with_wallet.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

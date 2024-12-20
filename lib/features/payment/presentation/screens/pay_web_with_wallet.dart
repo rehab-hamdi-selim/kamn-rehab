@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:kamn/features/payment/data/payment_data_source.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({super.key});
+class PaymentWithWalletScreen extends StatefulWidget {
+  const PaymentWithWalletScreen({super.key});
 
   @override
-  State<PaymentScreen> createState() => _PaymentScreenState();
+  State<PaymentWithWalletScreen> createState() => _PaymentScreenState();
 }
 
-class _PaymentScreenState extends State<PaymentScreen> {
+class _PaymentScreenState extends State<PaymentWithWalletScreen> {
   PaymentManager paymentManager = PaymobManager();
   String url = "https://google.com";
 
   void initUrl() async {
-    url = await paymentManager.paymentWithCard("100", "EGP");
-    url =
-        "https://accept.paymobsolutions.com/api/acceptance/iframes/810645?payment_token=$url";
+    url = await paymentManager.paymentWithMobileWallet(
+        "100", "EGP", "01010101010");
+    setState(() {});
   }
 
   @override
@@ -46,8 +46,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
           onNavigationRequest: (NavigationRequest request) {
             if (request.url.contains('success=true')) {
               url = request.url;
-              print(
-                  "=========================================================osama =========================================");
             } else {
               print(
                   "=========================================================no pay osama =========================================");

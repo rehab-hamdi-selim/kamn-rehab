@@ -5,7 +5,11 @@ abstract class PaymentManager {
   Future<String> getPaymentKey(int amount, String currency, int integrationId);
 
   // Protected abstract methods that implementations should provide
+
+  //1
   Future<String> getAuthenticationToken();
+
+  //2
   Future<String> createOrder({
     required String authToken,
     required String amount,
@@ -22,6 +26,8 @@ abstract class PaymentManager {
 
   Future<String> paymentWithMobileWallet(
       String amount, String currency, String walletMobileNumber);
+
+  Future<String> checkOrderStatus(String orderId);
 }
 
 // PayMob concrete implementation
@@ -81,6 +87,7 @@ class PaymobManager implements PaymentManager {
       "delivery_needed": "true",
       "items": [],
     });
+    print(response);
     return response.data["id"].toString();
   }
 
@@ -118,6 +125,7 @@ class PaymobManager implements PaymentManager {
         "state": "NA"
       },
     });
+    print(response);
     return response.data["token"];
   }
 
@@ -149,10 +157,28 @@ class PaymobManager implements PaymentManager {
   @override
   Future<String> paymentWithMobileWallet(
       String amount, String currency, String walletMobileNumber) async {
-    String paymentKey =
-        await getPaymentKey(int.parse(amount), currency, integrationid);
+    String paymentKey = await getPaymentKey(
+        int.parse(amount), currency, mobileWalletintegrationid);
     String redirectUrl = await _getWalletRedirectUrl(
         paymentKey: paymentKey, walletMobileNumber: walletMobileNumber);
     return redirectUrl;
+  }
+
+  @override
+  Future<String> checkOrderStatus(String orderId) async {
+    try {
+      final Response response = await Dio().post(
+        "https://accept.paymob.com/api/ecommerce/orders/transaction_inquiry",
+        data: {
+          "order_id": orderId,
+        },
+        options: Options(headers: {"Authorization": "Bearer $APIKEY"}),
+      );
+      print(response);
+      return response.toString();
+    } catch (e) {
+      print('Error checking order status: $e');
+      throw Exception('Failed to check order status');
+    }
   }
 }
