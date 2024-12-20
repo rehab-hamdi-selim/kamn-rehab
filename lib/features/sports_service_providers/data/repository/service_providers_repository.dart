@@ -6,20 +6,27 @@ import 'package:kamn/core/erorr/faliure.dart';
 import 'package:kamn/core/utils/try_and_catch.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports_service_providers/data/data_source/service_providers_remote_data_source.dart';
+import 'package:kamn/features/sports_service_providers/data/model/failure.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 import 'dart:async';
+
+import 'package:kamn/features/sports_service_providers/data/model/reservation_model.dart';
 
 abstract class ServiceProvidersRepository {
   Future<Either<Faliure, PlaygroundRequestModel>> addServiceToFirestore(
       PlaygroundRequestModel playground);
+
   Future<Either<Faliure, List<String>>> addImagesToStorage(List<File> images);
+
   Future<Either<Faliure, bool>> deleteImagesFromStorage(List<String> images);
+
   Future<Either<Faliure, List<PlaygroundRequestModel>>>
       getPlaygroundsRequests();
   Future<Either<Faliure, List<PlaygroundModel>>> getPlaygroundsByOwnerId(
       String ownerId);
   Future<Either<Faliure, List<Map<String, dynamic>>>>
       getPlaygroundsReservationDetailsById(String playgroundId);
+
   Future<Either<Faliure, void>> addWithTransactionToFirebase(
       PlaygroundModel playground);
   Future<Either<Faliure, void>> updateState(
@@ -101,5 +108,39 @@ class ServiceProvidersRepositoryImpl implements ServiceProvidersRepository {
           await dataSource.getPlaygroundsReservationDetailsById(playgroundId);
       return data;
     });
+  }
+}
+
+abstract class FinishedOrdersRepository {
+  Future<Either<Failure, List<Reservation>>> fetchOrdersByCategory(
+      String category);
+}
+
+class FinishedOrdersRepositoryImp implements FinishedOrdersRepository {
+  final FinishedOrdersRemoteDataSource remoteDataSource;
+
+  FinishedOrdersRepositoryImp(this.remoteDataSource);
+
+  @override
+  Future<Either<Failure, List<Reservation>>> fetchOrdersByCategory(
+      String category) {
+    return remoteDataSource.fetchOrdersByCategory(category);
+  }
+}
+
+abstract class CurrentOrdersRepository {
+  Future<Either<Failure, List<Reservation>>> fetchOrdersByCategory(
+      String category);
+}
+
+class CurrentOrdersRepositoryImp implements CurrentOrdersRepository {
+  final FinishedOrdersRemoteDataSource remoteDataSource;
+
+  CurrentOrdersRepositoryImp(this.remoteDataSource);
+
+  @override
+  Future<Either<Failure, List<Reservation>>> fetchOrdersByCategory(
+      String category) {
+    return remoteDataSource.fetchOrdersByCategory(category);
   }
 }
