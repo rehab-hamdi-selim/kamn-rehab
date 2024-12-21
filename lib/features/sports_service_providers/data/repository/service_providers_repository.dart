@@ -24,13 +24,14 @@ abstract class ServiceProvidersRepository {
       PlaygroundModel playground);
   Future<Either<Faliure, void>> updateState(
       String playgroundId, Map<String, dynamic> data);
+  Future<Either<Faliure, Map<String, List<PlaygroundRequestModel>>?>>
+      searchByQuery(String query, String type);
 }
 
 @Injectable(as: ServiceProvidersRepository)
 class ServiceProvidersRepositoryImpl implements ServiceProvidersRepository {
   ServiceProvidersRemoteDataSource dataSource;
   ServiceProvidersRepositoryImpl({required this.dataSource});
-  //TODO:Check connectivity  in executeTryAndCatchForRepository /* done
   @override
   Future<Either<Faliure, PlaygroundRequestModel>> addServiceToFirestore(
       PlaygroundRequestModel playground) {
@@ -100,6 +101,20 @@ class ServiceProvidersRepositoryImpl implements ServiceProvidersRepository {
       var data =
           await dataSource.getPlaygroundsReservationDetailsById(playgroundId);
       return data;
+    });
+  }
+
+  @override
+  Future<Either<Faliure, Map<String, List<PlaygroundRequestModel>>?>>
+      searchByQuery(String query, String type) {
+    return executeTryAndCatchForRepository(() async {
+      final List<Map<String, dynamic>> rawData =
+          await dataSource.searchByQuery(query, type);
+
+      final playgrounds =
+          rawData.map((data) => PlaygroundRequestModel.fromMap(data)).toList();
+
+      return {type: playgrounds};
     });
   }
 }

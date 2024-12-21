@@ -11,22 +11,47 @@ class CustomeUserOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        const Padding(
-          padding: EdgeInsets.only(top: 20),
-          child: CustomeMenuItem(icon: Icons.flight, title: "My Reservations"),
+        CustomeMenuItem(
+          icon: 'assets/icons/reservations.svg',
+          title: "My Reservations",
+          goTo: () {},
         ),
-        divider(25, 25), // Responsive indent
-        const CustomeMenuItem(
-            icon: Icons.local_grocery_store_outlined, title: "My Store"),
-        divider(25, 25), // Responsive indent
-        verticalSpace(70),
-        const CustomeMenuItem(
-            icon: Icons.group_add_outlined, title: "Invite Friends"),
-        divider(25, 25),
-        const CustomeMenuItem(
-            icon: Icons.question_mark_rounded, title: "My Order"),
-        divider(25, 25),
-        const CustomeMenuItem(icon: Icons.settings_outlined, title: "Settings"),
+        verticalSpace(16.h),
+        divider(25.w, 25.w), // Responsive indent
+        CustomeMenuItem(
+          icon: 'assets/icons/services.svg',
+          title: "My Services",
+          goTo: () {},
+        ),
+        verticalSpace(16.h),
+        divider(25.w, 25.w), // Responsive indent
+        CustomeMenuItem(
+          icon: 'assets/icons/store.svg',
+          title: "My Store",
+          goTo: () {},
+        ),
+        verticalSpace(16.h),
+        divider(25.w, 25.w), //  Responsive indent
+        CustomeMenuItem(
+          icon: 'assets/icons/order.svg',
+          title: "My Order",
+          goTo: () {},
+        ),
+        verticalSpace(16.h),
+        divider(25.w, 25.w),
+        CustomeMenuItem(
+          icon: 'assets/icons/dashboard.svg',
+          title: "Dashboard",
+          goTo: () {},
+        ),
+        verticalSpace(16.h),
+        divider(25.w, 25.w),
+        CustomeMenuItem(
+          icon: 'assets/icons/settings.svg',
+          title: "Settings",
+          goTo: () {},
+        ),
+        verticalSpace(16.h),
       ],
     );
   }

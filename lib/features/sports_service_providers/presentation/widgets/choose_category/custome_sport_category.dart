@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
@@ -11,21 +12,19 @@ import 'package:kamn/features/sports_service_providers/presentation/screens/serv
 class CustomeSportCategory extends StatelessWidget {
   final String title;
   final Color color;
+  final String? servicesNum;
   const CustomeSportCategory(
-      {super.key, required this.title, required this.color});
+      {super.key, required this.title, required this.color, this.servicesNum});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (_) => BlocProvider.value(
-                    value: context.read<ServiceProviderGroundsCubit>(),
-                    child: ServiceProviderGroundsScreen(
-                      type: title,
-                    ))));
+        Navigator.pushNamed(
+          context,
+          Routes.serviceProviderGroundsScreen,
+          arguments: title,
+        );
       },
       child: Container(
         height: 100.h,
@@ -38,10 +37,28 @@ class CustomeSportCategory extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                title,
-                style:
-                    TextStyles.fontRoboto16RegularBlack.copyWith(color: color),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  verticalSpace(38.h),
+                  Text(
+                    title,
+                    style: TextStyles.fontRoboto16RegularBlack
+                        .copyWith(color: color),
+                  ),
+                  verticalSpace(15.h),
+                  if (servicesNum != null)
+                    Row(
+                      children: [
+                        SvgPicture.asset('assets/icons/gear.svg'),
+                        horizontalSpace(4.w),
+                        Text('$servicesNum services open',
+                            style: TextStyles
+                                .font14CircularSpotifyTextGrayRegalur
+                                .copyWith(fontSize: 10)),
+                      ],
+                    )
+                ],
               ),
               SvgPicture.asset(
                 'assets/images/${title}_avatar.svg',

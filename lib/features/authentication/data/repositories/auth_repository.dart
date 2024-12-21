@@ -10,6 +10,7 @@ abstract interface class AuthRepository {
     required String email,
     required String password,
     required String name,
+    required String type,
   });
   Future<Either<Faliure, void>> sendVerificationEmail();
   Future<Either<Faliure, void>> setUser({required UserModel userModel});
@@ -32,6 +33,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required String email,
     required String password,
     required String name,
+    required String type,
   }) async {
     return await executeTryAndCatchForRepository(() async {
       final userCredential = await _authDataSource.signUp(
@@ -41,11 +43,11 @@ class AuthRepositoryImpl implements AuthRepository {
       );
 
       final userModel = UserModel(
-        uid: userCredential.user!.uid,
-        email: email,
-        name: name,
-        createdAt: DateTime.now(),
-      );
+          uid: userCredential.user!.uid,
+          email: email,
+          name: name,
+          createdAt: DateTime.now(),
+          type: type);
 
       return userModel;
     });

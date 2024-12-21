@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/helpers/spacer.dart';
 import '../../../../core/theme/style.dart';
 
 class CustomHader extends StatelessWidget {
   final String boldText;
   final String text;
-  const CustomHader({super.key,required this.boldText,required this.text});
+  const CustomHader({super.key, required this.boldText, required this.text});
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       children: [
-        Text(boldText,
-        style: TextStyles.fontRoboto24BoldBlack,
+        Text(
+          boldText,
+          style: TextStyles.fontRoboto24BoldBlack,
         ),
-        Text(text,
-        style: TextStyles.font14BlackColorMedium,
-        textAlign:TextAlign.center ,
+        verticalSpace(16.h),
+        Text(
+          text,
+          style: TextStyles.font14BlackColorMedium,
+          textAlign: TextAlign.center,
         ),
       ],
     );

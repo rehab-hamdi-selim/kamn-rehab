@@ -1,29 +1,21 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/common/class/custom_splash_screen.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/helpers/bloc_observer.dart';
 import 'package:kamn/core/routing/routes.dart';
+import 'package:kamn/features/authentication/presentation/screens/on_boarding_screen.dart';
 
 import 'package:kamn/firebase_options.dart';
-import 'package:kamn/test_login.dart';
 import 'core/routing/app_router.dart';
-
-import 'features/authentication/data/data_source/auth_remote_data_source.dart';
-import 'features/authentication/data/repositories/auth_repository.dart';
-import 'features/authentication/presentation/cubits/sign_up_cubit/sign_up_cubit.dart';
-import 'features/authentication/presentation/cubits/sign_up_cubit/sign_up_view_model.dart';
-import 'features/authentication/presentation/screens/sign_in_screen.dart';
-import 'features/authentication/presentation/screens/sign_up_screen.dart';
-
-import 'features/sports_service_providers/presentation/screens/service_provider_available_dates.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,7 +37,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AppUserCubit()..isUserLoggedIn(),
+      create: (context) => getIt<AppUserCubit>()..isUserLoggedIn(),
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
         minTextAdapt: true,
@@ -57,29 +49,21 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: BlocBuilder<AppUserCubit, AppUserState>(
-            builder: (context, state) {
-              if (state.isInitial()) {
-                return BlocProvider(
-                  create: (context) => getIt<SignUpCubit>(),
-                  child: const SignUpScreen(),
-                );
-              }
+          home: BlocListener<AppUserCubit, AppUserState>(
+            listener: (context, state) async {
+              await Future.delayed(const Duration(seconds: 2));
 
-              if (state.isIsLoggedIn()) {
-                return const LogoutScreen();
-              } else if (state.isIsNotLoggedIn()) {
-                return const SignInScreen();
-              } else {
-                return const Scaffold(
-                  body: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
+              if (state.isLoggedIn()) {
+                if (state.user?.type == 'normal') {
+                  Navigator.pushNamed(context, Routes.groundsScreen);
+                } else {
+                  Navigator.pushNamed(context, Routes.serviceSelection);
+                }
+              } else if (state.isNotLoggedIn()) {
+                Navigator.pushNamed(context, Routes.onBoardingScreen);
               }
-
-              // Loading state or other states
             },
+            child: const CustomSplashScreen(),
           ),
           onGenerateRoute: AppRouter.generateRoute,
         ),
