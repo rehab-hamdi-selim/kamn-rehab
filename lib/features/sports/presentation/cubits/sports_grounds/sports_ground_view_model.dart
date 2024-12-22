@@ -8,6 +8,7 @@ class SportsGroundViewModel {
   TextEditingController loactionController = TextEditingController();
   TextEditingController maxPriceController = TextEditingController();
   TextEditingController minPriceController = TextEditingController();
+  ScrollController scrollController = ScrollController();
   var distance = 0.0;
   var userLatitude = 0.0;
   var userLongitude = 0.0;
@@ -25,5 +26,6 @@ class SportsGroundViewModel {
     loactionController.dispose();
     maxPriceController.dispose();
     minPriceController.dispose();
+    scrollController.dispose();
   }
 }

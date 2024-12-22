@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/constants.dart';
@@ -14,6 +15,7 @@ import '../widgets/grounds_screen/custom_your_next_match_timer.dart';
 
 class GroundsScreen extends StatelessWidget {
   const GroundsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return CustomGroundsBlocListner(
@@ -30,13 +32,23 @@ class GroundsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                Constants.groundsScreenTitle,
-                style: Style.font30DarkGreenColorBold,
-              ),
-              CustomFilterSection(),
-              verticalSpace(10),
-              const CustomFilterProperties(),
+              ZoomIn(
+                  animate: true,
+                  delay: const Duration(milliseconds: 1000),
+                  duration: const Duration(milliseconds: 1000),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        Constants.groundsScreenTitle,
+                        style: Style.font30DarkGreenColorBold,
+                      ),
+                      CustomFilterSection(),
+                      verticalSpace(10),
+                      const CustomFilterProperties(),
+                    ],
+                  )),
+
               // Row(
               //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
               //   children: [

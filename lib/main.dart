@@ -49,25 +49,26 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: BlocListener<AppUserCubit, AppUserState>(
-            listener: (context, state) async {
-              await Future.delayed(const Duration(seconds: 2));
-
-              if (state.isLoggedIn()) {
-                if (state.user?.type == 'normal') {
-                  Navigator.pushNamed(context, Routes.groundsScreen);
-                } else {
-                  Navigator.pushNamed(context, Routes.serviceSelection);
-                }
-              } else if (state.isNotLoggedIn()) {
-                Navigator.pushNamed(context, Routes.onBoardingScreen);
-              }
-            },
-            child: const CustomSplashScreen(),
-          ),
+          initialRoute: Routes.groundsScreen,
           onGenerateRoute: AppRouter.generateRoute,
         ),
       ),
     );
   }
 }
+// BlocListener<AppUserCubit, AppUserState>(
+//             listener: (context, state) async {
+//               await Future.delayed(const Duration(seconds: 2));
+
+//               if (state.isLoggedIn()) {
+//                 if (state.user?.type == 'normal') {
+//                   Navigator.pushNamed(context, Routes.groundsScreen);
+//                 } else {
+//                   Navigator.pushNamed(context, Routes.serviceSelection);
+//                 }
+//               } else if (state.isNotLoggedIn()) {
+//                 Navigator.pushNamed(context, Routes.onBoardingScreen);
+//               }
+//             },
+//             child: const CustomSplashScreen(),
+//           ),

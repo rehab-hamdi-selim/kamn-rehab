@@ -1,3 +1,5 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class Constants {
   static const List<String> topics = [
     'Technology',
@@ -119,4 +121,7 @@ If you request a refund, the processing time will follow the same timeframe as o
     "Sohag",
     "South Sinai"
   ];
+
+  static num kImageSliderHeight = 380.h;
+  static num additionHightToToolBar = 300.h;
 }

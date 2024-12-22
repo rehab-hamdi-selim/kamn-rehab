@@ -63,8 +63,11 @@ class AppRouter {
         );
       case Routes.groundDetailsScreen:
         return MaterialPageRoute(
-          builder: (context) => GroundDetailsScreen(
-            playgroundModel: settings.arguments as PlaygroundModel,
+          builder: (context) => BlocProvider.value(
+            value: getIt<SportsGroundsCubit>()..initScrollListner(),
+            child: GroundDetailsScreen(
+              playgroundModel: settings.arguments as PlaygroundModel,
+            ),
           ),
         );
       case Routes.debitCreditCardPage:
@@ -104,7 +107,8 @@ class AppRouter {
             builder: (context) => BlocProvider(
                   create: (context) => getIt<SportsGroundsCubit>()
                     ..getPlaygrounds()
-                    ..getUserLocation(),
+                    ..getUserLocation()
+                    ..initScrollListner(),
                   child: const GroundsScreen(),
                 ));
       case Routes.chooseServiceCategoryScreen:

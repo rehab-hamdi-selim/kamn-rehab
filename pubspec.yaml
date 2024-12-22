@@ -49,7 +49,7 @@ dependencies:
   #generate unique id
   uuid: ^4.4.0
   #for animation
-  animate_do : any
+  animate_do : ^3.3.4
   smooth_page_indicator: ^1.0.0+2
   gif: ^2.3.0
   rive: ^0.12.3
