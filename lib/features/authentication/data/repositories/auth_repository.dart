@@ -18,6 +18,7 @@ abstract interface class AuthRepository {
       {required String email, required String password});
   Future<Either<Faliure, UserModel>> getUser({required String uid});
   Future<Either<Faliure, void>> signOut();
+  Future<Either<Faliure, String>> googleAuth();
 }
 
 @Injectable(as: AuthRepository)
@@ -94,6 +95,14 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Faliure, void>> signOut() async {
     return await executeTryAndCatchForRepository(() async {
       await _authDataSource.signOut();
+    });
+  }
+
+  @override
+  Future<Either<Faliure, String>> googleAuth() async {
+    return await executeTryAndCatchForRepository(() async {
+      final userCredential = await _authDataSource.googleAuth();
+      return userCredential.user!.uid;
     });
   }
 }

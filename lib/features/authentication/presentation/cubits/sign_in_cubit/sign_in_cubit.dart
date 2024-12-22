@@ -64,6 +64,20 @@ class SignInCubit extends Cubit<SignInState> {
         state: SignInStatus.visible, isVisible: !state.isVisible));
   }
 
+  Future<void> googleAuth() async {
+    emit(state.copyWith(
+      state: SignInStatus.googleAuthLoading,
+    ));
+    final result = await _authRepository.googleAuth();
+    result.fold((error) {
+      emit(state.copyWith(
+          state: SignInStatus.googleAuthFailure,
+          erorrMessage: state.erorrMessage));
+    }, (uId) {
+      emit(SignInState(state: SignInStatus.googleAuthSuccess, uid: uId));
+    });
+  }
+
   @override
   Future<void> close() {
     signInViewModel.dispose();

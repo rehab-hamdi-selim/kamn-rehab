@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/app_pallete.dart';
 import '../../data/data_source/auth_remote_data_source.dart';
@@ -77,7 +78,13 @@ class SignInScreen extends StatelessWidget {
                             },
                           ),
                           SizedBox(height: 22.h),
-                          GoogleButton(onTapButton: () {}),
+                          BlocBuilder<SignInCubit, SignInState>(
+                            builder: (context, state) {
+                              return GoogleButton(onTapButton: () {
+                                context.read<SignInCubit>().googleAuth();
+                              });
+                            },
+                          ),
                         ],
                       ),
                     ],

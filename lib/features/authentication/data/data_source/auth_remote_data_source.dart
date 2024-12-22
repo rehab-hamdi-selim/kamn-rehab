@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../core/const/firebase_collections.dart';
 import '../../../../core/utils/try_and_catch.dart';
@@ -15,6 +16,7 @@ abstract interface class AuthRemoteDataSource {
       {required String email, required String password});
   Future<Map<String, dynamic>> getUserData({required String uid});
   Future<void> signOut();
+  Future<UserCredential> googleAuth();
 }
 
 @Injectable(as: AuthRemoteDataSource)
@@ -107,6 +109,25 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<void> signOut() async {
     return await executeTryAndCatchForDataLayer(() async {
       await _auth.signOut();
+    });
+  }
+
+  @override
+  Future<UserCredential> googleAuth() async {
+    return await executeTryAndCatchForDataLayer(() async {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      final userCredential = await _auth.signInWithCredential(credential);
+
+      return userCredential;
     });
   }
 }

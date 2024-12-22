@@ -10,7 +10,10 @@ enum SignInStatus {
   visible,
   successGetData,
   failureGetData,
-  successSignOut
+  successSignOut,
+  googleAuthLoading,
+  googleAuthSuccess,
+  googleAuthFailure,
 }
 
 extension SignInStateExtension on SignInState {
@@ -22,6 +25,9 @@ extension SignInStateExtension on SignInState {
   bool get isSuccessGetData => state == SignInStatus.successGetData;
   bool get isFailureGetData => state == SignInStatus.failureGetData;
   bool get isSuccessSignOut => state == SignInStatus.successSignOut;
+  bool get isGoogleAuthLoading => state == SignInStatus.googleAuthLoading;
+  bool get isGoogleAuthSuccess => state == SignInStatus.googleAuthSuccess;
+  bool get isGoogleAuthFailure => state == SignInStatus.googleAuthFailure;
 }
 
 class SignInState {
