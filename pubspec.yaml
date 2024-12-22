@@ -98,6 +98,9 @@ dependencies:
   modal_bottom_sheet: ^3.0.0
   geolocator: ^13.0.2
   flutter_animate: ^4.5.2
+  firebase_analytics: ^11.3.6
+  firebase_remote_config: ^5.2.0
+  firebase_crashlytics: ^4.2.0
 
 
 

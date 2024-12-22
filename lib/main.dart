@@ -16,6 +16,7 @@ import 'package:kamn/features/authentication/presentation/screens/on_boarding_sc
 
 import 'package:kamn/firebase_options.dart';
 import 'core/routing/app_router.dart';
+import 'features/analitics.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,8 +50,9 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          initialRoute: Routes.groundsScreen,
-          onGenerateRoute: AppRouter.generateRoute,
+          // initialRoute: Routes.groundsScreen,
+          // onGenerateRoute: AppRouter.generateRoute,
+          home: const FirebaseAnalitics(),
         ),
       ),
     );
