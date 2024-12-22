@@ -16,6 +16,7 @@ abstract interface class AuthRemoteDataSource {
       {required String email, required String password});
   Future<Map<String, dynamic>> getUserData({required String uid});
   Future<void> signOut();
+  Future<void> googleSignOut();
   Future<UserCredential> googleAuth();
 }
 
@@ -66,7 +67,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> setUser({required UserModel userModel}) async {
     return await executeTryAndCatchForDataLayer(() async {
-      throw "User data not saved";
       await _userCollection.doc(userModel.uid).set(userModel.toMap());
     });
   }
@@ -128,6 +128,13 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       final userCredential = await _auth.signInWithCredential(credential);
 
       return userCredential;
+    });
+  }
+
+  @override
+  Future<void> googleSignOut() async {
+    return await executeTryAndCatchForDataLayer(() async {
+      await GoogleSignIn().signOut();
     });
   }
 }

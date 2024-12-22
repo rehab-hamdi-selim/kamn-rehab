@@ -23,6 +23,10 @@ class CustomSignInListener extends StatelessWidget {
           appUserCubit.saveUserData(state.userModel);
         } else if (state.isFailureGetData) {
           signInCubit.signOut();
+        } else if (state.isGoogleAuthSuccess) {
+          signInCubit.setUserData(userModel: state.userModel!);
+        } else if (state.isDwrUserDataSuccess) {
+          appUserCubit.saveUserData(state.userModel);
         }
       },
       child: child,

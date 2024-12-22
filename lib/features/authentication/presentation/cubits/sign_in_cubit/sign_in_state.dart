@@ -14,6 +14,9 @@ enum SignInStatus {
   googleAuthLoading,
   googleAuthSuccess,
   googleAuthFailure,
+  setUserDataSuccess,
+  setUserDataLoading,
+  setUserDataFailure,
 }
 
 extension SignInStateExtension on SignInState {
@@ -28,6 +31,9 @@ extension SignInStateExtension on SignInState {
   bool get isGoogleAuthLoading => state == SignInStatus.googleAuthLoading;
   bool get isGoogleAuthSuccess => state == SignInStatus.googleAuthSuccess;
   bool get isGoogleAuthFailure => state == SignInStatus.googleAuthFailure;
+  bool get isDwrUserDataLoading => state == SignInStatus.setUserDataLoading;
+  bool get isDwrUserDataSuccess => state == SignInStatus.setUserDataSuccess;
+  bool get isDwrUserDataFaliure => state == SignInStatus.setUserDataFailure;
 }
 
 class SignInState {
