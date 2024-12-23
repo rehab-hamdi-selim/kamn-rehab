@@ -1,34 +1,22 @@
-import 'dart:async';
-
-import 'package:bloc/bloc.dart';
-
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/core/common/class/custom_splash_screen.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
-import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
+import 'package:kamn/core/common/widget/upgrader.dart';
 import 'package:kamn/core/di/di.dart';
-import 'package:kamn/core/helpers/bloc_observer.dart';
-import 'package:kamn/core/routing/routes.dart';
-import 'package:kamn/features/authentication/presentation/screens/on_boarding_screen.dart';
-
-import 'package:kamn/firebase_options.dart';
-import 'core/routing/app_router.dart';
-import 'features/analitics.dart';
+import 'package:kamn/core/routing/app_router.dart';
+import 'package:kamn/init_dependencies.dart';
+import 'package:upgrader/upgrader.dart';
+import 'analitics.dart';
+import 'core/common/cubit/firebase_remote_config/firebase_remote_config_cubit.dart';
+import 'core/routing/routes.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await initDependencies();
 
   // Configure dependencies before using GetIt
   configureDependencies();
 
-  await ScreenUtil.ensureScreenSize();
-  Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
 
@@ -37,8 +25,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<AppUserCubit>()..isUserLoggedIn(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (context) => getIt<AppUserCubit>()..isUserLoggedIn()),
+        BlocProvider(
+            create: (context) => FirebaseRemoteConfigCubit()
+              ..initListner()
+              ..getStringValue('test')
+              ..getStringValue('app_version')),
+      ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
         minTextAdapt: true,
@@ -50,14 +46,18 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          // initialRoute: Routes.groundsScreen,
-          // onGenerateRoute: AppRouter.generateRoute,
-          home: const FirebaseAnalitics(),
+          initialRoute: Routes.groundsScreen,
+          onGenerateRoute: AppRouter.generateRoute,
+          // home: const CustomUpgrader(
+          //   child: FirebaseAnalitics(),
+          // ),
         ),
       ),
     );
   }
 }
+
+
 // BlocListener<AppUserCubit, AppUserState>(
 //             listener: (context, state) async {
 //               await Future.delayed(const Duration(seconds: 2));

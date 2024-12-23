@@ -28,6 +28,7 @@ class GroundDetailsScreen extends StatelessWidget {
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
               expandedHeight: 346.h,
+              
               flexibleSpace: FlexibleSpaceBar(
                   background: Stack(children: [
                 Positioned(
@@ -39,7 +40,8 @@ class GroundDetailsScreen extends StatelessWidget {
                     child: CustomeImageSlideShow(
                         imagesPath: playgroundModel.groundImages ?? [])),
                 const CustomBlackFilter()
-              ]))),
+              ])),
+              ),
           MediaQuery.removePadding(
               context: context,
               removeTop: true,

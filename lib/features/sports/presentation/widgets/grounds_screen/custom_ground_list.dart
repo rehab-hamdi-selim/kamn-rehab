@@ -23,7 +23,7 @@ class CustomGroundList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SportsGroundsCubit, SportsGroundsState>(
       builder: (context, state) {
-        if (state.isLoading || state.isInitial) {
+        if (state.isLoading || state.isInitial || state.isSuccess) {
           return const Loader();
         }
         if (state.playgrounds == null ||
@@ -49,20 +49,24 @@ class CustomGroundList extends StatelessWidget {
                     child: BlocProvider(
                       create: (context) => context.read<SportsGroundsCubit>(),
                       child: index % 2 == 0
-                          ? FadeInLeft(
-                              duration:
-                                  Duration(milliseconds: 1300 * (index + 1)),
-                              child: CustomGroundItem(
-                                playground: state.playgrounds![index],
-                              ),
-                            )
-                          : FadeInRight(
-                              duration:
-                                  Duration(milliseconds: 1300 * (index + 1)),
-                              child: CustomGroundItem(
-                                playground: state.playgrounds![index],
-                              ),
-                            ),
+                          ? ZoomIn(
+                              duration: const Duration(seconds: 2),
+                              child: FadeInLeft(
+                                duration:
+                                    Duration(milliseconds: 1300 * (index + 1)),
+                                child: CustomGroundItem(
+                                  playground: state.playgrounds![index],
+                                ),
+                              ))
+                          : ZoomIn(
+                              duration: const Duration(seconds: 2),
+                              child: FadeInRight(
+                                duration:
+                                    Duration(milliseconds: 1300 * (index + 1)),
+                                child: CustomGroundItem(
+                                  playground: state.playgrounds![index],
+                                ),
+                              )),
                     ),
                   );
                 },

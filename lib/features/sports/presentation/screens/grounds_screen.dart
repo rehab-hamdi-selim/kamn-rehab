@@ -34,8 +34,7 @@ class GroundsScreen extends StatelessWidget {
             children: [
               ZoomIn(
                   animate: true,
-                  delay: const Duration(milliseconds: 1000),
-                  duration: const Duration(milliseconds: 1000),
+                  duration: const Duration(seconds: 3),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
