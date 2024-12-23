@@ -50,12 +50,19 @@ class PaymentOptionsScreen extends StatelessWidget {
           SliverToBoxAdapter(child: verticalSpace(10.h)),
         ],
       ),
-      bottomNavigationBar: CustomButton(
-        onTap: () {
-          Navigator.pushNamed(context, Routes.debitCreditCardPage,
-              arguments: reservationModel);
+      bottomNavigationBar:
+          BlocBuilder<PaymentOptionsCubit, PaymentOptionsState>(
+        builder: (context, state) {
+          return CustomButton(
+            onTap: () {
+              if (state.currentOption == 1) {
+                Navigator.pushNamed(context, Routes.proceedPaymentScreen,
+                    arguments: reservationModel);
+              }
+            },
+            text: 'Select Payment',
+          );
         },
-        text: 'Select Payment',
       ),
     );
   }

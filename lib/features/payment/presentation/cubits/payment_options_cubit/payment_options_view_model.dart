@@ -5,21 +5,15 @@ import 'package:injectable/injectable.dart';
 class PaymentOptionsViewModel {
   List<PaymentOption> paymentOptions = [
     PaymentOption(PaymentOptionType.debitCreditCard, IconLinks.wallet),
-    PaymentOption(PaymentOptionType.bankAccount, IconLinks.bank),
-    PaymentOption(PaymentOptionType.googlePay, IconLinks.google),
-    PaymentOption(PaymentOptionType.paypal, IconLinks.paypal),
+    PaymentOption(PaymentOptionType.cash, IconLinks.cash),
     PaymentOption(PaymentOptionType.wallet, IconLinks.wallet),
-    PaymentOption(PaymentOptionType.fawry, IconLinks.fawry),
   ];
 }
 
 enum PaymentOptionType {
   debitCreditCard,
-  bankAccount,
-  googlePay,
-  paypal,
+  cash,
   wallet,
-  fawry,
 }
 
 class PaymentOption {
