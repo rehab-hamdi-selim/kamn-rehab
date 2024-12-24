@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kamn/core/common/class/firestore_services.dart';
 import '../../../../core/const/firebase_collections.dart';
 import '../../../../core/utils/try_and_catch.dart';
 import '../../../../core/common/entities/user_model.dart';
@@ -22,18 +23,15 @@ abstract interface class AuthRemoteDataSource {
 
 @Injectable(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  final FirebaseFirestore _firestore;
-  final FirebaseAuth _auth;
+  final FirestoreService firestore;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   AuthRemoteDataSourceImpl({
-    required FirebaseFirestore firestore,
-    FirebaseAuth? auth,
-  })  : _firestore = firestore,
-        _auth = auth ?? FirebaseAuth.instance;
+    required this.firestore,
+  });
 
   CollectionReference get _userCollection =>
-      _firestore.collection(FirebaseCollections.users);
-
+      firestore.firestore.collection(FirebaseCollections.users);
   @override
   Future<UserCredential> signUp(
       {required String email,

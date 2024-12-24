@@ -22,8 +22,8 @@ class AvailableDatesState {
   final AvailableDatesStatus state;
   TimeOfDay? startAt;
   TimeOfDay? endAt;
-  List<String>? intervials;
-  int peroid;
+  List<DateTime>? intervials;
+  int period;
   final String? erorrMessage;
   final String? successMessage;
 
@@ -33,14 +33,14 @@ class AvailableDatesState {
     this.endAt,
     this.intervials,
     this.startAt,
-    this.peroid = 60,
+    this.period = 60,
     this.successMessage,
   });
   AvailableDatesState copyWith({
     AvailableDatesStatus? state,
     TimeOfDay? startAt,
     TimeOfDay? endAt,
-    List<String>? intervials,
+    List<DateTime>? intervials,
     int? peroid,
     String? erorrMessage,
     String? successMessage,
@@ -50,7 +50,7 @@ class AvailableDatesState {
       erorrMessage: erorrMessage ?? this.erorrMessage,
       startAt: startAt ?? this.startAt,
       intervials: intervials ?? this.intervials,
-      peroid: peroid ?? this.peroid,
+      period: peroid ?? this.period,
       endAt: endAt ?? this.endAt,
       successMessage: successMessage ?? this.successMessage,
     );

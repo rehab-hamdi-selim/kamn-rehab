@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:kamn/core/helpers/spacer.dart';
+import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/features/authentication/presentation/widgets/on_boarding/custom_logo_paint.dart';
 
 import '../../../../core/routing/routes.dart';
@@ -13,61 +15,62 @@ class OnBoardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = 300.35.w;
-    return Scaffold(
-      body: Column(
-        children: [
-          //Add this CustomPaint widget to the Widget Tree
-          Stack(
-            children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    CustomPaint(
-                      size: Size(
-                          width,
-                          (width * 1.5)
-                              .toDouble()), //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
-                      painter: RPSCustomPainter(),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppPallete.whiteColor,
+        body: Stack(
+          children: [
+            Align(
+              alignment: Alignment.topCenter,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  CustomPaint(
+                    size: Size(
+                        width,
+                        (673.h)
+                            .toDouble()), //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
+                    painter: RPSCustomPainter(),
+                  ),
+                  Positioned(
+                    top: 130.h,
+                    child: Image.asset(
+                      "assets/images/loginLogo.png",
+                      height: 213.h,
+                      width: 328.w,
                     ),
-                    Positioned(
-                      top: 140.h,
-                      child: Image.asset(
-                        "assets/images/loginLogo.png",
-                        height: 213.h,
-                        width: 328.w,
-                      ),
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              top: 554.h,
+              width: 375.w,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30.w),
+                child: Column(
+                  children: [
+                    const CustomHader(
+                      boldText: "Welcome to KAMN !",
+                      text:
+                          "Book, train, and play your way to peak performance. Your game starts here!",
+                    ),
+                    verticalSpace(48.h),
+                    CustomButton(
+                      buttonText: 'Get Started',
+                      onTapButton: () {
+                        Navigator.pushNamed(
+                          context,
+                          Routes.signInScreen,
+                        );
+                      },
                     ),
                   ],
                 ),
               ),
-              Positioned(
-                bottom: 0,
-                width: 400,
-                child: Padding(
-                  padding: const EdgeInsets.all(30.0).copyWith(right: 40),
-                  child: const CustomHader(
-                    boldText: "Welcome to KAMN !",
-                    text:
-                        "Book, train, and play your way to peak performance. Your game starts here!",
-                  ),
-                ),
-              ),
-            ],
-          ),
-
-          CustomButton(
-            buttonText: 'Get Started',
-            onTapButton: () {
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                Routes.signInScreen,
-                (Route<dynamic> route) => false,
-              );
-            },
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

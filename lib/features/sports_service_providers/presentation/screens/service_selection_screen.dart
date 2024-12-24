@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/service_provider_grounds/custom_app_bar_service_provider.dart';
+import 'package:kamn/core/utils/custom_app_bar_service_provider.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/service_selection/custome_individual_play_categories.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/service_selection/custome_team_play_categories.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/service_selection/custome_title_text.dart';
@@ -16,6 +16,7 @@ class ServiceSelectionScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: AppPallete.whiteColor,
         appBar: CustomAppBarServiceProvider.appBar(
+          color: AppPallete.whiteColor,
           arrowFunction: () {},
           notificationIconFunction: () {},
           profileFunction: () {},

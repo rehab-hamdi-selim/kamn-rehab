@@ -7,9 +7,11 @@ class Loader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: RiveAnimation.asset(
-        "assets/rive/Loading5.riv",
+    return const Expanded(
+      child: Center(
+        child: RiveAnimation.asset(
+          "assets/images/loading.riv",
+        ),
       ),
     );
   }

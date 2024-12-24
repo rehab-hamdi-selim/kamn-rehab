@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
+import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/const/image_links.dart';
 import 'package:kamn/core/helpers/spacer.dart';
@@ -11,27 +14,37 @@ class CustomUserData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 12.w, right: 12.w, bottom: 24.h),
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 18.h),
+      decoration: BoxDecoration(
+          color: AppPallete.blackColor,
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(24.r),
+              bottomRight: Radius.circular(24.r))),
       child: Row(
         children: [
           CircleAvatar(
-            radius: 35.r, // Responsive radius
+            radius: 31.r, // Responsive radius
             backgroundColor: AppPallete.orangeAccentColor,
             backgroundImage: const AssetImage(
                 ImageLinks.profile_picture), // Responsive icon size
           ),
           SizedBox(width: 16.w), // Responsive width
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(Constants.userName, style: TextStyles.font18White),
+          BlocBuilder<AppUserCubit, AppUserState>(
+            builder: (context, state) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(state.user?.name ?? '', style: TextStyles.font18White),
 
-              verticalSpace(4), // Responsive height
-              Text(Constants.userEmail, style: TextStyles.font14White70),
-              verticalSpace(4),
-              Text(Constants.phoneNumber, style: TextStyles.font14White70),
-            ],
+                  verticalSpace(7.h), // Responsive height
+                  Text(state.user?.email ?? '',
+                      style: TextStyles.font14White70),
+                  verticalSpace(7.h),
+                  Text(Constants.phoneNumber, style: TextStyles.font14White70),
+                ],
+              );
+            },
           ),
           const Spacer(),
           IconButton(

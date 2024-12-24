@@ -10,7 +10,7 @@ import '../../../../core/helpers/spacer.dart';
 import '../../../../core/theme/app_pallete.dart';
 import '../../../../core/theme/style.dart';
 import '../../../../core/utils/app_images.dart';
-import '../widgets/service_provider_grounds/custom_app_bar_service_provider.dart';
+import '../../../../core/utils/custom_app_bar_service_provider.dart';
 import '../widgets/service_provider_grounds/custom_bottom_service_provider.dart';
 import '../widgets/service_provider_grounds/custom_filter_item_service_provider.dart';
 import '../widgets/service_provider_grounds/custom_text_form_field_service_provider.dart';
@@ -26,6 +26,7 @@ class TrackGroundReservationsScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppPallete.whiteColor,
         appBar: CustomAppBarServiceProvider.appBar(
+          color: AppPallete.whiteColor,
           arrowFunction: () {},
           notificationIconFunction: () {},
           profileFunction: () {},

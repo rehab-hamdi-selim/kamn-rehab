@@ -6,10 +6,45 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
 
-class CustomeBottomBook extends StatelessWidget {
+class CustomeBottomBook extends StatefulWidget {
   const CustomeBottomBook({required this.playgroundModel, super.key});
 
   final PlaygroundModel? playgroundModel;
+
+  @override
+  _CustomeBottomBookState createState() => _CustomeBottomBookState();
+}
+
+class _CustomeBottomBookState extends State<CustomeBottomBook>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 3), // Duration of the animation
+      vsync: this,
+    );
+
+    // Tween to animate from 0 to the price
+    _animation =
+        Tween<double>(begin: 0, end: widget.playgroundModel?.price ?? 0)
+            .animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInOut,
+    ));
+
+    // Start the animation
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,26 +60,38 @@ class CustomeBottomBook extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              RichText(
-                text: TextSpan(
-                    text: playgroundModel?.price
-                        .toString(), //TODO: dont pass the all model to display one attribute like price
-                    style: TextStyles.font32OfWhiteMedium,
-                    children: [
-                      TextSpan(
-                          text: ' / hr', style: TextStyles.font20OfWhiteReuglar)
-                    ]),
+              // Animated price display
+              AnimatedBuilder(
+                animation: _animation,
+                builder: (context, child) {
+                  return RichText(
+                    text: TextSpan(
+                      text: _animation.value
+                          .toStringAsFixed(2), // Format to 2 decimal places
+                      style: TextStyles.font32OfWhiteMedium,
+                      children: [
+                        TextSpan(
+                          text: ' / hr',
+                          style: TextStyles.font20OfWhiteReuglar,
+                        ),
+                      ],
+                    ),
+                  );
+                },
               ),
               ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(
-                        context, Routes.pickTimeReservationScreen,
-                        arguments: playgroundModel);
-                  },
-                  child: Text(
-                    Constants.bookNow,
-                    style: TextStyles.font16greenSemiBold,
-                  ))
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    Routes.pickTimeReservationScreen,
+                    arguments: widget.playgroundModel,
+                  );
+                },
+                child: Text(
+                  Constants.bookNow,
+                  style: TextStyles.font16greenSemiBold,
+                ),
+              ),
             ],
           ),
         ),

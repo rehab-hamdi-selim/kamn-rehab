@@ -10,6 +10,11 @@ class TextStyles {
       color: AppPallete.greyFontColor,
       fontWeight: FontWeightHelper.medium,
       fontSize: 12.77.h);
+  static TextStyle font7InterDimGraySemiBold = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.dimGrayColor,
+      fontWeight: FontWeightHelper.semiBold,
+      fontSize: 10.h);
 
   static TextStyle font24BlackRegular = TextStyle(
       fontFamily: "Roboto",
@@ -109,10 +114,11 @@ class TextStyles {
       fontWeight: FontWeightHelper.medium,
       fontSize: 24.h);
 
-  static TextStyle fontRoboto24BoldBlack = const TextStyle(
+  static TextStyle fontRoboto24BoldBlack = TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.lightBlackColor2,
-      fontWeight: FontWeightHelper.bold);
+      fontWeight: FontWeightHelper.bold,
+      fontSize: 24.h);
 
   static TextStyle fontRoboto24MediumWhite = TextStyle(
       fontFamily: "Roboto",
@@ -165,6 +171,11 @@ class TextStyles {
       color: AppPallete.blackColor,
       fontWeight: FontWeight.w400,
       fontSize: 16.h);
+  static TextStyle font14CircularSpotifyTextGrayRegalur = TextStyle(
+      fontFamily: "CircularSpotifyText",
+      color: AppPallete.grayColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 14.h);
   static TextStyle font30DarkGreenColorBold = TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.darkGreenColor,
@@ -187,7 +198,7 @@ class TextStyles {
       fontSize: 14.h);
   static TextStyle font14RobotoLightBlackColorMedium = TextStyle(
       fontFamily: "Roboto",
-      color: AppPallete.lightBlackColor,
+      color: AppPallete.lightBlackColor2,
       fontWeight: FontWeightHelper.medium,
       fontSize: 14.h);
   static TextStyle font14RobotoDarkGreenColorMedium = TextStyle(
@@ -264,7 +275,7 @@ class TextStyles {
   static TextStyle font14BlackColorMedium = TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.lightBlackColor2,
-      fontWeight: FontWeightHelper.medium,
+      fontWeight: FontWeightHelper.regular,
       fontSize: 14.h);
   static TextStyle font15BlackColorMedium = TextStyle(
       fontFamily: "Roboto",

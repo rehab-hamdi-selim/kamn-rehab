@@ -52,7 +52,7 @@ Future<Either<Faliure, T>> executeTryAndCatchForRepository<T>(
     } else if (e is SocketException) {
       return left(Faliure('Network error: ${e.message}'));
     } else {
-      return left(Faliure('An unexpected error occurred: ${e.toString()}'));
+      return left(Faliure('an unexpected error occurred: ${e.toString()}'));
     }
   }
 }
@@ -107,6 +107,7 @@ Future<T> executeTryAndCatchForDataLayer<T>(Future<T> Function() action) async {
   } on FormatException catch (e) {
     throw FormatException('Error parsing data: ${e.message}');
   } catch (e) {
+    print('#########################${e.toString()}');
     throw Exception('An unexpected error occurred: ${e.toString()}');
   }
 }
