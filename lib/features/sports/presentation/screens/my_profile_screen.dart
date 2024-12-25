@@ -7,6 +7,7 @@ import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/utils/custom_app_bar.dart';
 import 'package:kamn/features/sports/presentation/widgets/my_profile/custom_profile_top_bar.dart';
+import 'package:kamn/features/sports/presentation/widgets/my_profile/custome_add_service_button.dart';
 import 'package:kamn/features/sports/presentation/widgets/my_profile/custome_user_data.dart';
 import 'package:kamn/features/sports/presentation/widgets/my_profile/custome_user_options.dart';
 import 'package:kamn/core/utils/custom_app_bar_service_provider.dart';
@@ -37,6 +38,9 @@ class MyProfileScreen extends StatelessWidget {
           children: [
             const CustomUserData(),
             SizedBox(height: 16.h), // Responsive height
+            const CustomeAddServiceButton(),
+            SizedBox(height: 16.h), // Responsive height
+
             const Expanded(
               child: CustomeUserOptions(), // Updated to use alias
             ),

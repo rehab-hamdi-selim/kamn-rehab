@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/common/class/custom_splash_screen.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
+import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/core/common/widget/upgrader.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/routing/app_router.dart';
@@ -46,11 +48,25 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          initialRoute: Routes.groundsScreen,
           onGenerateRoute: AppRouter.generateRoute,
-          // home: const CustomUpgrader(
-          //   child: FirebaseAnalitics(),
-          // ),
+    home:     BlocListener<AppUserCubit, AppUserState>(
+            listener: (context, state) async {
+              await Future.delayed(const Duration(seconds: 2));
+
+              if (state.isLoggedIn()) {
+                if (state.user?.type == 'normal') {
+                  Navigator.pushNamed(context, Routes.groundsScreen);
+                } else {
+                  Navigator.pushNamed(context, Routes.groundsScreen);
+                }
+              } else if (state.isNotLoggedIn()) {
+
+                
+                Navigator.pushNamed(context, Routes.onBoardingScreen);
+              }
+            },
+            child: const CustomSplashScreen(),
+          ),
         ),
       ),
     );

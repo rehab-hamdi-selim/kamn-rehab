@@ -55,7 +55,7 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   Future<void> deleteUser({required String uid}) async {
     final result = await _authRepository.deleteUser(uid: uid);
-    result.fold(
+    result.fold(                                                 
         (l) => emit(state.copyWith(
               state: SignUpStatus.failureDeleteUser,
               erorrMessage: l.erorr,

@@ -17,6 +17,7 @@ class CustomPlayGroundTitleAndLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         verticalSpace(15.h),
         ownerAndDirectionRow(),

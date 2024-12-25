@@ -27,21 +27,20 @@ class GroundDetailsScreen extends StatelessWidget {
         controller: scrollController,
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
-              expandedHeight: 346.h,
-              
-              flexibleSpace: FlexibleSpaceBar(
-                  background: Stack(children: [
-                Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: 346.h,
-                    // Image height
-                    child: CustomeImageSlideShow(
-                        imagesPath: playgroundModel.groundImages ?? [])),
-                const CustomBlackFilter()
-              ])),
-              ),
+            expandedHeight: 346.h,
+            flexibleSpace: FlexibleSpaceBar(
+                background: Stack(children: [
+              Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: 346.h,
+                  // Image height
+                  child: CustomeImageSlideShow(
+                      imagesPath: playgroundModel.groundImages ?? [])),
+              const CustomBlackFilter()
+            ])),
+          ),
           MediaQuery.removePadding(
               context: context,
               removeTop: true,
@@ -51,6 +50,7 @@ class GroundDetailsScreen extends StatelessWidget {
                     state.isReturnedToTop ||
                     state.isInitial,
                 builder: (context, isScrolledDown) => SliverAppBar(
+                    automaticallyImplyLeading: false,
                     toolbarHeight: 150.h,
                     expandedHeight: 150.h,
                     floating: true,

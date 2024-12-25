@@ -6,13 +6,13 @@ class UserModel {
   final String email;
   final String name;
   final DateTime createdAt;
-  final String type;
+  final String? type;
   UserModel({
     required this.uid,
     required this.email,
     required this.name,
     required this.createdAt,
-    required this.type,
+     this.type,
   });
   // Add any other fields you need
 
