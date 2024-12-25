@@ -24,7 +24,8 @@ class CustomTextFormField extends StatelessWidget {
           filled: true,
           fillColor: AppPalette.lightGrayColor,
           hintText: Constants.hintTextForSearch,
-          hintStyle: TextStyles.fontCircularSpotify10RegularGray2,
+          hintStyle: TextStyles.fontCircularSpotify10RegularGray2
+              .copyWith(fontSize: 12.h),
           prefixIcon: const Icon(
             Icons.search,
             color: AppPalette.grayColor,

@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kamn/core/common/class/firestore_services.dart';
 import '../../../../core/const/firebase_collections.dart';
 import '../../../../core/utils/try_and_catch.dart';
 import '../../../../core/common/entities/user_model.dart';
@@ -15,22 +17,21 @@ abstract interface class AuthRemoteDataSource {
       {required String email, required String password});
   Future<Map<String, dynamic>> getUserData({required String uid});
   Future<void> signOut();
+  Future<void> googleSignOut();
+  Future<UserCredential> googleAuth();
 }
 
 @Injectable(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  final FirebaseFirestore _firestore;
-  final FirebaseAuth _auth;
+  final FirestoreService firestore;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   AuthRemoteDataSourceImpl({
-    required FirebaseFirestore firestore,
-    FirebaseAuth? auth,
-  })  : _firestore = firestore,
-        _auth = auth ?? FirebaseAuth.instance;
+    required this.firestore,
+  });
 
   CollectionReference get _userCollection =>
-      _firestore.collection(FirebaseCollections.users);
-
+      firestore.firestore.collection(FirebaseCollections.users);
   @override
   Future<UserCredential> signUp(
       {required String email,
@@ -64,7 +65,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> setUser({required UserModel userModel}) async {
     return await executeTryAndCatchForDataLayer(() async {
-      throw "User data not saved";
       await _userCollection.doc(userModel.uid).set(userModel.toMap());
     });
   }
@@ -107,6 +107,32 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<void> signOut() async {
     return await executeTryAndCatchForDataLayer(() async {
       await _auth.signOut();
+    });
+  }
+
+  @override
+  Future<UserCredential> googleAuth() async {
+    return await executeTryAndCatchForDataLayer(() async {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      final userCredential = await _auth.signInWithCredential(credential);
+
+      return userCredential;
+    });
+  }
+
+  @override
+  Future<void> googleSignOut() async {
+    return await executeTryAndCatchForDataLayer(() async {
+      await GoogleSignIn().signOut();
     });
   }
 }

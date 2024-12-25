@@ -7,12 +7,16 @@ import '../data_source/sports_remote_data_source.dart';
 import '../models/playground_model.dart';
 
 abstract class SportsRepository {
-  Future<Either<Faliure, List<PlaygroundModel>?>> getPlaygrounds();
+  Future<Either<Faliure, List<PlaygroundModel>>> getPlaygrounds();
   Future<Either<Faliure, ReservationModel>> submitReservation(
       ReservationModel reservation);
   Future<Either<Faliure, void>> updateState(
       String playgroundId, Map<String, dynamic> data);
   Future<Either<Faliure, void>> delete(ReservationModel reservation);
+  Future<Either<Faliure, List<ReservationModel>>> getAllReservation();
+  Future<Either<Faliure, List<ReservationModel>>>
+      getSpecificReservationsByGroundId(String groundId, DateTime selectedDate);
+  Future<Either<Faliure, List<PlaygroundModel>?>> searchByQuery(String query);
 }
 
 @Injectable(as: SportsRepository)
@@ -21,15 +25,12 @@ class SportsRepositoryImpl implements SportsRepository {
   SportsRepositoryImpl({required SportsRemoteDataSource remoteDataSource})
       : _remoteDataSource = remoteDataSource;
   @override
-  Future<Either<Faliure, List<PlaygroundModel>?>> getPlaygrounds() async {
+  Future<Either<Faliure, List<PlaygroundModel>>> getPlaygrounds() async {
     return executeTryAndCatchForRepository(() async {
-      final List<Map<String, dynamic>> rawData =
-          await _remoteDataSource.getPlaygrounds();
-
-      final playgrounds =
-          rawData.map((data) => PlaygroundModel.fromMap(data)).toList();
-
-      return playgrounds;
+      var data = await _remoteDataSource.getPlaygrounds();
+      return data.map((value) {
+        return PlaygroundModel.fromMap(value);
+      }).toList();
     });
   }
 
@@ -53,6 +54,42 @@ class SportsRepositoryImpl implements SportsRepository {
   Future<Either<Faliure, void>> delete(ReservationModel reservation) {
     return executeTryAndCatchForRepository(() async {
       return await _remoteDataSource.delete(reservation);
+    });
+  }
+
+  @override
+  Future<Either<Faliure, List<ReservationModel>>> getAllReservation() {
+    return executeTryAndCatchForRepository(() async {
+      var response = await _remoteDataSource.getAllReservation();
+      return response.map((element) {
+        return ReservationModel.fromMap(element);
+      }).toList();
+    });
+  }
+
+  @override
+  Future<Either<Faliure, List<PlaygroundModel>?>> searchByQuery(String query) {
+    return executeTryAndCatchForRepository(() async {
+      final List<Map<String, dynamic>> rawData =
+          await _remoteDataSource.searchByQuery(query);
+
+      final playgrounds =
+          rawData.map((data) => PlaygroundModel.fromMap(data)).toList();
+
+      return playgrounds;
+    });
+  }
+
+  @override
+  Future<Either<Faliure, List<ReservationModel>>>
+      getSpecificReservationsByGroundId(
+          String groundId, DateTime selectedDate) {
+    return executeTryAndCatchForRepository(() async {
+      var response = await _remoteDataSource.getSpecificReservationsByGroundId(
+          groundId, selectedDate);
+      return response.map((element) {
+        return ReservationModel.fromMap(element);
+      }).toList();
     });
   }
 }

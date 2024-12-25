@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_debouncer/flutter_debouncer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
@@ -10,14 +12,24 @@ import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_text_form_field.dart';
 
 class CustomFilterSection extends StatelessWidget {
-  const CustomFilterSection({super.key});
+  CustomFilterSection({super.key});
+  final Debouncer debouncer = Debouncer();
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
             child: CustomTextFormField(
-          controller: SportsGroundsCubit.get(context)
+          onChange: (value) {
+            debouncer.debounce(
+                duration: const Duration(milliseconds: 800),
+                onDebounce: () {
+                  context.read<SportsGroundsCubit>().searchByQuery(value);
+                });
+          },
+          controller: context
+              .read<SportsGroundsCubit>()
               .sportsGroundViewModel
               .searchController,
         )),

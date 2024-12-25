@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/const/constants.dart';
+import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/font_weight_helper.dart';
+import 'package:kamn/core/utils/alert_dialog_utils.dart';
+import 'package:kamn/core/utils/custom_app_bar.dart';
 import 'package:kamn/features/payment/presentation/widgets/debit_credit_card/custom_app_bar.dart';
 import 'package:kamn/features/payment/presentation/widgets/debit_credit_card/month_tex_field.dart';
 import 'package:kamn/features/payment/presentation/widgets/debit_credit_card/year_text_field.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kamn/features/sports/data/models/reservation_model.dart';
 
 class DebitCreditCardScreen extends StatefulWidget {
-  DebitCreditCardScreen({super.key});
+  const DebitCreditCardScreen({super.key, required this.reservationModel});
+  final ReservationModel reservationModel;
 
   @override
   State<DebitCreditCardScreen> createState() => _DebitCreditCardScreenState();
@@ -22,11 +28,12 @@ class _DebitCreditCardScreenState extends State<DebitCreditCardScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppPallete.whiteColor,
-      appBar: CustomDebitCrecitCardAppBar.appBar(
-          arrowFunction: () {},
-          notificationIconFunction: () {},
-          badgesIconFunction: () {},
-          profileFunction: () {}),
+      appBar: CustomAppBar.appBar(
+        color: AppPallete.whiteColor,
+        context: context,
+        notificationIconFunction: () {},
+        badgesIconFunction: () {},
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -222,7 +229,21 @@ class _DebitCreditCardScreenState extends State<DebitCreditCardScreen> {
                   child: RPadding(
                 padding: const EdgeInsets.symmetric(horizontal: 17),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    AlertDialogUtils.showAlert(
+                      context: context,
+                      content: Constants.termsAndConditionsContent,
+                      title: Constants.termsAndConditions,
+                      firstbutton: 'Procced',
+                      firstAction: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(
+                            context, Routes.proceedPaymentScreen,
+                            arguments: widget.reservationModel);
+                      },
+                      secondbutton: 'Cancel',
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: AppPallete.greenColor),
                   child: const RPadding(

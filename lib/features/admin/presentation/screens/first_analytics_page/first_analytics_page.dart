@@ -34,15 +34,13 @@ class FirstAnalyticsPage extends StatelessWidget {
               Constants.overview,
               style: TextStyle(fontWeight: FontWeightHelper.semiBold),
             ),
-            actions: [
-              const Icon(Icons.notifications_outlined),
+            actions: const [
+              Icon(Icons.notifications_outlined),
               Padding(
-                padding: const EdgeInsets.only(right: 8, left: 8),
-                child: Container(
-                  child: const CircleAvatar(
-                    backgroundImage: AssetImage(AppImages.profileImage),
-                    radius: 16,
-                  ),
+                padding: EdgeInsets.only(right: 8, left: 8),
+                child: CircleAvatar(
+                  backgroundImage: AssetImage(AppImages.profileImage),
+                  radius: 16,
                 ),
               )
             ],

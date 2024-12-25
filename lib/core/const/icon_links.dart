@@ -5,4 +5,5 @@ class IconLinks {
   static const String paypal = 'assets/icons/paypal.svg';
   static const String wallet = 'assets/icons/wallet.svg';
   static const String calender = 'assets/icons/calender.svg';
+  static const String cash = 'assets/icons/cash.svg';
 }

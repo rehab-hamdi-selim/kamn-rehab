@@ -2,6 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:google_sign_in/google_sign_in.dart';
+
+import 'package:kamn/core/di/di.dart';
+import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/features/authentication/presentation/widgets/sign_in/custome_title_text.dart';
+
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/app_pallete.dart';
 import '../../data/data_source/auth_remote_data_source.dart';
@@ -13,7 +20,7 @@ import '../widgets/custom_button.dart';
 import '../widgets/sign_in/custom_dont_have_account_row.dart';
 import '../widgets/sign_in/custom_sign_in_input_fields.dart';
 import '../widgets/sign_in/custom_sign_in_listener.dart';
-import '../widgets/sign_up/facebook_button.dart';
+import '../widgets/sign_up/google_button.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -21,18 +28,13 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SignInCubit(
-        authRepository: AuthRepositoryImpl(
-          authDataSource:
-              AuthRemoteDataSourceImpl(firestore: FirebaseFirestore.instance),
-        ),
-        signInViewModel: SignInViewModel(),
-      ),
+      create: (context) => getIt<SignInCubit>(),
       child: Builder(builder: (context) {
         final viewModel = context.read<SignInCubit>().signInViewModel;
 
         return CustomSignInListener(
           child: Scaffold(
+            backgroundColor: AppPallete.whiteColor,
             body: SafeArea(
               child: SingleChildScrollView(
                 child: Form(
@@ -40,8 +42,9 @@ class SignInScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const CustomeTitleText(),
                       CustomSignInInputFields(viewModel: viewModel),
-                      SizedBox(height: 27.h),
+                      SizedBox(height: 120.h),
                       Column(
                         children: [
                           BlocBuilder<SignInCubit, SignInState>(
@@ -69,15 +72,20 @@ class SignInScreen extends StatelessWidget {
                           SizedBox(height: 10.h),
                           CustomDontHaveAccountRow(
                             onTap: () {
-                              Navigator.pushNamedAndRemoveUntil(
+                              Navigator.pushNamed(
                                 context,
-                                Routes.signUpScreen,
-                                (route) => false,
+                                Routes.userTypeSelectionScreen,
                               );
                             },
                           ),
                           SizedBox(height: 22.h),
-                          FacebookButton(onTapButton: () {}),
+                          BlocBuilder<SignInCubit, SignInState>(
+                            builder: (context, state) {
+                              return GoogleButton(onTapButton: () {
+                                context.read<SignInCubit>().googleAuth();
+                              });
+                            },
+                          ),
                         ],
                       ),
                     ],

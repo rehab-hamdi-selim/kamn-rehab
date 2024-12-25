@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
@@ -12,8 +13,9 @@ class CustomFilterBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sportsGroundViewModel =
-        SportsGroundsCubit.get(context).sportsGroundViewModel;
-    final sportsGroundCubit = SportsGroundsCubit.get(context);
+        context.read<SportsGroundsCubit>().sportsGroundViewModel;
+    ;
+    final sportsGroundCubit = context.read<SportsGroundsCubit>();
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 5.w),
       child: SingleChildScrollView(

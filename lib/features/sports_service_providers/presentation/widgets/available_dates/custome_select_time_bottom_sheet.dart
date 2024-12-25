@@ -51,7 +51,7 @@ class CustomeSelectTimeBottomSheet extends StatelessWidget {
                 decoration:
                     const InputDecoration(labelText: 'Period (in minutes)'),
                 onChanged: (value) {
-                  state.peroid = int.tryParse(value) ?? 60;
+                  state.period = int.tryParse(value) ?? 60;
                 },
               ),
               const SizedBox(height: 16),

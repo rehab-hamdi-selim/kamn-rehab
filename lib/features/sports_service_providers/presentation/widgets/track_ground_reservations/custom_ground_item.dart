@@ -31,8 +31,8 @@ class CustomGroundItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15.r),
               ),
               child: CachedNetworkImage(
-                  imageUrl: playground.images?.isNotEmpty == true
-                      ? playground.images![0]
+                  imageUrl: playground.groundImages?.isNotEmpty == true
+                      ? playground.groundImages![0]
                       : '',
                   imageBuilder: (context, imageProvider) => Container(
                         width: double.infinity,

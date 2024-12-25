@@ -7,7 +7,16 @@ import 'package:flutter/foundation.dart';
 
 import '../../../data/models/playground_model.dart';
 
-enum SportsGroundsStatus { initial, loading, success, failure, changeDistance }
+enum SportsGroundsStatus {
+  initial,
+  loading,
+  success,
+  failure,
+  changeDistance,
+  isScrollingUp,
+  isReturnedToTop,
+  isScrolledDown
+}
 
 extension SportsGroundStateExtension on SportsGroundsState {
   bool get isInitial => state == SportsGroundsStatus.initial;
@@ -15,6 +24,8 @@ extension SportsGroundStateExtension on SportsGroundsState {
   bool get isSuccess => state == SportsGroundsStatus.success;
   bool get isFailure => state == SportsGroundsStatus.failure;
   bool get isChangeDistance => state == SportsGroundsStatus.changeDistance;
+  bool get isScrolledDown => state == SportsGroundsStatus.isScrolledDown;
+  bool get isReturnedToTop => state == SportsGroundsStatus.isReturnedToTop;
 }
 
 class SportsGroundsState {

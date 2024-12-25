@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../core/erorr/faliure.dart';
@@ -10,6 +11,7 @@ abstract interface class AuthRepository {
     required String email,
     required String password,
     required String name,
+    required String type,
   });
   Future<Either<Faliure, void>> sendVerificationEmail();
   Future<Either<Faliure, void>> setUser({required UserModel userModel});
@@ -18,6 +20,8 @@ abstract interface class AuthRepository {
       {required String email, required String password});
   Future<Either<Faliure, UserModel>> getUser({required String uid});
   Future<Either<Faliure, void>> signOut();
+  Future<Either<Faliure, void>> googleSignOut();
+  Future<Either<Faliure, UserModel>> googleAuth();
 }
 
 @Injectable(as: AuthRepository)
@@ -32,6 +36,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required String email,
     required String password,
     required String name,
+    required String type,
   }) async {
     return await executeTryAndCatchForRepository(() async {
       final userCredential = await _authDataSource.signUp(
@@ -41,11 +46,11 @@ class AuthRepositoryImpl implements AuthRepository {
       );
 
       final userModel = UserModel(
-        uid: userCredential.user!.uid,
-        email: email,
-        name: name,
-        createdAt: DateTime.now(),
-      );
+          uid: userCredential.user!.uid,
+          email: email,
+          name: name,
+          createdAt: DateTime.now(),
+          type: type);
 
       return userModel;
     });
@@ -94,6 +99,25 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Faliure, void>> signOut() async {
     return await executeTryAndCatchForRepository(() async {
       await _authDataSource.signOut();
+    });
+  }
+
+  @override
+  Future<Either<Faliure, UserModel>> googleAuth() async {
+    return await executeTryAndCatchForRepository(() async {
+      final userCredential = await _authDataSource.googleAuth();
+      return UserModel(
+          uid: userCredential.user!.uid,
+          email: userCredential.user!.email!,
+          name: userCredential.user!.displayName!,
+          createdAt: DateTime.now());
+    });
+  }
+
+  @override
+  Future<Either<Faliure, void>> googleSignOut() async {
+    return await executeTryAndCatchForRepository(() async {
+      await _authDataSource.googleSignOut();
     });
   }
 }
