@@ -48,6 +48,17 @@ class AppUserCubit extends Cubit<AppUserState> {
       emit(state.copyWith(state: AppUserStates.loggedIn, user: r));
     });
   }
+  void isFirstInstallation() async {
+    final res = await SecureStorageHelper.isUserLoggedIn();
+    res.fold((l) {
+      emit(state.copyWith(
+        state: AppUserStates.notLoggedIn,
+        errorMessage: l,
+      ));
+    }, (r) {
+      emit(state.copyWith(state: AppUserStates.loggedIn, user: r));
+    });
+  }
 
   // Get stored user data
   void getStoredUserData() async {

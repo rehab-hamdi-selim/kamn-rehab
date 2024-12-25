@@ -7,6 +7,7 @@ class SecureStorageHelper {
         encryptedSharedPreferences: true,
       );
   static const String _userKey = 'user_data';
+  static const String _firstTime = 'first_time';
   static final _storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
 
   // Save user data
