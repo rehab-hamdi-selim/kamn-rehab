@@ -65,7 +65,8 @@ class AppRouter {
                       getIt<TrackGroundReservationsDetailsCubit>()
                         ..getPlaygroundsDetailsById('zuQkYty1ma0ZML7gMGgz'),
                   child: TrackGroundReservationDetail(
-                    playgroundModel: settings.arguments as PlaygroundModel,
+                    playgroundModel:
+                        settings.arguments as PlaygroundRequestModel,
                   ),
                 ));
       case Routes.myProfileScreen:

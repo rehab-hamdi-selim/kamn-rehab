@@ -15,6 +15,7 @@ class TrackGroundReservationsCubit extends Cubit<TrackGroundsState> {
   Future<void> getPlaygroundsByOwnerId(String ownerId) async {
     emit(TrackGroundsState(state: TrackGroundsStatus.loading));
     final result = await repository.getPlaygroundsByOwnerId(ownerId);
+    print('${result},resultt');
     result.fold((error) {
       print(error.erorr);
 

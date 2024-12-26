@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
+import 'package:kamn/features/sports/data/models/reservation_model.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/track_ground_reservation_details/date_and_countdown_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ReservationDetailsItem extends StatelessWidget {
-  final Map<String, dynamic> data;
+  final ReservationModel data;
   ReservationDetailsItem({required this.data});
   @override
   Widget build(BuildContext context) {
@@ -51,7 +52,7 @@ class ReservationDetailsItem extends StatelessWidget {
                       );
                       await launchUrl(launchUri);
                     },
-                    child: Text(data['ground']['phone'],
+                    child: Text('phone number',
                         style: TextStyle(color: AppPallete.greenColor)),
                   )
                 ],
@@ -66,7 +67,7 @@ class ReservationDetailsItem extends StatelessWidget {
                       children: [
                         Text('paybal',
                             style: TextStyle(color: AppPallete.grayColor)),
-                        Text('${data['price']}/hr ',
+                        Text('${data.price}/hr ',
                             style: TextStyle(color: AppPallete.greenColor))
                       ],
                     ),
@@ -76,10 +77,11 @@ class ReservationDetailsItem extends StatelessWidget {
               Expanded(
                 child: ListView.builder(
                   itemCount:
-                      data['sessions'].length, // Number of items in the list
+                      data.sessions!.length, // Number of items in the list
                   itemBuilder: (context, index) {
                     return DateAndCountdownWidget(
-                      data: data['sessions'][index],
+                      data: data.sessions![index],
+                      reservation: data,
                     );
                   },
                 ),

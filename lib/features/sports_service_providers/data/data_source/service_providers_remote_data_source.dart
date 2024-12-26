@@ -23,6 +23,8 @@ abstract class ServiceProvidersRemoteDataSource {
   Future<List<Map<String, dynamic>>> getPlaygroundsRequests();
   Future<void> addWithTransactionToFirebase(PlaygroundModel playgroundModel);
   Future<void> updateState(String playgroundId, Map<String, dynamic> data);
+  Future<void> changeReservationState(
+      String reservationId, Map<String, dynamic> data);
 }
 
 @Injectable(as: ServiceProvidersRemoteDataSource)
@@ -94,12 +96,10 @@ class ServiceProvidersRemoteDataSourceImpl
   Future<List<Map<String, dynamic>>> getPlaygroundsByOwnerId(String ownerId) {
     return executeTryAndCatchForDataLayer(() async {
       var querySnapshot = await FirebaseFirestore.instance
-          .collection(FirebaseCollections.playgrounds)
+          .collection(FirebaseCollections.playgroundsRequests)
           .where('ownerId', isEqualTo: ownerId)
           .get();
-      return querySnapshot.docs
-          .map((doc) => doc.data() as Map<String, dynamic>)
-          .toList();
+      return querySnapshot.docs.map((doc) => doc.data()).toList();
     });
   }
 
@@ -136,9 +136,16 @@ class ServiceProvidersRemoteDataSourceImpl
           .collection(FirebaseCollections.reservations)
           .where('ground.playgroundId', isEqualTo: playgroundId)
           .get();
-      return querySnapshot.docs
-          .map((doc) => doc.data() as Map<String, dynamic>)
-          .toList();
+      return querySnapshot.docs.map((doc) => doc.data()).toList();
+    });
+  }
+
+  @override
+  Future<void> changeReservationState(
+      String reservationId, Map<String, dynamic> data) {
+    return executeTryAndCatchForDataLayer(() async {
+      return await firestoreServices.updateData(
+          FirebaseCollections.reservation, reservationId, data);
     });
   }
 }

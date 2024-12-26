@@ -1,3 +1,5 @@
+import 'package:kamn/features/sports/data/models/reservation_model.dart';
+
 enum TrackGroundsReservationDetailsStatus {
   initial,
   loading,
@@ -14,7 +16,7 @@ extension TrackGroundsStateExtension on TrackGroundsReservationDetailsState {
 
 class TrackGroundsReservationDetailsState {
   final TrackGroundsReservationDetailsStatus state;
-  final List<Map<String, dynamic>>? playgroundsReservationDetails;
+  final List<ReservationModel>? playgroundsReservationDetails;
   final String? erorrMessage;
   final String? successMessage;
 
@@ -24,4 +26,18 @@ class TrackGroundsReservationDetailsState {
     this.erorrMessage,
     this.successMessage,
   });
+  TrackGroundsReservationDetailsState copyWith({
+    TrackGroundsReservationDetailsStatus? state,
+    List<ReservationModel>? playgroundsReservationDetails,
+    String? erorrMessage,
+    String? successMessage,
+  }) {
+    return TrackGroundsReservationDetailsState(
+      state: state ?? this.state,
+      playgroundsReservationDetails:
+          playgroundsReservationDetails ?? this.playgroundsReservationDetails,
+      erorrMessage: erorrMessage ?? this.erorrMessage,
+      successMessage: successMessage ?? this.successMessage,
+    );
+  }
 }
