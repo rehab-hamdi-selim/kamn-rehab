@@ -51,7 +51,7 @@ class CustomSessionCountDown extends StatelessWidget {
           ),
           ValueListenableBuilder<Duration>(
             valueListenable:
-                context.read<ReservationDetailsCubit>().countdownDuration,
+                context.read<ReservationDetailsCubit>().countdownDuration!,
             builder: (context, duration, child) {
               // Format the remaining duration to display as HH:mm:ss
               final hours = duration.inHours.toString().padLeft(2, '0');

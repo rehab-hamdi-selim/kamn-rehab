@@ -76,6 +76,6 @@ class CustomeSubmitButton extends StatelessWidget {
         }).toList(),
         status: 'pending',
         price: playground.price,
-        userId: context.read<AppUserCubit>().state.user?.uid);
+        user: context.read<AppUserCubit>().state.user);
   }
 }

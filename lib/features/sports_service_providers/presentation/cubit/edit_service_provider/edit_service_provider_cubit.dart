@@ -152,7 +152,7 @@ class EditServiceProviderCubit extends Cubit<EditServiceProviderState> {
   }
 
   void initValue(PlaygroundRequestModel playground) {
-    nameController.text = playground.name ?? '';
+    nameController.text = playground.playgroundName ?? '';
     phoneController.text = playground.phone ?? '';
     addressController.text = playground.address ?? '';
     sizeController.text = playground.size.toString();

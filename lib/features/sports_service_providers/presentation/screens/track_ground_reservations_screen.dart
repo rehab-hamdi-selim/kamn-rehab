@@ -89,7 +89,6 @@ class TrackGroundReservationsScreen extends StatelessWidget {
                   ),
                   child: BlocBuilder<TrackGroundReservationsCubit,
                       TrackGroundsState>(
-                    buildWhen: (previous, current) => current.isSuccess,
                     builder: (context, state) {
                       if (state.isInitial || state.isLoading) {
                         return const Center(

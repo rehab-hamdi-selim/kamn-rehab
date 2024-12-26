@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/common/class/custom_splash_screen.dart';
+import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/features/authentication/presentation/cubits/sign_up_cubit/sign_up_cubit.dart';
-import 'package:kamn/features/authentication/presentation/screens/user_type_selection_screen.dart';
 import 'package:kamn/features/payment/presentation/cubits/procced_payment_cubit/procced_payment_cubit.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
@@ -62,10 +62,7 @@ class AppRouter {
               create: (context) => getIt<AnalyticsCubit>(),
               child: FirstAnalyticsPage()),
         );
-      case Routes.userTypeSelectionScreen:
-        return MaterialPageRoute(
-          builder: (context) => const UserTypeSelectionScreen(),
-        );
+
       case Routes.groundDetailsScreen:
         return MaterialPageRoute(
           builder: (context) => BlocProvider.value(
@@ -83,7 +80,8 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => BlocProvider<TrackGroundReservationsCubit>(
                   create: (context) => getIt<TrackGroundReservationsCubit>()
-                    ..getPlaygroundsByOwnerId('testOwner49'),
+                    ..getPlaygroundsByOwnerId(
+                        context.read<AppUserCubit>().state.user!.uid),
                   child: const TrackGroundReservationsScreen(),
                 ));
       case Routes.trackGroundResrvationsDetail:
@@ -92,7 +90,8 @@ class AppRouter {
                 BlocProvider<TrackGroundReservationsDetailsCubit>(
                   create: (context) =>
                       getIt<TrackGroundReservationsDetailsCubit>()
-                        ..getPlaygroundsDetailsById('zuQkYty1ma0ZML7gMGgz'),
+                        ..getPlaygroundsDetailsById(
+                            (settings.arguments as PlaygroundModel).playgroundId!),
                   child: TrackGroundReservationDetail(
                     playgroundModel: settings.arguments as PlaygroundModel,
                   ),
@@ -146,9 +145,7 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                   create: (context) => getIt<SignUpCubit>(),
-                  child: SignUpScreen(
-                    userType: settings.arguments as String,
-                  ),
+                  child: const SignUpScreen(),
                 ));
       case Routes.onBoardingScreen:
         return MaterialPageRoute(
@@ -215,18 +212,24 @@ class AppRouter {
                 ));
       case Routes.logOut:
         return MaterialPageRoute(builder: (context) => const LogoutScreen());
+      case Routes.viewResrvationScreen:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) =>
+                      getIt<ViewReservationCubit>()..getUserResevation(context.read<AppUserCubit>().state.user!.uid),
+                  child: const ViewResrvationScreen(),
+                ));
       case Routes.splashScreen:
         return MaterialPageRoute(
             builder: (context) => const CustomSplashScreen());
       case Routes.reservationScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-                  create: (context) => getIt<ReservationDetailsCubit>(),
+                  create: (context) => getIt<ReservationDetailsCubit>()
+                    ..setTargetTime(
+                        (settings.arguments as ReservationModel).startAt!),
                   child: ReservationDetailsScreen(
-                    reservation: settings.arguments != null
-                        ? settings.arguments as ReservationModel
-                        : ReservationModel(),
-                  ),
+                      reservation: settings.arguments as ReservationModel),
                 ));
       default:
         return MaterialPageRoute(

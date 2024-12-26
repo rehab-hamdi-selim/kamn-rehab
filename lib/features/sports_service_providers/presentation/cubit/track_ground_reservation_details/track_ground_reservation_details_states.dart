@@ -1,3 +1,5 @@
+import 'package:kamn/features/sports/data/models/reservation_model.dart';
+
 enum TrackGroundsReservationDetailsStatus {
   initial,
   loading,
@@ -14,7 +16,7 @@ extension TrackGroundsStateExtension on TrackGroundsReservationDetailsState {
 
 class TrackGroundsReservationDetailsState {
   final TrackGroundsReservationDetailsStatus state;
-  final List<Map<String, dynamic>>? playgroundsReservationDetails;
+  final List<ReservationModel>? playgroundsReservationDetails;
   final String? erorrMessage;
   final String? successMessage;
 

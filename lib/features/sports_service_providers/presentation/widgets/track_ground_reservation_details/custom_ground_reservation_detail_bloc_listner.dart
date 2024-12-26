@@ -14,9 +14,6 @@ class CustomeGroundReservationDetailsBlocListner extends StatelessWidget {
     return BlocListener<TrackGroundReservationsDetailsCubit,
         TrackGroundsReservationDetailsState>(
       listener: (context, state) {
-        if (state.isSuccess) {
-          showSnackBar(context, state.successMessage!);
-        }
         if (state.isFailure) {
           showSnackBar(context, state.erorrMessage!);
         }

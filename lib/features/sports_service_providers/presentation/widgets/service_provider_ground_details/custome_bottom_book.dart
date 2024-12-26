@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
@@ -54,7 +55,7 @@ class CustomeBottomBook extends StatelessWidget {
           ElevatedButton(
               onPressed: () {
                 context.read<ServiceProviderGroundDetailsCubit>().accept(
-                    PlaygroundModel.fromMap(playgroundRequestModel.toMap()));
+                    playgroundRequestModel,context.read<AppUserCubit>().state.user!.uid);
               },
               child: Text(
                 'Accept',

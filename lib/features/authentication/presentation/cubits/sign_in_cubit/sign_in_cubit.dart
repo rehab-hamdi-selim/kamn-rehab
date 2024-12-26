@@ -103,10 +103,4 @@ class SignInCubit extends Cubit<SignInState> {
               state: SignInStatus.setUserDataSuccess,
             )));
   }
-
-  @override
-  Future<void> close() {
-    signInViewModel.dispose();
-    return super.close();
-  }
 }

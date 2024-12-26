@@ -4,7 +4,7 @@ import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme_data/style.dart';
-import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_app_bar.dart';
+import 'package:kamn/core/utils/custom_app_bar.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_your_next_match_timer.dart';
 import 'package:kamn/features/sports/presentation/widgets/pick_time_for_reservation/custom_reservation_filter_item.dart';
 import 'package:kamn/features/sports/presentation/widgets/view_reservation_screen.dart/custom_reservation_filter.dart';
@@ -17,9 +17,8 @@ class ViewResrvationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppPallete.whiteColor,
-      appBar: CustomAppBar.appBar(
-        backGroundColor: AppPallete.whiteColor,
-        arrowFunction: () {},
+      appBar: CustomAppBar.appBar(context: context,
+        color: AppPallete.whiteColor,
         notificationIconFunction: () {},
         profileFunction: () {},
         badgesIconFunction: () {},
@@ -35,22 +34,22 @@ class ViewResrvationScreen extends StatelessWidget {
             ),
             const CustomReservationFilter(),
             verticalSpace(10),
-            const CustomReservationFilterItem(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  Constants.reservation,
-                  style: Style.font15BlackColorBold,
-                ),
-                Text(
-                  Constants.showAll,
-                  style: Style.font10GrayColorW400,
-                ),
-              ],
-            ),
-            verticalSpace(5.h),
-            const CustomYourNextMatchTimer(),
+            // const CustomReservationFilterItem(),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Text(
+            //       Constants.reservation,
+            //       style: Style.font15BlackColorBold,
+            //     ),
+            //     Text(
+            //       Constants.showAll,
+            //       style: Style.font10GrayColorW400,
+            //     ),
+            //   ],
+            // ),
+            // verticalSpace(5.h),
+            // const CustomYourNextMatchTimer(),
             verticalSpace(20),
             const Expanded(child: CustomReservationList())
           ],

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,7 +32,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (context) => getIt<AppUserCubit>()..isUserLoggedIn()),
+            create: (context) => getIt<AppUserCubit>()
+              ..isFirstInstallation()
+              ..isUserLoggedIn()),
         BlocProvider(
             create: (context) => FirebaseRemoteConfigCubit()
               ..initListner()
@@ -48,21 +52,28 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          onGenerateRoute: AppRouter.generateRoute,
-    home:     BlocListener<AppUserCubit, AppUserState>(
+          onGenerateRoute : AppRouter.generateRoute,
+          home: BlocListener<AppUserCubit, AppUserState>(
             listener: (context, state) async {
               await Future.delayed(const Duration(seconds: 2));
 
-              if (state.isLoggedIn()) {
-                if (state.user?.type == 'normal') {
-                  Navigator.pushNamed(context, Routes.groundsScreen);
-                } else {
-                  Navigator.pushNamed(context, Routes.groundsScreen);
-                }
-              } else if (state.isNotLoggedIn()) {
-
-                
+              if (state.isNotInstalled()) {
                 Navigator.pushNamed(context, Routes.onBoardingScreen);
+                context.read<AppUserCubit>().saveInstallationFlag();
+              } else {
+                if (state.isLoggedIn()) {
+                  await context
+                      .read<AppUserCubit>()
+                      .getUser(uid: state.user!.uid);
+                } else if (state.isGettedData()) {
+                  context.read<AppUserCubit>().saveUserData(
+                        state.user!,
+                      );
+                } else if (state.isSuccess()) {
+                  Navigator.pushNamed(context, Routes.groundsScreen);
+                } else if (state.isNotLoggedIn()) {
+                  Navigator.pushNamed(context, Routes.signInScreen);
+                }
               }
             },
             child: const CustomSplashScreen(),

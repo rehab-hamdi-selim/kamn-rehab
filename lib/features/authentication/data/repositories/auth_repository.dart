@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kamn/features/authentication/presentation/cubits/sign_in_cubit/sign_in_view_model.dart';
 import '../../../../core/erorr/faliure.dart';
 import '../../../../core/utils/try_and_catch.dart';
 import '../../../../core/common/entities/user_model.dart';
@@ -46,6 +47,7 @@ class AuthRepositoryImpl implements AuthRepository {
       );
 
       final userModel = UserModel(
+          signFrom: SignInMethods.emailAndPassword.name,
           uid: userCredential.user!.uid,
           email: email,
           name: name,
@@ -107,6 +109,8 @@ class AuthRepositoryImpl implements AuthRepository {
     return await executeTryAndCatchForRepository(() async {
       final userCredential = await _authDataSource.googleAuth();
       return UserModel(
+          signFrom: SignInMethods.google.name,
+          type: 'normal',
           uid: userCredential.user!.uid,
           email: userCredential.user!.email!,
           name: userCredential.user!.displayName!,

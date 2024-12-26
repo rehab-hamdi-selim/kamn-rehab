@@ -21,7 +21,8 @@ abstract class ServiceProvidersRemoteDataSource {
   Future<List<Map<String, dynamic>>> getPlaygroundsReservationDetailsById(
       String playgroundId);
   Future<List<Map<String, dynamic>>> getPlaygroundsRequests();
-  Future<void> addWithTransactionToFirebase(PlaygroundModel playgroundModel);
+  Future<void> addWithTransactionToFirebase(
+      PlaygroundRequestModel playgroundModel,String userId);
   Future<void> updateState(String playgroundId, Map<String, dynamic> data);
   Future<List<Map<String, dynamic>>> searchByQuery(String query, String type);
 }
@@ -42,7 +43,6 @@ class ServiceProvidersRemoteDataSourceImpl
           .collection(FirebaseCollections.playgroundsRequests);
       var docRef = collRef.doc();
       playground.playgroundId = docRef.id;
-      playground.state = 'pending';
       await docRef.set(playground.toMap());
       return playground;
     });
@@ -96,7 +96,7 @@ class ServiceProvidersRemoteDataSourceImpl
     return executeTryAndCatchForDataLayer(() async {
       var querySnapshot = await FirebaseFirestore.instance
           .collection(FirebaseCollections.playgrounds)
-          .where('ownerId', isEqualTo: ownerId)
+          .where('owner.uid', isEqualTo: ownerId)
           .get();
       return querySnapshot.docs
           .map((doc) => doc.data() as Map<String, dynamic>)
@@ -105,7 +105,8 @@ class ServiceProvidersRemoteDataSourceImpl
   }
 
   @override
-  Future<void> addWithTransactionToFirebase(PlaygroundModel playgroundModel) {
+  Future<void> addWithTransactionToFirebase(
+      PlaygroundRequestModel playgroundModel, String userId) {
     return executeTryAndCatchForDataLayer(() async {
       await firestoreServices.firestore.runTransaction((transaction) async {
         var deletedDocRef = firestoreServices.firestore
@@ -114,9 +115,16 @@ class ServiceProvidersRemoteDataSourceImpl
         var addedDocRef = firestoreServices.firestore
             .collection(FirebaseCollections.playgrounds)
             .doc();
+        var userDocRef = firestoreServices.firestore
+            .collection(FirebaseCollections.users)
+            .doc(userId);
         playgroundModel.playgroundId = addedDocRef.id;
+        playgroundModel.accpetingState = 'accepted';
         transaction.delete(deletedDocRef);
         transaction.set(addedDocRef, playgroundModel.toMap());
+        transaction.update(userDocRef, {
+          'type': 'serviceProvider',
+        });
       });
     });
   }
@@ -138,7 +146,7 @@ class ServiceProvidersRemoteDataSourceImpl
           .where('ground.playgroundId', isEqualTo: playgroundId)
           .get();
       return querySnapshot.docs
-          .map((doc) => doc.data() as Map<String, dynamic>)
+          .map((doc) => doc.data() )
           .toList();
     });
   }

@@ -1,8 +1,20 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'package:flutter/widgets.dart';
+
 import '../../entities/user_model.dart';
 
-enum AppUserStates { initial, failure, notLoggedIn, loggedIn, signOut }
+enum AppUserStates {
+  initial,
+  failure,
+  notLoggedIn,
+  loggedIn,
+  signOut,
+  installed,
+  notInstalled,
+  success,
+  gettedData
+}
 
 extension AppUserStateExtension on AppUserState {
   bool isInitial() => state == AppUserStates.initial;
@@ -10,6 +22,10 @@ extension AppUserStateExtension on AppUserState {
   bool isNotLoggedIn() => state == AppUserStates.notLoggedIn;
   bool isFailure() => state == AppUserStates.failure;
   bool isSignOut() => state == AppUserStates.signOut;
+  bool isInstalled() => state == AppUserStates.installed;
+  bool isNotInstalled() => state == AppUserStates.notInstalled;
+  bool isSuccess() => state == AppUserStates.success;
+  bool isGettedData() => state == AppUserStates.gettedData;
 }
 
 class AppUserState {
@@ -36,7 +52,7 @@ class AppUserState {
 
   @override
   String toString() =>
-      'AppUserState(state: $state, user: $user, errorMessage: $errorMessage)';
+      'AppUserState(state: $state, user: $user, errorMessage: $errorMessage )';
 
   @override
   bool operator ==(covariant AppUserState other) {
@@ -48,5 +64,8 @@ class AppUserState {
   }
 
   @override
-  int get hashCode => state.hashCode ^ user.hashCode ^ errorMessage.hashCode;
+  int get hashCode =>
+      state.hashCode ^
+      user.hashCode ^
+      errorMessage.hashCode ;
 }

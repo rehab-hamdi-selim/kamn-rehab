@@ -59,6 +59,7 @@ class ProceedPaymentScreen extends StatelessWidget {
         ),
         bottomNavigationBar: CustomButton(
             onTap: () {
+              reservationModel.paymentMethod = 'cash';
               context
                   .read<ProccedPaymentCubit>()
                   .onSubmitReservation(reservationModel);

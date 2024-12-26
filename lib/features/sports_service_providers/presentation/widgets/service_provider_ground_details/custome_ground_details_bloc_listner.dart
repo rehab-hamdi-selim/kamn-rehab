@@ -16,7 +16,7 @@ class CustomeGroundDetailsBlocListner extends StatelessWidget {
       listener: (context, state) {
         if (state.isSuccess) {
           showSnackBar(context, state.successMessage!);
-          Navigator.of(context).pushReplacementNamed(Routes.addServiceScreen);
+          Navigator.of(context).pushReplacementNamed(Routes.myProfileScreen);
         }
         if (state.isFailure) {
           showSnackBar(context, state.erorrMessage!);

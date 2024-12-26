@@ -73,7 +73,7 @@ class CustomPlayGroundTitleAndLocation extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(playgroundModel?.name ?? "",
+        Text(playgroundModel?.playgroundName ?? "",
             style: TextStyles.font24BlackRegular.copyWith(height: .85),
             maxLines: 2,
             overflow: TextOverflow.ellipsis),

@@ -32,7 +32,8 @@ class CustomSuccessAlertDailog extends StatelessWidget {
                 Text('Thanks for Booking',
                     style: TextStyles.fontRoboto24BoldBlack),
                 verticalSpace(10.h),
-                Text('you booked in ${reservationModel.ground?.name ?? ""}',
+                Text(
+                    'you booked in ${reservationModel.ground?.playgroundName ?? ""}',
                     style: TextStyles.font16blackRegular
                         .copyWith(fontWeight: FontWeight.w300)),
                 verticalSpace(20.h),

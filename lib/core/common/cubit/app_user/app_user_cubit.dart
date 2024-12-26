@@ -12,7 +12,7 @@ class AppUserCubit extends Cubit<AppUserState> {
   AppUserCubit({required this.authRepository})
       : super(AppUserState(state: AppUserStates.initial));
 
-  void saveUserData(UserModel? user) async {
+  void saveUserData(UserModel? user,) async {
     if (user != null) {
       final res = await SecureStorageHelper.saveUserData(user);
       res.fold((l) {
@@ -21,7 +21,8 @@ class AppUserCubit extends Cubit<AppUserState> {
           errorMessage: l,
         ));
       }, (r) {
-        emit(state.copyWith(state: AppUserStates.loggedIn, user: user));
+        emit(state.copyWith(
+            state: AppUserStates.success, user: user, ));
       });
     }
   }
@@ -33,22 +34,25 @@ class AppUserCubit extends Cubit<AppUserState> {
               state: AppUserStates.failure,
               errorMessage: 'Failed to sign out',
             )),
-        (r) => emit(state.copyWith(state: AppUserStates.notLoggedIn)));
+        (r) => emit(state.copyWith(
+            state: AppUserStates.notLoggedIn, user: null, )));
+  }
+   Future<void> getUser({required String uid}) async {
+    final result = await authRepository.getUser(uid: uid);
+    result.fold(
+        (l) => emit(state.copyWith(
+              state: AppUserStates.failure,
+              errorMessage: l.erorr,
+            )),
+        (r)  {print(r.toString());
+          emit(state.copyWith(
+              state: AppUserStates.gettedData,
+              user: r,
+            ));});
   }
 
   // Check if user is logged in
   void isUserLoggedIn() async {
-    final res = await SecureStorageHelper.isUserLoggedIn();
-    res.fold((l) {
-      emit(state.copyWith(
-        state: AppUserStates.notLoggedIn,
-        errorMessage: l,
-      ));
-    }, (r) {
-      emit(state.copyWith(state: AppUserStates.loggedIn, user: r));
-    });
-  }
-  void isFirstInstallation() async {
     final res = await SecureStorageHelper.isUserLoggedIn();
     res.fold((l) {
       emit(state.copyWith(
@@ -71,7 +75,7 @@ class AppUserCubit extends Cubit<AppUserState> {
         (r) => emit(state.copyWith(state: AppUserStates.loggedIn, user: r)));
   }
 
-  Future<void> signOutFromFireStore() async {
+  Future<void> signOutFromEmailandPassword() async {
     final res = await authRepository.signOut();
     res.fold(
         (l) => emit(state.copyWith(
@@ -79,5 +83,43 @@ class AppUserCubit extends Cubit<AppUserState> {
               errorMessage: l.erorr,
             )),
         (r) => emit(state.copyWith(state: AppUserStates.signOut)));
+  }
+
+  Future<void> signOutFromGoogle() async {
+    final res = await authRepository.googleSignOut();
+    res.fold(
+        (l) => emit(state.copyWith(
+              state: AppUserStates.failure,
+              errorMessage: l.erorr,
+            )),
+        (r) => emit(state.copyWith(state: AppUserStates.signOut)));
+  }
+
+  void isFirstInstallation() async {
+    final res = await SecureStorageHelper.isFirstInstallation();
+    res.fold((l) {
+      emit(state.copyWith(
+        state: AppUserStates.notInstalled,
+        errorMessage: l,
+      ));
+    }, (r) {
+      emit(state.copyWith(
+        state: AppUserStates.installed,
+      ));
+    });
+  }
+
+  void saveInstallationFlag() async {
+    final res = await SecureStorageHelper.saveInstalltionFlag();
+    res.fold((l) {
+      emit(state.copyWith(
+        state: AppUserStates.failure,
+        errorMessage: l,
+      ));
+    }, (r) {
+      emit(state.copyWith(
+        state: AppUserStates.installed,
+      ));
+    });
   }
 }

@@ -15,7 +15,7 @@ class ReservationDetailsCubit extends Cubit<ReservationDetailsState> {
 
   late DateTime? targetTime;
   Timer? _timer;
-  late ValueNotifier<Duration> countdownDuration;
+   ValueNotifier<Duration>? countdownDuration;
   setTargetTime(DateTime newTime) {
     targetTime = newTime;
     countdownDuration = ValueNotifier(targetTime!.difference(DateTime.now()));
@@ -24,7 +24,7 @@ class ReservationDetailsCubit extends Cubit<ReservationDetailsState> {
 
   void changeValue() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      countdownDuration.value = targetTime!.difference(DateTime.now());
+      countdownDuration?.value = targetTime!.difference(DateTime.now());
     });
   }
 
@@ -37,7 +37,6 @@ class ReservationDetailsCubit extends Cubit<ReservationDetailsState> {
   @override
   Future<void> close() {
     _timer?.cancel();
-    countdownDuration.dispose();
     return super.close();
   }
 }

@@ -19,7 +19,7 @@ class CustomProceedPaymentDetails extends StatelessWidget {
         style: TextStyles.font16RobotogreenMedium,
       ),
       Text(
-        reservationModel.ground?.name ?? '',
+        reservationModel.ground?.playgroundName ?? '',
         style: TextStyles.font30accentBlackColorMedium,
       ),
       verticalSpace(53.h),

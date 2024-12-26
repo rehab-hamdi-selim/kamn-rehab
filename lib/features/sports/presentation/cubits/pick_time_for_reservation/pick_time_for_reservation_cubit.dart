@@ -60,18 +60,18 @@ class PickTimeForReservationCubit extends Cubit<PickTimeForReservationState> {
         state: PickTimeForReservationStatus.loading, selectedDate: newDay));
   }
 
-  Future<void> getAllReservation() async {
-    var response = await repository.getAllReservation();
-    response.fold((error) {
-      emit(state.copyWith(
-          state: PickTimeForReservationStatus.failure,
-          erorrMessage: error.erorr));
-    }, (success) {
-      emit(state.copyWith(
-          state: PickTimeForReservationStatus.reservationLoaded,
-          reservationList: success));
-    });
-  }
+  // Future<void> getAllReservation() async {
+  //   var response = await repository.getUserReservations();
+  //   response.fold((error) {
+  //     emit(state.copyWith(
+  //         state: PickTimeForReservationStatus.failure,
+  //         erorrMessage: error.erorr));
+  //   }, (success) {
+  //     emit(state.copyWith(
+  //         state: PickTimeForReservationStatus.reservationLoaded,
+  //         reservationList: success));
+  //   });
+  // }
 
   Future<void> getSpecificReservationsByGroundId(
       String groundId, DateTime selectedDate) async {

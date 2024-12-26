@@ -240,7 +240,7 @@ class TextStyles {
       fontFamily: "Roboto",
       color: AppPallete.blueColor,
       fontWeight: FontWeightHelper.regular,
-      fontSize: 11.98.h);
+      fontSize: 11.h);
   static TextStyle font14RobotoWhiteColorBold = const TextStyle(
     fontFamily: "Roboto",
     color: AppPallete.whiteColor,

@@ -156,7 +156,7 @@ class CustomePlayGroundInfo extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: Text(playgroundModel?.name ?? "",
+          child: Text(playgroundModel?.playgroundName ?? "",
               style: TextStyles.font24BlackRegular.copyWith(height: .85),
               maxLines: 2,
               overflow: TextOverflow.ellipsis),
