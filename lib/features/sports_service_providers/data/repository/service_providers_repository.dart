@@ -25,6 +25,8 @@ abstract class ServiceProvidersRepository {
       PlaygroundModel playground);
   Future<Either<Faliure, void>> updateState(
       String playgroundId, Map<String, dynamic> data);
+  Future<Either<Faliure, void>> changeReservationState(
+      String reservationId, Map<String, dynamic> data);
 }
 
 @Injectable(as: ServiceProvidersRepository)
@@ -103,6 +105,14 @@ class ServiceProvidersRepositoryImpl implements ServiceProvidersRepository {
       return data.map((value) {
         return ReservationModel.fromMap(value);
       }).toList();
+    });
+  }
+
+  @override
+  Future<Either<Faliure, void>> changeReservationState(
+      String reservationId, Map<String, dynamic> data) {
+    return executeTryAndCatchForRepository(() async {
+      return await dataSource.changeReservationState(reservationId, data);
     });
   }
 }

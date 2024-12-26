@@ -81,6 +81,7 @@ class ReservationDetailsItem extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return DateAndCountdownWidget(
                       data: data.sessions![index],
+                      reservation: data,
                     );
                   },
                 ),

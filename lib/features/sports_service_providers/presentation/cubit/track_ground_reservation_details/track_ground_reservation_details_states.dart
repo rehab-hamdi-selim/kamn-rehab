@@ -26,4 +26,18 @@ class TrackGroundsReservationDetailsState {
     this.erorrMessage,
     this.successMessage,
   });
+  TrackGroundsReservationDetailsState copyWith({
+    TrackGroundsReservationDetailsStatus? state,
+    List<ReservationModel>? playgroundsReservationDetails,
+    String? erorrMessage,
+    String? successMessage,
+  }) {
+    return TrackGroundsReservationDetailsState(
+      state: state ?? this.state,
+      playgroundsReservationDetails:
+          playgroundsReservationDetails ?? this.playgroundsReservationDetails,
+      erorrMessage: erorrMessage ?? this.erorrMessage,
+      successMessage: successMessage ?? this.successMessage,
+    );
+  }
 }
