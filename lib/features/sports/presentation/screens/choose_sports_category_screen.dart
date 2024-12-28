@@ -12,7 +12,6 @@ import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_g
 import 'package:kamn/features/sports/presentation/widgets/choose_sports_category/custome_individual_play_categories.dart';
 import 'package:kamn/features/sports/presentation/widgets/choose_sports_category/custome_team_play_categories.dart';
 import 'package:kamn/features/sports/presentation/widgets/choose_sports_category/custome_title_text.dart';
-import 'package:kamn/core/utils/custom_app_bar_service_provider.dart';
 
 class ChooseSportsCategoryScreen extends StatelessWidget {
   const ChooseSportsCategoryScreen({super.key});

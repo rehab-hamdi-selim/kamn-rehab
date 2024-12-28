@@ -7,11 +7,9 @@ import 'package:kamn/core/utils/try_and_catch.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
 import 'package:kamn/features/sports_service_providers/data/data_source/service_providers_remote_data_source.dart';
-import 'package:kamn/features/sports_service_providers/data/model/failure.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 import 'dart:async';
 
-import 'package:kamn/features/sports_service_providers/data/model/reservation_model.dart';
 
 abstract class ServiceProvidersRepository {
   Future<Either<Faliure, PlaygroundRequestModel>> addServiceToFirestore(
@@ -28,11 +26,15 @@ abstract class ServiceProvidersRepository {
   Future<Either<Faliure, List<ReservationModel>>>
       getPlaygroundsReservationDetailsById(String playgroundId);
   Future<Either<Faliure, void>> addWithTransactionToFirebase(
-      PlaygroundRequestModel playground,String userId);
+      PlaygroundRequestModel playground, String userId);
   Future<Either<Faliure, void>> updateState(
       String playgroundId, Map<String, dynamic> data);
   Future<Either<Faliure, Map<String, List<PlaygroundRequestModel>>?>>
       searchByQuery(String query, String type);
+  Future<Either<Faliure,List<ReservationModel>?>> getCurrentOrdersByCategory(
+      String category);
+  Future<Either<Faliure,List<ReservationModel>?>> getFinishedOrdersByCategory(
+      String category);
 }
 
 @Injectable(as: ServiceProvidersRepository)
@@ -87,9 +89,9 @@ class ServiceProvidersRepositoryImpl implements ServiceProvidersRepository {
 
   @override
   Future<Either<Faliure, void>> addWithTransactionToFirebase(
-      PlaygroundRequestModel playground,String userId) {
+      PlaygroundRequestModel playground, String userId) {
     return executeTryAndCatchForRepository(() async {
-      return await dataSource.addWithTransactionToFirebase(playground,userId);
+      return await dataSource.addWithTransactionToFirebase(playground, userId);
     });
   }
 
@@ -127,36 +129,24 @@ class ServiceProvidersRepositoryImpl implements ServiceProvidersRepository {
       return {type: playgrounds};
     });
   }
-}
-
-abstract class FinishedOrdersRepository {
-  Future<Either<Failure, List<Reservation>>> fetchOrdersByCategory(
-      String category);
-}
-
-class FinishedOrdersRepositoryImp implements FinishedOrdersRepository {
-  final FinishedOrdersRemoteDataSource remoteDataSource;
-
-  FinishedOrdersRepositoryImp(this.remoteDataSource);
-
-  Future<Either<Failure, List<Reservation>>> fetchOrdersByCategory(
-      String category) {
-    return remoteDataSource.fetchOrdersByCategory(category);
+  
+  @override
+  Future<Either<Faliure,List<ReservationModel>?>> getCurrentOrdersByCategory(String category) {
+    return executeTryAndCatchForRepository(() async {
+     var response= await dataSource.getCurrentOrdersByCategory(category);
+       return response?.map((value) {
+        return ReservationModel.fromMap(value);
+      }).toList();
+    });
   }
-}
-
-abstract class CurrentOrdersRepository {
-  Future<Either<Failure, List<Reservation>>> fetchOrdersByCategory(
-      String category);
-}
-
-class CurrentOrdersRepositoryImp implements CurrentOrdersRepository {
-  final FinishedOrdersRemoteDataSource remoteDataSource;
-
-  CurrentOrdersRepositoryImp(this.remoteDataSource);
-
-  Future<Either<Failure, List<Reservation>>> fetchOrdersByCategory(
-      String category) {
-    return remoteDataSource.fetchOrdersByCategory(category);
+  
+  @override
+  Future<Either<Faliure,List<ReservationModel>?>> getFinishedOrdersByCategory(String category) {
+       return executeTryAndCatchForRepository(() async {
+     var response= await dataSource.getFinishedOrdersByCategory(category);
+       return response?.map((value) {
+        return ReservationModel.fromMap(value);
+      }).toList();
+    });
   }
 }

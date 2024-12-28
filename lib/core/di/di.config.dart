@@ -76,8 +76,12 @@ import '../../features/sports_service_providers/presentation/cubit/add_service_p
     as _i1058;
 import '../../features/sports_service_providers/presentation/cubit/available_dates/available_dates_cubit.dart'
     as _i731;
+import '../../features/sports_service_providers/presentation/cubit/current_reseravaion_order/current_orders_cubit.dart'
+    as _i861;
 import '../../features/sports_service_providers/presentation/cubit/edit_service_provider/edit_service_provider_cubit.dart'
     as _i773;
+import '../../features/sports_service_providers/presentation/cubit/finished_reseravaion_order/finished_order_cubit.dart'
+    as _i718;
 import '../../features/sports_service_providers/presentation/cubit/service_provider_ground_details/service_provider_ground_details_cubit.dart'
     as _i692;
 import '../../features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart'
@@ -177,6 +181,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i38.TrackGroundReservationsDetailsCubit>(() =>
         _i38.TrackGroundReservationsDetailsCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
+    gh.factory<_i861.CurrentOrdersCubit>(() => _i861.CurrentOrdersCubit(
+        repository: gh<_i542.ServiceProvidersRepository>()));
+    gh.factory<_i718.FinishedOrdersCubit>(() => _i718.FinishedOrdersCubit(
+        repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i252.AddServiceProviderCubit>(
         () => _i252.AddServiceProviderCubit(
               repository: gh<_i542.ServiceProvidersRepository>(),

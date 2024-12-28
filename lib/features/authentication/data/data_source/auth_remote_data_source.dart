@@ -15,7 +15,7 @@ abstract interface class AuthRemoteDataSource {
   Future<void> deleteUser({required String uid});
   Future<UserCredential> signIn(
       {required String email, required String password});
-  Future<Map<String, dynamic>> getUserData({required String uid});
+  Future<Map<String, dynamic>?> getUserData({required String uid});
   Future<void> signOut();
   Future<void> googleSignOut();
   Future<UserCredential> googleAuth();
@@ -96,10 +96,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<Map<String, dynamic>> getUserData({required String uid}) async {
+  Future<Map<String, dynamic>?> getUserData({required String uid}) async {
     return await executeTryAndCatchForDataLayer(() async {
       final doc = await _userCollection.doc(uid).get();
-      return doc.data() as Map<String, dynamic>;
+      if (doc.exists) {
+        return doc.data() as Map<String, dynamic>;
+      } else {
+        return null;
+      }
     });
   }
 

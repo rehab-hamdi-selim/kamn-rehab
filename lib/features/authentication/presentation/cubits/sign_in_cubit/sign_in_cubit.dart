@@ -70,10 +70,12 @@ class SignInCubit extends Cubit<SignInState> {
     ));
     final result = await _authRepository.googleAuth();
     result.fold((error) {
+      print(error.erorr);
       emit(state.copyWith(
           state: SignInStatus.googleAuthFailure,
           erorrMessage: state.erorrMessage));
     }, (userData) {
+      print(userData.toString());
       emit(SignInState(
           state: SignInStatus.googleAuthSuccess, userModel: userData));
     });

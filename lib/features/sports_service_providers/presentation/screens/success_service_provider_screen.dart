@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/routing/routes.dart';
-import 'package:kamn/core/utils/navigation.dart';
-import 'package:kamn/core/utils/custom_app_bar_service_provider.dart';
+import 'package:kamn/core/utils/custom_app_bar.dart';
 import '../../../../core/const/constants.dart';
 import '../../../../core/const/image_links.dart';
 import '../../../../core/theme/app_pallete.dart';
@@ -17,13 +16,13 @@ class SuccessServiceProviderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppPallete.whiteColor,
-      appBar: CustomAppBarServiceProvider.appBar(
-        color: AppPallete.whiteColor,
-        arrowFunction: () {},
-        notificationIconFunction: () {},
-        profileFunction: () {},
-        badgesIconFunction: () {},
-      ),
+      appBar: CustomAppBar.appBar(
+            context: context,
+            color: AppPallete.whiteColor,
+            notificationIconFunction: () {},
+            profileFunction: () {},
+            badgesIconFunction: () {},
+          ),
       body: SizedBox(
         width: double.infinity,
         child: Column(

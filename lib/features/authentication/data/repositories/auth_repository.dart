@@ -93,7 +93,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Faliure, UserModel>> getUser({required String uid}) async {
     return executeTryAndCatchForRepository(() async {
       final userData = await _authDataSource.getUserData(uid: uid);
-      return UserModel.fromMap(userData);
+      return UserModel.fromMap(userData!);
     });
   }
 
@@ -108,13 +108,19 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Faliure, UserModel>> googleAuth() async {
     return await executeTryAndCatchForRepository(() async {
       final userCredential = await _authDataSource.googleAuth();
-      return UserModel(
+      final user = await _authDataSource.getUserData(uid: userCredential.user!.uid);
+      if(user!=null){
+return UserModel.fromMap(user);
+      }
+      else {
+        return UserModel(
           signFrom: SignInMethods.google.name,
           type: 'normal',
           uid: userCredential.user!.uid,
           email: userCredential.user!.email!,
           name: userCredential.user!.displayName!,
           createdAt: DateTime.now());
+      }
     });
   }
 

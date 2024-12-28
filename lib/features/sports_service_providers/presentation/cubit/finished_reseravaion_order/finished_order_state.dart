@@ -1,19 +1,36 @@
-import 'package:kamn/features/sports_service_providers/data/model/reservation_model.dart';
+import 'package:flutter/widgets.dart';
 
-abstract class FinishedOrdersState {}
+import 'package:kamn/features/sports/data/models/reservation_model.dart';
 
-class FinishedOrdersInitial extends FinishedOrdersState {}
+enum FinishedOrdersStatus { initial, loading, success, failure }
 
-class FinishedOrdersLoading extends FinishedOrdersState {}
-
-class FinishedOrdersLoaded extends FinishedOrdersState {
-  final List<Reservation> reservations;
-
-  FinishedOrdersLoaded(this.reservations);
+extension FinishedOrderStateExtension on FinishedOrdersState {
+   bool get isInitial => state == FinishedOrdersStatus.initial;
+  bool get isLoading => state == FinishedOrdersStatus.loading;
+  bool get isSuccess => state == FinishedOrdersStatus.success;
+  bool get isFailure => state == FinishedOrdersStatus.failure;
 }
 
-class FinishedOrdersError extends FinishedOrdersState {
-  final String message;
+class FinishedOrdersState {
+  final FinishedOrdersStatus? state;
+  final String? errorMessage;
+  final List<ReservationModel>? reservations;
+  FinishedOrdersState({
+    required this.state,
+    this.errorMessage,
+    this.reservations,
+  });
+  
 
-  FinishedOrdersError(this.message);
+  FinishedOrdersState copyWith({
+    FinishedOrdersStatus? state,
+    String? errorMessage,
+    List<ReservationModel>? reservations,
+  }) {
+    return FinishedOrdersState(
+      state: state ?? this.state,
+      errorMessage: errorMessage ?? this.errorMessage,
+      reservations: reservations ?? this.reservations,
+    );
+  }
 }

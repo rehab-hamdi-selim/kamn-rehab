@@ -15,7 +15,9 @@ class CustomeUserOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AppUserCubit, AppUserState>(
       builder: (context, state) {
-        return Column(
+        return ListView(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             CustomeMenuItem(
               icon: 'assets/icons/reservations.svg',
@@ -40,16 +42,21 @@ class CustomeUserOptions extends StatelessWidget {
                     context, Routes.chooseServiceCategoryScreen);
               },
             ),
-            CustomeMenuItem(
-              icon: 'assets/icons/order.svg',
-              title: "My Order",
-              goTo: () {},
-            ),
+            if (state.user?.type == 'serviceProvider')
+              CustomeMenuItem(
+                icon: 'assets/icons/order.svg',
+                title: "My Order",
+                goTo: () {
+                  Navigator.pushNamed(context, Routes.currentOrderScreen);
+                },
+              ),
             if (state.user?.type == 'serviceProvider')
               CustomeMenuItem(
                 icon: 'assets/icons/dashboard.svg',
                 title: "Dashboard",
-                goTo: () {},
+                goTo: () {
+                  Navigator.pushNamed(context, Routes.finishOrderScreen);
+                },
               ),
             CustomeMenuItem(
               icon: 'assets/icons/settings.svg',

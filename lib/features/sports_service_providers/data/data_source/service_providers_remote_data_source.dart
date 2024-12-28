@@ -9,10 +9,8 @@ import 'package:kamn/core/common/class/firebase_storage_services.dart';
 import 'package:kamn/core/common/class/firestore_services.dart';
 import 'package:kamn/core/const/firebase_collections.dart';
 import 'package:kamn/core/utils/try_and_catch.dart';
-import 'package:kamn/features/sports/data/models/playground_model.dart';
-import 'package:kamn/features/sports_service_providers/data/model/failure.dart';
+
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
-import 'package:kamn/features/sports_service_providers/data/model/reservation_model.dart';
 import 'package:path/path.dart';
 
 abstract class ServiceProvidersRemoteDataSource {
@@ -25,9 +23,13 @@ abstract class ServiceProvidersRemoteDataSource {
       String playgroundId);
   Future<List<Map<String, dynamic>>> getPlaygroundsRequests();
   Future<void> addWithTransactionToFirebase(
-      PlaygroundRequestModel playgroundModel,String userId);
+      PlaygroundRequestModel playgroundModel, String userId);
   Future<void> updateState(String playgroundId, Map<String, dynamic> data);
   Future<List<Map<String, dynamic>>> searchByQuery(String query, String type);
+  Future<List<Map<String, dynamic>>?> getCurrentOrdersByCategory(
+      String category);
+  Future<List<Map<String, dynamic>>?> getFinishedOrdersByCategory(
+      String category);
 }
 
 @Injectable(as: ServiceProvidersRemoteDataSource)
@@ -148,9 +150,7 @@ class ServiceProvidersRemoteDataSourceImpl
           .collection(FirebaseCollections.reservations)
           .where('ground.playgroundId', isEqualTo: playgroundId)
           .get();
-      return querySnapshot.docs
-          .map((doc) => doc.data() )
-          .toList();
+      return querySnapshot.docs.map((doc) => doc.data()).toList();
     });
   }
 
@@ -183,64 +183,38 @@ class ServiceProvidersRemoteDataSourceImpl
       }).toList();
     });
   }
-}
-
-abstract class FinishedOrdersRemoteDataSource {
-  Future<Either<Failure, List<Reservation>>> fetchOrdersByCategory(
-      String category);
-}
-
-class FinishedOrdersRemoteDataSourceImpl
-    implements FinishedOrdersRemoteDataSource {
-  final FirebaseFirestore firestore;
-
-  FinishedOrdersRemoteDataSourceImpl(this.firestore);
 
   @override
-  Future<Either<Failure, List<Reservation>>> fetchOrdersByCategory(
+  Future<List<Map<String, dynamic>>?> getCurrentOrdersByCategory(
       String category) async {
     // Firebase Firestore query
-    final snapshot = await firestore
-        .collection('reservation')
-        .where('status', isEqualTo: 'completed') // Filter for finished orders
-        .where('ground.category', isEqualTo: category) // Filter by category
-        .get();
+    return executeTryAndCatchForDataLayer(() async {
+      final snapshot = await firestoreServices.firestore
+          .collection(FirebaseCollections.reservations)
+          .where('status', isEqualTo: 'pending') // Filter for finished orders
+          .where('ground.type', isEqualTo: category) // Filter by category
+          .get();
 
-    // Map Firestore results to the Reservation model
-    final reservations =
-        snapshot.docs.map((doc) => Reservation.fromMap(doc.data())).toList();
-
-    // Return results wrapped in Either
-    return Right(reservations);
+      // Return results wrapped in Either
+      return snapshot.docs.map((element) {
+        return element.data();
+      }).toList();
+    });
   }
-}
-
-abstract class CurrentOrdersRemoteDataSource {
-  Future<Either<Failure, List<Reservation>>> fetchOrdersByCategory(
-      String category);
-}
-
-class CurrentOrdersRemoteDataSourceImpl
-    implements CurrentOrdersRemoteDataSource {
-  final FirebaseFirestore firestore;
-
-  CurrentOrdersRemoteDataSourceImpl(this.firestore);
-
+  
   @override
-  Future<Either<Failure, List<Reservation>>> fetchOrdersByCategory(
-      String category) async {
-    // Firebase Firestore query
-    final snapshot = await firestore
-        .collection('reservation')
-        .where('status', isEqualTo: 'current') // Filter for current orders
-        .where('ground.category', isEqualTo: category) // Filter by category
-        .get();
+  Future<List<Map<String, dynamic>>?> getFinishedOrdersByCategory(String category) {
+     return executeTryAndCatchForDataLayer(() async {
+      final snapshot = await firestoreServices.firestore
+          .collection('reservation')
+          .where('status', isEqualTo: 'pending') // Filter for finished orders
+          .where('ground.type', isEqualTo: category) // Filter by category
+          .get();
 
-    // Map Firestore results to the Reservation model
-    final reservations =
-        snapshot.docs.map((doc) => Reservation.fromMap(doc.data())).toList();
-
-    // Return results wrapped in Either
-    return Right(reservations);
+      // Return results wrapped in Either
+      return snapshot.docs.map((element) {
+        return element.data();
+      }).toList();
+    });
   }
 }

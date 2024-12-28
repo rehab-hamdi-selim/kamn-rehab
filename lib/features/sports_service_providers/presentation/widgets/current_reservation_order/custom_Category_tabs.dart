@@ -1,50 +1,48 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/core/helpers/spacer.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/current_reseravaion_order/current_order_cubit.dart';
+import 'package:kamn/core/theme/app_pallete.dart';
+import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/features/sports_service_providers/presentation/cubit/current_reseravaion_order/current_orders_cubit.dart';
+import 'package:kamn/features/sports_service_providers/presentation/screens/current_reservation_order_screen.dart';
 
 class CustomCategoryTabs extends StatelessWidget {
   const CustomCategoryTabs({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return PreferredSize(
-      preferredSize: Size.fromHeight(50.h), // Responsive tab bar height
-      child: Material(
-        color: Colors.white,
-        child: TabBar(
-          onTap: (index) {
-            final category = _getCategory(index);
-            BlocProvider.of<CurrentOrdersCubit>(context)
-                .fetchOrdersForCategory(category);
-          },
-          tabs: const [
-            Tab(text: 'Football'),
-            Tab(text: 'Tennis'),
-            Tab(text: 'Basketball'),
-            Tab(text: 'Golf'),
-          ],
-          labelStyle: TextStyle(fontSize: 14.sp), // Responsive tab text size
-        ),
+    return TabBar(
+      overlayColor: MaterialStateProperty.resolveWith<Color?>(
+        (Set<MaterialState> states) {
+          return Colors.transparent;
+        },
       ),
+      indicatorColor: Colors.transparent,
+      tabAlignment: TabAlignment.start,
+      isScrollable: true,
+      onTap: (index) {
+        context
+            .read<CurrentOrdersCubit>()
+            .fetchOrdersForCategory(SportsTabs.values[index].displayName);
+      },
+      tabs: [
+        for (var category in SportsTabs.values)
+          Tab(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 8.h),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r),
+                color: category.sportColor.withOpacity(0.25),
+              ),
+              child: Text(
+                category.displayName,
+                style: TextStyles.fontCircularSpotify10Medium
+                    .copyWith(color: category.sportColor),
+              ),
+            ),
+          ),
+      ],
+      // Responsive tab text size
     );
-  }
-
-  // Map tab index to category
-  String _getCategory(int index) {
-    switch (index) {
-      case 0:
-        return 'football';
-      case 1:
-        return 'tennis';
-      case 2:
-        return 'basketball';
-      case 3:
-        return 'golf';
-      default:
-        return 'football';
-    }
   }
 }

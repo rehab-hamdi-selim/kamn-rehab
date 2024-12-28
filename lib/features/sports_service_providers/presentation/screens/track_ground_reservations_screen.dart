@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/routing/routes.dart';
+import 'package:kamn/core/utils/custom_app_bar.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/track_ground_reservations/track_ground_reservations_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/track_ground_reservations/track_ground_reservations_states.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/track_ground_reservations/custom_track_bloc_listner.dart';
@@ -10,7 +11,6 @@ import '../../../../core/helpers/spacer.dart';
 import '../../../../core/theme/app_pallete.dart';
 import '../../../../core/theme/style.dart';
 import '../../../../core/utils/app_images.dart';
-import '../../../../core/utils/custom_app_bar_service_provider.dart';
 import '../widgets/service_provider_grounds/custom_bottom_service_provider.dart';
 import '../widgets/service_provider_grounds/custom_filter_item_service_provider.dart';
 import '../widgets/service_provider_grounds/custom_text_form_field_service_provider.dart';
@@ -25,13 +25,13 @@ class TrackGroundReservationsScreen extends StatelessWidget {
     return CustomeTrackBlocListner(
       child: Scaffold(
         backgroundColor: AppPallete.whiteColor,
-        appBar: CustomAppBarServiceProvider.appBar(
-          color: AppPallete.whiteColor,
-          arrowFunction: () {},
-          notificationIconFunction: () {},
-          profileFunction: () {},
-          badgesIconFunction: () {},
-        ),
+        appBar:  CustomAppBar.appBar(
+            context: context,
+            color: AppPallete.whiteColor,
+            notificationIconFunction: () {},
+            profileFunction: () {},
+            badgesIconFunction: () {},
+          ),
         body: RPadding(
           padding: EdgeInsets.symmetric(horizontal: 19.w),
           child: Column(
