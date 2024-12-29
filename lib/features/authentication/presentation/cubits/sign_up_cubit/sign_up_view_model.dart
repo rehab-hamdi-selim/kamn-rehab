@@ -8,7 +8,7 @@ class SignUpViewModel {
   TextEditingController? nameController = TextEditingController();
   TextEditingController? confirmPasswordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-
+ 
   void dispose() {
     emailController?.dispose();
     passwordController?.dispose();

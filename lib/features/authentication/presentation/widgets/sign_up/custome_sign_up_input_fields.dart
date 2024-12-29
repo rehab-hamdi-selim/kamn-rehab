@@ -54,7 +54,7 @@ class CustomeSignUpInputFields extends StatelessWidget {
             hintText: "Enter your Username",
             keyboardType: TextInputType.emailAddress,
             suffixIcon: const Icon(
-              Icons.email_outlined,
+              Icons.person,
               color: AppPallete.accentBlackColor2,
             ),
             controller: cubit.nameController,
@@ -126,7 +126,15 @@ class CustomeSignUpInputFields extends StatelessWidget {
           ),
           Row(
             children: [
-              Checkbox(value: false, onChanged: (value) {}),
+              BlocBuilder<SignUpCubit, SignUpState>(
+                builder: (context, state) {
+                  return Checkbox(
+                      value: state.isChecked,
+                      onChanged: (value) {
+                        context.read<SignUpCubit>().check(value!);
+                      });
+                },
+              ),
               Text(
                 'By creating an account, you agree to our',
                 style: TextStyles.font11RobotoAccentBlackColor2Regular

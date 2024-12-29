@@ -55,7 +55,7 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   Future<void> deleteUser({required String uid}) async {
     final result = await _authRepository.deleteUser(uid: uid);
-    result.fold(                                                 
+    result.fold(
         (l) => emit(state.copyWith(
               state: SignUpStatus.failureDeleteUser,
               erorrMessage: l.erorr,
@@ -75,6 +75,10 @@ class SignUpCubit extends Cubit<SignUpState> {
     emit(state.copyWith(
         state: SignUpStatus.VisiblePasswordConfirm,
         isVisiblePasswordConfirm: !state.isVisiblePasswordConfirm));
+  }
+
+  void check(bool value) {
+    emit(state.copyWith(state: SignUpStatus.checked, isChecked: !state.isChecked));
   }
 
   Future<void> sendVerificationEmail() async {

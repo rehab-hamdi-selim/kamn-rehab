@@ -24,6 +24,14 @@ class ReservationDetailsCubit extends Cubit<ReservationDetailsState> {
 
   void changeValue() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+       final remainingDuration = targetTime?.difference(DateTime.now());
+      if (remainingDuration!.isNegative) {
+        // Stop the timer if the session has ended
+        _timer?.cancel();
+         countdownDuration?.value = Duration.zero;
+      } else {
+         countdownDuration?.value = remainingDuration;
+      }
       countdownDuration?.value = targetTime!.difference(DateTime.now());
     });
   }

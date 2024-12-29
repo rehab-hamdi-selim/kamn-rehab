@@ -100,6 +100,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Faliure, void>> signOut() async {
     return await executeTryAndCatchForRepository(() async {
+      
       await _authDataSource.signOut();
     });
   }
