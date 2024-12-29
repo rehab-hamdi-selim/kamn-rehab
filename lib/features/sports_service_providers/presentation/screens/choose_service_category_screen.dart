@@ -4,13 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/core/utils/custom_app_bar.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_state.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/choose_category/custome_individual_play_categories.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/choose_category/custome_team_play_categories.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/choose_category/custome_title_text.dart';
-import 'package:kamn/core/utils/custom_app_bar_service_provider.dart';
 
 class ChooseServiceCategoryScreen extends StatelessWidget {
   const ChooseServiceCategoryScreen({super.key});
@@ -26,9 +26,9 @@ class ChooseServiceCategoryScreen extends StatelessWidget {
       },
       child: Scaffold(
           backgroundColor: AppPallete.whiteColor,
-          appBar: CustomAppBarServiceProvider.appBar(
+          appBar:  CustomAppBar.appBar(
+            context: context,
             color: AppPallete.whiteColor,
-            arrowFunction: () {},
             notificationIconFunction: () {},
             profileFunction: () {},
             badgesIconFunction: () {},

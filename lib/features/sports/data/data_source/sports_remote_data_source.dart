@@ -10,7 +10,7 @@ abstract interface class SportsRemoteDataSource {
   Future<ReservationModel> submitReservation(ReservationModel reservation);
   Future<void> updateState(String playgroundId, Map<String, dynamic> data);
   Future<void> delete(ReservationModel reservation);
-  Future<List<Map<String, dynamic>>> getAllReservation();
+  Future<List<Map<String, dynamic>>> getUserReservations(String userId);
   Future<List<Map<String, dynamic>>> getSpecificReservationsByGroundId(
       String groundId, DateTime selectedDate);
   Future<List<Map<String, dynamic>>> searchByQuery(String query);
@@ -20,8 +20,8 @@ abstract interface class SportsRemoteDataSource {
 class SportsRemoteDataSourceImpl implements SportsRemoteDataSource {
   final FirestoreService firestoreService;
   SportsRemoteDataSourceImpl({required this.firestoreService});
-  CollectionReference get _playGroundCollection => firestoreService.firestore
-      .collection(FirebaseCollections.playgroundsRequests);
+  CollectionReference get _playGroundCollection =>
+      firestoreService.firestore.collection(FirebaseCollections.playgrounds);
   @override
   Future<List<Map<String, dynamic>>> getPlaygrounds() async {
     return executeTryAndCatchForDataLayer(() async {
@@ -63,10 +63,12 @@ class SportsRemoteDataSourceImpl implements SportsRemoteDataSource {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> getAllReservation() {
+  Future<List<Map<String, dynamic>>> getUserReservations(String userId) {
     return executeTryAndCatchForDataLayer(() async {
-      var querySnapshot =
-          await firestoreService.getData(FirebaseCollections.reservation);
+      var querySnapshot = await firestoreService.firestore
+          .collection(FirebaseCollections.reservation)
+          .where('user.uid',isEqualTo: userId)
+          .get();
       return querySnapshot.docs.map((element) {
         return element.data() as Map<String, dynamic>;
       }).toList();
@@ -78,12 +80,12 @@ class SportsRemoteDataSourceImpl implements SportsRemoteDataSource {
     return executeTryAndCatchForDataLayer(() async {
       List<String> seenIds = [];
       final nameQuery = firestoreService.firestore
-          .collection(FirebaseCollections.playgroundsRequests)
+          .collection(FirebaseCollections.playgrounds)
           .where('name', isGreaterThanOrEqualTo: query)
           .where('name', isLessThan: '$query\uf8ff')
           .get();
       final addressQuery = firestoreService.firestore
-          .collection(FirebaseCollections.playgroundsRequests)
+          .collection(FirebaseCollections.playgrounds)
           .where('address', isGreaterThanOrEqualTo: query)
           .where('address', isLessThan: '$query\uf8ff')
           .get();

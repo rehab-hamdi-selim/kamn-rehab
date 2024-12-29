@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_state.dart';
@@ -19,7 +20,7 @@ class CustomeAddServicesBlocListner extends StatelessWidget {
   Widget build(BuildContext context) {
     PlaygroundRequestModel prepareData(BuildContext context) =>
         PlaygroundRequestModel(
-            name: context
+            playgroundName: context
                 .read<AddServiceProviderCubit>()
                 .nameController
                 .text
@@ -50,7 +51,6 @@ class CustomeAddServicesBlocListner extends StatelessWidget {
             longitude: context
                 .read<AddServiceProviderCubit>()
                 .coordinates['longitude'],
-            ownerId: "under develop",
             price: double.parse(context
                 .read<AddServiceProviderCubit>()
                 .priceController
@@ -60,7 +60,9 @@ class CustomeAddServicesBlocListner extends StatelessWidget {
             status: context.read<AddServiceProviderCubit>().statusOption,
             ownershipImages:
                 context.read<AddServiceProviderCubit>().ownershipImagesUrl,
-            type: type);
+            type: type,
+            accpetingState: "pending",
+            owner: context.read<AppUserCubit>().state.user);
     return BlocListener<AddServiceProviderCubit, AddServiceProviderState>(
       listener: (context, state) {
         if (state.isImageUploaded) {

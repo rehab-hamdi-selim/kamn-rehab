@@ -13,8 +13,7 @@ import '../widgets/sign_up/custome_upper_text.dart';
 import '../widgets/sign_up/google_button.dart';
 
 class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key, required this.userType});
-  final String userType;
+  const SignUpScreen({super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +56,7 @@ class SignUpScreen extends StatelessWidget {
                                                   .emailController!.text,
                                               password: cubit.signUpViewModel
                                                   .passwordController!.text,
-                                              type: userType);
+                                              type: 'normal',);
                                         }
                                       },
                                     );

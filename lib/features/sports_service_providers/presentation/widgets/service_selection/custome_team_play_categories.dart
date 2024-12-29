@@ -22,21 +22,18 @@ class CustomeTeamPlayCategories extends StatelessWidget {
       decoration: BoxDecoration(
           color: AppPallete.lightGrayColor,
           borderRadius: BorderRadius.circular(20.h)),
-      child: SizedBox(
-        height: 435.0.h,
-        child: ListView.separated(
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: viewModel.teamSportList.length,
-          separatorBuilder: (context, index) => verticalSpace(10.h),
-          itemBuilder: (context, index) {
-            final category = viewModel.teamSportList[index];
-            print(category.title);
-            return CustomeSportCategory(
-              color: category.color,
-              title: category.title,
-            );
-          },
-        ),
+      child: ListView.separated(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: viewModel.teamSportList.length,
+        separatorBuilder: (context, index) => verticalSpace(10.h),
+        itemBuilder: (context, index) {
+          final category = viewModel.teamSportList[index];
+          return CustomeSportCategory(
+            color: category.color,
+            title: category.title,
+          );
+        },
       ),
     );
   }

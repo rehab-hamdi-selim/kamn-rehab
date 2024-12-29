@@ -7,9 +7,9 @@ import '../../../../../core/theme/app_pallete.dart';
 import '../../../../../core/theme/style.dart';
 
 class CustomGroundItem extends StatelessWidget {
-  PlaygroundModel playground;
+   final PlaygroundModel playground;
 
-  CustomGroundItem({super.key, required this.playground});
+  const CustomGroundItem({super.key, required this.playground});
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,7 @@ class CustomGroundItem extends StatelessWidget {
         Row(
           children: [
             Text(
-              playground.name!,
+              playground.playgroundName!,
               style: TextStyles.font16DartBlackColorW400,
             ),
             horizontalSpace(8),

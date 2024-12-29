@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
+import 'package:kamn/core/utils/custom_app_bar.dart';
 import 'package:kamn/features/sports_service_providers/data/repository/service_providers_repository.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart';
 
@@ -10,7 +11,6 @@ import 'package:kamn/features/sports_service_providers/presentation/widgets/add_
 import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_ownership_image_picker.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_service_info.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_text_title.dart';
-import 'package:kamn/core/utils/custom_app_bar_service_provider.dart';
 
 import '../widgets/add_service/custome_add_services_bloc_listner.dart';
 
@@ -25,9 +25,9 @@ class AddServiceScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Colors.white,
           resizeToAvoidBottomInset: true,
-          appBar: CustomAppBarServiceProvider.appBar(
+          appBar: CustomAppBar.appBar(
+            context: context,
             color: AppPallete.whiteColor,
-            arrowFunction: () {},
             notificationIconFunction: () {},
             profileFunction: () {},
             badgesIconFunction: () {},

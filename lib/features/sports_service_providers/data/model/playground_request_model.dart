@@ -2,15 +2,15 @@ import 'dart:convert';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
+
+import 'package:kamn/core/common/entities/user_model.dart';
 
 class PlaygroundRequestModel {
   String? playgroundId;
-  String? name;
+  String? playgroundName;
   String? phone;
   double? longitude;
   double? latitude;
-  String? ownerId; //get from user credential
   String? address;
   String? status; // need to handel
   double? rating; //calcolute from developer
@@ -22,16 +22,16 @@ class PlaygroundRequestModel {
   AvailableTime? availableTime;
   num? period;
   String? govenrate;
-  String? state;
+  String? accpetingState;
   String? comment;
   String? type;
+  UserModel? owner;
   PlaygroundRequestModel({
     this.playgroundId,
-    this.name,
+    this.playgroundName,
     this.phone,
     this.longitude,
     this.latitude,
-    this.ownerId,
     this.address,
     this.status,
     this.rating,
@@ -43,9 +43,10 @@ class PlaygroundRequestModel {
     this.availableTime,
     this.period,
     this.govenrate,
-    this.state,
+    this.accpetingState,
     this.comment,
     this.type,
+    this.owner,
   });
 
   PlaygroundRequestModel copyWith({
@@ -54,7 +55,6 @@ class PlaygroundRequestModel {
     ValueGetter<String?>? phone,
     ValueGetter<double?>? longitude,
     ValueGetter<double?>? latitude,
-    ValueGetter<String?>? ownerId,
     ValueGetter<String?>? address,
     ValueGetter<String?>? status,
     ValueGetter<double?>? rating,
@@ -66,17 +66,17 @@ class PlaygroundRequestModel {
     ValueGetter<AvailableTime?>? availableTime,
     ValueGetter<num?>? period,
     ValueGetter<String?>? govenrate,
-    ValueGetter<String?>? state,
+    ValueGetter<String?>? accpetingState,
     ValueGetter<String?>? comment,
     ValueGetter<String?>? type,
+    ValueGetter<UserModel?>? owner,
   }) {
     return PlaygroundRequestModel(
       playgroundId: playgroundId != null ? playgroundId() : this.playgroundId,
-      name: name != null ? name() : this.name,
+      playgroundName: name != null ? name() : this.playgroundName,
       phone: phone != null ? phone() : this.phone,
       longitude: longitude != null ? longitude() : this.longitude,
       latitude: latitude != null ? latitude() : this.latitude,
-      ownerId: ownerId != null ? ownerId() : this.ownerId,
       address: address != null ? address() : this.address,
       status: status != null ? status() : this.status,
       rating: rating != null ? rating() : this.rating,
@@ -90,20 +90,21 @@ class PlaygroundRequestModel {
           availableTime != null ? availableTime() : this.availableTime,
       period: period != null ? period() : this.period,
       govenrate: govenrate != null ? govenrate() : this.govenrate,
-      state: state != null ? state() : this.state,
+      accpetingState:
+          accpetingState != null ? accpetingState() : this.accpetingState,
       comment: comment != null ? comment() : this.comment,
       type: type != null ? type() : this.type,
+      owner: owner != null ? owner() : this.owner,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
       'playgroundId': playgroundId,
-      'name': name,
+      'name': playgroundName,
       'phone': phone,
       'longitude': longitude,
       'latitude': latitude,
-      'ownerId': ownerId,
       'address': address,
       'status': status,
       'rating': rating,
@@ -112,23 +113,23 @@ class PlaygroundRequestModel {
       'groundImages': groundImages,
       'ownershipImages': ownershipImages,
       'size': size,
-      'available_time': availableTime?.toMap(),
+      'availableTime': availableTime?.toMap(),
       'period': period,
       'govenrate': govenrate,
-      'state': state,
+      'accpetingState': accpetingState,
       'comment': comment,
       'type': type,
+      'owner': owner?.toMap(),
     };
   }
 
   factory PlaygroundRequestModel.fromMap(Map<String, dynamic> map) {
     return PlaygroundRequestModel(
       playgroundId: map['playgroundId'],
-      name: map['name'],
+      playgroundName: map['name'],
       phone: map['phone'],
       longitude: map['longitude']?.toDouble(),
       latitude: map['latitude']?.toDouble(),
-      ownerId: map['ownerId'],
       address: map['address'],
       status: map['status'],
       rating: map['rating']?.toDouble(),
@@ -137,14 +138,15 @@ class PlaygroundRequestModel {
       groundImages: List<String>.from(map['groundImages']),
       ownershipImages: List<String>.from(map['ownershipImages']),
       size: map['size']?.toInt(),
-      availableTime: map['available_time'] != null
-          ? AvailableTime.fromMap(map['available_time'])
+      availableTime: map['availableTime'] != null
+          ? AvailableTime.fromMap(map['availableTime'])
           : null,
       period: map['period'],
       govenrate: map['govenrate'],
-      state: map['state'],
+      accpetingState: map['accpetingState'],
       comment: map['comment'],
       type: map['type'],
+      owner: map['owner'] != null ? UserModel.fromMap(map['owner']) : null,
     );
   }
 
@@ -155,20 +157,20 @@ class PlaygroundRequestModel {
 
   @override
   String toString() {
-    return 'PlaygroundRequestModel(playgroundId: $playgroundId, name: $name, phone: $phone, longitude: $longitude, latitude: $latitude, ownerId: $ownerId, address: $address, status: $status, rating: $rating, price: $price, description: $description, groundImages: $groundImages, ownershipImages: $ownershipImages, size: $size, availableTime: $availableTime, peroid: $period, govenrate: $govenrate, state: $state, comment: $comment, type: $type)';
+    return 'PlaygroundRequestModel(playgroundId: $playgroundId, name: $playgroundName, phone: $phone, longitude: $longitude, latitude: $latitude, address: $address, status: $status, rating: $rating, price: $price, description: $description, groundImages: $groundImages, ownershipImages: $ownershipImages, size: $size, availableTime: $availableTime, period: $period, govenrate: $govenrate, accpetingState: $accpetingState, comment: $comment, type: $type, owner: $owner)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
+    final listEquals = const DeepCollectionEquality().equals;
 
     return other is PlaygroundRequestModel &&
         other.playgroundId == playgroundId &&
-        other.name == name &&
+        other.playgroundName == playgroundName &&
         other.phone == phone &&
         other.longitude == longitude &&
         other.latitude == latitude &&
-        other.ownerId == ownerId &&
         other.address == address &&
         other.status == status &&
         other.rating == rating &&
@@ -180,19 +182,19 @@ class PlaygroundRequestModel {
         other.availableTime == availableTime &&
         other.period == period &&
         other.govenrate == govenrate &&
-        other.state == state &&
+        other.accpetingState == accpetingState &&
         other.comment == comment &&
-        other.type == type;
+        other.type == type &&
+        other.owner == owner;
   }
 
   @override
   int get hashCode {
     return playgroundId.hashCode ^
-        name.hashCode ^
+        playgroundName.hashCode ^
         phone.hashCode ^
         longitude.hashCode ^
         latitude.hashCode ^
-        ownerId.hashCode ^
         address.hashCode ^
         status.hashCode ^
         rating.hashCode ^
@@ -204,9 +206,10 @@ class PlaygroundRequestModel {
         availableTime.hashCode ^
         period.hashCode ^
         govenrate.hashCode ^
-        state.hashCode ^
+        accpetingState.hashCode ^
         comment.hashCode ^
-        type.hashCode;
+        type.hashCode ^
+        owner.hashCode;
   }
 }
 

@@ -1,7 +1,11 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/common/class/custom_splash_screen.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
+import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/core/common/widget/upgrader.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/routing/app_router.dart';
@@ -28,7 +32,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (context) => getIt<AppUserCubit>()..isUserLoggedIn()),
+            create: (context) => getIt<AppUserCubit>()
+              ..isFirstInstallation()
+              ..isUserLoggedIn()),
         BlocProvider(
             create: (context) => FirebaseRemoteConfigCubit()
               ..initListner()
@@ -46,35 +52,32 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: BlocBuilder<AppUserCubit, AppUserState>(
-            builder: (context, state) {
-              if (state.isInitial()) {
-                return BlocProvider(
-                  create: (context) => getIt<SignUpCubit>(),
-                  child: const SignUpScreen(),
-                );
-              }
+          onGenerateRoute : AppRouter.generateRoute,
+          home: BlocListener<AppUserCubit, AppUserState>(
+            listener: (context, state) async {
+              await Future.delayed(const Duration(seconds: 2));
 
-              if (state.isIsLoggedIn()) {
-                return const LogoutScreen();
-              } else if (state.isIsNotLoggedIn()) {
-                return const SignInScreen();
+              if (state.isNotInstalled()) {
+                Navigator.pushNamed(context, Routes.onBoardingScreen);
+                context.read<AppUserCubit>().saveInstallationFlag();
               } else {
-                return const Scaffold(
-                  body: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
+                if (state.isLoggedIn()) {
+                  await context
+                      .read<AppUserCubit>()
+                      .getUser(uid: state.user!.uid);
+                } else if (state.isGettedData()) {
+                  context.read<AppUserCubit>().saveUserData(
+                        state.user!,
+                      );
+                } else if (state.isSuccess()) {
+                  Navigator.pushNamed(context, Routes.groundsScreen);
+                } else if (state.isNotLoggedIn()) {
+                  Navigator.pushNamed(context, Routes.signInScreen);
+                }
               }
-
-              // Loading state or other states
             },
+            child: const CustomSplashScreen(),
           ),
-          initialRoute: Routes.viewResrvationScreen,
-          onGenerateRoute: AppRouter.generateRoute,
-          // home: const CustomUpgrader(
-          //   child: FirebaseAnalitics(),
-          // ),
         ),
       ),
     );

@@ -63,7 +63,7 @@ class CustomeBottomSheet extends StatelessWidget {
                           .read<ServiceProviderGroundDetailsCubit>()
                           .commentController
                           .text,
-                      'state': 'decline'
+                      'accpetingState': 'decline'
                     });
                   },
                   child: const Text('submit')))

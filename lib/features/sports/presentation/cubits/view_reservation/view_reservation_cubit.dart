@@ -10,17 +10,17 @@ class ViewReservationCubit extends Cubit<ViewReservationState> {
       : _sportsRepository = sportsRepository,
         super(ViewReservationState(state: ViewReservationStatus.intial));
 
-  void getResevation() async {
+  void getUserResevation(String userId) async {
     emit(ViewReservationState(
       state: ViewReservationStatus.loading,
     ));
-    var result = await _sportsRepository.getPlaygrounds();
+    var result = await _sportsRepository.getUserReservations(userId);
     result.fold((error) {
       emit(ViewReservationState(
           state: ViewReservationStatus.failure, error: error.erorr));
     }, (success) {
       emit(ViewReservationState(
-          state: ViewReservationStatus.success, reservation: success));
+          state: ViewReservationStatus.success, reservations: success));
     });
   }
 }

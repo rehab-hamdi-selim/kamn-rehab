@@ -7,6 +7,7 @@ class SecureStorageHelper {
         encryptedSharedPreferences: true,
       );
   static const String _userKey = 'user_data';
+  static const String _firstTime = 'first_time';
   static final _storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
 
   // Save user data
@@ -53,6 +54,30 @@ class SecureStorageHelper {
         return Right(UserModel.fromJson(userData));
       }
       return const Left('User is not logged in');
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  static Future<Either<String, String>> isFirstInstallation() async {
+    try {
+      final flag = await _storage.read(key: _firstTime);
+      if (flag != null) {
+        return Right(flag);
+      }
+      return const Left('User is not logged in');
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  static Future<Either<String, void>> saveInstalltionFlag() async {
+    try {
+      await _storage.write(
+        key: _firstTime,
+        value: 'installed',
+      );
+      return const Right(null);
     } catch (e) {
       return Left(e.toString());
     }

@@ -82,7 +82,7 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
         Row(
           children: [
             Text(
-              playgroundRequest.name ?? '',
+              playgroundRequest.playgroundName ?? '',
               style: TextStyles.font16DartBlackColorW400,
             ),
             horizontalSpace(8),
@@ -95,7 +95,7 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
         Row(
           children: [
             Text(
-              "Owner: ",
+              "Owner: ${playgroundRequest.owner?.name ?? ''}",
               style: TextStyles.font10BlackColorW400,
             ),
             Text(
@@ -139,7 +139,7 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
                 ),
                 horizontalSpace(4),
                 Text(
-                  'available',
+                  playgroundRequest.status ?? "",
                   style: TextStyles.font7DartBlackColorW400,
                 ),
                 horizontalSpace(8),
@@ -157,7 +157,7 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '5',
+                        '${playgroundRequest.rating ?? 0}',
                         style: TextStyles.font10GrayColorW400,
                       ),
                       Icon(
@@ -178,7 +178,7 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
                   style: TextStyles.font16DartBlackColorW400,
                 ),
                 Text(
-                  "/hr",
+                  " / hr",
                   style: TextStyles.font10BlackColorW400,
                 ),
               ],

@@ -35,23 +35,9 @@ class CustomePlayGroundInfo extends StatelessWidget {
             style: TextStyles.font12GreenSemiBold,
           ),
           verticalSpace(5.h),
-          Flexible(
-            child: ListView.separated(
-              padding: EdgeInsets.zero,
-              itemCount: reservationModel?.sessions?.length ?? 0,
-              separatorBuilder: (context, index) => verticalSpace(5.h),
-              itemBuilder: (context, index) => BlocProvider.value(
-                value: getIt<ReservationDetailsCubit>()
-                  ..setTargetTime(
-                      (reservationModel?.sessions?[index].startAt)!),
-                child: CustomSessionCountDown(
-                  startAt: reservationModel?.sessions?[index].startAt ??
-                      DateTime.now(),
-                  endAt: reservationModel?.sessions?[index].endAt ??
-                      DateTime.now(),
-                ),
-              ),
-            ),
+          CustomSessionCountDown(
+            startAt: reservationModel?.startAt ?? DateTime.now(),
+            endAt: reservationModel?.endAt ?? DateTime.now(),
           ),
           verticalSpace(5.h),
           playGroundFeatures(),
@@ -205,7 +191,7 @@ class CustomePlayGroundInfo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(reservationModel?.ground?.name ?? "",
+        Text(reservationModel?.ground?.playgroundName ?? "",
             style: TextStyles.font24BlackRegular.copyWith(height: .85),
             maxLines: 2,
             overflow: TextOverflow.ellipsis),

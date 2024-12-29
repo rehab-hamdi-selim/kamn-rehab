@@ -14,7 +14,7 @@ class CustomPricePaymentDetails extends StatelessWidget {
   Map<String, dynamic> fillData(BuildContext context) {
     return {
       'Invoice': context.read<AppUserCubit>().state.user?.name ?? '',
-      'Bill to': reservationModel.ground?.name ?? '',
+      'Bill to': reservationModel.ground?.playgroundName ?? '',
       'Invoice date': DateFormat('EEEE, d MMM yyyy')
           .format(reservationModel.date ?? DateTime.now()),
       'Amount due': '${reservationModel.price} LE',

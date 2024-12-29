@@ -30,7 +30,8 @@ class Routes {
   static const String proceedPaymentScreen = '/proceedPaymentScreen';
   static const String viewResrvationScreen = '/viewResrvationScreen';
   static const String logOut = '/logOut';
-  static const String userTypeSelectionScreen = '/UserTypeSelectionScreen';
   static const String splashScreen = '/splashScreen';
   static const String reservationScreen = '/reservationScreen';
-}
+  static const String currentOrderScreen = '/currentOrdersScreen';
+  static const String finishOrderScreen = '/finishOrdersScreen';
+  }
