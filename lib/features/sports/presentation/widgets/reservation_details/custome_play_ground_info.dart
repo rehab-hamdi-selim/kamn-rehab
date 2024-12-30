@@ -12,6 +12,7 @@ import 'package:kamn/features/sports/presentation/cubits/reservation_details_cub
 import 'package:kamn/features/sports/presentation/cubits/reservation_details_cubit/reservation_details_state.dart';
 import 'package:kamn/features/sports/presentation/widgets/reservation_details/custom_session_count_down.dart';
 import 'package:kamn/core/utils/custom_star_rating.dart';
+import 'package:kamn/features/sports_service_providers/presentation/widgets/track_ground_reservation_details/date_and_countdown_widget.dart';
 
 class CustomePlayGroundInfo extends StatelessWidget {
   const CustomePlayGroundInfo({required this.reservationModel, super.key});
@@ -35,9 +36,10 @@ class CustomePlayGroundInfo extends StatelessWidget {
             style: TextStyles.font12GreenSemiBold,
           ),
           verticalSpace(5.h),
-          CustomSessionCountDown(
-            startAt: reservationModel?.startAt ?? DateTime.now(),
-            endAt: reservationModel?.endAt ?? DateTime.now(),
+          DateAndCountdownWidget(
+            session: Session(
+                startAt: reservationModel?.startAt ?? DateTime.now(),
+                endAt: reservationModel?.endAt ?? DateTime.now()),
           ),
           verticalSpace(5.h),
           playGroundFeatures(),

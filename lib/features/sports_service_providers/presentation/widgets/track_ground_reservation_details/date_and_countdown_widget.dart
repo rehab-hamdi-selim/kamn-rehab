@@ -30,11 +30,14 @@ class _DateAndCountdownWidgetState extends State<DateAndCountdownWidget> {
 
     // Initialize the remaining duration
     getRemainingDuration = ValueNotifier<Duration>(
-        widget.session.endAt.difference(DateTime.now()));
+        widget.session.startAt.difference(DateTime.now()).isNegative
+            ? Duration.zero
+            : widget.session.startAt.difference(DateTime.now()));
 
     // Start the periodic timer
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      final remainingDuration = widget.session.endAt.difference(DateTime.now());
+      final remainingDuration =
+          widget.session.startAt.difference(DateTime.now());
       if (remainingDuration.isNegative) {
         // Stop the timer if the session has ended
         _timer?.cancel();
@@ -59,7 +62,7 @@ class _DateAndCountdownWidgetState extends State<DateAndCountdownWidget> {
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(45.r),
-        color:  AppPallete.lightGreen.withOpacity(.07),
+        color: AppPallete.lightGreen.withOpacity(.07),
         border: Border.all(color: AppPallete.lighterGreenColor, width: 1),
       ),
       child: Row(

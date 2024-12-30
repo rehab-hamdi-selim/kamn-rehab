@@ -12,6 +12,7 @@ class CustomElevationButton extends StatelessWidget {
     return SizedBox(
       height: 50,
       width: 308,
+      
       child: ElevatedButton(
         onPressed: () {
           //todo: login

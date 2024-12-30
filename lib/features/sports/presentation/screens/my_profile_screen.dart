@@ -26,48 +26,51 @@ class MyProfileScreen extends StatelessWidget {
           context.read<AppUserCubit>().signOut();
         }
       },
-      child: Scaffold(
-        appBar: CustomAppBar.appBar(
-            color: AppPallete.blackColor,
-            context: context,
-            notificationIconFunction: () {},
-            badgesIconFunction: () {},
-            title: "My Profile"),
-        backgroundColor: AppPallete.whiteColor,
-        body: Column(
-          children: [
-            const CustomUserData(),
-            SizedBox(height: 16.h), // Responsive height
-            const CustomeAddServiceButton(),
-            SizedBox(height: 16.h), // Responsive height
-            const CustomeUserOptions(),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 35.w,
-              ),
-              child: ElevatedButton(
-                onPressed: () {
-                  context.read<AppUserCubit>().signOutFromEmailandPassword();
-                  context.read<AppUserCubit>().signOutFromGoogle();
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppPallete.blackColor,
-                  padding:
-                      EdgeInsets.symmetric(vertical: 12.h, horizontal: 90.w),
-                  // Adjust button size
-                  shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(51.r), // Adjust border radius
+      child: SafeArea(
+        child: Scaffold(
+          appBar: CustomAppBar.appBar(
+              color: AppPallete.blackColor,
+              context: context,
+              notificationIconFunction: () {},
+              badgesIconFunction: () {},
+              title: "My Profile"),
+          backgroundColor: AppPallete.whiteColor,
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                const CustomUserData(),
+                SizedBox(height: 16.h), // Responsive height
+                const CustomeAddServiceButton(),
+                SizedBox(height: 16.h), // Responsive height
+                const CustomeUserOptions(),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 35.w,
+                  ),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      context.read<AppUserCubit>().signOutFromEmailandPassword();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppPallete.blackColor,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12.h, horizontal: 90.w),
+                      // Adjust button size
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(51.r), // Adjust border radius
+                      ),
+                    ),
+                    child: Text(
+                      Constants.logout,
+                      style:
+                          TextStyles.font2OfWhiteMediumRoboto, // Adjust font size
+                    ),
                   ),
                 ),
-                child: Text(
-                  Constants.logout,
-                  style:
-                      TextStyles.font2OfWhiteMediumRoboto, // Adjust font size
-                ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

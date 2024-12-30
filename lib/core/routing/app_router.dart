@@ -4,6 +4,7 @@ import 'package:kamn/core/common/class/custom_splash_screen.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/routing/routes.dart';
+import 'package:kamn/features/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
 import 'package:kamn/features/authentication/presentation/cubits/sign_up_cubit/sign_up_cubit.dart';
 import 'package:kamn/features/payment/presentation/cubits/procced_payment_cubit/procced_payment_cubit.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
@@ -63,7 +64,25 @@ class AppRouter {
               create: (context) => getIt<AnalyticsCubit>(),
               child: FirstAnalyticsPage()),
         );
-
+      case Routes.myProfileScreen:
+        return MaterialPageRoute(builder: (context) => const MyProfileScreen());
+      case Routes.addServiceScreen:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider.value(
+                  value: getIt<AddServiceProviderCubit>(),
+                  child: AddServiceScreen(
+                    type: settings.arguments as String,
+                  ),
+                ));
+      case Routes.groundsScreen:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<SportsGroundsCubit>()
+                    ..getPlaygrounds()
+                    ..getUserLocation()
+                    ..initScrollListner(),
+                  child: const GroundsScreen(),
+                ));
       case Routes.groundDetailsScreen:
         return MaterialPageRoute(
           builder: (context) => BlocProvider.value(
@@ -98,25 +117,7 @@ class AppRouter {
                     playgroundModel: settings.arguments as PlaygroundModel,
                   ),
                 ));
-      case Routes.myProfileScreen:
-        return MaterialPageRoute(builder: (context) => const MyProfileScreen());
-      case Routes.addServiceScreen:
-        return MaterialPageRoute(
-            builder: (_) => BlocProvider.value(
-                  value: getIt<AddServiceProviderCubit>(),
-                  child: AddServiceScreen(
-                    type: settings.arguments as String,
-                  ),
-                ));
-      case Routes.groundsScreen:
-        return MaterialPageRoute(
-            builder: (context) => BlocProvider(
-                  create: (context) => getIt<SportsGroundsCubit>()
-                    ..getPlaygrounds()
-                    ..getUserLocation()
-                    ..initScrollListner(),
-                  child: const GroundsScreen(),
-                ));
+
       case Routes.chooseServiceCategoryScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider<ServiceProviderGroundsCubit>(
@@ -142,7 +143,11 @@ class AppRouter {
                   child: const ServiceSelectionScreen(),
                 ));
       case Routes.signInScreen:
-        return MaterialPageRoute(builder: (context) => const SignInScreen());
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<SignInCubit>(),
+                  child: const SignInScreen(),
+                ));
       case Routes.signUpScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
@@ -237,13 +242,15 @@ class AppRouter {
       case Routes.currentOrderScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-                  create: (context) => getIt<CurrentOrdersCubit>()..fetchOrdersForCategory('Football'),
+                  create: (context) => getIt<CurrentOrdersCubit>()
+                    ..fetchOrdersForCategory('Football'),
                   child: const CurrentOrdersScreen(),
                 ));
       case Routes.finishOrderScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-                  create: (context) => getIt<FinishedOrdersCubit>()..fetchOrdersForCategory('Football'),
+                  create: (context) => getIt<FinishedOrdersCubit>()
+                    ..fetchOrdersForCategory('Football'),
                   child: const FinishedOrdersScreen(),
                 ));
       default:

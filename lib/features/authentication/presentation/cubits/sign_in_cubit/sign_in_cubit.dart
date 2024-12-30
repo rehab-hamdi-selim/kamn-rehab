@@ -19,6 +19,7 @@ class SignInCubit extends Cubit<SignInState> {
   //init getPlaygrounds_from_firebase branch
 
   Future<void> signIn({required String email, required String password}) async {
+    emit(state.copyWith(state: SignInStatus.loading));
     final result =
         await _authRepository.signIn(email: email, password: password);
     result.fold(
@@ -70,12 +71,10 @@ class SignInCubit extends Cubit<SignInState> {
     ));
     final result = await _authRepository.googleAuth();
     result.fold((error) {
-      print(error.erorr);
       emit(state.copyWith(
           state: SignInStatus.googleAuthFailure,
           erorrMessage: state.erorrMessage));
     }, (userData) {
-      print(userData.toString());
       emit(SignInState(
           state: SignInStatus.googleAuthSuccess, userModel: userData));
     });
