@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,17 +18,20 @@ class CustomeImageSlideShow extends StatelessWidget {
             width: double.infinity,
             height: 346.h,
             initialPage: 0,
-            indicatorColor: AppPallete.greenColor,
+            indicatorColor: const Color.fromARGB(255, 116, 207, 131),
             indicatorBackgroundColor: AppPallete.lgGreyColor,
             autoPlayInterval: imagesPath.length == 1 ? null : 3000,
             isLoop: true,
             children: imagesPath.isNotEmpty
                 ? imagesPath.map((path) {
-                    return Image.network(
-                      path,
+                    return CachedNetworkImage(
                       width: double.infinity,
                       fit: BoxFit.cover,
-                    );
+       imageUrl: path,
+       progressIndicatorBuilder: (context, url, downloadProgress) => 
+               CircularProgressIndicator(value: downloadProgress.progress),
+       errorWidget: (context, url, error) => Icon(Icons.error),
+    );
                   }).toList()
                 : [
                     SizedBox(

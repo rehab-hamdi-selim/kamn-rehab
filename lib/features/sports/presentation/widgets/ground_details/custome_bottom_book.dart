@@ -49,7 +49,7 @@ class _CustomeBottomBookState extends State<CustomeBottomBook>
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
-      color: AppPallete.whiteColor,
+      color: Colors.transparent,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(65),

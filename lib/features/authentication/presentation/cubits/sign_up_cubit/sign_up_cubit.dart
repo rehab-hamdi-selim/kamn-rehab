@@ -77,6 +77,10 @@ class SignUpCubit extends Cubit<SignUpState> {
         isVisiblePasswordConfirm: !state.isVisiblePasswordConfirm));
   }
 
+  void check(bool value) {
+    emit(state.copyWith(state: SignUpStatus.checked, isChecked: !state.isChecked));
+  }
+
   Future<void> sendVerificationEmail() async {
     await _authRepository.sendVerificationEmail();
   }

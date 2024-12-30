@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/core/common/class/firestore_services.dart';
 import '../../../../core/const/firebase_collections.dart';
@@ -14,8 +15,10 @@ abstract interface class AuthRemoteDataSource {
   Future<void> deleteUser({required String uid});
   Future<UserCredential> signIn(
       {required String email, required String password});
-  Future<Map<String, dynamic>> getUserData({required String uid});
+  Future<Map<String, dynamic>?> getUserData({required String uid});
   Future<void> signOut();
+  Future<void> googleSignOut();
+  Future<UserCredential> googleAuth();
 }
 
 @Injectable(as: AuthRemoteDataSource)
@@ -93,17 +96,65 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<Map<String, dynamic>> getUserData({required String uid}) async {
+  Future<Map<String, dynamic>?> getUserData({required String uid}) async {
     return await executeTryAndCatchForDataLayer(() async {
       final doc = await _userCollection.doc(uid).get();
-      return doc.data() as Map<String, dynamic>;
+      if (doc.exists) {
+        return doc.data() as Map<String, dynamic>;
+      } else {
+        return null;
+      }
     });
   }
 
   @override
   Future<void> signOut() async {
     return await executeTryAndCatchForDataLayer(() async {
-      await _auth.signOut();
+          User? user = _auth.currentUser;
+      if (user != null) {
+      // Check the provider(s) used for signing in
+      String? providerId;
+      if (user.providerData.isNotEmpty) {
+        providerId = user.providerData.first.providerId; // Get the first provider
+      }
+
+      if (providerId == 'google.com') {
+        // Sign out only from Google
+      await GoogleSignIn().signOut();
+        print('Signed out from Google');
+      } else {
+        // Sign out for other providers (e.g., email/password)
+        await FirebaseAuth.instance.signOut();
+        print('Signed out from Firebase');
+      }
+    }
+
+    });
+  }
+
+  @override
+  Future<UserCredential> googleAuth() async {
+    return await executeTryAndCatchForDataLayer(() async {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      final userCredential = await _auth.signInWithCredential(credential);
+
+      return userCredential;
+    });
+  }
+
+  @override
+  Future<void> googleSignOut() async {
+    return await executeTryAndCatchForDataLayer(() async {
+      await GoogleSignIn().signOut();
     });
   }
 }

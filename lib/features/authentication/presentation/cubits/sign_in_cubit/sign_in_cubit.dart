@@ -19,6 +19,7 @@ class SignInCubit extends Cubit<SignInState> {
   //init getPlaygrounds_from_firebase branch
 
   Future<void> signIn({required String email, required String password}) async {
+    emit(state.copyWith(state: SignInStatus.loading));
     final result =
         await _authRepository.signIn(email: email, password: password);
     result.fold(
@@ -64,9 +65,43 @@ class SignInCubit extends Cubit<SignInState> {
         state: SignInStatus.visible, isVisible: !state.isVisible));
   }
 
-  @override
-  Future<void> close() {
-    signInViewModel.dispose();
-    return super.close();
+  Future<void> googleAuth() async {
+    emit(state.copyWith(
+      state: SignInStatus.googleAuthLoading,
+    ));
+    final result = await _authRepository.googleAuth();
+    result.fold((error) {
+      emit(state.copyWith(
+          state: SignInStatus.googleAuthFailure,
+          erorrMessage: state.erorrMessage));
+    }, (userData) {
+      emit(SignInState(
+          state: SignInStatus.googleAuthSuccess, userModel: userData));
+    });
+  }
+
+  Future<void> googleSignOut() async {
+    final res = await _authRepository.googleSignOut();
+    res.fold(
+        (l) => emit(state.copyWith(
+              state: SignInStatus.failure,
+              erorrMessage: l.erorr,
+            )),
+        (r) => emit(state.copyWith(state: SignInStatus.successSignOut)));
+  }
+
+  Future<void> setUserData({required UserModel userModel}) async {
+    emit(state.copyWith(
+      state: SignInStatus.setUserDataLoading,
+    ));
+    final result = await _authRepository.setUser(userModel: userModel);
+    result.fold(
+        (l) => emit(state.copyWith(
+              state: SignInStatus.setUserDataFailure,
+              erorrMessage: l.erorr,
+            )),
+        (r) => emit(state.copyWith(
+              state: SignInStatus.setUserDataSuccess,
+            )));
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/routing/routes.dart';
+import 'package:kamn/core/utils/custom_app_bar.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_state.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/service_provider_grounds/custome_grounds_bloc_listner.dart';
@@ -11,7 +12,6 @@ import '../../../../core/helpers/spacer.dart';
 import '../../../../core/theme/app_pallete.dart';
 import '../../../../core/theme/style.dart';
 import '../../../../core/utils/app_images.dart';
-import '../../../../core/utils/custom_app_bar_service_provider.dart';
 import '../widgets/service_provider_grounds/custom_bottom_service_provider.dart';
 import '../widgets/service_provider_grounds/custom_filter_item_service_provider.dart';
 import '../widgets/service_provider_grounds/custom_ground_item_service_provider.dart';
@@ -30,13 +30,13 @@ class ServiceProviderGroundsScreen extends StatelessWidget {
     return CustomeGroundsBlocListner(
       child: Scaffold(
         backgroundColor: AppPallete.whiteColor,
-        appBar: CustomAppBarServiceProvider.appBar(
-          color: AppPallete.whiteColor,
-          arrowFunction: () {},
-          notificationIconFunction: () {},
-          profileFunction: () {},
-          badgesIconFunction: () {},
-        ),
+        appBar: CustomAppBar.appBar(
+            context: context,
+            color: AppPallete.whiteColor,
+            notificationIconFunction: () {},
+            profileFunction: () {},
+            badgesIconFunction: () {},
+          ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 19.w),
           child: Column(

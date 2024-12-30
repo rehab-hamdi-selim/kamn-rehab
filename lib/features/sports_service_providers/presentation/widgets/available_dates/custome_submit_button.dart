@@ -36,7 +36,7 @@ class CustomeSubmitButton extends StatelessWidget {
                       cubit.onSubmit(
                         playgroundId,
                         {
-                          'available_time':
+                          'availableTime':
                               AvailableTime(data: cubit.selectedIntervals)
                                   .toMap(),
                           'period': state.period,

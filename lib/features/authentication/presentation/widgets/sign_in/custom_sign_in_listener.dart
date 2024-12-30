@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kamn/features/authentication/presentation/cubits/sign_in_cubit/sign_in_view_model.dart';
 import '../../../../../core/common/cubit/app_user/app_user_cubit.dart';
 import '../../../../../core/utils/show_snack_bar.dart';
 import '../../cubits/sign_in_cubit/sign_in_cubit.dart';
@@ -22,7 +23,15 @@ class CustomSignInListener extends StatelessWidget {
         } else if (state.isSuccessGetData) {
           appUserCubit.saveUserData(state.userModel);
         } else if (state.isFailureGetData) {
+          showSnackBar(context, state.erorrMessage ?? "");
           signInCubit.signOut();
+        } else if (state.isGoogleAuthSuccess) {
+          signInCubit.setUserData(userModel: state.userModel!); // to firestore
+        } else if (state.isDwrUserDataSuccess) {
+          appUserCubit.saveUserData(state.userModel); // local
+        } else if (state.isGoogleAuthFailure) {
+          showSnackBar(context, state.erorrMessage ?? "");
+          signInCubit.googleSignOut();
         }
       },
       child: child,

@@ -6,18 +6,13 @@ import 'package:kamn/features/sports_service_providers/presentation/cubit/track_
 @injectable
 class TrackGroundReservationsCubit extends Cubit<TrackGroundsState> {
   TrackGroundReservationsCubit({required this.repository})
-      : super(TrackGroundsState(state: TrackGroundsStatus.initial)) {
-    String ownerId = '';
-    getPlaygroundsByOwnerId(ownerId);
-  }
+      : super(TrackGroundsState(state: TrackGroundsStatus.initial));
   ServiceProvidersRepository repository;
 
   Future<void> getPlaygroundsByOwnerId(String ownerId) async {
     emit(TrackGroundsState(state: TrackGroundsStatus.loading));
     final result = await repository.getPlaygroundsByOwnerId(ownerId);
     result.fold((error) {
-      print(error.erorr);
-
       emit(TrackGroundsState(
         state: TrackGroundsStatus.failure,
         erorrMessage: error.erorr,

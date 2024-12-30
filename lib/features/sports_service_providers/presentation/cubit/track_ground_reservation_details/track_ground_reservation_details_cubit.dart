@@ -8,10 +8,7 @@ class TrackGroundReservationsDetailsCubit
     extends Cubit<TrackGroundsReservationDetailsState> {
   TrackGroundReservationsDetailsCubit({required this.repository})
       : super(TrackGroundsReservationDetailsState(
-            state: TrackGroundsReservationDetailsStatus.initial)) {
-    String ownerId = '';
-    getPlaygroundsDetailsById(ownerId);
-  }
+            state: TrackGroundsReservationDetailsStatus.initial));
   ServiceProvidersRepository repository;
 
   Future<void> getPlaygroundsDetailsById(String playgroundId) async {

@@ -60,6 +60,8 @@ import '../../features/sports/presentation/cubits/sports_grounds/sports_ground_c
     as _i1033;
 import '../../features/sports/presentation/cubits/sports_grounds/sports_ground_view_model.dart'
     as _i16;
+import '../../features/sports/presentation/cubits/view_reservation/view_reservation_cubit.dart'
+    as _i410;
 import '../../features/sports_service_providers/data/data_source/service_providers_remote_data_source.dart'
     as _i1047;
 import '../../features/sports_service_providers/data/repository/service_providers_repository.dart'
@@ -74,8 +76,12 @@ import '../../features/sports_service_providers/presentation/cubit/add_service_p
     as _i1058;
 import '../../features/sports_service_providers/presentation/cubit/available_dates/available_dates_cubit.dart'
     as _i731;
+import '../../features/sports_service_providers/presentation/cubit/current_reseravaion_order/current_orders_cubit.dart'
+    as _i861;
 import '../../features/sports_service_providers/presentation/cubit/edit_service_provider/edit_service_provider_cubit.dart'
     as _i773;
+import '../../features/sports_service_providers/presentation/cubit/finished_reseravaion_order/finished_order_cubit.dart'
+    as _i718;
 import '../../features/sports_service_providers/presentation/cubit/service_provider_ground_details/service_provider_ground_details_cubit.dart'
     as _i692;
 import '../../features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart'
@@ -103,29 +109,31 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
+    gh.factory<_i361.SignInViewModel>(() => _i361.SignInViewModel());
+    gh.factory<_i22.SignUpViewModel>(() => _i22.SignUpViewModel());
+    gh.factory<_i805.PaymentOptionsViewModel>(
+        () => _i805.PaymentOptionsViewModel());
+    gh.factory<_i282.PickTimeForReservationViewModel>(
+        () => _i282.PickTimeForReservationViewModel());
+    gh.factory<_i546.ReservationDetailsCubit>(
+        () => _i546.ReservationDetailsCubit());
+    gh.factory<_i16.SportsGroundViewModel>(() => _i16.SportsGroundViewModel());
     gh.factory<_i1058.AddServiceProviderViewModel>(
         () => _i1058.AddServiceProviderViewModel());
     gh.factory<_i1002.ServiceProviderGroundsViewModel>(
         () => _i1002.ServiceProviderGroundsViewModel());
-    gh.factory<_i805.PaymentOptionsViewModel>(
-        () => _i805.PaymentOptionsViewModel());
-    gh.factory<_i546.ReservationDetailsCubit>(
-        () => _i546.ReservationDetailsCubit());
-    gh.factory<_i16.SportsGroundViewModel>(() => _i16.SportsGroundViewModel());
-    gh.factory<_i282.PickTimeForReservationViewModel>(
-        () => _i282.PickTimeForReservationViewModel());
-    gh.factory<_i361.SignInViewModel>(() => _i361.SignInViewModel());
-    gh.factory<_i22.SignUpViewModel>(() => _i22.SignUpViewModel());
-    gh.lazySingleton<_i158.FirestoreService>(() => _i158.FirestoreService());
     gh.lazySingleton<_i304.FirebaseStorageServices>(
         () => _i304.FirebaseStorageServices());
+    gh.lazySingleton<_i158.FirestoreService>(() => _i158.FirestoreService());
     gh.factory<_i746.SecondPageDataSource>(() => _i746.SecondPageDataSourceImpl(
         firestore: gh<_i158.FirestoreService>()));
     gh.factory<_i418.AnalyticsDataSource>(() => _i418.AnalyticsDataSourceImpl(
           firestoreServices: gh<_i158.FirestoreService>(),
           storageServies: gh<_i304.FirebaseStorageServices>(),
         ));
-
+    gh.factory<_i654.FirebaseRemoteConfigCubit>(() =>
+        _i654.FirebaseRemoteConfigCubit(
+            remoteConfig: gh<_i627.FirebaseRemoteConfig>()));
     gh.factory<_i1047.ServiceProvidersRemoteDataSource>(
         () => _i1047.ServiceProvidersRemoteDataSourceImpl(
               firestoreServices: gh<_i158.FirestoreService>(),
@@ -159,20 +167,24 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i786.GetServicesFromFirebaseUsecase>(() =>
         _i786.GetServicesFromFirebaseUsecase(
             repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i773.EditServiceProviderCubit>(() =>
-        _i773.EditServiceProviderCubit(
-            repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i731.AvailableDatesCubit>(() => _i731.AvailableDatesCubit(
         repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i278.TrackGroundReservationsCubit>(() =>
-        _i278.TrackGroundReservationsCubit(
+    gh.factory<_i773.EditServiceProviderCubit>(() =>
+        _i773.EditServiceProviderCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i692.ServiceProviderGroundDetailsCubit>(() =>
         _i692.ServiceProviderGroundDetailsCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
+    gh.factory<_i278.TrackGroundReservationsCubit>(() =>
+        _i278.TrackGroundReservationsCubit(
+            repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i38.TrackGroundReservationsDetailsCubit>(() =>
         _i38.TrackGroundReservationsDetailsCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
+    gh.factory<_i861.CurrentOrdersCubit>(() => _i861.CurrentOrdersCubit(
+        repository: gh<_i542.ServiceProvidersRepository>()));
+    gh.factory<_i718.FinishedOrdersCubit>(() => _i718.FinishedOrdersCubit(
+        repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i252.AddServiceProviderCubit>(
         () => _i252.AddServiceProviderCubit(
               repository: gh<_i542.ServiceProvidersRepository>(),
@@ -203,6 +215,8 @@ extension GetItInjectableX on _i174.GetIt {
         sportsRepository: gh<_i379.SportsRepository>()));
     gh.factory<_i561.SportsGroundUsecase>(() => _i561.SportsGroundUsecase(
         sportsRepository: gh<_i379.SportsRepository>()));
+    gh.factory<_i410.ViewReservationCubit>(() => _i410.ViewReservationCubit(
+        sportsRepository: gh<_i379.SportsRepository>()));
     gh.factory<_i137.PickTimeForReservationCubit>(
         () => _i137.PickTimeForReservationCubit(
               repository: gh<_i379.SportsRepository>(),
@@ -215,11 +229,6 @@ extension GetItInjectableX on _i174.GetIt {
               gh<_i213.GetSportsFromFirebaseUsecase>(),
           sportsGroundViewModel: gh<_i16.SportsGroundViewModel>(),
         ));
-
-    gh.factory<_i654.FirebaseRemoteConfigCubit>(() =>
-        _i654.FirebaseRemoteConfigCubit(
-            remoteConfig: gh<_i627.FirebaseRemoteConfig>()));
-
     return this;
   }
 }

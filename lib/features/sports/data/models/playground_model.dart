@@ -1,13 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
+import 'package:kamn/core/common/entities/user_model.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 
 class PlaygroundModel {
   String? playgroundId;
-  String? name;
+  String? playgroundName;
   String? phone;
   double? longitude;
   double? latitude;
@@ -24,9 +27,10 @@ class PlaygroundModel {
   num? period;
   String? govenrate;
   String? type;
+  UserModel? owner;
   PlaygroundModel({
     this.playgroundId,
-    this.name,
+    this.playgroundName,
     this.phone,
     this.longitude,
     this.latitude,
@@ -43,6 +47,7 @@ class PlaygroundModel {
     this.period,
     this.govenrate,
     this.type,
+    this.owner,
   });
 
   PlaygroundModel copyWith({
@@ -64,10 +69,11 @@ class PlaygroundModel {
     ValueGetter<num?>? period,
     ValueGetter<String?>? govenrate,
     ValueGetter<String?>? type,
+    ValueGetter<UserModel?>? owner,
   }) {
     return PlaygroundModel(
       playgroundId: playgroundId != null ? playgroundId() : this.playgroundId,
-      name: name != null ? name() : this.name,
+      playgroundName: name != null ? name() : this.playgroundName,
       phone: phone != null ? phone() : this.phone,
       longitude: longitude != null ? longitude() : this.longitude,
       latitude: latitude != null ? latitude() : this.latitude,
@@ -86,13 +92,14 @@ class PlaygroundModel {
       period: period != null ? period() : this.period,
       govenrate: govenrate != null ? govenrate() : this.govenrate,
       type: type != null ? type() : this.type,
+      owner: owner != null ? owner() : this.owner,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
       'playgroundId': playgroundId,
-      'name': name,
+      'name': playgroundName,
       'phone': phone,
       'longitude': longitude,
       'latitude': latitude,
@@ -105,17 +112,18 @@ class PlaygroundModel {
       'groundImages': groundImages,
       'ownershipImages': ownershipImages,
       'size': size,
-      'available_time': availableTime?.toMap(),
+      'availableTime': availableTime?.toMap(),
       'period': period,
       'govenrate': govenrate,
       'type': type,
+      'owner': owner?.toMap(),
     };
   }
 
   factory PlaygroundModel.fromMap(Map<String, dynamic> map) {
     return PlaygroundModel(
       playgroundId: map['playgroundId'],
-      name: map['name'],
+      playgroundName: map['name'],
       phone: map['phone'],
       longitude: map['longitude']?.toDouble(),
       latitude: map['latitude']?.toDouble(),
@@ -128,12 +136,13 @@ class PlaygroundModel {
       groundImages: List<String>.from(map['groundImages']),
       ownershipImages: List<String>.from(map['ownershipImages']),
       size: map['size']?.toInt(),
-      availableTime: map['available_time'] != null
-          ? AvailableTime.fromMap(map['available_time'])
+      availableTime: map['availableTime'] != null
+          ? AvailableTime.fromMap(map['availableTime'])
           : null,
       period: map['period'],
       govenrate: map['govenrate'],
       type: map['type'],
+      owner: map['owner'] != null ? UserModel.fromMap(map['owner']) : null,
     );
   }
 
@@ -144,16 +153,17 @@ class PlaygroundModel {
 
   @override
   String toString() {
-    return 'PlaygroundModel(playgroundId: $playgroundId, name: $name, phone: $phone, longitude: $longitude, latitude: $latitude, ownerId: $ownerId, address: $address, status: $status, rating: $rating, price: $price, description: $description, groundImages: $groundImages, ownershipImages: $ownershipImages, size: $size, availableTime: $availableTime, peroid: $period, govenrate: $govenrate, type: $type)';
+    return 'PlaygroundModel(playgroundId: $playgroundId, name: $playgroundName, phone: $phone, longitude: $longitude, latitude: $latitude, ownerId: $ownerId, address: $address, status: $status, rating: $rating, price: $price, description: $description, groundImages: $groundImages, ownershipImages: $ownershipImages, size: $size, availableTime: $availableTime, period: $period, govenrate: $govenrate, type: $type, owner: $owner)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
+    final listEquals = const DeepCollectionEquality().equals;
 
     return other is PlaygroundModel &&
         other.playgroundId == playgroundId &&
-        other.name == name &&
+        other.playgroundName == playgroundName &&
         other.phone == phone &&
         other.longitude == longitude &&
         other.latitude == latitude &&
@@ -169,13 +179,14 @@ class PlaygroundModel {
         other.availableTime == availableTime &&
         other.period == period &&
         other.govenrate == govenrate &&
-        other.type == type;
+        other.type == type &&
+        other.owner == owner;
   }
 
   @override
   int get hashCode {
     return playgroundId.hashCode ^
-        name.hashCode ^
+        playgroundName.hashCode ^
         phone.hashCode ^
         longitude.hashCode ^
         latitude.hashCode ^
@@ -191,6 +202,7 @@ class PlaygroundModel {
         availableTime.hashCode ^
         period.hashCode ^
         govenrate.hashCode ^
-        type.hashCode;
+        type.hashCode ^
+        owner.hashCode;
   }
 }

@@ -12,6 +12,7 @@ import 'package:kamn/features/sports/presentation/cubits/reservation_details_cub
 import 'package:kamn/features/sports/presentation/cubits/reservation_details_cubit/reservation_details_state.dart';
 import 'package:kamn/features/sports/presentation/widgets/reservation_details/custom_session_count_down.dart';
 import 'package:kamn/core/utils/custom_star_rating.dart';
+import 'package:kamn/features/sports_service_providers/presentation/widgets/track_ground_reservation_details/date_and_countdown_widget.dart';
 
 class CustomePlayGroundInfo extends StatelessWidget {
   const CustomePlayGroundInfo({required this.reservationModel, super.key});
@@ -35,23 +36,10 @@ class CustomePlayGroundInfo extends StatelessWidget {
             style: TextStyles.font12GreenSemiBold,
           ),
           verticalSpace(5.h),
-          Flexible(
-            child: ListView.separated(
-              padding: EdgeInsets.zero,
-              itemCount: reservationModel?.sessions?.length ?? 0,
-              separatorBuilder: (context, index) => verticalSpace(5.h),
-              itemBuilder: (context, index) => BlocProvider.value(
-                value: getIt<ReservationDetailsCubit>()
-                  ..setTargetTime(
-                      (reservationModel?.sessions?[index].startAt)!),
-                child: CustomSessionCountDown(
-                  startAt: reservationModel?.sessions?[index].startAt ??
-                      DateTime.now(),
-                  endAt: reservationModel?.sessions?[index].endAt ??
-                      DateTime.now(),
-                ),
-              ),
-            ),
+          DateAndCountdownWidget(
+            session: Session(
+                startAt: reservationModel?.startAt ?? DateTime.now(),
+                endAt: reservationModel?.endAt ?? DateTime.now()),
           ),
           verticalSpace(5.h),
           playGroundFeatures(),
@@ -205,7 +193,7 @@ class CustomePlayGroundInfo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(reservationModel?.ground?.name ?? "",
+        Text(reservationModel?.ground?.playgroundName ?? "",
             style: TextStyles.font24BlackRegular.copyWith(height: .85),
             maxLines: 2,
             overflow: TextOverflow.ellipsis),

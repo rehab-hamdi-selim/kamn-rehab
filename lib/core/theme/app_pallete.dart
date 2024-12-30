@@ -40,6 +40,7 @@ class AppPallete {
   static const Color lightPinkColor = Color(0xffFFAFAF);
   static const Color pureRedColor = Color(0xffFF0000);
   static const Color dimGrayColor = Color(0xff6F6F6F);
+  static const Color lightVoivetteColor = Color(0xffE166CB);
 
   static const Color lightGrayColor = Color(0xffF6F6F6);
   static const Color accentBlackColor = Color(0xff1F1F1F);

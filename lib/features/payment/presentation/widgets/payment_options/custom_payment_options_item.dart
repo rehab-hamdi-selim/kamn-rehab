@@ -25,7 +25,11 @@ class CustomPaymentOptionsItem extends StatelessWidget {
           borderRadius: BorderRadius.all(
         Radius.circular(15.r),
       )),
-      leading: SvgPicture.asset(paymentIcon),
+      leading: SvgPicture.asset(
+        paymentIcon,
+        width: 25.w,
+        height: 25.h,
+      ),
       onTap: onTap,
       title: Text(
         paymentName,

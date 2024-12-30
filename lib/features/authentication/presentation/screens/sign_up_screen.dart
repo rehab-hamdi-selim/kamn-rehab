@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/utils/show_snack_bar.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/app_pallete.dart';
 import '../cubits/sign_up_cubit/sign_up_cubit.dart';
@@ -10,18 +11,16 @@ import '../widgets/sign_up/custome_already_have_an_account_row.dart';
 import '../widgets/sign_up/custome_sign_up_input_fields.dart';
 import '../widgets/sign_up/custome_sign_up_listner.dart';
 import '../widgets/sign_up/custome_upper_text.dart';
-import '../widgets/sign_up/facebook_button.dart';
+import '../widgets/sign_up/google_button.dart';
 
 class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key, required this.userType});
-  final String userType;
+  const SignUpScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignUpCubit, SignUpState>(
-      builder: (context, state) {
-        final cubit = context.read<SignUpCubit>();
-
+            final cubit = context.read<SignUpCubit>();
         return CustomeSignUpListner(
           child: Scaffold(
             backgroundColor: AppPallete.whiteColor,
@@ -47,17 +46,22 @@ class SignUpScreen extends StatelessWidget {
                                   : CustomButton(
                                       buttonText: 'Sign Up',
                                       onTapButton: () {
-                                        if (cubit.signUpViewModel.formKey
-                                            .currentState!
-                                            .validate()) {
-                                          cubit.signUp(
+                                        if (state.isChecked == true) {
+                                          if (cubit.signUpViewModel.formKey
+                                              .currentState!
+                                              .validate()) {
+                                            cubit.signUp(
                                               name: cubit.signUpViewModel
                                                   .nameController!.text,
                                               email: cubit.signUpViewModel
                                                   .emailController!.text,
                                               password: cubit.signUpViewModel
                                                   .passwordController!.text,
-                                              type: userType);
+                                              type: 'normal',
+                                            );
+                                          }
+                                        }else{
+                                          showSnackBar(context,'Please accept terms and conditions');
                                         }
                                       },
                                     );
@@ -74,7 +78,7 @@ class SignUpScreen extends StatelessWidget {
                             },
                           ),
                           SizedBox(height: 22.h),
-                          FacebookButton(onTapButton: () {}),
+                          GoogleButton(onTapButton: () {}),
                         ],
                       ),
                     ],
@@ -84,7 +88,7 @@ class SignUpScreen extends StatelessWidget {
             ),
           ),
         );
-      },
-    );
-  }
+      }
+    
+  
 }

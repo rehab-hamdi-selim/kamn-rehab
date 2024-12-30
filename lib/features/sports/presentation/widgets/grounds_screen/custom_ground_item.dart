@@ -55,13 +55,13 @@ class CustomGroundItem extends StatelessWidget {
           ),
           verticalSpace(3),
           CustomGroundDetails(
-            owner: playground.name ?? "",
+            owner: playground.playgroundName ?? "",
             km: distance.toString(),
             groundSize: playground.size!.toInt(),
           ),
           verticalSpace(1.2.h),
           Text(
-            playground.name ?? '',
+            playground.playgroundName ?? '',
             style: TextStyles.font16DartBlackColorCircularSpotifyTextW400,
           ),
           Row(

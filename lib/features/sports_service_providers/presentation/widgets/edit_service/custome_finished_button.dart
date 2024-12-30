@@ -82,7 +82,7 @@ class CustomeFinishedButton extends StatelessWidget {
     }
     allImageUrl
         .addAll(context.read<EditServiceProviderCubit>().groundImagesUrl);
-    playground.name =
+    playground.playgroundName =
         context.read<EditServiceProviderCubit>().nameController.text.trim();
     playground.phone =
         context.read<EditServiceProviderCubit>().phoneController.text.trim();

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:kamn/core/theme/app_pallete.dart';
 
 class AppTheme {
 //   static _border([Color color = AppPallete.borderColor]) =>

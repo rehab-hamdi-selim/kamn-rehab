@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
+import 'package:kamn/core/utils/custom_app_bar.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/edit_service/custome_edit_services_bloc_listner.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/edit_service/custome_finished_button.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/edit_service/custome_ground_image_picker.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/edit_service/custome_text_title.dart';
-import 'package:kamn/core/utils/custom_app_bar_service_provider.dart';
 
 class EditServiceScreen extends StatelessWidget {
   final PlaygroundRequestModel playground;
@@ -20,9 +21,9 @@ class EditServiceScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Colors.white,
           resizeToAvoidBottomInset: true,
-          appBar: CustomAppBarServiceProvider.appBar(
+          appBar: CustomAppBar.appBar(
+            context: context,
             color: AppPallete.whiteColor,
-            arrowFunction: () {},
             notificationIconFunction: () {},
             profileFunction: () {},
             badgesIconFunction: () {},

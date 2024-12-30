@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'package:flutter/widgets.dart';
+
 import '../../../../../core/common/entities/user_model.dart';
 
 enum SignUpStatus {
@@ -12,7 +14,7 @@ enum SignUpStatus {
   successSaveData,
   failureSaveData,
   successDeleteUser,
-  failureDeleteUser
+  failureDeleteUser,checked
 }
 
 extension SignInStateExtension on SignUpState {
@@ -27,6 +29,7 @@ extension SignInStateExtension on SignUpState {
   bool get isFailureSaveData => state == SignUpStatus.failureSaveData;
   bool get isSuccessDeleteUser => state == SignUpStatus.successDeleteUser;
   bool get isFailureDeleteUser => state == SignUpStatus.failureDeleteUser;
+  bool get isChecked => state == SignUpStatus.checked;
 }
 
 class SignUpState {
@@ -35,12 +38,14 @@ class SignUpState {
   final String? erorrMessage;
   final bool isVisiblePassword;
   final bool isVisiblePasswordConfirm;
+  final bool isChecked;
   SignUpState({
     required this.state,
     this.userModel,
     this.erorrMessage,
     this.isVisiblePassword = true,
     this.isVisiblePasswordConfirm = true,
+    this.isChecked=false,
   });
 
   SignUpState copyWith({
@@ -49,14 +54,15 @@ class SignUpState {
     String? erorrMessage,
     bool? isVisiblePassword,
     bool? isVisiblePasswordConfirm,
+    bool? isChecked,
   }) {
     return SignUpState(
       state: state ?? this.state,
       userModel: userModel ?? this.userModel,
       erorrMessage: erorrMessage ?? this.erorrMessage,
       isVisiblePassword: isVisiblePassword ?? this.isVisiblePassword,
-      isVisiblePasswordConfirm:
-          isVisiblePasswordConfirm ?? this.isVisiblePasswordConfirm,
+      isVisiblePasswordConfirm: isVisiblePasswordConfirm ?? this.isVisiblePasswordConfirm,
+      isChecked: isChecked ?? this.isChecked,
     );
   }
 

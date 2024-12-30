@@ -31,8 +31,8 @@ class ServiceProviderGroundDetailsCubit
         state: ServiceProviderGroundDetailsStatus.textExtended));
   }
 
-  Future<void> accept(PlaygroundModel playground) async {
-    var response = await repository.addWithTransactionToFirebase(playground);
+  Future<void> accept(PlaygroundRequestModel playground,String userId) async {
+    var response = await repository.addWithTransactionToFirebase(playground,userId);
     response.fold((error) {
       emit(ServiceProviderGroundDetailsState(
           state: ServiceProviderGroundDetailsStatus.failure,
