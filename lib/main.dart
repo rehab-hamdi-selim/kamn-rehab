@@ -46,17 +46,16 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          initialRoute: Routes.groundsScreen,
-          onGenerateRoute: AppRouter.generateRoute,
-          // home: const CustomUpgrader(
-          //   child: FirebaseAnalitics(),
-          // ),
+          // initialRoute: Routes.groundsScreen,
+          // onGenerateRoute: AppRouter.generateRoute,
+          home: const CustomUpgrader(
+            child: FirebaseAnalitics(),
+          ),
         ),
       ),
     );
   }
 }
-
 
 // BlocListener<AppUserCubit, AppUserState>(
 //             listener: (context, state) async {
