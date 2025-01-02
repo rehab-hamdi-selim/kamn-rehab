@@ -34,4 +34,5 @@ class Routes {
   static const String reservationScreen = '/reservationScreen';
   static const String currentOrderScreen = '/currentOrdersScreen';
   static const String finishOrderScreen = '/finishOrdersScreen';
+  static const String dashboardScreen = '/dashboardScreen';
   }

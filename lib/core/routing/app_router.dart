@@ -40,6 +40,7 @@ import 'package:kamn/features/sports_service_providers/presentation/cubit/track_
 import 'package:kamn/features/sports_service_providers/presentation/screens/add_service.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/choose_service_category_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/current_reservation_order_screen.dart';
+import 'package:kamn/features/sports_service_providers/presentation/screens/dashboard_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/edit_service_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/finished_reservation_order_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_available_dates.dart';
@@ -79,7 +80,6 @@ class AppRouter {
             builder: (context) => BlocProvider(
                   create: (context) => getIt<SportsGroundsCubit>()
                     ..getPlaygrounds()
-                    ..getUserLocation()
                     ..initScrollListner(),
                   child: const GroundsScreen(),
                 ));
@@ -253,6 +253,10 @@ class AppRouter {
                     ..fetchOrdersForCategory('Football'),
                   child: const FinishedOrdersScreen(),
                 ));
+      case Routes.dashboardScreen:
+        return MaterialPageRoute(
+            builder: (context) => const DashboardScreen(),
+                );
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(

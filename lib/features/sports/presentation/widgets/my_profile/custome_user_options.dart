@@ -47,7 +47,7 @@ class CustomeUserOptions extends StatelessWidget {
                 icon: 'assets/icons/order.svg',
                 title: "My Order",
                 goTo: () {
-                  Navigator.pushNamed(context, Routes.currentOrderScreen);
+                  Navigator.pushNamed(context, Routes.finishOrderScreen);
                 },
               ),
             if (state.user?.type == 'serviceProvider')
@@ -55,7 +55,7 @@ class CustomeUserOptions extends StatelessWidget {
                 icon: 'assets/icons/dashboard.svg',
                 title: "Dashboard",
                 goTo: () {
-                  Navigator.pushNamed(context, Routes.finishOrderScreen);
+                  Navigator.pushNamed(context, Routes.dashboardScreen);
                 },
               ),
             CustomeMenuItem(
