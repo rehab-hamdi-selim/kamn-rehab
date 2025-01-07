@@ -19,6 +19,7 @@ abstract interface class AuthRemoteDataSource {
   Future<void> signOut();
   Future<void> googleSignOut();
   Future<UserCredential> googleAuth();
+  Future<bool> checkUesrSignin();
 }
 
 @Injectable(as: AuthRemoteDataSource)
@@ -39,8 +40,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       required String name}) async {
     return await executeTryAndCatchForDataLayer(() async {
       // Create the user account
-      final userCredential = await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      final userCredential = await _auth
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .timeout(const Duration(seconds: 60));
 
       if (userCredential.user == null) {
         throw FirebaseAuthException(
@@ -81,8 +83,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<UserCredential> signIn(
       {required String email, required String password}) async {
     return await executeTryAndCatchForDataLayer(() async {
-      final userCredential = await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
+      final userCredential = await _auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .timeout(const Duration(seconds: 45));
 
       if (!userCredential.user!.emailVerified) {
         throw FirebaseAuthException(
@@ -110,25 +113,24 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> signOut() async {
     return await executeTryAndCatchForDataLayer(() async {
-          User? user = _auth.currentUser;
+      User? user = _auth.currentUser;
       if (user != null) {
-      // Check the provider(s) used for signing in
-      String? providerId;
-      if (user.providerData.isNotEmpty) {
-        providerId = user.providerData.first.providerId; // Get the first provider
-      }
+        // Check the provider(s) used for signing in
+        //  String? providerId;
+        // if (user.providerData.isNotEmpty) {
+        //   providerId = user.providerData.first.providerId; // Get the first provider
+        // if (providerId == 'google.com') {
+        //   // Sign out only from Google
+        // await GoogleSignIn().signOut();
+        //   print('Signed out from Google');
+        // } else {
+        //   // Sign out for other providers (e.g., email/password)
+        //   await FirebaseAuth.instance.signOut();
+        //   print('Signed out from Firebase');
+        // }
 
-      if (providerId == 'google.com') {
-        // Sign out only from Google
-      await GoogleSignIn().signOut();
-        print('Signed out from Google');
-      } else {
-        // Sign out for other providers (e.g., email/password)
-        await FirebaseAuth.instance.signOut();
-        print('Signed out from Firebase');
+        _auth.signOut();
       }
-    }
-
     });
   }
 
@@ -155,6 +157,13 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<void> googleSignOut() async {
     return await executeTryAndCatchForDataLayer(() async {
       await GoogleSignIn().signOut();
+    });
+  }
+
+  @override
+  Future<bool> checkUesrSignin() async {
+    return await executeTryAndCatchForDataLayer(() async {
+      return _auth.currentUser != null;
     });
   }
 }

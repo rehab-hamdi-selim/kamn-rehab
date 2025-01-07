@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/core/const/constants.dart';
+import 'package:kamn/core/helpers/navigation_extension.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/utils/custom_app_bar.dart';
 import 'package:kamn/features/authentication/presentation/cubits/sign_in_cubit/sign_in_view_model.dart';
@@ -12,6 +13,7 @@ import 'package:kamn/features/sports/presentation/widgets/my_profile/custome_add
 import 'package:kamn/features/sports/presentation/widgets/my_profile/custome_user_data.dart';
 import 'package:kamn/features/sports/presentation/widgets/my_profile/custome_user_options.dart';
 
+import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/app_pallete.dart';
 import '../../../../core/theme/style.dart';
 
@@ -22,8 +24,9 @@ class MyProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AppUserCubit, AppUserState>(
       listener: (context, state) {
-        if (state.isSignOut()) {
-          context.read<AppUserCubit>().signOut();
+        if (state.isClearUserData()) {
+          context.pop();
+          context.pushReplacementNamed(Routes.signInScreen);
         }
       },
       child: SafeArea(
@@ -49,12 +52,14 @@ class MyProfileScreen extends StatelessWidget {
                   ),
                   child: ElevatedButton(
                     onPressed: () {
-                      context.read<AppUserCubit>().signOutFromEmailandPassword();
+                      context
+                          .read<AppUserCubit>()
+                          .signOutFromEmailandPassword();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppPallete.blackColor,
-                      padding:
-                          EdgeInsets.symmetric(vertical: 12.h, horizontal: 90.w),
+                      padding: EdgeInsets.symmetric(
+                          vertical: 12.h, horizontal: 90.w),
                       // Adjust button size
                       shape: RoundedRectangleBorder(
                         borderRadius:
@@ -63,8 +68,8 @@ class MyProfileScreen extends StatelessWidget {
                     ),
                     child: Text(
                       Constants.logout,
-                      style:
-                          TextStyles.font2OfWhiteMediumRoboto, // Adjust font size
+                      style: TextStyles
+                          .font2OfWhiteMediumRoboto, // Adjust font size
                     ),
                   ),
                 ),

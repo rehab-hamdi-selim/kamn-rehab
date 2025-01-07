@@ -31,7 +31,7 @@ class CustomFilterSection extends StatelessWidget {
           controller: context
               .read<SportsGroundsCubit>()
               .sportsGroundViewModel
-              .searchController,
+              .searchController!,
         )),
         horizontalSpace(5),
         CustomBottom(

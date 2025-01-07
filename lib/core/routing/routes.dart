@@ -1,4 +1,5 @@
 class Routes {
+  static const String splashScreen = '/';
   static const String addServiceScreen = '/addServiceScreen';
   static const String successServiceProviderScreen =
       '/successServiceProviderScreen';
@@ -30,8 +31,8 @@ class Routes {
   static const String proceedPaymentScreen = '/proceedPaymentScreen';
   static const String viewResrvationScreen = '/viewResrvationScreen';
   static const String logOut = '/logOut';
-  static const String splashScreen = '/splashScreen';
   static const String reservationScreen = '/reservationScreen';
   static const String currentOrderScreen = '/currentOrdersScreen';
   static const String finishOrderScreen = '/finishOrdersScreen';
-  }
+  static const String mainLoaderScreen = '/mainLoaderScreen';
+}

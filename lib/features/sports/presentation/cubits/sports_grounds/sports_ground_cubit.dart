@@ -79,11 +79,11 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
   void deleteFilterItem({required int index}) {
     switch (sportsGroundViewModel.filterItem[index]!.icon) {
       case Icons.location_on_outlined:
-        sportsGroundViewModel.loactionController.clear();
+        sportsGroundViewModel.loactionController?.clear();
         break;
       case Icons.monetization_on_outlined:
-        sportsGroundViewModel.maxPriceController.clear();
-        sportsGroundViewModel.minPriceController.clear();
+        sportsGroundViewModel.maxPriceController?.clear();
+        sportsGroundViewModel.minPriceController?.clear();
         break;
       default:
         sportsGroundViewModel.distance = 0;
@@ -92,13 +92,13 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
         .remove(sportsGroundViewModel.filterItem[index]);
 
     filterPlayGroundData(
-      location: sportsGroundViewModel.loactionController.text,
-      maxPrice: sportsGroundViewModel.minPriceController.text != ''
-          ? int.parse(sportsGroundViewModel.maxPriceController.text)
+      location: sportsGroundViewModel.loactionController?.text,
+      maxPrice: sportsGroundViewModel.minPriceController?.text != ''
+          ? int.parse(sportsGroundViewModel.maxPriceController?.text ?? '0')
           : null,
       distance: sportsGroundViewModel.distance,
-      minPrice: sportsGroundViewModel.minPriceController.text != ''
-          ? int.parse(sportsGroundViewModel.minPriceController.text)
+      minPrice: sportsGroundViewModel.minPriceController?.text != ''
+          ? int.parse(sportsGroundViewModel.minPriceController?.text ?? '0')
           : null,
     );
   }
@@ -140,8 +140,11 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
   }
 
   @override
-  Future<void> close() {
-    sportsGroundViewModel.scrollController.dispose();
+  Future<void> close() async {
+    if (!isClosed) {
+      sportsGroundViewModel.scrollController?.removeListener(initScrollListner);
+      sportsGroundViewModel.dispose();
+    }
     return super.close();
   }
 
@@ -163,19 +166,20 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
   }
 
   void initScrollListner() {
-    sportsGroundViewModel.scrollController.addListener(() {
-      if (sportsGroundViewModel.scrollController.position.userScrollDirection ==
+    sportsGroundViewModel.scrollController?.addListener(() {
+      if (sportsGroundViewModel
+              .scrollController!.position.userScrollDirection ==
           ScrollDirection.reverse) {
         if (!state.isScrolledDown &&
-            sportsGroundViewModel.scrollController.position.pixels >=
+            sportsGroundViewModel.scrollController!.position.pixels >=
                 Constants.kImageSliderHeight) {
           emit(state.copyWith(state: SportsGroundsStatus.isScrolledDown));
         }
       }
 
-      if (sportsGroundViewModel.scrollController.position.pixels <=
+      if (sportsGroundViewModel.scrollController!.position.pixels <=
               kToolbarHeight + Constants.additionHightToToolBar &&
-          sportsGroundViewModel.scrollController.position.pixels != 0) {
+          sportsGroundViewModel.scrollController!.position.pixels != 0) {
         emit(state.copyWith(state: SportsGroundsStatus.isReturnedToTop));
       } else {
         if (state.isScrolledDown) {

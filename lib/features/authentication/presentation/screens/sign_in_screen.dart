@@ -41,7 +41,12 @@ class SignInScreen extends StatelessWidget {
                       children: [
                         BlocBuilder<SignInCubit, SignInState>(
                           builder: (context, state) {
-                            return state.isLoading
+                            return state.isLoading ||
+                                    state.isAlreadySignIn ||
+                                    state.isNotSignIn ||
+                                    state.isSuccessSignOut ||
+                                    state.isSuccessSignIn ||
+                                    state.isSuccessGetData
                                 ? const CircularProgressIndicator(
                                     color: AppPallete.darkVividVioletColor,
                                   )
@@ -50,7 +55,9 @@ class SignInScreen extends StatelessWidget {
                                     onTapButton: () {
                                       if (viewModel.formKey.currentState!
                                           .validate()) {
-                                        context.read<SignInCubit>().signIn(
+                                        context
+                                            .read<SignInCubit>()
+                                            .checkUesrSignin(
                                               email: viewModel
                                                   .emailController!.text,
                                               password: viewModel

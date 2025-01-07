@@ -15,11 +15,11 @@ class AlertDialogUtils {
             content: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CircularProgressIndicator(color: AppPallete.greenColor),
+                const CircularProgressIndicator(color: AppPallete.greenColor),
                 SizedBox(
                   width: 10.h,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Text(message, style: TextStyles.font12GreenSemiBold)

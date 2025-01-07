@@ -18,17 +18,17 @@ class SignInCubit extends Cubit<SignInState> {
         super(SignInState(state: SignInStatus.initial));
   //init getPlaygrounds_from_firebase branch
 
-  Future<void> signIn({required String email, required String password}) async {
+  Future<void> signIn() async {
     emit(state.copyWith(state: SignInStatus.loading));
-    final result =
-        await _authRepository.signIn(email: email, password: password);
+    final result = await _authRepository.signIn(
+        email: state.email!, password: state.password!);
     result.fold(
         (l) => emit(state.copyWith(
               state: SignInStatus.failure,
               erorrMessage: l.erorr,
             )),
         (r) => emit(state.copyWith(
-              state: SignInStatus.success,
+              state: SignInStatus.successSignIn,
               uid: r,
             )));
   }
@@ -103,5 +103,27 @@ class SignInCubit extends Cubit<SignInState> {
         (r) => emit(state.copyWith(
               state: SignInStatus.setUserDataSuccess,
             )));
+  }
+
+  Future<void> checkUesrSignin(
+      {required String email, required String password}) async {
+    final result = await _authRepository.checkUesrSignin();
+    result.fold((error) {
+      emit(state.copyWith(
+          state: SignInStatus.isAlreadySignIn,
+          email: email,
+          password: password,
+          erorrMessage: state.erorrMessage));
+    }, (userData) {
+      if (userData) {
+        emit(state.copyWith(
+            state: SignInStatus.isAlreadySignIn,
+            email: email,
+            password: password));
+      } else {
+        emit(state.copyWith(
+            state: SignInStatus.isNotSignIn, email: email, password: password));
+      }
+    });
   }
 }

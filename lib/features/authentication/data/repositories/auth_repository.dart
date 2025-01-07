@@ -23,6 +23,7 @@ abstract interface class AuthRepository {
   Future<Either<Faliure, void>> signOut();
   Future<Either<Faliure, void>> googleSignOut();
   Future<Either<Faliure, UserModel>> googleAuth();
+  Future<Either<Faliure, bool>> checkUesrSignin();
 }
 
 @Injectable(as: AuthRepository)
@@ -100,7 +101,6 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Faliure, void>> signOut() async {
     return await executeTryAndCatchForRepository(() async {
-      
       await _authDataSource.signOut();
     });
   }
@@ -109,18 +109,18 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Faliure, UserModel>> googleAuth() async {
     return await executeTryAndCatchForRepository(() async {
       final userCredential = await _authDataSource.googleAuth();
-      final user = await _authDataSource.getUserData(uid: userCredential.user!.uid);
-      if(user!=null){
-return UserModel.fromMap(user);
-      }
-      else {
+      final user =
+          await _authDataSource.getUserData(uid: userCredential.user!.uid);
+      if (user != null) {
+        return UserModel.fromMap(user);
+      } else {
         return UserModel(
-          signFrom: SignInMethods.google.name,
-          type: 'normal',
-          uid: userCredential.user!.uid,
-          email: userCredential.user!.email!,
-          name: userCredential.user!.displayName!,
-          createdAt: DateTime.now());
+            signFrom: SignInMethods.google.name,
+            type: 'normal',
+            uid: userCredential.user!.uid,
+            email: userCredential.user!.email!,
+            name: userCredential.user!.displayName!,
+            createdAt: DateTime.now());
       }
     });
   }
@@ -129,6 +129,13 @@ return UserModel.fromMap(user);
   Future<Either<Faliure, void>> googleSignOut() async {
     return await executeTryAndCatchForRepository(() async {
       await _authDataSource.googleSignOut();
+    });
+  }
+
+  @override
+  Future<Either<Faliure, bool>> checkUesrSignin() async {
+    return await executeTryAndCatchForRepository(() async {
+      return await _authDataSource.checkUesrSignin();
     });
   }
 }

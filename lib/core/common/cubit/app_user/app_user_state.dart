@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-
 import '../../entities/user_model.dart';
 
 enum AppUserStates {
@@ -12,7 +11,9 @@ enum AppUserStates {
   installed,
   notInstalled,
   success,
-  gettedData
+  gettedData,
+  failureSaveData,
+  clearUserData,
 }
 
 extension AppUserStateExtension on AppUserState {
@@ -25,15 +26,19 @@ extension AppUserStateExtension on AppUserState {
   bool isNotInstalled() => state == AppUserStates.notInstalled;
   bool isSuccess() => state == AppUserStates.success;
   bool isGettedData() => state == AppUserStates.gettedData;
+  bool isFailureSaveData() => state == AppUserStates.failureSaveData;
+  bool isClearUserData() => state == AppUserStates.clearUserData;
 }
 
 class AppUserState {
   final AppUserStates state;
   final UserModel? user;
+  final String? userIntialRoute;
   final String? errorMessage;
   AppUserState({
     required this.state,
     this.user,
+    this.userIntialRoute,
     this.errorMessage,
   });
 
@@ -41,11 +46,13 @@ class AppUserState {
     AppUserStates? state,
     UserModel? user,
     String? errorMessage,
+    String? userIntialRoute,
   }) {
     return AppUserState(
       state: state ?? this.state,
       user: user ?? this.user,
       errorMessage: errorMessage ?? this.errorMessage,
+      userIntialRoute: userIntialRoute ?? this.userIntialRoute,
     );
   }
 
@@ -63,8 +70,5 @@ class AppUserState {
   }
 
   @override
-  int get hashCode =>
-      state.hashCode ^
-      user.hashCode ^
-      errorMessage.hashCode ;
+  int get hashCode => state.hashCode ^ user.hashCode ^ errorMessage.hashCode;
 }

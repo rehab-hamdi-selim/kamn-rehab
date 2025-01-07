@@ -17,6 +17,10 @@ enum SignInStatus {
   setUserDataSuccess,
   setUserDataLoading,
   setUserDataFailure,
+  successSignIn,
+  failureSignIn,
+  isAlreadySignIn,
+  isNotSignIn,
 }
 
 extension SignInStateExtension on SignInState {
@@ -34,12 +38,18 @@ extension SignInStateExtension on SignInState {
   bool get isDwrUserDataLoading => state == SignInStatus.setUserDataLoading;
   bool get isDwrUserDataSuccess => state == SignInStatus.setUserDataSuccess;
   bool get isDwrUserDataFaliure => state == SignInStatus.setUserDataFailure;
+  bool get isSuccessSignIn => state == SignInStatus.successSignIn;
+  bool get isFailureSignIn => state == SignInStatus.failureSignIn;
+  bool get isAlreadySignIn => state == SignInStatus.isAlreadySignIn;
+  bool get isNotSignIn => state == SignInStatus.isNotSignIn;
 }
 
 class SignInState {
   final SignInStatus state;
   final UserModel? userModel;
   final String? erorrMessage;
+  final String? email;
+  final String? password;
   final String? uid;
   final bool isVisible;
   SignInState({
@@ -48,6 +58,8 @@ class SignInState {
     this.erorrMessage,
     this.uid,
     this.isVisible = true,
+    this.email,
+    this.password,
   });
 
   SignInState copyWith({
@@ -56,6 +68,8 @@ class SignInState {
     String? erorrMessage,
     bool? isVisible,
     String? uid,
+    String? email,
+    String? password,
   }) {
     return SignInState(
       state: state ?? this.state,
@@ -63,12 +77,14 @@ class SignInState {
       erorrMessage: erorrMessage ?? this.erorrMessage,
       isVisible: isVisible ?? this.isVisible,
       uid: uid ?? this.uid,
+      email: email ?? this.email,
+      password: password ?? this.password,
     );
   }
 
   @override
   String toString() =>
-      'SignInState(state: $state, userModel: $userModel, erorrMessage: $erorrMessage isVisible: $isVisible uid: $uid)';
+      'SignInState(state: $state, userModel: $userModel, erorrMessage: $erorrMessage isVisible: $isVisible uid: $uid email: $email password: $password)';
 
   @override
   bool operator ==(covariant SignInState other) {
@@ -78,7 +94,9 @@ class SignInState {
         other.userModel == userModel &&
         other.erorrMessage == erorrMessage &&
         other.isVisible == isVisible &&
-        other.uid == uid;
+        other.uid == uid &&
+        other.email == email &&
+        other.password == password;
   }
 
   @override
@@ -87,5 +105,7 @@ class SignInState {
       userModel.hashCode ^
       erorrMessage.hashCode ^
       isVisible.hashCode ^
-      uid.hashCode;
+      uid.hashCode ^
+      email.hashCode ^
+      password.hashCode;
 }

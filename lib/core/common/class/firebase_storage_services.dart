@@ -15,11 +15,11 @@ class FirebaseStorageServices {
 
   Future<void> uploadFile(String path, String filePath) async {
     final fileRef = _storage.ref().child(path);
-    await fileRef.putFile(File(filePath));
+    await fileRef.putFile(File(filePath)).timeout(const Duration(minutes: 2));
   }
 
   Future<String> getDownloadURL(String path) async {
     final fileRef = _storage.ref().child(path);
-    return await fileRef.getDownloadURL();
+    return await fileRef.getDownloadURL().timeout(const Duration(seconds: 30));
   }
 }

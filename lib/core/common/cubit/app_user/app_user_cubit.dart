@@ -12,17 +12,21 @@ class AppUserCubit extends Cubit<AppUserState> {
   AppUserCubit({required this.authRepository})
       : super(AppUserState(state: AppUserStates.initial));
 
-  void saveUserData(UserModel? user,) async {
+  Future<void> saveUserData(
+    UserModel? user,
+  ) async {
     if (user != null) {
       final res = await SecureStorageHelper.saveUserData(user);
       res.fold((l) {
         emit(state.copyWith(
-          state: AppUserStates.failure,
+          state: AppUserStates.failureSaveData,
           errorMessage: l,
         ));
       }, (r) {
         emit(state.copyWith(
-            state: AppUserStates.success, user: user, ));
+          state: AppUserStates.success,
+          user: user,
+        ));
       });
     }
   }
@@ -35,20 +39,24 @@ class AppUserCubit extends Cubit<AppUserState> {
               errorMessage: 'Failed to sign out',
             )),
         (r) => emit(state.copyWith(
-            state: AppUserStates.notLoggedIn, user: null, )));
+              state: AppUserStates.notLoggedIn,
+              user: null,
+            )));
   }
-   Future<void> getUser({required String uid}) async {
+
+  Future<void> getUser({required String uid}) async {
     final result = await authRepository.getUser(uid: uid);
     result.fold(
         (l) => emit(state.copyWith(
               state: AppUserStates.failure,
               errorMessage: l.erorr,
-            )),
-        (r)  {print(r.toString());
-          emit(state.copyWith(
-              state: AppUserStates.gettedData,
-              user: r,
-            ));});
+            )), (r) {
+      print(r.toString());
+      emit(state.copyWith(
+        state: AppUserStates.gettedData,
+        user: r,
+      ));
+    });
   }
 
   // Check if user is logged in
@@ -119,6 +127,21 @@ class AppUserCubit extends Cubit<AppUserState> {
     }, (r) {
       emit(state.copyWith(
         state: AppUserStates.installed,
+      ));
+    });
+  }
+
+  void clearUserData() async {
+    final res = await SecureStorageHelper.removeUserData();
+    res.fold((l) {
+      emit(state.copyWith(
+        state: AppUserStates.failure,
+        errorMessage: l,
+      ));
+    }, (r) {
+      emit(state.copyWith(
+        state: AppUserStates.clearUserData,
+        user: null,
       ));
     });
   }

@@ -65,6 +65,18 @@ class SignUpCubit extends Cubit<SignUpState> {
             )));
   }
 
+  Future<void> signOut() async {
+    final result = await _authRepository.signOut();
+    result.fold(
+        (l) => emit(state.copyWith(
+              state: SignUpStatus.failureSignOut,
+              erorrMessage: l.erorr,
+            )),
+        (r) => emit(state.copyWith(
+              state: SignUpStatus.successSignOut,
+            )));
+  }
+
   changeVisiblePassword() {
     emit(state.copyWith(
         state: SignUpStatus.VisiblePassword,
@@ -78,7 +90,8 @@ class SignUpCubit extends Cubit<SignUpState> {
   }
 
   void check(bool value) {
-    emit(state.copyWith(state: SignUpStatus.checked, isChecked: !state.isChecked));
+    emit(state.copyWith(
+        state: SignUpStatus.checked, isChecked: !state.isChecked));
   }
 
   Future<void> sendVerificationEmail() async {

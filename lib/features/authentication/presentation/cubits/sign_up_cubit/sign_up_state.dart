@@ -14,7 +14,10 @@ enum SignUpStatus {
   successSaveData,
   failureSaveData,
   successDeleteUser,
-  failureDeleteUser,checked
+  failureDeleteUser,
+  successSignOut,
+  failureSignOut,
+  checked
 }
 
 extension SignInStateExtension on SignUpState {
@@ -45,7 +48,7 @@ class SignUpState {
     this.erorrMessage,
     this.isVisiblePassword = true,
     this.isVisiblePasswordConfirm = true,
-    this.isChecked=false,
+    this.isChecked = false,
   });
 
   SignUpState copyWith({
@@ -61,7 +64,8 @@ class SignUpState {
       userModel: userModel ?? this.userModel,
       erorrMessage: erorrMessage ?? this.erorrMessage,
       isVisiblePassword: isVisiblePassword ?? this.isVisiblePassword,
-      isVisiblePasswordConfirm: isVisiblePasswordConfirm ?? this.isVisiblePasswordConfirm,
+      isVisiblePasswordConfirm:
+          isVisiblePasswordConfirm ?? this.isVisiblePasswordConfirm,
       isChecked: isChecked ?? this.isChecked,
     );
   }

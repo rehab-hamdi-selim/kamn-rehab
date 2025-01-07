@@ -54,6 +54,7 @@ import 'package:kamn/test_login.dart';
 import '../../features/authentication/presentation/screens/on_boarding_screen.dart';
 import '../../features/authentication/presentation/screens/sign_in_screen.dart';
 import '../../features/authentication/presentation/screens/sign_up_screen.dart';
+import '../common/widget/main_loader.dart';
 
 class AppRouter {
   static Route generateRoute(RouteSettings settings) {
@@ -229,7 +230,8 @@ class AppRouter {
                 ));
       case Routes.splashScreen:
         return MaterialPageRoute(
-            builder: (context) => const CustomSplashScreen());
+          builder: (_) => const CustomSplashScreen(),
+        );
       case Routes.reservationScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
@@ -253,6 +255,8 @@ class AppRouter {
                     ..fetchOrdersForCategory('Football'),
                   child: const FinishedOrdersScreen(),
                 ));
+      case Routes.mainLoaderScreen:
+        return MaterialPageRoute(builder: (context) => const MainLoader());
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(

@@ -23,8 +23,8 @@ class CustomGroundList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SportsGroundsCubit, SportsGroundsState>(
       builder: (context, state) {
-        if (state.isLoading || state.isInitial ) {
-          return const Loader();
+        if (state.isLoading || state.isInitial) {
+          return const Expanded(child: Loader());
         }
         if (state.playgrounds == null ||
             state.playgrounds!.isEmpty ||
