@@ -35,4 +35,6 @@ class Routes {
   static const String currentOrderScreen = '/currentOrdersScreen';
   static const String finishOrderScreen = '/finishOrdersScreen';
   static const String mainLoaderScreen = '/mainLoaderScreen';
+  static const String notificationsScreen = '/notificationsScreen';
+  static const String notificationDetailsScreen = '/notificationDetailsScreen';
 }

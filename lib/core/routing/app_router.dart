@@ -54,6 +54,10 @@ import 'package:kamn/test_login.dart';
 import '../../features/authentication/presentation/screens/on_boarding_screen.dart';
 import '../../features/authentication/presentation/screens/sign_in_screen.dart';
 import '../../features/authentication/presentation/screens/sign_up_screen.dart';
+import '../../features/user/data/models/notifications_model.dart';
+import '../../features/user/presentation/cubit/notification/notifications_cubit.dart';
+import '../../features/user/presentation/screens/notifications_details_screen.dart';
+import '../../features/user/presentation/screens/notifications_screen.dart';
 import '../common/widget/main_loader.dart';
 
 class AppRouter {
@@ -257,6 +261,17 @@ class AppRouter {
                 ));
       case Routes.mainLoaderScreen:
         return MaterialPageRoute(builder: (context) => const MainLoader());
+      case Routes.notificationsScreen:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider<NotificationsCubit>(
+                  create: (context) => getIt<NotificationsCubit>(),
+                  child: const NotificationsScreen(),
+                ));
+      case Routes.notificationDetailsScreen:
+        return MaterialPageRoute(
+            builder: (context) => NotificationDetailsScreen(
+                  notification: settings.arguments as NotificationsModel,
+                ));
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(

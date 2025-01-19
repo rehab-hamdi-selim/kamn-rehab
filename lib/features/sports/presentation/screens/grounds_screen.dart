@@ -2,12 +2,14 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/constants.dart';
+import 'package:kamn/core/helpers/navigation_extension.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme_data/style.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_filter_properties.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_filter_section.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_ground_list.dart';
+import '../../../../core/routing/routes.dart';
 import '../../../../core/utils/custom_app_bar.dart';
 import '../widgets/grounds_screen/custom_grounds_bloc_listner.dart';
 import '../widgets/grounds_screen/custome_ground_screen_app_bar.dart';
@@ -26,7 +28,9 @@ class GroundsScreen extends StatelessWidget {
             color: AppPallete.whiteColor,
             context: context,
             notificationIconFunction: () {},
-            badgesIconFunction: () {},
+            badgesIconFunction: () {
+              context.pushNamed(Routes.notificationsScreen);
+            },
           ),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 19.w),
