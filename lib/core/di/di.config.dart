@@ -92,6 +92,11 @@ import '../../features/sports_service_providers/presentation/cubit/track_ground_
     as _i38;
 import '../../features/sports_service_providers/presentation/cubit/track_ground_reservations/track_ground_reservations_cubit.dart'
     as _i278;
+import '../../features/user/data/data_source/user_remote_data_source.dart'
+    as _i677;
+import '../../features/user/data/repository/user_repository.dart' as _i812;
+import '../../features/user/presentation/cubit/notification/notifications_cubit.dart'
+    as _i566;
 import '../common/class/firebase_storage_services.dart' as _i304;
 import '../common/class/firestore_services.dart' as _i158;
 import '../common/cubit/app_user/app_user_cubit.dart' as _i94;
@@ -109,22 +114,22 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
-    gh.factory<_i361.SignInViewModel>(() => _i361.SignInViewModel());
-    gh.factory<_i22.SignUpViewModel>(() => _i22.SignUpViewModel());
-    gh.factory<_i805.PaymentOptionsViewModel>(
-        () => _i805.PaymentOptionsViewModel());
-    gh.factory<_i282.PickTimeForReservationViewModel>(
-        () => _i282.PickTimeForReservationViewModel());
-    gh.factory<_i546.ReservationDetailsCubit>(
-        () => _i546.ReservationDetailsCubit());
-    gh.factory<_i16.SportsGroundViewModel>(() => _i16.SportsGroundViewModel());
     gh.factory<_i1058.AddServiceProviderViewModel>(
         () => _i1058.AddServiceProviderViewModel());
     gh.factory<_i1002.ServiceProviderGroundsViewModel>(
         () => _i1002.ServiceProviderGroundsViewModel());
+    gh.factory<_i805.PaymentOptionsViewModel>(
+        () => _i805.PaymentOptionsViewModel());
+    gh.factory<_i546.ReservationDetailsCubit>(
+        () => _i546.ReservationDetailsCubit());
+    gh.factory<_i16.SportsGroundViewModel>(() => _i16.SportsGroundViewModel());
+    gh.factory<_i282.PickTimeForReservationViewModel>(
+        () => _i282.PickTimeForReservationViewModel());
+    gh.factory<_i361.SignInViewModel>(() => _i361.SignInViewModel());
+    gh.factory<_i22.SignUpViewModel>(() => _i22.SignUpViewModel());
+    gh.lazySingleton<_i158.FirestoreService>(() => _i158.FirestoreService());
     gh.lazySingleton<_i304.FirebaseStorageServices>(
         () => _i304.FirebaseStorageServices());
-    gh.lazySingleton<_i158.FirestoreService>(() => _i158.FirestoreService());
     gh.factory<_i746.SecondPageDataSource>(() => _i746.SecondPageDataSourceImpl(
         firestore: gh<_i158.FirestoreService>()));
     gh.factory<_i418.AnalyticsDataSource>(() => _i418.AnalyticsDataSourceImpl(
@@ -150,6 +155,8 @@ extension GetItInjectableX on _i174.GetIt {
         repository: gh<_i173.SecondPageRepository>()));
     gh.factory<_i935.AuthRepository>(() => _i935.AuthRepositoryImpl(
         authDataSource: gh<_i21.AuthRemoteDataSource>()));
+    gh.factory<_i677.UserRemoteDataSource>(() => _i677.UserRemoteDataSourceImpl(
+        firestoreService: gh<_i158.FirestoreService>()));
     gh.factory<_i724.AnalyticsRepository>(() => _i724.AnalyticsRepositoryImpl(
         dataSource: gh<_i418.AnalyticsDataSource>()));
     gh.factory<_i608.SecondPageCubit>(() => _i608.SecondPageCubit(
@@ -182,6 +189,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i278.TrackGroundReservationsCubit>(() =>
         _i278.TrackGroundReservationsCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
+    gh.factory<_i718.FinishedOrdersCubit>(() => _i718.FinishedOrdersCubit(
+        repository: gh<_i542.ServiceProvidersRepository>()));
+    gh.factory<_i692.ServiceProviderGroundDetailsCubit>(() =>
+        _i692.ServiceProviderGroundDetailsCubit(
+            repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i38.TrackGroundReservationsDetailsCubit>(() =>
         _i38.TrackGroundReservationsDetailsCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
@@ -194,6 +206,8 @@ extension GetItInjectableX on _i174.GetIt {
           authRepository: gh<_i935.AuthRepository>(),
           signInViewModel: gh<_i361.SignInViewModel>(),
         ));
+    gh.factory<_i812.UserRepository>(() => _i812.UserRepositoryImpl(
+        userRemoteDataSource: gh<_i677.UserRemoteDataSource>()));
     gh.factory<_i94.AppUserCubit>(
         () => _i94.AppUserCubit(authRepository: gh<_i935.AuthRepository>()));
     gh.factory<_i531.SignUpCubit>(() => _i531.SignUpCubit(
@@ -217,6 +231,8 @@ extension GetItInjectableX on _i174.GetIt {
         sportsRepository: gh<_i379.SportsRepository>()));
     gh.factory<_i410.ViewReservationCubit>(() => _i410.ViewReservationCubit(
         sportsRepository: gh<_i379.SportsRepository>()));
+    gh.factory<_i566.NotificationsCubit>(() =>
+        _i566.NotificationsCubit(userRepository: gh<_i812.UserRepository>()));
     gh.factory<_i137.PickTimeForReservationCubit>(
         () => _i137.PickTimeForReservationCubit(
               repository: gh<_i379.SportsRepository>(),
