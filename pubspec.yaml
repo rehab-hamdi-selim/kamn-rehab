@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 1.0.2+1
 
 environment:
   sdk: ^3.5.3
@@ -104,6 +104,7 @@ dependencies:
   firebase_remote_config: ^5.2.0
   firebase_crashlytics: ^4.2.0
   upgrader: ^11.3.1
+  flutter_cache_manager: ^3.4.1
 
 
 
@@ -150,10 +151,19 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: CircularSpotifyText
+
+    - family: Inter
       fonts:
-        - asset: assets\fonts\CircularSpotifyTxT-Bold.ttf
-          weight: 500
+        - asset: assets/fonts/Inter_28pt-Bold.ttf
+        - asset: assets/fonts/Inter_28pt-ExtraBold.ttf
+        - asset: assets/fonts/Inter_28pt-ExtraLight.ttf
+        - asset: assets/fonts/Inter_28pt-Light.ttf
+        - asset: assets/fonts/Inter_28pt-Medium.ttf
+        - asset: assets/fonts/Inter_28pt-Regular.ttf
+        - asset: assets/fonts/Inter_28pt-SemiBold.ttf
+        - asset: assets/fonts/Inter_28pt-Thin.ttf
+        - asset: assets/fonts/Inter_28pt-Black.ttf 
+       
     
 
   #       - asset: fonts/Schyler-Italic.ttf

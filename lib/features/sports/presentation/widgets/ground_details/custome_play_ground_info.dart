@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/core/const/constants.dart';
-import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kamn/core/utils/custom_star_rating.dart';
 import "package:kamn/features/sports/data/models/playground_model.dart";
 
 class CustomePlayGroundInfo extends StatefulWidget {

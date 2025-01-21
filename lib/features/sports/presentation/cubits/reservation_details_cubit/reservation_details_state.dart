@@ -1,4 +1,3 @@
-import 'package:flutter_countdown_timer/countdown_controller.dart';
 
 enum ReservationDetailsStatus { initial, refreshed, completed }
 

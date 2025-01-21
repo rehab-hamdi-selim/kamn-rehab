@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/features/authentication/presentation/screens/sign_in_screen.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_avaliable_button.dart';

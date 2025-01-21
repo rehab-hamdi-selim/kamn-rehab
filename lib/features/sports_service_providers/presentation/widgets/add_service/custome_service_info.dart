@@ -84,7 +84,7 @@ class CustomeServiceInfo extends StatelessWidget {
 
   SizedBox createSelectionButton({required String title}) {
     return SizedBox(
-        height: 69.h,
+        height: 70.h,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

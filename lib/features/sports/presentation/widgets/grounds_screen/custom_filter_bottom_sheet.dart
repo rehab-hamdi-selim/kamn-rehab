@@ -14,7 +14,6 @@ class CustomFilterBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final sportsGroundViewModel =
         context.read<SportsGroundsCubit>().sportsGroundViewModel;
-    ;
     final sportsGroundCubit = context.read<SportsGroundsCubit>();
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 5.w),
@@ -46,18 +45,18 @@ class CustomFilterBottomSheet extends StatelessWidget {
               child: CustomButton(
                 onTap: () {
                   sportsGroundCubit.filterPlayGroundData(
-                    location: sportsGroundViewModel.loactionController.text,
-                    maxPrice:
-                        sportsGroundViewModel.maxPriceController.text.isNotEmpty
-                            ? int.parse(
-                                sportsGroundViewModel.maxPriceController.text)
-                            : null,
+                    location: sportsGroundViewModel.loactionController!.text,
+                    maxPrice: sportsGroundViewModel
+                            .maxPriceController!.text.isNotEmpty
+                        ? int.parse(
+                            sportsGroundViewModel.maxPriceController!.text)
+                        : null,
                     distance: sportsGroundViewModel.distance,
-                    minPrice:
-                        sportsGroundViewModel.minPriceController.text.isNotEmpty
-                            ? int.parse(
-                                sportsGroundViewModel.minPriceController.text)
-                            : null,
+                    minPrice: sportsGroundViewModel
+                            .minPriceController!.text.isNotEmpty
+                        ? int.parse(
+                            sportsGroundViewModel.minPriceController!.text)
+                        : null,
                   );
                   Navigator.pop(context);
                 },

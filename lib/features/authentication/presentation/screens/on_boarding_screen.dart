@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/features/authentication/presentation/widgets/on_boarding/custom_logo_paint.dart';
 
-import '../../../../core/routing/routes.dart';
+import '../../../../core/common/cubit/app_user/app_user_cubit.dart';
 import '../widgets/Custom_hader.dart';
 import '../widgets/custom_button.dart';
 
@@ -14,6 +14,15 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void onTapButton() {
+      context.read<AppUserCubit>().saveInstallationFlag();
+
+      // Navigator.pushNamed(
+      //   context,
+      //   Routes.signInScreen,
+      // );
+    }
+
     double width = 300.35.w;
     return SafeArea(
       child: Scaffold(
@@ -58,12 +67,7 @@ class OnBoardingScreen extends StatelessWidget {
                     verticalSpace(48.h),
                     CustomButton(
                       buttonText: 'Get Started',
-                      onTapButton: () {
-                        Navigator.pushNamed(
-                          context,
-                          Routes.signInScreen,
-                        );
-                      },
+                      onTapButton: onTapButton,
                     ),
                   ],
                 ),

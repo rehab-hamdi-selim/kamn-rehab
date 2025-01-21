@@ -7,7 +7,6 @@ import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/features/sports/presentation/cubits/reservation_details_cubit/reservation_details_cubit.dart';
-import 'package:kamn/features/sports/presentation/cubits/reservation_details_cubit/reservation_details_state.dart';
 
 class CustomSessionCountDown extends StatelessWidget {
   const CustomSessionCountDown({

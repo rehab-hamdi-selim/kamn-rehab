@@ -14,7 +14,7 @@ class CustomUpgrader extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FirebaseRemoteConfigCubit, FirebaseRemoteConfigState>(
       builder: (context, state) {
-        print(state.configValues?['app_version']);
+        //print(state.configValues?['app_version']);
         return UpgradeAlert(
           dialogStyle: Platform.isAndroid
               ? UpgradeDialogStyle.material

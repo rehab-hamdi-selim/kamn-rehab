@@ -5,12 +5,11 @@ import 'package:kamn/features/sports_service_providers/data/model/playground_req
 import '../../../../../core/helpers/spacer.dart';
 import '../../../../../core/theme/app_pallete.dart';
 import '../../../../../core/theme/style.dart';
-import '../../../../../core/utils/app_images.dart';
 
 class CustomGroundItemServiceProvider extends StatelessWidget {
-  PlaygroundRequestModel playgroundRequest;
+ final PlaygroundRequestModel playgroundRequest;
 
-  CustomGroundItemServiceProvider({super.key, required this.playgroundRequest});
+  const CustomGroundItemServiceProvider({super.key, required this.playgroundRequest});
 
   @override
   Widget build(BuildContext context) {
@@ -104,87 +103,98 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
             ),
           ],
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
+       Row(
+  mainAxisAlignment: MainAxisAlignment.start,
+  children: [
+    Expanded( // Wrap the first Row with Expanded to limit its width
+      child: Row(  mainAxisAlignment: MainAxisAlignment.start,
+      
+        children: [
+          Icon(
+            Icons.location_on_outlined,
+            size: 12.h,
+            color: AppPallete.grayColor,
+          ),
+          horizontalSpace(4),
+          Flexible( // Wrap the Text with Expanded to limit its width
+            child: IntrinsicWidth(
+              child: Text(
+                playgroundRequest.address ?? "",
+                style: TextStyles.font10GrayColorW400,
+                maxLines: 1, // Limit to 1 line`
+                overflow: TextOverflow.ellipsis, // Add ellipsis if the text overflows
+              ),
+            ),
+          ),
+          horizontalSpace(8),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
+            decoration: BoxDecoration(
+              color: AppPallete.whiteColor,
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: AppPallete.greenColor,
+                width: 1.w,
+              ),
+            ),
+            child: Container(
+              height: 4.h,
+              width: 4.w,
+              decoration: const BoxDecoration(
+                color: AppPallete.greenColor,
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+          horizontalSpace(4),
+          Text(
+            playgroundRequest.status ?? "",
+            style: TextStyles.font7DartBlackColorW400,
+          ),
+          horizontalSpace(8),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 4.w),
+            decoration: BoxDecoration(
+              color: AppPallete.whiteColor,
+              borderRadius: BorderRadius.circular(15.r),
+              border: Border.all(
+                color: AppPallete.greenColor,
+                width: 1.w,
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(
-                  Icons.location_on_outlined,
-                  size: 12.h,
-                  color: AppPallete.grayColor,
-                ),
-                horizontalSpace(4),
                 Text(
-                  playgroundRequest.address ?? "",
+                  '${playgroundRequest.rating ?? 0}',
                   style: TextStyles.font10GrayColorW400,
                 ),
-                horizontalSpace(8),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
-                  decoration: BoxDecoration(
-                    color: AppPallete.whiteColor,
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: AppPallete.greenColor,
-                      width: 1.w,
-                    ),
-                  ),
-                  child: Container(
-                    height: 4.h,
-                    width: 4.w,
-                    decoration: const BoxDecoration(
-                        color: AppPallete.greenColor, shape: BoxShape.circle),
-                  ),
-                ),
-                horizontalSpace(4),
-                Text(
-                  playgroundRequest.status ?? "",
-                  style: TextStyles.font7DartBlackColorW400,
-                ),
-                horizontalSpace(8),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 4.w),
-                  decoration: BoxDecoration(
-                    color: AppPallete.whiteColor,
-                    borderRadius: BorderRadius.circular(15.r),
-                    border: Border.all(
-                      color: AppPallete.greenColor,
-                      width: 1.w,
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '${playgroundRequest.rating ?? 0}',
-                        style: TextStyles.font10GrayColorW400,
-                      ),
-                      Icon(
-                        Icons.star,
-                        size: 12.h,
-                        color: AppPallete.yellowColor,
-                      ),
-                    ],
-                  ),
+                Icon(
+                  Icons.star,
+                  size: 12.h,
+                  color: AppPallete.yellowColor,
                 ),
               ],
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  "250 LE",
-                  style: TextStyles.font16DartBlackColorW400,
-                ),
-                Text(
-                  " / hr",
-                  style: TextStyles.font10BlackColorW400,
-                ),
-              ],
-            ),
-          ],
+          ),
+        ],
+      ),
+    ),
+    Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Text(
+          "250 LE",
+          style: TextStyles.font16DartBlackColorW400,
         ),
+        Text(
+          " / hr",
+          style: TextStyles.font10BlackColorW400,
+        ),
+      ],
+    ),
+  ],
+),
       ]),
     );
   }

@@ -4,9 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 
 class CustomeImageSlideShow extends StatelessWidget {
-  CustomeImageSlideShow(this.imagesPath, {super.key});
+  const CustomeImageSlideShow( {required this.imagesPath,super.key});
 
-  List<dynamic> imagesPath = [];
+  final List<dynamic> imagesPath ;
 
   @override
   Widget build(BuildContext context) {

@@ -5,12 +5,12 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 
 class CustomeDropdownMenu extends StatelessWidget {
-  String? hint;
-  Widget? prefixIcon;
-  List<String> choices;
-  TextEditingController controller;
+  final String? hint;
+  final Widget? prefixIcon;
+  final List<String> choices;
+  final TextEditingController controller;
 
-  CustomeDropdownMenu(
+  const CustomeDropdownMenu(
       {super.key,
       this.hint,
       this.prefixIcon,

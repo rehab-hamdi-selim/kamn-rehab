@@ -5,4 +5,5 @@ class FirebaseCollections {
   static const String reservation = 'reservation';
   static const String analyticsdata = 'analyticsdata';
   static const String reservations = 'reservation';
+  static const String notifications = 'notifications';
 }

@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/features/authentication/presentation/cubits/sign_in_cubit/sign_in_view_model.dart';
 import '../../../../../core/common/entities/user_model.dart';
-import '../../../../../core/helpers/secure_storage_helper.dart';
 import '../../../data/repositories/auth_repository.dart';
 import 'sign_in_state.dart';
 
@@ -12,23 +11,22 @@ class SignInCubit extends Cubit<SignInState> {
   final AuthRepository _authRepository;
   SignInCubit(
       {required AuthRepository authRepository,
-      required SignInViewModel signInViewModel})
+      required this.signInViewModel})
       : _authRepository = authRepository,
-        signInViewModel = signInViewModel,
         super(SignInState(state: SignInStatus.initial));
   //init getPlaygrounds_from_firebase branch
 
-  Future<void> signIn({required String email, required String password}) async {
+  Future<void> signIn() async {
     emit(state.copyWith(state: SignInStatus.loading));
-    final result =
-        await _authRepository.signIn(email: email, password: password);
+    final result = await _authRepository.signIn(
+        email: state.email!, password: state.password!);
     result.fold(
         (l) => emit(state.copyWith(
               state: SignInStatus.failure,
               erorrMessage: l.erorr,
             )),
         (r) => emit(state.copyWith(
-              state: SignInStatus.success,
+              state: SignInStatus.successSignIn,
               uid: r,
             )));
   }
@@ -103,5 +101,27 @@ class SignInCubit extends Cubit<SignInState> {
         (r) => emit(state.copyWith(
               state: SignInStatus.setUserDataSuccess,
             )));
+  }
+
+  Future<void> checkUesrSignin(
+      {required String email, required String password}) async {
+    final result = await _authRepository.checkUesrSignin();
+    result.fold((error) {
+      emit(state.copyWith(
+          state: SignInStatus.isAlreadySignIn,
+          email: email,
+          password: password,
+          erorrMessage: state.erorrMessage));
+    }, (userData) {
+      if (userData) {
+        emit(state.copyWith(
+            state: SignInStatus.isAlreadySignIn,
+            email: email,
+            password: password));
+      } else {
+        emit(state.copyWith(
+            state: SignInStatus.isNotSignIn, email: email, password: password));
+      }
+    });
   }
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kamn/features/authentication/presentation/cubits/sign_in_cubit/sign_in_view_model.dart';
+import 'package:kamn/core/helpers/navigation_extension.dart';
 import '../../../../../core/common/cubit/app_user/app_user_cubit.dart';
+import '../../../../../core/routing/routes.dart';
 import '../../../../../core/utils/show_snack_bar.dart';
 import '../../cubits/sign_in_cubit/sign_in_cubit.dart';
 import '../../cubits/sign_in_cubit/sign_in_state.dart';
@@ -14,14 +15,24 @@ class CustomSignInListener extends StatelessWidget {
   Widget build(BuildContext context) {
     final appUserCubit = context.read<AppUserCubit>();
     final signInCubit = context.read<SignInCubit>();
+
+    // checkuser signin --> if user signin --> signout --> user signin again --> get user data --> save user data
+
     return BlocListener<SignInCubit, SignInState>(
-      listener: (context, state) {
-        if (state.isFailure) {
+      listener: (context, state) async {
+        if (state.isAlreadySignIn) {
+          signInCubit.signOut();
+        } else if (state.isNotSignIn) {
+          signInCubit.signIn();
+        } else if (state.isSuccessSignOut) {
+          signInCubit.signIn();
+        } else if (state.isFailure) {
           showSnackBar(context, state.erorrMessage ?? "");
-        } else if (state.isSuccess) {
+        } else if (state.isSuccessSignIn) {
           signInCubit.getUser(uid: state.uid ?? "");
         } else if (state.isSuccessGetData) {
-          appUserCubit.saveUserData(state.userModel);
+          await appUserCubit.saveUserData(state.userModel);
+          context.pushReplacementNamed(Routes.groundsScreen);
         } else if (state.isFailureGetData) {
           showSnackBar(context, state.erorrMessage ?? "");
           signInCubit.signOut();
@@ -31,7 +42,7 @@ class CustomSignInListener extends StatelessWidget {
           appUserCubit.saveUserData(state.userModel); // local
         } else if (state.isGoogleAuthFailure) {
           showSnackBar(context, state.erorrMessage ?? "");
-          signInCubit.googleSignOut();
+          signInCubit.signOut();
         }
       },
       child: child,

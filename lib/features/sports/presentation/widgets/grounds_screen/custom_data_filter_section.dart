@@ -15,7 +15,7 @@ class CustomDataFilterSection extends StatelessWidget {
     return Column(
       children: [
         CustomFilterTextFormField(
-          controller: sportsGroundViewModel.loactionController,
+          controller: sportsGroundViewModel.loactionController!,
           sufficIcon: Icons.location_on_outlined,
           hintText: 'Alexandria, Hadra',
           txt: 'Locations',
@@ -26,7 +26,7 @@ class CustomDataFilterSection extends StatelessWidget {
           children: [
             Expanded(
               child: CustomFilterTextFormField(
-                controller: sportsGroundViewModel.minPriceController,
+                controller: sportsGroundViewModel.minPriceController!,
                 sufficIcon: null,
                 textInputType: TextInputType.number,
                 hintText: 'min',
@@ -36,7 +36,7 @@ class CustomDataFilterSection extends StatelessWidget {
             horizontalSpace(7.w),
             Expanded(
               child: CustomFilterTextFormField(
-                controller: sportsGroundViewModel.maxPriceController,
+                controller: sportsGroundViewModel.maxPriceController!,
                 textInputType: TextInputType.number,
                 sufficIcon: null,
                 hintText: 'max',

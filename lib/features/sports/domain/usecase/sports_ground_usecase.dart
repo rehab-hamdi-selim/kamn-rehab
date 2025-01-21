@@ -22,7 +22,7 @@ class SportsGroundUsecase {
     var userLocation = await getUserLocation();
     var result = await _sportsRepository.getPlaygrounds();
     return result.fold((error) => Left(error), (data) {
-      fliterData = data!.where((element) {
+      fliterData = data.where((element) {
         return priceRange(
                 maxPrice: maxPrice, minPrice: minPrice, price: element.price) &&
             locationChecker(address: element.address, location: location) &&

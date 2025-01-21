@@ -10,8 +10,8 @@ import '../../screens/success_service_provider_screen.dart';
 
 class CustomeEditServicesBlocListner extends StatelessWidget {
   final Widget child;
-  PlaygroundRequestModel playground;
-  CustomeEditServicesBlocListner(
+  final PlaygroundRequestModel playground;
+  const CustomeEditServicesBlocListner(
       {super.key, required this.child, required this.playground});
 
   @override

@@ -63,9 +63,10 @@ class SecureStorageHelper {
     try {
       final flag = await _storage.read(key: _firstTime);
       if (flag != null) {
+        print('flag: $flag');
         return Right(flag);
       }
-      return const Left('User is not logged in');
+      return const Left('User is not Install the app');
     } catch (e) {
       return Left(e.toString());
     }

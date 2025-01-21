@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/constants.dart';
-import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
@@ -10,7 +9,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
 import 'package:kamn/features/sports/presentation/cubits/reservation_details_cubit/reservation_details_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/reservation_details_cubit/reservation_details_state.dart';
-import 'package:kamn/features/sports/presentation/widgets/reservation_details/custom_session_count_down.dart';
 import 'package:kamn/core/utils/custom_star_rating.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/track_ground_reservation_details/date_and_countdown_widget.dart';
 

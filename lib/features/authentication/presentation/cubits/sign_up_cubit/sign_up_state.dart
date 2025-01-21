@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:flutter/widgets.dart';
 
 import '../../../../../core/common/entities/user_model.dart';
 
@@ -9,12 +8,15 @@ enum SignUpStatus {
   loading,
   success,
   failure,
-  VisiblePassword,
-  VisiblePasswordConfirm,
+  visiblePassword,
+  visiblePasswordConfirm,
   successSaveData,
   failureSaveData,
   successDeleteUser,
-  failureDeleteUser,checked
+  failureDeleteUser,
+  successSignOut,
+  failureSignOut,
+  checked
 }
 
 extension SignInStateExtension on SignUpState {
@@ -22,9 +24,9 @@ extension SignInStateExtension on SignUpState {
   bool get isLoading => state == SignUpStatus.loading;
   bool get isSuccess => state == SignUpStatus.success;
   bool get isFailure => state == SignUpStatus.failure;
-  bool get isVisiblePassword => state == SignUpStatus.VisiblePassword;
+  bool get isVisiblePassword => state == SignUpStatus.visiblePassword;
   bool get isVisiblePasswordConfirm =>
-      state == SignUpStatus.VisiblePasswordConfirm;
+      state == SignUpStatus.visiblePasswordConfirm;
   bool get isSuccessSaveData => state == SignUpStatus.successSaveData;
   bool get isFailureSaveData => state == SignUpStatus.failureSaveData;
   bool get isSuccessDeleteUser => state == SignUpStatus.successDeleteUser;
@@ -45,7 +47,7 @@ class SignUpState {
     this.erorrMessage,
     this.isVisiblePassword = true,
     this.isVisiblePasswordConfirm = true,
-    this.isChecked=false,
+    this.isChecked = false,
   });
 
   SignUpState copyWith({
@@ -61,7 +63,8 @@ class SignUpState {
       userModel: userModel ?? this.userModel,
       erorrMessage: erorrMessage ?? this.erorrMessage,
       isVisiblePassword: isVisiblePassword ?? this.isVisiblePassword,
-      isVisiblePasswordConfirm: isVisiblePasswordConfirm ?? this.isVisiblePasswordConfirm,
+      isVisiblePasswordConfirm:
+          isVisiblePasswordConfirm ?? this.isVisiblePasswordConfirm,
       isChecked: isChecked ?? this.isChecked,
     );
   }

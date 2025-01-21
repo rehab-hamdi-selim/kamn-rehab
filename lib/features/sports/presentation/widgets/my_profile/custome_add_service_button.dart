@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/core/common/class/custom_splash_screen.dart';
 import 'package:kamn/core/routing/routes.dart';
 
 class CustomeAddServiceButton extends StatelessWidget {

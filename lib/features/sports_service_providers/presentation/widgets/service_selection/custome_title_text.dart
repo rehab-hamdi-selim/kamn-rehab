@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/theme/style.dart';
 
 class CustomeTitleText extends StatelessWidget {
-  String title;
-  String type;
-  CustomeTitleText({super.key, required this.title, required this.type});
+ final String title;
+ final  String type;
+  const CustomeTitleText({super.key, required this.title, required this.type});
 
   @override
   Widget build(BuildContext context) {

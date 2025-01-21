@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/core/common/class/firebase_storage_services.dart';
 import 'package:kamn/core/common/class/firestore_services.dart';
@@ -64,9 +63,12 @@ class ServiceProvidersRemoteDataSourceImpl
 
         UploadTask uploadTask = firebaseStorageRef.putFile(image);
 
-        TaskSnapshot taskSnapshot = await uploadTask;
+        TaskSnapshot taskSnapshot =
+            await uploadTask.timeout(const Duration(seconds: 100));
 
-        String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+        String downloadUrl = await taskSnapshot.ref
+            .getDownloadURL()
+            .timeout(const Duration(seconds: 30));
         imagesUrl.add(downloadUrl);
       }
       return imagesUrl;
@@ -103,9 +105,7 @@ class ServiceProvidersRemoteDataSourceImpl
           .collection(FirebaseCollections.playgrounds)
           .where('owner.uid', isEqualTo: ownerId)
           .get();
-      return querySnapshot.docs
-          .map((doc) => doc.data() as Map<String, dynamic>)
-          .toList();
+      return querySnapshot.docs.map((doc) => doc.data()).toList();
     });
   }
 
@@ -201,10 +201,11 @@ class ServiceProvidersRemoteDataSourceImpl
       }).toList();
     });
   }
-  
+
   @override
-  Future<List<Map<String, dynamic>>?> getFinishedOrdersByCategory(String category) {
-     return executeTryAndCatchForDataLayer(() async {
+  Future<List<Map<String, dynamic>>?> getFinishedOrdersByCategory(
+      String category) {
+    return executeTryAndCatchForDataLayer(() async {
       final snapshot = await firestoreServices.firestore
           .collection('reservation')
           .where('status', isEqualTo: 'pending') // Filter for finished orders

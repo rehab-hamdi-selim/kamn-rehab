@@ -25,7 +25,7 @@ class ServiceProviderGroundDetailsScreen extends StatelessWidget {
                 right: 0,
                 height: 346.h,
                 // Image height
-                child: CustomeImageSlideShow(playgroundModel.groundImages!)),
+                child: CustomeImageSlideShow(imagesPath: playgroundModel.groundImages??[],)),
             Positioned(
               bottom: 0,
               // Start from the bottom

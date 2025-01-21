@@ -70,7 +70,7 @@ class SportsRemoteDataSourceImpl implements SportsRemoteDataSource {
           .where('user.uid',isEqualTo: userId)
           .get();
       return querySnapshot.docs.map((element) {
-        return element.data() as Map<String, dynamic>;
+        return element.data();
       }).toList();
     });
   }

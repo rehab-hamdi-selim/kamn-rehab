@@ -12,15 +12,25 @@ class FirestoreService {
   FirebaseFirestore get firestore => _firestore;
 
   Future<QuerySnapshot> getData(String collectionPath) async {
-    return await _firestore.collection(collectionPath).get();
+    return await _firestore
+        .collection(collectionPath)
+        .get()
+        .timeout(const Duration(seconds: 30));
   }
 
   Future<void> addData(String collectionPath, Map<String, dynamic> data) async {
-    await _firestore.collection(collectionPath).add(data);
+    await _firestore
+        .collection(collectionPath)
+        .add(data)
+        .timeout(const Duration(seconds: 60));
   }
 
   Future<void> updateData(String collectionPath, String playgroundId,
       Map<String, dynamic> data) async {
-    await _firestore.collection(collectionPath).doc(playgroundId).update(data);
+    await _firestore
+        .collection(collectionPath)
+        .doc(playgroundId)
+        .update(data)
+        .timeout(const Duration(seconds: 30));
   }
 }

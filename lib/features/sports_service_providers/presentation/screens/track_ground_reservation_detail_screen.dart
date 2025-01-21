@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/core/theme/font_weight_helper.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/track_ground_reservation_details/track_ground_reservation_details_cubit.dart';
@@ -35,7 +33,7 @@ class TrackGroundReservationDetail extends StatelessWidget {
                 right: 0,
                 height: 346.h,
                 // Image height
-                child: CustomeImageSlideShow(playgroundModel.groundImages!)),
+                child: CustomeImageSlideShow(imagesPath: playgroundModel.groundImages??[],)),
             Positioned(
               bottom: 0,
               // Start from the bottom

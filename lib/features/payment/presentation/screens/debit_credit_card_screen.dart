@@ -6,7 +6,6 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/font_weight_helper.dart';
 import 'package:kamn/core/utils/alert_dialog_utils.dart';
 import 'package:kamn/core/utils/custom_app_bar.dart';
-import 'package:kamn/features/payment/presentation/widgets/debit_credit_card/custom_app_bar.dart';
 import 'package:kamn/features/payment/presentation/widgets/debit_credit_card/month_tex_field.dart';
 import 'package:kamn/features/payment/presentation/widgets/debit_credit_card/year_text_field.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -136,7 +135,7 @@ class _DebitCreditCardScreenState extends State<DebitCreditCardScreen> {
                   child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const RPadding(
+                   RPadding(
                     padding: EdgeInsets.symmetric(horizontal: 17),
                     child: Text('Expiry date'),
                   ),

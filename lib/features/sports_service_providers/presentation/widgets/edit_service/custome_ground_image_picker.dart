@@ -12,8 +12,8 @@ import 'package:kamn/features/sports_service_providers/presentation/cubit/edit_s
 
 class CustomeGroundImagePicker extends StatelessWidget {
   final List<String> groundImages;
-  bool isInit = false;
-  CustomeGroundImagePicker({super.key, required this.groundImages});
+   bool isInit = false;
+   CustomeGroundImagePicker({super.key, required this.groundImages});
 
   @override
   Widget build(BuildContext context) {

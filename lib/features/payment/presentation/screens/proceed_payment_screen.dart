@@ -11,7 +11,6 @@ import 'package:kamn/features/payment/presentation/widgets/proceed_payment/custo
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
 import 'package:kamn/core/utils/custom_app_bar.dart';
 import 'package:kamn/features/sports/presentation/widgets/reservation_details/custom_success_alert_dailog.dart';
-import 'package:kamn/main.dart';
 
 class ProceedPaymentScreen extends StatelessWidget {
   const ProceedPaymentScreen({super.key, required this.reservationModel});

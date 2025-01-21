@@ -1,12 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:get_it/get_it.dart';
-import 'package:kamn/core/helpers/spacer.dart';
-import 'package:kamn/core/routing/routes.dart';
-import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/core/theme_data/style.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_state.dart';
 import 'package:kamn/features/sports/presentation/screens/ground_details_screen.dart';
@@ -23,8 +17,8 @@ class CustomGroundList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SportsGroundsCubit, SportsGroundsState>(
       builder: (context, state) {
-        if (state.isLoading || state.isInitial ) {
-          return const Loader();
+        if (state.isLoading || state.isInitial) {
+          return const Expanded(child: Loader());
         }
         if (state.playgrounds == null ||
             state.playgrounds!.isEmpty ||
@@ -46,8 +40,8 @@ class CustomGroundList extends StatelessWidget {
                 closedBuilder: (context, action) {
                   return InkWell(
                     onTap: action,
-                    child: BlocProvider(
-                      create: (context) => context.read<SportsGroundsCubit>(),
+                    child: BlocProvider.value(
+                      value:context.read<SportsGroundsCubit>(),
                       child: index % 2 == 0
                           ? ZoomIn(
                               duration: const Duration(seconds: 2),
@@ -71,8 +65,8 @@ class CustomGroundList extends StatelessWidget {
                   );
                 },
                 openBuilder: (context, action) {
-                  return BlocProvider(
-                    create: (context) =>
+                  return BlocProvider.value(
+                   value:
                         getIt<SportsGroundsCubit>()..initScrollListner(),
                     child: GroundDetailsScreen(
                       playgroundModel: state.playgrounds![index],

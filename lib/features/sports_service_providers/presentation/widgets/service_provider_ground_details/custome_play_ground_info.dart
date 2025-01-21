@@ -3,16 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kamn/core/const/constants.dart';
-import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/edit_service_provider/edit_service_provider_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_ground_details/service_provider_ground_details_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_ground_details/service_provider_ground_details_state.dart';
-import 'package:kamn/features/sports_service_providers/presentation/screens/edit_service_screen.dart';
 
 class CustomePlayGroundInfo extends StatelessWidget {
   const CustomePlayGroundInfo({required this.playgroundModel, super.key});
