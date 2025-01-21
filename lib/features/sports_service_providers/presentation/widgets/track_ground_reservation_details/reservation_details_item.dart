@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/core/common/class/custom_splash_screen.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
@@ -53,9 +52,9 @@ class ReservationDetailsItem extends StatelessWidget {
                     );
                     await launchUrl(launchUri);
                   },
-                  child: Text(
+                  child: const Text(
                      '012111111111', // Use dynamic phone
-                    style: const TextStyle(color: AppPallete.greenColor),
+                    style: TextStyle(color: AppPallete.greenColor),
                   ),
                 ),
               ],

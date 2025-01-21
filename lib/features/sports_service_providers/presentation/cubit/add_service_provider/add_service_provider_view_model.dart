@@ -1,6 +1,5 @@
 // ignore_for_file: constant_identifier_names
 
-import 'dart:ui';
 
 import 'package:injectable/injectable.dart';
 import 'package:kamn/core/theme/app_pallete.dart';

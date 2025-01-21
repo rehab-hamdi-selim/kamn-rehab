@@ -6,7 +6,6 @@ import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/features/payment/presentation/widgets/proceed_payment/custom_price_payment_item.dart';
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
-import 'package:path/path.dart';
 
 class CustomPricePaymentDetails extends StatelessWidget {
   const CustomPricePaymentDetails({super.key, required this.reservationModel});

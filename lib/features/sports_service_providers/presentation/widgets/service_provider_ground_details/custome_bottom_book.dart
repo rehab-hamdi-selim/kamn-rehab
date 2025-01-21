@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_ground_details/service_provider_ground_details_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/service_provider_ground_details/custome_bottom_sheet.dart';
@@ -30,7 +29,7 @@ class CustomeBottomBook extends StatelessWidget {
           // RichText(
           //   text: TextSpan(
           //       text: playgroundModel?.price
-          //           .toString(), //TODO: dont pass the all model to display one attribute like price
+          //           .toString(), 
           //       style: TextStyles.font32OfWhiteMedium,
           //       children: [
           //         TextSpan(

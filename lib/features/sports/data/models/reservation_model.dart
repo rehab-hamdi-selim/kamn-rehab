@@ -67,7 +67,7 @@ class ReservationModel {
       'startAt': startAt?.millisecondsSinceEpoch,
       'endAt': endAt?.millisecondsSinceEpoch,
       'status': status,
-      'sessions': sessions?.map((x) => x?.toMap())?.toList(),
+      'sessions': sessions?.map((x) => x.toMap()).toList(),
       'paymentMethod': paymentMethod,
     };
   }

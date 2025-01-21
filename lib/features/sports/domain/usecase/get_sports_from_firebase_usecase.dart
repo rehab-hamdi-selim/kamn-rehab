@@ -6,9 +6,9 @@ import 'package:kamn/features/sports/data/repositories/sports_repository.dart';
 import 'package:collection/collection.dart';
 
 @injectable
-class GetSportsFromFirebaseUsecase {
+class GetPlaygroundsAndFlittered {
   SportsRepository repository;
-  GetSportsFromFirebaseUsecase({required this.repository});
+  GetPlaygroundsAndFlittered({required this.repository});
 
   Future<Either<Faliure, Map<String, List<PlaygroundModel>>>> invoke() async {
     var response = await repository.getPlaygrounds();

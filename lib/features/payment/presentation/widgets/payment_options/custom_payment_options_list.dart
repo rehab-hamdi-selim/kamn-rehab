@@ -23,7 +23,7 @@ class CustomPaymentOptionsList extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 19.w),
           child: CustomPaymentOptionsItem(
             onTap: () => itemOnTap(index),
-            isSelected: index == currentOption ?? false,
+            isSelected: index == currentOption,
             paymentIcon: paymentOptions[index].iconLink,
             paymentName: paymentOptions[index].type.name,
           ),

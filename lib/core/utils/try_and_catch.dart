@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:math';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fpdart/fpdart.dart';
@@ -69,7 +68,6 @@ Future<Either<Faliure, T>> executeTryAndCatchForRepository<T>(
       return left(Faliure(
           'Network error. Please check your connection and try again.'));
     }
-    print(e.runtimeType);
     return left(Faliure('Something went wrong. Please try again later.'));
   }
 }

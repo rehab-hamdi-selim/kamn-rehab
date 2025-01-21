@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/helpers/navigation_extension.dart';
-import 'package:kamn/features/authentication/presentation/cubits/sign_in_cubit/sign_in_view_model.dart';
 import '../../../../../core/common/cubit/app_user/app_user_cubit.dart';
 import '../../../../../core/routing/routes.dart';
 import '../../../../../core/utils/show_snack_bar.dart';

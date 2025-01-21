@@ -12,33 +12,41 @@ import '../../../../../core/const/constants.dart';
 import '../../../data/repositories/sports_repository.dart';
 import '../../../data/models/playground_model.dart';
 
-@injectable
+@singleton
 class SportsGroundsCubit extends Cubit<SportsGroundsState> {
   final SportsRepository sportsRepository;
   final SportsGroundUsecase sportsGroundUsecase;
-  final GetSportsFromFirebaseUsecase getSportsFromFirebaseUsecase;
+  final GetPlaygroundsAndFlittered getPlaygrouundsUseCase;
   final SportsGroundViewModel sportsGroundViewModel;
   SportsGroundsCubit(
       {required this.sportsRepository,
       required this.sportsGroundUsecase,
-      required this.getSportsFromFirebaseUsecase,
+      required this.getPlaygrouundsUseCase,
       required this.sportsGroundViewModel})
       : super(SportsGroundsState(state: SportsGroundsStatus.initial));
 
   Future<void> getPlaygrounds() async {
     emit(state.copyWith(state: SportsGroundsStatus.loading));
-    final result = await sportsRepository.getPlaygrounds();
-    result.fold(
-        (l) => emit(state.copyWith(
-              state: SportsGroundsStatus.failure,
-              erorrMessage: l.erorr,
-            )), (r) {
-      print(r.length);
+    final result = await getPlaygrouundsUseCase.invoke();
+    result.fold((error) {
       emit(state.copyWith(
-        state: SportsGroundsStatus.success,
-        playgrounds: r,
+        state: SportsGroundsStatus.failure,
+        erorrMessage: error.erorr,
       ));
+    }, (success) {
+      emit(state.copyWith(
+          state: SportsGroundsStatus.success, playgroundsMap: success));
     });
+  }
+
+  void passFilteredPlaygrounds(String title) {
+    emit(state.copyWith(
+      state: SportsGroundsStatus.loading,
+    ));
+    emit(state.copyWith(
+      state: SportsGroundsStatus.success,
+      playgrounds: state.playgroundsMap?[title] ?? [],
+    ));
   }
 
   Future<void> filterPlayGroundData(
@@ -139,15 +147,6 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
     sportsGroundViewModel.userLongitude = data['longitude']!;
   }
 
-  @override
-  Future<void> close() async {
-    if (!isClosed) {
-      sportsGroundViewModel.scrollController?.removeListener(initScrollListner);
-      sportsGroundViewModel.dispose();
-    }
-    return super.close();
-  }
-
   Future<void> searchByQuery(String query) async {
     emit(state.copyWith(state: SportsGroundsStatus.loading));
 
@@ -187,5 +186,12 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
         }
       }
     });
+  }
+
+  @override
+  Future<void> close() {
+    sportsGroundViewModel.scrollController?.dispose();
+    sportsGroundViewModel.dispose();
+    return super.close();
   }
 }

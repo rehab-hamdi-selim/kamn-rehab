@@ -20,7 +20,7 @@ class AnalyticsDataSourceImpl implements AnalyticsDataSource {
       var querySnapshot =
           await FirebaseFirestore.instance.collection('analyticsdata').get();
       return querySnapshot.docs
-          .map((doc) => doc.data() as Map<String, dynamic>)
+          .map((doc) => doc.data())
           .toList();
     });
   }

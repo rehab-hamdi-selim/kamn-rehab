@@ -6,15 +6,15 @@ import 'package:kamn/core/theme/style.dart';
 typedef MyValidator = String? Function(String?);
 
 class CustomeTextFormField extends StatelessWidget {
-  String hint;
-  Widget? suffixIcon;
-  Widget? prefixIcon;
-  bool? obscureText;
-  MyValidator? validator;
-  TextEditingController controller;
-  bool show;
-  ImageIcon? suffixIconShowed;
-  CustomeTextFormField(
+  final String hint;
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
+  final bool? obscureText;
+  final MyValidator? validator;
+  final TextEditingController controller;
+  final bool show;
+  final ImageIcon? suffixIconShowed;
+  const CustomeTextFormField(
       {super.key,
       required this.hint,
       this.suffixIcon,

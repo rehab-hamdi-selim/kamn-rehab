@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:flutter/widgets.dart';
 
 import '../../../../../core/common/entities/user_model.dart';
 
@@ -9,8 +8,8 @@ enum SignUpStatus {
   loading,
   success,
   failure,
-  VisiblePassword,
-  VisiblePasswordConfirm,
+  visiblePassword,
+  visiblePasswordConfirm,
   successSaveData,
   failureSaveData,
   successDeleteUser,
@@ -25,9 +24,9 @@ extension SignInStateExtension on SignUpState {
   bool get isLoading => state == SignUpStatus.loading;
   bool get isSuccess => state == SignUpStatus.success;
   bool get isFailure => state == SignUpStatus.failure;
-  bool get isVisiblePassword => state == SignUpStatus.VisiblePassword;
+  bool get isVisiblePassword => state == SignUpStatus.visiblePassword;
   bool get isVisiblePasswordConfirm =>
-      state == SignUpStatus.VisiblePasswordConfirm;
+      state == SignUpStatus.visiblePasswordConfirm;
   bool get isSuccessSaveData => state == SignUpStatus.successSaveData;
   bool get isFailureSaveData => state == SignUpStatus.failureSaveData;
   bool get isSuccessDeleteUser => state == SignUpStatus.successDeleteUser;

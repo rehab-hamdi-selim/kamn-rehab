@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/features/authentication/presentation/widgets/on_boarding/custom_logo_paint.dart';
 
 import '../../../../core/common/cubit/app_user/app_user_cubit.dart';
-import '../../../../core/routing/routes.dart';
 import '../widgets/Custom_hader.dart';
 import '../widgets/custom_button.dart';
 

@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/features/authentication/presentation/cubits/sign_in_cubit/sign_in_view_model.dart';
 import '../../../../../core/common/entities/user_model.dart';
-import '../../../../../core/helpers/secure_storage_helper.dart';
 import '../../../data/repositories/auth_repository.dart';
 import 'sign_in_state.dart';
 
@@ -12,9 +11,8 @@ class SignInCubit extends Cubit<SignInState> {
   final AuthRepository _authRepository;
   SignInCubit(
       {required AuthRepository authRepository,
-      required SignInViewModel signInViewModel})
+      required this.signInViewModel})
       : _authRepository = authRepository,
-        signInViewModel = signInViewModel,
         super(SignInState(state: SignInStatus.initial));
   //init getPlaygrounds_from_firebase branch
 

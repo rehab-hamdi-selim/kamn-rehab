@@ -24,7 +24,7 @@ class CustomAppBar {
       title: Text(title ?? "", style: TextStyles.font20White),
       leading: Row(
         children: [
-          horizontalSpace(18.w),
+          horizontalSpace(10.w),
           InkWell(
             onTap: () {
               Navigator.pop(context);
@@ -55,6 +55,9 @@ class CustomAppBar {
           child: InkWell(
             onTap: badgesIconFunction,
             child: CircleAvatar(
+              backgroundColor:
+                  title == null ? AppPallete.whiteColor : AppPallete.grayColor,
+              radius: 16.0,
               child: Icon(
                 Icons.notifications_none_outlined,
                 color: title == null
@@ -62,9 +65,6 @@ class CustomAppBar {
                     : AppPallete.whiteColor,
                 size: 25.h,
               ),
-              backgroundColor:
-                  title == null ? AppPallete.whiteColor : AppPallete.grayColor,
-              radius: 16.0,
             ),
           ),
         ),

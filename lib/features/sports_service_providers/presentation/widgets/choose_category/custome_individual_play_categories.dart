@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_state.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/choose_category/custome_sport_category.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/choose_category/custome_team_play_categories.dart';
 
 class CustomeIndividualPlayCategories extends StatelessWidget {
   const CustomeIndividualPlayCategories({super.key});

@@ -79,13 +79,13 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   changeVisiblePassword() {
     emit(state.copyWith(
-        state: SignUpStatus.VisiblePassword,
+        state: SignUpStatus.visiblePassword,
         isVisiblePassword: !state.isVisiblePassword));
   }
 
   changeVisibleConfirmPassword() {
     emit(state.copyWith(
-        state: SignUpStatus.VisiblePasswordConfirm,
+        state: SignUpStatus.visiblePasswordConfirm,
         isVisiblePasswordConfirm: !state.isVisiblePasswordConfirm));
   }
 

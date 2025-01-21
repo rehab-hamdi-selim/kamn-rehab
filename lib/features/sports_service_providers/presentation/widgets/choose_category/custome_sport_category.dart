@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart';
-import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_grounds_screen.dart';
 
 class CustomeSportCategory extends StatelessWidget {
   final String title;
@@ -46,7 +43,7 @@ class CustomeSportCategory extends StatelessWidget {
                     style: TextStyles.fontRoboto16RegularBlack
                         .copyWith(color: color),
                   ),
-                  verticalSpace(15.h),
+                  verticalSpace(10.h),
                   if (servicesNum != null)
                     Row(
                       children: [

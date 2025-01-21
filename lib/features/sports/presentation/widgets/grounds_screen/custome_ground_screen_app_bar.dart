@@ -9,7 +9,6 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 
 import '../../../../../core/utils/app_images.dart';
-import '../../../../../core/utils/show_alert.dart';
 import '../../../../../core/utils/show_snack_bar.dart';
 
 class CustomGroundScreenAppBar {
@@ -29,7 +28,7 @@ class CustomGroundScreenAppBar {
       title: Text(title ?? "", style: TextStyles.font20White),
       leading: Row(
         children: [
-          horizontalSpace(18.w),
+          horizontalSpace(10.w),
           InkWell(
             onTap: () {
               showCustomDialog(context,

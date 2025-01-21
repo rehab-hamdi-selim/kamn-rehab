@@ -16,8 +16,8 @@ import 'package:kamn/features/sports_service_providers/presentation/widgets/add_
 import 'package:kamn/features/sports_service_providers/presentation/widgets/edit_service/custome_radio_button.dart';
 
 class CustomeServiceInfo extends StatelessWidget {
-  PlaygroundRequestModel playground;
-  CustomeServiceInfo({super.key, required this.playground});
+  final PlaygroundRequestModel playground;
+  const CustomeServiceInfo({super.key, required this.playground});
 
   @override
   Widget build(BuildContext context) {

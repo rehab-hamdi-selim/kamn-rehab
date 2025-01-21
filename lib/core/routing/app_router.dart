@@ -75,14 +75,17 @@ class AppRouter {
                     type: settings.arguments as String,
                   ),
                 ));
+
       case Routes.groundsScreen:
         return MaterialPageRoute(
-            builder: (context) => BlocProvider(
-                  create: (context) => getIt<SportsGroundsCubit>()
-                    ..getPlaygrounds()
-                    ..getUserLocation()
-                    ..initScrollListner(),
-                  child: const GroundsScreen(),
+            builder: (context) => BlocProvider.value(
+      value: getIt<SportsGroundsCubit>()
+        ..passFilteredPlaygrounds(settings.arguments as String)
+        ..getUserLocation()
+        ..initScrollListner(),
+                  child: GroundsScreen(
+                    title: settings.arguments as String,
+                  ),
                 ));
       case Routes.groundDetailsScreen:
         return MaterialPageRoute(
