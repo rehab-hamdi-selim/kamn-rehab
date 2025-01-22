@@ -74,19 +74,11 @@ class SignInCubit extends Cubit<SignInState> {
           erorrMessage: state.erorrMessage));
     }, (userData) {
       emit(SignInState(
-          state: SignInStatus.googleAuthSuccess, userModel: userData));
+          state: SignInStatus.googleAuthSuccess, userModel: userData,uid: userData.uid));
     });
   }
 
-  Future<void> googleSignOut() async {
-    final res = await _authRepository.googleSignOut();
-    res.fold(
-        (l) => emit(state.copyWith(
-              state: SignInStatus.failure,
-              erorrMessage: l.erorr,
-            )),
-        (r) => emit(state.copyWith(state: SignInStatus.successSignOut)));
-  }
+
 
   Future<void> setUserData({required UserModel userModel}) async {
     emit(state.copyWith(

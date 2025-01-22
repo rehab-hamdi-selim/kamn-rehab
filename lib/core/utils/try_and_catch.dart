@@ -68,6 +68,8 @@ Future<Either<Faliure, T>> executeTryAndCatchForRepository<T>(
       return left(Faliure(
           'Network error. Please check your connection and try again.'));
     }
+        print('@@@@@@@@@@@@@@@@${e.toString()}');
+
     return left(Faliure('Something went wrong. Please try again later.'));
   }
 }
@@ -120,6 +122,7 @@ Future<T> executeTryAndCatchForDataLayer<T>(Future<T> Function() action) async {
   } on FormatException {
     rethrow;
   } catch (e) {
+    print('@@@@@@@@@@@@@@@@${e.toString()}');
     throw Exception('Something went wrong. Please try again later.');
   }
 }

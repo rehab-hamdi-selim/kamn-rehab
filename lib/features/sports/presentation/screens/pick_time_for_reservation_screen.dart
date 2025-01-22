@@ -51,7 +51,7 @@ class PickTimeForReservationScreen extends StatelessWidget {
                           },
                         ),
                         CustomeChoosePickTime(
-                            availableTime: playground.availableTime!),
+                            availableTime: playground.availableTime!,peroid: playground.period?.toInt()??60,),
                         CustomeSubmitButton(
                           playground: playground,
                           selectedDate: state.selectedDate ?? DateTime.now(),

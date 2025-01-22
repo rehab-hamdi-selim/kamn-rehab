@@ -37,7 +37,7 @@ class GroundsScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Builder(builder: (context) {
+                      Builder(builder: (context) { 
                         return Text(
                           title,
                           style: Style.font30DarkGreenColorBold.copyWith(
@@ -47,7 +47,8 @@ class GroundsScreen extends StatelessWidget {
                                   .sportColor),
                         );
                       }),
-                      CustomFilterSection(),
+                      CustomFilterSection(title: title
+                      ,),
                       verticalSpace(10),
                       const CustomFilterProperties(),
                     ],

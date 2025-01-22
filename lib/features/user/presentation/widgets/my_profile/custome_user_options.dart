@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/core/routing/routes.dart';
-import 'package:kamn/features/sports/presentation/widgets/my_profile/custome_menu_item.dart';
+import 'package:kamn/features/user/presentation/widgets/my_profile/custome_menu_item.dart';
 
 class CustomeUserOptions extends StatelessWidget {
   const CustomeUserOptions({super.key});
@@ -24,7 +24,8 @@ class CustomeUserOptions extends StatelessWidget {
                 Navigator.pushNamed(context, Routes.viewResrvationScreen);
               },
             ),
-            if (state.user?.type == 'serviceProvider')
+            if (state.user?.type == 'serviceProvider' ||
+                state.user?.type == 'admin')
               CustomeMenuItem(
                 icon: 'assets/icons/services.svg',
                 title: "My Services",
@@ -35,12 +36,10 @@ class CustomeUserOptions extends StatelessWidget {
             CustomeMenuItem(
               icon: 'assets/icons/store.svg',
               title: "My Store",
-              goTo: () {
-                Navigator.pushNamed(
-                    context, Routes.chooseServiceCategoryScreen);
-              },
+              goTo: () {},
             ),
-            if (state.user?.type == 'serviceProvider')
+            if (state.user?.type == 'serviceProvider' ||
+                state.user?.type == 'admin')
               CustomeMenuItem(
                 icon: 'assets/icons/order.svg',
                 title: "My Order",
@@ -48,12 +47,22 @@ class CustomeUserOptions extends StatelessWidget {
                   Navigator.pushNamed(context, Routes.finishOrderScreen);
                 },
               ),
-            if (state.user?.type == 'serviceProvider')
+            if (state.user?.type == 'serviceProvider' ||
+                state.user?.type == 'admin')
               CustomeMenuItem(
                 icon: 'assets/icons/dashboard.svg',
                 title: "Dashboard",
                 goTo: () {
-                  Navigator.pushNamed(context, Routes.dashboardScreen);
+                  Navigator.pushNamed(context, Routes.currentOrderScreen);
+                },
+              ),
+            if (state.user?.type == 'admin')
+              CustomeMenuItem(
+                icon: 'assets/icons/admin.svg',
+                title: "Admin",
+                goTo: () {
+                  Navigator.pushNamed(
+                      context, Routes.chooseServiceCategoryScreen);
                 },
               ),
             CustomeMenuItem(

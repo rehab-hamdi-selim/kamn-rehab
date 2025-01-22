@@ -9,6 +9,7 @@ import 'package:kamn/features/authentication/presentation/cubits/sign_up_cubit/s
 import 'package:kamn/features/payment/presentation/cubits/procced_payment_cubit/procced_payment_cubit.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
+import 'package:kamn/features/user/presentation/cubit/edit_profile/edit_profile_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart';
 import 'package:kamn/features/admin/presentation/cubits/first_page_cupit/analytics_cubit.dart';
 import 'package:kamn/features/admin/presentation/screens/first_analytics_page/first_analytics_page.dart';
@@ -21,9 +22,11 @@ import 'package:kamn/features/payment/presentation/screens/proceed_payment_scree
 import 'package:kamn/features/sports/presentation/cubits/reservation_details_cubit/reservation_details_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/view_reservation/view_reservation_cubit.dart';
+import 'package:kamn/features/user/presentation/screens/edit_profile_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/grounds_screen.dart';
-import 'package:kamn/features/sports/presentation/screens/my_profile_screen.dart';
+import 'package:kamn/features/user/presentation/screens/my_profile_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/pick_time_for_reservation_screen.dart';
+import 'package:kamn/features/sports/presentation/screens/select_category_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/view_resrvation_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/ground_details_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/reservation_details_screen.dart';
@@ -40,7 +43,6 @@ import 'package:kamn/features/sports_service_providers/presentation/cubit/track_
 import 'package:kamn/features/sports_service_providers/presentation/screens/add_service.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/choose_service_category_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/current_reservation_order_screen.dart';
-import 'package:kamn/features/sports_service_providers/presentation/screens/dashboard_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/edit_service_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/finished_reservation_order_screen.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_available_dates.dart';
@@ -70,6 +72,12 @@ class AppRouter {
               create: (context) => getIt<AnalyticsCubit>(),
               child: FirstAnalyticsPage()),
         );
+      case Routes.editProfileScreen:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<EditProfileCubit>(),
+                  child: const EditProfileScreen(),
+                ));
       case Routes.myProfileScreen:
         return MaterialPageRoute(builder: (context) => const MyProfileScreen());
       case Routes.addServiceScreen:
@@ -81,21 +89,30 @@ class AppRouter {
                   ),
                 ));
 
+      case Routes.selectCategoryScreen:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) =>
+                      getIt<SportsGroundsCubit>()..getPlaygrounds(),
+                  child: const SelectCategoryScreen(),
+                ));
+
       case Routes.groundsScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider.value(
-      value: getIt<SportsGroundsCubit>()
-        ..passFilteredPlaygrounds(settings.arguments as String)
-        ..getUserLocation()
-        ..initScrollListner(),
+                  value: getIt<SportsGroundsCubit>()
+                    ..passFilteredPlaygrounds(settings.arguments as String)
+                    ..getUserLocation()
+                    ..initScrollListner(),
                   child: GroundsScreen(
                     title: settings.arguments as String,
                   ),
                 ));
       case Routes.groundDetailsScreen:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider.value(
-            value: getIt<SportsGroundsCubit>()..initScrollListner(),
+          builder: (context) => BlocProvider(
+            create: (context) =>
+                getIt<SportsGroundsCubit>()..initScrollListner(),
             child: GroundDetailsScreen(
               playgroundModel: settings.arguments as PlaygroundModel,
             ),

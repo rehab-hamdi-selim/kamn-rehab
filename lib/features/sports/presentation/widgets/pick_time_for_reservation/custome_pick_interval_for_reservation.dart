@@ -10,11 +10,13 @@ class CustomePickIntervalForReservation extends StatelessWidget {
       {super.key,
       required this.interval,
       required this.isPicked,
-      required this.day});
+      required this.day,
+      required this.peroid});
 
   final DateTime interval;
   final bool isPicked;
   final String day;
+  final int peroid;
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +32,8 @@ class CustomePickIntervalForReservation extends StatelessWidget {
                 },
                 child: Container(
                   margin: const EdgeInsets.symmetric(vertical: 8),
-                  padding: const EdgeInsets.all(16),
-                  width: 100.w,
+                  padding:  EdgeInsets.symmetric(vertical: 10.h,),
+                  width: 120.w,
                   decoration: BoxDecoration(
                     color: cubit.viewModel.isSelected(interval, day)
                         ? Colors.blueAccent
@@ -59,7 +61,7 @@ class CustomePickIntervalForReservation extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      DateFormat('HH:mm').format(interval),
+                      '${DateFormat('HH:mm').format(interval)} to ${DateFormat('HH:mm').format(cubit.viewModel.getEndTime(interval, peroid))}',
                       style: TextStyle(
                         color: cubit.viewModel.isSelected(interval, day)
                             ? Colors.white

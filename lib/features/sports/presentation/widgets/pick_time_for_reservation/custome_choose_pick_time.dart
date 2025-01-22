@@ -9,7 +9,8 @@ import 'package:kamn/features/sports_service_providers/data/model/playground_req
 
 class CustomeChoosePickTime extends StatelessWidget {
   final AvailableTime? availableTime;
-  const CustomeChoosePickTime({super.key, required this.availableTime});
+  final int peroid;
+  const CustomeChoosePickTime({super.key, required this.availableTime, required this.peroid});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +47,9 @@ class CustomeChoosePickTime extends StatelessWidget {
                               reservationList,
                               cubit.viewModel.copyDate(
                                   first: interval, second: selectedDate),
-                              selectedDate));
+                              selectedDate),
+                              peroid:peroid,
+                              );
                     }),
                   ] else if (state.isLoading)
                     const Center(

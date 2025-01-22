@@ -13,7 +13,7 @@ abstract interface class SportsRemoteDataSource {
   Future<List<Map<String, dynamic>>> getUserReservations(String userId);
   Future<List<Map<String, dynamic>>> getSpecificReservationsByGroundId(
       String groundId, DateTime selectedDate);
-  Future<List<Map<String, dynamic>>> searchByQuery(String query);
+  Future<List<Map<String, dynamic>>> searchByQuery(String query,String type);
 }
 
 @Injectable(as: SportsRemoteDataSource)
@@ -76,16 +76,16 @@ class SportsRemoteDataSourceImpl implements SportsRemoteDataSource {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> searchByQuery(String query) {
+  Future<List<Map<String, dynamic>>> searchByQuery(String query,String type) {
     return executeTryAndCatchForDataLayer(() async {
       List<String> seenIds = [];
       final nameQuery = firestoreService.firestore
-          .collection(FirebaseCollections.playgrounds)
+          .collection(FirebaseCollections.playgrounds).where('type',isEqualTo: type)
           .where('name', isGreaterThanOrEqualTo: query)
           .where('name', isLessThan: '$query\uf8ff')
           .get();
       final addressQuery = firestoreService.firestore
-          .collection(FirebaseCollections.playgrounds)
+          .collection(FirebaseCollections.playgrounds).where('type',isEqualTo: type)
           .where('address', isGreaterThanOrEqualTo: query)
           .where('address', isLessThan: '$query\uf8ff')
           .get();
@@ -124,4 +124,6 @@ class SportsRemoteDataSourceImpl implements SportsRemoteDataSource {
       return querySnapshot.docs.map((doc) => doc.data()).toList();
     });
   }
+  
+  
 }

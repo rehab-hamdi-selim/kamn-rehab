@@ -54,7 +54,7 @@ class CustomeBottomBook extends StatelessWidget {
           ElevatedButton(
               onPressed: () {
                 context.read<ServiceProviderGroundDetailsCubit>().accept(
-                    playgroundRequestModel,context.read<AppUserCubit>().state.user!.uid);
+                    playgroundRequestModel,);
               },
               child: Text(
                 'Accept',

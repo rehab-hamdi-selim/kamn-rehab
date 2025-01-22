@@ -115,21 +115,22 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     return await executeTryAndCatchForDataLayer(() async {
       User? user = _auth.currentUser;
       if (user != null) {
-        // Check the provider(s) used for signing in
-        //  String? providerId;
-        // if (user.providerData.isNotEmpty) {
-        //   providerId = user.providerData.first.providerId; // Get the first provider
-        // if (providerId == 'google.com') {
-        //   // Sign out only from Google
-        // await GoogleSignIn().signOut();
-        //   print('Signed out from Google');
-        // } else {
-        //   // Sign out for other providers (e.g., email/password)
-        //   await FirebaseAuth.instance.signOut();
-        //   print('Signed out from Firebase');
-        // }
+        String? providerId;
+        if (user.providerData.isNotEmpty) {
+          providerId =
+              user.providerData.first.providerId; // Get the first provider
+          if (providerId == 'google.com') {
+            // Sign out only from Google
+            await GoogleSignIn().signOut();
+            print('Signed out from Google');
+          } else {
+            // Sign out for other providers (e.g., email/password)
+            await FirebaseAuth.instance.signOut();
+            print('Signed out from Firebase');
+          }
 
-        _auth.signOut();
+          _auth.signOut();
+        }
       }
     });
   }

@@ -35,7 +35,9 @@ class CustomFilterBottomSheet extends StatelessWidget {
                 resetButton: () {
                   sportsGroundCubit.resetFilter();
                 },
-                closeSheet: () {}),
+                closeSheet: () {
+                  Navigator.pop(context);
+                }),
             verticalSpace(20.h),
             Padding(
                 padding: EdgeInsets.symmetric(horizontal: 13.w),

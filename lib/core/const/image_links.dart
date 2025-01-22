@@ -12,4 +12,5 @@ class ImageLinks {
   static const String welcomeImg = 'assets/images/welcomeImg.png';
   static const String loginLogo = "assets/images/loginLogo.png";
   static const String groundImage = "assets/images/ground_image.png";
+  static const String defaultUserImage = "assets/icons/default_user_image.svg";
 }

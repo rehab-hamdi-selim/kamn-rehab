@@ -41,13 +41,13 @@ Future<void> initDependencies() async {
   Bloc.observer = MyBlocObserver();
 
   //crashlytics
-  FlutterError.onError = (details) {
-    FirebaseCrashlytics.instance.recordFlutterError(details);
-  };
-  PlatformDispatcher.instance.onError = (error, stackTrace) {
-    FirebaseCrashlytics.instance.recordError(error, stackTrace);
-    return true;
-  };
+  // FlutterError.onError = (details) {
+  //   FirebaseCrashlytics.instance.recordFlutterError(details);
+  // };
+  // PlatformDispatcher.instance.onError = (error, stackTrace) {
+  //   FirebaseCrashlytics.instance.recordError(error, stackTrace);
+  //   return true;
+  // };
 
   //remote config
 

@@ -22,7 +22,7 @@ abstract class ServiceProvidersRemoteDataSource {
       String playgroundId);
   Future<List<Map<String, dynamic>>> getPlaygroundsRequests();
   Future<void> addWithTransactionToFirebase(
-      PlaygroundRequestModel playgroundModel, String userId);
+      PlaygroundRequestModel playgroundModel);
   Future<void> updateState(String playgroundId, Map<String, dynamic> data);
   Future<List<Map<String, dynamic>>> searchByQuery(String query, String type);
   Future<List<Map<String, dynamic>>?> getCurrentOrdersByCategory(
@@ -111,7 +111,7 @@ class ServiceProvidersRemoteDataSourceImpl
 
   @override
   Future<void> addWithTransactionToFirebase(
-      PlaygroundRequestModel playgroundModel, String userId) {
+      PlaygroundRequestModel playgroundModel) {
     return executeTryAndCatchForDataLayer(() async {
       await firestoreServices.firestore.runTransaction((transaction) async {
         var deletedDocRef = firestoreServices.firestore
@@ -122,7 +122,7 @@ class ServiceProvidersRemoteDataSourceImpl
             .doc();
         var userDocRef = firestoreServices.firestore
             .collection(FirebaseCollections.users)
-            .doc(userId);
+            .doc(playgroundModel.owner?.uid);
         playgroundModel.playgroundId = addedDocRef.id;
         playgroundModel.accpetingState = 'accepted';
         transaction.delete(deletedDocRef);

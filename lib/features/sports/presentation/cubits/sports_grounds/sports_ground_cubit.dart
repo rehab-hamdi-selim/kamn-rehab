@@ -12,7 +12,7 @@ import '../../../../../core/const/constants.dart';
 import '../../../data/repositories/sports_repository.dart';
 import '../../../data/models/playground_model.dart';
 
-@singleton
+@lazySingleton
 class SportsGroundsCubit extends Cubit<SportsGroundsState> {
   final SportsRepository sportsRepository;
   final SportsGroundUsecase sportsGroundUsecase;
@@ -43,9 +43,11 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
     emit(state.copyWith(
       state: SportsGroundsStatus.loading,
     ));
+          sportsGroundViewModel.playgroundsByCategory=state.playgroundsMap?[title] ?? [];
+
     emit(state.copyWith(
       state: SportsGroundsStatus.success,
-      playgrounds: state.playgroundsMap?[title] ?? [],
+      playgrounds:sportsGroundViewModel.playgroundsByCategory ,
     ));
   }
 
@@ -54,16 +56,17 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
       num? minPrice,
       String? location,
       double? distance}) async {
-    emit(SportsGroundsState(
+    emit(state.copyWith(
       state: SportsGroundsStatus.loading,
     ));
     final result = await sportsGroundUsecase.filterGoundData(
+      playgrounds: sportsGroundViewModel.playgroundsByCategory,
         distance: distance,
         location: location,
         maxPrice: maxPrice,
         minPrice: minPrice);
     result.fold((error) {
-      emit(SportsGroundsState(
+      emit(state.copyWith(
         state: SportsGroundsStatus.failure,
         erorrMessage: error.erorr,
       ));
@@ -73,7 +76,8 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
           location: location,
           maxPrice: maxPrice,
           minPrice: minPrice);
-      emit(SportsGroundsState(
+          sportsGroundViewModel.resetViewModel();
+      emit(state.copyWith(
         state: SportsGroundsStatus.success,
         playgrounds: success,
       ));
@@ -147,10 +151,10 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
     sportsGroundViewModel.userLongitude = data['longitude']!;
   }
 
-  Future<void> searchByQuery(String query) async {
+  Future<void> searchByQuery(String query,String type) async {
     emit(state.copyWith(state: SportsGroundsStatus.loading));
 
-    final result = await sportsRepository.searchByQuery(query);
+    final result = await sportsRepository.searchByQuery(query, type);
     result.fold((l) {
       emit(state.copyWith(
         state: SportsGroundsStatus.failure,

@@ -17,7 +17,7 @@ abstract class SportsRepository {
       String userId);
   Future<Either<Faliure, List<ReservationModel>>>
       getSpecificReservationsByGroundId(String groundId, DateTime selectedDate);
-  Future<Either<Faliure, List<PlaygroundModel>?>> searchByQuery(String query);
+  Future<Either<Faliure, List<PlaygroundModel>?>> searchByQuery(String query,String type);
 }
 
 @Injectable(as: SportsRepository)
@@ -70,10 +70,10 @@ class SportsRepositoryImpl implements SportsRepository {
   }
 
   @override
-  Future<Either<Faliure, List<PlaygroundModel>?>> searchByQuery(String query) {
+  Future<Either<Faliure, List<PlaygroundModel>?>> searchByQuery(String query,String type) {
     return executeTryAndCatchForRepository(() async {
       final List<Map<String, dynamic>> rawData =
-          await _remoteDataSource.searchByQuery(query);
+          await _remoteDataSource.searchByQuery(query,type);
 
       final playgrounds =
           rawData.map((data) => PlaygroundModel.fromMap(data)).toList();
@@ -94,4 +94,6 @@ class SportsRepositoryImpl implements SportsRepository {
       }).toList();
     });
   }
+  
+  
 }

@@ -29,8 +29,8 @@ class CustomeImageSlideShow extends StatelessWidget {
                       fit: BoxFit.cover,
        imageUrl: path,
        progressIndicatorBuilder: (context, url, downloadProgress) => 
-               CircularProgressIndicator(value: downloadProgress.progress),
-       errorWidget: (context, url, error) => Icon(Icons.error),
+               Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
+       errorWidget: (context, url, error) => const Icon(Icons.error),
     );
                   }).toList()
                 : [

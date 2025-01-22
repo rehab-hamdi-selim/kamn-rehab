@@ -41,7 +41,7 @@ class CustomGroundList extends StatelessWidget {
                   return InkWell(
                     onTap: action,
                     child: BlocProvider.value(
-                      value:context.read<SportsGroundsCubit>(),
+                      value: getIt<SportsGroundsCubit>(),
                       child: index % 2 == 0
                           ? ZoomIn(
                               duration: const Duration(seconds: 2),
@@ -67,7 +67,7 @@ class CustomGroundList extends StatelessWidget {
                 openBuilder: (context, action) {
                   return BlocProvider.value(
                    value:
-                        getIt<SportsGroundsCubit>()..initScrollListner(),
+                         getIt<SportsGroundsCubit>()..initScrollListner(),
                     child: GroundDetailsScreen(
                       playgroundModel: state.playgrounds![index],
                     ),

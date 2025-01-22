@@ -95,6 +95,8 @@ import '../../features/sports_service_providers/presentation/cubit/track_ground_
 import '../../features/user/data/data_source/user_remote_data_source.dart'
     as _i677;
 import '../../features/user/data/repository/user_repository.dart' as _i812;
+import '../../features/user/presentation/cubit/edit_profile/edit_profile_cubit.dart'
+    as _i98;
 import '../../features/user/presentation/cubit/notification/notifications_cubit.dart'
     as _i566;
 import '../common/class/firebase_storage_services.dart' as _i304;
@@ -118,6 +120,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i22.SignUpViewModel>(() => _i22.SignUpViewModel());
     gh.factory<_i805.PaymentOptionsViewModel>(
         () => _i805.PaymentOptionsViewModel());
+    gh.factory<_i561.SportsGroundUsecase>(() => _i561.SportsGroundUsecase());
     gh.factory<_i282.PickTimeForReservationViewModel>(
         () => _i282.PickTimeForReservationViewModel());
     gh.factory<_i546.ReservationDetailsCubit>(
@@ -205,6 +208,8 @@ extension GetItInjectableX on _i174.GetIt {
         userRemoteDataSource: gh<_i677.UserRemoteDataSource>()));
     gh.factory<_i94.AppUserCubit>(
         () => _i94.AppUserCubit(authRepository: gh<_i935.AuthRepository>()));
+    gh.factory<_i98.EditProfileCubit>(
+        () => _i98.EditProfileCubit(repository: gh<_i812.UserRepository>()));
     gh.factory<_i531.SignUpCubit>(() => _i531.SignUpCubit(
           authRepository: gh<_i935.AuthRepository>(),
           signUpViewModel: gh<_i22.SignUpViewModel>(),
@@ -222,8 +227,6 @@ extension GetItInjectableX on _i174.GetIt {
             ));
     gh.factory<_i692.ProccedPaymentCubit>(() => _i692.ProccedPaymentCubit(
         sportsRepository: gh<_i379.SportsRepository>()));
-    gh.factory<_i561.SportsGroundUsecase>(() => _i561.SportsGroundUsecase(
-        sportsRepository: gh<_i379.SportsRepository>()));
     gh.factory<_i410.ViewReservationCubit>(() => _i410.ViewReservationCubit(
         sportsRepository: gh<_i379.SportsRepository>()));
     gh.factory<_i566.NotificationsCubit>(() =>
@@ -233,7 +236,7 @@ extension GetItInjectableX on _i174.GetIt {
               repository: gh<_i379.SportsRepository>(),
               viewModel: gh<_i282.PickTimeForReservationViewModel>(),
             ));
-    gh.singleton<_i1033.SportsGroundsCubit>(() => _i1033.SportsGroundsCubit(
+    gh.lazySingleton<_i1033.SportsGroundsCubit>(() => _i1033.SportsGroundsCubit(
           sportsRepository: gh<_i379.SportsRepository>(),
           sportsGroundUsecase: gh<_i561.SportsGroundUsecase>(),
           getPlaygrouundsUseCase: gh<_i213.GetPlaygroundsAndFlittered>(),

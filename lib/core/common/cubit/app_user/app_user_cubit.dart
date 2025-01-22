@@ -51,7 +51,6 @@ class AppUserCubit extends Cubit<AppUserState> {
               state: AppUserStates.failure,
               errorMessage: l.erorr,
             )), (r) {
-      print(r.toString());
       emit(state.copyWith(
         state: AppUserStates.gettedData,
         user: r,

@@ -4,38 +4,37 @@ import 'package:injectable/injectable.dart';
 import 'package:kamn/core/erorr/faliure.dart';
 import 'package:kamn/core/utils/location.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
-import 'package:kamn/features/sports/data/repositories/sports_repository.dart';
 
 @injectable
 class SportsGroundUsecase {
-  final SportsRepository _sportsRepository;
-
-  SportsGroundUsecase({required SportsRepository sportsRepository})
-      : _sportsRepository = sportsRepository;
-
   Future<Either<Faliure, List<PlaygroundModel>>> filterGoundData(
       {num? maxPrice,
       num? minPrice,
       String? location,
-      double? distance}) async {
-    List<PlaygroundModel> fliterData = [];
+      double? distance,
+      required List<PlaygroundModel> playgrounds}) async {
     var userLocation = await getUserLocation();
-    var result = await _sportsRepository.getPlaygrounds();
-    return result.fold((error) => Left(error), (data) {
-      fliterData = data.where((element) {
-        return priceRange(
-                maxPrice: maxPrice, minPrice: minPrice, price: element.price) &&
-            locationChecker(address: element.address, location: location) &&
-            claculateDistance(
+    return Right(playgrounds.where((element) {
+      final priceCondition = (maxPrice != null || minPrice != null)
+          ? priceRange(maxPrice: maxPrice, minPrice: minPrice, price: element.price)
+          : true;
+
+      final locationCondition = location != null
+          ? locationChecker(address: element.address, location: location)
+          : true;
+
+      final distanceCondition = distance != null
+          ? claculateDistance(
               distance: distance,
               goundLatitude: element.latitude!.toDouble(),
               groundLongitude: element.longitude!.toDouble(),
               userLatitude: userLocation['latitude'],
               userLongitude: userLocation['longitude'],
-            );
-      }).toList();
-      return Right(fliterData);
-    });
+            )
+          : true;
+
+      return priceCondition && locationCondition && distanceCondition;
+    }).toList());
   }
 }
 
