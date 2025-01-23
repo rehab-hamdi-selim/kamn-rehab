@@ -105,6 +105,7 @@ dependencies:
   firebase_crashlytics: ^4.2.0
   upgrader: ^11.3.1
   flutter_cache_manager: ^3.4.1
+  dismissible_page: ^1.0.2
 
 
 

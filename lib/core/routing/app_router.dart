@@ -118,6 +118,7 @@ class AppRouter {
             ),
           ),
         );
+
       case Routes.debitCreditCardPage:
         return MaterialPageRoute(
             builder: (context) => DebitCreditCardScreen(
@@ -189,7 +190,10 @@ class AppRouter {
             builder: (context) => BlocProvider<EditServiceProviderCubit>(
                   create: (context) => getIt<EditServiceProviderCubit>(),
                   child: EditServiceScreen(
-                    playground: settings.arguments as PlaygroundRequestModel,
+                    playground: settings.arguments is PlaygroundRequestModel
+                        ? settings.arguments as PlaygroundRequestModel
+                        : PlaygroundRequestModel.fromMap(
+                            (settings.arguments as PlaygroundModel).toMap()),
                   ),
                 ));
       case Routes.serviceProviderGroundDetailsScreen:
@@ -208,7 +212,7 @@ class AppRouter {
             builder: (context) => BlocProvider(
                   create: (context) => getIt<AvailableDatesCubit>(),
                   child: ServiceProviderAvailableDates(
-                    playgroundId: settings.arguments as String,
+                    playground: settings.arguments as PlaygroundRequestModel,
                   ),
                 ));
       case Routes.pickTimeReservationScreen:

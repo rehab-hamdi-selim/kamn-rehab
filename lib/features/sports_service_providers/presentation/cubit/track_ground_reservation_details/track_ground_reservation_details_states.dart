@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
 
 enum TrackGroundsReservationDetailsStatus {
@@ -26,4 +27,9 @@ class TrackGroundsReservationDetailsState {
     this.erorrMessage,
     this.successMessage,
   });
+
+  @override
+  String toString() {
+    return 'TrackGroundsReservationDetailsState(state: $state, playgroundsReservationDetails: $playgroundsReservationDetails, erorrMessage: $erorrMessage, successMessage: $successMessage)';
+  }
 }

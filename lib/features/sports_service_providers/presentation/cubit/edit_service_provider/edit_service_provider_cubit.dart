@@ -41,9 +41,9 @@ class EditServiceProviderCubit extends Cubit<EditServiceProviderState> {
   }
 
   Future<void> updateService(
-      String playgroundId, Map<String, dynamic> data) async {
+      PlaygroundRequestModel playground, Map<String, dynamic> data) async {
     emit(state.copyWith(state: EditServiceProviderStatus.loading));
-    var response = await repository.updateState(playgroundId, data);
+    var response = await repository.updateState(playground, data);
     response.fold((error) {
       emit(state.copyWith(
           state: EditServiceProviderStatus.serviceFailed,

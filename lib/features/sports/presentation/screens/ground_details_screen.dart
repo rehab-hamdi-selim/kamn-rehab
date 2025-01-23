@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/features/sports/presentation/widgets/ground_details/custome_bottom_book.dart';
 import 'package:kamn/features/sports/presentation/widgets/ground_details/custome_play_ground_info.dart';
 import 'package:kamn/features/sports/presentation/widgets/ground_details/custome_image_slide_show.dart';
@@ -73,16 +74,20 @@ class GroundDetailsScreen extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
-              child: const CustomePlayGroundInfo(
-                playgroundModel: null,
+              child: const SingleChildScrollView(
+                child: CustomePlayGroundInfo(
+                  playgroundModel: null,
+                ),
               ),
             ),
             Positioned(
               bottom: 0,
               left: 0,
               right: 0,
-              child: CustomeBottomBook(
-                playgroundModel: playgroundModel,
+              child: Container(color: AppPallete.whiteColor,
+                child: CustomeBottomBook(
+                  playgroundModel: playgroundModel,
+                ),
               ),
             )
           ],

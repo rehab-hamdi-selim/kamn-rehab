@@ -28,7 +28,7 @@ abstract class ServiceProvidersRepository {
   Future<Either<Faliure, void>> addWithTransactionToFirebase(
       PlaygroundRequestModel playground);
   Future<Either<Faliure, void>> updateState(
-      String playgroundId, Map<String, dynamic> data);
+      PlaygroundRequestModel playground, Map<String, dynamic> data);
   Future<Either<Faliure, Map<String, List<PlaygroundRequestModel>>?>>
       searchByQuery(String query, String type);
   Future<Either<Faliure,List<ReservationModel>?>> getCurrentOrdersByCategory(
@@ -97,9 +97,9 @@ class ServiceProvidersRepositoryImpl implements ServiceProvidersRepository {
 
   @override
   Future<Either<Faliure, void>> updateState(
-      String playgroundId, Map<String, dynamic> data) {
+      PlaygroundRequestModel playground, Map<String, dynamic> data) {
     return executeTryAndCatchForRepository(() async {
-      return await dataSource.updateState(playgroundId, data);
+      return await dataSource.updateState(playground, data);
     });
   }
 

@@ -72,22 +72,22 @@ class ServiceProviderGroundsScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              verticalSpace(10),
-              SizedBox(
-                height: 30.h,
-                child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return CustomFilterItemServiceProvider(
-                          icon: Icons.location_on_outlined,
-                          text: "Alexandria, Hadra",
-                          onPressed: () {});
-                    },
-                    separatorBuilder: (context, index) {
-                      return horizontalSpace(5);
-                    },
-                    itemCount: 5),
-              ),
+              // verticalSpace(10),
+              // SizedBox(
+              //   height: 30.h,
+              //   child: ListView.separated(
+              //       scrollDirection: Axis.horizontal,
+              //       itemBuilder: (context, index) {
+              //         return CustomFilterItemServiceProvider(
+              //             icon: Icons.location_on_outlined,
+              //             text: "Alexandria, Hadra",
+              //             onPressed: () {});
+              //       },
+              //       separatorBuilder: (context, index) {
+              //         return horizontalSpace(5);
+              //       },
+              //       itemCount: 5),
+              // ),
               verticalSpace(20),
               Expanded(
                 child: Container(

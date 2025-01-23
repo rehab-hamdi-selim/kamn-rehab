@@ -23,7 +23,7 @@ abstract class ServiceProvidersRemoteDataSource {
   Future<List<Map<String, dynamic>>> getPlaygroundsRequests();
   Future<void> addWithTransactionToFirebase(
       PlaygroundRequestModel playgroundModel);
-  Future<void> updateState(String playgroundId, Map<String, dynamic> data);
+  Future<void> updateState(PlaygroundRequestModel playground, Map<String, dynamic> data);
   Future<List<Map<String, dynamic>>> searchByQuery(String query, String type);
   Future<List<Map<String, dynamic>>?> getCurrentOrdersByCategory(
       String category);
@@ -135,10 +135,10 @@ class ServiceProvidersRemoteDataSourceImpl
   }
 
   @override
-  Future<void> updateState(String playgroundId, Map<String, dynamic> data) {
+  Future<void> updateState(PlaygroundRequestModel playground, Map<String, dynamic> data) {
     return executeTryAndCatchForDataLayer(() async {
       return await firestoreServices.updateData(
-          FirebaseCollections.playgroundsRequests, playgroundId, data);
+        playground.accpetingState == 'pending' ?  FirebaseCollections.playgroundsRequests:FirebaseCollections.playgrounds, playground.playgroundId!, data);
     });
   }
 

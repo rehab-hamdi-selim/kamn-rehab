@@ -46,7 +46,7 @@ class CustomeFinishedButton extends StatelessWidget {
                         } else {
                           context
                               .read<EditServiceProviderCubit>()
-                              .updateService(playground.playgroundId!,
+                              .updateService(playground,
                                   prepareUpdatedData(context).toMap());
                         }
                       }

@@ -59,6 +59,8 @@ Future<Either<Faliure, T>> executeTryAndCatchForRepository<T>(
       return left(Faliure(
           'Network error. Please check your connection and try again.'));
     }
+            print('@@@@@@@@@@@@@@@@${e.toString()}');
+
     return left(
         Faliure('Service temporarily unavailable. Please try again later.'));
   } catch (e) {

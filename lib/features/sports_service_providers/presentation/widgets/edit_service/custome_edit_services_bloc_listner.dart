@@ -57,7 +57,7 @@ class CustomeEditServicesBlocListner extends StatelessWidget {
       listener: (context, state) {
         if (state.isImageUploaded) {
           context.read<EditServiceProviderCubit>().updateService(
-              playground.playgroundId!, prepareUpdatedData(context).toMap());
+              playground, prepareUpdatedData(context).toMap());
         }
         if (state.isSuccess) {
           if (context

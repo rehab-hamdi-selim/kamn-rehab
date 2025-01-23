@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kamn/core/const/image_links.dart';
 
 import '../../../../../core/const/constants.dart';
 import '../../../../../core/helpers/spacer.dart';
@@ -102,12 +104,24 @@ class CustomPlayGroundTitleAndLocation extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              CircleAvatar(
-                  radius: 10.r, child: Image.asset('assets/images/user.png')),
+           CircleAvatar(
+                radius: 15.r, // Responsive radius
+                backgroundColor: AppPallete.orangeAccentColor,
+                backgroundImage: playgroundModel?.owner?.profileImage != null
+                    ? CachedNetworkImageProvider(playgroundModel!.owner!.profileImage!)
+                    : null,
+                child: playgroundModel?.owner?.profileImage == null
+                    ? SvgPicture.asset(
+                        ImageLinks.defaultUserImage,
+                        width: 20.r,
+                        height: 20.r,
+                      )
+                    : null,
+              ),
               horizontalSpace(3.w),
               Text(
-                'mahmoudsayed',
-                style: TextStyles.font10BlackColorW400,
+                playgroundModel?.owner?.name ?? "dsadas",
+                style: TextStyles.font12CircularSpotifyTextBlackMedium,
               )
             ],
           ),

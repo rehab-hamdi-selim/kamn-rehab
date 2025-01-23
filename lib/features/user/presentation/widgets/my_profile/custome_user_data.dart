@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,7 +31,7 @@ class CustomUserData extends StatelessWidget {
                 radius: 34.r, // Responsive radius
                 backgroundColor: AppPallete.orangeAccentColor,
                 backgroundImage: user?.profileImage != null
-                    ? NetworkImage(user!.profileImage!)
+                    ? CachedNetworkImageProvider(user!.profileImage!)
                     : null,
                 child: user?.profileImage == null
                     ? SvgPicture.asset(

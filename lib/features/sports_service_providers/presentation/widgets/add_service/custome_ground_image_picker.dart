@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/common/widget/view_full_image.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 
@@ -44,34 +45,48 @@ class CustomeGroundImagePicker extends StatelessWidget {
                 children: [
                   Row(
                     children: state.groundImagesList!.map((element) {
-                      return Stack(
-                        alignment: Alignment.topRight,
-                        children: [
-                          Container(
-                            width: 95.w,
-                            height: 85.w,
-                            margin: EdgeInsets.symmetric(horizontal: 5.w),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              image: DecorationImage(
-                                image: FileImage(element),
-                                fit: BoxFit.cover,
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ViewFullImage(
+                                        imageUrl: element.path,
+                                      )));
+                        },
+                        child: Stack(
+                          alignment: Alignment.topRight,
+                          children: [
+                            Hero(
+                              tag:
+                                  element.path,
+                              child: Container(
+                                width: 95.w,
+                                height: 85.w,
+                                margin: EdgeInsets.symmetric(horizontal: 5.w),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  image: DecorationImage(
+                                    image: FileImage(element),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                          Positioned(
-                            right: 5.w,
-                            child: InkWell(
-                              onTap: () => context
-                                  .read<AddServiceProviderCubit>()
-                                  .removeImageFromList(element, true),
-                              child: const Icon(
-                                Icons.cancel_outlined,
-                                color: Colors.white,
+                            Positioned(
+                              right: 5.w,
+                              child: InkWell(
+                                onTap: () => context
+                                    .read<AddServiceProviderCubit>()
+                                    .removeImageFromList(element, true),
+                                child: const Icon(
+                                  Icons.cancel_outlined,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       );
                     }).toList(),
                   ),
