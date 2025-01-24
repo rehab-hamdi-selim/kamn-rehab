@@ -7,7 +7,7 @@ Widget bottomNavBar() {
     child: ClipRRect(
       borderRadius: BorderRadius.circular(20).r,
       child: Container(
-        decoration: BoxDecoration(boxShadow: [
+        decoration: const BoxDecoration(boxShadow: [
           BoxShadow(color: Colors.black, spreadRadius: 100, blurRadius: 100),
         ]),
         child: BottomNavigationBar(

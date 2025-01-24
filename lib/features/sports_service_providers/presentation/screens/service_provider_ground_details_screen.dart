@@ -21,93 +21,97 @@ class ServiceProviderGroundDetailsScreen extends StatelessWidget {
     return CustomeGroundDetailsBlocListner(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.h),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                CustomeImageSlideShow(
-                  imagesPath: playgroundModel.groundImages ?? [],
-                ),
-                verticalSpace(10.h),
-                Text(
-                  "PlayGround Ownership Paper",
-                  style:
-                      TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
-                ),
-                verticalSpace(10.h),
-                GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                  ),
-                  itemCount: playgroundModel.ownershipImages?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ViewFullImage(
-                                imageUrl:
-                                    playgroundModel.ownershipImages?[index] ??
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              CustomeImageSlideShow(
+                imagesPath: playgroundModel.groundImages ?? [],
+              ),
+              verticalSpace(10.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15.0.h),
+                child: Column(            crossAxisAlignment: CrossAxisAlignment.stretch,
+
+                  children: [
+                    Text(
+                      "PlayGround Ownership Paper",
+                      style: TextStyle(
+                          fontSize: 16.sp, fontWeight: FontWeight.bold),
+                    ),
+                    verticalSpace(10.h),
+                    GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                      ),
+                      itemCount: playgroundModel.ownershipImages?.length ?? 0,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ViewFullImage(
+                                    imageUrl: playgroundModel
+                                            .ownershipImages?[index] ??
                                         '',
-                                        
+                                  ),
+                                ));
+                          },
+                          child: Hero(
+                            tag: playgroundModel.ownershipImages?[index] ?? '',
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20.r),
+                                image: DecorationImage(
+                                  image: CachedNetworkImageProvider(
+                                      playgroundModel.ownershipImages?[index] ??
+                                          ''),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ));
-                      },
-                      child: Hero(
-                        tag: playgroundModel.ownershipImages?[index] ?? '',
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.r),
-                            image: DecorationImage(
-                              image: CachedNetworkImageProvider(
-                                  playgroundModel.ownershipImages?[index] ??
-                                      ''),
-                              fit: BoxFit.cover,
                             ),
                           ),
-                        ),
-                      ),
-                    );
-                  },
+                        );
+                      },
+                    ),
+                    verticalSpace(10.h),
+                    CustomPlayGroundTitleAndLocation(
+                        playgroundModel:
+                            PlaygroundModel.fromMap(playgroundModel.toMap())),
+                    verticalSpace(10.h),
+                    CustomePlayGroundInfo(
+                      description:
+                          PlaygroundModel.fromMap(playgroundModel.toMap()).description??'empty description',
+                    ),
+                    verticalSpace(10.h),
+                  ],
                 ),
-                verticalSpace(10.h),
-                CustomPlayGroundTitleAndLocation(
-                    playgroundModel:
-                        PlaygroundModel.fromMap(playgroundModel.toMap())),
-                verticalSpace(10.h),
-                CustomePlayGroundInfo(
-                  playgroundModel:
-                      PlaygroundModel.fromMap(playgroundModel.toMap()),
-                ),
-                verticalSpace(10.h),
-                CustomeBottomBook(
-                  playgroundRequestModel: playgroundModel,
-                ),
-                // Container(
-                //   decoration: const BoxDecoration(
-                //       color: Colors.white,
-                //       borderRadius: BorderRadius.only(
-                //         topLeft: Radius.circular(30),
-                //         topRight: Radius.circular(30),
-                //       )),
-                //   child: Column(
-                //     children: [
-                //       CustomePlayGroundInfo(
-                //         playgroundModel: playgroundModel,
-                //       ),
-                //       CustomeBottomBook(
-                //         playgroundRequestModel: playgroundModel,
-                //       ),
-                //     ],
-                //   ),
-                // )
-              ],
-            ),
+              ),
+              CustomeBottomBook(
+                playgroundRequestModel: playgroundModel,
+              ),
+              // Container(
+              //   decoration: const BoxDecoration(
+              //       color: Colors.white,
+              //       borderRadius: BorderRadius.only(
+              //         topLeft: Radius.circular(30),
+              //         topRight: Radius.circular(30),
+              //       )),
+              //   child: Column(
+              //     children: [
+              //       CustomePlayGroundInfo(
+              //         playgroundModel: playgroundModel,
+              //       ),
+              //       CustomeBottomBook(
+              //         playgroundRequestModel: playgroundModel,
+              //       ),
+              //     ],
+              //   ),
+              // )
+            ],
           ),
         ),
       ),

@@ -73,7 +73,7 @@ class PlaygroundModel {
   }) {
     return PlaygroundModel(
       playgroundId: playgroundId != null ? playgroundId() : this.playgroundId,
-      playgroundName: name != null ? name() : this.playgroundName,
+      playgroundName: name != null ? name() : playgroundName,
       phone: phone != null ? phone() : this.phone,
       longitude: longitude != null ? longitude() : this.longitude,
       latitude: latitude != null ? latitude() : this.latitude,

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
+import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 
 class CustomeBottomBar extends StatelessWidget {
   const CustomeBottomBar({required this.reservationModel, super.key});
@@ -45,8 +47,12 @@ class CustomeBottomBar extends StatelessWidget {
                     backgroundColor: AppPallete.redColor,
                     fixedSize: Size.fromWidth(100.w),
                   ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, Routes.groundsScreen);
+                  onPressed: () async {
+                    await getIt.resetLazySingleton<
+                        SportsGroundsCubit>(); // Reset the singleton
+
+                    Navigator.pushReplacementNamed(
+                        context, Routes.selectCategoryScreen);
                   },
                   child: Text(
                     'Leave',

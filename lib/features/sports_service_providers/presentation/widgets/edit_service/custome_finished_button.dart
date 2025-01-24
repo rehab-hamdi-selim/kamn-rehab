@@ -97,6 +97,11 @@ class CustomeFinishedButton extends StatelessWidget {
         .governateController
         .text
         .trim();
+    playground.description = context
+        .read<EditServiceProviderCubit>()
+        .descriptionController
+        .text
+        .trim();
     playground.status = context.read<EditServiceProviderCubit>().statusOption;
     playground.latitude =
         context.read<EditServiceProviderCubit>().coordinates['latitude'];

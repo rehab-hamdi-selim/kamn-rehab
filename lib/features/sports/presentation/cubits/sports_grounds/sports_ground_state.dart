@@ -11,9 +11,7 @@ enum SportsGroundsStatus {
   success,
   failure,
   changeDistance,
-  isScrollingUp,
-  isReturnedToTop,
-  isScrolledDown
+ 
 }
 
 extension SportsGroundStateExtension on SportsGroundsState {
@@ -22,8 +20,7 @@ extension SportsGroundStateExtension on SportsGroundsState {
   bool get isSuccess => state == SportsGroundsStatus.success;
   bool get isFailure => state == SportsGroundsStatus.failure;
   bool get isChangeDistance => state == SportsGroundsStatus.changeDistance;
-  bool get isScrolledDown => state == SportsGroundsStatus.isScrolledDown;
-  bool get isReturnedToTop => state == SportsGroundsStatus.isReturnedToTop;
+
 }
 
 class SportsGroundsState {

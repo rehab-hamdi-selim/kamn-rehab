@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/core/utils/custom_app_bar.dart';
 import 'package:kamn/features/admin/presentation/cubits/second_page_cubit/second_page_cubit.dart';
 import 'package:kamn/features/admin/presentation/cubits/second_page_cubit/second_page_state.dart';
 import 'package:kamn/features/admin/presentation/widgets/second_page/custom_analytics_chart.dart';
-import 'package:kamn/features/admin/presentation/widgets/second_page/custom_text_app_bar.dart';
 import 'package:kamn/features/admin/presentation/widgets/second_page/custom_expacted_earning_chart.dart';
 import 'package:kamn/features/admin/presentation/widgets/second_page/custom_income_outcome_item.dart';
 
@@ -21,17 +19,11 @@ class SecondPage extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           backgroundColor: AppPallete.whiteColor,
-          appBar: CustomTextAppBar.appBar(
+          appBar: CustomAppBar.appBar(color: AppPallete.whiteColor,context: context,
             notificationIconFunction: () {},
             profileFunction: () {},
             badgesIconFunction: () {},
-            titleWidget: Padding(
-              padding: EdgeInsets.only(left: 15.w),
-              child: Text(
-                Constants.financialReports,
-                style: TextStyles.fontRoboto24MediumBlack,
-              ),
-            ),
+            
           ),
           body: state.inLoading
               ? const Center(child: CircularProgressIndicator())

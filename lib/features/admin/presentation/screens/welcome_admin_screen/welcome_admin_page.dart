@@ -36,9 +36,9 @@ class WelcomeAdminPage extends StatelessWidget {
           verticalSpace(40),
 
           // Next button
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: const CustomWelcomeElevationButton(),
+          const Padding(
+            padding: EdgeInsets.all(15.0),
+            child: CustomWelcomeElevationButton(),
           ),
         ],
       ),

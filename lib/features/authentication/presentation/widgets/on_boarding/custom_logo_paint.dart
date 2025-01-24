@@ -15,17 +15,17 @@ class RPSCustomPainter extends CustomPainter {
     path_0.lineTo(size.width * 0.1023383, size.height * 0.4604517);
     path_0.close();
 
-    Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
-    paint_0_fill.shader = ui.Gradient.linear(
+    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    paint0Fill.shader = ui.Gradient.linear(
         Offset(size.width * 0.4995350, size.height * 0.1753365),
         Offset(size.width * 0.4995350, size.height * 0.8711971), [
-      Color(0xffA117F1).withOpacity(0.05),
-      Color(0xff2954E3).withOpacity(0.05)
+      const Color(0xffA117F1).withOpacity(0.05),
+      const Color(0xff2954E3).withOpacity(0.05)
     ], [
       0,
       1
     ]);
-    canvas.drawPath(path_0, paint_0_fill);
+    canvas.drawPath(path_0, paint0Fill);
 
     Path path_1 = Path();
     path_1.moveTo(size.width * 0.1023383, size.height * 0.4604517);
@@ -37,15 +37,15 @@ class RPSCustomPainter extends CustomPainter {
     path_1.lineTo(size.width * 0.1023383, size.height * 0.4604517);
     path_1.close();
 
-    Paint paint_1_stroke = Paint()
+    Paint paint1Stroke = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = size.width * 0.003971945;
-    paint_1_stroke.color = Color(0xffF3EBF5).withOpacity(0.4);
-    canvas.drawPath(path_1, paint_1_stroke);
+    paint1Stroke.color = const Color(0xffF3EBF5).withOpacity(0.4);
+    canvas.drawPath(path_1, paint1Stroke);
 
-    Paint paint_1_fill = Paint()..style = PaintingStyle.fill;
-    paint_1_fill.color = Color(0xffF3EBF5).withOpacity(0.4);
-    canvas.drawPath(path_1, paint_1_fill);
+    Paint paint1Fill = Paint()..style = PaintingStyle.fill;
+    paint1Fill.color = const Color(0xffF3EBF5).withOpacity(0.4);
+    canvas.drawPath(path_1, paint1Fill);
   }
 
   @override

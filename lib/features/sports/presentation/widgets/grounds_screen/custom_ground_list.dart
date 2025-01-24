@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kamn/features/sports/presentation/cubits/ground_details_cubit/ground_details_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_state.dart';
 import 'package:kamn/features/sports/presentation/screens/ground_details_screen.dart';
@@ -67,7 +68,7 @@ class CustomGroundList extends StatelessWidget {
                 openBuilder: (context, action) {
                   return BlocProvider.value(
                    value:
-                         getIt<SportsGroundsCubit>()..initScrollListner(),
+                         getIt<GroundDetailsCubit>(),
                     child: GroundDetailsScreen(
                       playgroundModel: state.playgrounds![index],
                     ),

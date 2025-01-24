@@ -34,12 +34,12 @@ class ServiceSelectionScreen extends StatelessWidget {
                   style: TextStyles.fontRoboto24MediumBlack,
                 ),
               ),
-              CustomeTitleText(
+              const CustomeTitleText(
                 title: Constants.teamPlay,
                 type: Constants.fourOrMore,
               ),
               const CustomeTeamPlayCategories(),
-              CustomeTitleText(
+              const CustomeTitleText(
                 title: Constants.individualPlay,
                 type: Constants.oneOrMore,
               ),

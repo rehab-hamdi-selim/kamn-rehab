@@ -6,7 +6,7 @@ Widget leftTiltleWidget(value, meta) {
     axisSide: meta.axisSide,
     child: Text(
       formatNumber(value),
-      style: TextStyle(color: Colors.grey), // Change axis label color
+      style: const TextStyle(color: Colors.grey), // Change axis label color
     ),
   );
 }

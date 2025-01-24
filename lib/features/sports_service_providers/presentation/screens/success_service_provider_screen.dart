@@ -54,7 +54,8 @@ class SuccessServiceProviderScreen extends StatelessWidget {
                 ),
                 onPressed: () {
                   Navigator.of(context)
-                      .pushNamed(Routes.myProfileScreen);
+                      .pushNamedAndRemoveUntil(Routes.myProfileScreen,
+                          ( route) => false);
                 },
                 textBottom: 'Check',
                 textStyle: TextStyles.font12WhiteColorW400,

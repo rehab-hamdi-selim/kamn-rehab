@@ -11,7 +11,6 @@ class SportsGroundViewModel {
   TextEditingController? loactionController;
   TextEditingController? maxPriceController;
   TextEditingController? minPriceController;
-  ScrollController? scrollController;
   var distance = 0.0;
   var userLatitude = 0.0;
   var userLongitude = 0.0;
@@ -28,7 +27,6 @@ class SportsGroundViewModel {
     loactionController = TextEditingController();
     maxPriceController = TextEditingController();
     minPriceController = TextEditingController();
-    scrollController = ScrollController();
   }
 
   void resetViewModel() {
@@ -43,12 +41,10 @@ class SportsGroundViewModel {
     loactionController = null;
     maxPriceController = null;
     minPriceController = null;
-    scrollController = null;
     searchController?.dispose();
     loactionController?.dispose();
     maxPriceController?.dispose();
     minPriceController?.dispose();
-    scrollController?.dispose();
   }
 
   List<SportDetail> teamSportList = [

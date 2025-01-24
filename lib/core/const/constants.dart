@@ -41,6 +41,9 @@ class Constants {
   static const governate = 'Governate';
   static const price = 'Price per hour';
   static const priceHint = 'Enter ground price';
+  static const description = 'Description';
+  static const descriptionHint = 'Enter ground description';
+  static const optional = ' (Optional)';
   static const fullNameHint = ' Enter your full name';
   static const nameHint = ' Enter your  name';
   static const passwordHint = ' Enter your  password';

@@ -51,7 +51,7 @@ class AvailableDatesState {
       erorrMessage: erorrMessage ?? this.erorrMessage,
       startAt: startAt ?? this.startAt,
       intervials: intervials ?? this.intervials,
-      period: peroid ?? this.period,
+      period: peroid ?? period,
       endAt: endAt ?? this.endAt,
       successMessage: successMessage ?? this.successMessage,
     );

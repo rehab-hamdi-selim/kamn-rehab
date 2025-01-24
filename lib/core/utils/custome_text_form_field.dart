@@ -14,6 +14,7 @@ class CustomeTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final bool show;
   final ImageIcon? suffixIconShowed;
+  final int? maxLength;
   const CustomeTextFormField(
       {super.key,
       required this.hint,
@@ -23,14 +24,20 @@ class CustomeTextFormField extends StatelessWidget {
       this.show = false,
       this.suffixIconShowed,
       this.prefixIcon,
-      required this.controller});
+      required this.controller,
+      this.maxLength});
+
+  @override
+ 
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       obscureText: obscureText ?? false,
+      maxLength: maxLength,
       validator: validator,
+      maxLines: null,
       style: TextStyles.fontInter14BlackMedium,
       decoration: InputDecoration(
         errorMaxLines: 2,
@@ -66,6 +73,11 @@ class CustomeTextFormField extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(20)),
       ),
+      buildCounter: maxLength != null?(context, {required currentLength, required isFocused, required maxLength}) {
+                              return Text('$currentLength/$maxLength',style: TextStyle(
+                                fontSize: 12,
+                                color: currentLength==maxLength?AppPallete.redColor:AppPallete.blueColor
+                              ),);}:null,
     );
   }
 }

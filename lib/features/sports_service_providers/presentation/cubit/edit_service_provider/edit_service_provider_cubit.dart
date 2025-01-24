@@ -27,6 +27,7 @@ class EditServiceProviderCubit extends Cubit<EditServiceProviderState> {
   TextEditingController addressController = TextEditingController();
   TextEditingController sizeController = TextEditingController();
   TextEditingController priceController = TextEditingController();
+  TextEditingController descriptionController= TextEditingController();
   TextEditingController governateController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -143,6 +144,7 @@ class EditServiceProviderCubit extends Cubit<EditServiceProviderState> {
     sizeController.dispose();
     governateController.dispose();
     priceController.dispose();
+    descriptionController.dispose();
   }
 
   @override
@@ -159,5 +161,6 @@ class EditServiceProviderCubit extends Cubit<EditServiceProviderState> {
     priceController.text = playground.price!.toStringAsFixed(0);
     governateController.text = playground.govenrate ?? '';
     statusOption = playground.status;
+    descriptionController.text=playground.description??'';
   }
 }

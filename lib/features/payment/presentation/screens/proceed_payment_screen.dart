@@ -21,7 +21,7 @@ class ProceedPaymentScreen extends StatelessWidget {
     return BlocListener<ProccedPaymentCubit, ProccedPaymentState>(
       listener: (context, state) {
         if (state.isSuccess) {
-          Navigator.pushNamed(context, Routes.reservationScreen,
+          Navigator.pushNamedAndRemoveUntil(context, Routes.reservationScreen,(rpute)=>false,
               arguments: reservationModel);
           showDialog(
               context: context,

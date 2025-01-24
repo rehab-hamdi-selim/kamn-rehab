@@ -42,6 +42,7 @@ class CustomeAddServicesBlocListner extends StatelessWidget {
                 .read<AddServiceProviderCubit>()
                 .governateController
                 .text,
+
             groundImages:
                 context.read<AddServiceProviderCubit>().groundImagesUrl,
             latitude:
@@ -54,7 +55,10 @@ class CustomeAddServicesBlocListner extends StatelessWidget {
                 .priceController
                 .text
                 .trim()),
-            description: "under develop",
+            description: context
+                .read<AddServiceProviderCubit>()
+                .descriptionController
+                .text,
             status: context.read<AddServiceProviderCubit>().statusOption,
             ownershipImages:
                 context.read<AddServiceProviderCubit>().ownershipImagesUrl,

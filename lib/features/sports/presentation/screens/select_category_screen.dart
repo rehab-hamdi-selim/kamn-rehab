@@ -5,10 +5,10 @@ import 'package:kamn/core/common/widget/loader.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/core/utils/custom_app_bar.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_state.dart';
-import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custome_ground_screen_app_bar.dart';
 import 'package:kamn/features/sports/presentation/widgets/select_category/custome_individual_play_categories.dart';
 import 'package:kamn/features/sports/presentation/widgets/select_category/custome_team_play_categories.dart';
 import 'package:kamn/features/sports/presentation/widgets/select_category/custome_title_text.dart';
@@ -26,7 +26,8 @@ class SelectCategoryScreen extends StatelessWidget {
     }, builder: (context, state) {
       return Scaffold(
           backgroundColor: AppPallete.whiteColor,
-          appBar: CustomGroundScreenAppBar.appBar(
+          appBar: CustomAppBar.appBar(
+            firstScreen: true,
             color: AppPallete.whiteColor,
             context: context,
             notificationIconFunction: () {},
@@ -49,12 +50,12 @@ class SelectCategoryScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                CustomeTitleText(
+                const CustomeTitleText(
                   title: Constants.teamPlay,
                   type: Constants.fourOrMore,
                 ),
                 const CustomeTeamPlayCategories(),
-                CustomeTitleText(
+                const CustomeTitleText(
                   title: Constants.individualPlay,
                   type: Constants.oneOrMore,
                 ),

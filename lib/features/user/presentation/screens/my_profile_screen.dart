@@ -24,13 +24,10 @@ class MyProfileScreen extends StatelessWidget {
     return BlocListener<AppUserCubit, AppUserState>(
       listener: (context, state) async {
         if (state.isClearUserData()) {
-          if (getIt.isRegistered<SportsGroundsCubit>()) {
-            await getIt<SportsGroundsCubit>()
-                .close(); // Optional if additional cleanup is needed
-            getIt.resetLazySingleton<
-                SportsGroundsCubit>(); // Reset the singleton
-          }
-          context.pushReplacementNamed(Routes.signInScreen);
+         await getIt.resetLazySingleton<SportsGroundsCubit>(); // Reset the singleton
+
+          context.pushNamedAndRemoveUntil(Routes.signInScreen,
+              predicate: (route) => false);
         }
       },
       child: SafeArea(

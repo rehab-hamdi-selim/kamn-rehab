@@ -21,7 +21,7 @@ class CustomElevationButton extends StatelessWidget {
             backgroundColor: AppPallete.mainColor,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(15.r)))),
-        child: Container(
+        child: SizedBox(
           height: 64.h,
           width: 398.w,
           child: Center(

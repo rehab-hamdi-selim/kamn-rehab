@@ -11,8 +11,8 @@ class CustomCategoryTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TabBar(
-      overlayColor: MaterialStateProperty.resolveWith<Color?>(
-        (Set<MaterialState> states) {
+      overlayColor: WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) {
           return Colors.transparent;
         },
       ),

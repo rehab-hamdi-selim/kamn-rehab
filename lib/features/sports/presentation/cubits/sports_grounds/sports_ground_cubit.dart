@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/core/utils/location.dart';
@@ -8,7 +7,6 @@ import 'package:kamn/features/sports/domain/usecase/get_sports_from_firebase_use
 import 'package:kamn/features/sports/domain/usecase/sports_ground_usecase.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_state.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_view_model.dart';
-import '../../../../../core/const/constants.dart';
 import '../../../data/repositories/sports_repository.dart';
 import '../../../data/models/playground_model.dart';
 
@@ -168,33 +166,9 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
     });
   }
 
-  void initScrollListner() {
-    sportsGroundViewModel.scrollController?.addListener(() {
-      if (sportsGroundViewModel
-              .scrollController!.position.userScrollDirection ==
-          ScrollDirection.reverse) {
-        if (!state.isScrolledDown &&
-            sportsGroundViewModel.scrollController!.position.pixels >=
-                Constants.kImageSliderHeight) {
-          emit(state.copyWith(state: SportsGroundsStatus.isScrolledDown));
-        }
-      }
-
-      if (sportsGroundViewModel.scrollController!.position.pixels <=
-              kToolbarHeight + Constants.additionHightToToolBar &&
-          sportsGroundViewModel.scrollController!.position.pixels != 0) {
-        emit(state.copyWith(state: SportsGroundsStatus.isReturnedToTop));
-      } else {
-        if (state.isScrolledDown) {
-          emit(state.copyWith(state: SportsGroundsStatus.isScrollingUp));
-        }
-      }
-    });
-  }
-
+  
   @override
   Future<void> close() {
-    sportsGroundViewModel.scrollController?.dispose();
     sportsGroundViewModel.dispose();
     return super.close();
   }

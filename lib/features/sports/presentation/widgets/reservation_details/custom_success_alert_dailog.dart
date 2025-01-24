@@ -15,8 +15,8 @@ class CustomSuccessAlertDailog extends StatelessWidget {
     return Dialog(
       backgroundColor: Colors.transparent,
       child: SizedBox(
-        width: 316.w,
-        height: 378.h,
+        width: 316,
+        height: 378,
         child: CustomPaint(
             size: Size(
                 width,
@@ -26,36 +26,36 @@ class CustomSuccessAlertDailog extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(Icons.check_circle_outline_rounded,
-                    size: 130.h, color: AppPallete.lightGreenColor),
-                verticalSpace(22.h),
+                const Icon(Icons.check_circle_outline_rounded,
+                    size: 130, color: AppPallete.lightGreenColor),
+                verticalSpace(15),
                 Text('Thanks for Booking',
                     style: TextStyles.fontRoboto24BoldBlack),
-                verticalSpace(10.h),
+                verticalSpace(10),
                 Text(
                     'you booked in ${reservationModel.ground?.playgroundName ?? ""}',
                     style: TextStyles.font16blackRegular
                         .copyWith(fontWeight: FontWeight.w300)),
-                verticalSpace(20.h),
+                verticalSpace(15),
                 Text(
                   DateFormat('EEEE, d MMM yyyy')
                       .format(reservationModel.startAt ?? DateTime.now()),
                   style: TextStyles.font14GreenRegular,
                 ),
-                verticalSpace(7.h),
+                verticalSpace(7),
                 Text(
                   "${DateFormat.jm().format(reservationModel.startAt ?? DateTime.now())} to ${DateFormat.jm().format(reservationModel.endAt ?? DateTime.now())}",
                   style: TextStyles.font14GreenRegular,
                 ),
-                verticalSpace(20.h),
+                verticalSpace(15),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppPallete.lightGreenColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.r),
                     ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 35.w,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 35,
                     ),
                   ),
                   onPressed: () => Navigator.of(context).pop(),
@@ -66,7 +66,7 @@ class CustomSuccessAlertDailog extends StatelessWidget {
                     ),
                   ),
                 ),
-                verticalSpace(20.h),
+                verticalSpace(5),
               ],
             )),
       ),

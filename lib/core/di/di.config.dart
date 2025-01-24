@@ -50,6 +50,8 @@ import '../../features/sports/domain/usecase/get_sports_from_firebase_usecase.da
     as _i213;
 import '../../features/sports/domain/usecase/sports_ground_usecase.dart'
     as _i561;
+import '../../features/sports/presentation/cubits/ground_details_cubit/ground_details_cubit.dart'
+    as _i792;
 import '../../features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart'
     as _i137;
 import '../../features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_view_model.dart'
@@ -121,6 +123,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i805.PaymentOptionsViewModel>(
         () => _i805.PaymentOptionsViewModel());
     gh.factory<_i561.SportsGroundUsecase>(() => _i561.SportsGroundUsecase());
+    gh.factory<_i792.GroundDetailsCubit>(() => _i792.GroundDetailsCubit());
     gh.factory<_i282.PickTimeForReservationViewModel>(
         () => _i282.PickTimeForReservationViewModel());
     gh.factory<_i546.ReservationDetailsCubit>(

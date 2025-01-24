@@ -30,6 +30,7 @@ class AddServiceProviderCubit extends Cubit<AddServiceProviderState> {
   TextEditingController addressController = TextEditingController();
   TextEditingController sizeController = TextEditingController();
   TextEditingController priceController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
   TextEditingController governateController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -156,6 +157,7 @@ class AddServiceProviderCubit extends Cubit<AddServiceProviderState> {
     sizeController.dispose();
     governateController.dispose();
     priceController.dispose();
+    descriptionController.dispose();
   }
 
   @override

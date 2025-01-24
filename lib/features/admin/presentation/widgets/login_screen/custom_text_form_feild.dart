@@ -14,7 +14,7 @@ class CustomTextFieldItem extends StatelessWidget {
   TextEditingController controller;
 
   CustomTextFieldItem(
-      {required this.fieldName,
+      {super.key, required this.fieldName,
       required this.hintText,
       this.suffixIcon,
       this.isObscure = false,

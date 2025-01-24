@@ -98,7 +98,7 @@ class CustomPlayGroundTitleAndLocation extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 8.h),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(13.r)),
+            borderRadius: BorderRadius.all(Radius.circular(25.r)),
             color: AppPallete.shadeOfGray,
           ),
           child: Row(
@@ -120,7 +120,7 @@ class CustomPlayGroundTitleAndLocation extends StatelessWidget {
               ),
               horizontalSpace(3.w),
               Text(
-                playgroundModel?.owner?.name ?? "dsadas",
+                playgroundModel?.owner?.name ?? "",
                 style: TextStyles.font12CircularSpotifyTextBlackMedium,
               )
             ],

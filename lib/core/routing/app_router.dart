@@ -102,23 +102,11 @@ class AppRouter {
             builder: (context) => BlocProvider.value(
                   value: getIt<SportsGroundsCubit>()
                     ..passFilteredPlaygrounds(settings.arguments as String)
-                    ..getUserLocation()
-                    ..initScrollListner(),
+                    ..getUserLocation(),
                   child: GroundsScreen(
                     title: settings.arguments as String,
                   ),
                 ));
-      case Routes.groundDetailsScreen:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) =>
-                getIt<SportsGroundsCubit>()..initScrollListner(),
-            child: GroundDetailsScreen(
-              playgroundModel: settings.arguments as PlaygroundModel,
-            ),
-          ),
-        );
-
       case Routes.debitCreditCardPage:
         return MaterialPageRoute(
             builder: (context) => DebitCreditCardScreen(
@@ -186,16 +174,17 @@ class AppRouter {
             builder: (context) => const OnBoardingScreen());
 
       case Routes.editServiceScreen:
-        return MaterialPageRoute(
-            builder: (context) => BlocProvider<EditServiceProviderCubit>(
-                  create: (context) => getIt<EditServiceProviderCubit>(),
-                  child: EditServiceScreen(
-                    playground: settings.arguments is PlaygroundRequestModel
-                        ? settings.arguments as PlaygroundRequestModel
-                        : PlaygroundRequestModel.fromMap(
-                            (settings.arguments as PlaygroundModel).toMap()),
-                  ),
-                ));
+        return MaterialPageRoute(builder: (context) {
+          final playground = settings.arguments is PlaygroundRequestModel
+              ? settings.arguments as PlaygroundRequestModel
+              : PlaygroundRequestModel.fromMap(
+                  (settings.arguments as PlaygroundModel).toMap());
+          return BlocProvider<EditServiceProviderCubit>(
+            create: (context) =>
+                getIt<EditServiceProviderCubit>()..initValue(playground),
+            child: EditServiceScreen(playground: playground),
+          );
+        });
       case Routes.serviceProviderGroundDetailsScreen:
         return MaterialPageRoute(
             builder: (context) =>
