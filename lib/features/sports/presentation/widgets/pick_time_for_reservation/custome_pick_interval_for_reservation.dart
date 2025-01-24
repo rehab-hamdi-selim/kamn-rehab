@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_state.dart';
 
@@ -11,13 +12,14 @@ class CustomePickIntervalForReservation extends StatelessWidget {
       required this.interval,
       required this.isPicked,
       required this.day,
-      required this.peroid});
+      required this.peroid,
+      required this.check});
 
   final DateTime interval;
   final bool isPicked;
   final String day;
   final int peroid;
-
+  final bool Function() check;
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<PickTimeForReservationCubit>();
@@ -28,11 +30,18 @@ class CustomePickIntervalForReservation extends StatelessWidget {
         return !isPicked
             ? GestureDetector(
                 onTap: () {
-                  cubit.onIntervalSelection(interval, day);
+                  if (check.call()) {
+                    cubit.onIntervalSelection(interval, day);
+                  } else {
+                    showSnackBar(
+                        context, 'you can not pick more than 2 session  ');
+                  }
                 },
                 child: Container(
                   margin: const EdgeInsets.symmetric(vertical: 8),
-                  padding:  EdgeInsets.symmetric(vertical: 10.h,),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10.h,
+                  ),
                   width: 120.w,
                   decoration: BoxDecoration(
                     color: cubit.viewModel.isSelected(interval, day)
@@ -73,9 +82,11 @@ class CustomePickIntervalForReservation extends StatelessWidget {
                 ),
               )
             : Container(
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                padding: const EdgeInsets.all(16),
-                width: 100.w,
+              margin: const EdgeInsets.symmetric(vertical: 8),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10.h,
+                  ),
+                  width: 120.w,
                 decoration: BoxDecoration(
                   color: Colors.redAccent,
                   borderRadius: BorderRadius.circular(10),
@@ -92,7 +103,7 @@ class CustomePickIntervalForReservation extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    DateFormat('HH:mm').format(interval),
+                    '${DateFormat('HH:mm').format(interval)} to ${DateFormat('HH:mm').format(cubit.viewModel.getEndTime(interval, peroid))}',
                     style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,

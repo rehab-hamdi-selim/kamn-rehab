@@ -66,8 +66,8 @@ class CustomGroundList extends StatelessWidget {
                   );
                 },
                 openBuilder: (context, action) {
-                  return BlocProvider.value(
-                   value:
+                  return BlocProvider(
+                   create:(context)=>
                          getIt<GroundDetailsCubit>(),
                     child: GroundDetailsScreen(
                       playgroundModel: state.playgrounds![index],

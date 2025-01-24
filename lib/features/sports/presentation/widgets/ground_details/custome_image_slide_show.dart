@@ -75,8 +75,7 @@ class CustomeImageSlideShow extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () {
-                  },
+                  onTap: () {},
                   child: Icon(
                     Icons.bookmark_border,
                     color: AppPallete.whiteColor,
@@ -91,4 +90,3 @@ class CustomeImageSlideShow extends StatelessWidget {
     );
   }
 }
-

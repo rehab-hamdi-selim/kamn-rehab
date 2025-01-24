@@ -28,7 +28,6 @@ import 'package:kamn/features/user/presentation/screens/my_profile_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/pick_time_for_reservation_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/select_category_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/view_resrvation_screen.dart';
-import 'package:kamn/features/sports/presentation/screens/ground_details_screen.dart';
 import 'package:kamn/features/sports/presentation/screens/reservation_details_screen.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart';
@@ -125,7 +124,7 @@ class AppRouter {
                 BlocProvider<TrackGroundReservationsDetailsCubit>(
                   create: (context) =>
                       getIt<TrackGroundReservationsDetailsCubit>()
-                        ..getPlaygroundsDetailsById(
+                        ..getPlaygroundsReservationDetailsById(
                             (settings.arguments as PlaygroundModel)
                                 .playgroundId!),
                   child: TrackGroundReservationDetail(
@@ -263,14 +262,14 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                   create: (context) => getIt<CurrentOrdersCubit>()
-                    ..fetchOrdersForCategory('Football'),
+                    ..fetchOrdersForCategory('Football',context.read<AppUserCubit>().state.user!.uid),
                   child: const CurrentOrdersScreen(),
                 ));
       case Routes.finishOrderScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                   create: (context) => getIt<FinishedOrdersCubit>()
-                    ..fetchOrdersForCategory('Football'),
+                    ..fetchOrdersForCategory('Football',context.read<AppUserCubit>().state.user!.uid),
                   child: const FinishedOrdersScreen(),
                 ));
       case Routes.mainLoaderScreen:

@@ -17,8 +17,8 @@ class CustomPricePaymentDetails extends StatelessWidget {
       'Invoice date': DateFormat('EEEE, d MMM yyyy')
           .format(reservationModel.date ?? DateTime.now()),
       'Amount due': '${reservationModel.price} LE',
-      'Fees': '25 LE',
-      'Total': '${reservationModel.price! + 25} LE',
+      'Fees': '0 LE',
+      'Total': '${reservationModel.price! } LE',
     };
   }
 

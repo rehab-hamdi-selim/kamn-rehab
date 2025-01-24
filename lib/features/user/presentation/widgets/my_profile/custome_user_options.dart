@@ -18,6 +18,13 @@ class CustomeUserOptions extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           children: [
             CustomeMenuItem(
+              icon: 'assets/icons/home.svg',
+              title: "Home",
+              goTo: () {
+                Navigator.pushNamedAndRemoveUntil(context, Routes.selectCategoryScreen,(route)=>false);
+              },
+            ),
+            CustomeMenuItem(
               icon: 'assets/icons/reservations.svg',
               title: "My Reservations",
               goTo: () {

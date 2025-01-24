@@ -11,13 +11,12 @@ class TrackGroundReservationsDetailsCubit
             state: TrackGroundsReservationDetailsStatus.initial));
   ServiceProvidersRepository repository;
 
-  Future<void> getPlaygroundsDetailsById(String playgroundId) async {
+  Future<void> getPlaygroundsReservationDetailsById(String playgroundId) async {
     emit(TrackGroundsReservationDetailsState(
         state: TrackGroundsReservationDetailsStatus.loading));
     final result =
         await repository.getPlaygroundsReservationDetailsById(playgroundId);
     result.fold((error) {
-      print(error.erorr);
 
       emit(TrackGroundsReservationDetailsState(
         state: TrackGroundsReservationDetailsStatus.failure,

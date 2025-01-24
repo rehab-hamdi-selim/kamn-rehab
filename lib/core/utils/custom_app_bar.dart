@@ -13,7 +13,6 @@ import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
-import 'app_images.dart';
 
 class CustomAppBar {
   static AppBar appBar(

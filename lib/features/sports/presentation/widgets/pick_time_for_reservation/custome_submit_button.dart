@@ -61,7 +61,6 @@ class CustomeSubmitButton extends StatelessWidget {
       return entry.value;
     }).toList();
     selectedDateList.sort((a, b) => a.compareTo(b));
-
     return ReservationModel(
         ground: playground,
         date: DateTime.now(),
@@ -74,7 +73,8 @@ class CustomeSubmitButton extends StatelessWidget {
               endAt: start.add(Duration(minutes: playground.period!.toInt())));
         }).toList(),
         status: 'pending',
-        price: playground.price,
+       price: (playground.price ?? 0) * selectedDateList.length ,
+
         user: context.read<AppUserCubit>().state.user);
   }
 }

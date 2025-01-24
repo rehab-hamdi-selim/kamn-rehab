@@ -49,6 +49,8 @@ class AuthRepositoryImpl implements AuthRepository {
       final userModel = UserModel(
           signFrom: SignInMethods.emailAndPassword.name,
           uid: userCredential.user!.uid,
+          profileImage: userCredential.user?.photoURL ,
+          phoneNumber: userCredential.user?.phoneNumber ,
           email: email,
           name: name,
           createdAt: DateTime.now(),
@@ -116,6 +118,8 @@ class AuthRepositoryImpl implements AuthRepository {
         return UserModel(
             signFrom: SignInMethods.google.name,
             type: 'normal',
+            profileImage: userCredential.user?.photoURL,
+            phoneNumber: userCredential.user?.phoneNumber ,
             uid: userCredential.user!.uid,
             email: userCredential.user!.email!,
             name: userCredential.user!.displayName!,

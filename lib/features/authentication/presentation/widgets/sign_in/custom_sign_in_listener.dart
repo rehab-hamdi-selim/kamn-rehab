@@ -25,7 +25,7 @@ class CustomSignInListener extends StatelessWidget {
         } else if (state.isNotSignIn) {
           signInCubit.signIn();
         } else if (state.isSuccessSignOut) {
-          signInCubit.signIn();
+          // signInCubit.signIn();
         } else if (state.isFailure) {
           showSnackBar(context, state.erorrMessage ?? "");
         } else if (state.isSuccessSignIn) {
