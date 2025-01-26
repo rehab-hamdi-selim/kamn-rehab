@@ -4,10 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/core/const/constants.dart';
-import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/helpers/navigation_extension.dart';
 import 'package:kamn/core/utils/custom_app_bar.dart';
-import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/user/presentation/widgets/my_profile/custome_add_service_button.dart';
 import 'package:kamn/features/user/presentation/widgets/my_profile/custome_user_data.dart';
 import 'package:kamn/features/user/presentation/widgets/my_profile/custome_user_options.dart';
@@ -24,8 +22,6 @@ class MyProfileScreen extends StatelessWidget {
     return BlocListener<AppUserCubit, AppUserState>(
       listener: (context, state) async {
         if (state.isClearUserData()) {
-         await getIt.resetLazySingleton<SportsGroundsCubit>(); // Reset the singleton
-
           context.pushNamedAndRemoveUntil(Routes.signInScreen,
               predicate: (route) => false);
         }

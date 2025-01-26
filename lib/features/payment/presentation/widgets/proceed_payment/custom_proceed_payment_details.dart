@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
-import 'package:kamn/features/sports_service_providers/presentation/screens/current_reservation_order_screen.dart';
 
 class CustomProceedPaymentDetails extends StatelessWidget {
   const CustomProceedPaymentDetails(
@@ -17,7 +17,7 @@ class CustomProceedPaymentDetails extends StatelessWidget {
       // Category Text
       Text(
         reservationModel.ground?.type ?? '',
-        style: TextStyles.font16RobotogreenMedium.copyWith(color: SportsTabs.values
+        style: TextStyles.font16RobotogreenMedium.copyWith(color: Sport.values
                           .firstWhere((element) =>
                               element.displayName == reservationModel.ground?.type)
                           .sportColor),

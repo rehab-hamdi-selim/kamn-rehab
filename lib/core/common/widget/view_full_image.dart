@@ -11,6 +11,9 @@ class ViewFullImage extends StatelessWidget {
   bool _isNetworkImage(String path) {
     return path.startsWith('http://') || path.startsWith('https://');
   }
+  bool _isAssetsImage(String path) {
+    return path.startsWith('assets/');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +27,18 @@ class ViewFullImage extends StatelessWidget {
           tag: tag??imageUrl,
           child: _isNetworkImage(imageUrl)
               ? CachedNetworkImage(
-                imageUrl:   imageUrl,
-                  fit: BoxFit.fitWidth
-                  ,
-                )
-              : Image.file(
-                  File(imageUrl),
+                  imageUrl: imageUrl,
                   fit: BoxFit.fitWidth,
-                )),
+                )
+              : _isAssetsImage(imageUrl)
+                  ? Image.asset(
+                      imageUrl,
+                      fit: BoxFit.fitWidth,
+                    )
+                  : Image.file(
+                      File(imageUrl),
+                      fit: BoxFit.fitWidth,
+                    )),
     );
   }
 }

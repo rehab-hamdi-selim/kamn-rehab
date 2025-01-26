@@ -48,8 +48,7 @@ class CustomeBottomBar extends StatelessWidget {
                     fixedSize: Size.fromWidth(100.w),
                   ),
                   onPressed: () async {
-                    await getIt.resetLazySingleton<
-                        SportsGroundsCubit>(); // Reset the singleton
+                    
 
                     Navigator.pushReplacementNamed(
                         context, Routes.selectCategoryScreen);

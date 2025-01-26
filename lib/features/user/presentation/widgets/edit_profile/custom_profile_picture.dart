@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
+import 'package:kamn/core/common/widget/view_full_image.dart';
 import 'package:kamn/core/const/image_links.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
@@ -66,24 +67,41 @@ class CustomProfilePicture extends StatelessWidget {
                       children: [
                         BlocBuilder<EditProfileCubit, EditProfileState>(
                           builder: (context, state) {
-                            return CircleAvatar(
-                              radius: currentSize, // Responsive radius
-                              backgroundColor: AppPallete.orangeAccentColor,
-                              backgroundImage: user?.profileImage != null ||
-                                      state.picturePicked != null
-                                  ? state.picturePicked != null
-                                      ? FileImage(state.picturePicked!)
-                                      : CachedNetworkImageProvider(user!.profileImage!)
-                                  : null,
-                              child: state.profilePictureUrl == null &&
-                                      user?.profileImage == null &&
-                                      state.picturePicked == null
-                                  ? SvgPicture.asset(
-                                      ImageLinks.defaultUserImage,
-                                      width: currentSize,
-                                      height: currentSize,
-                                    )
-                                  : null,
+                            return InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ViewFullImage(
+                                              imageUrl: user?.profileImage !=
+                                                          null ||
+                                                      state.picturePicked !=
+                                                          null
+                                                  ? user?.profileImage ?? state
+                                                          .picturePicked?.path ??""
+                                                  :ImageLinks.defaultUserImage ,
+                                            )));
+                              },
+                              child: CircleAvatar(
+                                radius: currentSize, // Responsive radius
+                                backgroundColor: AppPallete.orangeAccentColor,
+                                backgroundImage: user?.profileImage != null ||
+                                        state.picturePicked != null
+                                    ? state.picturePicked != null
+                                        ? FileImage(state.picturePicked!)
+                                        : CachedNetworkImageProvider(
+                                            user!.profileImage!)
+                                    : null,
+                                child: state.profilePictureUrl == null &&
+                                        user?.profileImage == null &&
+                                        state.picturePicked == null
+                                    ? SvgPicture.asset(
+                                        ImageLinks.defaultUserImage,
+                                        width: currentSize,
+                                        height: currentSize,
+                                      )
+                                    : null,
+                              ),
                             );
                           },
                         ),

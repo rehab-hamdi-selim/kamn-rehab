@@ -7,8 +7,10 @@ import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/features/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
 import 'package:kamn/features/authentication/presentation/cubits/sign_up_cubit/sign_up_cubit.dart';
 import 'package:kamn/features/payment/presentation/cubits/procced_payment_cubit/procced_payment_cubit.dart';
+import 'package:kamn/features/sports/data/models/category_data.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
+import 'package:kamn/features/sports/presentation/cubits/select_category_cubit/select_category_cubit.dart';
 import 'package:kamn/features/user/presentation/cubit/edit_profile/edit_profile_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart';
 import 'package:kamn/features/admin/presentation/cubits/first_page_cupit/analytics_cubit.dart';
@@ -92,18 +94,18 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                   create: (context) =>
-                      getIt<SportsGroundsCubit>()..getPlaygrounds(),
+                      getIt<SelectCategoryCubit>()..getPlaygrounds(),
                   child: const SelectCategoryScreen(),
                 ));
 
       case Routes.groundsScreen:
         return MaterialPageRoute(
-            builder: (context) => BlocProvider.value(
-                  value: getIt<SportsGroundsCubit>()
-                    ..passFilteredPlaygrounds(settings.arguments as String)
+            builder: (context) => BlocProvider(
+                  create:(_)=> getIt<SportsGroundsCubit>()
+                    ..passFilteredPlaygrounds((settings.arguments as CategoryData).data)
                     ..getUserLocation(),
                   child: GroundsScreen(
-                    title: settings.arguments as String,
+                    title: (settings.arguments as CategoryData).title,
                   ),
                 ));
       case Routes.debitCreditCardPage:

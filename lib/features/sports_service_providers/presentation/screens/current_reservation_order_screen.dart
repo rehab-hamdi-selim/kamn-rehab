@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/utils/custom_app_bar.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/current_reseravaion_order/current_orders_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/current_reseravaion_order/current_orders_state.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/current_reservation_order/custom_Category_tabs.dart';
+import 'package:kamn/features/sports_service_providers/presentation/widgets/current_reservation_order/custom_category_tabs.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/current_reservation_order/custom_current_orders_tile.dart';
 
 class CurrentOrdersScreen extends StatelessWidget {
@@ -20,7 +21,7 @@ class CurrentOrdersScreen extends StatelessWidget {
           notificationIconFunction: () {},
           badgesIconFunction: () {}),
       body: DefaultTabController(
-        length: SportsTabs.values.length, // Number of tabs
+        length: Sport.values.length, // Number of tabs
 
         child: Column(
           children: [
@@ -60,47 +61,4 @@ class CurrentOrdersScreen extends StatelessWidget {
   }
 }
 
-enum SportsTabs {
-  football,
-  basketball,
-  tennis,
-  volleyball,
-  skyDiving,
-  swimming
-}
 
-extension SportsTabsExtension on SportsTabs {
-  String get displayName {
-    switch (this) {
-      case SportsTabs.football:
-        return 'Football';
-      case SportsTabs.basketball:
-        return "Basketball";
-      case SportsTabs.tennis:
-        return "Tennis";
-      case SportsTabs.volleyball:
-        return "Volleyball";
-      case SportsTabs.skyDiving:
-        return "Sky Diving";
-      case SportsTabs.swimming:
-        return "Swimming";
-    }
-  }
-
-  Color get sportColor {
-    switch (this) {
-      case SportsTabs.football:
-        return AppPallete.greenColor;
-      case SportsTabs.basketball:
-        return AppPallete.pinkColor;
-      case SportsTabs.tennis:
-        return AppPallete.orangeColor;
-      case SportsTabs.volleyball:
-        return AppPallete.yellowColor;
-      case SportsTabs.skyDiving:
-        return AppPallete.lightVoivetteColor;
-      case SportsTabs.swimming:
-        return AppPallete.lightBlueColor;
-    }
-  }
-}

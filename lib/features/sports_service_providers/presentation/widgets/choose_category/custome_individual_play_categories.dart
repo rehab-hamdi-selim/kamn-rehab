@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart';
@@ -12,7 +13,6 @@ class CustomeIndividualPlayCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = context.read<ServiceProviderGroundsCubit>();
     return Container(
       height: 240.h,
       width: double.infinity,
@@ -23,10 +23,10 @@ class CustomeIndividualPlayCategories extends StatelessWidget {
           borderRadius: BorderRadius.circular(20.h)),
       child: ListView.separated(
           physics: const NeverScrollableScrollPhysics(),
-          itemCount: cubit.viewModel.individualSportList.length,
+          itemCount: Constants.individualSportList.length,
           separatorBuilder: (context, index) => verticalSpace(10.h),
           itemBuilder: (context, index) {
-            final sport = cubit.viewModel.individualSportList[index];
+            final sport = Constants.individualSportList[index];
             return BlocBuilder<ServiceProviderGroundsCubit,
                 ServiceProviderGroundsState>(
               builder: (context, state) {

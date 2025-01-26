@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/service_selection/custome_sport_category.dart';
 
 class CustomeTeamPlayCategories extends StatelessWidget {
@@ -11,7 +10,6 @@ class CustomeTeamPlayCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var viewModel = context.read<AddServiceProviderCubit>().viewModel;
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(vertical: 15.h),
@@ -22,10 +20,10 @@ class CustomeTeamPlayCategories extends StatelessWidget {
       child: ListView.separated(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: viewModel.teamSportList.length,
+        itemCount: Constants.teamSportList.length,
         separatorBuilder: (context, index) => verticalSpace(10.h),
         itemBuilder: (context, index) {
-          final category = viewModel.teamSportList[index];
+          final category = Constants.teamSportList[index];
           return CustomeSportCategory(
             color: category.color,
             title: category.title,

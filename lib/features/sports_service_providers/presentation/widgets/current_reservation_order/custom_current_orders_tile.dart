@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
-import 'package:kamn/features/sports_service_providers/presentation/screens/current_reservation_order_screen.dart';
 
 class CurrentOrdersTile extends StatelessWidget {
   final ReservationModel reservation;
@@ -38,7 +38,7 @@ class CurrentOrdersTile extends StatelessWidget {
                 Text(
                   reservation.ground?.type ?? '',
                   style: TextStyles.fontCircularSpotify18Medium.copyWith(
-                      color: SportsTabs.values
+                      color: Sport.values
                           .firstWhere((element) =>
                               element.displayName == reservation.ground?.type)
                           .sportColor),

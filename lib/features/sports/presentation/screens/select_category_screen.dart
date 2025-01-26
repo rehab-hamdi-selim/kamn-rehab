@@ -7,8 +7,8 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/core/utils/custom_app_bar.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
-import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
-import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_state.dart';
+import 'package:kamn/features/sports/presentation/cubits/select_category_cubit/select_category_cubit.dart';
+import 'package:kamn/features/sports/presentation/cubits/select_category_cubit/select_category_state.dart';
 import 'package:kamn/features/sports/presentation/widgets/select_category/custome_individual_play_categories.dart';
 import 'package:kamn/features/sports/presentation/widgets/select_category/custome_team_play_categories.dart';
 import 'package:kamn/features/sports/presentation/widgets/select_category/custome_title_text.dart';
@@ -18,10 +18,10 @@ class SelectCategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SportsGroundsCubit, SportsGroundsState>(
+    return BlocConsumer<SelectCategoryCubit, SelectCategoryState>(
         listener: (context, state) {
-      if (state.isFailure) {
-        showSnackBar(context, state.erorrMessage!);
+      if (state.isError) {
+        showSnackBar(context, state.error!);
       }
     }, builder: (context, state) {
       return Scaffold(

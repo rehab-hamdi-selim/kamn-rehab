@@ -1,13 +1,13 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme_data/style.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_filter_properties.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_filter_section.dart';
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_ground_list.dart';
-import 'package:kamn/features/sports_service_providers/presentation/screens/current_reservation_order_screen.dart';
 import '../../../../core/utils/custom_app_bar.dart';
 import '../widgets/grounds_screen/custom_grounds_bloc_listner.dart';
 
@@ -41,9 +41,9 @@ class GroundsScreen extends StatelessWidget {
                         return Text(
                           title,
                           style: Style.font30DarkGreenColorBold.copyWith(
-                              color: SportsTabs.values
+                              color: Sport.values
                                   .firstWhere((element) =>
-                                      element.displayName == title)
+                                      element.displayName == title,orElse: () => Sport.football,)
                                   .sportColor),
                         );
                       }),

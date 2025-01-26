@@ -10,7 +10,7 @@ import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_g
 import '../../../data/repositories/sports_repository.dart';
 import '../../../data/models/playground_model.dart';
 
-@lazySingleton
+@injectable
 class SportsGroundsCubit extends Cubit<SportsGroundsState> {
   final SportsRepository sportsRepository;
   final SportsGroundUsecase sportsGroundUsecase;
@@ -23,25 +23,12 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
       required this.sportsGroundViewModel})
       : super(SportsGroundsState(state: SportsGroundsStatus.initial));
 
-  Future<void> getPlaygrounds() async {
-    emit(state.copyWith(state: SportsGroundsStatus.loading));
-    final result = await getPlaygrouundsUseCase.invoke();
-    result.fold((error) {
-      emit(state.copyWith(
-        state: SportsGroundsStatus.failure,
-        erorrMessage: error.erorr,
-      ));
-    }, (success) {
-      emit(state.copyWith(
-          state: SportsGroundsStatus.success, playgroundsMap: success));
-    });
-  }
-
-  void passFilteredPlaygrounds(String title) {
+  
+  void passFilteredPlaygrounds(List<PlaygroundModel> list) {
     emit(state.copyWith(
       state: SportsGroundsStatus.loading,
     ));
-          sportsGroundViewModel.playgroundsByCategory=state.playgroundsMap?[title] ?? [];
+          sportsGroundViewModel.playgroundsByCategory=list;
 
     emit(state.copyWith(
       state: SportsGroundsStatus.success,
