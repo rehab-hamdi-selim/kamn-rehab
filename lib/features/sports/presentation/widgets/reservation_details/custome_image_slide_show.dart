@@ -48,7 +48,7 @@ class CustomeImageSlideShow extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.maybePop(context);
                   },
                   child: Container(
                     decoration: BoxDecoration(

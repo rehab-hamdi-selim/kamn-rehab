@@ -13,7 +13,7 @@ class CustomTextFormName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 80.h,
       width: 400.w,
       child: CustomTextFieldItem(
@@ -24,6 +24,7 @@ class CustomTextFormName extends StatelessWidget {
           if (value == null || value.trim().isEmpty) {
             return Constants.pleaseName;
           }
+          return null;
         },
       ),
     );

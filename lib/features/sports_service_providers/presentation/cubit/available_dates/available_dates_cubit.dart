@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/core/utils/time_picker.dart';
+import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 import 'package:kamn/features/sports_service_providers/data/repository/service_providers_repository.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/available_dates/available_dates_state.dart';
 
@@ -90,9 +91,9 @@ class AvailableDatesCubit extends Cubit<AvailableDatesState> {
     }
   }
 
-  Future<void> onSubmit(String playgroundId, Map<String, dynamic> data) async {
+  Future<void> onSubmit(PlaygroundRequestModel playground, Map<String, dynamic> data) async {
     emit(state.copyWith(state: AvailableDatesStatus.loading));
-    var response = await repository.updateState(playgroundId, data);
+    var response = await repository.updateState(playground, data);
     response.fold((error) {
       emit(state.copyWith(
         state: AvailableDatesStatus.failure,

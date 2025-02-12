@@ -16,7 +16,7 @@ class CustomeMenuItem extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-            leading: SvgPicture.asset(icon),
+            leading: SvgPicture.asset(icon,),
             // Responsive icon size
             title: Text(
               title,

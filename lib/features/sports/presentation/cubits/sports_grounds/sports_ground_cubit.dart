@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/core/utils/location.dart';
@@ -8,11 +7,10 @@ import 'package:kamn/features/sports/domain/usecase/get_sports_from_firebase_use
 import 'package:kamn/features/sports/domain/usecase/sports_ground_usecase.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_state.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_view_model.dart';
-import '../../../../../core/const/constants.dart';
 import '../../../data/repositories/sports_repository.dart';
 import '../../../data/models/playground_model.dart';
 
-@singleton
+@injectable
 class SportsGroundsCubit extends Cubit<SportsGroundsState> {
   final SportsRepository sportsRepository;
   final SportsGroundUsecase sportsGroundUsecase;
@@ -25,27 +23,16 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
       required this.sportsGroundViewModel})
       : super(SportsGroundsState(state: SportsGroundsStatus.initial));
 
-  Future<void> getPlaygrounds() async {
-    emit(state.copyWith(state: SportsGroundsStatus.loading));
-    final result = await getPlaygrouundsUseCase.invoke();
-    result.fold((error) {
-      emit(state.copyWith(
-        state: SportsGroundsStatus.failure,
-        erorrMessage: error.erorr,
-      ));
-    }, (success) {
-      emit(state.copyWith(
-          state: SportsGroundsStatus.success, playgroundsMap: success));
-    });
-  }
-
-  void passFilteredPlaygrounds(String title) {
+  
+  void passFilteredPlaygrounds(List<PlaygroundModel> list) {
     emit(state.copyWith(
       state: SportsGroundsStatus.loading,
     ));
+          sportsGroundViewModel.playgroundsByCategory=list;
+
     emit(state.copyWith(
       state: SportsGroundsStatus.success,
-      playgrounds: state.playgroundsMap?[title] ?? [],
+      playgrounds:sportsGroundViewModel.playgroundsByCategory ,
     ));
   }
 
@@ -54,16 +41,17 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
       num? minPrice,
       String? location,
       double? distance}) async {
-    emit(SportsGroundsState(
+    emit(state.copyWith(
       state: SportsGroundsStatus.loading,
     ));
     final result = await sportsGroundUsecase.filterGoundData(
+      playgrounds: sportsGroundViewModel.playgroundsByCategory,
         distance: distance,
         location: location,
         maxPrice: maxPrice,
         minPrice: minPrice);
     result.fold((error) {
-      emit(SportsGroundsState(
+      emit(state.copyWith(
         state: SportsGroundsStatus.failure,
         erorrMessage: error.erorr,
       ));
@@ -73,7 +61,8 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
           location: location,
           maxPrice: maxPrice,
           minPrice: minPrice);
-      emit(SportsGroundsState(
+          sportsGroundViewModel.resetViewModel();
+      emit(state.copyWith(
         state: SportsGroundsStatus.success,
         playgrounds: success,
       ));
@@ -147,10 +136,10 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
     sportsGroundViewModel.userLongitude = data['longitude']!;
   }
 
-  Future<void> searchByQuery(String query) async {
+  Future<void> searchByQuery(String query,String type) async {
     emit(state.copyWith(state: SportsGroundsStatus.loading));
 
-    final result = await sportsRepository.searchByQuery(query);
+    final result = await sportsRepository.searchByQuery(query, type);
     result.fold((l) {
       emit(state.copyWith(
         state: SportsGroundsStatus.failure,
@@ -164,33 +153,9 @@ class SportsGroundsCubit extends Cubit<SportsGroundsState> {
     });
   }
 
-  void initScrollListner() {
-    sportsGroundViewModel.scrollController?.addListener(() {
-      if (sportsGroundViewModel
-              .scrollController!.position.userScrollDirection ==
-          ScrollDirection.reverse) {
-        if (!state.isScrolledDown &&
-            sportsGroundViewModel.scrollController!.position.pixels >=
-                Constants.kImageSliderHeight) {
-          emit(state.copyWith(state: SportsGroundsStatus.isScrolledDown));
-        }
-      }
-
-      if (sportsGroundViewModel.scrollController!.position.pixels <=
-              kToolbarHeight + Constants.additionHightToToolBar &&
-          sportsGroundViewModel.scrollController!.position.pixels != 0) {
-        emit(state.copyWith(state: SportsGroundsStatus.isReturnedToTop));
-      } else {
-        if (state.isScrolledDown) {
-          emit(state.copyWith(state: SportsGroundsStatus.isScrollingUp));
-        }
-      }
-    });
-  }
-
+  
   @override
   Future<void> close() {
-    sportsGroundViewModel.scrollController?.dispose();
     sportsGroundViewModel.dispose();
     return super.close();
   }

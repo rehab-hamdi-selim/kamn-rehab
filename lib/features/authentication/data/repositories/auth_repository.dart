@@ -23,6 +23,8 @@ abstract interface class AuthRepository {
   Future<Either<Faliure, void>> googleSignOut();
   Future<Either<Faliure, UserModel>> googleAuth();
   Future<Either<Faliure, bool>> checkUesrSignin();
+  Future<Either<Faliure, void>> updateUser(String uid,Map<String, dynamic> data);
+
 }
 
 @Injectable(as: AuthRepository)
@@ -49,6 +51,8 @@ class AuthRepositoryImpl implements AuthRepository {
       final userModel = UserModel(
           signFrom: SignInMethods.emailAndPassword.name,
           uid: userCredential.user!.uid,
+          profileImage: userCredential.user?.photoURL ,
+          phoneNumber: userCredential.user?.phoneNumber ,
           email: email,
           name: name,
           createdAt: DateTime.now(),
@@ -116,6 +120,8 @@ class AuthRepositoryImpl implements AuthRepository {
         return UserModel(
             signFrom: SignInMethods.google.name,
             type: 'normal',
+            profileImage: userCredential.user?.photoURL,
+            phoneNumber: userCredential.user?.phoneNumber ,
             uid: userCredential.user!.uid,
             email: userCredential.user!.email!,
             name: userCredential.user!.displayName!,
@@ -135,6 +141,13 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Faliure, bool>> checkUesrSignin() async {
     return await executeTryAndCatchForRepository(() async {
       return await _authDataSource.checkUesrSignin();
+    });
+  }
+  
+  @override
+  Future<Either<Faliure, void>> updateUser(String uid, Map<String, dynamic> data)async {
+  return await executeTryAndCatchForRepository(() async {
+      return await _authDataSource.updateUser(uid, data);
     });
   }
 }

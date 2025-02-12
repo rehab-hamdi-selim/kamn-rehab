@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/edit_service_provider/edit_service_provider_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/edit_service_provider/edit_service_provider_state.dart';
 
-import '../../../../../core/utils/navigation.dart';
 import '../../../data/model/playground_request_model.dart';
-import '../../screens/success_service_provider_screen.dart';
 
 class CustomeEditServicesBlocListner extends StatelessWidget {
   final Widget child;
@@ -57,7 +56,7 @@ class CustomeEditServicesBlocListner extends StatelessWidget {
       listener: (context, state) {
         if (state.isImageUploaded) {
           context.read<EditServiceProviderCubit>().updateService(
-              playground.playgroundId!, prepareUpdatedData(context).toMap());
+              playground, prepareUpdatedData(context).toMap());
         }
         if (state.isSuccess) {
           if (context
@@ -69,7 +68,7 @@ class CustomeEditServicesBlocListner extends StatelessWidget {
                     .read<EditServiceProviderCubit>()
                     .groundRemovedImagesUrl);
           }
-          navigationTo(context, const SuccessServiceProviderScreen());
+          Navigator.pushNamedAndRemoveUntil(context, Routes.successServiceProviderScreen, (route) => false);
         } else if (state.isServiceFailed) {
           context.read<EditServiceProviderCubit>().deleteImagesFromStorage(
               context.read<EditServiceProviderCubit>().groundImagesUrl);

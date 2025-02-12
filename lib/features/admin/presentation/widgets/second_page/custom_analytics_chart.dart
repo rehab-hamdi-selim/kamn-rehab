@@ -88,7 +88,7 @@ class CustomAnalyticsChart extends StatelessWidget {
               ],
             ),
             verticalSpace(43.h),
-            CustomAnalyticsChartData(),
+            const CustomAnalyticsChartData(),
             verticalSpace(7.h),
             Container(
               decoration: BoxDecoration(

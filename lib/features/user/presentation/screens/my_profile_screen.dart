@@ -6,9 +6,9 @@ import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/navigation_extension.dart';
 import 'package:kamn/core/utils/custom_app_bar.dart';
-import 'package:kamn/features/sports/presentation/widgets/my_profile/custome_add_service_button.dart';
-import 'package:kamn/features/sports/presentation/widgets/my_profile/custome_user_data.dart';
-import 'package:kamn/features/sports/presentation/widgets/my_profile/custome_user_options.dart';
+import 'package:kamn/features/user/presentation/widgets/my_profile/custome_add_service_button.dart';
+import 'package:kamn/features/user/presentation/widgets/my_profile/custome_user_data.dart';
+import 'package:kamn/features/user/presentation/widgets/my_profile/custome_user_options.dart';
 
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theme/app_pallete.dart';
@@ -20,10 +20,10 @@ class MyProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<AppUserCubit, AppUserState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state.isClearUserData()) {
-          context.pop();
-          context.pushReplacementNamed(Routes.signInScreen);
+          context.pushNamedAndRemoveUntil(Routes.signInScreen,
+              predicate: (route) => false);
         }
       },
       child: SafeArea(

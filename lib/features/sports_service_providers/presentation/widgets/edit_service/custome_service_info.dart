@@ -6,14 +6,15 @@ import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/helpers/validators.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 
 import 'package:kamn/features/sports_service_providers/presentation/cubit/edit_service_provider/edit_service_provider_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/edit_service_provider/edit_service_provider_state.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_dropdown_menu.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_text_form_field.dart';
+import 'package:kamn/core/utils/custome_text_form_field.dart';
+import 'package:kamn/features/sports_service_providers/presentation/widgets/edit_service/custome_dropdown_menu.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/edit_service/custome_radio_button.dart';
+
+import '../../../../../core/theme/style.dart';
 
 class CustomeServiceInfo extends StatelessWidget {
   final PlaygroundRequestModel playground;
@@ -21,7 +22,6 @@ class CustomeServiceInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<EditServiceProviderCubit>().initValue(playground);
     return Form(
       key: context.read<EditServiceProviderCubit>().formKey,
       child: Column(
@@ -80,6 +80,17 @@ class CustomeServiceInfo extends StatelessWidget {
               hint: Constants.governateHint,
               iconPath: 'assets/icons/location.svg',
               choices: Constants.egyptGovernorates),
+          verticalSpace(10.h),
+          createField(
+              maxLength: 200,
+              title: Constants.description,
+              hint: Constants.descriptionHint,
+              nameController: context
+                  .read<EditServiceProviderCubit>()
+                  .descriptionController,
+              iconPath: 'assets/icons/description.svg',
+              explane: Constants.optional,
+              isRequired: false),
           verticalSpace(16.h),
         ],
       ),
@@ -88,7 +99,7 @@ class CustomeServiceInfo extends StatelessWidget {
 
   SizedBox createSelectionButton({required String title}) {
     return SizedBox(
-        height: 69.h,
+        height: 70.h,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -115,6 +126,8 @@ class CustomeServiceInfo extends StatelessWidget {
       required String title,
       required String hint,
       required String iconPath,
+      int? maxLength,
+      bool? isRequired,
       BuildContext? context,
       bool showLocationIcon = false,
       String? explane,
@@ -128,11 +141,12 @@ class CustomeServiceInfo extends StatelessWidget {
                 text: title,
                 style: TextStyles.fontInter14BlackMedium,
                 children: [
-                  TextSpan(
-                    text: '*',
-                    style: TextStyles.fontInter14BlackMedium
-                        .copyWith(color: AppPallete.redColor),
-                  ),
+                  if (isRequired == true || isRequired == null)
+                    TextSpan(
+                      text: '*',
+                      style: TextStyles.fontInter14BlackMedium
+                          .copyWith(color: AppPallete.redColor),
+                    ),
                   TextSpan(
                       text: explane, style: TextStyles.fontInter11GreyMedium)
                 ])),
@@ -141,6 +155,7 @@ class CustomeServiceInfo extends StatelessWidget {
             Expanded(
               child: CustomeTextFormField(
                 hint: hint,
+                maxLength: maxLength,
                 validator: validator,
                 controller: nameController,
                 prefixIcon: Padding(
@@ -193,7 +208,7 @@ class CustomeServiceInfo extends StatelessWidget {
       required String iconPath,
       required List<String> choices}) {
     return SizedBox(
-      height: 82.h,
+      height: 81.h,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

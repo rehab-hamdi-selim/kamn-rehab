@@ -7,6 +7,7 @@ import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/core/utils/rating_dialog.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
@@ -15,9 +16,11 @@ import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservati
 class CustomeSubmitButton extends StatelessWidget {
   final PlaygroundModel playground;
   final DateTime selectedDate;
-  const CustomeSubmitButton(
+   CustomeSubmitButton(
       {super.key, required this.playground, required this.selectedDate});
+ 
 
+   
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<PickTimeForReservationCubit>();
@@ -29,6 +32,7 @@ class CustomeSubmitButton extends StatelessWidget {
               disabledBackgroundColor: AppPallete.blackColor,
               backgroundColor: AppPallete.blackColor),
           onPressed: () {
+     
             // cubit.onSubmitReservation(perpareReservation(cubit));
             if (cubit.viewModel.selectedIntervals.isNotEmpty) {
               Navigator.pushNamed(context, Routes.paymentOptionsScreen,
@@ -61,7 +65,6 @@ class CustomeSubmitButton extends StatelessWidget {
       return entry.value;
     }).toList();
     selectedDateList.sort((a, b) => a.compareTo(b));
-
     return ReservationModel(
         ground: playground,
         date: DateTime.now(),
@@ -74,7 +77,8 @@ class CustomeSubmitButton extends StatelessWidget {
               endAt: start.add(Duration(minutes: playground.period!.toInt())));
         }).toList(),
         status: 'pending',
-        price: playground.price,
+       price: (playground.price ?? 0) * selectedDateList.length ,
+
         user: context.read<AppUserCubit>().state.user);
   }
 }

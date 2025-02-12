@@ -13,8 +13,8 @@ import 'package:kamn/features/sports_service_providers/presentation/cubit/availa
 import 'package:kamn/features/sports_service_providers/presentation/cubit/available_dates/available_dates_state.dart';
 
 class CustomeSubmitButton extends StatelessWidget {
-  final String playgroundId;
-  const CustomeSubmitButton({super.key, required this.playgroundId});
+  final PlaygroundRequestModel playground;
+  const CustomeSubmitButton({super.key, required this.playground});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class CustomeSubmitButton extends StatelessWidget {
                   ? null
                   : () {
                       cubit.onSubmit(
-                        playgroundId,
+                        playground,
                         {
                           'availableTime':
                               AvailableTime(data: cubit.selectedIntervals)

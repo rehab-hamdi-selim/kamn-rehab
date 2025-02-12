@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/available_dates/available_dates_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/available_dates/available_dates_state.dart';
 import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_available_dates.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/available_dates/custome_available_interval.dart';
 
 class CustomeChooseAvailableDates extends StatelessWidget {
-  final String playgroundId;
+  final PlaygroundRequestModel playground;
   final String day;
   const CustomeChooseAvailableDates(
-      {super.key, required this.playgroundId, required this.day});
+      {super.key, required this.playground, required this.day});
 
   @override
   Widget build(BuildContext context) {

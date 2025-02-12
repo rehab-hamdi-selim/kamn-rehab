@@ -44,6 +44,7 @@ class PaymentOptionsScreen extends StatelessWidget {
                 currentOption: state.currentOption,
                 itemOnTap: (index) =>
                     PaymentOptionsCubit.get(context).changePaymentOption(index),
+                    isCashActive:reservationModel.sessions!.length>2 ,
               );
             },
           ),

@@ -10,9 +10,9 @@ class CurrentOrdersCubit extends Cubit<CurrentOrdersState> {
   CurrentOrdersCubit({required this.repository})
       : super(CurrentOrdersState(state: CurrentOrdersStatus.initial));
 
-  void fetchOrdersForCategory(String category) async {
+  void fetchOrdersForCategory(String category,String userId) async {
     emit(state.copyWith(state: CurrentOrdersStatus.loading));
-    final result = await repository.getCurrentOrdersByCategory(category);
+    final result = await repository.getCurrentOrdersByCategory(category,userId);
 
     result.fold(
         (failure) => emit(

@@ -8,17 +8,15 @@ import 'package:kamn/core/utils/image_picker.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 import 'package:kamn/features/sports_service_providers/data/repository/service_providers_repository.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_state.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_view_model.dart';
 
 import '../../../../../core/utils/location.dart';
 
 @injectable
 class AddServiceProviderCubit extends Cubit<AddServiceProviderState> {
-  AddServiceProviderCubit({required this.repository, required this.viewModel})
+  AddServiceProviderCubit({required this.repository})
       : super(AddServiceProviderState(state: AddServiceProviderStatus.initial));
 
   ServiceProvidersRepository repository;
-  AddServiceProviderViewModel viewModel;
   List<File> groundSelectedImageList = [];
   List<File> ownershipSelectedImageList = [];
 
@@ -30,6 +28,7 @@ class AddServiceProviderCubit extends Cubit<AddServiceProviderState> {
   TextEditingController addressController = TextEditingController();
   TextEditingController sizeController = TextEditingController();
   TextEditingController priceController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
   TextEditingController governateController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -156,6 +155,7 @@ class AddServiceProviderCubit extends Cubit<AddServiceProviderState> {
     sizeController.dispose();
     governateController.dispose();
     priceController.dispose();
+    descriptionController.dispose();
   }
 
   @override

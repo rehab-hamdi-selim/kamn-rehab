@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
+import 'package:kamn/features/sports/presentation/cubits/reservation_details_cubit/reservation_details_cubit.dart';
 
 class CustomeBottomBar extends StatelessWidget {
   const CustomeBottomBar({required this.reservationModel, super.key});
@@ -45,8 +46,9 @@ class CustomeBottomBar extends StatelessWidget {
                     backgroundColor: AppPallete.redColor,
                     fixedSize: Size.fromWidth(100.w),
                   ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, Routes.groundsScreen);
+                  onPressed: () async {
+                  context.read<ReservationDetailsCubit>().deleteReservation(reservationModel!);
+                   
                   },
                   child: Text(
                     'Leave',

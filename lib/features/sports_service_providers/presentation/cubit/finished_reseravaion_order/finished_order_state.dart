@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
 
@@ -32,4 +33,7 @@ class FinishedOrdersState {
       reservations: reservations ?? this.reservations,
     );
   }
+
+  @override
+  String toString() => 'FinishedOrdersState(state: $state, errorMessage: $errorMessage, reservations: $reservations)';
 }

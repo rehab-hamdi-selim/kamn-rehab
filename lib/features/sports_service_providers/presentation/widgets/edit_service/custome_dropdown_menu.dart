@@ -22,7 +22,7 @@ class CustomeDropdownMenu extends StatelessWidget {
     return DropdownMenu(
         menuHeight: 400.h,
         menuStyle: MenuStyle(
-            backgroundColor: MaterialStateProperty.all(AppPallete.lightColor)),
+            backgroundColor: WidgetStateProperty.all(AppPallete.lightColor)),
         selectedTrailingIcon: const Icon(Icons.keyboard_arrow_up_outlined),
         controller: controller,
         hintText: hint,

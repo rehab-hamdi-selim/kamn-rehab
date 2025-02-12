@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 
 Future<File?> pickImage() async {
   try {
@@ -25,15 +23,13 @@ Future<File?> pickImage() async {
 }
 
 Future<File?> compressImages(XFile image) async {
-  final tempDir = await getTemporaryDirectory();
-  final targetPath =
-      join(tempDir.path, "${DateTime.now().millisecondsSinceEpoch}.jpg");
+  
 
-  var compressedImage = await compress(image, targetPath);
+  var compressedImage = await compress(image, image.path);
   if (compressedImage != null) {
     double imageSize = compressedImage.lengthSync() / (1024 * 1024); // in MB
     if (imageSize > 2) {
-      compressedImage = await compress(image, targetPath);
+      compressedImage = await compress(image, image.path);
     }
     return compressedImage;
   }

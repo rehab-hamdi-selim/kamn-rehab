@@ -15,12 +15,12 @@ Widget chartWidget() {
                   color: Colors.grey.withOpacity(0.1),
                   spreadRadius: 0),
             ],
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(8),
                 bottomRight: Radius.circular(8)),
             color: Colors.white),
         child: Padding(
-          padding: EdgeInsets.fromLTRB(0, 16, 16, 0),
+          padding: const EdgeInsets.fromLTRB(0, 16, 16, 0),
           child: LineChart(LineChartData(
             minX: 0,
             maxX: 11,
@@ -28,19 +28,19 @@ Widget chartWidget() {
             lineBarsData: [
               LineChartBarData(
                   spots: [
-                    FlSpot(2, 5),
-                    FlSpot(3, 5),
-                    FlSpot(4, 15),
-                    FlSpot(6, 9),
-                    FlSpot(8, 25),
-                    FlSpot(11, 15),
+                    const FlSpot(2, 5),
+                    const FlSpot(3, 5),
+                    const FlSpot(4, 15),
+                    const FlSpot(6, 9),
+                    const FlSpot(8, 25),
+                    const FlSpot(11, 15),
                   ],
-                  color: Color(0xff2563EB),
+                  color: const Color(0xff2563EB),
                   isCurved: true,
                   preventCurveOverShooting: true,
-                  dotData: FlDotData(show: false)),
+                  dotData: const FlDotData(show: false)),
             ],
-            titlesData: FlTitlesData(
+            titlesData: const FlTitlesData(
                 rightTitles: AxisTitles(
                     sideTitles: SideTitles(
                   showTitles: false,
@@ -60,9 +60,9 @@ Widget chartWidget() {
                         showTitles: true,
                         reservedSize: 30,
                         getTitlesWidget: leftTiltleWidget))),
-            gridData: FlGridData(show: false),
+            gridData: const FlGridData(show: false),
             borderData: FlBorderData(show: false),
-            clipData: FlClipData.all(),
+            clipData: const FlClipData.all(),
           )),
         ),
       ),

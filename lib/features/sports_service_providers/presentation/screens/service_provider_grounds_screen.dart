@@ -12,7 +12,6 @@ import '../../../../core/theme/app_pallete.dart';
 import '../../../../core/theme/style.dart';
 import '../../../../core/utils/app_images.dart';
 import '../widgets/service_provider_grounds/custom_bottom_service_provider.dart';
-import '../widgets/service_provider_grounds/custom_filter_item_service_provider.dart';
 import '../widgets/service_provider_grounds/custom_ground_item_service_provider.dart';
 import '../widgets/service_provider_grounds/custom_text_form_field_service_provider.dart';
 import 'package:flutter_debouncer/flutter_debouncer.dart';
@@ -72,22 +71,22 @@ class ServiceProviderGroundsScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              verticalSpace(10),
-              SizedBox(
-                height: 30.h,
-                child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return CustomFilterItemServiceProvider(
-                          icon: Icons.location_on_outlined,
-                          text: "Alexandria, Hadra",
-                          onPressed: () {});
-                    },
-                    separatorBuilder: (context, index) {
-                      return horizontalSpace(5);
-                    },
-                    itemCount: 5),
-              ),
+              // verticalSpace(10),
+              // SizedBox(
+              //   height: 30.h,
+              //   child: ListView.separated(
+              //       scrollDirection: Axis.horizontal,
+              //       itemBuilder: (context, index) {
+              //         return CustomFilterItemServiceProvider(
+              //             icon: Icons.location_on_outlined,
+              //             text: "Alexandria, Hadra",
+              //             onPressed: () {});
+              //       },
+              //       separatorBuilder: (context, index) {
+              //         return horizontalSpace(5);
+              //       },
+              //       itemCount: 5),
+              // ),
               verticalSpace(20),
               Expanded(
                 child: Container(

@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kamn/features/sports/presentation/cubits/ground_details_cubit/ground_details_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_state.dart';
 import 'package:kamn/features/sports/presentation/screens/ground_details_screen.dart';
@@ -41,7 +42,7 @@ class CustomGroundList extends StatelessWidget {
                   return InkWell(
                     onTap: action,
                     child: BlocProvider.value(
-                      value:context.read<SportsGroundsCubit>(),
+                      value: getIt<SportsGroundsCubit>(),
                       child: index % 2 == 0
                           ? ZoomIn(
                               duration: const Duration(seconds: 2),
@@ -65,9 +66,9 @@ class CustomGroundList extends StatelessWidget {
                   );
                 },
                 openBuilder: (context, action) {
-                  return BlocProvider.value(
-                   value:
-                        getIt<SportsGroundsCubit>()..initScrollListner(),
+                  return BlocProvider(
+                   create:(context)=>
+                         getIt<GroundDetailsCubit>(),
                     child: GroundDetailsScreen(
                       playgroundModel: state.playgrounds![index],
                     ),

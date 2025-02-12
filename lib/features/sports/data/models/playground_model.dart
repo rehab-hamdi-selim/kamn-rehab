@@ -7,7 +7,8 @@ import 'package:flutter/widgets.dart';
 
 import 'package:kamn/core/common/entities/user_model.dart';
 import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
-
+extension PlaygroundExtension on PlaygroundModel{
+double get ratings => (rating?.reduce((a, b) => a + b) ?? 0) / (rating?.length ?? 1);}
 class PlaygroundModel {
   String? playgroundId;
   String? playgroundName;
@@ -17,7 +18,7 @@ class PlaygroundModel {
   String? ownerId; //get from user credential
   String? address;
   String? status; // need to handel
-  double? rating; //calcolute from developer
+  List<double>? rating; //calcolute from developer
   double? price; // need to handel  /*
   String? description; // need to handel /*
   List<String>? groundImages;
@@ -59,7 +60,7 @@ class PlaygroundModel {
     ValueGetter<String?>? ownerId,
     ValueGetter<String?>? address,
     ValueGetter<String?>? status,
-    ValueGetter<double?>? rating,
+    ValueGetter<List<double>?>? rating,
     ValueGetter<double?>? price,
     ValueGetter<String?>? description,
     ValueGetter<List<String>?>? groundImages,
@@ -73,7 +74,7 @@ class PlaygroundModel {
   }) {
     return PlaygroundModel(
       playgroundId: playgroundId != null ? playgroundId() : this.playgroundId,
-      playgroundName: name != null ? name() : this.playgroundName,
+      playgroundName: name != null ? name() : playgroundName,
       phone: phone != null ? phone() : this.phone,
       longitude: longitude != null ? longitude() : this.longitude,
       latitude: latitude != null ? latitude() : this.latitude,
@@ -130,7 +131,9 @@ class PlaygroundModel {
       ownerId: map['ownerId'],
       address: map['address'],
       status: map['status'],
-      rating: map['rating']?.toDouble(),
+      rating: map['rating'] != null
+          ? List<double>.from(map['rating'].map((x) => x.toDouble()))
+          : null,
       price: map['price']?.toDouble(),
       description: map['description'],
       groundImages: List<String>.from(map['groundImages']),

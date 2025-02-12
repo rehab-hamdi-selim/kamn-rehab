@@ -55,12 +55,12 @@ class ChooseServiceCategoryScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                CustomeTitleText(
+                const CustomeTitleText(
                   title: Constants.teamPlay,
                   type: Constants.fourOrMore,
                 ),
                 const CustomeTeamPlayCategories(),
-                CustomeTitleText(
+                const CustomeTitleText(
                   title: Constants.individualPlay,
                   type: Constants.oneOrMore,
                 ),

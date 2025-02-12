@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/common/widget/view_full_image.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 
@@ -12,8 +14,8 @@ import 'package:kamn/features/sports_service_providers/presentation/cubit/edit_s
 
 class CustomeGroundImagePicker extends StatelessWidget {
   final List<String> groundImages;
-   bool isInit = false;
-   CustomeGroundImagePicker({super.key, required this.groundImages});
+  bool isInit = false;
+  CustomeGroundImagePicker({super.key, required this.groundImages});
 
   @override
   Widget build(BuildContext context) {
@@ -50,36 +52,50 @@ class CustomeGroundImagePicker extends StatelessWidget {
                 children: [
                   Row(
                     children: state.groundImagesList!.map((element) {
-                      return Stack(
-                        alignment: Alignment.topRight,
-                        children: [
-                          Container(
-                            width: 95.w,
-                            height: 85.w,
-                            margin: EdgeInsets.symmetric(horizontal: 5.w),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              image: DecorationImage(
-                                image: element is String
-                                    ? NetworkImage(element)
-                                    : FileImage(element),
-                                fit: BoxFit.cover,
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ViewFullImage(
+                                        imageUrl:element is String ? element : element.path,
+                                        tag: element is String ? null : element.path,
+                                      )));
+                        },
+                        child: Stack(
+                          alignment: Alignment.topRight,
+                          children: [
+                            Hero(
+                              tag: element is String ? element : element.path,
+                              child: Container(
+                                width: 95.w,
+                                height: 85.w,
+                                margin: EdgeInsets.symmetric(horizontal: 5.w),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  image: DecorationImage(
+                                    image: element is String
+                                        ? CachedNetworkImageProvider(element)
+                                        : FileImage(element),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                          Positioned(
-                            right: 5.w,
-                            child: InkWell(
-                              onTap: () => context
-                                  .read<EditServiceProviderCubit>()
-                                  .removeImageFromList(element),
-                              child: const Icon(
-                                Icons.cancel_outlined,
-                                color: Colors.white,
+                            Positioned(
+                              right: 5.w,
+                              child: InkWell(
+                                onTap: () => context
+                                    .read<EditServiceProviderCubit>()
+                                    .removeImageFromList(element),
+                                child: const Icon(
+                                  Icons.cancel_outlined,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       );
                     }).toList(),
                   ),

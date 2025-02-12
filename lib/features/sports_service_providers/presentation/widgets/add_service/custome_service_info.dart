@@ -11,7 +11,7 @@ import 'package:kamn/features/sports_service_providers/presentation/cubit/add_se
 import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_state.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_dropdown_menu.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_radio_button.dart';
-import 'package:kamn/features/sports_service_providers/presentation/widgets/add_service/custome_text_form_field.dart';
+import 'package:kamn/core/utils/custome_text_form_field.dart';
 
 class CustomeServiceInfo extends StatelessWidget {
   const CustomeServiceInfo({super.key});
@@ -77,12 +77,19 @@ class CustomeServiceInfo extends StatelessWidget {
               iconPath: 'assets/icons/location.svg',
               choices: Constants.egyptGovernorates),
           verticalSpace(16.h),
+            createField(maxLength: 200,
+            title: Constants.description,
+            hint: Constants.descriptionHint,
+            nameController:
+                context.read<AddServiceProviderCubit>().descriptionController,
+            iconPath: 'assets/icons/description.svg',explane: Constants.optional,isRequired: false
+          ),
+          verticalSpace(16.h),
         ],
       ),
     );
   }
-
-  SizedBox createSelectionButton({required String title}) {
+SizedBox createSelectionButton({required String title}) {
     return SizedBox(
         height: 70.h,
         child: Column(
@@ -111,9 +118,11 @@ class CustomeServiceInfo extends StatelessWidget {
       required String title,
       required String hint,
       required String iconPath,
+      bool? isRequired,
       BuildContext? context,
       bool showLocationIcon = false,
       String? explane,
+      int? maxLength,
       MyValidator? validator}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,6 +133,7 @@ class CustomeServiceInfo extends StatelessWidget {
                 text: title,
                 style: TextStyles.fontInter14BlackMedium,
                 children: [
+                  if(isRequired == true||isRequired == null)
                   TextSpan(
                     text: '*',
                     style: TextStyles.fontInter14BlackMedium
@@ -138,6 +148,7 @@ class CustomeServiceInfo extends StatelessWidget {
               child: CustomeTextFormField(
                 hint: hint,
                 validator: validator,
+                maxLength: maxLength,
                 controller: nameController,
                 prefixIcon: Padding(
                   padding: EdgeInsets.all(14.h),
@@ -221,4 +232,5 @@ class CustomeServiceInfo extends StatelessWidget {
       ),
     );
   }
+  
 }

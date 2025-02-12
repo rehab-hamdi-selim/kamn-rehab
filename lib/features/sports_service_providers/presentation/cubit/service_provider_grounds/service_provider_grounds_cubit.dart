@@ -3,13 +3,11 @@ import 'package:injectable/injectable.dart';
 import 'package:kamn/features/sports_service_providers/domain/usecase/filter_search_data_use_case.dart';
 import 'package:kamn/features/sports_service_providers/domain/usecase/get_services_from_firebase_usecase.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_state.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_view_model.dart';
 
 @injectable
 class ServiceProviderGroundsCubit extends Cubit<ServiceProviderGroundsState> {
   ServiceProviderGroundsCubit(
       {required this.getPlaygroundUsecase,
-      required this.viewModel,
       required this.searchDataUseCase})
       : super(ServiceProviderGroundsState(
             state: ServiceProviderGroundsStatus.initial)) {
@@ -17,7 +15,6 @@ class ServiceProviderGroundsCubit extends Cubit<ServiceProviderGroundsState> {
       getPlaygroundsRequests();
     }
   }
-  final ServiceProviderGroundsViewModel viewModel;
   final GetServicesFromFirebaseUsecase getPlaygroundUsecase;
   final FilterSearchDataUseCase searchDataUseCase;
 

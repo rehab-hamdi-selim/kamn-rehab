@@ -54,7 +54,7 @@ class CustomeRadioButton extends StatelessWidget {
               builder: (context, state) {
                 return Radio<String>(
                   activeColor: color,
-                  fillColor: MaterialStateProperty.resolveWith((state) {
+                  fillColor: WidgetStateProperty.resolveWith((state) {
                     return context
                                 .read<AddServiceProviderCubit>()
                                 .statusOption ==

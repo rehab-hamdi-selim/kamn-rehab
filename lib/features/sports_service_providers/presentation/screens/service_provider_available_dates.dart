@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/utils/custom_app_bar.dart';
+import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
 import 'package:kamn/features/sports_service_providers/presentation/cubit/available_dates/available_dates_cubit.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/available_dates/custome_available_dates_bloc_listener.dart';
 import 'package:kamn/features/sports_service_providers/presentation/widgets/available_dates/custome_choose_available_dates.dart';
@@ -10,8 +11,8 @@ import 'package:kamn/features/sports_service_providers/presentation/widgets/avai
 import 'package:kamn/features/sports_service_providers/presentation/widgets/available_dates/custome_submit_button.dart';
 
 class ServiceProviderAvailableDates extends StatelessWidget {
-  final String playgroundId;
-  const ServiceProviderAvailableDates({super.key, required this.playgroundId});
+  final PlaygroundRequestModel playground;
+  const ServiceProviderAvailableDates({super.key, required this.playground});
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<AvailableDatesCubit>();
@@ -51,11 +52,11 @@ class ServiceProviderAvailableDates extends StatelessWidget {
                     child: TabBarView(
                         children: WeekDays.values.map((element) {
                       return CustomeChooseAvailableDates(
-                          playgroundId: playgroundId, day: element.name);
+                          playground: playground, day: element.name);
                     }).toList()),
                   ),
                   CustomeSubmitButton(
-                    playgroundId: playgroundId,
+                    playground: playground,
                   )
                 ],
               ),

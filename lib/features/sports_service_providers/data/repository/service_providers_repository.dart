@@ -26,15 +26,15 @@ abstract class ServiceProvidersRepository {
   Future<Either<Faliure, List<ReservationModel>>>
       getPlaygroundsReservationDetailsById(String playgroundId);
   Future<Either<Faliure, void>> addWithTransactionToFirebase(
-      PlaygroundRequestModel playground, String userId);
+      PlaygroundRequestModel playground);
   Future<Either<Faliure, void>> updateState(
-      String playgroundId, Map<String, dynamic> data);
+      PlaygroundRequestModel playground, Map<String, dynamic> data);
   Future<Either<Faliure, Map<String, List<PlaygroundRequestModel>>?>>
       searchByQuery(String query, String type);
   Future<Either<Faliure,List<ReservationModel>?>> getCurrentOrdersByCategory(
-      String category);
+      String category,String userId);
   Future<Either<Faliure,List<ReservationModel>?>> getFinishedOrdersByCategory(
-      String category);
+      String category,String userId);
 }
 
 @Injectable(as: ServiceProvidersRepository)
@@ -89,17 +89,17 @@ class ServiceProvidersRepositoryImpl implements ServiceProvidersRepository {
 
   @override
   Future<Either<Faliure, void>> addWithTransactionToFirebase(
-      PlaygroundRequestModel playground, String userId) {
+      PlaygroundRequestModel playground) {
     return executeTryAndCatchForRepository(() async {
-      return await dataSource.addWithTransactionToFirebase(playground, userId);
+      return await dataSource.addWithTransactionToFirebase(playground);
     });
   }
 
   @override
   Future<Either<Faliure, void>> updateState(
-      String playgroundId, Map<String, dynamic> data) {
+      PlaygroundRequestModel playground, Map<String, dynamic> data) {
     return executeTryAndCatchForRepository(() async {
-      return await dataSource.updateState(playgroundId, data);
+      return await dataSource.updateState(playground, data);
     });
   }
 
@@ -131,9 +131,9 @@ class ServiceProvidersRepositoryImpl implements ServiceProvidersRepository {
   }
   
   @override
-  Future<Either<Faliure,List<ReservationModel>?>> getCurrentOrdersByCategory(String category) {
+  Future<Either<Faliure,List<ReservationModel>?>> getCurrentOrdersByCategory(String category,String userId) {
     return executeTryAndCatchForRepository(() async {
-     var response= await dataSource.getCurrentOrdersByCategory(category);
+     var response= await dataSource.getCurrentOrdersByCategory(category,userId);
        return response?.map((value) {
         return ReservationModel.fromMap(value);
       }).toList();
@@ -141,9 +141,9 @@ class ServiceProvidersRepositoryImpl implements ServiceProvidersRepository {
   }
   
   @override
-  Future<Either<Faliure,List<ReservationModel>?>> getFinishedOrdersByCategory(String category) {
+  Future<Either<Faliure,List<ReservationModel>?>> getFinishedOrdersByCategory(String category,String userId) {
        return executeTryAndCatchForRepository(() async {
-     var response= await dataSource.getFinishedOrdersByCategory(category);
+     var response= await dataSource.getFinishedOrdersByCategory(category,userId);
        return response?.map((value) {
         return ReservationModel.fromMap(value);
       }).toList();

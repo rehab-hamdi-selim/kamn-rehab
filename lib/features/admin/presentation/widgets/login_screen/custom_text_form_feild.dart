@@ -5,16 +5,16 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 
 class CustomTextFieldItem extends StatelessWidget {
-  String fieldName;
-  String hintText;
-  Widget? suffixIcon;
-  bool isObscure;
-  var keyboardType;
-  String? Function(String?)? validator;
-  TextEditingController controller;
+  final String fieldName;
+  final String hintText;
+  final Widget? suffixIcon;
+  final bool isObscure;
+  final TextInputType? keyboardType;
+  final String? Function(String?)? validator;
+  final TextEditingController controller;
 
-  CustomTextFieldItem(
-      {required this.fieldName,
+  const CustomTextFieldItem(
+      {super.key, required this.fieldName,
       required this.hintText,
       this.suffixIcon,
       this.isObscure = false,

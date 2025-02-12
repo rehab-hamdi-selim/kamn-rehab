@@ -10,9 +10,9 @@ class FinishedOrdersCubit extends Cubit<FinishedOrdersState> {
   FinishedOrdersCubit({required this.repository})
       : super(FinishedOrdersState(state: FinishedOrdersStatus.initial));
 
-  void fetchOrdersForCategory(String category) async {
+  void fetchOrdersForCategory(String category,String userId) async {
     emit(state.copyWith(state: FinishedOrdersStatus.loading));
-    final result = await repository.getFinishedOrdersByCategory(category);
+    final result = await repository.getFinishedOrdersByCategory(category,userId);
 
     result.fold(
       (failure) => emit(state.copyWith(state: FinishedOrdersStatus.failure, errorMessage: failure.erorr),),

@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 enum AvailableDatesStatus {
@@ -50,9 +51,14 @@ class AvailableDatesState {
       erorrMessage: erorrMessage ?? this.erorrMessage,
       startAt: startAt ?? this.startAt,
       intervials: intervials ?? this.intervials,
-      period: peroid ?? this.period,
+      period: peroid ?? period,
       endAt: endAt ?? this.endAt,
       successMessage: successMessage ?? this.successMessage,
     );
+  }
+
+  @override
+  String toString() {
+    return 'AvailableDatesState(state: $state, startAt: $startAt, endAt: $endAt, intervials: $intervials, period: $period, erorrMessage: $erorrMessage, successMessage: $successMessage)';
   }
 }

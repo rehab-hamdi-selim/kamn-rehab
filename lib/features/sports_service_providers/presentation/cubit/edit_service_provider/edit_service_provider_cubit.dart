@@ -27,6 +27,7 @@ class EditServiceProviderCubit extends Cubit<EditServiceProviderState> {
   TextEditingController addressController = TextEditingController();
   TextEditingController sizeController = TextEditingController();
   TextEditingController priceController = TextEditingController();
+  TextEditingController descriptionController= TextEditingController();
   TextEditingController governateController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -41,9 +42,9 @@ class EditServiceProviderCubit extends Cubit<EditServiceProviderState> {
   }
 
   Future<void> updateService(
-      String playgroundId, Map<String, dynamic> data) async {
+      PlaygroundRequestModel playground, Map<String, dynamic> data) async {
     emit(state.copyWith(state: EditServiceProviderStatus.loading));
-    var response = await repository.updateState(playgroundId, data);
+    var response = await repository.updateState(playground, data);
     response.fold((error) {
       emit(state.copyWith(
           state: EditServiceProviderStatus.serviceFailed,
@@ -143,6 +144,7 @@ class EditServiceProviderCubit extends Cubit<EditServiceProviderState> {
     sizeController.dispose();
     governateController.dispose();
     priceController.dispose();
+    descriptionController.dispose();
   }
 
   @override
@@ -159,5 +161,6 @@ class EditServiceProviderCubit extends Cubit<EditServiceProviderState> {
     priceController.text = playground.price!.toStringAsFixed(0);
     governateController.text = playground.govenrate ?? '';
     statusOption = playground.status;
+    descriptionController.text=playground.description??'';
   }
 }

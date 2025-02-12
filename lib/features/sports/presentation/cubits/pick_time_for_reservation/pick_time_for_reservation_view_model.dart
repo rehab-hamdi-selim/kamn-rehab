@@ -33,4 +33,7 @@ class PickTimeForReservationViewModel {
         .toList()
         .isNotEmpty;
   }
+  DateTime getEndTime(DateTime interval,int period) {  
+    return interval.add( Duration(minutes: period));
+  }
 }

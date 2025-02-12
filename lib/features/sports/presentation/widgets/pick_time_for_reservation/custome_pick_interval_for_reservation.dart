@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
+import 'package:kamn/core/utils/alert_dialog_utils.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_state.dart';
 
@@ -10,15 +12,19 @@ class CustomePickIntervalForReservation extends StatelessWidget {
       {super.key,
       required this.interval,
       required this.isPicked,
-      required this.day});
+      required this.day,
+      required this.peroid,
+      required this.check});
 
   final DateTime interval;
   final bool isPicked;
   final String day;
-
+  final int peroid;
+  final bool Function() check;
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<PickTimeForReservationCubit>();
+    final appUserCubit = context.read<AppUserCubit>();
 
     return BlocBuilder<PickTimeForReservationCubit,
         PickTimeForReservationState>(
@@ -26,12 +32,44 @@ class CustomePickIntervalForReservation extends StatelessWidget {
         return !isPicked
             ? GestureDetector(
                 onTap: () {
-                  cubit.onIntervalSelection(interval, day);
+                  if (appUserCubit.isSpammer()) {
+                    AlertDialogUtils.showAlert(
+                      context: context,title: "Reservation Restricted",
+                      content:
+                          "Sorry, you can't make any reservation before paying cancellation fees.",
+                      firstbutton: 'OK',
+                      secondAction: () {},
+                      secondbutton: 'Pay Now',
+                    );
+                    return;
+                  }
+
+                  final isSelected = cubit.viewModel.isSelected(interval, day);
+
+                  if (isSelected || check.call()) {
+                    cubit.onIntervalSelection(interval, day);
+                  } else {
+                    if (context.read<PickTimeForReservationCubit>().state.contuine) {
+                      cubit.onIntervalSelection(interval, day);
+                    } else {
+                      AlertDialogUtils.showAlert(
+                        context: context, 
+                        title: 'Important Payment Information',
+                        content:
+                            'You cannot pay cash when selecting more than 2 sessions. A deposit is required.',
+                        firstbutton: 'back',
+                        secondAction: context.read<PickTimeForReservationCubit>().allowCountuine,
+                        secondbutton: 'contiune',
+                      );
+                    }
+                  }
                 },
                 child: Container(
                   margin: const EdgeInsets.symmetric(vertical: 8),
-                  padding: const EdgeInsets.all(16),
-                  width: 100.w,
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10.h,
+                  ),
+                  width: 120.w,
                   decoration: BoxDecoration(
                     color: cubit.viewModel.isSelected(interval, day)
                         ? Colors.blueAccent
@@ -59,7 +97,7 @@ class CustomePickIntervalForReservation extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      DateFormat('HH:mm').format(interval),
+                      '${DateFormat('HH:mm').format(interval)} to ${DateFormat('HH:mm').format(cubit.viewModel.getEndTime(interval, peroid))}',
                       style: TextStyle(
                         color: cubit.viewModel.isSelected(interval, day)
                             ? Colors.white
@@ -72,8 +110,10 @@ class CustomePickIntervalForReservation extends StatelessWidget {
               )
             : Container(
                 margin: const EdgeInsets.symmetric(vertical: 8),
-                padding: const EdgeInsets.all(16),
-                width: 100.w,
+                padding: EdgeInsets.symmetric(
+                  vertical: 10.h,
+                ),
+                width: 120.w,
                 decoration: BoxDecoration(
                   color: Colors.redAccent,
                   borderRadius: BorderRadius.circular(10),
@@ -90,7 +130,7 @@ class CustomePickIntervalForReservation extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    DateFormat('HH:mm').format(interval),
+                    '${DateFormat('HH:mm').format(interval)} to ${DateFormat('HH:mm').format(cubit.viewModel.getEndTime(interval, peroid))}',
                     style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -101,4 +141,6 @@ class CustomePickIntervalForReservation extends StatelessWidget {
       },
     );
   }
+
+ 
 }

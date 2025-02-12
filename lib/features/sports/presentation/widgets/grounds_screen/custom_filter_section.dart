@@ -12,8 +12,9 @@ import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_
 import 'package:kamn/features/sports/presentation/widgets/grounds_screen/custom_text_form_field.dart';
 
 class CustomFilterSection extends StatelessWidget {
-  CustomFilterSection({super.key});
+  CustomFilterSection({super.key, required this.title});
   final Debouncer debouncer = Debouncer();
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class CustomFilterSection extends StatelessWidget {
             debouncer.debounce(
                 duration: const Duration(milliseconds: 800),
                 onDebounce: () {
-                  context.read<SportsGroundsCubit>().searchByQuery(value);
+                  context.read<SportsGroundsCubit>().searchByQuery(value,title);
                 });
           },
           controller: context

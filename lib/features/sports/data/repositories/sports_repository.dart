@@ -12,12 +12,14 @@ abstract class SportsRepository {
       ReservationModel reservation);
   Future<Either<Faliure, void>> updateState(
       String playgroundId, Map<String, dynamic> data);
+  Future<Either<Faliure, void>> setData(
+      String playgroundId, Map<String, dynamic> data);
   Future<Either<Faliure, void>> delete(ReservationModel reservation);
   Future<Either<Faliure, List<ReservationModel>>> getUserReservations(
       String userId);
   Future<Either<Faliure, List<ReservationModel>>>
       getSpecificReservationsByGroundId(String groundId, DateTime selectedDate);
-  Future<Either<Faliure, List<PlaygroundModel>?>> searchByQuery(String query);
+  Future<Either<Faliure, List<PlaygroundModel>?>> searchByQuery(String query,String type);
 }
 
 @Injectable(as: SportsRepository)
@@ -70,10 +72,10 @@ class SportsRepositoryImpl implements SportsRepository {
   }
 
   @override
-  Future<Either<Faliure, List<PlaygroundModel>?>> searchByQuery(String query) {
+  Future<Either<Faliure, List<PlaygroundModel>?>> searchByQuery(String query,String type) {
     return executeTryAndCatchForRepository(() async {
       final List<Map<String, dynamic>> rawData =
-          await _remoteDataSource.searchByQuery(query);
+          await _remoteDataSource.searchByQuery(query,type);
 
       final playgrounds =
           rawData.map((data) => PlaygroundModel.fromMap(data)).toList();
@@ -94,4 +96,13 @@ class SportsRepositoryImpl implements SportsRepository {
       }).toList();
     });
   }
+  
+  @override
+  Future<Either<Faliure, void>> setData(String playgroundId, Map<String, dynamic> data) {
+  return executeTryAndCatchForRepository(() async {
+      return await _remoteDataSource.setData(playgroundId, data);
+    });
+  }
+  
+  
 }

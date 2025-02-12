@@ -51,7 +51,6 @@ class AppUserCubit extends Cubit<AppUserState> {
               state: AppUserStates.failure,
               errorMessage: l.erorr,
             )), (r) {
-      print(r.toString());
       emit(state.copyWith(
         state: AppUserStates.gettedData,
         user: r,
@@ -144,5 +143,27 @@ class AppUserCubit extends Cubit<AppUserState> {
         user: null,
       ));
     });
+ 
+}
+ Future<void> updateUser (UserModel user,Map<String, dynamic> changedAttributes) async {
+  emit(state.copyWith(
+        state: AppUserStates.loading,
+      ));
+    final res = await authRepository.updateUser(user.uid, changedAttributes);
+    res.fold((l) {
+      emit(state.copyWith(
+        state: AppUserStates.failure,
+        errorMessage: l.erorr,
+      ));
+    }, (r) {
+      emit(state.copyWith(
+        state: AppUserStates.updated,
+        user: user,
+      ));
+    });
+  }
+
+  bool isSpammer(){
+    return state.user?.spamer??false;
   }
 }

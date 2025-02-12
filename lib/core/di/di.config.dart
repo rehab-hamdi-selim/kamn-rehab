@@ -50,12 +50,16 @@ import '../../features/sports/domain/usecase/get_sports_from_firebase_usecase.da
     as _i213;
 import '../../features/sports/domain/usecase/sports_ground_usecase.dart'
     as _i561;
+import '../../features/sports/presentation/cubits/ground_details_cubit/ground_details_cubit.dart'
+    as _i792;
 import '../../features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart'
     as _i137;
 import '../../features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_view_model.dart'
     as _i282;
 import '../../features/sports/presentation/cubits/reservation_details_cubit/reservation_details_cubit.dart'
     as _i546;
+import '../../features/sports/presentation/cubits/select_category_cubit/select_category_cubit.dart'
+    as _i778;
 import '../../features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart'
     as _i1033;
 import '../../features/sports/presentation/cubits/sports_grounds/sports_ground_view_model.dart'
@@ -72,8 +76,6 @@ import '../../features/sports_service_providers/domain/usecase/get_services_from
     as _i786;
 import '../../features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart'
     as _i252;
-import '../../features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_view_model.dart'
-    as _i1058;
 import '../../features/sports_service_providers/presentation/cubit/available_dates/available_dates_cubit.dart'
     as _i731;
 import '../../features/sports_service_providers/presentation/cubit/current_reseravaion_order/current_orders_cubit.dart'
@@ -86,8 +88,6 @@ import '../../features/sports_service_providers/presentation/cubit/service_provi
     as _i692;
 import '../../features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart'
     as _i987;
-import '../../features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_view_model.dart'
-    as _i1002;
 import '../../features/sports_service_providers/presentation/cubit/track_ground_reservation_details/track_ground_reservation_details_cubit.dart'
     as _i38;
 import '../../features/sports_service_providers/presentation/cubit/track_ground_reservations/track_ground_reservations_cubit.dart'
@@ -95,6 +95,8 @@ import '../../features/sports_service_providers/presentation/cubit/track_ground_
 import '../../features/user/data/data_source/user_remote_data_source.dart'
     as _i677;
 import '../../features/user/data/repository/user_repository.dart' as _i812;
+import '../../features/user/presentation/cubit/edit_profile/edit_profile_cubit.dart'
+    as _i98;
 import '../../features/user/presentation/cubit/notification/notifications_cubit.dart'
     as _i566;
 import '../common/class/firebase_storage_services.dart' as _i304;
@@ -118,15 +120,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i22.SignUpViewModel>(() => _i22.SignUpViewModel());
     gh.factory<_i805.PaymentOptionsViewModel>(
         () => _i805.PaymentOptionsViewModel());
+    gh.factory<_i561.SportsGroundUsecase>(() => _i561.SportsGroundUsecase());
+    gh.factory<_i792.GroundDetailsCubit>(() => _i792.GroundDetailsCubit());
     gh.factory<_i282.PickTimeForReservationViewModel>(
         () => _i282.PickTimeForReservationViewModel());
-    gh.factory<_i546.ReservationDetailsCubit>(
-        () => _i546.ReservationDetailsCubit());
     gh.factory<_i16.SportsGroundViewModel>(() => _i16.SportsGroundViewModel());
-    gh.factory<_i1058.AddServiceProviderViewModel>(
-        () => _i1058.AddServiceProviderViewModel());
-    gh.factory<_i1002.ServiceProviderGroundsViewModel>(
-        () => _i1002.ServiceProviderGroundsViewModel());
     gh.lazySingleton<_i304.FirebaseStorageServices>(
         () => _i304.FirebaseStorageServices());
     gh.lazySingleton<_i158.FirestoreService>(() => _i158.FirestoreService());
@@ -174,6 +172,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i786.GetServicesFromFirebaseUsecase>(() =>
         _i786.GetServicesFromFirebaseUsecase(
             repository: gh<_i542.ServiceProvidersRepository>()));
+    gh.factory<_i252.AddServiceProviderCubit>(() =>
+        _i252.AddServiceProviderCubit(
+            repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i731.AvailableDatesCubit>(() => _i731.AvailableDatesCubit(
         repository: gh<_i542.ServiceProvidersRepository>()));
     gh.factory<_i861.CurrentOrdersCubit>(() => _i861.CurrentOrdersCubit(
@@ -192,11 +193,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i38.TrackGroundReservationsDetailsCubit>(() =>
         _i38.TrackGroundReservationsDetailsCubit(
             repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i252.AddServiceProviderCubit>(
-        () => _i252.AddServiceProviderCubit(
-              repository: gh<_i542.ServiceProvidersRepository>(),
-              viewModel: gh<_i1058.AddServiceProviderViewModel>(),
-            ));
     gh.factory<_i670.SignInCubit>(() => _i670.SignInCubit(
           authRepository: gh<_i935.AuthRepository>(),
           signInViewModel: gh<_i361.SignInViewModel>(),
@@ -205,6 +201,8 @@ extension GetItInjectableX on _i174.GetIt {
         userRemoteDataSource: gh<_i677.UserRemoteDataSource>()));
     gh.factory<_i94.AppUserCubit>(
         () => _i94.AppUserCubit(authRepository: gh<_i935.AuthRepository>()));
+    gh.factory<_i98.EditProfileCubit>(
+        () => _i98.EditProfileCubit(repository: gh<_i812.UserRepository>()));
     gh.factory<_i531.SignUpCubit>(() => _i531.SignUpCubit(
           authRepository: gh<_i935.AuthRepository>(),
           signUpViewModel: gh<_i22.SignUpViewModel>(),
@@ -214,18 +212,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i213.GetPlaygroundsAndFlittered>(() =>
         _i213.GetPlaygroundsAndFlittered(
             repository: gh<_i379.SportsRepository>()));
-    gh.factory<_i987.ServiceProviderGroundsCubit>(
-        () => _i987.ServiceProviderGroundsCubit(
-              getPlaygroundUsecase: gh<_i786.GetServicesFromFirebaseUsecase>(),
-              viewModel: gh<_i1002.ServiceProviderGroundsViewModel>(),
-              searchDataUseCase: gh<_i774.FilterSearchDataUseCase>(),
-            ));
+    gh.factory<_i546.ReservationDetailsCubit>(() =>
+        _i546.ReservationDetailsCubit(
+            repository: gh<_i379.SportsRepository>()));
     gh.factory<_i692.ProccedPaymentCubit>(() => _i692.ProccedPaymentCubit(
-        sportsRepository: gh<_i379.SportsRepository>()));
-    gh.factory<_i561.SportsGroundUsecase>(() => _i561.SportsGroundUsecase(
         sportsRepository: gh<_i379.SportsRepository>()));
     gh.factory<_i410.ViewReservationCubit>(() => _i410.ViewReservationCubit(
         sportsRepository: gh<_i379.SportsRepository>()));
+    gh.factory<_i987.ServiceProviderGroundsCubit>(
+        () => _i987.ServiceProviderGroundsCubit(
+              getPlaygroundUsecase: gh<_i786.GetServicesFromFirebaseUsecase>(),
+              searchDataUseCase: gh<_i774.FilterSearchDataUseCase>(),
+            ));
+    gh.factory<_i778.SelectCategoryCubit>(() => _i778.SelectCategoryCubit(
+        getPlaygrouundsUseCase: gh<_i213.GetPlaygroundsAndFlittered>()));
     gh.factory<_i566.NotificationsCubit>(() =>
         _i566.NotificationsCubit(userRepository: gh<_i812.UserRepository>()));
     gh.factory<_i137.PickTimeForReservationCubit>(
@@ -233,7 +233,7 @@ extension GetItInjectableX on _i174.GetIt {
               repository: gh<_i379.SportsRepository>(),
               viewModel: gh<_i282.PickTimeForReservationViewModel>(),
             ));
-    gh.singleton<_i1033.SportsGroundsCubit>(() => _i1033.SportsGroundsCubit(
+    gh.factory<_i1033.SportsGroundsCubit>(() => _i1033.SportsGroundsCubit(
           sportsRepository: gh<_i379.SportsRepository>(),
           sportsGroundUsecase: gh<_i561.SportsGroundUsecase>(),
           getPlaygrouundsUseCase: gh<_i213.GetPlaygroundsAndFlittered>(),

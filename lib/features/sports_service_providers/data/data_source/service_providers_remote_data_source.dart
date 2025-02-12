@@ -22,13 +22,13 @@ abstract class ServiceProvidersRemoteDataSource {
       String playgroundId);
   Future<List<Map<String, dynamic>>> getPlaygroundsRequests();
   Future<void> addWithTransactionToFirebase(
-      PlaygroundRequestModel playgroundModel, String userId);
-  Future<void> updateState(String playgroundId, Map<String, dynamic> data);
+      PlaygroundRequestModel playgroundModel);
+  Future<void> updateState(PlaygroundRequestModel playground, Map<String, dynamic> data);
   Future<List<Map<String, dynamic>>> searchByQuery(String query, String type);
   Future<List<Map<String, dynamic>>?> getCurrentOrdersByCategory(
-      String category);
+      String category,String userId);
   Future<List<Map<String, dynamic>>?> getFinishedOrdersByCategory(
-      String category);
+      String category,String userId);
 }
 
 @Injectable(as: ServiceProvidersRemoteDataSource)
@@ -111,7 +111,7 @@ class ServiceProvidersRemoteDataSourceImpl
 
   @override
   Future<void> addWithTransactionToFirebase(
-      PlaygroundRequestModel playgroundModel, String userId) {
+      PlaygroundRequestModel playgroundModel) {
     return executeTryAndCatchForDataLayer(() async {
       await firestoreServices.firestore.runTransaction((transaction) async {
         var deletedDocRef = firestoreServices.firestore
@@ -122,7 +122,7 @@ class ServiceProvidersRemoteDataSourceImpl
             .doc();
         var userDocRef = firestoreServices.firestore
             .collection(FirebaseCollections.users)
-            .doc(userId);
+            .doc(playgroundModel.owner?.uid);
         playgroundModel.playgroundId = addedDocRef.id;
         playgroundModel.accpetingState = 'accepted';
         transaction.delete(deletedDocRef);
@@ -135,10 +135,10 @@ class ServiceProvidersRemoteDataSourceImpl
   }
 
   @override
-  Future<void> updateState(String playgroundId, Map<String, dynamic> data) {
+  Future<void> updateState(PlaygroundRequestModel playground, Map<String, dynamic> data) {
     return executeTryAndCatchForDataLayer(() async {
       return await firestoreServices.updateData(
-          FirebaseCollections.playgroundsRequests, playgroundId, data);
+        playground.accpetingState == 'pending' ?  FirebaseCollections.playgroundsRequests:FirebaseCollections.playgrounds, playground.playgroundId!, data);
     });
   }
 
@@ -186,16 +186,14 @@ class ServiceProvidersRemoteDataSourceImpl
 
   @override
   Future<List<Map<String, dynamic>>?> getCurrentOrdersByCategory(
-      String category) async {
-    // Firebase Firestore query
+      String category,String userId) async {
     return executeTryAndCatchForDataLayer(() async {
       final snapshot = await firestoreServices.firestore
           .collection(FirebaseCollections.reservations)
-          .where('status', isEqualTo: 'pending') // Filter for finished orders
-          .where('ground.type', isEqualTo: category) // Filter by category
+          .where('status', isEqualTo: 'pending') .where('user.uid',isEqualTo: userId)
+          .where('ground.type', isEqualTo: category) 
           .get();
 
-      // Return results wrapped in Either
       return snapshot.docs.map((element) {
         return element.data();
       }).toList();
@@ -204,11 +202,11 @@ class ServiceProvidersRemoteDataSourceImpl
 
   @override
   Future<List<Map<String, dynamic>>?> getFinishedOrdersByCategory(
-      String category) {
+      String category,String userId) {
     return executeTryAndCatchForDataLayer(() async {
       final snapshot = await firestoreServices.firestore
           .collection('reservation')
-          .where('status', isEqualTo: 'pending') // Filter for finished orders
+          .where('status', isEqualTo: 'pending')  .where('user.uid',isEqualTo: userId)// Filter for finished orders
           .where('ground.type', isEqualTo: category) // Filter by category
           .get();
 

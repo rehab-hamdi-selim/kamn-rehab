@@ -46,7 +46,7 @@ class CustomeFinishedButton extends StatelessWidget {
                         } else {
                           context
                               .read<EditServiceProviderCubit>()
-                              .updateService(playground.playgroundId!,
+                              .updateService(playground,
                                   prepareUpdatedData(context).toMap());
                         }
                       }
@@ -95,6 +95,11 @@ class CustomeFinishedButton extends StatelessWidget {
     playground.govenrate = context
         .read<EditServiceProviderCubit>()
         .governateController
+        .text
+        .trim();
+    playground.description = context
+        .read<EditServiceProviderCubit>()
+        .descriptionController
         .text
         .trim();
     playground.status = context.read<EditServiceProviderCubit>().statusOption;

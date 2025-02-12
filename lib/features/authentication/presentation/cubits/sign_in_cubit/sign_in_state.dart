@@ -35,9 +35,9 @@ extension SignInStateExtension on SignInState {
   bool get isGoogleAuthLoading => state == SignInStatus.googleAuthLoading;
   bool get isGoogleAuthSuccess => state == SignInStatus.googleAuthSuccess;
   bool get isGoogleAuthFailure => state == SignInStatus.googleAuthFailure;
-  bool get isDwrUserDataLoading => state == SignInStatus.setUserDataLoading;
-  bool get isDwrUserDataSuccess => state == SignInStatus.setUserDataSuccess;
-  bool get isDwrUserDataFaliure => state == SignInStatus.setUserDataFailure;
+  bool get isSetUserDataLoading => state == SignInStatus.setUserDataLoading;
+  bool get isSetUserDataSuccess => state == SignInStatus.setUserDataSuccess;
+  bool get isSetUserDataFaliure => state == SignInStatus.setUserDataFailure;
   bool get isSuccessSignIn => state == SignInStatus.successSignIn;
   bool get isFailureSignIn => state == SignInStatus.failureSignIn;
   bool get isAlreadySignIn => state == SignInStatus.isAlreadySignIn;

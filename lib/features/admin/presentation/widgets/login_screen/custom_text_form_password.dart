@@ -20,7 +20,7 @@ class _CustomTextFormPasswordState extends State<CustomTextFormPassword> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 400.w,
       height: 80.h,
       child: CustomTextFieldItem(
@@ -39,7 +39,7 @@ class _CustomTextFormPasswordState extends State<CustomTextFormPassword> {
         isObscure: isObscure,
         suffixIcon: InkWell(
           child:
-              isObscure ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
+              isObscure ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
           onTap: () {
             if (isObscure) {
               isObscure = false;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
 import 'package:kamn/features/sports/presentation/widgets/view_reservation_screen.dart/custom_reservation_background_image.dart';
 import 'package:kamn/features/sports/presentation/widgets/view_reservation_screen.dart/custom_reservation_ground_info.dart';
@@ -42,7 +43,7 @@ class CustomReservationItem extends StatelessWidget {
             CustomReservationGroundInfo(
               ownreName: reservation.ground?.playgroundName ?? '',
               address: reservation.ground?.address ?? '',
-              rate: reservation.ground?.rating ?? 0,
+              rate: reservation.ground?.ratings ?? 0,
               review: 0,
             ),
             CustomReservationInfo(
