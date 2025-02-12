@@ -49,7 +49,7 @@ class ViewResrvationScreen extends StatelessWidget {
             // verticalSpace(5.h),
             // const CustomYourNextMatchTimer(),
             verticalSpace(20),
-            const Expanded(child: CustomReservationList())
+             Expanded(child: CustomReservationList())
           ],
         ),
       ),

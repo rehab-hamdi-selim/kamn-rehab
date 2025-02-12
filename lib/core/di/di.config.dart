@@ -124,8 +124,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i792.GroundDetailsCubit>(() => _i792.GroundDetailsCubit());
     gh.factory<_i282.PickTimeForReservationViewModel>(
         () => _i282.PickTimeForReservationViewModel());
-    gh.factory<_i546.ReservationDetailsCubit>(
-        () => _i546.ReservationDetailsCubit());
     gh.factory<_i16.SportsGroundViewModel>(() => _i16.SportsGroundViewModel());
     gh.lazySingleton<_i304.FirebaseStorageServices>(
         () => _i304.FirebaseStorageServices());
@@ -213,6 +211,9 @@ extension GetItInjectableX on _i174.GetIt {
         remoteDataSource: gh<_i575.SportsRemoteDataSource>()));
     gh.factory<_i213.GetPlaygroundsAndFlittered>(() =>
         _i213.GetPlaygroundsAndFlittered(
+            repository: gh<_i379.SportsRepository>()));
+    gh.factory<_i546.ReservationDetailsCubit>(() =>
+        _i546.ReservationDetailsCubit(
             repository: gh<_i379.SportsRepository>()));
     gh.factory<_i692.ProccedPaymentCubit>(() => _i692.ProccedPaymentCubit(
         sportsRepository: gh<_i379.SportsRepository>()));

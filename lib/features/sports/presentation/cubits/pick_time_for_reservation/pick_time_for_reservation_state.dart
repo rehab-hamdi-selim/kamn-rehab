@@ -9,7 +9,8 @@ enum PickTimeForReservationStatus {
   intervalSelected,
   availabledTimeUpdated,
   reservationDeleted,
-  reservationLoaded
+  reservationLoaded,
+  allowCountuine
 }
 
 extension PickTimeForReservationStateExtension on PickTimeForReservationState {
@@ -27,6 +28,7 @@ extension PickTimeForReservationStateExtension on PickTimeForReservationState {
       state == PickTimeForReservationStatus.availabledTimeUpdated;
   bool get isIntervalSelected =>
       state == PickTimeForReservationStatus.intervalSelected;
+      bool get isAllowCountuine => state== PickTimeForReservationStatus.allowCountuine;
 }
 
 class PickTimeForReservationState {
@@ -35,22 +37,25 @@ class PickTimeForReservationState {
   final DateTime? selectedDate;
   final ReservationModel? reservation;
   final List<ReservationModel>? reservationList;
+  final bool contuine;
 
   PickTimeForReservationState(
       {required this.state,
       this.erorrMessage,
       this.selectedDate,
       this.reservation,
-      this.reservationList});
+      this.reservationList,this.contuine=false});
 
   PickTimeForReservationState copyWith(
       {PickTimeForReservationStatus? state,
       String? erorrMessage,
       DateTime? selectedDate,
       ReservationModel? reservation,
+      bool? contuine,
       List<ReservationModel>? reservationList}) {
     return PickTimeForReservationState(
       state: state ?? this.state,
+      contuine: contuine??this.contuine,
       erorrMessage: erorrMessage ?? this.erorrMessage,
       selectedDate: selectedDate ?? this.selectedDate,
       reservation: reservation ?? this.reservation,

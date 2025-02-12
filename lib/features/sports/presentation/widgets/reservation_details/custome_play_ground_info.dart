@@ -6,6 +6,7 @@ import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kamn/features/sports/data/models/playground_model.dart';
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
 import 'package:kamn/features/sports/presentation/cubits/reservation_details_cubit/reservation_details_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/reservation_details_cubit/reservation_details_state.dart';
@@ -204,7 +205,7 @@ class CustomePlayGroundInfo extends StatelessWidget {
                 color: AppPallete.shadeOfGray,
                 borderRadius: BorderRadius.circular(23.r)),
             child: CustomStarRating(
-                rating: reservationModel?.ground?.rating ?? 0)),
+                rating: reservationModel?.ground?.ratings ?? 0)),
       ],
     );
   }

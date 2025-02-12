@@ -87,7 +87,7 @@ class CustomPlayGroundTitleAndLocation extends StatelessWidget {
             decoration: BoxDecoration(
                 color: AppPallete.shadeOfGray,
                 borderRadius: BorderRadius.circular(23.r)),
-            child: CustomStarRating(rating: playgroundModel?.rating ?? 0)),
+            child: CustomStarRating(rating: playgroundModel?.ratings ?? 0)),
       ],
     );
   }

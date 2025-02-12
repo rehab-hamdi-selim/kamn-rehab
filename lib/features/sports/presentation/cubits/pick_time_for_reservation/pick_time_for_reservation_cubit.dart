@@ -60,6 +60,9 @@ class PickTimeForReservationCubit extends Cubit<PickTimeForReservationState> {
         state: PickTimeForReservationStatus.loading, selectedDate: newDay));
   }
 
+  void allowCountuine() {
+    emit(state.copyWith(contuine: true));
+  }
   // Future<void> getAllReservation() async {
   //   var response = await repository.getUserReservations();
   //   response.fold((error) {

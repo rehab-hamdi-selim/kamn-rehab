@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:kamn/core/utils/show_snack_bar.dart';
+import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
+import 'package:kamn/core/utils/alert_dialog_utils.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart';
 import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_state.dart';
 
@@ -23,6 +24,7 @@ class CustomePickIntervalForReservation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = context.read<PickTimeForReservationCubit>();
+    final appUserCubit = context.read<AppUserCubit>();
 
     return BlocBuilder<PickTimeForReservationCubit,
         PickTimeForReservationState>(
@@ -30,11 +32,36 @@ class CustomePickIntervalForReservation extends StatelessWidget {
         return !isPicked
             ? GestureDetector(
                 onTap: () {
-                  if (check.call()) {
+                  if (appUserCubit.isSpammer()) {
+                    AlertDialogUtils.showAlert(
+                      context: context,title: "Reservation Restricted",
+                      content:
+                          "Sorry, you can't make any reservation before paying cancellation fees.",
+                      firstbutton: 'OK',
+                      secondAction: () {},
+                      secondbutton: 'Pay Now',
+                    );
+                    return;
+                  }
+
+                  final isSelected = cubit.viewModel.isSelected(interval, day);
+
+                  if (isSelected || check.call()) {
                     cubit.onIntervalSelection(interval, day);
                   } else {
-                    showSnackBar(
-                        context, 'you can not pick more than 2 session  ');
+                    if (context.read<PickTimeForReservationCubit>().state.contuine) {
+                      cubit.onIntervalSelection(interval, day);
+                    } else {
+                      AlertDialogUtils.showAlert(
+                        context: context, 
+                        title: 'Important Payment Information',
+                        content:
+                            'You cannot pay cash when selecting more than 2 sessions. A deposit is required.',
+                        firstbutton: 'back',
+                        secondAction: context.read<PickTimeForReservationCubit>().allowCountuine,
+                        secondbutton: 'contiune',
+                      );
+                    }
                   }
                 },
                 child: Container(
@@ -82,11 +109,11 @@ class CustomePickIntervalForReservation extends StatelessWidget {
                 ),
               )
             : Container(
-              margin: const EdgeInsets.symmetric(vertical: 8),
-                  padding: EdgeInsets.symmetric(
-                    vertical: 10.h,
-                  ),
-                  width: 120.w,
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                padding: EdgeInsets.symmetric(
+                  vertical: 10.h,
+                ),
+                width: 120.w,
                 decoration: BoxDecoration(
                   color: Colors.redAccent,
                   borderRadius: BorderRadius.circular(10),
@@ -114,4 +141,6 @@ class CustomePickIntervalForReservation extends StatelessWidget {
       },
     );
   }
+
+ 
 }

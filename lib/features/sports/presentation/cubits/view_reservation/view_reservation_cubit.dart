@@ -23,4 +23,14 @@ class ViewReservationCubit extends Cubit<ViewReservationState> {
           state: ViewReservationStatus.success, reservations: success));
     });
   }
+  Future<void> addRating(String reservationId, double rating) async {
+    var result = await _sportsRepository.setData(reservationId, {'rating': rating});
+    result.fold((error) {
+      emit(state.copyWith(
+          state: ViewReservationStatus.failure, error: error.erorr));
+    }, (success) {
+      emit(state.copyWith(
+          state: ViewReservationStatus.settedData,));
+    });
+}
 }

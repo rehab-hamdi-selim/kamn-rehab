@@ -2,13 +2,14 @@ import 'package:flutter/widgets.dart';
 
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
 
-enum ViewReservationStatus { intial, loading, success, failure }
+enum ViewReservationStatus { intial, loading, success, failure,settedData }
 
 extension ViewReservationExtension on ViewReservationState {
   bool get inIntial => state == ViewReservationStatus.intial;
   bool get inSuccess => state == ViewReservationStatus.success;
   bool get inLoading => state == ViewReservationStatus.loading;
   bool get inFailure => state == ViewReservationStatus.failure;
+  bool get isSettedData => state == ViewReservationStatus.settedData;
 }
 
 class ViewReservationState {
@@ -20,13 +21,13 @@ class ViewReservationState {
 
   ViewReservationState copyWith({
     ViewReservationStatus? state,
-    ValueGetter<List<ReservationModel>?>? reservations,
-    ValueGetter<String?>? error,
+    List<ReservationModel>? reservations,
+    String? error,
   }) {
     return ViewReservationState(
       state: state ?? this.state,
-      reservations: reservations != null ? reservations() : this.reservations,
-      error: error != null ? error() : this.error,
+      reservations: reservations ?? this.reservations,
+      error: error ?? this.error,
     );
   }
 }

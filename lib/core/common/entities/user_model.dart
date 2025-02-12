@@ -11,6 +11,7 @@ class UserModel {
   final String? signFrom;
   final String? profileImage;
   final String? phoneNumber;
+   bool? spamer;
   UserModel({
     required this.uid,
     required this.email,
@@ -21,6 +22,7 @@ class UserModel {
     required this.signFrom,
     this.profileImage,
     this.phoneNumber,
+    this.spamer,
   });
   // Add any other fields you need
 
@@ -34,6 +36,7 @@ class UserModel {
     String? signFrom,
     String? profileImage,
     String? phoneNumber,
+    bool? spamer,
   }) {
     return UserModel(
       uid: uid ?? this.uid,
@@ -45,6 +48,7 @@ class UserModel {
       signFrom: signFrom ?? this.signFrom,
       profileImage: profileImage ?? this.profileImage,
       phoneNumber: phoneNumber ?? this.phoneNumber,
+      spamer: spamer ?? this.spamer,
     );
   }
 
@@ -59,6 +63,7 @@ class UserModel {
       'signFrom': signFrom,
       'profileImage': profileImage,
       'phoneNumber': phoneNumber,
+      'spamer': spamer,
     };
   }
 
@@ -73,6 +78,7 @@ class UserModel {
       signFrom: map['signFrom'] != null ? map['signFrom'] as String : null,
       profileImage: map['profileImage'] != null ? map['profileImage'] as String : null,
       phoneNumber: map['phoneNumber'] != null ? map['phoneNumber'] as String : null,
+      spamer: map['spamer'] != null ? map['spamer'] as bool : null,
     );
   }
 
@@ -82,7 +88,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(uid: $uid, email: $email, name: $name, createdAt: $createdAt, type: $type, city: $city, signFrom: $signFrom, profileImage: $profileImage, phoneNumber: $phoneNumber)';
+    return 'UserModel(uid: $uid, email: $email, name: $name, createdAt: $createdAt, type: $type, city: $city, signFrom: $signFrom, profileImage: $profileImage, phoneNumber: $phoneNumber, spamer: $spamer)';
   }
 
   @override
@@ -98,7 +104,8 @@ class UserModel {
       other.city == city &&
       other.signFrom == signFrom &&
       other.profileImage == profileImage &&
-      other.phoneNumber == phoneNumber;
+      other.phoneNumber == phoneNumber &&
+      other.spamer == spamer;
   }
 
   @override
@@ -111,6 +118,7 @@ class UserModel {
       city.hashCode ^
       signFrom.hashCode ^
       profileImage.hashCode ^
-      phoneNumber.hashCode;
+      phoneNumber.hashCode ^
+      spamer.hashCode;
   }
 }

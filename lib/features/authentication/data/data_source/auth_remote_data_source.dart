@@ -20,6 +20,8 @@ abstract interface class AuthRemoteDataSource {
   Future<void> googleSignOut();
   Future<UserCredential> googleAuth();
   Future<bool> checkUesrSignin();
+    Future<void> updateUser(String uid,Map<String, dynamic> data);
+
 }
 
 @Injectable(as: AuthRemoteDataSource)
@@ -167,4 +169,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       return _auth.currentUser != null;
     });
   }
+  
+  @override
+  Future<void> updateUser(String uid, Map<String, dynamic> data) async{
+  return await executeTryAndCatchForDataLayer(() async {
+   return await firestore.updateData(FirebaseCollections.users, uid, data);
+    });  }
 }

@@ -9,6 +9,7 @@ abstract interface class SportsRemoteDataSource {
   Future<List<Map<String, dynamic>>> getPlaygrounds();
   Future<ReservationModel> submitReservation(ReservationModel reservation);
   Future<void> updateState(String playgroundId, Map<String, dynamic> data);
+  Future<void> setData(String playgroundId, Map<String, dynamic> data);
   Future<void> delete(ReservationModel reservation);
   Future<List<Map<String, dynamic>>> getUserReservations(String userId);
   Future<List<Map<String, dynamic>>> getSpecificReservationsByGroundId(
@@ -122,6 +123,14 @@ class SportsRemoteDataSourceImpl implements SportsRemoteDataSource {
           .where('startAt', isLessThan: endOfDay)
           .get();
       return querySnapshot.docs.map((doc) => doc.data()).toList();
+    });
+  }
+  
+  @override
+  Future<void> setData(String playgroundId, Map<String, dynamic> data) {
+    return executeTryAndCatchForDataLayer(() async {
+      return await firestoreService.setData(
+          FirebaseCollections.playgrounds, playgroundId, data);
     });
   }
   

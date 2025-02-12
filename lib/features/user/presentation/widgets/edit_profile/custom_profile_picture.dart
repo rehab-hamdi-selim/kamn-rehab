@@ -77,9 +77,11 @@ class CustomProfilePicture extends StatelessWidget {
                                                           null ||
                                                       state.picturePicked !=
                                                           null
-                                                  ? user?.profileImage ?? state
-                                                          .picturePicked?.path ??""
-                                                  :ImageLinks.defaultUserImage ,
+                                                  ? user?.profileImage ??
+                                                      state.picturePicked
+                                                          ?.path ??
+                                                      ""
+                                                  : ImageLinks.defaultUserImage,
                                             )));
                               },
                               child: CircleAvatar(

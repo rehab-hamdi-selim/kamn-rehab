@@ -33,4 +33,13 @@ class FirestoreService {
         .update(data)
         .timeout(const Duration(seconds: 30));
   }
+
+  Future<void> setData(String collectionPath, String playgroundId,
+      Map<String, dynamic> data) async {
+    await _firestore
+        .collection(collectionPath)
+        .doc(playgroundId)
+       .set(data, SetOptions(merge: true))
+        .timeout(const Duration(seconds: 30));
+  }
 }

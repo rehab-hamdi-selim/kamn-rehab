@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/core/di/di.dart';
-import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/features/sports/data/models/reservation_model.dart';
-import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
+import 'package:kamn/features/sports/presentation/cubits/reservation_details_cubit/reservation_details_cubit.dart';
 
 class CustomeBottomBar extends StatelessWidget {
   const CustomeBottomBar({required this.reservationModel, super.key});
@@ -48,10 +47,8 @@ class CustomeBottomBar extends StatelessWidget {
                     fixedSize: Size.fromWidth(100.w),
                   ),
                   onPressed: () async {
-                    
-
-                    Navigator.pushReplacementNamed(
-                        context, Routes.selectCategoryScreen);
+                  context.read<ReservationDetailsCubit>().deleteReservation(reservationModel!);
+                   
                   },
                   child: Text(
                     'Leave',

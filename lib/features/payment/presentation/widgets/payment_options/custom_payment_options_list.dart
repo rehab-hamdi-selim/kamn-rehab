@@ -6,14 +6,15 @@ import 'package:kamn/features/payment/presentation/widgets/payment_options/custo
 import '../../cubits/payment_options_cubit/payment_options_view_model.dart';
 
 class CustomPaymentOptionsList extends StatelessWidget {
-  const CustomPaymentOptionsList(
+  const  CustomPaymentOptionsList(
       {super.key,
       required this.currentOption,
       required this.itemOnTap,
-      required this.paymentOptions});
+      required this.paymentOptions, required this.isCashActive});
   final List<PaymentOption> paymentOptions;
   final int currentOption;
   final Function itemOnTap;
+  final bool isCashActive;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class CustomPaymentOptionsList extends StatelessWidget {
       itemBuilder: (context, index) {
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 19.w),
-          child: CustomPaymentOptionsItem(
+          child: CustomPaymentOptionsItem(isDisabled: index == 1 && isCashActive,
             onTap: () => itemOnTap(index),
             isSelected: index == currentOption,
             paymentIcon: paymentOptions[index].iconLink,

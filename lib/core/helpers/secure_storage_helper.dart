@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fpdart/fpdart.dart';
 import '../common/entities/user_model.dart';
@@ -8,6 +10,7 @@ class SecureStorageHelper {
       );
   static const String _userKey = 'user_data';
   static const String _firstTime = 'first_time';
+  static const String _ratingListKey = 'ratingList';
   static final _storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
 
   // Save user data
@@ -63,7 +66,6 @@ class SecureStorageHelper {
     try {
       final flag = await _storage.read(key: _firstTime);
       if (flag != null) {
-        print('flag: $flag');
         return Right(flag);
       }
       return const Left('User is not Install the app');
@@ -83,4 +85,16 @@ class SecureStorageHelper {
       return Left(e.toString());
     }
   }
+  static Future<void> saveStringList( List<String> list) async {
+  final jsonString = jsonEncode(list);
+  await _storage.write(key: _ratingListKey, value: jsonString,);
+}
+
+static Future<List<String>> getStringList() async {
+  final jsonString = await _storage.read(key: _ratingListKey);
+  if (jsonString != null) {
+    return List<String>.from(jsonDecode(jsonString));
+  }
+  return [];
+}
 }
