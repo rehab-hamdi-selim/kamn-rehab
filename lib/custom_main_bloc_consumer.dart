@@ -16,7 +16,8 @@ class CustomMainBlocConsumer extends StatelessWidget {
   const CustomMainBlocConsumer({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
+    
     final appUserCubit = context.read<AppUserCubit>();
 
     return BlocConsumer<AppUserCubit, AppUserState>(
