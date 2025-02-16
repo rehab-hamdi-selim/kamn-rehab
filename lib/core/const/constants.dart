@@ -1,3 +1,8 @@
+import 'dart:ui';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/theme/app_pallete.dart';
+
 class Constants {
   static const List<String> topics = [
     'Technology',
@@ -39,6 +44,9 @@ class Constants {
   static const governate = 'Governate';
   static const price = 'Price per hour';
   static const priceHint = 'Enter ground price';
+  static const description = 'Description';
+  static const descriptionHint = 'Enter ground description';
+  static const optional = ' (Optional)';
   static const fullNameHint = ' Enter your full name';
   static const nameHint = ' Enter your  name';
   static const passwordHint = ' Enter your  password';
@@ -61,6 +69,9 @@ class Constants {
   static const nextMatch = "Your next match will start at:";
   static const serviceSuccessfullyAdded = "Your service \nsuccessfully added";
   static const whichSportYouServe = "Which Sport you want to service?";
+  static const yourServices = "Your Services";
+  static const chooseYourGame = "Choose your game";
+  static const chooseYourAddedServices = "Choose your added services";
   static const teamPlay = "Team play";
   static const fourOrMore = "4 or more players";
   static const individualPlay = "Individual play";
@@ -74,6 +85,18 @@ class Constants {
   static const welcomeToManagementSystem = 'Welcome to\nManagement System';
   static const financialReports = 'Financial Reports';
   static const paymentOptions = 'Choose payment\noption';
+  static const termsAndConditions = 'Terms and Conditions';
+  static const termsAndConditionsContent = '''1. Introduction
+
+Welcome to KAMN. By using our services, you agree to the following Terms of Service. Please read them carefully.
+
+2. Payment Process
+
+When paying by Visa, please note that the transaction may take between 24 to 48 hours to process, depending on your bank. This timeframe also applies in case of refunds, as the processing duration is subject to the policies of the bank you are using.
+
+3. Refund Policy
+
+If you request a refund, the processing time will follow the same timeframe as outlined in Section 2, taking between 24 to 48 hours based on your bank’s processing rules.''';
 
   static const List<String> egyptGovernorates = [
     "Cairo",
@@ -104,4 +127,87 @@ class Constants {
     "Sohag",
     "South Sinai"
   ];
+
+  static num kImageSliderHeight = 380.h;
+  static num additionHightToToolBar = 300.h;
+
+  static List<SportDetail> teamSportList = [
+    SportDetail(
+      Sport.football.displayName,
+      Sport.football.sportColor,
+    ),
+    SportDetail(
+      Sport.basketball.displayName,
+      Sport.basketball.sportColor,
+    ),
+    SportDetail(
+      Sport.tennis.displayName,
+      Sport.tennis.sportColor,
+    ),
+    SportDetail(
+      Sport.volleyball.displayName,
+      Sport.volleyball.sportColor,
+    ),
+  ];
+  static List<SportDetail> individualSportList = [
+    SportDetail(
+      Sport.skyDiving.displayName,
+      Sport.football.sportColor,
+    ),
+    SportDetail(
+      Sport.swimming.displayName,
+      Sport.swimming.sportColor,
+    ),
+  ];
+}
+class SportDetail {
+  final String title;
+  final Color color;
+
+  SportDetail(this.title, this.color);
+}
+
+enum Sport {
+  football,
+  basketball,
+  tennis,
+  volleyball,
+  skyDiving,
+  swimming,
+}
+
+extension SportExtension on Sport {
+  String get displayName {
+    switch (this) {
+      case Sport.football:
+        return "Football";
+      case Sport.basketball:
+        return "Basketball";
+      case Sport.tennis:
+        return "Tennis";
+      case Sport.volleyball:
+        return "Volleyball";
+      case Sport.skyDiving:
+        return "Sky Diving";
+      case Sport.swimming:
+        return "Swimming";
+    }
+  }
+
+  Color get sportColor {
+    switch (this) {
+      case Sport.football:
+        return AppPallete.greenColor;
+      case Sport.basketball:
+        return AppPallete.pinkColor;
+      case Sport.tennis:
+        return AppPallete.orangeColor;
+      case Sport.volleyball:
+        return AppPallete.yellowColor;
+      case Sport.skyDiving:
+        return AppPallete.lightVoivetteColor;
+      case Sport.swimming:
+        return AppPallete.lightBlueColor;
+    }
+  }
 }

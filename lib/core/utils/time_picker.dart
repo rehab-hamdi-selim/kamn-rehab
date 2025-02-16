@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 Future<TimeOfDay?> selectTime(BuildContext context) async {
   final TimeOfDay? picked = await showTimePicker(
@@ -13,7 +12,7 @@ Future<TimeOfDay?> selectTime(BuildContext context) async {
   }
 }
 
-List<String>? calculateIntervals(
+List<DateTime>? calculateIntervals(
     TimeOfDay startTime, TimeOfDay endTime, int period) {
   final start = DateTime(DateTime.now().year, DateTime.now().month,
       DateTime.now().day, startTime.hour, startTime.minute);
@@ -21,9 +20,9 @@ List<String>? calculateIntervals(
       DateTime.now().day, endTime.hour, endTime.minute);
   final interval = Duration(minutes: period);
 
-  List<String> intervals = [];
+  List<DateTime> intervals = [];
   for (DateTime time = start; time.isBefore(end); time = time.add(interval)) {
-    intervals.add(DateFormat.Hm().format(time));
+    intervals.add(time);
   }
   if (intervals.isNotEmpty) {
     return intervals;

@@ -10,6 +10,11 @@ class TextStyles {
       color: AppPallete.greyFontColor,
       fontWeight: FontWeightHelper.medium,
       fontSize: 12.77.h);
+  static TextStyle font7InterDimGraySemiBold = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.dimGrayColor,
+      fontWeight: FontWeightHelper.semiBold,
+      fontSize: 10.h);
 
   static TextStyle font24BlackRegular = TextStyle(
       fontFamily: "Roboto",
@@ -109,11 +114,11 @@ class TextStyles {
       fontWeight: FontWeightHelper.medium,
       fontSize: 24.h);
 
-  static TextStyle fontRoboto24BoldBlack = const TextStyle(
-    fontFamily: "Roboto",
-    color: AppPallete.lightBlackColor2,
-    fontWeight: FontWeightHelper.bold,
-  );
+  static TextStyle fontRoboto24BoldBlack = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.lightBlackColor2,
+      fontWeight: FontWeightHelper.bold,
+      fontSize: 24.h);
 
   static TextStyle fontRoboto24MediumWhite = TextStyle(
       fontFamily: "Roboto",
@@ -145,11 +150,36 @@ class TextStyles {
       color: AppPallete.blackColor,
       fontWeight: FontWeightHelper.medium,
       fontSize: 10.h);
+  static TextStyle fontCircularSpotify7RegularGrey = TextStyle(
+      fontFamily: "CircularSpotifyText",
+      color: AppPallete.greyColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 7.h);
+  static TextStyle fontCircularSpotify10Regular = TextStyle(
+      fontFamily: "CircularSpotifyText",
+      color: AppPallete.lightColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 10.h);
+  static TextStyle fontCircularSpotify11Regular = TextStyle(
+      fontFamily: "CircularSpotifyText",
+      color: AppPallete.lightColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 11.h);
   static TextStyle fontCircularSpotify8Regular = TextStyle(
       fontFamily: "CircularSpotifyText",
       color: AppPallete.accentBlackColor,
       fontWeight: FontWeightHelper.regular,
       fontSize: 8.h);
+  static TextStyle fontCircularSpotify18Medium = TextStyle(
+      fontFamily: "CircularSpotifyText",
+      color: AppPallete.lightColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 18.h);
+  static TextStyle fontCircularSpotify15MediumBlack = TextStyle(
+      fontFamily: "CircularSpotifyText",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 15.h);
   static TextStyle fontRoboto26BoldBlack = TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.blackColor,
@@ -166,6 +196,16 @@ class TextStyles {
       color: AppPallete.blackColor,
       fontWeight: FontWeight.w400,
       fontSize: 16.h);
+  static TextStyle font16LightColorCircularSpotifyRegular = TextStyle(
+      fontFamily: "CircularSpotifyText",
+      color: AppPallete.lightColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 16.h);
+  static TextStyle font14CircularSpotifyTextGrayRegalur = TextStyle(
+      fontFamily: "CircularSpotifyText",
+      color: AppPallete.grayColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 14.h);
   static TextStyle font30DarkGreenColorBold = TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.darkGreenColor,
@@ -188,12 +228,12 @@ class TextStyles {
       fontSize: 14.h);
   static TextStyle font14RobotoLightBlackColorMedium = TextStyle(
       fontFamily: "Roboto",
-      color: AppPallete.lightBlackColor,
+      color: AppPallete.lightBlackColor2,
       fontWeight: FontWeightHelper.medium,
       fontSize: 14.h);
-  static TextStyle font14RobotoDarkBlueColorMedium = TextStyle(
+  static TextStyle font14RobotoDarkGreenColorMedium = TextStyle(
       fontFamily: "Roboto",
-      color: AppPallete.darkBlueColor,
+      color: AppPallete.darkGreenColor,
       fontWeight: FontWeightHelper.medium,
       fontSize: 14.h);
   static TextStyle font17RobotoAccentBlackColor2Regular = TextStyle(
@@ -210,7 +250,7 @@ class TextStyles {
       fontFamily: "Roboto",
       color: AppPallete.blueColor,
       fontWeight: FontWeightHelper.regular,
-      fontSize: 11.98.h);
+      fontSize: 11.h);
   static TextStyle font14RobotoWhiteColorBold = const TextStyle(
     fontFamily: "Roboto",
     color: AppPallete.whiteColor,
@@ -243,10 +283,9 @@ class TextStyles {
       fontWeight: FontWeightHelper.regular,
       fontSize: 12.h);
   static TextStyle font12lightBlackColor2Bold = const TextStyle(
-    fontFamily: "Roboto",
-    color: AppPallete.lightBlackColor2,
-    fontWeight: FontWeightHelper.bold,
-  );
+      fontFamily: "Roboto",
+      color: AppPallete.lightBlackColor2,
+      fontWeight: FontWeightHelper.bold);
 
   static TextStyle fontRoboto12DarkGreyMedium = TextStyle(
       fontFamily: "Roboto",
@@ -266,7 +305,7 @@ class TextStyles {
   static TextStyle font14BlackColorMedium = TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.lightBlackColor2,
-      fontWeight: FontWeightHelper.medium,
+      fontWeight: FontWeightHelper.regular,
       fontSize: 14.h);
   static TextStyle font15BlackColorMedium = TextStyle(
       fontFamily: "Roboto",

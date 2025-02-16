@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-String basicAuth = 'Basic ' + base64Encode(utf8.encode("osama:osama1234"));
+String basicAuth = 'Basic ${base64Encode(utf8.encode("osama:osama1234"))}';
 
 class AppSecrets {
   static const String agoraAppId = "d9aadbc447c440baaf77d28b4083d4c9";

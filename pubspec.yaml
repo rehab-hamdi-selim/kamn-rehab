@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 1.0.2+1
 
 environment:
   sdk: ^3.5.3
@@ -49,15 +49,15 @@ dependencies:
   #generate unique id
   uuid: ^4.4.0
   #for animation
-  animate_do : any
+  animate_do : ^3.3.4
   smooth_page_indicator: ^1.0.0+2
   gif: ^2.3.0
   rive: ^0.12.3
   animations: ^2.0.11
+  flutter_animate: ^4.5.2
   #for flowchart
   fl_chart: ^0.69.0
   
-  upgrader: ^10.3.0
   badges: ^3.1.2
   intl: ^0.19.0
   shared_preferences: ^2.2.3
@@ -93,9 +93,20 @@ dependencies:
   url_launcher: ^6.3.1
   flutter_countdown_timer: ^4.1.0
   table_calendar: ^3.1.2
+  collection: ^1.17.0
+  flutter_debouncer: ^2.0.0
   modal_bottom_sheet: ^3.0.0
   geolocator: ^13.0.2
+  google_sign_in: ^6.2.2
 
+#Tracking app after release
+  firebase_analytics: ^11.3.6
+  firebase_remote_config: ^5.2.0
+  firebase_crashlytics: ^4.2.0
+  upgrader: ^11.3.1
+  flutter_cache_manager: ^3.4.1
+  dismissible_page: ^1.0.2
+  flutter_rating_bar: ^4.0.1
 
 
 dev_dependencies:
@@ -126,6 +137,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - shorebird.yaml
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -140,10 +152,19 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: CircularSpotifyText
+
+    - family: Inter
       fonts:
-        - asset: assets\fonts\CircularSpotifyTxT-Bold.ttf
-          weight: 500
+        - asset: assets/fonts/Inter_28pt-Bold.ttf
+        - asset: assets/fonts/Inter_28pt-ExtraBold.ttf
+        - asset: assets/fonts/Inter_28pt-ExtraLight.ttf
+        - asset: assets/fonts/Inter_28pt-Light.ttf
+        - asset: assets/fonts/Inter_28pt-Medium.ttf
+        - asset: assets/fonts/Inter_28pt-Regular.ttf
+        - asset: assets/fonts/Inter_28pt-SemiBold.ttf
+        - asset: assets/fonts/Inter_28pt-Thin.ttf
+        - asset: assets/fonts/Inter_28pt-Black.ttf 
+       
     
 
   #       - asset: fonts/Schyler-Italic.ttf
