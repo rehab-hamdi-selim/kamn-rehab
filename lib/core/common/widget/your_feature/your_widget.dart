@@ -26,7 +26,7 @@ class _YourRiveWidgetState extends State<YourRiveWidget> {
     _artboard = file.mainArtboard;
 
     // Find the state machine controller
-    final stateMachine = _artboard!.stateMachines.first;
+    // final stateMachine = _artboard!.stateMachines.first;
     _controller = SimpleAnimation('idle'); // Set the initial animation
 
     // Set the state machine controller
