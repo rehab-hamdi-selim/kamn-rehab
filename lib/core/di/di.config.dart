@@ -106,7 +106,6 @@ import '../common/cubit/firebase_remote_config/firebase_remote_config_cubit.dart
     as _i654;
 
 extension GetItInjectableX on _i174.GetIt {
-// initializes the registration of main-scope dependencies inside of GetIt
   _i174.GetIt init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
