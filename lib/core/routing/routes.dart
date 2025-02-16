@@ -1,4 +1,5 @@
 class Routes {
+  static const String splashScreen = '/';
   static const String addServiceScreen = '/addServiceScreen';
   static const String successServiceProviderScreen =
       '/successServiceProviderScreen';
@@ -28,4 +29,14 @@ class Routes {
       '/trackGroundReservationsDetails';
   static const String paymentOptionsScreen = '/paymentOptionsScreen';
   static const String proceedPaymentScreen = '/proceedPaymentScreen';
+  static const String viewResrvationScreen = '/viewResrvationScreen';
+  static const String logOut = '/logOut';
+  static const String reservationScreen = '/reservationScreen';
+  static const String currentOrderScreen = '/currentOrdersScreen';
+  static const String finishOrderScreen = '/finishOrdersScreen';
+  static const String mainLoaderScreen = '/mainLoaderScreen';
+  static const String notificationsScreen = '/notificationsScreen';
+  static const String notificationDetailsScreen = '/notificationDetailsScreen';
+  static const String selectCategoryScreen= '/selectCategoryScreen';
+  static const String editProfileScreen='/editProfileScreen';
 }
