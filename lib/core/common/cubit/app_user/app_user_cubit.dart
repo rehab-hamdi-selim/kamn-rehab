@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
-import 'package:kamn/features/authentication/data/repositories/auth_repository.dart';
+import 'package:kamn/playground_feature/authentication/data/repositories/auth_repository.dart';
 
 import '../../../helpers/secure_storage_helper.dart';
 import '../../entities/user_model.dart';

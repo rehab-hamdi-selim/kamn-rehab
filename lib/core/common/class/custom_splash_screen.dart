@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/features/authentication/presentation/widgets/on_boarding/custom_logo_paint.dart';
+import 'package:kamn/playground_feature/authentication/presentation/widgets/on_boarding/custom_logo_paint.dart';
 
 class CustomSplashScreen extends StatelessWidget {
   const CustomSplashScreen({super.key});

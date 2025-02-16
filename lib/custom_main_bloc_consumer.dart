@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/core/routing/app_router.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
-import 'package:kamn/features/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
-import 'package:kamn/features/authentication/presentation/screens/on_boarding_screen.dart';
-import 'package:kamn/features/sports/presentation/cubits/select_category_cubit/select_category_cubit.dart';
-import 'package:kamn/features/sports/presentation/screens/select_category_screen.dart';
+import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
+import 'package:kamn/playground_feature/authentication/presentation/screens/on_boarding_screen.dart';
+import 'package:kamn/playground_feature/sports/presentation/cubits/select_category_cubit/select_category_cubit.dart';
+import 'package:kamn/playground_feature/sports/presentation/screens/select_category_screen.dart';
 import 'core/common/cubit/app_user/app_user_cubit.dart';
 import 'core/common/widget/main_loader.dart';
 import 'core/di/di.dart';
-import 'features/authentication/presentation/screens/sign_in_screen.dart';
+import 'playground_feature/authentication/presentation/screens/sign_in_screen.dart';
 
 class CustomMainBlocConsumer extends StatelessWidget {
   const CustomMainBlocConsumer({super.key});
