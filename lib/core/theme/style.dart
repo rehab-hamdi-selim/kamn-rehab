@@ -165,6 +165,11 @@ class TextStyles {
       color: AppPallete.lightColor,
       fontWeight: FontWeightHelper.regular,
       fontSize: 11.h);
+  static TextStyle fontCircularSpotify10RegularAccent = TextStyle(
+      fontFamily: "CircularSpotifyText",
+      color: AppPallete.accentBlackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 10.h);
   static TextStyle fontCircularSpotify8Regular = TextStyle(
       fontFamily: "CircularSpotifyText",
       color: AppPallete.accentBlackColor,
@@ -180,6 +185,11 @@ class TextStyles {
       color: AppPallete.blackColor,
       fontWeight: FontWeightHelper.regular,
       fontSize: 15.h);
+  static TextStyle fontCircularSpotify14MediumAccentBlack = TextStyle(
+      fontFamily: "CircularSpotifyText",
+      color: AppPallete.accentBlackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 14.67.h);
   static TextStyle fontRoboto26BoldBlack = TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.blackColor,
@@ -189,6 +199,11 @@ class TextStyles {
   static TextStyle font12CircularSpotifyTextBlackMedium = TextStyle(
       fontFamily: "CircularSpotifyText",
       color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 12.h);
+  static TextStyle font12CircularSpotifyTextDarkGeryMedium = TextStyle(
+      fontFamily: "CircularSpotifyText",
+      color: AppPallete.darkGreyColor,
       fontWeight: FontWeightHelper.medium,
       fontSize: 12.h);
   static TextStyle font16DartBlackColorCircularSpotifyTextW400 = TextStyle(
@@ -206,6 +221,11 @@ class TextStyles {
       color: AppPallete.grayColor,
       fontWeight: FontWeightHelper.regular,
       fontSize: 14.h);
+  static TextStyle font20CircularSpotifyTextAccentBlackMedium = TextStyle(
+      fontFamily: "CircularSpotifyText",
+      color: AppPallete.accentBlackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 20.h);
   static TextStyle font30DarkGreenColorBold = TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.darkGreenColor,
