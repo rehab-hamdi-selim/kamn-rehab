@@ -17,6 +17,7 @@ class CustomGymAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: AppPallete.lightWiteColor,
       leading: InkWell(
         onTap: () {
           Navigator.pop(context);
@@ -86,7 +87,7 @@ class CustomGymAppbar extends StatelessWidget implements PreferredSizeWidget {
         InkWell(
           onTap: () {},
           child: CircleAvatar(
-            backgroundColor: AppPallete.lgGreyColor.withOpacity(0.3),
+            backgroundColor: AppPallete.lighttColor2,
             radius: 18.0.r,
             child: Icon(
               Icons.search_rounded,
@@ -104,7 +105,7 @@ class CustomGymAppbar extends StatelessWidget implements PreferredSizeWidget {
           child: InkWell(
             onTap: () {},
             child: CircleAvatar(
-              backgroundColor: AppPallete.lgGreyColor.withOpacity(0.3),
+              backgroundColor: AppPallete.lighttColor2,
               radius: 18.0.r,
               child: Icon(
                 Icons.notifications_none_outlined,
