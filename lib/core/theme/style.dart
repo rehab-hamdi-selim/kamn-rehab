@@ -221,6 +221,11 @@ class TextStyles {
       color: AppPallete.grayColor,
       fontWeight: FontWeightHelper.regular,
       fontSize: 14.h);
+  static TextStyle font15CircularSpotifyTextWhiteMedium = TextStyle(
+      fontFamily: "CircularSpotifyText",
+      color: AppPallete.whiteColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 15.h);
   static TextStyle font20CircularSpotifyTextAccentBlackMedium = TextStyle(
       fontFamily: "CircularSpotifyText",
       color: AppPallete.accentBlackColor,
