@@ -31,7 +31,7 @@ class CustomeSportCategory extends StatelessWidget {
               Text(
                 title,
                 style:
-                    TextStyles.fontRoboto16RegularBlack.copyWith(color: color),
+                    TextStyles.fontRoboto16BlackRegular.copyWith(color: color),
               ),
               SvgPicture.asset(
                 'assets/images/${title}_avatar.svg',

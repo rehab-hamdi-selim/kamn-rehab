@@ -19,7 +19,7 @@ class CustomHader extends StatelessWidget {
         verticalSpace(16.h),
         Text(
           text,
-          style: TextStyles.font14BlackColorMedium,
+          style: TextStyles.fontRoboto14BlackMedium,
           textAlign: TextAlign.center,
         ),
       ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/core/theme_data/style.dart';
+import 'package:kamn/core/theme/style.dart';
 
 class CustomRateSection extends StatelessWidget {
   const CustomRateSection({super.key, required this.rates});
@@ -23,7 +23,7 @@ class CustomRateSection extends StatelessWidget {
         children: [
           Text(
             rates,
-            style: Style.font10GrayColorW400,
+            style: TextStyles.fontCircularSpotify10BlackRegular,
           ),
           Icon(
             Icons.star,

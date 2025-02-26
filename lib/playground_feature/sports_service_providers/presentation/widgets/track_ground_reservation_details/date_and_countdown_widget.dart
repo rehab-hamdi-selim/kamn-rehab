@@ -74,11 +74,11 @@ class _DateAndCountdownWidgetState extends State<DateAndCountdownWidget> {
             children: [
               Text(
                 DateFormat('EEEE, d MMM yyyy').format(widget.session.startAt),
-                style: TextStyles.font14GreenRegular,
+                style: TextStyles.fontRoboto14GreenRegular,
               ),
               Text(
                 "${DateFormat.jm().format(widget.session.startAt)} to ${DateFormat.jm().format(widget.session.endAt)}",
-                style: TextStyles.font14GreenRegular,
+                style: TextStyles.fontRoboto14GreenRegular,
               ),
             ],
           ),
@@ -95,7 +95,7 @@ class _DateAndCountdownWidgetState extends State<DateAndCountdownWidget> {
 
               return Text(
                 '$hours:$minutes:$seconds',
-                style: TextStyles.font12GreenSemiBold
+                style: TextStyles.fontRoboto12GreenSemiBold
                     .copyWith(fontWeight: FontWeight.bold),
               );
             },

@@ -39,7 +39,7 @@ class CustomPaymentOptionsItem extends StatelessWidget {
       onTap: isDisabled ? null : onTap, // Disable tap if inactive
       title: Text(
         paymentName,
-        style: TextStyles.font15BlackColorRegular.copyWith(
+        style: TextStyles.fontRoboto15BlackRegular.copyWith(
           color: isDisabled ? AppPallete.lgGreyColor : Colors.black,
         ),
       ),

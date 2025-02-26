@@ -20,23 +20,23 @@ class CustomGroundDetails extends StatelessWidget {
         RichText(
           text: TextSpan(
               text: 'Owner: ',
-              style: TextStyles.fontCircularSpotify8Regular,
+              style: TextStyles.fontCircularSpotify8AccentBlackRegular,
               children: [
                 TextSpan(
                     text: owner,
-                    style: TextStyles.fontCircularSpotify8Regular
+                    style: TextStyles.fontCircularSpotify8AccentBlackRegular
                         .copyWith(color: AppPallete.darkGreenColor)),
               ]),
         ),
         horizontalSpace(13.w),
         Text(
           '$km km away',
-          style: TextStyles.fontCircularSpotify8Regular,
+          style: TextStyles.fontCircularSpotify8AccentBlackRegular,
         ),
         horizontalSpace(13.w),
         Text(
           'Ground Size $groundSize',
-          style: TextStyles.fontCircularSpotify8Regular,
+          style: TextStyles.fontCircularSpotify8AccentBlackRegular,
         ),
       ],
     );

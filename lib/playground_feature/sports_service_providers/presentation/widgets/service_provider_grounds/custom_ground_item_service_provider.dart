@@ -82,12 +82,12 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
           children: [
             Text(
               playgroundRequest.playgroundName ?? '',
-              style: TextStyles.font16DartBlackColorW400,
+              style: TextStyles.fontCircularSpotify16BlackRegular,
             ),
             horizontalSpace(8),
             Text(
               "2 km",
-              style: TextStyles.font10DarkGreenColorW400,
+              style: TextStyles.fontCircularSpotify10GreenRegular,
             ),
           ],
         ),
@@ -95,11 +95,11 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
           children: [
             Text(
               "Owner: ${playgroundRequest.owner?.name ?? ''}",
-              style: TextStyles.font10BlackColorW400,
+              style: TextStyles.fontCircularSpotify10BlackRegular,
             ),
             Text(
               '',
-              style: TextStyles.font10DarkGreenColorW400,
+              style: TextStyles.fontCircularSpotify10GreenRegular,
             ),
           ],
         ),
@@ -120,7 +120,7 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
             child: IntrinsicWidth(
               child: Text(
                 playgroundRequest.address ?? "",
-                style: TextStyles.font10GrayColorW400,
+                style: TextStyles.fontCircularSpotify10BlackRegular,
                 maxLines: 1, // Limit to 1 line`
                 overflow: TextOverflow.ellipsis, // Add ellipsis if the text overflows
               ),
@@ -149,7 +149,7 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
           horizontalSpace(4),
           Text(
             playgroundRequest.status ?? "",
-            style: TextStyles.font7DartBlackColorW400,
+            style: TextStyles.fontCircularSpotify7BlackRegular,
           ),
           horizontalSpace(8),
           Container(
@@ -167,7 +167,7 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
               children: [
                 Text(
                   '${playgroundRequest.rating ?? 0}',
-                  style: TextStyles.font10GrayColorW400,
+                  style: TextStyles.fontCircularSpotify10Gray2Regular,
                 ),
                 Icon(
                   Icons.star,
@@ -185,11 +185,11 @@ class CustomGroundItemServiceProvider extends StatelessWidget {
       children: [
         Text(
           "250 LE",
-          style: TextStyles.font16DartBlackColorW400,
+          style: TextStyles.fontCircularSpotify16BlackRegular,
         ),
         Text(
           " / hr",
-          style: TextStyles.font10BlackColorW400,
+          style: TextStyles.fontCircularSpotify10BlackRegular,
         ),
       ],
     ),

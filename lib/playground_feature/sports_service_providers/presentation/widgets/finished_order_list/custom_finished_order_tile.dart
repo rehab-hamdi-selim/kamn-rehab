@@ -36,7 +36,7 @@ class CustomFinishedOrdersTile extends StatelessWidget {
                       children: [
                         Text(
                           reservation.ground?.type ?? '',
-                          style: TextStyles.fontCircularSpotify18Medium
+                          style: TextStyles.fontCircularSpotify18LightMedium
                               .copyWith(
   color: Sport.values
                           .firstWhere((element) =>
@@ -89,12 +89,12 @@ class CustomFinishedOrdersTile extends StatelessWidget {
                       child: RichText(
                         text: TextSpan(
                           text: 'Reserved by: ',
-                          style: TextStyles.fontCircularSpotify10RegularGray2
+                          style: TextStyles.fontCircularSpotify12GrayRegular
                               .copyWith(fontSize: 12.5.h),
                           children: [
                             TextSpan(
                                 text: '\n${reservation.user?.name ?? ''}',
-                                style: TextStyles.fontCircularSpotify11Regular
+                                style: TextStyles.fontCircularSpotify11LightRegular
                                     .copyWith(
                                         color: AppPallete.greenColor,
                                         fontSize: 12.5.h))
@@ -110,7 +110,7 @@ class CustomFinishedOrdersTile extends StatelessWidget {
                     SizedBox(width: 4.w),
                     Text(
                       '0123 567 90',
-                      style: TextStyles.fontCircularSpotify10RegularGray2
+                      style: TextStyles.fontCircularSpotify12GrayRegular
                           .copyWith(
                               fontSize: 12.5.h, color: AppPallete.greenColor),
                     ),
@@ -125,7 +125,7 @@ class CustomFinishedOrdersTile extends StatelessWidget {
                       child: RichText(
                         text: TextSpan(
                           text: reservation.paymentMethod ?? '',
-                          style: TextStyles.fontCircularSpotify10RegularGray2
+                          style: TextStyles.fontCircularSpotify12GrayRegular
                               .copyWith(fontSize: 12.5.h),
                           children: [
                             TextSpan(
@@ -149,7 +149,7 @@ class CustomFinishedOrdersTile extends StatelessWidget {
                         Text(
                           DateFormat('EEEE, dd MMM yyyy')
                               .format(reservation.startAt!),
-                          style: TextStyles.fontCircularSpotify10RegularGray2
+                          style: TextStyles.fontCircularSpotify12GrayRegular
                               .copyWith(
                                   fontSize: 12.5.h,
                                   color: AppPallete.greenColor),
@@ -157,7 +157,7 @@ class CustomFinishedOrdersTile extends StatelessWidget {
                         verticalSpace(4.h),
                         Text(
                           '${DateFormat.jm().format(reservation.startAt!)} to ${DateFormat.jm().format(reservation.endAt!)}',
-                          style: TextStyles.fontCircularSpotify10RegularGray2
+                          style: TextStyles.fontCircularSpotify12GrayRegular
                               .copyWith(
                                   fontSize: 12.5.h,
                                   color: AppPallete.greenColor),

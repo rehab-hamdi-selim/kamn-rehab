@@ -26,7 +26,7 @@ class CustomElevationButton extends StatelessWidget {
           width: 398.w,
           child: Center(
             child: Text(Constants.signUp,
-                style: TextStyles.font24WhiteInterColorMedium),
+                style: TextStyles.fontInter24BlackMedium),
           ),
         ),
       ),

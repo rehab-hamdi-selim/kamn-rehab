@@ -25,7 +25,7 @@ class CustomeSignUpInputFields extends StatelessWidget {
         children: [
           Text(
             "Email",
-            style: TextStyles.font17RobotoAccentBlackColor2Regular,
+            style: TextStyles.fontRoboto17AccentBlackRegular,
           ),
           CustomTextFormFeld(
             validator: emailValidator,
@@ -42,7 +42,7 @@ class CustomeSignUpInputFields extends StatelessWidget {
           ),
           Text(
             "Username",
-            style: TextStyles.font17RobotoAccentBlackColor2Regular,
+            style: TextStyles.fontRoboto17AccentBlackRegular,
           ),
           CustomTextFormFeld(
             validator: (String? value) {
@@ -64,7 +64,7 @@ class CustomeSignUpInputFields extends StatelessWidget {
           ),
           Text(
             "Pawssword",
-            style: TextStyles.font17RobotoAccentBlackColor2Regular,
+            style: TextStyles.fontRoboto17AccentBlackRegular,
           ),
           BlocBuilder<SignUpCubit, SignUpState>(
             builder: (context, state) {
@@ -93,7 +93,7 @@ class CustomeSignUpInputFields extends StatelessWidget {
           ),
           Text(
             "Confirm Password",
-            style: TextStyles.font17RobotoAccentBlackColor2Regular,
+            style: TextStyles.fontRoboto17AccentBlackRegular,
           ),
           BlocBuilder<SignUpCubit, SignUpState>(
             builder: (context, state) {
@@ -137,14 +137,14 @@ class CustomeSignUpInputFields extends StatelessWidget {
               ),
               Text(
                 'By creating an account, you agree to our',
-                style: TextStyles.font11RobotoAccentBlackColor2Regular
+                style: TextStyles.fontRoboto17AccentBlackRegular
                     .copyWith(fontSize: 10.h),
               ),
               InkWell(
                   onTap: () {},
                   child: Text(
                     'Term & Conditions',
-                    style: TextStyles.font11RobotoBlueColorRegular
+                    style: TextStyles.fontRoboto11BlueRegular
                         .copyWith(fontSize: 10.h),
                   )),
             ],

@@ -17,30 +17,30 @@ class CustomProceedPaymentDetails extends StatelessWidget {
       // Category Text
       Text(
         reservationModel.ground?.type ?? '',
-        style: TextStyles.font16RobotogreenMedium.copyWith(color: Sport.values
+        style: TextStyles.fontRoboto16GreenMedium.copyWith(color: Sport.values
                           .firstWhere((element) =>
                               element.displayName == reservationModel.ground?.type)
                           .sportColor),
       ),
       Text(
         reservationModel.ground?.playgroundName ?? '',
-        style: TextStyles.font30accentBlackColorMedium,
+        style: TextStyles.fontRoboto30AccentBlackMedium,
       ),
       verticalSpace(53.h),
       // Price Text
       Text(
         '${reservationModel.price} LE',
-        style: TextStyles.font45RobtoBlackColorMedium,
+        style: TextStyles.fontRoboto45BlackMedium,
       ),
       verticalSpace(36.h),
       Text(
           DateFormat('EEEE, d MMM yyyy')
               .format(reservationModel.startAt ?? DateTime.now()),
-          style: TextStyles.font14RobtoAccentBlackColorLight),
+          style: TextStyles.fontRobto14AccentBlackLight),
       verticalSpace(7.h),
       Text(
         "${DateFormat.jm().format(reservationModel.startAt ?? DateTime.now())} to ${DateFormat.jm().format(reservationModel.endAt ?? DateTime.now())}",
-        style: TextStyles.font14RobtoAccentBlackColorLight,
+        style: TextStyles.fontRobto14AccentBlackLight,
       ),
     ]);
   }

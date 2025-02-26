@@ -30,7 +30,7 @@ class CustomAppBar {
       surfaceTintColor: color,
       backgroundColor: color,
       centerTitle: true,
-      title: Text(title ?? "", style: TextStyles.font20White),
+      title: Text(title ?? "", style: TextStyles.fontInter20WhiteSemiBold),
       leading: Row(
         children: [
           horizontalSpace(10.w),

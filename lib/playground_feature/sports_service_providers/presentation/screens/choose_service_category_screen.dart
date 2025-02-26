@@ -45,13 +45,13 @@ class ChooseServiceCategoryScreen extends StatelessWidget {
                       Text(
                         textAlign: TextAlign.center,
                         Constants.yourServices,
-                        style: TextStyles.font32BlackColormedium,
+                        style: TextStyles.fontCircularSpotify32BlackMedium,
                       ),
                       Text(
                           textAlign: TextAlign.center,
                           Constants.chooseYourAddedServices,
                           style:
-                              TextStyles.font14CircularSpotifyTextGrayRegalur),
+                              TextStyles.fontCircularSpotify14GrayRegular),
                     ],
                   ),
                 ),

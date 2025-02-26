@@ -31,7 +31,7 @@ class CustomeDropdownMenu extends StatelessWidget {
         trailingIcon: const Icon(Icons.keyboard_arrow_down_outlined),
         inputDecorationTheme: InputDecorationTheme(
             labelStyle: TextStyles.fontInter14BlackMedium,
-            hintStyle: TextStyles.font12GreyRegular,
+            hintStyle: TextStyles.fontCircularSpotify12GrayRegular,
             suffixIconColor: AppPallete.greyColor,
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),

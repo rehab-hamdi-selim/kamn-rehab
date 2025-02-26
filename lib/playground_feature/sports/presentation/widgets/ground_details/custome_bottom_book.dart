@@ -68,11 +68,11 @@ class _CustomeBottomBookState extends State<CustomeBottomBook>
                     text: TextSpan(
                       text: _animation.value
                           .toStringAsFixed(2), // Format to 2 decimal places
-                      style: TextStyles.font32OfWhiteMedium,
+                      style: TextStyles.fontRoboto32OfWhiteMedium,
                       children: [
                         TextSpan(
                           text: ' / hr',
-                          style: TextStyles.font20OfWhiteReuglar,
+                          style: TextStyles.fontRoboto20OfWhiteRegular,
                         ),
                       ],
                     ),
@@ -89,7 +89,7 @@ class _CustomeBottomBookState extends State<CustomeBottomBook>
                 },
                 child: Text(
                   Constants.bookNow,
-                  style: TextStyles.font16greenSemiBold,
+                  style: TextStyles.fontRoboto16GreenSemiBold,
                 ),
               ),
             ],

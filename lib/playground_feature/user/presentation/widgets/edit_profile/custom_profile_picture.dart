@@ -149,13 +149,13 @@ class CustomProfilePicture extends StatelessWidget {
                         children: [
                           Text(
                             user?.name ?? '',
-                            style: TextStyles.font20White,
+                            style: TextStyles.fontRoboto20OfWhiteMedium,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           ),
                           Text(
                             user?.type ?? '',
-                            style: TextStyles.font18White,
+                            style: TextStyles.fontRoboto18OfWhiteMedium,
                           ),
                         ],
                       ),

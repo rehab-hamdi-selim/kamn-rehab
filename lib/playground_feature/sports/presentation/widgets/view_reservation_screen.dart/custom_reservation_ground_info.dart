@@ -35,7 +35,7 @@ class CustomReservationGroundInfo extends StatelessWidget {
                 contentPadding: const EdgeInsets.all(0),
                 title: Text(
                   ownreName,
-                  style: TextStyles.fontCircularSpotify8Regular
+                  style: TextStyles.fontCircularSpotify8AccentBlackRegular
                       .copyWith(color: AppPallete.lightColor),
                 ),
               ),
@@ -51,7 +51,7 @@ class CustomReservationGroundInfo extends StatelessWidget {
                 contentPadding: const EdgeInsets.symmetric(horizontal: 11),
                 title: Text(
                   address,
-                  style: TextStyles.fontCircularSpotify8Regular
+                  style: TextStyles.fontCircularSpotify8AccentBlackRegular
                       .copyWith(color: AppPallete.lightColor),
                 ),
               ),
@@ -67,7 +67,7 @@ class CustomReservationGroundInfo extends StatelessWidget {
                 horizontalTitleGap: 4,
                 title: Text(
                   '$rate ($review reviews)',
-                  style: TextStyles.fontCircularSpotify8Regular
+                  style: TextStyles.fontCircularSpotify8AccentBlackRegular
                       .copyWith(color: AppPallete.lightColor),
                 ),
               ),

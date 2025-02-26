@@ -36,7 +36,7 @@ class CustomWelcomeElevationButton extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Next', style: TextStyles.font24WhiteInterColorMedium),
+            Text('Next', style: TextStyles.fontInter24BlackMedium),
             const Padding(
               padding: EdgeInsets.all(6.0),
               child: Icon(

@@ -46,7 +46,7 @@ class CustomIncomeOutcomeItem extends StatelessWidget {
             verticalSpace(10.h),
             Text(
               money,
-              style: TextStyles.font24BlackInterColorMedium,
+              style: TextStyles.fontInter24BlackMedium,
             ),
             verticalSpace(10.h),
             Row(
@@ -63,7 +63,7 @@ class CustomIncomeOutcomeItem extends StatelessWidget {
                 RichText(
                   text: TextSpan(
                       text: '${increase.abs()}% ',
-                      style: TextStyles.fontInter9LightGreyMudium.copyWith(
+                      style: TextStyles.fontInter9LightGreyMedium.copyWith(
                         color: increase < 0
                             ? AppPallete.redColor
                             : AppPallete.greenColor,
@@ -71,7 +71,7 @@ class CustomIncomeOutcomeItem extends StatelessWidget {
                       children: [
                         TextSpan(
                           text: 'Less than last month',
-                          style: TextStyles.fontInter9LightGreyMudium,
+                          style: TextStyles.fontInter9LightGreyMedium,
                         ),
                       ]),
                 ),

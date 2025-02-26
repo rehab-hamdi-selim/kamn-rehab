@@ -40,12 +40,12 @@ class CustomReservationInfo extends StatelessWidget {
                   children: [
                     Text(
                       DateFormat('EEEE, d MMM yyyy').format(timeToStart),
-                      style: TextStyles.font11RobotoBlueColorRegular
+                      style: TextStyles.fontRoboto11BlueRegular
                           .copyWith(color: AppPallete.whiteColor),
                     ),
                     Text(
                       "${DateFormat.jm().format(timeToStart)} to ${DateFormat.jm().format(timeToEnd)}",
-                      style: TextStyles.font11RobotoBlueColorRegular
+                      style: TextStyles.fontRoboto11BlueRegular
                           .copyWith(color: AppPallete.whiteColor),
                     )
                   ],
@@ -56,11 +56,11 @@ class CustomReservationInfo extends StatelessWidget {
             RichText(
                 text: TextSpan(
                     text: '${price.toStringAsFixed(2)} LE',
-                    style: TextStyles.fontCircularSpotify18Medium,
+                    style: TextStyles.fontCircularSpotify18LightMedium,
                     children: [
                   TextSpan(
                       text: '/ hr',
-                      style: TextStyles.fontCircularSpotify11Regular),
+                      style: TextStyles.fontCircularSpotify11LightRegular),
                 ]))
           ],
         ),

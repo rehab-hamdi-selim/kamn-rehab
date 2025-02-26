@@ -24,7 +24,7 @@ class CustomAnalyticsChart extends StatelessWidget {
               children: [
                 Text(
                   'Analytics Report',
-                  style: TextStyles.font13BlackInterColorSemiBold,
+                  style: TextStyles.fontInter13BlackSemiBold,
                 ),
                 const Spacer(),
                 Container(

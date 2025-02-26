@@ -44,7 +44,7 @@ class CustomOrderBox extends StatelessWidget {
               ),
               Text(
                 title,
-                style: TextStyles.fontCircularSpotify10Medium,
+                style: TextStyles.fontCircularSpotify10BlackMedium,
               ),
               const Spacer(),
               Icon(
@@ -65,12 +65,12 @@ class CustomOrderBox extends StatelessWidget {
               RichText(
                   text: TextSpan(
                       text: '$ratio%',
-                      style: TextStyles.fontCircularSpotify10Medium
+                      style: TextStyles.fontCircularSpotify10BlackMedium
                           .copyWith(color: AppPallete.greenColor),
                       children: [
                     TextSpan(
                       text: 'less than last month',
-                      style: TextStyles.fontCircularSpotify10Medium
+                      style: TextStyles.fontCircularSpotify10BlackMedium
                           .copyWith(color: AppPallete.greyColor),
                     )
                   ]))

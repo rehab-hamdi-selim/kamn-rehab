@@ -33,7 +33,7 @@ class CustomFilterItemServiceProvider extends StatelessWidget {
           ),
           Text(
             text,
-            style: TextStyles.font10BlackColorW400,
+            style: TextStyles.fontCircularSpotify10BlackRegular,
           ),
           IconButton(
             onPressed: onPressed,

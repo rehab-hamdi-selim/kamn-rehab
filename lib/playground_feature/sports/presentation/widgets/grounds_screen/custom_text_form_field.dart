@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import '../../../../../core/const/constants.dart';
-import '../../../../../core/theme_data/app_palette.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
@@ -18,29 +18,29 @@ class CustomTextFormField extends StatelessWidget {
       height: 30,
       child: TextFormField(
         controller: controller,
-        cursorColor: AppPalette.darkGreenColor,
+        cursorColor: AppPallete.darkGreenColor,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 0.h, horizontal: 0.w),
           filled: true,
-          fillColor: AppPalette.lightGrayColor,
+          fillColor: AppPallete.lightGrayColor,
           hintText: Constants.hintTextForSearch,
-          hintStyle: TextStyles.fontCircularSpotify10RegularGray2
+          hintStyle: TextStyles.fontCircularSpotify10Gray2Regular
               .copyWith(fontSize: 12.h),
           prefixIcon: const Icon(
             Icons.search,
-            color: AppPalette.grayColor,
+            color: AppPallete.grayColor,
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(50),
-            borderSide: const BorderSide(color: AppPalette.lightGrayColor),
+            borderSide: const BorderSide(color: AppPallete.lightGrayColor),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(50),
-            borderSide: const BorderSide(color: AppPalette.lightGrayColor),
+            borderSide: const BorderSide(color: AppPallete.lightGrayColor),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(50),
-            borderSide: const BorderSide(color: AppPalette.darkGreenColor),
+            borderSide: const BorderSide(color: AppPallete.darkGreenColor),
           ),
         ),
         onChanged: onChange,

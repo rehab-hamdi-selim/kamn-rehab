@@ -28,7 +28,7 @@ class GoogleButton extends StatelessWidget {
             SvgPicture.asset(IconLinks.google),
             horizontalSpace(3),
             Text("Connect with Google",
-                style: TextStyles.font14RobotoDarkGreenColorMedium),
+                style: TextStyles.fontRoboto14GreenMedium),
           ],
         ),
       ),

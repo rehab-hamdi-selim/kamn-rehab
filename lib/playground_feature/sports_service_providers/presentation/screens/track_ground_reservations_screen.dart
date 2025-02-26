@@ -39,7 +39,7 @@ class TrackGroundReservationsScreen extends StatelessWidget {
             children: [
               Text(
                 Constants.groundsScreenTitle,
-                style: TextStyles.font32BlackColormedium,
+                style: TextStyles.fontCircularSpotify32BlackMedium,
               ),
               Row(
                 children: [
@@ -57,7 +57,7 @@ class TrackGroundReservationsScreen extends StatelessWidget {
                     ),
                     onPressed: () {},
                     textBottom: 'Filter',
-                    textStyle: TextStyles.font12WhiteColorW400,
+                    textStyle: TextStyles.fontCircularSpotify12WhiteRegular,
                   ),
                 ],
               ),

@@ -19,7 +19,7 @@ showLoadingAlert(String? message, BuildContext context) {
                   const CircularProgressIndicator(color: AppPallete.mainColor),
                   horizontalSpace(10.w),
                   Text(message ?? '',
-                      style: TextStyles.font15blackMediumInter
+                      style: TextStyles.fontInter15BlackMedium
                           .copyWith(color: AppPallete.mainColor))
                 ],
               ),

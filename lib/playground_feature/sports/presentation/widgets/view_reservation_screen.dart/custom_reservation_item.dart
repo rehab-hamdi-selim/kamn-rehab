@@ -35,7 +35,7 @@ class CustomReservationItem extends StatelessWidget {
                 children: [
                   Text(
                     reservation.ground?.playgroundName ?? '',
-                    style: TextStyles.font16LightColorCircularSpotifyRegular,
+                    style: TextStyles.fontCircularSpotify16BlackRegular,
                   ),
                 ],
               ),

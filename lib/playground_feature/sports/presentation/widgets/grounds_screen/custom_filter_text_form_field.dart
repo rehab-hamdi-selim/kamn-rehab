@@ -24,7 +24,7 @@ class CustomFilterTextFormField extends StatelessWidget {
       children: [
         Text(
           txt,
-          style: TextStyles.font2OfaccentBlackMediumRoboto,
+          style: TextStyles.fontRoboto20AccentBlackMedium,
         ),
         verticalSpace(7.h),
         SizedBox(
@@ -37,7 +37,7 @@ class CustomFilterTextFormField extends StatelessWidget {
                 contentPadding:
                     EdgeInsets.only(left: 15.w, right: 15.w, bottom: 10.h),
                 hintText: hintText,
-                hintStyle: TextStyles.font12LightGreyColorregular,
+                hintStyle: TextStyles.fontInter12GreyRegular,
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(31.r),
                   borderSide:

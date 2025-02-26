@@ -31,7 +31,7 @@ class SuccessServiceProviderScreen extends StatelessWidget {
           children: [
             Text(
               Constants.serviceSuccessfullyAdded,
-              style: TextStyles.font32BlackColormedium,
+              style: TextStyles.fontCircularSpotify32BlackMedium,
               textAlign: TextAlign.center,
             ),
             verticalSpace(16),
@@ -58,7 +58,7 @@ class SuccessServiceProviderScreen extends StatelessWidget {
                           ( route) => false);
                 },
                 textBottom: 'Check',
-                textStyle: TextStyles.font12WhiteColorW400,
+                textStyle: TextStyles.fontCircularSpotify12WhiteRegular,
               ),
             ),
           ],

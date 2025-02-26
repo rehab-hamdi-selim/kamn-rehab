@@ -42,7 +42,7 @@ class ServiceProviderGroundsScreen extends StatelessWidget {
             children: [
               Text(
                 type,
-                style: TextStyles.font32BlackColormedium,
+                style: TextStyles.fontInter32BlackMedium,
               ),
               Row(
                 children: [
@@ -67,7 +67,7 @@ class ServiceProviderGroundsScreen extends StatelessWidget {
                     ),
                     onPressed: () {},
                     textBottom: 'Filter',
-                    textStyle: TextStyles.font12WhiteColorW400,
+                    textStyle: TextStyles.fontRoboto12WhiteRegular,
                   ),
                 ],
               ),

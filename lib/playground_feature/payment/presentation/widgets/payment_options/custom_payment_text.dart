@@ -16,7 +16,7 @@ class CustomPaymentText extends StatelessWidget {
         children: [
           Text(
             Constants.paymentOptions,
-            style: TextStyles.font30DarkGreenColorMedium,
+            style: TextStyles.font30DarkGreenMedium,
           ),
           verticalSpace(10.h),
           Text(

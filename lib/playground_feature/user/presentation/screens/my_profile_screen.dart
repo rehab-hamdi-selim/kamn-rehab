@@ -66,7 +66,7 @@ class MyProfileScreen extends StatelessWidget {
                     child: Text(
                       Constants.logout,
                       style: TextStyles
-                          .font2OfWhiteMediumRoboto, // Adjust font size
+                          .fontRoboto20OfWhiteMedium, // Adjust font size
                     ),
                   ),
                 ),
