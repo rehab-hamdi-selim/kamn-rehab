@@ -53,7 +53,7 @@ class CustomGymAppBar {
               child: Icon(
                 Icons.arrow_back_rounded,
                 size: 20.h,
-                color: AppPallete.lightGrayColor,
+                color: AppPallete.ofWhiteColor,
               ),
             ),
           ),

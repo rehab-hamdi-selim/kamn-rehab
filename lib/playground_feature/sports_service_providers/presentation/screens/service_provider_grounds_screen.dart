@@ -94,7 +94,7 @@ class ServiceProviderGroundsScreen extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
                   decoration: BoxDecoration(
-                    color: AppPallete.lightGrayColor,
+                    color: AppPallete.ofWhiteColor,
                     borderRadius: BorderRadius.circular(15.r),
                   ),
                   child: BlocBuilder<ServiceProviderGroundsCubit,

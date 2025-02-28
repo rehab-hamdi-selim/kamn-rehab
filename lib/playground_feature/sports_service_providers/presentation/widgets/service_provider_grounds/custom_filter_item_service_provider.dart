@@ -20,7 +20,7 @@ class CustomFilterItemServiceProvider extends StatelessWidget {
       alignment: Alignment.center,
       padding: EdgeInsets.symmetric(horizontal: 10.w),
       decoration: BoxDecoration(
-        color: AppPallete.lightGrayColor,
+        color: AppPallete.ofWhiteColor,
         borderRadius: BorderRadius.circular(15.r),
       ),
       child: Row(

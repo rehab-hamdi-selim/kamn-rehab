@@ -21,7 +21,7 @@ class CustomIncomeOutcomeItem extends StatelessWidget {
         alignment: Alignment.topLeft,
         decoration: BoxDecoration(
             border: Border.all(
-              color: AppPallete.ligtGreyColor.withOpacity(0.3),
+              color: AppPallete.lightGreyColor.withOpacity(0.3),
             ),
             borderRadius: BorderRadius.circular(10)),
         padding: const EdgeInsets.all(10),

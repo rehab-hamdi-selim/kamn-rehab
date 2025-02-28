@@ -22,7 +22,7 @@ class CustomTextFormField extends StatelessWidget {
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 0.h, horizontal: 0.w),
           filled: true,
-          fillColor: AppPallete.lightGrayColor,
+          fillColor: AppPallete.ofWhiteColor,
           hintText: Constants.hintTextForSearch,
           hintStyle: TextStyles.fontCircularSpotify10Gray2Regular
               .copyWith(fontSize: 12.h),
@@ -32,11 +32,11 @@ class CustomTextFormField extends StatelessWidget {
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(50),
-            borderSide: const BorderSide(color: AppPallete.lightGrayColor),
+            borderSide: const BorderSide(color: AppPallete.ofWhiteColor),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(50),
-            borderSide: const BorderSide(color: AppPallete.lightGrayColor),
+            borderSide: const BorderSide(color: AppPallete.ofWhiteColor),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(50),

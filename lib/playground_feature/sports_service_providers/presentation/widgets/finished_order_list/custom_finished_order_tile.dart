@@ -19,7 +19,7 @@ class CustomFinishedOrdersTile extends StatelessWidget {
         color: AppPallete.whiteColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
-          side: BorderSide(color: AppPallete.ligtGreyColor, width: 0.5.w),
+          side: BorderSide(color: AppPallete.lightGreyColor, width: 0.5.w),
         ),
         elevation: 3,
         child: Padding(

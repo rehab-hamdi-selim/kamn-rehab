@@ -54,7 +54,7 @@ class CustomFilterTextFormField extends StatelessWidget {
                         const BorderSide(color: AppPallete.darkGreenColor)),
                 suffixIcon: Icon(
                   sufficIcon,
-                  color: AppPallete.ligtGreyColor,
+                  color: AppPallete.lightGreyColor,
                 ),
               )),
         ),

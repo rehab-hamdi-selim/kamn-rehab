@@ -14,7 +14,7 @@ class CustomRateSection extends StatelessWidget {
         color: AppPallete.whiteColor,
         borderRadius: BorderRadius.circular(15.r),
         border: Border.all(
-          color: AppPallete.ligtGreyColor,
+          color: AppPallete.lightGreyColor,
           width: 1.w,
         ),
       ),

@@ -30,7 +30,7 @@ class CustomAnalyticsChart extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                       border: Border.all(
-                        color: AppPallete.ligtGreyColor.withOpacity(0.3),
+                        color: AppPallete.lightGreyColor.withOpacity(0.3),
                       ),
                       borderRadius: BorderRadius.circular(12.r)),
                   padding:
@@ -93,7 +93,7 @@ class CustomAnalyticsChart extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                   border: Border.all(
-                    color: AppPallete.ligtGreyColor.withOpacity(0.25),
+                    color: AppPallete.lightGreyColor.withOpacity(0.25),
                   ),
                   borderRadius: BorderRadius.circular(9.9.r)),
               padding: EdgeInsets.symmetric(horizontal: 17.h, vertical: 8.w),

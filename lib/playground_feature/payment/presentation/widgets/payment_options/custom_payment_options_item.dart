@@ -56,7 +56,7 @@ class CustomPaymentOptionsItem extends StatelessWidget {
         child: CircleAvatar(
           backgroundColor: isDisabled
               ? AppPallete.lgGreyColor
-              : (isSelected ? AppPallete.lightGreenColor : AppPallete.ligtGreyColor),
+              : (isSelected ? AppPallete.lightGreenColor : AppPallete.lightGreyColor),
           radius: 8.r,
         ),
       ),

@@ -44,7 +44,7 @@ class CustomDistanceFilter extends StatelessWidget {
               },
               thumbColor: AppPallete.greenColor,
               activeColor: AppPallete.greenColor,
-              inactiveColor: AppPallete.ligtGreyColor,
+              inactiveColor: AppPallete.lightGreyColor,
             ),
           ],
         );
