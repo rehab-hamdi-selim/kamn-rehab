@@ -50,7 +50,7 @@ class CurrentOrdersTile extends StatelessWidget {
                 Row(
                   children: [
                     Icon(Icons.location_on_outlined,
-                        size: 14.sp, color: AppPallete.greyColor),
+                        size: 14.sp, color: AppPallete.grayColor),
                     horizontalSpace(5.w),
                     Text(
                       reservation.ground?.address ?? '',

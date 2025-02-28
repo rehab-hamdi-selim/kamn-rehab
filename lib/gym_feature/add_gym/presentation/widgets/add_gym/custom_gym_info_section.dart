@@ -40,20 +40,20 @@ class CustomGymInfoSection extends StatelessWidget {
       children: [
         _buildSectionTitle('Choose Gym Logo'),
         _buildDottedUploadLogoBox(),
-        verticalSpace(12.h),
+        verticalSpace(12),
         _buildTextField(nameController, 'Gym Name', 'enter gym name',
             "e.g., Gold's Gym Alexandria"),
-        verticalSpace(12.h),
+        verticalSpace(12),
         _buildTextField(addressController, 'Gym Address', 'enter gym address',
             "e.g., City, District, Street"),
-        verticalSpace(12.h),
+        verticalSpace(12),
         _buildTextField(phoneController, 'Gym Phone', 'enter gym phone',
             "e.g., 01xxxxxxxxx"),
-        verticalSpace(12.h),
+        verticalSpace(12),
         _buildTextField(descriptionController, 'Gym Description',
             'enter gym description', '',
             maxLines: 5, maxLength: 400),
-        verticalSpace(8.h),
+        verticalSpace(8),
       ],
     );
   }
@@ -62,12 +62,12 @@ class CustomGymInfoSection extends StatelessWidget {
     return buildContainer(
       children: [
         _buildSectionTitle('Choose Gym Photos'),
-        verticalSpace(8.h),
+        verticalSpace(8),
         SizedBox(
           height: 94.h,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            separatorBuilder: (_, __) => horizontalSpace(8.w),
+            separatorBuilder: (_, __) => horizontalSpace(8),
             itemCount: 3,
             itemBuilder: (_, __) =>
                 _buildDottedUploadImageBox(width: 121.w, height: 94.h),
@@ -81,13 +81,13 @@ class CustomGymInfoSection extends StatelessWidget {
     return buildContainer(
       children: [
         _buildSectionTitle('Gym Links (optional)'),
-        verticalSpace(8.h),
+        verticalSpace(8),
         _buildSocialTextField(nameController, "assets/icons/instagram.svg",
             'Instagram', 'enter instagram Url'),
-        verticalSpace(12.h),
+        verticalSpace(12),
         _buildSocialTextField(nameController, "assets/icons/facebook.svg",
             'Facebook', 'enter facebook Url'),
-        verticalSpace(12.h),
+        verticalSpace(12),
         _buildSocialTextField(
             nameController, "assets/icons/x.svg", 'X', 'enter x Url'),
       ],
@@ -112,7 +112,7 @@ class CustomGymInfoSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SvgPicture.asset('assets/icons/insert_image.svg', width: 25.w),
-            verticalSpace(7.h),
+            verticalSpace(7),
             Text(
               "Please upload a clear photo in JPG or PNG\n format. File size must be 5MBs or less",
               style: TextStyles.fontCircularSpotify8StealGrayRegular,
@@ -245,7 +245,7 @@ Widget buildNextButton() {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text("Next"),
-            horizontalSpace(8.w),
+            horizontalSpace(8),
             Icon(Icons.arrow_forward, size: 10.h,color: AppPallete.whiteColor,),
           ],
         ),
@@ -254,27 +254,4 @@ Widget buildNextButton() {
   );
 }
 
-Widget buildBackButton() {
-  return Expanded(
-    child: SizedBox(
-      height: 50.h,
-      child: OutlinedButton(
-        style: OutlinedButton.styleFrom(
-          backgroundColor: AppPallete.whiteColor,
-          foregroundColor: AppPallete.blackColor,side: const BorderSide(color: AppPallete.lightGreyColor,width: 0.3),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(70.r)),
-        ),
-        onPressed: () {},
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.arrow_back, size: 10.h,color: AppPallete.blackColor,),
-            horizontalSpace(8.w),
-            const Text("Back"),
-          ],
-        ),
-      ),
-    ),
-  );
-}
+

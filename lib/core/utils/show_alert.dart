@@ -16,11 +16,11 @@ showLoadingAlert(String? message, BuildContext context) {
               content: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const CircularProgressIndicator(color: AppPallete.mainColor),
+                  const CircularProgressIndicator(color: AppPallete.violetColor),
                   horizontalSpace(10.w),
                   Text(message ?? '',
                       style: TextStyles.fontInter15BlackMedium
-                          .copyWith(color: AppPallete.mainColor))
+                          .copyWith(color: AppPallete.violetColor))
                 ],
               ),
             ));

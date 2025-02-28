@@ -22,7 +22,7 @@ class CustomeDropdownMenu extends StatelessWidget {
     return DropdownMenu(
         menuHeight: 400.h,
         menuStyle: MenuStyle(
-            backgroundColor: WidgetStateProperty.all(AppPallete.lightColor)),
+            backgroundColor: WidgetStateProperty.all(AppPallete.lightWhiteColor)),
         selectedTrailingIcon: const Icon(Icons.keyboard_arrow_up_outlined),
         controller: controller,
         hintText: hint,
@@ -32,15 +32,15 @@ class CustomeDropdownMenu extends StatelessWidget {
         inputDecorationTheme: InputDecorationTheme(
             labelStyle: TextStyles.fontInter14BlackMedium,
             hintStyle: TextStyles.fontCircularSpotify12GrayRegular,
-            suffixIconColor: AppPallete.greyColor,
+            suffixIconColor: AppPallete.grayColor,
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
                 borderSide: const BorderSide(
-                  color: AppPallete.greyColor,
+                  color: AppPallete.grayColor,
                   width: 1,
                 )),
             filled: true,
-            fillColor: AppPallete.lightColor,
+            fillColor: AppPallete.lightWhiteColor,
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
               borderSide: const BorderSide(

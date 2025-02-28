@@ -25,7 +25,7 @@ class CustomGroundDetails extends StatelessWidget {
                 TextSpan(
                     text: owner,
                     style: TextStyles.fontCircularSpotify8AccentBlackRegular
-                        .copyWith(color: AppPallete.darkGreenColor)),
+                        .copyWith(color: AppPallete.greenColor)),
               ]),
         ),
         horizontalSpace(13.w),

@@ -15,7 +15,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      cursorColor: AppPallete.darkGreenColor,
+      cursorColor: AppPallete.greenColor,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
         filled: true,
@@ -36,7 +36,7 @@ class CustomTextFormField extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(50),
-          borderSide: const BorderSide(color: AppPallete.darkGreenColor),
+          borderSide: const BorderSide(color: AppPallete.greenColor),
         ),
       ),
       onChanged: onChange,

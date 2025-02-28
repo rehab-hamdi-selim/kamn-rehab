@@ -25,7 +25,7 @@ class CustomWelcomeElevationButton extends StatelessWidget {
           );
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppPallete.mainColor, // Background color
+          backgroundColor: AppPallete.violetColor, // Background color
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),

@@ -58,7 +58,7 @@ class _CustomTabBarState extends State<CustomTabBar>
               tabs: tabs.map((tab) => IntrinsicWidth(child: Tab(text: tab,))).toList(),
             ),
           ),
-          verticalSpace(16.h),
+          verticalSpace(16),
           Expanded(
             child: TabBarView(
               controller: _tabController,

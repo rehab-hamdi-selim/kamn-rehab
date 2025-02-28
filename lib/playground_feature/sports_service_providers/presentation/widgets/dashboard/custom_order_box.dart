@@ -71,7 +71,7 @@ class CustomOrderBox extends StatelessWidget {
                     TextSpan(
                       text: 'less than last month',
                       style: TextStyles.fontCircularSpotify10BlackMedium
-                          .copyWith(color: AppPallete.greyColor),
+                          .copyWith(color: AppPallete.grayColor),
                     )
                   ]))
             ],

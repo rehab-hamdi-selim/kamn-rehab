@@ -18,7 +18,7 @@ class CustomElevationButton extends StatelessWidget {
           //todo: login
         },
         style: ElevatedButton.styleFrom(
-            backgroundColor: AppPallete.mainColor,
+            backgroundColor: AppPallete.violetColor,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(15.r)))),
         child: SizedBox(

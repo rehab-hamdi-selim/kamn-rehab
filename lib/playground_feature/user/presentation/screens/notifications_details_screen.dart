@@ -68,7 +68,7 @@ class NotificationDetailsScreen extends StatelessWidget {
                     Text(
                       'kamnSports@gmail.com',
                       style: TextStyle(
-                        color: AppPallete.greyColor,
+                        color: AppPallete.grayColor,
                         fontSize: 12.sp,
                       ),
                     ),
@@ -80,12 +80,12 @@ class NotificationDetailsScreen extends StatelessWidget {
             Text(
               DateFormat('MMM d, yyyy - h:mm a').format(notification.timestamp),
               style: TextStyle(
-                color: AppPallete.greyColor,
+                color: AppPallete.grayColor,
                 fontSize: 12.sp,
               ),
             ),
             SizedBox(height: 16.h),
-            Divider(color: AppPallete.greyColor.withOpacity(0.5)),
+            Divider(color: AppPallete.grayColor.withOpacity(0.5)),
             SizedBox(height: 16.h),
             Text(
               notification.body,

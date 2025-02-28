@@ -17,7 +17,7 @@ class ReservationDetailsItem extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: AppPallete.ofWhiteColor.withOpacity(0.07),
-        border: Border.all(color: AppPallete.whiteGreenColor, width: 1),
+        border: Border.all(color: AppPallete.lighterGreenColor, width: 1),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(

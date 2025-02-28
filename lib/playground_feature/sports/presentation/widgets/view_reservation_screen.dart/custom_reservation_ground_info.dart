@@ -36,7 +36,7 @@ class CustomReservationGroundInfo extends StatelessWidget {
                 title: Text(
                   ownreName,
                   style: TextStyles.fontCircularSpotify8AccentBlackRegular
-                      .copyWith(color: AppPallete.lightColor),
+                      .copyWith(color: AppPallete.lightWhiteColor),
                 ),
               ),
             ),
@@ -44,7 +44,7 @@ class CustomReservationGroundInfo extends StatelessWidget {
               child: ListTile(
                 leading: const Icon(
                   Icons.location_on_outlined,
-                  color: AppPallete.lightColor,
+                  color: AppPallete.lightWhiteColor,
                 ),
                 horizontalTitleGap: 4,
                 minVerticalPadding: 0,
@@ -52,7 +52,7 @@ class CustomReservationGroundInfo extends StatelessWidget {
                 title: Text(
                   address,
                   style: TextStyles.fontCircularSpotify8AccentBlackRegular
-                      .copyWith(color: AppPallete.lightColor),
+                      .copyWith(color: AppPallete.lightWhiteColor),
                 ),
               ),
             ),
@@ -68,7 +68,7 @@ class CustomReservationGroundInfo extends StatelessWidget {
                 title: Text(
                   '$rate ($review reviews)',
                   style: TextStyles.fontCircularSpotify8AccentBlackRegular
-                      .copyWith(color: AppPallete.lightColor),
+                      .copyWith(color: AppPallete.lightWhiteColor),
                 ),
               ),
             ),

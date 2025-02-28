@@ -59,7 +59,9 @@ class _CustomMandatoryFieldState extends State<CustomMandatoryField> {
                     ),
                     Text(
                       "(${widget.translation})",
-                      style: TextStyles.fontCircularSpotify8StealGrayRegular
+                      style: TextStyles.fontCircularSpotify8StealGrayRegular.copyWith(
+                        fontSize: widget.fontSize
+                      )
                         
                     ),
                   ],

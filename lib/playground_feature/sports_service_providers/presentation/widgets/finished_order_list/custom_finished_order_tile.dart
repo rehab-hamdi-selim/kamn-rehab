@@ -51,7 +51,7 @@ class CustomFinishedOrdersTile extends StatelessWidget {
                           children: [
                             const Icon(
                               Icons.location_on_outlined,
-                              color: AppPallete.greyColor,
+                              color: AppPallete.grayColor,
                               size: 12,
                             ),
                             horizontalSpace(4.w),

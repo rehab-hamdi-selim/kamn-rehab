@@ -35,7 +35,7 @@ class CustomFilterItem extends StatelessWidget {
           Icon(
             icon,
             size: 12.sp,
-            color: AppPallete.darkGreenColor,
+            color: AppPallete.greenColor,
           ),
           horizontalSpace(5.w),
           Text(

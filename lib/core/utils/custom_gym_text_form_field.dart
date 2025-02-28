@@ -66,7 +66,7 @@ class CustomGymTextFormField extends StatelessWidget {
             borderRadius: BorderRadius.circular(8.r)),
         focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: AppPallete.greyColor,
+              color: AppPallete.grayColor,
               width: 1.2,
             ),
             borderRadius: BorderRadius.circular(8.r)),

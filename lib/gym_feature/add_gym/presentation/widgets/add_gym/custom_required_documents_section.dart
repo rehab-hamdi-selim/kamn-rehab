@@ -40,22 +40,23 @@ class CustomRequiredDocumentsSection extends StatelessWidget {
           'All mandatory documents must be clear, valid, and up-to-date.\nIncomplete or expired documents will prevent submission.',
           style: TextStyles.fontCircularSpotify10Gray2Regular,
         ),
-        verticalSpace(12.h),
+        verticalSpace(12),
         const CustomMandatoryField(
           title: 'Gym Operating License',
           translation: 'رخصه تشغيل الجيم',
         ),
-        verticalSpace(12.h),
-        const CustomMandatoryField(
+        verticalSpace(12),
+         CustomMandatoryField(
           title: 'ID or Passport of Owner',
           translation: 'صورة البطاقة الشخصية أو جواز السفر لصاحب الملكيه/الجيم',
+          fontSize: 6.h,
         ),
-        verticalSpace(12.h),
+        verticalSpace(12),
         const CustomMandatoryField(
           title: 'Ownership Contract',
           translation: 'عقد ايجار او ملكيه المكان',
         ),
-        verticalSpace(12.h),
+        verticalSpace(12),
         CustomGymTextFormField(
           controller: TextEditingController(),
           label: 'Contact Number',
@@ -68,7 +69,7 @@ class CustomRequiredDocumentsSection extends StatelessWidget {
 
   Widget _buildDivider() {
     return Divider(
-      color: AppPallete.greyColor,
+      color: AppPallete.grayColor,
       thickness: 0.2.h,
       indent: 73.w,
       endIndent: 73.w,
@@ -84,7 +85,7 @@ class CustomRequiredDocumentsSection extends StatelessWidget {
           'Mandatory Fields',
           style: TextStyles.fontCircularSpotify16BlackMedium,
         ),
-        verticalSpace(12.h),
+        verticalSpace(12),
         const CustomMandatoryField(
           title: 'Tax Registration',
           translation: 'البطاقة الضريبية او التسجيل الضريبي',
@@ -102,4 +103,28 @@ class CustomRequiredDocumentsSection extends StatelessWidget {
       ],
     );
   }
+}
+Widget buildBackButton() {
+  return Expanded(
+    child: SizedBox(
+      height: 50.h,
+      child: OutlinedButton(
+        style: OutlinedButton.styleFrom(
+          backgroundColor: AppPallete.whiteColor,
+          foregroundColor: AppPallete.blackColor,side: const BorderSide(color: AppPallete.lightGreyColor,width: 0.3),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(70.r)),
+        ),
+        onPressed: () {},
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.arrow_back, size: 10.h,color: AppPallete.blackColor,),
+            horizontalSpace(8),
+            const Text("Back"),
+          ],
+        ),
+      ),
+    ),
+  );
 }

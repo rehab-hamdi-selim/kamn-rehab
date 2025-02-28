@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/style.dart';
 
@@ -15,7 +14,7 @@ class CustomHeadTitle extends StatelessWidget {
           "Add Gym",
           style: TextStyles.fontCircularSpotify21BlackMedium,
         ),
-        verticalSpace(2.h),
+        verticalSpace(2),
         Text(
           "Basic Gym Information",
           style: TextStyles.fontCircularSpotify10Gray2Regular,
