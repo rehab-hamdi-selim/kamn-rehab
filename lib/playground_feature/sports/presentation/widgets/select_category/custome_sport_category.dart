@@ -43,7 +43,7 @@ class CustomeSportCategory extends StatelessWidget {
                   verticalSpace(38.h),
                   Text(
                     title,
-                    style: TextStyles.fontRoboto16RegularBlack
+                    style: TextStyles.fontRoboto16BlackRegular
                         .copyWith(color: color),
                   ),
                   verticalSpace(10.h),
@@ -54,7 +54,7 @@ class CustomeSportCategory extends StatelessWidget {
                         horizontalSpace(4.w),
                         Text('$servicesNum services open',
                             style: TextStyles
-                                .font14CircularSpotifyTextGrayRegalur
+                                .fontCircularSpotify14GrayRegular
                                 .copyWith(fontSize: 10)),
                       ],
                     )

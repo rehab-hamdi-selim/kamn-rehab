@@ -26,7 +26,7 @@ class CustomDistanceFilter extends StatelessWidget {
                 children: [
                   Text(
                     'Distance',
-                    style: TextStyles.font2OfaccentBlackMediumRoboto,
+                    style: TextStyles.fontRoboto20AccentBlackMedium,
                   ),
                   Text(
                     '$distanceInKm km',
@@ -44,7 +44,7 @@ class CustomDistanceFilter extends StatelessWidget {
               },
               thumbColor: AppPallete.greenColor,
               activeColor: AppPallete.greenColor,
-              inactiveColor: AppPallete.ligtGreyColor,
+              inactiveColor: AppPallete.lightGreyColor,
             ),
           ],
         );

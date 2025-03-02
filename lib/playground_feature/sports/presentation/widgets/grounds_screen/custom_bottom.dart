@@ -29,7 +29,7 @@ class CustomBottom extends StatelessWidget {
         height: 30.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.r),
-          color: backgroundColor ?? AppPallete.darkGreenColor,
+          color: backgroundColor ?? AppPallete.greenColor,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

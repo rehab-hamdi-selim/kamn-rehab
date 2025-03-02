@@ -2,113 +2,224 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/font_weight_helper.dart';
-import 'package:kamn/core/theme_data/app_palette.dart';
 
 class TextStyles {
-  static TextStyle font12GrayMedium = TextStyle(
-      fontFamily: "Inter",
-      color: AppPallete.greyFontColor,
-      fontWeight: FontWeightHelper.medium,
-      fontSize: 12.77.h);
-  static TextStyle font7InterDimGraySemiBold = TextStyle(
-      fontFamily: "Inter",
-      color: AppPallete.dimGrayColor,
-      fontWeight: FontWeightHelper.semiBold,
+  // Roboto Font Family Styles
+  static TextStyle fontRoboto10RegularGray = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.grayColor,
+      fontWeight: FontWeightHelper.regular,
       fontSize: 10.h);
 
-  static TextStyle font24BlackRegular = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.blackColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 24.h);
-  static TextStyle font13BlackRegular = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.blackColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 13.33.h);
-  static TextStyle font12GreenSemiBold = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.greenColor,
-      fontWeight: FontWeightHelper.semiBold,
-      fontSize: 12.72.h);
-  static TextStyle font12GreyRegular = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.greyColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 11.91.h);
-  static TextStyle font14GreenRegular = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.greenColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 14.34.h);
-  static TextStyle font20BlackBold = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.blackColor,
-      fontWeight: FontWeightHelper.bold,
-      fontSize: 20.h);
-  static TextStyle font12blackRegular = TextStyle(
+  static TextStyle fontRoboto11BlackRegular= TextStyle(
+      // renamed from font12blackRegular
       fontFamily: "Roboto",
       color: AppPallete.blackColor,
       fontWeight: FontWeightHelper.regular,
       fontSize: 11.43.h);
-  static TextStyle font16blackRegular = TextStyle(
+  static TextStyle fontRoboto11BlueRegular = TextStyle(
+      // renamed from font12blackRegular
+      fontFamily: "Roboto",
+      color: AppPallete.blueColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 11.43.h);
+
+  static TextStyle fontRoboto12BlackRegular = TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.blackColor,
       fontWeight: FontWeightHelper.regular,
-      fontSize: 16.h);
-  static TextStyle font32OfWhiteMedium = TextStyle(
+      fontSize: 11.43.h);
+
+  static TextStyle fontRoboto12DarkGreyMedium = TextStyle(
       fontFamily: "Roboto",
-      color: AppPallete.ofWhiteColor,
+      color: AppPallete.darkGrayColor,
       fontWeight: FontWeightHelper.medium,
-      fontSize: 32.h);
-  static TextStyle font20OfWhiteReuglar = TextStyle(
+      fontSize: 11.91.h);
+  static TextStyle fontRoboto12GreyRegular = TextStyle(
       fontFamily: "Roboto",
-      color: AppPallete.ofWhiteColor,
+      color: AppPallete.grayColor,
       fontWeight: FontWeightHelper.regular,
-      fontSize: 24.h);
-  static TextStyle font16greenSemiBold = TextStyle(
+      fontSize: 11.91.h);
+
+  static TextStyle fontRoboto12WhiteRegular = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.whiteColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 12.h);
+
+  static TextStyle fontRoboto12GreenSemiBold = TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.greenColor,
       fontWeight: FontWeightHelper.semiBold,
-      fontSize: 16.h);
-  static TextStyle font16RobotogreenMedium = TextStyle(
+      fontSize: 12.72.h);
+
+  static TextStyle fontRoboto13GreenSemiBold = TextStyle(
+      // renamed from font12GreenSemiBold
       fontFamily: "Roboto",
       color: AppPallete.greenColor,
+      fontWeight: FontWeightHelper.semiBold,
+      fontSize: 12.72.h);
+  static TextStyle fontRoboto12WhiteMedium = TextStyle(
+      // renamed from font12GreenSemiBold
+      fontFamily: "Roboto",
+      color: AppPallete.whiteColor,
       fontWeight: FontWeightHelper.medium,
-      fontSize: 16.h);
-  static TextStyle font14White70 = TextStyle(
+      fontSize: 12.h);
+
+  static TextStyle fontRoboto13BlackRegular = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 13.33.h);
+
+  static TextStyle fontRoboto13SemiBoldGreen = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.greenColor,
+      fontWeight: FontWeightHelper.semiBold,
+      fontSize: 13.h);
+
+  static TextStyle fontRoboto13WhiteRegular = TextStyle(
+      // renamed from font14White70
       fontFamily: "Roboto",
       color: AppPallete.whiteColor,
       fontWeight: FontWeightHelper.regular,
       fontSize: 13.14.h);
-  static TextStyle font18White = TextStyle(
-      fontFamily: "Inter",
+
+  static TextStyle fontRoboto14WhiteRegular = TextStyle(
+      fontFamily: "Roboto",
       color: AppPallete.whiteColor,
-      fontWeight: FontWeightHelper.semiBold,
-      fontSize: 18.77.h);
-  static TextStyle font20White = TextStyle(
-      fontFamily: "Inter",
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 13.14.h);
+  static TextStyle fontRoboto14GreenMedium = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.greenColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 14.h);
+  static TextStyle fontRoboto14WhiteBold = TextStyle(
+      fontFamily: "Roboto",
       color: AppPallete.whiteColor,
-      fontWeight: FontWeightHelper.semiBold,
-      fontSize: 20.h);
-  static TextStyle font15blackMediumInter = TextStyle(
-      fontFamily: "Inter",
+      fontWeight: FontWeightHelper.bold,
+      fontSize: 14.h);
+  static TextStyle fontRoboto14LiteBlackRegular = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.lightBlackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 14.h);
+  static TextStyle fontRoboto14BlackRegular = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 14.h);
+  static TextStyle fontRoboto14AccentBlackLight = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.accentBlackColor,
+      fontWeight: FontWeightHelper.light,
+      fontSize: 14.h);
+  static TextStyle fontRoboto14LiteBlackMedium = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.lightBlackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 14.h);
+  static TextStyle fontRoboto14BlackMedium = TextStyle(
+      fontFamily: "Roboto",
       color: AppPallete.blackColor,
       fontWeight: FontWeightHelper.medium,
-      fontSize: 15.15.h);
-  static TextStyle font2OfWhiteMediumRoboto = TextStyle(
+      fontSize: 14.h);
+  static TextStyle fontRobto14AccentBlackLight = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.accentBlackColor,
+      fontWeight: FontWeightHelper.light,
+      fontSize: 14.h);
+  static TextStyle fontRoboto14LightBlackRegular = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.lightBlackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 14.h);
+
+  static TextStyle fontRoboto14GreenRegular = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.greenColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 14.34.h);
+
+  static TextStyle fontRoboto15BlackRegular = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 15.h);
+  static TextStyle fontRoboto16BlackRegular = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 16.h);
+
+  static TextStyle fontRoboto16GreenMedium = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.greenColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 16.h);
+
+  static TextStyle fontRoboto16GreenSemiBold = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.greenColor,
+      fontWeight: FontWeightHelper.semiBold,
+      fontSize: 16.h);
+
+
+  static TextStyle fontRoboto17AccentBlackRegular = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.accentBlackColor2,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 17.h);
+  static TextStyle fontRoboto18OfWhiteMedium = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.ofWhiteColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 18.h);
+
+  static TextStyle fontRoboto20BlackBold = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.bold,
+      fontSize: 20.h);
+
+  static TextStyle fontRoboto20OfWhiteMedium = TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.ofWhiteColor,
       fontWeight: FontWeightHelper.medium,
       fontSize: 20.h);
-  static TextStyle font2OfaccentBlackMediumRoboto = TextStyle(
+  static TextStyle fontRoboto20OfWhiteRegular = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.ofWhiteColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 20.h);
+
+  static TextStyle fontRoboto20AccentBlackMedium = TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.accentBlackColor,
       fontWeight: FontWeightHelper.medium,
       fontSize: 20.h);
 
-  //
+  static TextStyle fontRoboto20OfWhiteReuglar = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.ofWhiteColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 20.h);
+
+  static TextStyle fontRoboto24BlackRegular = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 24.h);
+
   static TextStyle fontRoboto24MediumBlack = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 24.h);
+
+  static TextStyle fontRoboto24BlackMedium = TextStyle(
+      // renamed from fontRoboto24MediumBlack
       fontFamily: "Roboto",
       color: AppPallete.blackColor,
       fontWeight: FontWeightHelper.medium,
@@ -120,279 +231,131 @@ class TextStyles {
       fontWeight: FontWeightHelper.bold,
       fontSize: 24.h);
 
+  static TextStyle fontRoboto24BlackBold = TextStyle(
+      // renamed from fontRoboto24BoldBlack
+      fontFamily: "Roboto",
+      color: AppPallete.lightBlackColor2,
+      fontWeight: FontWeightHelper.bold,
+      fontSize: 24.h);
+
   static TextStyle fontRoboto24MediumWhite = TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.whiteColor,
       fontWeight: FontWeightHelper.medium,
       fontSize: 24.h);
-  static TextStyle fontRoboto16RegularBlack = TextStyle(
+
+  static TextStyle fontRoboto24WhiteMedium = TextStyle(
+      // renamed from fontRoboto24MediumWhite
       fontFamily: "Roboto",
-      color: AppPallete.blackColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 16.h);
-  static TextStyle fontRoboto13SemiBoldGreen = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.greenColor,
-      fontWeight: FontWeightHelper.semiBold,
-      fontSize: 13.h);
-  static TextStyle fontRoboto10RegularGray = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.grayColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 10.h);
-  static TextStyle fontCircularSpotify10RegularGray2 = TextStyle(
-      fontFamily: "CircularSpotifyText",
-      color: AppPallete.gray2,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 10.h);
-  static TextStyle fontCircularSpotify10Medium = TextStyle(
-      fontFamily: "CircularSpotifyText",
-      color: AppPallete.blackColor,
+      color: AppPallete.whiteColor,
       fontWeight: FontWeightHelper.medium,
-      fontSize: 10.h);
-  static TextStyle fontCircularSpotify7RegularGrey = TextStyle(
-      fontFamily: "CircularSpotifyText",
-      color: AppPallete.greyColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 7.h);
-  static TextStyle fontCircularSpotify10Regular = TextStyle(
-      fontFamily: "CircularSpotifyText",
-      color: AppPallete.lightColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 10.h);
-  static TextStyle fontCircularSpotify11Regular = TextStyle(
-      fontFamily: "CircularSpotifyText",
-      color: AppPallete.lightColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 11.h);
-  static TextStyle fontCircularSpotify10RegularAccent = TextStyle(
-      fontFamily: "CircularSpotifyText",
-      color: AppPallete.accentBlackColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 10.h);
-  static TextStyle fontCircularSpotify10RegularAccentMedium = TextStyle(
-      fontFamily: "CircularSpotifyText",
-      color: AppPallete.accentBlackColor,
-      fontWeight: FontWeightHelper.medium,
-      fontSize: 10.h);
-  static TextStyle fontCircularSpotify10RegularAccentLight = TextStyle(
-      fontFamily: "CircularSpotifyText",
-      color: AppPallete.accentBlackColor,
-      fontWeight: FontWeightHelper.light,
-      fontSize: 10.h);
-  static TextStyle fontCircularSpotify8Regular = TextStyle(
-      fontFamily: "CircularSpotifyText",
-      color: AppPallete.accentBlackColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 8.h);
-  static TextStyle fontCircularSpotify18Medium = TextStyle(
-      fontFamily: "CircularSpotifyText",
-      color: AppPallete.lightColor,
-      fontWeight: FontWeightHelper.medium,
-      fontSize: 18.h);
-  static TextStyle fontCircularSpotify15MediumBlack = TextStyle(
-      fontFamily: "CircularSpotifyText",
-      color: AppPallete.blackColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 15.h);
-  static TextStyle fontCircularSpotify14MediumAccentBlack = TextStyle(
-      fontFamily: "CircularSpotifyText",
-      color: AppPallete.accentBlackColor,
-      fontWeight: FontWeightHelper.medium,
-      fontSize: 14.67.h);
+      fontSize: 24.h);
+
   static TextStyle fontRoboto26BoldBlack = TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.blackColor,
       fontWeight: FontWeightHelper.bold,
       fontSize: 26.h);
 
-  static TextStyle font12CircularSpotifyTextBlackMedium = TextStyle(
-      fontFamily: "CircularSpotifyText",
+  static TextStyle fontRoboto26BlackBold = TextStyle(
+      fontFamily: "Roboto",
       color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.bold,
+      fontSize: 26.h);
+
+  static TextStyle font30DarkGreenMedium = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.greenColor,
       fontWeight: FontWeightHelper.medium,
-      fontSize: 12.h);
-  static TextStyle font12CircularSpotifyTextDarkGeryMedium = TextStyle(
-      fontFamily: "CircularSpotifyText",
-      color: AppPallete.darkGreyColor,
-      fontWeight: FontWeightHelper.medium,
-      fontSize: 12.h);
-  static TextStyle font16DartBlackColorCircularSpotifyTextW400 = TextStyle(
-      fontFamily: "CircularSpotifyText",
-      color: AppPallete.blackColor,
-      fontWeight: FontWeight.w400,
-      fontSize: 16.h);
-  static TextStyle font16LightColorCircularSpotifyRegular = TextStyle(
-      fontFamily: "CircularSpotifyText",
-      color: AppPallete.lightColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 16.h);
-  static TextStyle font14CircularSpotifyTextGrayRegalur = TextStyle(
-      fontFamily: "CircularSpotifyText",
-      color: AppPallete.grayColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 14.h);
-  static TextStyle font15CircularSpotifyTextWhiteMedium = TextStyle(
-      fontFamily: "CircularSpotifyText",
-      color: AppPallete.whiteColor,
-      fontWeight: FontWeightHelper.medium,
-      fontSize: 15.h);
-  static TextStyle font20CircularSpotifyTextAccentBlackMedium = TextStyle(
-      fontFamily: "CircularSpotifyText",
+      fontSize: 30.h);
+  static TextStyle fontRoboto30AccentBlackMedium = TextStyle(
+      fontFamily: "Roboto",
       color: AppPallete.accentBlackColor,
       fontWeight: FontWeightHelper.medium,
-      fontSize: 20.h);
-  static TextStyle font7CircularSpotifyTextDarkGreyMedium = TextStyle(
-      fontFamily: "CircularSpotifyText",
-      color: AppPallete.darkGreyColor,
-      fontWeight: FontWeightHelper.medium,
-      fontSize: 7.h);
-  static TextStyle font30DarkGreenColorBold = TextStyle(
+      fontSize: 30.h);
+  static TextStyle fontRoboto30GreenBold = TextStyle(
       fontFamily: "Roboto",
-      color: AppPallete.darkGreenColor,
+      color: AppPallete.greenColor,
       fontWeight: FontWeightHelper.bold,
       fontSize: 30.h);
-  static TextStyle font30DarkGreenColorMedium = TextStyle(
+  static TextStyle fontRoboto32OfWhiteMedium = TextStyle(
       fontFamily: "Roboto",
-      color: AppPallete.darkGreenColor,
+      color: AppPallete.ofWhiteColor,
       fontWeight: FontWeightHelper.medium,
-      fontSize: 30.h);
-  static TextStyle font30accentBlackColorMedium = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.accentBlackColor,
-      fontWeight: FontWeightHelper.medium,
-      fontSize: 30.h);
-  static TextStyle font14RobotoLightBlackColorRegular = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.lightBlackColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 14.h);
-  static TextStyle font14RobotoLightBlackColorMedium = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.lightBlackColor2,
-      fontWeight: FontWeightHelper.medium,
-      fontSize: 14.h);
-  static TextStyle font14RobotoDarkGreenColorMedium = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.darkGreenColor,
-      fontWeight: FontWeightHelper.medium,
-      fontSize: 14.h);
-  static TextStyle font17RobotoAccentBlackColor2Regular = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.accentBlackColor2,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 17.24.h);
-  static TextStyle font11RobotoAccentBlackColor2Regular = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.accentBlackColor2,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 11.98.h);
-  static TextStyle font11RobotoBlueColorRegular = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.blueColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 11.h);
-  static TextStyle font14RobotoWhiteColorBold = const TextStyle(
-    fontFamily: "Roboto",
-    color: AppPallete.whiteColor,
-    fontWeight: FontWeightHelper.bold,
-  );
-
-  static TextStyle font14RobotoBlackColorRegular = TextStyle(
+      fontSize: 32.h);
+  static TextStyle fontRoboto32BlackMedium = TextStyle(
       fontFamily: "Roboto",
       color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 32.h);
+  static TextStyle fontRoboto45BlackMedium = TextStyle(
+      fontFamily: "Roboto",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 45.h);
+
+  // Inter Font Family Styles
+  static TextStyle fontInter13GrayMedium = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.grayColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 13.h);
+  static TextStyle fontInter7DimGraySemiBold = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.dimGrayColor,
+      fontWeight: FontWeightHelper.semiBold,
+      fontSize: 7.h);
+  static TextStyle fontInter10BlackRegular = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 10.h);
+  static TextStyle fontInter12GreyRegular = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.grayColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 12.h);
+  static TextStyle fontInter12BlackRegular = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 12.h);
+  static TextStyle fontInter14GreenRegular = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.greenColor,
       fontWeight: FontWeightHelper.regular,
       fontSize: 14.h);
-  static TextStyle font32BlackColormedium = TextStyle(
+  static TextStyle fontInter16BlackRegular = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 16.h);
+  static TextStyle fontInter19WhiteSemiBold = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.whiteColor,
+      fontWeight: FontWeightHelper.semiBold,
+      fontSize: 19.h);
+  static TextStyle fontInter20WhiteSemiBold = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.whiteColor,
+      fontWeight: FontWeightHelper.semiBold,
+      fontSize: 20.h);
+ 
+  static TextStyle fontInter24WhiteMedium = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.whiteColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 24.h);
+  static TextStyle fontInter24BlackRegular = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 24.h);
+  static TextStyle fontInter32BlackMedium = TextStyle(
       fontFamily: "Inter",
       color: AppPallete.blackColor2,
       fontWeight: FontWeightHelper.medium,
       fontSize: 32.h);
-  static TextStyle font15DarkGreenColorBold = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.darkGreenColor,
-      fontWeight: FontWeightHelper.bold,
-      fontSize: 15.h);
-  static TextStyle font10DarkGreenColorW400 = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.darkGreenColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 10.h);
-  static TextStyle font12WhiteColorW400 = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.whiteColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 12.h);
-  static TextStyle font12lightBlackColor2Bold = const TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.lightBlackColor2,
-      fontWeight: FontWeightHelper.bold);
-
-  static TextStyle fontRoboto12DarkGreyMedium = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.darkGreyColor,
-      fontWeight: FontWeightHelper.medium,
-      fontSize: 12.h);
-  static TextStyle font10BlackColorW400 = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.accentBlackColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 10.h);
-  static TextStyle font15BlackColorBold = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.accentBlackColor,
-      fontWeight: FontWeightHelper.bold,
-      fontSize: 15.h);
-  static TextStyle font14BlackColorMedium = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.lightBlackColor2,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 14.h);
-  static TextStyle font15BlackColorMedium = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.accentBlackColor,
-      fontWeight: FontWeightHelper.medium,
-      fontSize: 15.h);
-  static TextStyle font15BlackColorRegular = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.accentBlackColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 15.h);
-  static TextStyle font16DartBlackColorW400 = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.dartBlackColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 16.h);
-  static TextStyle font16GreyColorW400 = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.greyColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 16.h);
-  static TextStyle font7DartBlackColorW400 = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.dartBlackColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 7.h);
-  static TextStyle font10GrayColorW400 = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.grayColor,
-      fontWeight: FontWeightHelper.regular,
-      fontSize: 10.h);
-
-  static TextStyle font45RobtoBlackColorMedium = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.blackColor,
-      fontWeight: FontWeightHelper.thin,
-      fontSize: 45.h);
-  static TextStyle font14RobtoAccentBlackColorLight = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.accentBlackColor,
-      fontWeight: FontWeightHelper.light,
-      fontSize: 14.h);
-  static TextStyle font14RobtoAccentBlackLight = TextStyle(
-      fontFamily: "Roboto",
-      color: AppPallete.blackColor,
-      fontWeight: FontWeightHelper.light,
-      fontSize: 14.h);
   static TextStyle fontInter8BlackRegular = TextStyle(
       fontFamily: "Inter",
       color: AppPallete.blackColor,
@@ -400,67 +363,261 @@ class TextStyles {
       fontSize: 8.87.h);
   static TextStyle fontInter14GreyRegular = TextStyle(
       fontFamily: "Inter",
-      color: AppPallete.greyColor,
+      color: AppPallete.grayColor,
       fontWeight: FontWeightHelper.regular,
       fontSize: 14.h);
-  static TextStyle fontInter32BlackMedium = TextStyle(
-      fontFamily: "Inter",
-      color: AppPallete.blackColor,
-      fontWeight: FontWeightHelper.medium,
-      fontSize: 32.h);
-  static TextStyle fontInter10GreyLight = TextStyle(
-      fontFamily: "Inter",
-      color: AppPallete.greyColor,
-      fontWeight: FontWeightHelper.light,
-      fontSize: 10.h);
-  static TextStyle fontInter9LightGreyMudium = TextStyle(
-      fontFamily: "Inter",
-      color: AppPallete.ligtGreyColor,
-      fontWeight: FontWeightHelper.medium,
-      fontSize: 9.h);
-  static TextStyle fontInter9BlackLight = TextStyle(
-      fontFamily: "Inter",
-      color: AppPallete.blackColor,
-      fontWeight: FontWeightHelper.light,
-      fontSize: 9.h);
-  static TextStyle fontInter10LightGreySemiBold = TextStyle(
-      fontFamily: "Inter",
-      color: AppPallete.ligtGreyColor,
-      fontWeight: FontWeightHelper.semiBold,
-      fontSize: 10.h);
   static TextStyle fontInter14BlackMedium = TextStyle(
       fontFamily: "Inter",
       color: AppPallete.blackColor,
       fontWeight: FontWeightHelper.medium,
       fontSize: 14.h);
-  static TextStyle fontInter11GreyMedium = TextStyle(
+  static TextStyle fontInter24BlackMedium = TextStyle(
       fontFamily: "Inter",
-      color: const Color(0xffBBBBBB),
-      fontWeight: FontWeightHelper.medium,
-      fontSize: 11.h);
-  static TextStyle fontInter16WhiteMedium = TextStyle(
-      fontFamily: "Inter",
-      color: Colors.white,
-      fontWeight: FontWeightHelper.medium,
-      fontSize: 16.h);
-  static TextStyle font24BlackInterColorMedium = TextStyle(
-      fontFamily: "Inter",
-      color: AppPalette.blackColor,
+      color: AppPallete.blackColor,
       fontWeight: FontWeightHelper.medium,
       fontSize: 24.h);
-  static TextStyle font24WhiteInterColorMedium = TextStyle(
+  static TextStyle fontInter11GreyMedium = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.grayColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 11.h);
+  static TextStyle fontInter13BlackSemiBold = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.semiBold,
+      fontSize: 13.h);
+  static TextStyle fontInter10LightGreySemiBold = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.ofWhiteColor,
+      fontWeight: FontWeightHelper.semiBold,
+      fontSize: 10.h);
+  static TextStyle fontInter9BlackLight = TextStyle(
+      fontFamily: "Inter",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.light,
+      fontSize: 9.h);
+  static TextStyle fontInter9LightGreyMedium = TextStyle(
+      // fixed typo in "Mudium"
+      fontFamily: "Inter",
+      color: AppPallete.ofWhiteColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 9.h);
+  static TextStyle fontInter10DimGreySemiBold = TextStyle(
+      // renamed from font7InterDimGraySemiBold
+      fontFamily: "Inter",
+      color: AppPallete.dimGrayColor,
+      fontWeight: FontWeightHelper.semiBold,
+      fontSize: 10.h);
+  static TextStyle fontInter10GreyLight = TextStyle(
+      // renamed from font7InterDimGraySemiBold
+      fontFamily: "Inter",
+      color: AppPallete.grayColor,
+      fontWeight: FontWeightHelper.light,
+      fontSize: 10.h);
+  static TextStyle fontInter12GreyMedium = TextStyle(
+      // renamed from font12GrayMedium
+      fontFamily: "Inter",
+      color: AppPallete.greyFontColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 12.77.h);
+  static TextStyle fontInter15BlackMedium = TextStyle(
+      // renamed from font15blackMediumInter
+      fontFamily: "Inter",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 15.15.h);
+  static TextStyle fontInter16GreyRegular = TextStyle(
+      // renamed from font15blackMediumInter
+      fontFamily: "Inter",
+      color: AppPallete.grayColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 16.h);
+  static TextStyle fontInter16WhiteMedium = TextStyle(
+      // renamed from font15blackMediumInter
       fontFamily: "Inter",
       color: AppPallete.whiteColor,
       fontWeight: FontWeightHelper.medium,
-      fontSize: 24.h);
-  static TextStyle font13BlackInterColorSemiBold = TextStyle(
+      fontSize: 16.h);
+  static TextStyle fontInter18WhiteSemiBold = TextStyle(
+      // renamed from font18White
       fontFamily: "Inter",
-      color: AppPallete.accentBlackColor,
+      color: AppPallete.whiteColor,
       fontWeight: FontWeightHelper.semiBold,
-      fontSize: 13.h);
-  static TextStyle font12LightGreyColorregular = TextStyle(
+      fontSize: 18.77.h);
+
+  static TextStyle fontInter32Black2Medium = TextStyle(
+      // renamed from font32BlackColormedium
       fontFamily: "Inter",
-      color: AppPallete.ligtGreyColor,
+      color: AppPallete.blackColor2,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 32.h);
+  // CircularSpotify Font Family Styles
+  static TextStyle fontCircularSpotify7GreyRegular = TextStyle(
+      // renamed from fontCircularSpotify7RegularGrey
+      fontFamily: "CircularSpotify",
+      color: AppPallete.grayColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 7.h);
+  static TextStyle fontCircularSpotify7BlackRegular = TextStyle(
+      // renamed from fontCircularSpotify7RegularGrey
+      fontFamily: "CircularSpotify",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 7.h);
+  static TextStyle fontCircularSpotify7RegularGrey = TextStyle(
+      // renamed from fontCircularSpotify7RegularGrey
+      fontFamily: "CircularSpotify",
+      color: AppPallete.grayColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 7.h);
+  static TextStyle fontCircularSpotify8AccentBlackRegular = TextStyle(
+      // renamed from fontCircularSpotify8Regular
+      fontFamily: "CircularSpotify",
+      color: AppPallete.accentBlackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 8.h);
+  static TextStyle fontCircularSpotify8StealGrayRegular = TextStyle(
+      // renamed from fontCircularSpotify8Regular
+      fontFamily: "CircularSpotify",
+      color: AppPallete.stealGray,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 8.h);
+  static TextStyle fontCircularSpotify10Gray2Regular = TextStyle(
+      // renamed from fontCircularSpotify10RegularGray2
+      fontFamily: "CircularSpotify",
+      color: AppPallete.gray2,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 10.h);
+  static TextStyle fontCircularSpotify10GreenRegular = TextStyle(
+      // renamed from fontCircularSpotify10RegularGray2
+      fontFamily: "CircularSpotify",
+      color: AppPallete.greenColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 10.h);
+  static TextStyle fontCircularSpotify10BlackMedium = TextStyle(
+      // renamed from fontCircularSpotify10Medium
+      fontFamily: "CircularSpotify",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 10.h);
+  static TextStyle fontCircularSpotify10StealGrayMedium = TextStyle(
+      // renamed from fontCircularSpotify10Medium
+      fontFamily: "CircularSpotify",
+      color: AppPallete.stealGray,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 10.h);
+  static TextStyle fontCircularSpotify10LightRegular = TextStyle(
+      // renamed from fontCircularSpotify10Regular
+      fontFamily: "CircularSpotify",
+      color: AppPallete.lightWhiteColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 10.h);
+  static TextStyle fontCircularSpotify10BlackRegular = TextStyle(
+      // renamed from fontCircularSpotify10Regular
+      fontFamily: "CircularSpotify",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 10.h);
+  static TextStyle fontCircularSpotify11LightRegular = TextStyle(
+      // renamed from fontCircularSpotify11Regular
+      fontFamily: "CircularSpotify",
+      color: AppPallete.lightWhiteColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 11.h);
+  static TextStyle fontCircularSpotify12BlackMedium = TextStyle(
+      // renamed from font12CircularSpotifyTextBlackMedium
+      fontFamily: "CircularSpotify",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 12.h);
+  static TextStyle fontCircularSpotify12BlackRegular = TextStyle(
+      // renamed from font12CircularSpotifyTextBlackMedium
+      fontFamily: "CircularSpotify",
+      color: AppPallete.blackColor,
       fontWeight: FontWeightHelper.regular,
       fontSize: 12.h);
+  static TextStyle fontCircularSpotify12WhiteRegular = TextStyle(
+      // renamed from font12CircularSpotifyTextBlackMedium
+      fontFamily: "CircularSpotify",
+      color: AppPallete.whiteColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 12.h);
+  static TextStyle fontCircularSpotify12GrayRegular = TextStyle(
+      // renamed from font12CircularSpotifyTextBlackMedium
+      fontFamily: "CircularSpotify",
+      color: AppPallete.grayColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 12.h);
+  static TextStyle fontCircularSpotify14GrayRegular = TextStyle(
+      // renamed from font14CircularSpotifyTextGrayRegalur, fixed typo
+      fontFamily: "CircularSpotify",
+      color: AppPallete.grayColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 14.h);
+  static TextStyle fontCircularSpotify14LightBlackRegular = TextStyle(
+      // renamed from font14CircularSpotifyTextGrayRegalur, fixed typo
+      fontFamily: "CircularSpotify",
+      color: AppPallete.lightBlack,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 14.h);
+  static TextStyle fontCircularSpotify14BlackRegular = TextStyle(
+      // renamed from font14CircularSpotifyTextGrayRegalur, fixed typo
+      fontFamily: "CircularSpotify",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 14.h);
+  static TextStyle fontCircularSpotify15BlackRegular = TextStyle(
+      // renamed from fontCircularSpotify15MediumBlack
+      fontFamily: "CircularSpotify",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 15.h);
+  static TextStyle fontCircularSpotify15MediumBlack = TextStyle(
+      // renamed from fontCircularSpotify15MediumBlack
+      fontFamily: "CircularSpotify",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 15.h);
+  static TextStyle fontCircularSpotify15GreenBold = TextStyle(
+      // renamed from fontCircularSpotify15MediumBlack
+      fontFamily: "CircularSpotify",
+      color: AppPallete.greenColor,
+      fontWeight: FontWeightHelper.bold,
+      fontSize: 15.h);
+  static TextStyle fontCircularSpotify16BlackRegular = TextStyle(
+      // renamed from font16DartBlackColorCircularSpotifyTextW400
+      fontFamily: "CircularSpotify",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeight.w400,
+      fontSize: 16.h);
+  static TextStyle fontCircularSpotify16LightRegular = TextStyle(
+      // renamed from font16LightColorCircularSpotifyRegular
+      fontFamily: "CircularSpotify",
+      color: AppPallete.lightWhiteColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 16.h);
+  static TextStyle fontCircularSpotify16BlackMedium = TextStyle(
+      // renamed from font16LightColorCircularSpotifyRegular
+      fontFamily: "CircularSpotify",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 16.h);
+  static TextStyle fontCircularSpotify18LightMedium = TextStyle(
+      // renamed from fontCircularSpotify18Medium
+      fontFamily: "CircularSpotify",
+      color: AppPallete.lightWhiteColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 18.h);
+  static TextStyle fontCircularSpotify21BlackMedium = TextStyle(
+      // renamed from fontCircularSpotify18Medium
+      fontFamily: "CircularSpotify",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 21.h);
+  static TextStyle fontCircularSpotify32BlackMedium = TextStyle(
+      // renamed from fontCircularSpotify18Medium
+      fontFamily: "CircularSpotify",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 32.h);
 }

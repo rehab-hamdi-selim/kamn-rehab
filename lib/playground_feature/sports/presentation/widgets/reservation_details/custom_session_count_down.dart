@@ -37,11 +37,11 @@ class CustomSessionCountDown extends StatelessWidget {
             children: [
               Text(
                 DateFormat('EEEE, d MMM yyyy').format(startAt),
-                style: TextStyles.font14GreenRegular,
+                style: TextStyles.fontRoboto14GreenRegular,
               ),
               Text(
                 "${DateFormat.jm().format(startAt)} to ${DateFormat.jm().format(endAt)}",
-                style: TextStyles.font14GreenRegular,
+                style: TextStyles.fontRoboto14GreenRegular,
               )
             ],
           ),
@@ -60,7 +60,7 @@ class CustomSessionCountDown extends StatelessWidget {
                   (duration.inSeconds % 60).toString().padLeft(2, '0');
 
               return Text('$hours:$minutes:$seconds',
-                  style: TextStyles.font12GreenSemiBold
+                  style: TextStyles.fontRoboto12GreenSemiBold
                       .copyWith(fontWeight: FontWeight.bold));
             },
           )

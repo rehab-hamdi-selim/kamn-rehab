@@ -27,7 +27,7 @@ class CustomFavoriteButton extends StatelessWidget {
               horizontalSpace(6.w),
               Text(
                 'Like',
-                style: TextStyles.fontCircularSpotify10Medium,
+                style: TextStyles.fontCircularSpotify10BlackMedium,
               )
             ],
           ),

@@ -26,14 +26,14 @@ class CustomTextFormFeld extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
           controller: controller,
-          style:TextStyles.font17RobotoAccentBlackColor2Regular,
+          style:TextStyles.fontRoboto17AccentBlackRegular,
           cursorColor: AppPallete.darkVividVioletColor,
           validator: validator,
           keyboardType:keyboardType ,
           obscureText: obscureText,
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: TextStyles.font17RobotoAccentBlackColor2Regular,
+            hintStyle: TextStyles.fontRoboto17AccentBlackRegular,
             suffixIcon: suffixIcon,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(14.78.r),

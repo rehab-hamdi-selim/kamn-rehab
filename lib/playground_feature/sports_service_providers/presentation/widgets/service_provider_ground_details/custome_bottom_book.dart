@@ -46,7 +46,7 @@ class CustomeBottomBook extends StatelessWidget {
               },
               child: Text(
                 'Decline',
-                style: TextStyles.font16greenSemiBold.copyWith(
+                style: TextStyles.fontRoboto16GreenSemiBold.copyWith(
                   color: AppPallete.redColor,
                 ),
               )),
@@ -57,7 +57,7 @@ class CustomeBottomBook extends StatelessWidget {
               },
               child: Text(
                 'Accept',
-                style: TextStyles.font16greenSemiBold,
+                style: TextStyles.fontRoboto16GreenSemiBold,
               ))
         ],
       ),

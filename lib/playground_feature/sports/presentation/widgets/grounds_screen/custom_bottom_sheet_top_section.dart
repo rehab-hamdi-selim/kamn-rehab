@@ -19,12 +19,12 @@ class CustomBottomSheetTopSection extends StatelessWidget {
           iconSize: 28,
         ),
         Text('Filters',
-            style: TextStyles.font20BlackBold.copyWith(
+            style: TextStyles.fontRoboto20BlackBold.copyWith(
               color: AppPallete.accentBlackColor,
             )),
         TextButton(
             onPressed: resetButton,
-            child: Text('Reset', style: TextStyles.font16GreyColorW400)),
+            child: Text('Reset', style: TextStyles.fontInter16GreyRegular)),
       ],
     );
   }

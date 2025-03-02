@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(Constants.login,
-                        style: TextStyles.font24BlackInterColorMedium),
+                        style: TextStyles.fontInter24BlackMedium),
                     Padding(
                       padding: EdgeInsets.only(top: 40.h),
                       child: Form(

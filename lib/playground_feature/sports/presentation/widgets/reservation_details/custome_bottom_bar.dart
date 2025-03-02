@@ -31,12 +31,12 @@ class CustomeBottomBar extends StatelessWidget {
                 text: TextSpan(
                     text:
                         '${(reservationModel?.ground?.price)?.toStringAsFixed(0)} LE',
-                    style: TextStyles.font32OfWhiteMedium
+                    style: TextStyles.fontRoboto32OfWhiteMedium
                         .copyWith(color: AppPallete.redColor),
                     children: [
                       TextSpan(
                         text: ' / hr',
-                        style: TextStyles.font20OfWhiteReuglar
+                        style: TextStyles.fontRoboto20OfWhiteReuglar
                             .copyWith(color: AppPallete.redColor),
                       )
                     ]),
@@ -52,7 +52,7 @@ class CustomeBottomBar extends StatelessWidget {
                   },
                   child: Text(
                     'Leave',
-                    style: TextStyles.font16greenSemiBold
+                    style: TextStyles.fontRoboto16GreenSemiBold
                         .copyWith(color: AppPallete.whiteColor),
                   ))
             ],

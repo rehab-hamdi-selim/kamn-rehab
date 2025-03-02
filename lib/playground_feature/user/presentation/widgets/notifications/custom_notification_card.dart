@@ -23,10 +23,10 @@ class CustomNotificationCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: notification.isRead
               ? AppPallete.whiteColor
-              : AppPallete.lightVioletColor.withOpacity(0.1),
+              : AppPallete.lightWhiteColor.withOpacity(0.1),
           border: Border(
             bottom: BorderSide(
-              color: AppPallete.greyColor.withOpacity(0.2),
+              color: AppPallete.grayColor.withOpacity(0.2),
               width: 1,
             ),
           ),
@@ -67,7 +67,7 @@ class CustomNotificationCard extends StatelessWidget {
                       Text(
                         DateFormat('MMM d').format(notification.timestamp),
                         style: TextStyle(
-                          color: AppPallete.greyColor,
+                          color: AppPallete.grayColor,
                           fontSize: 12.sp,
                         ),
                       ),
@@ -90,7 +90,7 @@ class CustomNotificationCard extends StatelessWidget {
                   Text(
                     notification.body,
                     style: TextStyle(
-                      color: AppPallete.greyColor,
+                      color: AppPallete.grayColor,
                       fontSize: 12.sp,
                     ),
                     maxLines: 2,

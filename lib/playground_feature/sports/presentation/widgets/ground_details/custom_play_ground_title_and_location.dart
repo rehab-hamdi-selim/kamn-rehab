@@ -27,7 +27,7 @@ class CustomPlayGroundTitleAndLocation extends StatelessWidget {
         playGroundNameAndRating(),
         Text(
           playgroundModel?.address ?? "",
-          style: TextStyles.font12GreenSemiBold,
+          style: TextStyles.fontRoboto12GreenSemiBold,
         ),
         verticalSpace(10.h),
         playGroundFeatures(),
@@ -42,7 +42,7 @@ class CustomPlayGroundTitleAndLocation extends StatelessWidget {
       children: [
         Text(
           Constants.playGroundFeatures,
-          style: TextStyles.font20BlackBold,
+          style: TextStyles.fontRoboto20BlackBold,
         ),
         Row(
           children: [
@@ -63,7 +63,7 @@ class CustomPlayGroundTitleAndLocation extends StatelessWidget {
             horizontalSpace(6.w),
             Text(
               Constants.available,
-              style: TextStyles.font13BlackRegular,
+              style: TextStyles.fontRoboto13BlackRegular,
             )
           ],
         )
@@ -76,7 +76,7 @@ class CustomPlayGroundTitleAndLocation extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(playgroundModel?.playgroundName ?? "",
-            style: TextStyles.font24BlackRegular.copyWith(height: .85),
+            style: TextStyles.fontRoboto24BlackRegular.copyWith(height: .85),
             maxLines: 2,
             overflow: TextOverflow.ellipsis),
         const Spacer(
@@ -121,7 +121,7 @@ class CustomPlayGroundTitleAndLocation extends StatelessWidget {
               horizontalSpace(3.w),
               Text(
                 playgroundModel?.owner?.name ?? "",
-                style: TextStyles.font12CircularSpotifyTextBlackMedium,
+                style: TextStyles.fontCircularSpotify12BlackMedium,
               )
             ],
           ),
@@ -140,7 +140,7 @@ class CustomPlayGroundTitleAndLocation extends StatelessWidget {
             onPressed: () {},
             label: Text(
               Constants.directions,
-              style: TextStyles.font14GreenRegular,
+              style: TextStyles.fontRoboto14GreenRegular,
             ),
             icon: SvgPicture.asset('assets/icons/direction.svg'),
           ),

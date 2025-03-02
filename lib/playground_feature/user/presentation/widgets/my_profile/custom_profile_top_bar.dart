@@ -23,7 +23,7 @@ class CustomProfileTopBar extends StatelessWidget {
             },
           ),
           Text(Constants.myProfile,
-              style: TextStyles.font20White // Adjust font size
+              style: TextStyles.fontRoboto20OfWhiteMedium // Adjust font size
               ),
           CircleAvatar(
             backgroundColor: const Color(0xffF6F6F6).withOpacity(.4),

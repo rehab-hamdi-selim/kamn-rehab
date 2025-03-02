@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kamn/core/theme_data/style.dart';
+import 'package:kamn/core/theme/style.dart';
 
 class CustomPriceSection extends StatefulWidget {
   const CustomPriceSection({super.key, required this.price});
@@ -46,11 +46,11 @@ class _CustomPriceSectionState extends State<CustomPriceSection>
       builder: (context, child) => RichText(
         text: TextSpan(
           text: '${_animation.value.toStringAsFixed(0)} LE',
-          style: Style.font16DartBlackColorW400,
+          style: TextStyles.fontCircularSpotify16BlackRegular,
           children: [
             TextSpan(
               text: '/hr',
-              style: Style.font10BlackColorW400,
+              style: TextStyles.fontCircularSpotify10BlackRegular,
             ),
           ],
         ),

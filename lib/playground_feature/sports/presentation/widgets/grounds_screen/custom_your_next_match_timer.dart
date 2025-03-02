@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
+import 'package:kamn/core/theme/style.dart';
 
 import '../../../../../core/const/constants.dart';
-import '../../../../../core/theme_data/style.dart';
 
 class CustomYourNextMatchTimer extends StatelessWidget {
   const CustomYourNextMatchTimer({
@@ -29,11 +29,11 @@ class CustomYourNextMatchTimer extends StatelessWidget {
         children: [
           Text(
             Constants.nextMatch,
-            style: Style.font15DarkGreenColorBold,
+            style: TextStyles.fontCircularSpotify15GreenBold,
           ),
           Text(
             "00 : 52 : 36",
-            style: Style.font15DarkGreenColorBold,
+            style: TextStyles.fontCircularSpotify15GreenBold,
           ),
         ],
       ),

@@ -40,7 +40,7 @@ class CustomeUpperText extends StatelessWidget {
           ),
           Text(
             "Create an account to continue!",
-            style: TextStyles.font14BlackColorMedium,
+            style: TextStyles.fontRoboto14BlackMedium,
           ),
         ],
       ),

@@ -37,7 +37,7 @@ class CustomExpactedEarningChart extends StatelessWidget {
             ),
             Text(
               'Expacted Earning',
-              style: TextStyles.font13BlackRegular,
+              style: TextStyles.fontRoboto13BlackRegular,
             ),
             verticalSpace(9.31.h),
             Text(
@@ -54,7 +54,7 @@ class CustomExpactedEarningChart extends StatelessWidget {
               child: Center(
                 child: Text(
                   '+2.15%',
-                  style: TextStyles.font14White70,
+                  style: TextStyles.fontRoboto14WhiteRegular,
                 ),
               ),
             ),
