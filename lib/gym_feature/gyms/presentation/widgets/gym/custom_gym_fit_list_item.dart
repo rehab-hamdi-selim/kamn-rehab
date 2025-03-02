@@ -44,7 +44,7 @@ class CustomGymFitListItem extends StatelessWidget {
                   child: FittedBox(
                     child: Text(
                       description,
-                      style: TextStyles.fontCircularSpotify10RegularAccent,
+                      style: TextStyles.fontCircularSpotify10BlackRegular,
                     ),
                   ),
                 ),
@@ -69,7 +69,7 @@ class CustomGymFitListItem extends StatelessWidget {
               padding: EdgeInsets.only(right: 20.w),
               child: Text(
                 name,
-                style: TextStyles.font15CircularSpotifyTextWhiteMedium,
+                style: TextStyles.fontCircularSpotify15WhiteMedium,
               ),
             ),
           ],

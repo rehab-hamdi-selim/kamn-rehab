@@ -33,7 +33,7 @@ class CustomGymAppbar extends StatelessWidget implements PreferredSizeWidget {
             child: Icon(
               Icons.arrow_back_rounded,
               size: 20.h,
-              color: AppPallete.lightGrayColor,
+              color: AppPallete.lightGreyColor,
             ),
           ),
         ),
@@ -74,11 +74,11 @@ class CustomGymAppbar extends StatelessWidget implements PreferredSizeWidget {
           RichText(
             text: TextSpan(
                 text: 'Welcome back 👋\n',
-                style: TextStyles.font12CircularSpotifyTextDarkGeryMedium,
+                style: TextStyles.fontCircularSpotify12GrayRegular,
                 children: [
                   TextSpan(
                       text: 'Mohammed Ashraf',
-                      style: TextStyles.fontCircularSpotify14MediumAccentBlack),
+                      style: TextStyles.fontCircularSpotify14AccentBlackMedium),
                 ]),
           ),
         ],
