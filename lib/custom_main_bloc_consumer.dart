@@ -40,14 +40,14 @@ class CustomMainBlocConsumer extends StatelessWidget {
       },
       builder: (context, state) {
         return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          onGenerateRoute: AppRouter.generateRoute,
-          home: _buildHomeWidget(state, appUserCubit));
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,
+            ),
+            onGenerateRoute: AppRouter.generateRoute,
+            home: _buildHomeWidget(state, appUserCubit));
       },
     );
   }
@@ -61,7 +61,7 @@ class CustomMainBlocConsumer extends StatelessWidget {
     }
     if (state.isLoggedIn() || state.isGettedData() || state.isSuccess()) {
       return BlocProvider(
-        create:(context)=> getIt<SelectCategoryCubit>()..getPlaygrounds(),
+        create: (context) => getIt<SelectCategoryCubit>()..getPlaygrounds(),
         child: const SelectCategoryScreen(),
       );
     }
