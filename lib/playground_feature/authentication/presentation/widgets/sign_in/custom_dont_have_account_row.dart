@@ -16,13 +16,13 @@ class CustomDontHaveAccountRow extends StatelessWidget {
       children: [
         Text(
           "Don't have an account? ",
-          style: TextStyles.font14RobotoLightBlackColorRegular,
+          style: TextStyles.fontRoboto14LiteBlackRegular,
         ),
         InkWell(
           onTap: onTap,
           child: Text(
             'Sign Up',
-            style: TextStyles.font14RobotoLightBlackColorMedium,
+            style: TextStyles.fontRoboto14LiteBlackRegular,
           ),
         ),
       ],

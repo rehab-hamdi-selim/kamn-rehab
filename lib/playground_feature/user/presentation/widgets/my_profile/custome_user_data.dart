@@ -45,12 +45,12 @@ class CustomUserData extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(user?.name ?? '', style: TextStyles.font18White),
+              Text(user?.name ?? '', style: TextStyles.fontRoboto18OfWhiteMedium),
 
               verticalSpace(7.h), // Responsive height
-              Text(user?.email ?? '', style: TextStyles.font14White70),
+              Text(user?.email ?? '', style: TextStyles.fontRoboto14WhiteBold),
               verticalSpace(7.h),
-              Text(user?.phoneNumber??"", style: TextStyles.font14White70),
+              Text(user?.phoneNumber??"", style: TextStyles.fontRoboto14WhiteBold),
             ],
           ),
           const Spacer(),

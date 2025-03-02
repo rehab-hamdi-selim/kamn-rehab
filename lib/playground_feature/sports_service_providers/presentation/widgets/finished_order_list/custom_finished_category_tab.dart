@@ -36,7 +36,7 @@ class CustomFinishedOrdersTabs extends StatelessWidget {
               ),
               child: Text(
                 category.displayName,
-                style: TextStyles.fontCircularSpotify10Medium
+                style: TextStyles.fontCircularSpotify10BlackMedium
                     .copyWith(color: category.sportColor),
               ),
             ),

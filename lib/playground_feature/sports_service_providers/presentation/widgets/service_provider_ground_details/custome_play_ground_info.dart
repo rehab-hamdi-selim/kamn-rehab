@@ -36,7 +36,7 @@ class CustomePlayGroundInfo extends StatelessWidget {
                     children: [
                       Text(
                         "  ${playgroundModel?.description}",
-                        style: TextStyles.font12blackRegular
+                        style: TextStyles.fontRoboto12BlackRegular
                             .copyWith(fontSize: 16.h),
                         maxLines: context
                             .read<ServiceProviderGroundDetailsCubit>()
@@ -105,7 +105,7 @@ class CustomePlayGroundInfo extends StatelessWidget {
               },
               child: Text(
                 "Read More",
-                style: TextStyles.font16blackRegular,
+                style: TextStyles.fontRoboto16BlackRegular,
               ),
             ),
           ),
@@ -120,7 +120,7 @@ class CustomePlayGroundInfo extends StatelessWidget {
       children: [
         Text(
           Constants.playGroundFeatures,
-          style: TextStyles.font20BlackBold,
+          style: TextStyles.fontRoboto20BlackBold,
         ),
         Row(
           children: [
@@ -141,7 +141,7 @@ class CustomePlayGroundInfo extends StatelessWidget {
             horizontalSpace(6.w),
             Text(
               Constants.available,
-              style: TextStyles.font13BlackRegular,
+              style: TextStyles.fontRoboto13BlackRegular,
             )
           ],
         )
@@ -154,7 +154,7 @@ class CustomePlayGroundInfo extends StatelessWidget {
       children: [
         Expanded(
           child: Text(playgroundModel?.playgroundName ?? "",
-              style: TextStyles.font24BlackRegular.copyWith(height: .85),
+              style: TextStyles.fontRoboto24BlackRegular.copyWith(height: .85),
               maxLines: 2,
               overflow: TextOverflow.ellipsis),
         ),
@@ -175,7 +175,7 @@ class CustomePlayGroundInfo extends StatelessWidget {
             ),
             label: Text(
               'edit',
-              style: TextStyles.font14RobotoLightBlackColorRegular,
+              style: TextStyles.fontRoboto14LightBlackRegular,
             ))
       ],
     );

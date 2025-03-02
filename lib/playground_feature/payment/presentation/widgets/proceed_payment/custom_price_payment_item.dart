@@ -16,15 +16,15 @@ class CustomPricePaymentItem extends StatelessWidget {
       leading: Text(
         name,
         style: name == 'Bill to' || name == 'Invoice'
-            ? TextStyles.font14RobotoBlackColorRegular
-            : TextStyles.font14RobtoAccentBlackColorLight,
+            ? TextStyles.fontRoboto14BlackRegular
+            : TextStyles.fontRoboto14AccentBlackLight,
       ),
       minTileHeight: 0,
       trailing: Text(
         value,
         style: name == 'Bill to' || name == 'Invoice'
-            ? TextStyles.font14RobotoBlackColorRegular
-            : TextStyles.font14RobtoAccentBlackColorLight,
+            ? TextStyles.fontRoboto14BlackRegular
+            : TextStyles.fontRoboto14AccentBlackLight,
       ),
     );
   }

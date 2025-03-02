@@ -33,7 +33,7 @@ class CustomEditAppBar {
         style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w500,
-            color: AppPallete.greyColor), // Same styling as others
+            color: AppPallete.grayColor), // Same styling as others
       ),
       actions: [
         BlocBuilder<EditProfileCubit, EditProfileState>(

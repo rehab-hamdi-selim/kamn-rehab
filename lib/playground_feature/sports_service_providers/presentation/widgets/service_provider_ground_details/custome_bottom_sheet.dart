@@ -21,12 +21,12 @@ class CustomeBottomSheet extends StatelessWidget {
         children: [
           Text(
             'Decline',
-            style: TextStyles.font20BlackBold,
+            style: TextStyles.fontRoboto20BlackBold,
             textAlign: TextAlign.center,
           ),
           Text(
             'leave a comment ',
-            style: TextStyles.font20BlackBold
+            style: TextStyles.fontRoboto20BlackBold
                 .copyWith(fontWeight: FontWeightHelper.medium),
           ),
           TextField(

@@ -19,7 +19,7 @@ class CustomeIndividualPlayCategories extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 15.h),
       margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
       decoration: BoxDecoration(
-          color: AppPallete.lightGrayColor,
+          color: AppPallete.ofWhiteColor,
           borderRadius: BorderRadius.circular(20.h)),
       child: ListView.separated(
           physics: const NeverScrollableScrollPhysics(),

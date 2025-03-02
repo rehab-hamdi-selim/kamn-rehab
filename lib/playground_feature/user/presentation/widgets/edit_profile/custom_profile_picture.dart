@@ -125,7 +125,7 @@ class CustomProfilePicture extends StatelessWidget {
                                     color: AppPallete.whiteColor,
                                     shape: BoxShape.circle),
                                 child: CircleAvatar(
-                                  backgroundColor: AppPallete.ligtGreyColor,
+                                  backgroundColor: AppPallete.lightGreyColor,
                                   child: Padding(
                                     padding: const EdgeInsets.all(5.0),
                                     child: SizedBox.expand(
@@ -149,13 +149,13 @@ class CustomProfilePicture extends StatelessWidget {
                         children: [
                           Text(
                             user?.name ?? '',
-                            style: TextStyles.font20White,
+                            style: TextStyles.fontRoboto20OfWhiteMedium,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           ),
                           Text(
                             user?.type ?? '',
-                            style: TextStyles.font18White,
+                            style: TextStyles.fontRoboto18OfWhiteMedium,
                           ),
                         ],
                       ),

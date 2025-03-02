@@ -27,7 +27,7 @@ class CustomSignInInputFields extends StatelessWidget {
         children: [
           Text(
             "Email",
-            style: TextStyles.font17RobotoAccentBlackColor2Regular,
+            style: TextStyles.fontRoboto17AccentBlackRegular,
           ),
           verticalSpace(5.h),
           CustomTextFormFeld(
@@ -43,7 +43,7 @@ class CustomSignInInputFields extends StatelessWidget {
           SizedBox(height: 15.h),
           Text(
             "Password",
-            style: TextStyles.font17RobotoAccentBlackColor2Regular,
+            style: TextStyles.fontRoboto17AccentBlackRegular,
           ),
           verticalSpace(5.h),
           BlocBuilder<SignInCubit, SignInState>(

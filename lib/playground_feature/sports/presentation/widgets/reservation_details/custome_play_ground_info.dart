@@ -32,7 +32,7 @@ class CustomePlayGroundInfo extends StatelessWidget {
           playGroundNameAndRating(),
           Text(
             reservationModel?.ground?.address ?? "",
-            style: TextStyles.font12GreenSemiBold,
+            style: TextStyles.fontRoboto12GreenSemiBold,
           ),
           verticalSpace(5.h),
           DateAndCountdownWidget(
@@ -55,7 +55,7 @@ class CustomePlayGroundInfo extends StatelessWidget {
                           children: [
                             Text(
                               " Lorem ipsum dolor sit amet consectetur. Aliquam auctor erat bibendum magna mi. Sed diam cursus quam volutpat faucibus ullamcorper phasellus urna semper. Et eget aliquet odio iaculis viverra aliquet venenatis. Purus malesuada odio enim elit. Non in est faucibus eget nec. Faucibus mauris elit dictum ultricies ut amet purus. Consequat aliquam volutpat quisque auctor tristique elementum nunc. Ultricies diam fermentum ullamcorper egestas aenean fringilla commodo. Semper habitasse mauris ornare imperdiet. Egestas non magna id a. Sollicitudin sodales sit purus volutpat mi aliquam lobortis dictum. Tortor integer ullamcorper orci enim cursus netus sed.Nunc odio consequat morbi dolor pharetra sed proin. Cras nisi malesuada malesuada tristique sit at sit felis. Enim hendrerit eu suscipit vel nibh natoque. Neque at malesuada nunc tortor odio. Vulputate quam egestas nam etiam nec feugiat. Convallis ipsum senectus a tellus.Metus lectus luctus viverra donec. Augue cursus viverra eros in. Nunc, eget aliquet odio iaculis",
-                              style: TextStyles.font12blackRegular
+                              style: TextStyles.fontInter12BlackRegular
                                   .copyWith(fontSize: 16.h),
                               maxLines: state.maxLines,
                               textAlign: TextAlign.center,
@@ -119,7 +119,7 @@ class CustomePlayGroundInfo extends StatelessWidget {
             },
             child: Text(
               'Read more',
-              style: TextStyles.font16blackRegular,
+              style: TextStyles.fontInter16BlackRegular,
             ),
           ),
         ),
@@ -146,7 +146,7 @@ class CustomePlayGroundInfo extends StatelessWidget {
           },
           child: Text(
             'show less',
-            style: TextStyles.font16blackRegular,
+            style: TextStyles.fontInter16BlackRegular ,
           ),
         ),
       ),
@@ -159,7 +159,7 @@ class CustomePlayGroundInfo extends StatelessWidget {
       children: [
         Text(
           Constants.playGroundFeatures,
-          style: TextStyles.font20BlackBold,
+          style: TextStyles.fontRoboto20BlackBold,
         ),
         Row(
           children: [
@@ -180,7 +180,7 @@ class CustomePlayGroundInfo extends StatelessWidget {
             horizontalSpace(6.w),
             Text(
               Constants.available,
-              style: TextStyles.font13BlackRegular,
+              style: TextStyles.fontRoboto13BlackRegular,
             )
           ],
         )
@@ -193,7 +193,7 @@ class CustomePlayGroundInfo extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(reservationModel?.ground?.playgroundName ?? "",
-            style: TextStyles.font24BlackRegular.copyWith(height: .85),
+            style: TextStyles.fontInter24BlackRegular.copyWith(height: .85),
             maxLines: 2,
             overflow: TextOverflow.ellipsis),
         const Spacer(
@@ -227,7 +227,7 @@ class CustomePlayGroundInfo extends StatelessWidget {
               horizontalSpace(3.w),
               Text(
                 'mahmoudsayed',
-                style: TextStyles.font10BlackColorW400,
+                style: TextStyles.fontInter10BlackRegular,
               )
             ],
           ),
@@ -246,7 +246,7 @@ class CustomePlayGroundInfo extends StatelessWidget {
             onPressed: () {},
             label: Text(
               Constants.directions,
-              style: TextStyles.font14GreenRegular,
+              style: TextStyles.fontInter14GreenRegular,
             ),
             icon: SvgPicture.asset('assets/icons/direction.svg'),
           ),

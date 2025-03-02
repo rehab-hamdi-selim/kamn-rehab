@@ -37,7 +37,7 @@ class CurrentOrdersTile extends StatelessWidget {
               children: [
                 Text(
                   reservation.ground?.type ?? '',
-                  style: TextStyles.fontCircularSpotify18Medium.copyWith(
+                  style: TextStyles.fontCircularSpotify18LightMedium.copyWith(
                       color: Sport.values
                           .firstWhere((element) =>
                               element.displayName == reservation.ground?.type)
@@ -50,11 +50,11 @@ class CurrentOrdersTile extends StatelessWidget {
                 Row(
                   children: [
                     Icon(Icons.location_on_outlined,
-                        size: 14.sp, color: AppPallete.greyColor),
+                        size: 14.sp, color: AppPallete.grayColor),
                     horizontalSpace(5.w),
                     Text(
                       reservation.ground?.address ?? '',
-                      style: TextStyles.fontCircularSpotify7RegularGrey,
+                      style: TextStyles.fontCircularSpotify7GreyRegular,
                     ),
                   ],
                 ),

@@ -4,7 +4,7 @@ import 'package:flutter_debouncer/flutter_debouncer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/core/theme_data/style.dart';
+import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/core/utils/app_images.dart';
 import 'package:kamn/playground_feature/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
 import 'package:kamn/playground_feature/sports/presentation/widgets/grounds_screen/custom_bottom.dart';
@@ -46,7 +46,7 @@ class CustomFilterSection extends StatelessWidget {
             filterBottomSheet(context);
           },
           textBottom: 'Filter',
-          textStyle: Style.font12WhiteColorW400,
+          textStyle: TextStyles.fontCircularSpotify12WhiteRegular,
         ),
       ],
     );

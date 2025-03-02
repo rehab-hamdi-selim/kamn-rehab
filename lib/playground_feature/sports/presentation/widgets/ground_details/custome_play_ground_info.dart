@@ -32,7 +32,7 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
                   children: [
                     Text(
                       widget.description ,
-                      style: TextStyles.font12blackRegular
+                      style: TextStyles.fontRoboto12BlackRegular
                           .copyWith(fontSize: 16.h),
                       maxLines: maxLines,
                       textAlign: TextAlign.center,
@@ -95,7 +95,7 @@ class _CustomePlayGroundInfoState extends State<CustomePlayGroundInfo> {
           },
           child: Text(
             isExpanded ? 'show less' : 'Read more',
-            style: TextStyles.font16blackRegular,
+            style: TextStyles.fontRoboto16BlackRegular,
           ),
         ),
       ),

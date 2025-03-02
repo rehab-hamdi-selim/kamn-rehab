@@ -44,9 +44,9 @@ class CustomeTextFormField extends StatelessWidget {
         contentPadding: EdgeInsets.symmetric(horizontal: 10.w),
         suffixIcon: suffixIcon,
         hintText: hint,
-        hintStyle: TextStyles.font12GreyRegular,
+        hintStyle: TextStyles.fontRoboto12GreyRegular,
         filled: true,
-        fillColor: AppPallete.lightColor,
+        fillColor: AppPallete.lightWhiteColor,
         prefixIcon: prefixIcon,
         errorBorder: OutlineInputBorder(
             borderSide: BorderSide(
@@ -68,7 +68,7 @@ class CustomeTextFormField extends StatelessWidget {
             borderRadius: BorderRadius.circular(20)),
         focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(
-              color: AppPallete.greyColor,
+              color: AppPallete.grayColor,
               width: 1,
             ),
             borderRadius: BorderRadius.circular(20)),

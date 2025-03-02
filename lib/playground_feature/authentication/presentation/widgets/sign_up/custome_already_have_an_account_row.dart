@@ -14,7 +14,7 @@ class CustomeAlreadyHaveAnAccountRow extends StatelessWidget {
       children: [
         Text(
           'Already have an account? ',
-          style: TextStyles.font14RobotoLightBlackColorRegular,
+          style: TextStyles.fontRoboto14LiteBlackRegular,
         ),
         InkWell(
           onTap: () {
@@ -26,7 +26,7 @@ class CustomeAlreadyHaveAnAccountRow extends StatelessWidget {
           },
           child: Text(
             'Sign In',
-            style: TextStyles.font14RobotoLightBlackColorMedium,
+            style: TextStyles.fontRoboto14LiteBlackMedium,
           ),
         ),
       ],

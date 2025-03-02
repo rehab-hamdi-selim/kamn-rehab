@@ -30,7 +30,7 @@ class WelcomeAdminPage extends StatelessWidget {
             child: Text(
               Constants.welcomeToManagementSystem,
               textAlign: TextAlign.left,
-              style: TextStyles.font24BlackInterColorMedium,
+              style: TextStyles.fontInter24BlackMedium,
             ),
           ),
           verticalSpace(40),

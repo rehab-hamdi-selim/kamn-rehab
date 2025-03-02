@@ -76,7 +76,7 @@ class CustomeRadioButton extends StatelessWidget {
             ),
           ),
           Text(text,
-              style: TextStyles.font12CircularSpotifyTextBlackMedium
+              style: TextStyles.fontCircularSpotify12BlackMedium
                   .copyWith(color: color)),
         ],
       ),
