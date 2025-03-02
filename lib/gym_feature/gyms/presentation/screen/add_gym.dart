@@ -40,9 +40,9 @@ class _AddGymScreenState extends State<AddGymScreen> {
         title: const Text("Add Gym"),
         actions: const [
           CircleAvatar(backgroundImage: AssetImage("assets/profile.png")),
-          SizedBox(width: 10),
+          SizedBox(width: 10.w),
           Icon(Icons.notifications),
-          SizedBox(width: 10),
+          SizedBox(width: 10.w),
         ],
       ),
       body: Padding(
@@ -54,9 +54,9 @@ class _AddGymScreenState extends State<AddGymScreen> {
               "Basic Gym Information",
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 10.h),
             const CustomBuildTabBar(),
-            const SizedBox(height: 20),
+            const SizedBox(height: 20.h),
             Expanded(
               child: ListView(
                 children: [

@@ -8,7 +8,8 @@ class TextStyles {
   static TextStyle font12GrayMedium = TextStyle(
       fontFamily: "Inter",
       color: AppPallete.greyFontColor,
-      fontWeight: FontWeightHelper.medium,
+      fontWeight:
+      FontWeightHelper.medium,
       fontSize: 12.77.h);
   static TextStyle font7InterDimGraySemiBold = TextStyle(
       fontFamily: "Inter",
