@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kamn/core/const/icon_links.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
@@ -24,13 +25,13 @@ class CustomIncomeOutcomeItem extends StatelessWidget {
               color: AppPallete.ligtGreyColor.withOpacity(0.3),
             ),
             borderRadius: BorderRadius.circular(10)),
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                SvgPicture.asset('assets/icons/UserPlus.svg'),
+                SvgPicture.asset(IconLinks.cash),
                 horizontalSpace(8),
                 Text(
                   text,
