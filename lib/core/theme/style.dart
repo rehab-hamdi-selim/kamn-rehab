@@ -458,6 +458,12 @@ class TextStyles {
       color: AppPallete.grayColor,
       fontWeight: FontWeightHelper.regular,
       fontSize: 7.h);
+  static TextStyle fontCircularSpotify7GreyMedium = TextStyle(
+      // renamed from fontCircularSpotify7RegularGrey
+      fontFamily: "CircularSpotify",
+      color: AppPallete.grayColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 7.h);
   static TextStyle fontCircularSpotify7BlackRegular = TextStyle(
       // renamed from fontCircularSpotify7RegularGrey
       fontFamily: "CircularSpotify",
@@ -566,11 +572,23 @@ class TextStyles {
       color: AppPallete.blackColor,
       fontWeight: FontWeightHelper.regular,
       fontSize: 14.h);
+  static TextStyle fontCircularSpotify14AccentBlackMedium = TextStyle(
+      // renamed from font14CircularSpotifyTextGrayRegalur, fixed typo
+      fontFamily: "CircularSpotify",
+      color: AppPallete.accentBlackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 14.h);
   static TextStyle fontCircularSpotify15BlackRegular = TextStyle(
       // renamed from fontCircularSpotify15MediumBlack
       fontFamily: "CircularSpotify",
       color: AppPallete.blackColor,
       fontWeight: FontWeightHelper.regular,
+      fontSize: 15.h);
+  static TextStyle fontCircularSpotify15WhiteMedium = TextStyle(
+      // renamed from fontCircularSpotify15MediumBlack
+      fontFamily: "CircularSpotify",
+      color: AppPallete.whiteColor,
+      fontWeight: FontWeightHelper.medium,
       fontSize: 15.h);
   static TextStyle fontCircularSpotify15MediumBlack = TextStyle(
       // renamed from fontCircularSpotify15MediumBlack
@@ -608,6 +626,12 @@ class TextStyles {
       color: AppPallete.lightWhiteColor,
       fontWeight: FontWeightHelper.medium,
       fontSize: 18.h);
+  static TextStyle fontCircularSpotify20AccentBlackMedium = TextStyle(
+      // renamed from fontCircularSpotify18Medium
+      fontFamily: "CircularSpotify",
+      color: AppPallete.accentBlackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 20.h);
   static TextStyle fontCircularSpotify21BlackMedium = TextStyle(
       // renamed from fontCircularSpotify18Medium
       fontFamily: "CircularSpotify",

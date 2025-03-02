@@ -5,6 +5,7 @@ import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/screens/add_gym_screen.dart';
+import 'package:kamn/gym_feature/gyms/presentation/pages/gyms_screen.dart';
 import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
 import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_up_cubit/sign_up_cubit.dart';
 import 'package:kamn/playground_feature/payment/presentation/cubits/procced_payment_cubit/procced_payment_cubit.dart';
@@ -102,8 +103,9 @@ class AppRouter {
       case Routes.groundsScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-                  create:(_)=> getIt<SportsGroundsCubit>()
-                    ..passFilteredPlaygrounds((settings.arguments as CategoryData).data)
+                  create: (_) => getIt<SportsGroundsCubit>()
+                    ..passFilteredPlaygrounds(
+                        (settings.arguments as CategoryData).data)
                     ..getUserLocation(),
                   child: GroundsScreen(
                     title: (settings.arguments as CategoryData).title,
@@ -265,14 +267,16 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                   create: (context) => getIt<CurrentOrdersCubit>()
-                    ..fetchOrdersForCategory('Football',context.read<AppUserCubit>().state.user!.uid),
+                    ..fetchOrdersForCategory('Football',
+                        context.read<AppUserCubit>().state.user!.uid),
                   child: const CurrentOrdersScreen(),
                 ));
       case Routes.finishOrderScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                   create: (context) => getIt<FinishedOrdersCubit>()
-                    ..fetchOrdersForCategory('Football',context.read<AppUserCubit>().state.user!.uid),
+                    ..fetchOrdersForCategory('Football',
+                        context.read<AppUserCubit>().state.user!.uid),
                   child: const FinishedOrdersScreen(),
                 ));
       case Routes.mainLoaderScreen:
@@ -293,6 +297,8 @@ class AppRouter {
       case Routes.addGymScreen:
         return MaterialPageRoute(
             builder: (context) => const AddGymScreen());
+      case Routes.gymScreen:
+        return MaterialPageRoute(builder: (context) => const GymsScreen());
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(
