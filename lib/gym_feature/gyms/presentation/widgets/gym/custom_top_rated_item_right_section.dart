@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/features/gyms/presentation/widgets/custom_gym_feature_item.dart';
-import 'package:kamn/features/gyms/presentation/widgets/custom_rating_bar.dart';
+import 'package:kamn/gym_feature/gyms/presentation/widgets/gym/custom_gym_feature_item.dart';
+import 'package:kamn/gym_feature/gyms/presentation/widgets/gym/custom_rating_bar.dart';
 
 class CustomTopRatedItemRightSection extends StatelessWidget {
   const CustomTopRatedItemRightSection(

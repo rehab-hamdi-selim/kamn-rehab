@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/features/gyms/presentation/widgets/custom_top_rated_item_left_section.dart';
-import 'package:kamn/features/gyms/presentation/widgets/custom_top_rated_item_right_section.dart';
+import 'package:kamn/gym_feature/gyms/presentation/widgets/gym/custom_top_rated_item_left_section.dart';
+import 'package:kamn/gym_feature/gyms/presentation/widgets/gym/custom_top_rated_item_right_section.dart';
 
 class CustomTopRatedItem extends StatelessWidget {
   const CustomTopRatedItem(

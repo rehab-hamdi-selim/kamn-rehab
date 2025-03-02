@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
-import 'package:kamn/features/gyms/presentation/widgets/custom_top_rated_item.dart';
+import 'package:kamn/gym_feature/gyms/presentation/widgets/gym/custom_top_rated_item.dart';
 
 class CustomGymRatedList extends StatelessWidget {
   const CustomGymRatedList({super.key});
