@@ -27,7 +27,7 @@ class CustomTopRatedItemRightSection extends StatelessWidget {
             Text(
               gymName,
               textAlign: TextAlign.start,
-              style: TextStyles.font20CircularSpotifyTextAccentBlackMedium,
+              style: TextStyles.fontCircularSpotify20AccentBlackMedium,
             ),
             const Spacer(),
             CustomRatingBar(rate: gymrate),
@@ -36,7 +36,7 @@ class CustomTopRatedItemRightSection extends StatelessWidget {
         verticalSpace(4.h),
         Text(
           gymDescription,
-          style: TextStyles.fontCircularSpotify10RegularAccentLight,
+          style: TextStyles.fontCircularSpotify10LightRegular,
         ),
         ListTile(
           leading: const Icon(
@@ -51,7 +51,7 @@ class CustomTopRatedItemRightSection extends StatelessWidget {
           contentPadding: EdgeInsets.only(left: 5.w, top: 12.h),
           title: Text(
             gymLocation,
-            style: TextStyles.font7CircularSpotifyTextDarkGreyMedium,
+            style: TextStyles.fontCircularSpotify7GreyMedium,
           ),
         ),
         verticalSpace(10.h),

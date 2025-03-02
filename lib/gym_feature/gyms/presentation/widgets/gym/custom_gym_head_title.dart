@@ -15,7 +15,7 @@ class CustomGymHeadTitle extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyles.font20CircularSpotifyTextAccentBlackMedium,
+          style: TextStyles.fontCircularSpotify20AccentBlackMedium,
         ),
         const Spacer(),
         ElevatedButton(
@@ -27,7 +27,7 @@ class CustomGymHeadTitle extends StatelessWidget {
                 padding: const EdgeInsets.all(0)),
             child: Text(
               'View more',
-              style: TextStyles.fontCircularSpotify10RegularAccent,
+              style: TextStyles.fontCircularSpotify10BlackRegular,
             ))
       ],
     );

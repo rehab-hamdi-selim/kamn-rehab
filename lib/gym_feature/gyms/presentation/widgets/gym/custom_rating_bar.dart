@@ -18,7 +18,7 @@ class CustomRatingBar extends StatelessWidget {
         children: [
           Text(
             rate,
-            style: TextStyles.fontCircularSpotify10RegularAccent,
+            style: TextStyles.fontCircularSpotify10BlackRegular,
           ),
           const Icon(
             Icons.star,

@@ -18,11 +18,11 @@ class CustomTopRatedItemLeftSection extends StatelessWidget {
         RichText(
             text: TextSpan(
                 text: '$gymPrice £GP/',
-                style: TextStyles.fontCircularSpotify10RegularAccentMedium,
+                style: TextStyles.fontCircularSpotify10BlackMedium,
                 children: [
               TextSpan(
                   text: gymDuration,
-                  style: TextStyles.fontCircularSpotify10RegularAccentLight),
+                  style: TextStyles.fontCircularSpotify10LightRegular),
             ])),
       ],
     );

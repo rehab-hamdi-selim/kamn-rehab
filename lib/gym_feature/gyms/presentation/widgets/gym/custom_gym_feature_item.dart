@@ -14,7 +14,7 @@ class CustomGymFeatureItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(99.h),
           color: AppPallete.lighttColor2),
       child: Text('🏋️‍♂️ Cardio',
-          style: TextStyles.font7CircularSpotifyTextDarkGreyMedium.copyWith(
+          style: TextStyles.fontCircularSpotify7GreyMedium.copyWith(
             color: AppPallete.accentBlackColor,
           )),
     );
