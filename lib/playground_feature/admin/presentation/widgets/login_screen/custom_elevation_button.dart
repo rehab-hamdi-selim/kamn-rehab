@@ -18,7 +18,7 @@ class CustomElevationButton extends StatelessWidget {
           //todo: login
         },
         style: ElevatedButton.styleFrom(
-            backgroundColor: AppPallete.mainColor,
+            backgroundColor: AppPallete.violetColor,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(15.r)))),
         child: SizedBox(
@@ -26,7 +26,7 @@ class CustomElevationButton extends StatelessWidget {
           width: 398.w,
           child: Center(
             child: Text(Constants.signUp,
-                style: TextStyles.font24WhiteInterColorMedium),
+                style: TextStyles.fontInter24BlackMedium),
           ),
         ),
       ),

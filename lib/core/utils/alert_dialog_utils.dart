@@ -22,7 +22,7 @@ class AlertDialogUtils {
                 const SizedBox(
                   width: 10,
                 ),
-                Text(message, style: TextStyles.font12GreenSemiBold)
+                Text(message, style: TextStyles.fontRoboto12GreenSemiBold)
               ],
             ),
           );
@@ -60,7 +60,7 @@ class AlertDialogUtils {
                 : Navigator.of(context).pop();
           },
           child: Text(firstbutton,
-              style: TextStyles.font12WhiteColorW400
+              style: TextStyles.fontRoboto12WhiteRegular
                   .copyWith(fontWeight: FontWeight.w500)),
         ),
       ));
@@ -86,7 +86,7 @@ class AlertDialogUtils {
             }
           },
           child: Text(secondbutton,
-              style: TextStyles.font12WhiteColorW400
+              style: TextStyles.fontRoboto12WhiteRegular
                   .copyWith(fontWeight: FontWeight.w500)),
         ),
       ));
@@ -98,10 +98,10 @@ class AlertDialogUtils {
             actionsOverflowButtonSpacing: 30,
             backgroundColor: AppPallete.whiteColor,
             title: Text(title,
-                style: TextStyles.font20BlackBold
+                style: TextStyles.fontRoboto20BlackBold
                     .copyWith(fontWeight: FontWeight.w500)),
             content: Text(content,
-                style: TextStyles.font11RobotoAccentBlackColor2Regular),
+                style: TextStyles.fontRoboto12BlackRegular),
             actions: actionList));
   }
 }

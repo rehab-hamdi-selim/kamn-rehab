@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
-import 'package:kamn/core/theme_data/app_palette.dart';
-import 'package:kamn/core/theme_data/style.dart';
+import 'package:kamn/core/theme/app_pallete.dart';
+import 'package:kamn/core/theme/style.dart';
+
 
 class CustomAvaliableButton extends StatelessWidget {
   const CustomAvaliableButton({super.key, required this.available});
@@ -14,10 +15,10 @@ class CustomAvaliableButton extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
           decoration: BoxDecoration(
-            color: AppPalette.backgroundColor,
+            color: AppPallete.whiteColor,
             shape: BoxShape.circle,
             border: Border.all(
-              color: AppPalette.greenColor,
+              color: AppPallete.greenColor,
               width: 1.w,
             ),
           ),
@@ -25,13 +26,13 @@ class CustomAvaliableButton extends StatelessWidget {
             height: 4.h,
             width: 4.w,
             decoration: const BoxDecoration(
-                color: AppPalette.greenColor, shape: BoxShape.circle),
+                color: AppPallete.greenColor, shape: BoxShape.circle),
           ),
         ),
         horizontalSpace(4),
         Text(
           available,
-          style: Style.font7DartBlackColorW400,
+          style: TextStyles.fontCircularSpotify7BlackRegular,
         ),
       ],
     );

@@ -45,7 +45,7 @@ class SelectCategoryScreen extends StatelessWidget {
                       Text(
                         textAlign: TextAlign.center,
                         Constants.chooseYourGame,
-                        style: TextStyles.font32BlackColormedium,
+                        style: TextStyles.fontRoboto32BlackMedium,
                       ),
                     ],
                   ),

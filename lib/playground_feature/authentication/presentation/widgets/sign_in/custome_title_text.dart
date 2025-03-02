@@ -14,12 +14,12 @@ class CustomeTitleText extends StatelessWidget {
         children: [
           Text(
             'Let’s Sign You In',
-            style: TextStyles.font32BlackColormedium
+            style: TextStyles.fontRoboto32BlackMedium
                 .copyWith(fontWeight: FontWeight.w700),
           ),
           Text(
             'Welcome back, you’ve been missed!',
-            style: TextStyles.font14BlackColorMedium,
+            style: TextStyles.fontRoboto14BlackMedium,
           ),
         ],
       ),

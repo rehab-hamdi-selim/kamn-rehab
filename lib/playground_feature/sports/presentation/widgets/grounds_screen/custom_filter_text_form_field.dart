@@ -24,7 +24,7 @@ class CustomFilterTextFormField extends StatelessWidget {
       children: [
         Text(
           txt,
-          style: TextStyles.font2OfaccentBlackMediumRoboto,
+          style: TextStyles.fontRoboto20AccentBlackMedium,
         ),
         verticalSpace(7.h),
         SizedBox(
@@ -32,29 +32,29 @@ class CustomFilterTextFormField extends StatelessWidget {
           child: TextFormField(
               keyboardType: textInputType,
               controller: controller,
-              cursorColor: AppPallete.darkGreenColor,
+              cursorColor: AppPallete.greenColor,
               decoration: InputDecoration(
                 contentPadding:
                     EdgeInsets.only(left: 15.w, right: 15.w, bottom: 10.h),
                 hintText: hintText,
-                hintStyle: TextStyles.font12LightGreyColorregular,
+                hintStyle: TextStyles.fontInter12GreyRegular,
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(31.r),
                   borderSide:
-                      const BorderSide(color: AppPallete.darkGreenColor),
+                      const BorderSide(color: AppPallete.greenColor),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(31.r),
                   borderSide:
-                      const BorderSide(color: AppPallete.darkGreenColor),
+                      const BorderSide(color: AppPallete.greenColor),
                 ),
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(31.r),
                     borderSide:
-                        const BorderSide(color: AppPallete.darkGreenColor)),
+                        const BorderSide(color: AppPallete.greenColor)),
                 suffixIcon: Icon(
                   sufficIcon,
-                  color: AppPallete.ligtGreyColor,
+                  color: AppPallete.lightGreyColor,
                 ),
               )),
         ),

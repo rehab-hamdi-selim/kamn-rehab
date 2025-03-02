@@ -13,7 +13,7 @@ class CustomeTitleText extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyles.fontRoboto16RegularBlack,
+          style: TextStyles.fontRoboto16BlackRegular,
         ),
         Text(
           type,

@@ -41,7 +41,7 @@ class CustomStarRating extends StatelessWidget {
       horizontalSpace(5.w),
       Text(
         '$rating/$maxRating',
-        style: TextStyles.font7InterDimGraySemiBold,
+        style: TextStyles.fontInter7DimGraySemiBold,
       )
     ]);
   }

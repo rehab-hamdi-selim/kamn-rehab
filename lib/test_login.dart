@@ -49,7 +49,7 @@ class LogoutScreen extends StatelessWidget {
           ),
           child: Text(
             'Logout',
-            style: TextStyles.font10DarkGreenColorW400,
+            style: TextStyles.fontInter10LightGreySemiBold,
           ),
         ),
       ),

@@ -54,7 +54,7 @@ class TrackGroundReservationDetail extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(playgroundModel.playgroundName ?? '',
-                              style: TextStyles.font24BlackRegular
+                              style: TextStyles.fontRoboto24BlackRegular
                                   .copyWith(height: .85),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis),
@@ -80,7 +80,7 @@ class TrackGroundReservationDetail extends StatelessWidget {
                             label: Text(
                               'edit',
                               style:
-                                  TextStyles.font14RobotoLightBlackColorRegular,
+                                  TextStyles.fontRoboto14LightBlackRegular,
                             ))
                       ],
                     ),

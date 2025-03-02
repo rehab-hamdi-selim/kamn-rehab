@@ -39,7 +39,7 @@ class TrackGroundReservationsScreen extends StatelessWidget {
             children: [
               Text(
                 Constants.groundsScreenTitle,
-                style: TextStyles.font32BlackColormedium,
+                style: TextStyles.fontCircularSpotify32BlackMedium,
               ),
               Row(
                 children: [
@@ -57,7 +57,7 @@ class TrackGroundReservationsScreen extends StatelessWidget {
                     ),
                     onPressed: () {},
                     textBottom: 'Filter',
-                    textStyle: TextStyles.font12WhiteColorW400,
+                    textStyle: TextStyles.fontCircularSpotify12WhiteRegular,
                   ),
                 ],
               ),
@@ -84,7 +84,7 @@ class TrackGroundReservationsScreen extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
                   decoration: BoxDecoration(
-                    color: AppPallete.lightGrayColor,
+                    color: AppPallete.ofWhiteColor,
                     borderRadius: BorderRadius.circular(15.r),
                   ),
                   child: BlocBuilder<TrackGroundReservationsCubit,

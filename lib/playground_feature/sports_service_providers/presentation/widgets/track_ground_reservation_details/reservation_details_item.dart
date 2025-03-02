@@ -16,8 +16,8 @@ class ReservationDetailsItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: AppPallete.lightGrayColor.withOpacity(0.07),
-        border: Border.all(color: AppPallete.whiteGreenColor, width: 1),
+        color: AppPallete.ofWhiteColor.withOpacity(0.07),
+        border: Border.all(color: AppPallete.lighterGreenColor, width: 1),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(

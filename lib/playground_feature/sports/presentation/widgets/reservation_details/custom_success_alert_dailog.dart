@@ -34,18 +34,18 @@ class CustomSuccessAlertDailog extends StatelessWidget {
                 verticalSpace(10),
                 Text(
                     'you booked in ${reservationModel.ground?.playgroundName ?? ""}',
-                    style: TextStyles.font16blackRegular
+                    style: TextStyles.fontRoboto16BlackRegular
                         .copyWith(fontWeight: FontWeight.w300)),
                 verticalSpace(15),
                 Text(
                   DateFormat('EEEE, d MMM yyyy')
                       .format(reservationModel.startAt ?? DateTime.now()),
-                  style: TextStyles.font14GreenRegular,
+                  style: TextStyles.fontRoboto14GreenRegular,
                 ),
                 verticalSpace(7),
                 Text(
                   "${DateFormat.jm().format(reservationModel.startAt ?? DateTime.now())} to ${DateFormat.jm().format(reservationModel.endAt ?? DateTime.now())}",
-                  style: TextStyles.font14GreenRegular,
+                  style: TextStyles.fontRoboto14GreenRegular,
                 ),
                 verticalSpace(15),
                 ElevatedButton(
@@ -61,7 +61,7 @@ class CustomSuccessAlertDailog extends StatelessWidget {
                   onPressed: () => Navigator.of(context).pop(),
                   child: Text(
                     'Ok',
-                    style: TextStyles.font24WhiteInterColorMedium.copyWith(
+                    style: TextStyles.fontInter24WhiteMedium.copyWith(
                       fontWeight: FontWeight.w400,
                     ),
                   ),

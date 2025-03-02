@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
-import '../../../../../core/theme_data/style.dart';
+import 'package:kamn/core/theme/style.dart';
 
 class CustomFilterItem extends StatelessWidget {
   final IconData? icon;
@@ -35,12 +35,12 @@ class CustomFilterItem extends StatelessWidget {
           Icon(
             icon,
             size: 12.sp,
-            color: AppPallete.darkGreenColor,
+            color: AppPallete.greenColor,
           ),
           horizontalSpace(5.w),
           Text(
             text,
-            style: Style.font10BlackColorW400,
+            style: TextStyles.fontCircularSpotify10BlackRegular,
           ),
           horizontalSpace(5.w),
           InkWell(

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/core/theme_data/style.dart';
+import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/core/utils/custom_app_bar.dart';
 import 'package:kamn/playground_feature/sports/presentation/widgets/view_reservation_screen.dart/custom_reservation_filter.dart';
 import 'package:kamn/playground_feature/sports/presentation/widgets/view_reservation_screen.dart/custom_reservation_list.dart';
@@ -28,7 +28,7 @@ class ViewResrvationScreen extends StatelessWidget {
           children: [
             Text(
               Constants.groundsScreenTitle,
-              style: Style.font30DarkGreenColorBold,
+              style: TextStyles.fontRoboto30GreenBold,
             ),
             const CustomReservationFilter(),
             verticalSpace(10),

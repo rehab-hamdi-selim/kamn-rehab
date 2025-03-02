@@ -82,12 +82,12 @@ class CustomGroundItem extends StatelessWidget {
           children: [
             Text(
               playground.playgroundName!,
-              style: TextStyles.font16DartBlackColorW400,
+              style: TextStyles.fontCircularSpotify16BlackRegular,
             ),
             horizontalSpace(8),
             Text(
               "2 km",
-              style: TextStyles.font10DarkGreenColorW400,
+              style: TextStyles.fontCircularSpotify10GreenRegular,
             ),
           ],
         ),
@@ -95,11 +95,11 @@ class CustomGroundItem extends StatelessWidget {
           children: [
             Text(
               "Owner: ${playground.ownerId}",
-              style: TextStyles.font10BlackColorW400,
+              style: TextStyles.fontCircularSpotify10BlackRegular,
             ),
             Text(
               '',
-              style: TextStyles.font10DarkGreenColorW400,
+              style: TextStyles.fontCircularSpotify10GreenRegular,
             ),
           ],
         ),
@@ -116,7 +116,7 @@ class CustomGroundItem extends StatelessWidget {
                 horizontalSpace(4),
                 Text(
                   playground.address!,
-                  style: TextStyles.font10GrayColorW400,
+                  style: TextStyles.fontCircularSpotify10Gray2Regular,
                 ),
                 horizontalSpace(8),
                 Container(
@@ -139,7 +139,7 @@ class CustomGroundItem extends StatelessWidget {
                 horizontalSpace(4),
                 Text(
                   'available',
-                  style: TextStyles.font7DartBlackColorW400,
+                  style: TextStyles.fontCircularSpotify7BlackRegular,
                 ),
                 horizontalSpace(8),
                 Container(
@@ -157,7 +157,7 @@ class CustomGroundItem extends StatelessWidget {
                     children: [
                       Text(
                         '5',
-                        style: TextStyles.font10GrayColorW400,
+                        style: TextStyles.fontCircularSpotify10Gray2Regular,
                       ),
                       Icon(
                         Icons.star,
@@ -174,11 +174,11 @@ class CustomGroundItem extends StatelessWidget {
               children: [
                 Text(
                   '${playground.price!.toInt()}',
-                  style: TextStyles.font16DartBlackColorW400,
+                  style: TextStyles.fontCircularSpotify16BlackRegular,
                 ),
                 Text(
                   "/hr",
-                  style: TextStyles.font10BlackColorW400,
+                  style: TextStyles.fontCircularSpotify10BlackRegular,
                 ),
               ],
             ),

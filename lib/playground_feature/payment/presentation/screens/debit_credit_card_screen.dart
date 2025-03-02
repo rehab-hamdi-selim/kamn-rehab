@@ -58,7 +58,7 @@ class _DebitCreditCardScreenState extends State<DebitCreditCardScreen> {
             padding: EdgeInsets.symmetric(horizontal: 24),
             child: Text(
               'please make sure the entered data is correct',
-              style: TextStyle(color: AppPallete.greyColor),
+              style: TextStyle(color: AppPallete.grayColor),
             ),
           ),
           const Spacer(

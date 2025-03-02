@@ -12,93 +12,96 @@ import 'package:firebase_remote_config/firebase_remote_config.dart' as _i627;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart'
+    as _i1045;
 import '../../playground_feature/admin/data/data_source/analytics_data_source.dart'
-    as _i418;
+    as _i366;
 import '../../playground_feature/admin/data/data_source/second_page_data_source.dart'
-    as _i746;
+    as _i4;
 import '../../playground_feature/admin/data/repository/analytics_repository.dart'
-    as _i724;
+    as _i130;
 import '../../playground_feature/admin/data/repository/second_page_repository.dart'
-    as _i173;
+    as _i317;
 import '../../playground_feature/admin/domain/use_case/second_page_use_case.dart'
-    as _i396;
+    as _i582;
 import '../../playground_feature/admin/presentation/cubits/first_page_cupit/analytics_cubit.dart'
-    as _i209;
+    as _i14;
 import '../../playground_feature/admin/presentation/cubits/second_page_cubit/second_page_cubit.dart'
-    as _i608;
+    as _i224;
 import '../../playground_feature/authentication/data/data_source/auth_remote_data_source.dart'
-    as _i21;
-import '../../playground_feature/authentication/data/repositories/auth_repository.dart'
-    as _i935;
-import '../../playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart'
-    as _i670;
-import '../../playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_view_model.dart'
-    as _i361;
-import '../../playground_feature/authentication/presentation/cubits/sign_up_cubit/sign_up_cubit.dart'
-    as _i531;
-import '../../playground_feature/authentication/presentation/cubits/sign_up_cubit/sign_up_view_model.dart'
-    as _i22;
-import '../../playground_feature/payment/presentation/cubits/payment_options_cubit/payment_options_view_model.dart'
-    as _i805;
-import '../../playground_feature/payment/presentation/cubits/procced_payment_cubit/procced_payment_cubit.dart'
-    as _i692;
-import '../../playground_feature/sports/data/data_source/sports_remote_data_source.dart'
-    as _i575;
-import '../../playground_feature/sports/data/repositories/sports_repository.dart'
-    as _i379;
-import '../../playground_feature/sports/domain/usecase/get_sports_from_firebase_usecase.dart'
-    as _i213;
-import '../../playground_feature/sports/domain/usecase/sports_ground_usecase.dart'
-    as _i561;
-import '../../playground_feature/sports/presentation/cubits/ground_details_cubit/ground_details_cubit.dart'
-    as _i792;
-import '../../playground_feature/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart'
-    as _i137;
-import '../../playground_feature/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_view_model.dart'
-    as _i282;
-import '../../playground_feature/sports/presentation/cubits/reservation_details_cubit/reservation_details_cubit.dart'
-    as _i546;
-import '../../playground_feature/sports/presentation/cubits/select_category_cubit/select_category_cubit.dart'
-    as _i778;
-import '../../playground_feature/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart'
-    as _i1033;
-import '../../playground_feature/sports/presentation/cubits/sports_grounds/sports_ground_view_model.dart'
-    as _i16;
-import '../../playground_feature/sports/presentation/cubits/view_reservation/view_reservation_cubit.dart'
-    as _i410;
-import '../../playground_feature/sports_service_providers/data/data_source/service_providers_remote_data_source.dart'
-    as _i1047;
-import '../../playground_feature/sports_service_providers/data/repository/service_providers_repository.dart'
-    as _i542;
-import '../../playground_feature/sports_service_providers/domain/usecase/filter_search_data_use_case.dart'
     as _i774;
+import '../../playground_feature/authentication/data/repositories/auth_repository.dart'
+    as _i307;
+import '../../playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart'
+    as _i529;
+import '../../playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_view_model.dart'
+    as _i89;
+import '../../playground_feature/authentication/presentation/cubits/sign_up_cubit/sign_up_cubit.dart'
+    as _i672;
+import '../../playground_feature/authentication/presentation/cubits/sign_up_cubit/sign_up_view_model.dart'
+    as _i505;
+import '../../playground_feature/payment/presentation/cubits/payment_options_cubit/payment_options_view_model.dart'
+    as _i557;
+import '../../playground_feature/payment/presentation/cubits/procced_payment_cubit/procced_payment_cubit.dart'
+    as _i827;
+import '../../playground_feature/sports/data/data_source/sports_remote_data_source.dart'
+    as _i382;
+import '../../playground_feature/sports/data/repositories/sports_repository.dart'
+    as _i201;
+import '../../playground_feature/sports/domain/usecase/get_sports_from_firebase_usecase.dart'
+    as _i870;
+import '../../playground_feature/sports/domain/usecase/sports_ground_usecase.dart'
+    as _i405;
+import '../../playground_feature/sports/presentation/cubits/ground_details_cubit/ground_details_cubit.dart'
+    as _i697;
+import '../../playground_feature/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart'
+    as _i767;
+import '../../playground_feature/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_view_model.dart'
+    as _i40;
+import '../../playground_feature/sports/presentation/cubits/reservation_details_cubit/reservation_details_cubit.dart'
+    as _i645;
+import '../../playground_feature/sports/presentation/cubits/select_category_cubit/select_category_cubit.dart'
+    as _i915;
+import '../../playground_feature/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart'
+    as _i262;
+import '../../playground_feature/sports/presentation/cubits/sports_grounds/sports_ground_view_model.dart'
+    as _i174;
+import '../../playground_feature/sports/presentation/cubits/view_reservation/view_reservation_cubit.dart'
+    as _i1055;
+import '../../playground_feature/sports_service_providers/data/data_source/service_providers_remote_data_source.dart'
+    as _i348;
+import '../../playground_feature/sports_service_providers/data/repository/service_providers_repository.dart'
+    as _i231;
+import '../../playground_feature/sports_service_providers/domain/usecase/filter_search_data_use_case.dart'
+    as _i321;
 import '../../playground_feature/sports_service_providers/domain/usecase/get_services_from_firebase_usecase.dart'
-    as _i786;
+    as _i447;
 import '../../playground_feature/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart'
-    as _i252;
+    as _i519;
 import '../../playground_feature/sports_service_providers/presentation/cubit/available_dates/available_dates_cubit.dart'
-    as _i731;
+    as _i451;
 import '../../playground_feature/sports_service_providers/presentation/cubit/current_reseravaion_order/current_orders_cubit.dart'
-    as _i861;
+    as _i369;
 import '../../playground_feature/sports_service_providers/presentation/cubit/edit_service_provider/edit_service_provider_cubit.dart'
-    as _i773;
-import '../../playground_feature/sports_service_providers/presentation/cubit/finished_reseravaion_order/finished_order_cubit.dart'
-    as _i718;
-import '../../playground_feature/sports_service_providers/presentation/cubit/service_provider_ground_details/service_provider_ground_details_cubit.dart'
-    as _i692;
-import '../../playground_feature/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart'
-    as _i987;
-import '../../playground_feature/sports_service_providers/presentation/cubit/track_ground_reservation_details/track_ground_reservation_details_cubit.dart'
-    as _i38;
-import '../../playground_feature/sports_service_providers/presentation/cubit/track_ground_reservations/track_ground_reservations_cubit.dart'
-    as _i278;
-import '../../playground_feature/user/data/data_source/user_remote_data_source.dart'
-    as _i677;
-import '../../playground_feature/user/data/repository/user_repository.dart' as _i812;
-import '../../playground_feature/user/presentation/cubit/edit_profile/edit_profile_cubit.dart'
-    as _i98;
-import '../../playground_feature/user/presentation/cubit/notification/notifications_cubit.dart'
     as _i566;
+import '../../playground_feature/sports_service_providers/presentation/cubit/finished_reseravaion_order/finished_order_cubit.dart'
+    as _i1038;
+import '../../playground_feature/sports_service_providers/presentation/cubit/service_provider_ground_details/service_provider_ground_details_cubit.dart'
+    as _i632;
+import '../../playground_feature/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart'
+    as _i616;
+import '../../playground_feature/sports_service_providers/presentation/cubit/track_ground_reservation_details/track_ground_reservation_details_cubit.dart'
+    as _i18;
+import '../../playground_feature/sports_service_providers/presentation/cubit/track_ground_reservations/track_ground_reservations_cubit.dart'
+    as _i725;
+import '../../playground_feature/user/data/data_source/user_remote_data_source.dart'
+    as _i680;
+import '../../playground_feature/user/data/repository/user_repository.dart'
+    as _i609;
+import '../../playground_feature/user/presentation/cubit/edit_profile/edit_profile_cubit.dart'
+    as _i798;
+import '../../playground_feature/user/presentation/cubit/notification/notifications_cubit.dart'
+    as _i113;
 import '../common/class/firebase_storage_services.dart' as _i304;
 import '../common/class/firestore_services.dart' as _i158;
 import '../common/cubit/app_user/app_user_cubit.dart' as _i94;
@@ -106,6 +109,7 @@ import '../common/cubit/firebase_remote_config/firebase_remote_config_cubit.dart
     as _i654;
 
 extension GetItInjectableX on _i174.GetIt {
+// initializes the registration of main-scope dependencies inside of GetIt
   _i174.GetIt init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
@@ -115,128 +119,130 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
-    gh.factory<_i361.SignInViewModel>(() => _i361.SignInViewModel());
-    gh.factory<_i22.SignUpViewModel>(() => _i22.SignUpViewModel());
-    gh.factory<_i805.PaymentOptionsViewModel>(
-        () => _i805.PaymentOptionsViewModel());
-    gh.factory<_i561.SportsGroundUsecase>(() => _i561.SportsGroundUsecase());
-    gh.factory<_i792.GroundDetailsCubit>(() => _i792.GroundDetailsCubit());
-    gh.factory<_i282.PickTimeForReservationViewModel>(
-        () => _i282.PickTimeForReservationViewModel());
-    gh.factory<_i16.SportsGroundViewModel>(() => _i16.SportsGroundViewModel());
+    gh.factory<_i1045.AddGymCubit>(() => _i1045.AddGymCubit());
+    gh.factory<_i89.SignInViewModel>(() => _i89.SignInViewModel());
+    gh.factory<_i505.SignUpViewModel>(() => _i505.SignUpViewModel());
+    gh.factory<_i557.PaymentOptionsViewModel>(
+        () => _i557.PaymentOptionsViewModel());
+    gh.factory<_i405.SportsGroundUsecase>(() => _i405.SportsGroundUsecase());
+    gh.factory<_i697.GroundDetailsCubit>(() => _i697.GroundDetailsCubit());
+    gh.factory<_i40.PickTimeForReservationViewModel>(
+        () => _i40.PickTimeForReservationViewModel());
+    gh.factory<_i174.SportsGroundViewModel>(
+        () => _i174.SportsGroundViewModel());
     gh.lazySingleton<_i304.FirebaseStorageServices>(
         () => _i304.FirebaseStorageServices());
     gh.lazySingleton<_i158.FirestoreService>(() => _i158.FirestoreService());
-    gh.factory<_i746.SecondPageDataSource>(() => _i746.SecondPageDataSourceImpl(
+    gh.factory<_i774.AuthRemoteDataSource>(() => _i774.AuthRemoteDataSourceImpl(
         firestore: gh<_i158.FirestoreService>()));
-    gh.factory<_i418.AnalyticsDataSource>(() => _i418.AnalyticsDataSourceImpl(
+    gh.factory<_i366.AnalyticsDataSource>(() => _i366.AnalyticsDataSourceImpl(
           firestoreServices: gh<_i158.FirestoreService>(),
           storageServies: gh<_i304.FirebaseStorageServices>(),
         ));
     gh.factory<_i654.FirebaseRemoteConfigCubit>(() =>
         _i654.FirebaseRemoteConfigCubit(
             remoteConfig: gh<_i627.FirebaseRemoteConfig>()));
-    gh.factory<_i1047.ServiceProvidersRemoteDataSource>(
-        () => _i1047.ServiceProvidersRemoteDataSourceImpl(
+    gh.factory<_i348.ServiceProvidersRemoteDataSource>(
+        () => _i348.ServiceProvidersRemoteDataSourceImpl(
               firestoreServices: gh<_i158.FirestoreService>(),
               storageServies: gh<_i304.FirebaseStorageServices>(),
             ));
-    gh.factory<_i21.AuthRemoteDataSource>(() =>
-        _i21.AuthRemoteDataSourceImpl(firestore: gh<_i158.FirestoreService>()));
-    gh.factory<_i173.SecondPageRepository>(() => _i173.SecondPageRepositoryImpl(
-        secondPageDataSource: gh<_i746.SecondPageDataSource>()));
-    gh.factory<_i542.ServiceProvidersRepository>(() =>
-        _i542.ServiceProvidersRepositoryImpl(
-            dataSource: gh<_i1047.ServiceProvidersRemoteDataSource>()));
-    gh.factory<_i396.SecondPageUseCase>(() => _i396.SecondPageUseCaseImpl(
-        repository: gh<_i173.SecondPageRepository>()));
-    gh.factory<_i935.AuthRepository>(() => _i935.AuthRepositoryImpl(
-        authDataSource: gh<_i21.AuthRemoteDataSource>()));
-    gh.factory<_i677.UserRemoteDataSource>(() => _i677.UserRemoteDataSourceImpl(
+    gh.factory<_i307.AuthRepository>(() => _i307.AuthRepositoryImpl(
+        authDataSource: gh<_i774.AuthRemoteDataSource>()));
+    gh.factory<_i130.AnalyticsRepository>(() => _i130.AnalyticsRepositoryImpl(
+        dataSource: gh<_i366.AnalyticsDataSource>()));
+    gh.factory<_i4.SecondPageDataSource>(() =>
+        _i4.SecondPageDataSourceImpl(firestore: gh<_i158.FirestoreService>()));
+    gh.factory<_i680.UserRemoteDataSource>(() => _i680.UserRemoteDataSourceImpl(
         firestoreService: gh<_i158.FirestoreService>()));
-    gh.factory<_i724.AnalyticsRepository>(() => _i724.AnalyticsRepositoryImpl(
-        dataSource: gh<_i418.AnalyticsDataSource>()));
-    gh.factory<_i608.SecondPageCubit>(() => _i608.SecondPageCubit(
-          repository: gh<_i173.SecondPageRepository>(),
-          dataFilter: gh<_i396.SecondPageUseCase>(),
+    gh.factory<_i317.SecondPageRepository>(() => _i317.SecondPageRepositoryImpl(
+        secondPageDataSource: gh<_i4.SecondPageDataSource>()));
+    gh.factory<_i529.SignInCubit>(() => _i529.SignInCubit(
+          authRepository: gh<_i307.AuthRepository>(),
+          signInViewModel: gh<_i89.SignInViewModel>(),
         ));
-    gh.factory<_i209.AnalyticsCubit>(() =>
-        _i209.AnalyticsCubit(repository: gh<_i724.AnalyticsRepository>()));
-    gh.factory<_i575.SportsRemoteDataSource>(() =>
-        _i575.SportsRemoteDataSourceImpl(
+    gh.factory<_i231.ServiceProvidersRepository>(() =>
+        _i231.ServiceProvidersRepositoryImpl(
+            dataSource: gh<_i348.ServiceProvidersRemoteDataSource>()));
+    gh.factory<_i382.SportsRemoteDataSource>(() =>
+        _i382.SportsRemoteDataSourceImpl(
             firestoreService: gh<_i158.FirestoreService>()));
-    gh.factory<_i774.FilterSearchDataUseCase>(() =>
-        _i774.FilterSearchDataUseCase(
-            repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i786.GetServicesFromFirebaseUsecase>(() =>
-        _i786.GetServicesFromFirebaseUsecase(
-            repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i252.AddServiceProviderCubit>(() =>
-        _i252.AddServiceProviderCubit(
-            repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i731.AvailableDatesCubit>(() => _i731.AvailableDatesCubit(
-        repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i861.CurrentOrdersCubit>(() => _i861.CurrentOrdersCubit(
-        repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i773.EditServiceProviderCubit>(() =>
-        _i773.EditServiceProviderCubit(
-            repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i718.FinishedOrdersCubit>(() => _i718.FinishedOrdersCubit(
-        repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i692.ServiceProviderGroundDetailsCubit>(() =>
-        _i692.ServiceProviderGroundDetailsCubit(
-            repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i278.TrackGroundReservationsCubit>(() =>
-        _i278.TrackGroundReservationsCubit(
-            repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i38.TrackGroundReservationsDetailsCubit>(() =>
-        _i38.TrackGroundReservationsDetailsCubit(
-            repository: gh<_i542.ServiceProvidersRepository>()));
-    gh.factory<_i670.SignInCubit>(() => _i670.SignInCubit(
-          authRepository: gh<_i935.AuthRepository>(),
-          signInViewModel: gh<_i361.SignInViewModel>(),
-        ));
-    gh.factory<_i812.UserRepository>(() => _i812.UserRepositoryImpl(
-        userRemoteDataSource: gh<_i677.UserRemoteDataSource>()));
     gh.factory<_i94.AppUserCubit>(
-        () => _i94.AppUserCubit(authRepository: gh<_i935.AuthRepository>()));
-    gh.factory<_i98.EditProfileCubit>(
-        () => _i98.EditProfileCubit(repository: gh<_i812.UserRepository>()));
-    gh.factory<_i531.SignUpCubit>(() => _i531.SignUpCubit(
-          authRepository: gh<_i935.AuthRepository>(),
-          signUpViewModel: gh<_i22.SignUpViewModel>(),
+        () => _i94.AppUserCubit(authRepository: gh<_i307.AuthRepository>()));
+    gh.factory<_i14.AnalyticsCubit>(
+        () => _i14.AnalyticsCubit(repository: gh<_i130.AnalyticsRepository>()));
+    gh.factory<_i672.SignUpCubit>(() => _i672.SignUpCubit(
+          authRepository: gh<_i307.AuthRepository>(),
+          signUpViewModel: gh<_i505.SignUpViewModel>(),
         ));
-    gh.factory<_i379.SportsRepository>(() => _i379.SportsRepositoryImpl(
-        remoteDataSource: gh<_i575.SportsRemoteDataSource>()));
-    gh.factory<_i213.GetPlaygroundsAndFlittered>(() =>
-        _i213.GetPlaygroundsAndFlittered(
-            repository: gh<_i379.SportsRepository>()));
-    gh.factory<_i546.ReservationDetailsCubit>(() =>
-        _i546.ReservationDetailsCubit(
-            repository: gh<_i379.SportsRepository>()));
-    gh.factory<_i692.ProccedPaymentCubit>(() => _i692.ProccedPaymentCubit(
-        sportsRepository: gh<_i379.SportsRepository>()));
-    gh.factory<_i410.ViewReservationCubit>(() => _i410.ViewReservationCubit(
-        sportsRepository: gh<_i379.SportsRepository>()));
-    gh.factory<_i987.ServiceProviderGroundsCubit>(
-        () => _i987.ServiceProviderGroundsCubit(
-              getPlaygroundUsecase: gh<_i786.GetServicesFromFirebaseUsecase>(),
-              searchDataUseCase: gh<_i774.FilterSearchDataUseCase>(),
+    gh.factory<_i321.FilterSearchDataUseCase>(() =>
+        _i321.FilterSearchDataUseCase(
+            repository: gh<_i231.ServiceProvidersRepository>()));
+    gh.factory<_i447.GetServicesFromFirebaseUsecase>(() =>
+        _i447.GetServicesFromFirebaseUsecase(
+            repository: gh<_i231.ServiceProvidersRepository>()));
+    gh.factory<_i519.AddServiceProviderCubit>(() =>
+        _i519.AddServiceProviderCubit(
+            repository: gh<_i231.ServiceProvidersRepository>()));
+    gh.factory<_i451.AvailableDatesCubit>(() => _i451.AvailableDatesCubit(
+        repository: gh<_i231.ServiceProvidersRepository>()));
+    gh.factory<_i369.CurrentOrdersCubit>(() => _i369.CurrentOrdersCubit(
+        repository: gh<_i231.ServiceProvidersRepository>()));
+    gh.factory<_i566.EditServiceProviderCubit>(() =>
+        _i566.EditServiceProviderCubit(
+            repository: gh<_i231.ServiceProvidersRepository>()));
+    gh.factory<_i1038.FinishedOrdersCubit>(() => _i1038.FinishedOrdersCubit(
+        repository: gh<_i231.ServiceProvidersRepository>()));
+    gh.factory<_i632.ServiceProviderGroundDetailsCubit>(() =>
+        _i632.ServiceProviderGroundDetailsCubit(
+            repository: gh<_i231.ServiceProvidersRepository>()));
+    gh.factory<_i725.TrackGroundReservationsCubit>(() =>
+        _i725.TrackGroundReservationsCubit(
+            repository: gh<_i231.ServiceProvidersRepository>()));
+    gh.factory<_i18.TrackGroundReservationsDetailsCubit>(() =>
+        _i18.TrackGroundReservationsDetailsCubit(
+            repository: gh<_i231.ServiceProvidersRepository>()));
+    gh.factory<_i609.UserRepository>(() => _i609.UserRepositoryImpl(
+        userRemoteDataSource: gh<_i680.UserRemoteDataSource>()));
+    gh.factory<_i201.SportsRepository>(() => _i201.SportsRepositoryImpl(
+        remoteDataSource: gh<_i382.SportsRemoteDataSource>()));
+    gh.factory<_i616.ServiceProviderGroundsCubit>(
+        () => _i616.ServiceProviderGroundsCubit(
+              getPlaygroundUsecase: gh<_i447.GetServicesFromFirebaseUsecase>(),
+              searchDataUseCase: gh<_i321.FilterSearchDataUseCase>(),
             ));
-    gh.factory<_i778.SelectCategoryCubit>(() => _i778.SelectCategoryCubit(
-        getPlaygrouundsUseCase: gh<_i213.GetPlaygroundsAndFlittered>()));
-    gh.factory<_i566.NotificationsCubit>(() =>
-        _i566.NotificationsCubit(userRepository: gh<_i812.UserRepository>()));
-    gh.factory<_i137.PickTimeForReservationCubit>(
-        () => _i137.PickTimeForReservationCubit(
-              repository: gh<_i379.SportsRepository>(),
-              viewModel: gh<_i282.PickTimeForReservationViewModel>(),
+    gh.factory<_i113.NotificationsCubit>(() =>
+        _i113.NotificationsCubit(userRepository: gh<_i609.UserRepository>()));
+    gh.factory<_i827.ProccedPaymentCubit>(() => _i827.ProccedPaymentCubit(
+        sportsRepository: gh<_i201.SportsRepository>()));
+    gh.factory<_i1055.ViewReservationCubit>(() => _i1055.ViewReservationCubit(
+        sportsRepository: gh<_i201.SportsRepository>()));
+    gh.factory<_i582.SecondPageUseCase>(() => _i582.SecondPageUseCaseImpl(
+        repository: gh<_i317.SecondPageRepository>()));
+    gh.factory<_i798.EditProfileCubit>(
+        () => _i798.EditProfileCubit(repository: gh<_i609.UserRepository>()));
+    gh.factory<_i767.PickTimeForReservationCubit>(
+        () => _i767.PickTimeForReservationCubit(
+              repository: gh<_i201.SportsRepository>(),
+              viewModel: gh<_i40.PickTimeForReservationViewModel>(),
             ));
-    gh.factory<_i1033.SportsGroundsCubit>(() => _i1033.SportsGroundsCubit(
-          sportsRepository: gh<_i379.SportsRepository>(),
-          sportsGroundUsecase: gh<_i561.SportsGroundUsecase>(),
-          getPlaygrouundsUseCase: gh<_i213.GetPlaygroundsAndFlittered>(),
-          sportsGroundViewModel: gh<_i16.SportsGroundViewModel>(),
+    gh.factory<_i870.GetPlaygroundsAndFlittered>(() =>
+        _i870.GetPlaygroundsAndFlittered(
+            repository: gh<_i201.SportsRepository>()));
+    gh.factory<_i645.ReservationDetailsCubit>(() =>
+        _i645.ReservationDetailsCubit(
+            repository: gh<_i201.SportsRepository>()));
+    gh.factory<_i915.SelectCategoryCubit>(() => _i915.SelectCategoryCubit(
+        getPlaygrouundsUseCase: gh<_i870.GetPlaygroundsAndFlittered>()));
+    gh.factory<_i224.SecondPageCubit>(() => _i224.SecondPageCubit(
+          repository: gh<_i317.SecondPageRepository>(),
+          dataFilter: gh<_i582.SecondPageUseCase>(),
+        ));
+    gh.factory<_i262.SportsGroundsCubit>(() => _i262.SportsGroundsCubit(
+          sportsRepository: gh<_i201.SportsRepository>(),
+          sportsGroundUsecase: gh<_i405.SportsGroundUsecase>(),
+          getPlaygrouundsUseCase: gh<_i870.GetPlaygroundsAndFlittered>(),
+          sportsGroundViewModel: gh<_i174.SportsGroundViewModel>(),
         ));
     return this;
   }
