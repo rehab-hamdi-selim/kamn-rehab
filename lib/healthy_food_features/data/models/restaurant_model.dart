@@ -3,13 +3,19 @@ class Restaurant {
   final String imageUrl;
   final double rating;
   final String description;
-  final double deliveryTime;
+  final List<String> tags;
+  final double minPrice;
+  final double maxPrice;
+  final int deliveryTime;
 
   Restaurant({
     required this.name,
     required this.imageUrl,
     required this.rating,
     required this.description,
+    required this.tags,
+    required this.minPrice,
+    required this.maxPrice,
     required this.deliveryTime,
   });
 
@@ -19,7 +25,10 @@ class Restaurant {
       imageUrl: json['imageUrl'],
       rating: json['rating'].toDouble(),
       description: json['description'],
-      deliveryTime: json['deliveryTime'].toDouble(),
+      tags: List<String>.from(json['tags']),
+      minPrice: json['minPrice'].toDouble(),
+      maxPrice: json['maxPrice'].toDouble(),
+      deliveryTime: json['deliveryTime'],
     );
   }
 
@@ -29,6 +38,9 @@ class Restaurant {
       'imageUrl': imageUrl,
       'rating': rating,
       'description': description,
+      'tags': tags,
+      'minPrice': minPrice,
+      'maxPrice': maxPrice,
       'deliveryTime': deliveryTime,
     };
   }
@@ -37,30 +49,32 @@ class Restaurant {
 List<Restaurant> restaurants = [
   Restaurant(
     name: "House of Diet",
-    imageUrl: "assets/images/house_of_diet.png",
+    imageUrl: "assets/images/resturantTest.png",
+    rating: 4.8,
+    description: "Specializes in high-protein and low-carb meals.",
+    tags: ["Organic Ingredients", "High-Protein", "Grain"],
+    minPrice: 500,
+    maxPrice: 1500,
+    deliveryTime: 30,
+  ),
+  Restaurant(
+    name: "FitFuel Restaurant",
+    imageUrl: "assets/images/resturantTest.png",
     rating: 4.7,
-    description: "Healthy food & nutrition services",
-    deliveryTime: 25.0,
+    description: "Perfect choice for healthy eating.",
+    tags: ["Meal Prep", "High-Protein", "Vegan Balance"],
+    minPrice: 300,
+    maxPrice: 2500,
+    deliveryTime: 35,
   ),
   Restaurant(
     name: "FitFuel Restaurant",
-    imageUrl: "assets/images/fitfuel_restaurant.png",
-    rating: 4.6,
-    description: "Perfect choice for healthy eating",
-    deliveryTime: 30.0,
-  ),
-  Restaurant(
-    name: "FitFuel Restaurant",
-    imageUrl: "assets/images/fitfuel_restaurant.png",
-    rating: 4.6,
-    description: "Perfect choice for healthy eating",
-    deliveryTime: 30.0,
-  ),
-  Restaurant(
-    name: "FitFuel Restaurant",
-    imageUrl: "assets/images/fitfuel_restaurant.png",
-    rating: 4.6,
-    description: "Perfect choice for healthy eating",
-    deliveryTime: 30.0,
+    imageUrl: "assets/images/resturantTest.png",
+    rating: 4.7,
+    description: "Perfect choice for healthy eating.",
+    tags: ["Meal Prep", "High-Protein", "Vegan Balance"],
+    minPrice: 300,
+    maxPrice: 2500,
+    deliveryTime: 35,
   ),
 ];

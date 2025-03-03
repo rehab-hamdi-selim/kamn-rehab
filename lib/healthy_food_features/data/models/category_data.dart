@@ -22,10 +22,10 @@ class Category {
 
 // Sample Data Lists
 List<Category> categories = [
-  Category(name: "All", icon: "assets/icons/all.png"),
-  Category(name: "Vegan", icon: "assets/icons/vegan.png"),
-  Category(name: "Chicken", icon: "assets/icons/chicken.png"),
-  Category(name: "Chicken", icon: "assets/icons/chicken.png"),
+  Category(name: "All", icon: "assets/icons/vegan_1.svg"),
+  Category(name: "Vegan", icon: "assets/icons/chickenTest.svg"),
+  Category(name: "Chicken", icon: "assets/icons/vegan_1.svg"),
+  Category(name: "Chicken", icon: "assets/icons/vegan_1.svg"),
 ];
 
 

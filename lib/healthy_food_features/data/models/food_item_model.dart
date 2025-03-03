@@ -4,8 +4,9 @@ class FoodItem {
   final double price;
   final int calories;
   final double rating;
-  final List<String> ingredients;
+  final List<String> tags;
   final String restaurantName;
+  final int deliveryTime;
 
   FoodItem({
     required this.name,
@@ -13,8 +14,9 @@ class FoodItem {
     required this.price,
     required this.calories,
     required this.rating,
-    required this.ingredients,
+    required this.tags,
     required this.restaurantName,
+    required this.deliveryTime,
   });
 
   factory FoodItem.fromJson(Map<String, dynamic> json) {
@@ -24,8 +26,9 @@ class FoodItem {
       price: json['price'].toDouble(),
       calories: json['calories'],
       rating: json['rating'].toDouble(),
-      ingredients: List<String>.from(json['ingredients']),
+      tags: List<String>.from(json['tags']),
       restaurantName: json['restaurantName'],
+      deliveryTime: json['deliveryTime'],
     );
   }
 
@@ -36,8 +39,9 @@ class FoodItem {
       'price': price,
       'calories': calories,
       'rating': rating,
-      'ingredients': ingredients,
+      'tags': tags,
       'restaurantName': restaurantName,
+      'deliveryTime': deliveryTime,
     };
   }
 }
@@ -45,41 +49,65 @@ class FoodItem {
 List<FoodItem> trendingFoods = [
   FoodItem(
     name: "Fruit Salad",
-    imageUrl: "assets/images/fruit_salad.png",
+    imageUrl: "assets/images/salad_1.png",
     price: 150.0,
-    calories: 150,
+    calories: 250,
     rating: 4.7,
-    ingredients: ["Apple", "Banana", "Grapes", "Orange"],
+    tags: ["Healthy", "Low-Carb"],
     restaurantName: "Sarah's House",
+    deliveryTime: 30,
   ),
   FoodItem(
     name: "Chicken Salad",
-    imageUrl: "assets/images/chicken_salad.png",
+    imageUrl: "assets/images/salad_1.png",
     price: 250.0,
-    calories: 300,
+    calories: 150,
     rating: 4.8,
-    ingredients: ["Grilled Chicken", "Lettuce", "Tomato", "Cucumber"],
+    tags: ["Protein", "Keto"],
     restaurantName: "FitFuel Restaurant",
+    deliveryTime: 25,
+  ),
+  FoodItem(
+    name: "Chicken Salad",
+    imageUrl: "assets/images/salad_1.png",
+    price: 250.0,
+    calories: 150,
+    rating: 4.8,
+    tags: ["Protein", "Keto"],
+    restaurantName: "FitFuel Restaurant",
+    deliveryTime: 25,
   ),
 ];
 
-List<FoodItem> popularFoods = [
-  FoodItem(
-    name: "Chicken Salad",
-    imageUrl: "assets/images/chicken_salad.png",
-    price: 250.0,
-    calories: 300,
-    rating: 4.8,
-    ingredients: ["Grilled Chicken", "Lettuce", "Tomato", "Cucumber"],
-    restaurantName: "House of Diet",
-  ),
+List<FoodItem> homeCooks = [
   FoodItem(
     name: "Grilled Chicken Salad",
-    imageUrl: "assets/images/grilled_chicken_salad.png",
+    imageUrl: "assets/images/homCookiesTest.png",
     price: 150.0,
-    calories: 250,
+    calories: 500,
+    rating: 4.8,
+    tags: ["Low-Carb", "Paleo"],
+    restaurantName: "Sarah's Kitchen",
+    deliveryTime: 40,
+  ),
+  FoodItem(
+    name: "Quinoa & Chickpea Salad",
+    imageUrl: "assets/images/homCookiesTest.png",
+    price: 90.0,
+    calories: 400,
     rating: 4.6,
-    ingredients: ["Chicken", "Broccoli", "Walnut", "Orange"],
-    restaurantName: "Sarah's House",
+    tags: ["Keto", "Mediterranean"],
+    restaurantName: "Omar’s Healthy Bites",
+    deliveryTime: 20,
+  ),
+  FoodItem(
+    name: "Quinoa & Chickpea Salad",
+    imageUrl: "assets/images/homCookiesTest.png",
+    price: 90.0,
+    calories: 400,
+    rating: 4.6,
+    tags: ["Keto", "Mediterranean"],
+    restaurantName: "Omar’s Healthy Bites",
+    deliveryTime: 20,
   ),
 ];
