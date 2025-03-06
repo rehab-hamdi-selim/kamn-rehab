@@ -11,6 +11,7 @@ class CustomGymTextFormField extends StatelessWidget {
   final TextEditingController? controller;
   final int? maxLine;
   final int? maxLength;
+
   
 
   const CustomGymTextFormField({
@@ -25,6 +26,7 @@ class CustomGymTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         RichText(
                 text: TextSpan(
@@ -44,49 +46,55 @@ class CustomGymTextFormField extends StatelessWidget {
         TextFormField(
           controller: controller,
            
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-           errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: AppPallete.redColor.withOpacity(.5),
-              width: 1.2,
-            ),
-            borderRadius: BorderRadius.circular(8.r)),
-        focusedErrorBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-              color: AppPallete.redColor,
-              width: 1.2,
-            ),
-            borderRadius: BorderRadius.circular(8.r)),
-        enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-              color: AppPallete.tooLightGray,
-              width: 1.2,
-            ),
-            borderRadius: BorderRadius.circular(8.r)),
-        focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-              color: AppPallete.grayColor,
-              width: 1.2,
-            ),
-            borderRadius: BorderRadius.circular(8.r)),
-            hintText: hint,
-            helperText: helper,
-        
-            hintStyle: TextStyle(color: Colors.grey.shade600,fontSize: 12.h),
-            helperStyle: TextStyles.fontCircularSpotify10StealGrayMedium,
-            fillColor: AppPallete.whiteColor,
-            filled: true,
-          ),
+          decoration: field_decoration(),
           maxLines: maxLine,
           maxLength: maxLength,
            buildCounter: maxLength != null?(context, {required currentLength, required isFocused, required maxLength}) {
                               return Text('$currentLength/($maxLength) character',style: TextStyle(
                                 fontSize: 8,
                                 color: currentLength==maxLength?AppPallete.redColor:AppPallete.darkGreyColor
-                              ),);}:null,
+                              )
+                              ,)
+                              ;}:null,
         ),
       ],
     );
+  }
+
+  InputDecoration field_decoration() {
+    return InputDecoration(
+          contentPadding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+         errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: AppPallete.redColor.withOpacity(.5),
+            width: 1.2,
+          ),
+          borderRadius: BorderRadius.circular(8.r)),
+      focusedErrorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: AppPallete.redColor,
+            width: 1.2,
+          ),
+          borderRadius: BorderRadius.circular(8.r)),
+      enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: AppPallete.tooLightGray,
+            width: 1.2,
+          ),
+          borderRadius: BorderRadius.circular(8.r)),
+      focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            color: AppPallete.grayColor,
+            width: 1.2,
+          ),
+          borderRadius: BorderRadius.circular(8.r)),
+          hintText: hint,
+          helperText: helper,
+      
+          hintStyle: TextStyle(color: Colors.grey.shade600,fontSize: 12.h),
+          helperStyle: TextStyles.fontCircularSpotify10StealGrayMedium,
+          fillColor: AppPallete.whiteColor,
+          filled: true,
+        );
   }
 }
