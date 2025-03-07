@@ -58,7 +58,7 @@ class CustomTabBar extends StatelessWidget {
                   children: [
                     CustomGymInfoSection(),
                     const CustomRequiredDocumentsSection(),
-                    const CustomGymFeaturesSection(),
+                     CustomGymFeaturesSection(),
                   ],
                 ),
               ),
