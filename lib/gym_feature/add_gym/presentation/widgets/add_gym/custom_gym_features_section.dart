@@ -8,13 +8,14 @@ import 'package:kamn/gym_feature/add_gym/presentation/cubits/gym_features/cubit/
 import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_check_bar.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_drop_down_menu.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_general_button.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_radio_button.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_text_form_field.dart';
 
 import '../../cubits/gym_features/cubit/gym_features_cubit.dart';
 
 // ignore: must_be_immutable
 class CustomGymFeaturesSection extends StatefulWidget {
-  CustomGymFeaturesSection({super.key});
+  const CustomGymFeaturesSection({super.key});
 
   @override
   State<CustomGymFeaturesSection> createState() => _CustomGymFeaturesSectionState();
@@ -44,13 +45,13 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => GymFeaturesCubit(),
-      child: SingleChildScrollView(
-        child: BlocListener<GymFeaturesCubit, GymFeaturesState>(
-          listener: (context, state) {
-            if(_menuController.text != state.selectedValue){
-              _menuController.text = state.selectedValue;
-            }
-          },
+      child: BlocListener<GymFeaturesCubit, GymFeaturesState>(
+        listener: (context, state) {
+          if(_menuController.text != state.selectedValue){
+            _menuController.text = state.selectedValue;
+          }
+        },
+        child: SingleChildScrollView(
           child: Column(
             children: [
               Container(
@@ -66,13 +67,13 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                       child: Text('Add Gym Facilities and Features',
-                          style: TextStyles.fontRoboto16BlackRegular),
+                          style: TextStyles.fontCircularSpotify16BlackMedium),
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(10, 6, 0, 0),
                       child: Text(
                         'Add predefined features like sauna, cardio machines, or yoga',
-                        style: TextStyles.fontRoboto10RegularGray,
+                        style: TextStyles.fontCircularSpotify11LightRegular,
                       ),
                     ),
                     verticalSpace(12),
@@ -92,29 +93,26 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
                       label: 'Feature-Based Pricing',
                       optionalText: '',
                       hintText: '',
-                      widget: Text('£GP'),
+                      widget: const Text('£GP'),
                     ),
                     verticalSpace(8),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        CustomCheckBar(
-                          txt: 'Free',
-                          cardColor: const Color(0xffFEFEFE),
-                          textColor: AppPallete.accentBlackColor2,
-                          checkColor: AppPallete.accentBlackColor2,
+                        CustomRadioButton(
+                          text: 'Free',
+                          activeColor: const Color(0xffFEFEFE),
+                          backgroundColor: AppPallete.blackColor,
                         ),
-                        CustomCheckBar(
-                          txt: '/ month',
-                          cardColor: const Color(0xff1775F1),
-                          textColor: AppPallete.shadeOfGray,
-                          checkColor: AppPallete.blueGreenColor,
+                        CustomRadioButton(
+                        text: '/ monthly',
+                          activeColor: const Color(0xffFEFEFE),
+                          backgroundColor: AppPallete.blueColor,
                         ),
-                        CustomCheckBar(
-                          txt: ' / session',
-                          cardColor: const Color(0xff00A28C),
-                          textColor: AppPallete.shadeOfGray,
-                          checkColor: AppPallete.blueGreenColor,
+                        CustomRadioButton(
+                       text: '/ session',
+                          activeColor: const Color(0xffFEFEFE),
+                          backgroundColor: AppPallete.greenColor,
                         ),
                       ],
                     ),
