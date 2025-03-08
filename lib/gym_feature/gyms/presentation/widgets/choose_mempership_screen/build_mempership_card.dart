@@ -10,7 +10,7 @@ class BuildMempershipCard extends StatelessWidget {
     super.key,
     required this.plan,
   });
-  
+
   final PlanModel plan;
 
   @override
@@ -34,20 +34,16 @@ class BuildMempershipCard extends StatelessWidget {
             children: [
               Text(plan.subtitle,
                   style: TextStyles.fontCircularSpotify12BlackRegular),
-              Text(plan.title, style: TextStyles.fontCircularSpotify16BlackMedium),
+              Text(plan.title,
+                  style: TextStyles.fontCircularSpotify16BlackMedium),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(12.r),
-                ),
-                child: Text(plan.discount,
-                    style: TextStyle(
-                        fontFamily: "CircularSpotify",
-                        fontWeight: FontWeight.w900,
-                        color: Colors.white,
-                        fontSize: 12.sp)),
-              ),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                  child: Text(plan.discount,
+                      style: TextStyles.fontCircularSpotify12WhiteExtr2aBold)),
             ],
           ),
           SizedBox(height: 8.h),
@@ -75,8 +71,7 @@ class BuildMempershipCard extends StatelessWidget {
                 .map((feature) => Padding(
                       padding: EdgeInsets.only(bottom: 8.h),
                       child: Text(feature,
-                          style: TextStyles
-                              .fontCircularSpotify12BlackRegular),
+                          style: TextStyles.fontCircularSpotify12BlackRegular),
                     ))
                 .toList(),
           ),
@@ -85,5 +80,3 @@ class BuildMempershipCard extends StatelessWidget {
     );
   }
 }
- 
-
