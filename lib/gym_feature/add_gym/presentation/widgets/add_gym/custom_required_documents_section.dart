@@ -15,7 +15,7 @@ class CustomRequiredDocumentsSection extends StatelessWidget {
     return SingleChildScrollView(
       child: IntrinsicHeight(
         child: Column(
-          spacing: 16.h,
+          // spacing: 16.h,
           children: [
             _buildMandatoryDocumentsSection(),
             _buildDivider(),
@@ -96,7 +96,7 @@ class CustomRequiredDocumentsSection extends StatelessWidget {
 
   Widget _buildNavigationButtons() {
     return Row(
-      spacing: 12.w,
+      // spacing: 12.w,
       children: [
         buildBackButton(),
         buildNextButton(),
