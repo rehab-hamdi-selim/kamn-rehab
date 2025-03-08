@@ -14,10 +14,12 @@ class ChooseMempershipPlanScreen extends StatefulWidget {
   const ChooseMempershipPlanScreen({super.key});
 
   @override
-  State<ChooseMempershipPlanScreen> createState() => _ChooseMempershipPlanScreenState();
+  State<ChooseMempershipPlanScreen> createState() =>
+      _ChooseMempershipPlanScreenState();
 }
 
-class _ChooseMempershipPlanScreenState extends State<ChooseMempershipPlanScreen> with SingleTickerProviderStateMixin {
+class _ChooseMempershipPlanScreenState extends State<ChooseMempershipPlanScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -63,7 +65,7 @@ class _ChooseMempershipPlanScreenState extends State<ChooseMempershipPlanScreen>
                     child: OutlinedButton(
                       onPressed: () {},
                       style: OutlinedButton.styleFrom(
-                        side: BorderSide(color: Colors.grey),
+                        side: const BorderSide(color: Colors.grey),
                         backgroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
@@ -108,14 +110,12 @@ class _ChooseMempershipPlanScreenState extends State<ChooseMempershipPlanScreen>
   }
 }
 
-
-
-Future<dynamic> _showDialog(BuildContext context,PlanModel plan) {
+Future<dynamic> _showDialog(BuildContext context, PlanModel plan) {
   return showDialog(
       context: context,
       builder: (context) {
         return Dialog(
-       backgroundColor: AppPallete.whiteColor,
+          backgroundColor: AppPallete.whiteColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.r),
           ),
@@ -162,9 +162,9 @@ Future<dynamic> _showDialog(BuildContext context,PlanModel plan) {
                           backgroundColor: AppPallete.blackColor,
                         ),
                         onPressed: () => Navigator.of(context).pop(),
-                        child: const Text(
+                        child: Text(
                           "Proceed to Payment",
-                          style: TextStyle(color: Colors.white, fontSize: 10),
+                          style: TextStyles.fontCircularSpotify10White,
                         ),
                       ),
                     ),

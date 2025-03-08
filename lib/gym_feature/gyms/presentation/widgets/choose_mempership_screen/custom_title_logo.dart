@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../../core/theme/style.dart';
+
 class CustomTitleLogo extends StatelessWidget {
   const CustomTitleLogo({super.key});
 
@@ -10,23 +12,11 @@ class CustomTitleLogo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
-          "Choose Membership Plan",
-          style: TextStyle(
-            fontFamily: 'CircularSpotify',
-            fontWeight: FontWeight.w500,
-            color: Colors.black,
-            fontSize: 20.sp, // Use ScreenUtil for font size
-          ),
-        ),
+        Text("Choose Membership Plan",
+            style: TextStyles.fontCircularSpotify20BlackMedium),
         Text(
           "Select a plan that suits your fitness goals!",
-          style: TextStyle(
-            fontFamily: 'CircularSpotify',
-            fontWeight: FontWeight.w500,
-            color: Colors.grey.shade600,
-            fontSize: 10.sp, // Use ScreenUtil for font size
-          ),
+          style: TextStyles.fontCircularSpotify10AccentBlackColorMedium,
         ),
         SizedBox(height: 30.h),
         Center(
@@ -43,21 +33,11 @@ class CustomTitleLogo extends StatelessWidget {
         Text(
           "Gold's Gym",
           textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 20.sp, // Use ScreenUtil for font size
-            fontWeight: FontWeight.w500,
-            fontFamily: 'CircularSpotify',
-          ),
+          style: TextStyles.fontCircularSpotify20BlackMedium,
         ),
-        Text(
-          "@goldsgymalex",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 10.sp, // Use ScreenUtil for font size
-            fontWeight: FontWeight.w400,
-            fontFamily: 'CircularSpotify',
-          ),
-        ),
+        Text("@goldsgymalex",
+            textAlign: TextAlign.center,
+            style: TextStyles.fontCircularSpotify10AccentBlackColorMedium),
       ],
     );
   }
