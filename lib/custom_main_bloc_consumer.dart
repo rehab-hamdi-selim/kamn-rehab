@@ -62,10 +62,7 @@ class CustomMainBlocConsumer extends StatelessWidget {
       return const OnBoardingScreen();
     }
     if (state.isLoggedIn() || state.isGettedData() || state.isSuccess()) {
-      return BlocProvider(
-        create: (context) => getIt<AddGymCubit>(),
-        child: const AddGymScreen(),
-      );
+      return ChooseMempershipPlanScreen();
       // return BlocProvider(
       //   create:(context)=> getIt<SelectCategoryCubit>()..getPlaygrounds(),
       //   child: const SelectCategoryScreen(),
