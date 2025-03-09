@@ -25,7 +25,6 @@ class CustomTextFormField extends StatelessWidget {
       required this.controller,
       required this.boxhight,
       this.maxLength,
-      required int maxLine,
       required this.label,
       this.optionalText,
       this.sufixText,
@@ -45,7 +44,7 @@ class CustomTextFormField extends StatelessWidget {
                 style: TextStyles.fontCircularSpotify14LightBlackRegular,
               ),
               TextSpan(
-                text: optionalText!,
+                text: optionalText ?? '',
                 style: TextStyles.fontCircularSpotify12GrayRegular,
               ),
             ],
@@ -79,8 +78,6 @@ class CustomTextFormField extends StatelessWidget {
           controller: controller,
           style: TextStyles.fontCircularSpotify14LightBlackRegular,
           decoration: InputDecoration(
-<<<<<<< HEAD
-            
             suffixIcon: Padding(
               padding: const EdgeInsets.all(8.0),
               child: widget,
@@ -88,21 +85,10 @@ class CustomTextFormField extends StatelessWidget {
             constraints: boxhight,
             contentPadding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
             errorBorder: OutlineInputBorder(
-=======
-              suffixIcon: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: widget,
-              ),
-              constraints: boxhight,
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-              errorBorder: OutlineInputBorder(
->>>>>>> 6960c59cbdd2850ea2c728ad4c139e54e2197e45
                 borderSide: const BorderSide(
                   width: 1.2,
                 ),
-<<<<<<< HEAD
-                borderRadius: BorderRadius.circular(20.r),),
+                borderRadius: BorderRadius.circular(20.r)),
             focusedErrorBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
                   color: AppPallete.redColor,
@@ -112,42 +98,20 @@ class CustomTextFormField extends StatelessWidget {
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20.r)),
             focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                                    color: const Color.fromARGB(255, 245, 245, 245),
-
-                  width: 1.2,
-                ),
-                borderRadius: BorderRadius.circular(20.r)),
-            hintText: hintText!,
-            
-            hintStyle: TextStyle(color: Colors.grey.shade600, fontSize: 12.h),
-            fillColor:                    const Color.fromARGB(255, 245, 245, 245),
-            filled: true
-          ),
-=======
-                borderRadius: BorderRadius.circular(8.r),
+              borderSide: const BorderSide(
+                color: AppPallete.grayColor,
+                width: 1.2,
               ),
-              focusedErrorBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: AppPallete.redColor,
-                    width: 1.2,
-                  ),
-                  borderRadius: BorderRadius.circular(8.r)),
-              enabledBorder:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(8.r)),
-              focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: AppPallete.lgWhiteColor,
-                    width: 1.2,
-                  ),
-                  borderRadius: BorderRadius.circular(8.r)),
-              hintText: hintText!,
-              hintStyle: TextStyle(color: Colors.grey.shade600, fontSize: 12.h),
-              fillColor: AppPallete.whiteColor,
-              filled: true),
->>>>>>> 6960c59cbdd2850ea2c728ad4c139e54e2197e45
+              borderRadius: BorderRadius.circular(20.r),
+            ),
+            hintText: hintText ?? '',
+            hintStyle: TextStyle(color: Colors.grey.shade600, fontSize: 12.h),
+            fillColor: const Color.fromARGB(255, 245, 245, 245),
+            filled: true,
+          ),
         ),
       ],
     );
   }
+
 }

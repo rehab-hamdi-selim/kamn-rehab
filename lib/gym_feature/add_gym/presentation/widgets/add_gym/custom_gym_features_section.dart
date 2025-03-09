@@ -89,36 +89,13 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
                       lines: 1,
                       controller: _priceController,
                       boxhight: BoxConstraints.tight(const Size.fromHeight(40)),
-                      maxLine: 1,
                       label: 'Feature-Based Pricing',
                       optionalText: '',
                       hintText: '',
                       widget: const Text('£GP'),
                     ),
                     verticalSpace(8),
-<<<<<<< HEAD
                     CustomCheckBar(
-=======
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomRadioButton(
-                          text: 'Free',
-                          activeColor: const Color(0xffFEFEFE),
-                          backgroundColor: AppPallete.blackColor,
-                        ),
-                        CustomRadioButton(
-                        text: '/ monthly',
-                          activeColor: const Color(0xffFEFEFE),
-                          backgroundColor: AppPallete.blueColor,
-                        ),
-                        CustomRadioButton(
-                       text: '/ session',
-                          activeColor: const Color(0xffFEFEFE),
-                          backgroundColor: AppPallete.greenColor,
-                        ),
-                      ],
->>>>>>> 6960c59cbdd2850ea2c728ad4c139e54e2197e45
                     ),
                     verticalSpace(8),
                     CustomTextFormField(
@@ -130,7 +107,6 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
                       boxhight:
                           BoxConstraints.tight(const Size.fromHeight(120)),
                       label: 'Description',
-                      maxLine: 6,
                       optionalText: '',
                       maxLength: 100,
                     ),
