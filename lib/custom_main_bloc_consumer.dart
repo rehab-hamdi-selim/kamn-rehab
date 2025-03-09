@@ -8,8 +8,6 @@ import 'package:kamn/gym_feature/add_gym/presentation/screens/add_gym_screen.dar
 import 'package:kamn/gym_feature/gyms/presentation/screen/choose_mempership_plan_screen.dart';
 import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
 import 'package:kamn/playground_feature/authentication/presentation/screens/on_boarding_screen.dart';
-import 'package:kamn/playground_feature/sports/presentation/cubits/select_category_cubit/select_category_cubit.dart';
-import 'package:kamn/playground_feature/sports/presentation/screens/select_category_screen.dart';
 import 'core/common/cubit/app_user/app_user_cubit.dart';
 import 'core/common/widget/main_loader.dart';
 import 'core/di/di.dart';
@@ -64,7 +62,10 @@ class CustomMainBlocConsumer extends StatelessWidget {
       return const OnBoardingScreen();
     }
     if (state.isLoggedIn() || state.isGettedData() || state.isSuccess()) {
-      return  const ChooseMempershipPlanScreen();
+      return BlocProvider(
+        create: (context) => getIt<AddGymCubit>(),
+        child: const AddGymScreen(),
+      );
       // return BlocProvider(
       //   create:(context)=> getIt<SelectCategoryCubit>()..getPlaygrounds(),
       //   child: const SelectCategoryScreen(),
