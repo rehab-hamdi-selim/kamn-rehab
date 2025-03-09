@@ -25,7 +25,7 @@ class CustomGymInfoSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-        spacing: 16.h,
+        // spacing: 16.h,
         children: [
           _buildGymLogoSection(context),
           _buildGymPhotosSection(),
