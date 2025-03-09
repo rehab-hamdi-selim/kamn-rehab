@@ -16,16 +16,14 @@ class CustomRequiredDocumentsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: IntrinsicHeight(
-        child: Column(
-          spacing: 16.h,
-          children: [
-            _buildMandatoryDocumentsSection(context),
-            _buildDivider(),
-            _buildTaxRegistrationSection(context),
-            _buildNavigationButtons(context),
-          ],
-        ),
+      child: Column(
+        spacing: 16.h,
+        children: [
+          _buildMandatoryDocumentsSection(context),
+          _buildDivider(),
+          _buildTaxRegistrationSection(context),
+          _buildNavigationButtons(context),
+        ],
       ),
     );
   }
