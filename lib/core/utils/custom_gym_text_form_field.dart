@@ -27,6 +27,7 @@ class CustomGymTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         RichText(
                 text: TextSpan(

@@ -546,6 +546,12 @@ class TextStyles {
       color: AppPallete.lightWhiteColor,
       fontWeight: FontWeightHelper.regular,
       fontSize: 11.h);
+  static TextStyle fontCircularSpotify11GreyRegular = TextStyle(
+      // renamed from fontCircularSpotify11Regular
+      fontFamily: "CircularSpotify",
+      color: AppPallete.stealGray,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 11.h);
   static TextStyle fontCircularSpotify12BlackMedium = TextStyle(
       // renamed from font12CircularSpotifyTextBlackMedium
       fontFamily: "CircularSpotify",
