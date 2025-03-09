@@ -23,10 +23,9 @@ class CustomSelectedFeaturesSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
-      // Use ScreenUtil for padding
       decoration: BoxDecoration(
         color: Colors.grey.shade100,
-        borderRadius: BorderRadius.circular(10.w), // Use ScreenUtil for radius
+        borderRadius: BorderRadius.circular(10.w),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,31 +34,40 @@ class CustomSelectedFeaturesSection extends StatelessWidget {
             "Your Selection:",
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 16.sp, // Use ScreenUtil for font size
+              fontSize: 16.sp,
             ),
           ),
-          if (selectedFeatures.isEmpty)
-            const Text(
-              "No features selected",
-              style: TextStyle(color: Colors.grey),
+          SizedBox(
+            height: 150.h, // Set a max height to avoid infinite growth
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  if (selectedFeatures.isEmpty)
+                    const Text(
+                      "No features selected",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ...selectedFeatures.entries.map((entry) {
+                    final feature = entry.key;
+                    final quantity = entry.value;
+                    return CustomSelectionItem(
+                      feature: feature,
+                      quantity: quantity,
+                      increaseQuantity: increaseQuantity,
+                      decreaseQuantity: decreaseQuantity,
+                      removeFeature: removeFeature,
+                    );
+                  }),
+                ],
+              ),
             ),
-          ...selectedFeatures.entries.map((entry) {
-            final feature = entry.key;
-            final quantity = entry.value;
-            return CustomSelectionItem(
-              feature: feature,
-              quantity: quantity,
-              increaseQuantity: increaseQuantity,
-              decreaseQuantity: decreaseQuantity,
-              removeFeature: removeFeature,
-            );
-          }),
+          ),
           const Divider(),
           Center(
             child: Text(
               "Total: $totalPrice£EGP",
               style: TextStyle(
-                fontSize: 12.sp, // Use ScreenUtil for font size
+                fontSize: 12.sp,
                 fontWeight: FontWeight.w300,
               ),
             ),

@@ -4,6 +4,14 @@ import 'package:kamn/gym_feature/add_gym/presentation/cubits/gym_features/cubit/
 class GymFeaturesCubit extends Cubit<GymFeaturesState>{
   GymFeaturesCubit() : super(const GymFeaturesState());
 
+  String? statusOption;
+  void onChangeStatusSelection(String newOption) {
+    if (statusOption == newOption) {
+      return;
+    }
+    statusOption = newOption;
+    emit(state.copyWith(selectedValue: newOption));
+  }
   void takeSelectedValue(String value){
     emit(state.copyWith(selectedValue: value));
   }
