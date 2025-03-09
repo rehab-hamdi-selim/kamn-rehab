@@ -64,6 +64,7 @@ class CustomTextFormField extends StatelessWidget {
           controller: controller,
           style: TextStyles.fontCircularSpotify14LightBlackRegular,
           decoration: InputDecoration(
+            
             suffixIcon: Padding(
               padding: const EdgeInsets.all(8.0),
               child: widget,
@@ -72,7 +73,6 @@ class CustomTextFormField extends StatelessWidget {
             contentPadding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
             errorBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 237, 243, 238),
                   width: 1.2,
                 ),
                 borderRadius: BorderRadius.circular(20.r),),
@@ -86,14 +86,15 @@ class CustomTextFormField extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20.r)),
             focusedBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
-                  color: AppPallete.lgWhiteColor,
+                                    color: const Color.fromARGB(255, 245, 245, 245),
+
                   width: 1.2,
                 ),
                 borderRadius: BorderRadius.circular(20.r)),
             hintText: hintText!,
             
             hintStyle: TextStyle(color: Colors.grey.shade600, fontSize: 12.h),
-            fillColor: AppPallete.whiteColor,
+            fillColor:                    const Color.fromARGB(255, 245, 245, 245),
             filled: true
           ),
         ),

@@ -95,28 +95,7 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
                       widget: Text('£GP'),
                     ),
                     verticalSpace(8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomCheckBar(
-                          txt: 'Free',
-                          cardColor: const Color(0xffFEFEFE),
-                          textColor: AppPallete.accentBlackColor2,
-                          checkColor: AppPallete.accentBlackColor2,
-                        ),
-                        CustomCheckBar(
-                          txt: '/ month',
-                          cardColor: const Color(0xff1775F1),
-                          textColor: AppPallete.shadeOfGray,
-                          checkColor: AppPallete.blueGreenColor,
-                        ),
-                        CustomCheckBar(
-                          txt: ' / session',
-                          cardColor: const Color(0xff00A28C),
-                          textColor: AppPallete.shadeOfGray,
-                          checkColor: AppPallete.blueGreenColor,
-                        ),
-                      ],
+                    CustomCheckBar(
                     ),
                     verticalSpace(8),
                     CustomTextFormField(
