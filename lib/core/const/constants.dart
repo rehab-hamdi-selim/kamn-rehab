@@ -82,11 +82,25 @@ class Constants {
   static const volleyball = "Volleyball";
   static const skyDiving = "Sky Diving";
   static const swimming = "Swimming";
+
   static const welcomeToManagementSystem = 'Welcome to\nManagement System';
   static const financialReports = 'Financial Reports';
   static const paymentOptions = 'Choose payment\noption';
   static const termsAndConditions = 'Terms and Conditions';
+  static const String restaurantName = "Sarah's House";
+  static const String foodTitle = "Quinoa Salad with Grilled Chicken";
+  static const String details =
+      "A delicious grilled chicken salad packed with vibrant greens, colorful vegetables, and topped with a light vinaigrette. The tender chicken adds a lean source of protein, while the mix of nuts and seeds provides healthy fats and essential micronutrients.";
+  static const String ingredientsTitle = "Ingredients";
+  static const String detailsTitle = "Details";
   static const termsAndConditionsContent = '''1. Introduction
+  
+  
+  
+  
+  
+  
+  
 
 Welcome to KAMN. By using our services, you agree to the following Terms of Service. Please read them carefully.
 
