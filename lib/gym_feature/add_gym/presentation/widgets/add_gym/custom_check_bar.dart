@@ -1,101 +1,97 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/core/helpers/spacer.dart';
-import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/cubits/gym_features/cubit/gym_features_cubit.dart';
 
-import '../../../../../core/theme/font_weight_helper.dart';
-import '../../cubits/gym_features/cubit/gym_features_state.dart';
+import '../../../../../core/theme/style.dart';
 
-class CustomCheckBar extends StatelessWidget {
-  final bool _chosen = true;
-  final String? txt;
-  final Color cardColor;
-  final Color textColor;
-  final Color checkColor;
+enum SubscriptionType { free, session, month } // Improved enum name
 
-  CustomCheckBar(
-      {super.key,
-      required this.txt,
-      required this.cardColor,
-      required this.textColor,
-      required this.checkColor});
+class CustomCheckBar extends StatefulWidget {
+  const CustomCheckBar({super.key});
   @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: cardColor,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          children: [
-            CustomCheckbox(
-              checkColor: cardColor,
-            ),
-            horizontalSpace(4),
-            Text(
-              txt!,
-              style: TextStyle(
-                  fontFamily: "Roboto",
-                  color: textColor,
-                  fontWeight: FontWeightHelper.regular,
-                  fontSize: 12.h),
-            )
-          ],
-        ),
-      ),
-    );
-  }
+  State<CustomCheckBar> createState() => _CustomCheckBarState();
 }
 
-class CustomCheckbox extends StatefulWidget {
-  final Color checkColor;
-
-  const CustomCheckbox({super.key, required this.checkColor});
-
-  @override
-  _CustomCheckboxExampleState createState() => _CustomCheckboxExampleState();
-}
-
-class _CustomCheckboxExampleState extends State<CustomCheckbox> {
-  bool isChecked = false;
+class _CustomCheckBarState extends State<CustomCheckBar> {
+  SubscriptionType? _subscriptionSelection; 
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GymFeaturesCubit, GymFeaturesState>(
-      builder: (context, state) {
-        return GestureDetector(
-          onTap: () {
-            setState(() {
-              isChecked = !isChecked;
-            });
-           context.read<GymFeaturesCubit>().takeisChecked(isChecked);
-          },
-          child: Container(
-            width: 20,
-            height: 20,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color:
-                    isChecked ? AppPallete.shadeOfGray : AppPallete.shadeOfGray,
-                width: 2,
+    return Row( 
+      children: <Widget>[
+        Card(
+
+                  color: const Color.fromARGB(255, 245, 245, 245),
+          elevation: 6,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+              child: Row(
+                children: [
+                  Radio<SubscriptionType>(
+                    activeColor: Color.fromARGB(255, 0, 0, 0),//no
+                    hoverColor: Color.fromARGB(255, 0, 0, 0),//no
+                    overlayColor: WidgetStatePropertyAll(Color.fromARGB(255, 0, 0, 0)),//no
+                    fillColor: WidgetStateProperty.all(Color.fromARGB(255, 0, 0, 0)),//radio color
+                    value: SubscriptionType.free,
+                    groupValue: _subscriptionSelection,
+                    onChanged: (SubscriptionType? value) {
+                      setState(() {
+                        _subscriptionSelection = value;
+                      });
+                    },
+                  ),
+                Text('Free',style: TextStyles.fontCircularSpotify12BlackMedium,), 
+              
+                ],
               ),
             ),
-            child: Center(
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 150),
-                width: isChecked ? 8.w : 0,
-                height: isChecked ? 8.h : 0,
-                decoration: const BoxDecoration(
-                  color: AppPallete.accentBlackColor2,
-                  shape: BoxShape.circle,
-                ),
+        ),
+        Card(
+
+                  color: const Color.fromARGB(255, 245, 245, 245),
+          elevation: 6,
+            child: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+
+              child: Row(
+                children: [
+                  Radio<SubscriptionType>(
+                    value: SubscriptionType.session,
+                    groupValue: _subscriptionSelection,
+                    onChanged: (SubscriptionType? value) {
+                      setState(() {
+                        _subscriptionSelection = value;
+                      });
+                    },
+                  ),
+               Text('/Session',style: TextStyles.fontCircularSpotify12BlackMedium,),
+              
+                ],
               ),
             ),
           ),
-        );
-      },
+        
+        Card(
+          color: const Color.fromARGB(255, 245, 245, 245),
+          elevation: 6,
+            child: Padding(
+                           padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+
+              child: Row(
+                children: [
+                  Radio<SubscriptionType>(
+                    value: SubscriptionType.month,
+                    groupValue: _subscriptionSelection,
+                    onChanged: (SubscriptionType? value) {
+                      setState(() {
+                        _subscriptionSelection = value;
+                      });
+                    },
+                  ),
+                Text('/month',style: TextStyles.fontCircularSpotify12BlackMedium,),
+                ],
+              ),
+            ),
+          ),
+      ],
     );
   }
 }

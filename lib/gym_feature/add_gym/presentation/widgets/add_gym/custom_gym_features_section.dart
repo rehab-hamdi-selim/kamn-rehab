@@ -96,6 +96,9 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
                       widget: const Text('£GP'),
                     ),
                     verticalSpace(8),
+<<<<<<< HEAD
+                    CustomCheckBar(
+=======
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -115,6 +118,7 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
                           backgroundColor: AppPallete.greenColor,
                         ),
                       ],
+>>>>>>> 6960c59cbdd2850ea2c728ad4c139e54e2197e45
                     ),
                     verticalSpace(8),
                     CustomTextFormField(
