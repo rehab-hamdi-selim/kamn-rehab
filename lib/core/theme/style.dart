@@ -681,4 +681,57 @@ class TextStyles {
       color: AppPallete.blackColor,
       fontWeight: FontWeightHelper.medium,
       fontSize: 32.h);
+
+  static TextStyle circularSpotify12BoldGreen = TextStyle(
+    color: AppPallete.darkGreenColor,
+    fontFamily: 'CircularSpotify',
+    fontWeight: FontWeightHelper.bold,
+    fontSize: 12.h,
+  );
+  static TextStyle circularSpotify10BoldWhite = TextStyle(
+    fontSize: 10.h,
+    fontFamily: 'CircularSpotify',
+    fontWeight: FontWeightHelper.bold,
+    color: Colors.white,
+  );
+
+  static TextStyle circularSpotify14RegularDarkBlack = TextStyle(
+    color: AppPallete.darkBlack,
+    fontSize: 14.h,
+    fontFamily: 'CircularSpotifyTxT',
+    fontWeight: FontWeightHelper.regular,
+  );
+
+  static TextStyle circularSpotify16BoldDarkBlack = TextStyle(
+    color: AppPallete.darkBlack,
+    fontSize: 16.h,
+    fontFamily: 'CircularSpotifyTxT',
+    fontWeight: FontWeightHelper.bold,
+  );
+
+  static TextStyle circularSpotify10LightGrey = TextStyle(
+    color: AppPallete.grey,
+    fontSize: 10.h,
+    fontFamily: 'CircularSpotifyTxT',
+    fontWeight: FontWeightHelper.light,
+  );
+
+  static TextStyle circularSpotify14BoldDarkBlack = TextStyle(
+    fontSize: 14.h,
+    fontFamily: 'CircularSpotifyTxT',
+    fontWeight: FontWeightHelper.bold,
+    color: AppPallete.darkBlack,
+  );
+
+  static TextStyle circularSpotify10Green = TextStyle(
+    fontSize: 10.h,
+    fontFamily: 'CircularSpotifyTxT',
+    color: AppPallete.darkGreenColor,
+  );
+  static TextStyle circularSpotify8Grey = TextStyle(
+    fontSize: 8.h,
+    fontFamily: 'CircularSpotifyTxT',
+    fontWeight: FontWeightHelper.regular,
+    color: AppPallete.darkBlackColor,
+  );
 }
