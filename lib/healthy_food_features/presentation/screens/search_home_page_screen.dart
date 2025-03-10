@@ -10,8 +10,8 @@ import 'package:kamn/healthy_food_features/presentation/widgets/home_page/rounde
 
 import '../../data/models/food_item_model.dart';
 
-class SearchScreen extends StatelessWidget {
-  const SearchScreen({super.key});
+class SearchingOfHomePageScreen extends StatelessWidget {
+  const SearchingOfHomePageScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
