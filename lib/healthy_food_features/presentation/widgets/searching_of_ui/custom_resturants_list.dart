@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:kamn/core/const/constants.dart';
+import 'package:kamn/core/const/icon_links.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/healthy_food_features/data/models/restaurant_model.dart';
@@ -46,7 +48,7 @@ class CustomResturantsList extends StatelessWidget {
                                             height: 10.h),
                                         SizedBox(width: 4.w),
                                         Text(
-                                          "${restaurants[index].deliveryTime} min",
+                                          "${restaurants[index].deliveryTime} ${Constants.minute}",
                                           style: TextStyles
                                               .fontCircularSpotify8AccentBlackRegular,
                                         ),
@@ -57,7 +59,7 @@ class CustomResturantsList extends StatelessWidget {
                                 Row(
                                   children: [
                                     SvgPicture.asset(
-                                        "assets/images/location_tag.svg"),
+                                       IconLinks.location),
                                     SizedBox(width: 4.w),
                                     Text(
                                       "Location",
@@ -131,7 +133,7 @@ class CustomResturantsList extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(57.17.r),
                                         ),
-                                        child: Text("Book Now",
+                                        child: Text(Constants.bookNow,
                                             style: TextStyles.fontCircularSpotify8WhiteBold),
                                       ),
                                     )

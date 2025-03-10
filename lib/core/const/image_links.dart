@@ -19,4 +19,5 @@ class ImageLinks {
   static const String fruitSaladImg = 'assets/images/salad_1.png';
   static const String homCookiesTest = 'assets/images/homCookiesTest.png';
   static const String ellips = 'assets/images/Ellips.png';
+  static const String plusBtn = "assets/images/plus_btn.png";
 }

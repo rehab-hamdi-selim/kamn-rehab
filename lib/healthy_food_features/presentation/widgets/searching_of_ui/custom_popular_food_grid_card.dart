@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/const/constants.dart';
+import 'package:kamn/core/const/image_links.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
@@ -60,7 +62,7 @@ class CustomPopularFoodGridCard extends StatelessWidget {
                                   end: Alignment.bottomCenter,
                                   colors: [
                                     Color(0x00FFFFFF),
-                                    Color(0xFFFFFFFF),
+                                    AppPallete.whiteColor,
                                   ],
                                 ),
                                 borderRadius: BorderRadius.only(
@@ -84,7 +86,7 @@ class CustomPopularFoodGridCard extends StatelessWidget {
                                       children: [
                                         verticalSpace(3.h),
                                         Text(
-                                          "🔥${trendingFoods[index].calories} KCal",
+                                          "🔥${trendingFoods[index].calories} ${Constants.kCal}",
                                           style: TextStyles
                                               .fontCircularSpotify8StealGrayRegular,
                                         ),
@@ -110,7 +112,7 @@ class CustomPopularFoodGridCard extends StatelessWidget {
                                             ),
                                             horizontalSpace(1.w),
                                             Text(
-                                              "£GP",
+                                              Constants.egp,
                                               style: TextStyles
                                                   .fontCircularSpotify14GreenRegular,
                                             ),
@@ -128,7 +130,7 @@ class CustomPopularFoodGridCard extends StatelessWidget {
                                 child: IconButton(
                                   onPressed: () {},
                                   icon: Image.asset(
-                                    "assets/images/plus_btn.png",
+                                    ImageLinks.plusBtn,
                                     width: 32.w,
                                     height: 32.h,
                                     color: AppPallete.blackColor,

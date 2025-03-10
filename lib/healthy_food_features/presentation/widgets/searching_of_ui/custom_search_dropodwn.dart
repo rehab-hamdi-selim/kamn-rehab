@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 
 class CustomSearchDropodwn extends StatefulWidget {
@@ -24,11 +25,11 @@ class _CustomSearchDropodwnState extends State<CustomSearchDropodwn> {
         width: 144.w,
         height: 45.h,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppPallete.whiteColor,
           borderRadius: BorderRadius.circular(33.sp),
           border: Border.all(color:Color(0xffECF0F4)),
         ),
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.symmetric(horizontal: 10.w),
         child: DropdownButtonHideUnderline(
           child: DropdownButton<String>(
             value: selectedValue,
@@ -47,7 +48,7 @@ class _CustomSearchDropodwnState extends State<CustomSearchDropodwn> {
                 selectedValue = newValue!;
               });
             },
-            icon: Icon(Icons.arrow_drop_down, color: Color(0xff2A7737),), // Dropdown icon
+            icon: Icon(Icons.arrow_drop_down, color: Color(0xff2A7737),),
           ),
         ),
       ),
