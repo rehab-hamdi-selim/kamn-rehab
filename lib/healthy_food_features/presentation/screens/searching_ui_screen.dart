@@ -5,6 +5,8 @@ import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/searching_of_ui/custom_popular_food_grid_card.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/searching_of_ui/custom_resturants_list.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/searching_of_ui/custom_search_appbar.dart';
+import 'package:kamn/core/const/constants.dart';
+
 
 class SearchingUiScreen extends StatelessWidget {
   const SearchingUiScreen({super.key});
@@ -21,12 +23,12 @@ class SearchingUiScreen extends StatelessWidget {
             CustomSearchAppbar(),
             verticalSpace(10.h),
             Text(
-              "Popular food",
+              Constants.popularFood,
               style: TextStyles.fontCircularSpotify21BlackRegular,
             ),
             verticalSpace(10.h),
 
-            // Popular Food Grid (with defined height)
+            // Popular Food Grid
             SizedBox(
               height: 350.h,
               child: SingleChildScrollView(child: CustomPopularFoodGridCard()),
@@ -34,12 +36,12 @@ class SearchingUiScreen extends StatelessWidget {
             verticalSpace(12.h),
 
             Text(
-              "Open Restaurants",
+              Constants.openRestaurants,
               style: TextStyles.fontCircularSpotify21BlackRegular,
             ),
             verticalSpace(10.h),
 
-            // Wrap ListView.builder inside Expanded
+            // Resturants
             CustomResturantsList(),
           ],
         ),

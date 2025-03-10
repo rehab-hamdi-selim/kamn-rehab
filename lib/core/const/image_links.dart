@@ -15,4 +15,5 @@ class ImageLinks {
   static const String defaultUserImage = "assets/icons/default_user_image.svg";
   static const String fitImage = 'assets/images/fit.jpeg';
   static const String gymImage = 'assets/images/gym.png';
+  static const String plusBtn = "assets/images/plus_btn.png";
 }
