@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomResView extends StatelessWidget {
-  const CustomResView({super.key});
+class CustomMealInfo extends StatelessWidget {
+  const CustomMealInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
