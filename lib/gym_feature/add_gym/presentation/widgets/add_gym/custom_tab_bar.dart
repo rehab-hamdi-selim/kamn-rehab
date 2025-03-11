@@ -31,7 +31,7 @@ class CustomTabBar extends StatelessWidget {
                   border: Border.all(color: Colors.grey.shade300),
                 ),
                 child: TabBar(
-                  controller: state.tabController,
+                  controller: cubit.tabController,
                   dividerHeight: 0,
                   indicatorSize: TabBarIndicatorSize.tab,
                   indicator: BoxDecoration(
@@ -54,10 +54,10 @@ class CustomTabBar extends StatelessWidget {
               verticalSpace(16),
               Expanded(
                 child: TabBarView(
-                  controller: state.tabController,
+                  controller: cubit.tabController,
                   children: [
                     CustomGymInfoSection(),
-                    const CustomRequiredDocumentsSection(),
+                     CustomRequiredDocumentsSection(),
                     const CustomGymFeaturesSection(),
                   ],
                 ),

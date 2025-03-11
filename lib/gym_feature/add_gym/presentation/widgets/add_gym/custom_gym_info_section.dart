@@ -6,9 +6,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kamn/core/helpers/spacer.dart';
+import 'package:kamn/core/helpers/validators.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/core/utils/custom_gym_text_form_field.dart';
+import 'package:kamn/core/utils/custome_text_form_field.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_state.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_scoial_text_form_field.dart';
@@ -20,6 +22,9 @@ class CustomGymInfoSection extends StatelessWidget {
   final TextEditingController addressController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController facebookController = TextEditingController();
+  final TextEditingController instagramController = TextEditingController();
+  final TextEditingController xController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +33,11 @@ class CustomGymInfoSection extends StatelessWidget {
         // spacing: 16.h,
         children: [
           _buildGymLogoSection(context),
-          _buildGymPhotosSection(),
-          _buildGymLinksSection(),
+          _buildGymPhotosSection(context),
+          _buildGymLinksSection(context),
           Row(
             children: [
-              buildNextButton(),
+              buildNextButton(context ),
             ],
           ),
         ],
@@ -40,30 +45,31 @@ class CustomGymInfoSection extends StatelessWidget {
     );
   }
 
-  Widget _buildGymLogoSection(BuildContext context) {
-    return buildContainer(
+  Widget _buildGymLogoSection(BuildContext context,) {
+    return buildContainer(key: context.read<AddGymCubit>().key,
       children: [
         _buildSectionTitle('Choose Gym Logo'),
         _buildDottedUploadLogoBox(context: context),
         verticalSpace(12),
         _buildTextField(nameController, 'Gym Name', 'enter gym name',
-            "e.g., Gold's Gym Alexandria"),
+            "e.g., Gold's Gym Alexandria",validator: emptyValidator),
         verticalSpace(12),
         _buildTextField(addressController, 'Gym Address', 'enter gym address',
-            "e.g., City, District, Street"),
+            "e.g., City, District, Street",validator: emptyValidator),
         verticalSpace(12),
         _buildTextField(phoneController, 'Gym Phone', 'enter gym phone',
-            "e.g., 01xxxxxxxxx"),
+            "e.g., 01xxxxxxxxx",validator: phoneValidator),
         verticalSpace(12),
         _buildTextField(descriptionController, 'Gym Description',
-            'enter gym description', '',
+            'enter gym description', '',validator: emptyValidator,
             maxLines: 5, maxLength: 400),
         verticalSpace(8),
       ],
+
     );
   }
 
-  Widget _buildGymPhotosSection() {
+  Widget _buildGymPhotosSection(BuildContext context) {
     return buildContainer(
       children: [
         _buildSectionTitle('Choose Gym Photos'),
@@ -74,27 +80,27 @@ class CustomGymInfoSection extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             separatorBuilder: (_, __) => horizontalSpace(8),
             itemCount: 3,
-            itemBuilder: (_, __) =>
-                _buildDottedUploadImageBox(width: 121.w, height: 94.h),
+            itemBuilder: (_, index) => _buildDottedUploadImageBox(
+                width: 121.w, height: 94.h, index: index),
           ),
         ),
       ],
     );
   }
 
-  Widget _buildGymLinksSection() {
+  Widget _buildGymLinksSection(BuildContext context) {
     return buildContainer(
       children: [
         _buildSectionTitle('Gym Links (optional)'),
         verticalSpace(8),
-        _buildSocialTextField(nameController, "assets/icons/instagram.svg",
+        _buildSocialTextField(instagramController, "assets/icons/instagram.svg",
             'Instagram', 'enter instagram Url'),
         verticalSpace(12),
-        _buildSocialTextField(nameController, "assets/icons/facebook.svg",
+        _buildSocialTextField(facebookController, "assets/icons/facebook.svg",
             'Facebook', 'enter facebook Url'),
         verticalSpace(12),
         _buildSocialTextField(
-            nameController, "assets/icons/x.svg", 'X', 'enter x Url'),
+            xController, "assets/icons/x.svg", 'X', 'enter x Url'),
       ],
     );
   }
@@ -157,7 +163,8 @@ class CustomGymInfoSection extends StatelessWidget {
     );
   }
 
-  Widget _buildLogoPreview(BuildContext context, File logo) {
+  Widget _buildLogoPreview(BuildContext context, File logo,
+      {bool isLogo = true, int? index}) {
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -172,7 +179,9 @@ class CustomGymInfoSection extends StatelessWidget {
           bottom: 0,
           right: 0,
           child: InkWell(
-            onTap: () => context.read<AddGymCubit>().pickLogoImage(),
+            onTap: () => isLogo
+                ? context.read<AddGymCubit>().pickLogoImage()
+                : context.read<AddGymCubit>().replaceGymImage(index!),
             child: SvgPicture.asset('assets/icons/replace.svg'),
           ),
         ),
@@ -213,7 +222,8 @@ class CustomGymInfoSection extends StatelessWidget {
     );
   }
 
-  Widget _buildDottedUploadImageBox({double? width, double? height}) {
+  Widget _buildDottedUploadImageBox(
+      {double? width, double? height, required int index}) {
     return DottedBorder(
       radius: Radius.circular(12.r),
       borderType: BorderType.RRect,
@@ -227,36 +237,48 @@ class CustomGymInfoSection extends StatelessWidget {
         decoration: BoxDecoration(
             color: AppPallete.whiteColor,
             borderRadius: BorderRadius.all(Radius.circular(12.r))),
-        child: Column(children: [
-          SvgPicture.asset(
-            'assets/icons/insert_image.svg',
-            width: 25.w,
-          ),
-          TextButton(
-            style: TextButton.styleFrom(
-              backgroundColor: AppPallete.whiteColor,
-              side: const BorderSide(
-                color: AppPallete.lightGreyColor,
-                width: 0.27,
+        child: BlocBuilder<AddGymCubit, AddGymState>(
+          builder: (context, state) {
+            if ((state.gymImages?.isNotEmpty ?? false) &&
+                state.gymImages!.length > index) {
+              return _buildLogoPreview(context, state.gymImages![index],
+                  isLogo: false, index: index);
+            }
+            return Column(children: [
+              SvgPicture.asset(
+                'assets/icons/insert_image.svg',
+                width: 25.w,
               ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(3.5),
+              TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: AppPallete.whiteColor,
+                  side: const BorderSide(
+                    color: AppPallete.lightGreyColor,
+                    width: 0.27,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(3.5),
+                  ),
+                  minimumSize: Size(61.w, 16.h),
+                ),
+                onPressed: () {
+                  context.read<AddGymCubit>().pickGymImage();
+                },
+                child: Text("Choose file",
+                    style: TextStyles.fontCircularSpotify8AccentBlackRegular),
               ),
-              minimumSize: Size(61.w, 16.h),
-            ),
-            onPressed: () {},
-            child: Text("Choose file",
-                style: TextStyles.fontCircularSpotify8AccentBlackRegular),
-          ),
-        ]),
+            ]);
+          },
+        ),
       ),
     );
   }
 
   Widget _buildTextField(TextEditingController controller, String label,
       String hint, String helper,
-      {int? maxLines, int? maxLength}) {
+      {int? maxLines, int? maxLength,MyValidator? validator}) {
     return CustomGymTextFormField(
+      valodator: validator,
       controller: controller,
       label: label,
       hint: hint,
@@ -291,7 +313,7 @@ Widget buildDottedBorder({required Widget child}) {
 Widget buildContainer(
     {required List<Widget> children,
     CrossAxisAlignment alignment = CrossAxisAlignment.start,
-    double horizontalPadding = 20}) {
+    double horizontalPadding = 20,GlobalKey<FormState>? key}) {
   return Container(
     decoration: BoxDecoration(
       color: AppPallete.ofWhiteColor,
@@ -301,11 +323,14 @@ Widget buildContainer(
     padding:
         EdgeInsets.symmetric(horizontal: horizontalPadding.w, vertical: 10.h),
     width: double.infinity,
-    child: Column(crossAxisAlignment: alignment, children: children),
+    child: Form(
+      key:key,
+      child: Column(crossAxisAlignment: alignment, children: children)),
   );
 }
 
-Widget buildNextButton() {
+Widget buildNextButton(BuildContext context) {
+  final cubit =  context.read<AddGymCubit>();
   return Expanded(
     child: SizedBox(
       height: 50.h,
@@ -313,10 +338,11 @@ Widget buildNextButton() {
         style: ElevatedButton.styleFrom(
           backgroundColor: AppPallete.blackColor,
           foregroundColor: AppPallete.whiteColor,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(70.r)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(70.r)),
         ),
-        onPressed: () {},
+        onPressed: () {
+        cubit.checkMandatoryFields();
+        },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
