@@ -20,4 +20,6 @@ class ImageLinks {
   static const String homCookiesTest = 'assets/images/homCookiesTest.png';
   static const String ellips = 'assets/images/Ellips.png';
   static const String plusBtn = "assets/images/plus_btn.png";
+
+  static const String testrestaurant = 'assets/images/testrestaurant.png';
 }

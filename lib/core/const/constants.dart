@@ -10,6 +10,11 @@ class Constants {
     'Programming',
     'Entertainment',
   ];
+  static const catrgories = 'Catrgories';
+  static const vegan = 'Vegan';
+  static const chicken = 'Chicken';
+  static const meat = 'Meat';
+  static const fish = 'Fish';
 
   static const overview = 'Overview';
   static const salesOverView = 'Salesoverview';
@@ -112,12 +117,11 @@ When paying by Visa, please note that the transaction may take between 24 to 48 
 
 If you request a refund, the processing time will follow the same timeframe as outlined in Section 2, taking between 24 to 48 hours based on your bank’s processing rules.''';
 
-
-static const popularFood = 'Popular Food';
-static const openRestaurants = 'Open Restaurants';
-static const kCal = 'KCal';
-static const egp = '£GP';
-static const minute = 'min';
+  static const popularFood = 'Popular Food';
+  static const openRestaurants = 'Open Restaurants';
+  static const kCal = 'KCal';
+  static const egp = '£GP';
+  static const minute = 'min';
 
   static const List<String> egyptGovernorates = [
     "Cairo",
@@ -181,6 +185,7 @@ static const minute = 'min';
     ),
   ];
 }
+
 class SportDetail {
   final String title;
   final Color color;
