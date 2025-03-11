@@ -1,7 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,13 +39,13 @@ Future<void> initDependencies() async {
   Bloc.observer = MyBlocObserver();
 
   //crashlytics
-  FlutterError.onError = (details) {
-    FirebaseCrashlytics.instance.recordFlutterError(details);
-  };
-  PlatformDispatcher.instance.onError = (error, stackTrace) {
-    FirebaseCrashlytics.instance.recordError(error, stackTrace);
-    return true;
-  };
+  // FlutterError.onError = (details) {
+  //   FirebaseCrashlytics.instance.recordFlutterError(details);
+  // };
+  // PlatformDispatcher.instance.onError = (error, stackTrace) {
+  //   FirebaseCrashlytics.instance.recordError(error, stackTrace);
+  //   return true;
+  // };
 
   //remote config
 

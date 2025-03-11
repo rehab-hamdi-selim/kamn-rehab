@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
-import 'package:kamn/core/helpers/navigation_extension.dart';
 import 'package:kamn/core/routing/app_router.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
-import 'package:kamn/features/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
-import 'package:kamn/features/authentication/presentation/screens/on_boarding_screen.dart';
+import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
+import 'package:kamn/playground_feature/authentication/presentation/screens/on_boarding_screen.dart';
+import 'package:kamn/playground_feature/sports/presentation/cubits/select_category_cubit/select_category_cubit.dart';
+import 'package:kamn/playground_feature/sports/presentation/screens/select_category_screen.dart';
 import 'core/common/cubit/app_user/app_user_cubit.dart';
 import 'core/common/widget/main_loader.dart';
 import 'core/di/di.dart';
-import 'core/routing/routes.dart';
-import 'features/authentication/presentation/screens/sign_in_screen.dart';
-import 'features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
-import 'features/sports/presentation/screens/grounds_screen.dart';
+import 'playground_feature/authentication/presentation/screens/sign_in_screen.dart';
 
 class CustomMainBlocConsumer extends StatelessWidget {
   const CustomMainBlocConsumer({super.key});
@@ -49,8 +47,7 @@ class CustomMainBlocConsumer extends StatelessWidget {
             useMaterial3: true,
           ),
           onGenerateRoute: AppRouter.generateRoute,
-          home: _buildHomeWidget(state, appUserCubit),
-        );
+          home: _buildHomeWidget(state, appUserCubit));
       },
     );
   }
@@ -64,11 +61,8 @@ class CustomMainBlocConsumer extends StatelessWidget {
     }
     if (state.isLoggedIn() || state.isGettedData() || state.isSuccess()) {
       return BlocProvider(
-        create: (context) => getIt<SportsGroundsCubit>()
-          ..getPlaygrounds()
-          ..getUserLocation()
-          ..initScrollListner(),
-        child: const GroundsScreen(),
+        create:(context)=> getIt<SelectCategoryCubit>()..getPlaygrounds(),
+        child: const SelectCategoryScreen(),
       );
     }
     if (state.isNotLoggedIn() || state.isClearUserData()) {

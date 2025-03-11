@@ -78,9 +78,12 @@ class AlertDialogUtils {
             ),
           ),
           onPressed: () {
-            secondAction != null
-                ? secondAction.call()
-                : Navigator.of(context).pop();
+            if (secondAction != null) {
+              secondAction.call();
+              Navigator.of(context).pop();
+            } else {
+              Navigator.of(context).pop();
+            }
           },
           child: Text(secondbutton,
               style: TextStyles.font12WhiteColorW400

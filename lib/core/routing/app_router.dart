@@ -4,60 +4,64 @@ import 'package:kamn/core/common/class/custom_splash_screen.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/routing/routes.dart';
-import 'package:kamn/features/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
-import 'package:kamn/features/authentication/presentation/cubits/sign_up_cubit/sign_up_cubit.dart';
-import 'package:kamn/features/payment/presentation/cubits/procced_payment_cubit/procced_payment_cubit.dart';
-import 'package:kamn/features/sports/data/models/playground_model.dart';
-import 'package:kamn/features/sports/data/models/reservation_model.dart';
-import 'package:kamn/features/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart';
-import 'package:kamn/features/admin/presentation/cubits/first_page_cupit/analytics_cubit.dart';
-import 'package:kamn/features/admin/presentation/screens/first_analytics_page/first_analytics_page.dart';
-import 'package:kamn/features/admin/presentation/cubits/second_page_cubit/second_page_cubit.dart';
-import 'package:kamn/features/admin/presentation/screens/second_page/second_page.dart';
-import 'package:kamn/features/payment/presentation/screens/debit_credit_card_screen.dart';
-import 'package:kamn/features/payment/presentation/cubits/payment_options_cubit/payment_options_cubit.dart';
-import 'package:kamn/features/payment/presentation/screens/payment_options_screen.dart';
-import 'package:kamn/features/payment/presentation/screens/proceed_payment_screen.dart';
-import 'package:kamn/features/sports/presentation/cubits/reservation_details_cubit/reservation_details_cubit.dart';
-import 'package:kamn/features/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
-import 'package:kamn/features/sports/presentation/cubits/view_reservation/view_reservation_cubit.dart';
-import 'package:kamn/features/sports/presentation/screens/grounds_screen.dart';
-import 'package:kamn/features/sports/presentation/screens/my_profile_screen.dart';
-import 'package:kamn/features/sports/presentation/screens/pick_time_for_reservation_screen.dart';
-import 'package:kamn/features/sports/presentation/screens/view_resrvation_screen.dart';
-import 'package:kamn/features/sports/presentation/screens/ground_details_screen.dart';
-import 'package:kamn/features/sports/presentation/screens/reservation_details_screen.dart';
-import 'package:kamn/features/sports_service_providers/data/model/playground_request_model.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/available_dates/available_dates_cubit.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/current_reseravaion_order/current_orders_cubit.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/edit_service_provider/edit_service_provider_cubit.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/finished_reseravaion_order/finished_order_cubit.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_ground_details/service_provider_ground_details_cubit.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/track_ground_reservation_details/track_ground_reservation_details_cubit.dart';
-import 'package:kamn/features/sports_service_providers/presentation/cubit/track_ground_reservations/track_ground_reservations_cubit.dart';
-import 'package:kamn/features/sports_service_providers/presentation/screens/add_service.dart';
-import 'package:kamn/features/sports_service_providers/presentation/screens/choose_service_category_screen.dart';
-import 'package:kamn/features/sports_service_providers/presentation/screens/current_reservation_order_screen.dart';
-import 'package:kamn/features/sports_service_providers/presentation/screens/edit_service_screen.dart';
-import 'package:kamn/features/sports_service_providers/presentation/screens/finished_reservation_order_screen.dart';
-import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_available_dates.dart';
-import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_ground_details_screen.dart';
-import 'package:kamn/features/sports_service_providers/presentation/screens/service_provider_grounds_screen.dart';
-import 'package:kamn/features/sports_service_providers/presentation/screens/service_selection_screen.dart';
-import 'package:kamn/features/sports_service_providers/presentation/screens/track_ground_reservation_detail_screen.dart';
-import 'package:kamn/features/sports_service_providers/presentation/screens/track_ground_reservations_screen.dart';
-import 'package:kamn/features/sports_service_providers/presentation/screens/success_service_provider_screen.dart';
+import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
+import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_up_cubit/sign_up_cubit.dart';
+import 'package:kamn/playground_feature/payment/presentation/cubits/procced_payment_cubit/procced_payment_cubit.dart';
+import 'package:kamn/playground_feature/sports/data/models/category_data.dart';
+import 'package:kamn/playground_feature/sports/data/models/playground_model.dart';
+import 'package:kamn/playground_feature/sports/data/models/reservation_model.dart';
+import 'package:kamn/playground_feature/sports/presentation/cubits/select_category_cubit/select_category_cubit.dart';
+import 'package:kamn/playground_feature/user/presentation/cubit/edit_profile/edit_profile_cubit.dart';
+import 'package:kamn/playground_feature/sports/presentation/cubits/pick_time_for_reservation/pick_time_for_reservation_cubit.dart';
+import 'package:kamn/playground_feature/admin/presentation/cubits/first_page_cupit/analytics_cubit.dart';
+import 'package:kamn/playground_feature/admin/presentation/screens/first_analytics_page/first_analytics_page.dart';
+import 'package:kamn/playground_feature/admin/presentation/cubits/second_page_cubit/second_page_cubit.dart';
+import 'package:kamn/playground_feature/admin/presentation/screens/second_page/second_page.dart';
+import 'package:kamn/playground_feature/payment/presentation/screens/debit_credit_card_screen.dart';
+import 'package:kamn/playground_feature/payment/presentation/cubits/payment_options_cubit/payment_options_cubit.dart';
+import 'package:kamn/playground_feature/payment/presentation/screens/payment_options_screen.dart';
+import 'package:kamn/playground_feature/payment/presentation/screens/proceed_payment_screen.dart';
+import 'package:kamn/playground_feature/sports/presentation/cubits/reservation_details_cubit/reservation_details_cubit.dart';
+import 'package:kamn/playground_feature/sports/presentation/cubits/sports_grounds/sports_ground_cubit.dart';
+import 'package:kamn/playground_feature/sports/presentation/cubits/view_reservation/view_reservation_cubit.dart';
+import 'package:kamn/playground_feature/user/presentation/screens/edit_profile_screen.dart';
+import 'package:kamn/playground_feature/sports/presentation/screens/grounds_screen.dart';
+import 'package:kamn/playground_feature/user/presentation/screens/my_profile_screen.dart';
+import 'package:kamn/playground_feature/sports/presentation/screens/pick_time_for_reservation_screen.dart';
+import 'package:kamn/playground_feature/sports/presentation/screens/select_category_screen.dart';
+import 'package:kamn/playground_feature/sports/presentation/screens/view_resrvation_screen.dart';
+import 'package:kamn/playground_feature/sports/presentation/screens/reservation_details_screen.dart';
+import 'package:kamn/playground_feature/sports_service_providers/data/model/playground_request_model.dart';
+import 'package:kamn/playground_feature/sports_service_providers/presentation/cubit/add_service_provider/add_service_provider_cubit.dart';
+import 'package:kamn/playground_feature/sports_service_providers/presentation/cubit/available_dates/available_dates_cubit.dart';
+import 'package:kamn/playground_feature/sports_service_providers/presentation/cubit/current_reseravaion_order/current_orders_cubit.dart';
+import 'package:kamn/playground_feature/sports_service_providers/presentation/cubit/edit_service_provider/edit_service_provider_cubit.dart';
+import 'package:kamn/playground_feature/sports_service_providers/presentation/cubit/finished_reseravaion_order/finished_order_cubit.dart';
+import 'package:kamn/playground_feature/sports_service_providers/presentation/cubit/service_provider_ground_details/service_provider_ground_details_cubit.dart';
+import 'package:kamn/playground_feature/sports_service_providers/presentation/cubit/service_provider_grounds/service_provider_grounds_cubit.dart';
+import 'package:kamn/playground_feature/sports_service_providers/presentation/cubit/track_ground_reservation_details/track_ground_reservation_details_cubit.dart';
+import 'package:kamn/playground_feature/sports_service_providers/presentation/cubit/track_ground_reservations/track_ground_reservations_cubit.dart';
+import 'package:kamn/playground_feature/sports_service_providers/presentation/screens/add_service.dart';
+import 'package:kamn/playground_feature/sports_service_providers/presentation/screens/choose_service_category_screen.dart';
+import 'package:kamn/playground_feature/sports_service_providers/presentation/screens/current_reservation_order_screen.dart';
+import 'package:kamn/playground_feature/sports_service_providers/presentation/screens/edit_service_screen.dart';
+import 'package:kamn/playground_feature/sports_service_providers/presentation/screens/finished_reservation_order_screen.dart';
+import 'package:kamn/playground_feature/sports_service_providers/presentation/screens/service_provider_available_dates.dart';
+import 'package:kamn/playground_feature/sports_service_providers/presentation/screens/service_provider_ground_details_screen.dart';
+import 'package:kamn/playground_feature/sports_service_providers/presentation/screens/service_provider_grounds_screen.dart';
+import 'package:kamn/playground_feature/sports_service_providers/presentation/screens/service_selection_screen.dart';
+import 'package:kamn/playground_feature/sports_service_providers/presentation/screens/track_ground_reservation_detail_screen.dart';
+import 'package:kamn/playground_feature/sports_service_providers/presentation/screens/track_ground_reservations_screen.dart';
+import 'package:kamn/playground_feature/sports_service_providers/presentation/screens/success_service_provider_screen.dart';
 import 'package:kamn/test_login.dart';
 
-import '../../features/authentication/presentation/screens/on_boarding_screen.dart';
-import '../../features/authentication/presentation/screens/sign_in_screen.dart';
-import '../../features/authentication/presentation/screens/sign_up_screen.dart';
-import '../../features/user/data/models/notifications_model.dart';
-import '../../features/user/presentation/cubit/notification/notifications_cubit.dart';
-import '../../features/user/presentation/screens/notifications_details_screen.dart';
-import '../../features/user/presentation/screens/notifications_screen.dart';
+import '../../playground_feature/authentication/presentation/screens/on_boarding_screen.dart';
+import '../../playground_feature/authentication/presentation/screens/sign_in_screen.dart';
+import '../../playground_feature/authentication/presentation/screens/sign_up_screen.dart';
+import '../../playground_feature/user/data/models/notifications_model.dart';
+import '../../playground_feature/user/presentation/cubit/notification/notifications_cubit.dart';
+import '../../playground_feature/user/presentation/screens/notifications_details_screen.dart';
+import '../../playground_feature/user/presentation/screens/notifications_screen.dart';
 import '../common/widget/main_loader.dart';
 
 class AppRouter {
@@ -69,6 +73,12 @@ class AppRouter {
               create: (context) => getIt<AnalyticsCubit>(),
               child: FirstAnalyticsPage()),
         );
+      case Routes.editProfileScreen:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<EditProfileCubit>(),
+                  child: const EditProfileScreen(),
+                ));
       case Routes.myProfileScreen:
         return MaterialPageRoute(builder: (context) => const MyProfileScreen());
       case Routes.addServiceScreen:
@@ -79,24 +89,25 @@ class AppRouter {
                     type: settings.arguments as String,
                   ),
                 ));
+
+      case Routes.selectCategoryScreen:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) =>
+                      getIt<SelectCategoryCubit>()..getPlaygrounds(),
+                  child: const SelectCategoryScreen(),
+                ));
+
       case Routes.groundsScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-                  create: (context) => getIt<SportsGroundsCubit>()
-                    ..getPlaygrounds()
-                    ..getUserLocation()
-                    ..initScrollListner(),
-                  child: const GroundsScreen(),
+                  create:(_)=> getIt<SportsGroundsCubit>()
+                    ..passFilteredPlaygrounds((settings.arguments as CategoryData).data)
+                    ..getUserLocation(),
+                  child: GroundsScreen(
+                    title: (settings.arguments as CategoryData).title,
+                  ),
                 ));
-      case Routes.groundDetailsScreen:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider.value(
-            value: getIt<SportsGroundsCubit>()..initScrollListner(),
-            child: GroundDetailsScreen(
-              playgroundModel: settings.arguments as PlaygroundModel,
-            ),
-          ),
-        );
       case Routes.debitCreditCardPage:
         return MaterialPageRoute(
             builder: (context) => DebitCreditCardScreen(
@@ -115,7 +126,7 @@ class AppRouter {
                 BlocProvider<TrackGroundReservationsDetailsCubit>(
                   create: (context) =>
                       getIt<TrackGroundReservationsDetailsCubit>()
-                        ..getPlaygroundsDetailsById(
+                        ..getPlaygroundsReservationDetailsById(
                             (settings.arguments as PlaygroundModel)
                                 .playgroundId!),
                   child: TrackGroundReservationDetail(
@@ -164,13 +175,17 @@ class AppRouter {
             builder: (context) => const OnBoardingScreen());
 
       case Routes.editServiceScreen:
-        return MaterialPageRoute(
-            builder: (context) => BlocProvider<EditServiceProviderCubit>(
-                  create: (context) => getIt<EditServiceProviderCubit>(),
-                  child: EditServiceScreen(
-                    playground: settings.arguments as PlaygroundRequestModel,
-                  ),
-                ));
+        return MaterialPageRoute(builder: (context) {
+          final playground = settings.arguments is PlaygroundRequestModel
+              ? settings.arguments as PlaygroundRequestModel
+              : PlaygroundRequestModel.fromMap(
+                  (settings.arguments as PlaygroundModel).toMap());
+          return BlocProvider<EditServiceProviderCubit>(
+            create: (context) =>
+                getIt<EditServiceProviderCubit>()..initValue(playground),
+            child: EditServiceScreen(playground: playground),
+          );
+        });
       case Routes.serviceProviderGroundDetailsScreen:
         return MaterialPageRoute(
             builder: (context) =>
@@ -187,7 +202,7 @@ class AppRouter {
             builder: (context) => BlocProvider(
                   create: (context) => getIt<AvailableDatesCubit>(),
                   child: ServiceProviderAvailableDates(
-                    playgroundId: settings.arguments as String,
+                    playground: settings.arguments as PlaygroundRequestModel,
                   ),
                 ));
       case Routes.pickTimeReservationScreen:
@@ -249,14 +264,14 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                   create: (context) => getIt<CurrentOrdersCubit>()
-                    ..fetchOrdersForCategory('Football'),
+                    ..fetchOrdersForCategory('Football',context.read<AppUserCubit>().state.user!.uid),
                   child: const CurrentOrdersScreen(),
                 ));
       case Routes.finishOrderScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                   create: (context) => getIt<FinishedOrdersCubit>()
-                    ..fetchOrdersForCategory('Football'),
+                    ..fetchOrdersForCategory('Football',context.read<AppUserCubit>().state.user!.uid),
                   child: const FinishedOrdersScreen(),
                 ));
       case Routes.mainLoaderScreen:
