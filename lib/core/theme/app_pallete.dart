@@ -19,7 +19,7 @@ class AppPallete {
   static const Color blueGreenColor = Color(0xffC9F4D1);
   static const Color ofWhiteColor = Color(0xffF6F6F6);
   static const Color lgGreyColor = Color(0xffD9D9D9);
-  static const Color lgWhiteColor = Color(0xffeeeeee);
+  static const Color lgWhiteColor = Color(0xffF8F8F8);
   static const Color yellowColor = Color(0xffF6B000);
   static const Color lightyellowColor = Color(0xffFFC500);
   static const Color violetColor = Color(0xffA117F1);
@@ -74,4 +74,24 @@ class AppPallete {
   static const Color ofWhiteColor3 = Color(0xffF8F8F8);
   static const Color ofWhiteColor4 = Color(0xffFFFFFF);
   static const Color green = Color(0xff205B2A);
+
+  static const List<Color> radialGradientForSearchUi = [
+    Color.fromARGB(5, 96, 96, 96), // Very weak in the center
+    Color.fromARGB(7, 96, 96, 96),
+    Color.fromARGB(9, 96, 96, 96),
+    Color.fromARGB(12, 96, 96, 96),
+    Color.fromARGB(14, 96, 96, 96),
+    Color.fromARGB(16, 96, 96, 96), // Weak in the middle
+
+    Color.fromARGB(21, 96, 96, 96), // Getting stronger
+    Color.fromARGB(26, 96, 96, 96),
+    Color.fromARGB(21, 96, 96, 96), // Peak strength
+
+    Color.fromARGB(16, 96, 96, 96), // Getting weaker again
+    Color.fromARGB(11, 96, 96, 96),
+    Color.fromARGB(9, 96, 96, 96),
+    Color.fromARGB(6, 96, 96, 96),
+    Color.fromARGB(4, 96, 96, 96),
+    Color.fromARGB(2, 96, 96, 96), // Very weak at the edges
+  ];
 }

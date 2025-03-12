@@ -21,13 +21,17 @@ class _CustomSearchDropodwnState extends State<CustomSearchDropodwn> {
   @override
   Widget build(BuildContext context) {
     return Material(
+      elevation: 0,
+      color: Colors.transparent,
+      shadowColor: Colors.transparent,
       child: Container(
         width: 144.w,
         height: 45.h,
         decoration: BoxDecoration(
           color: AppPallete.whiteColor,
           borderRadius: BorderRadius.circular(33.sp),
-          border: Border.all(color:Color(0xffECF0F4)),
+          border: Border.all(color: const Color(0xffECF0F4)),
+          boxShadow: const [], // Empty box shadow to ensure no shadow
         ),
         padding: EdgeInsets.symmetric(horizontal: 10.w),
         child: DropdownButtonHideUnderline(
@@ -39,7 +43,7 @@ class _CustomSearchDropodwnState extends State<CustomSearchDropodwn> {
                 child: Text(
                   item,
                   overflow: TextOverflow.ellipsis,
-                 style:  TextStyles.fontCircularSpotify14BlackRegular,
+                  style: TextStyles.fontCircularSpotify14BlackRegular,
                 ),
               );
             }).toList(),
@@ -48,7 +52,11 @@ class _CustomSearchDropodwnState extends State<CustomSearchDropodwn> {
                 selectedValue = newValue!;
               });
             },
-            icon: Icon(Icons.arrow_drop_down, color: Color(0xff2A7737),),
+            icon: const Icon(
+              Icons.arrow_drop_down,
+              color: Color(0xff2A7737),
+            ),
+            elevation: 0, // Remove dropdown menu elevation
           ),
         ),
       ),

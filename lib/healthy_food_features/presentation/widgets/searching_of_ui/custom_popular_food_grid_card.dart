@@ -7,148 +7,135 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/healthy_food_features/data/models/food_item_model.dart';
 
-class CustomPopularFoodGridCard extends StatelessWidget {
-  const CustomPopularFoodGridCard({super.key});
+class CustomPopularFoodGrid extends StatelessWidget {
+  const CustomPopularFoodGrid({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 20.h,
-                        crossAxisSpacing: 10.w,
-                        mainAxisExtent: 210.h,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 20.h,
+        crossAxisSpacing: 23.w,
+        mainAxisExtent: 182.h,
+      ),
+      itemCount: trendingFoods.length,
+      itemBuilder: (context, index) {
+        return _buildPopularFoodCard(trendingFoods[index]);
+      },
+    );
+  }
+
+  Widget _buildPopularFoodCard(FoodItem foodItem) {
+    return SingleChildScrollView(
+        child: Container(
+      width: 160.w,
+      height: 182.h,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          stops: const [0.0, 0.2, 0.4, 0.6, 0.8],
+          colors: [
+            Colors.white.withOpacity(0.0), // Fully transparent at top
+            Colors.white.withOpacity(0.3), // Slightly visible
+            Colors.white.withOpacity(0.6), // More visible
+            Colors.white.withOpacity(0.9), // Almost opaque
+            Colors.white, // Fully white at bottom
+          ],
+        ),
+        borderRadius: BorderRadius.circular(14.r),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Image at the top
+          SizedBox(
+            height: 94.h,
+            width: double.infinity,
+            child: Center(
+              child: Image.asset(
+                foodItem.imageUrl,
+                height: 120.h,
+                width: 142.w,
+                fit: BoxFit.contain,
+                errorBuilder: (context, error, stackTrace) {
+                  return Center(
+                    child: Icon(
+                      Icons.image_not_supported,
+                      size: 40.h,
+                      color: Colors.grey,
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+
+          // Content
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "🔥${foodItem.calories} ${Constants.kCal}",
+                    style: TextStyles.fontCircularSpotify8StealGrayRegular,
+                  ),
+                  verticalSpace(2.h),
+                  Text(
+                    foodItem.name,
+                    style: TextStyles.fontCircularSpotify14BlackBold,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  verticalSpace(2.h),
+                  Text(
+                    foodItem.tags.toString(),
+                    style: TextStyles.fontCircularSpotify8StealGrayLight,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+
+                  // Price and plus button row
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            foodItem.price.toString(),
+                            style: TextStyles.fontCircularSpotify14BlackBold,
+                          ),
+                          horizontalSpace(1.w),
+                          Text(
+                            Constants.egp,
+                            style: TextStyles.fontCircularSpotify14GreenRegular,
+                          ),
+                        ],
                       ),
-                      itemCount: trendingFoods.length,
-                      itemBuilder: (context, index) {
-                        return Stack(
-                          children: [
-                            
-                            // Shadow Container
-                            Positioned(
-                              bottom: -10.h,
-                              //top: 130.h,
-                              left: -5,
-                              right: -5,
-                              child: Container(
-                                width: 190.w,
-                                height: 120.h,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.vertical(
-                                    bottom: Radius.circular(40.r),
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black
-                                          .withOpacity(0.1), // Soft shadow
-                                      blurRadius: 14.sp, // Spread softly
-                                      spreadRadius: 3, // Slightly expands shadow
-                                      offset: Offset(0, 0), // Moves shadow downward
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                  
-                            // Main Container
-                            Container(
-                              width: 160.w,
-                              height: 202.h,
-                              decoration: BoxDecoration(
-                                gradient: const LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    Color(0x00FFFFFF),
-                                    AppPallete.whiteColor,
-                                  ],
-                                ),
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(14.r),
-                                  bottomRight: Radius.circular(14.r),
-                                ),
-                                border: const Border(
-                                  bottom: BorderSide(
-                                    color: Color(0xffECF0F4),
-                                    width: 2.0,
-                                  ),
-                                ),
-                              ),
-                              child: Column(
-                                children: [
-                                  verticalSpace(92.h),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        verticalSpace(3.h),
-                                        Text(
-                                          "🔥${trendingFoods[index].calories} ${Constants.kCal}",
-                                          style: TextStyles
-                                              .fontCircularSpotify8StealGrayRegular,
-                                        ),
-                                        verticalSpace(2.h),
-                                        Text(
-                                          trendingFoods[index].name,
-                                          style: TextStyles
-                                              .fontCircularSpotify14BlackBold,
-                                        ),
-                                        verticalSpace(2.h),
-                                        Text(
-                                          trendingFoods[index].tags.toString(),
-                                          style: TextStyles
-                                              .fontCircularSpotify8StealGrayLight,
-                                        ),
-                                        verticalSpace(2.h),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              trendingFoods[index].price.toString(),
-                                              style: TextStyles
-                                                  .fontCircularSpotify14BlackBold,
-                                            ),
-                                            horizontalSpace(1.w),
-                                            Text(
-                                              Constants.egp,
-                                              style: TextStyles
-                                                  .fontCircularSpotify14GreenRegular,
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Positioned(
-                                bottom: 7.h,
-                                right: 7.w,
-                                child: IconButton(
-                                  onPressed: () {},
-                                  icon: Image.asset(
-                                    ImageLinks.plusBtn,
-                                    width: 32.w,
-                                    height: 32.h,
-                                    color: AppPallete.blackColor,
-                                  ),
-                                )),
-                            Positioned(
-                              top: -15.h,
-                              child: Container(
-                                width: 147.w,
-                                height: 147.h,
-                                child: Image.asset(
-                                  trendingFoods[index].imageUrl,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      });
+
+                      // Plus button
+                      InkWell(
+                        onTap: () {},
+                        child: Image.asset(
+                          ImageLinks.plusBtn,
+                          width: 32.w,
+                          height: 32.h,
+                          color: AppPallete.blackColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    ));
   }
 }

@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/core/routing/app_router.dart';
+import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/gym_feature/gyms/presentation/screen/choose_plan_screen.dart';
+import 'package:kamn/healthy_food_features/presentation/screens/res_view_screen.dart'
+    show RestaurantDetails;
 import 'package:kamn/healthy_food_features/presentation/screens/searching_ui_screen.dart';
 import 'package:kamn/playground_feature/authentication/presentation/screens/on_boarding_screen.dart';
 
 import 'core/common/cubit/app_user/app_user_cubit.dart';
 import 'core/common/widget/main_loader.dart';
+import 'healthy_food_features/presentation/screens/home_page_screen.dart';
 
 class CustomMainBlocConsumer extends StatelessWidget {
   const CustomMainBlocConsumer({super.key});
@@ -16,8 +20,7 @@ class CustomMainBlocConsumer extends StatelessWidget {
   //////
 
   @override
-  Widget build(BuildContext context) { 
-    
+  Widget build(BuildContext context) {
     final appUserCubit = context.read<AppUserCubit>();
 
     return BlocConsumer<AppUserCubit, AppUserState>(
@@ -44,12 +47,12 @@ class CustomMainBlocConsumer extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
+              scaffoldBackgroundColor: AppPallete.whiteColor,
             ),
             onGenerateRoute: AppRouter.generateRoute,
-            home: const SearchingUiScreen());
-            //home: _buildHomeWidget(state, appUserCubit));
+            home: const RestaurantDetails());
+        //home: _buildHomeWidget(state, appUserCubit));
       },
     );
   }
@@ -64,11 +67,11 @@ class CustomMainBlocConsumer extends StatelessWidget {
       return const OnBoardingScreen();
     }
     if (state.isLoggedIn() || state.isGettedData() || state.isSuccess()) {
-      return ChoosePlanScreen();
+      return const ChoosePlanScreen();
       // return BlocProvider(
       //   create:(context)=> getIt<SelectCategoryCubit>()..getPlaygrounds(),
       //   child: const SelectCategoryScreen(),
-     // );
+      // );
     }
     if (state.isNotLoggedIn() || state.isClearUserData()) {
       return const SearchingUiScreen();
