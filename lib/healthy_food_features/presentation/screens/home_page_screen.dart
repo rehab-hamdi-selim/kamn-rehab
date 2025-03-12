@@ -44,6 +44,16 @@ class _HomePageHealthyFoodScreenState extends State<HomePageHealthyFoodScreen> {
       deliveryTime: 30,
     ),
     FoodItem(
+      name: "Fruit Salad",
+      imageUrl: "assets/images/salad_1.png",
+      price: 150.0,
+      calories: 250,
+      rating: 4.7,
+      tags: ["Healthy", "Low-Carb"],
+      restaurantName: "Sarah's House",
+      deliveryTime: 30,
+    ),
+    FoodItem(
       name: "Chicken Salad",
       imageUrl: "assets/images/salad_1.png",
       price: 250.0,
