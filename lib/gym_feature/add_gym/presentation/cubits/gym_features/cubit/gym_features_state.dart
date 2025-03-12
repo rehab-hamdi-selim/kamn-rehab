@@ -5,33 +5,38 @@ import 'package:equatable/equatable.dart';
 
 class GymFeaturesState extends Equatable {
   final String selectedValue;
-  final String typedText;
+  final String priceText;
+  final String descriptionText;
   final bool isChecked;
   const GymFeaturesState({
+    this.descriptionText = '' ,
      this.selectedValue = '',
-     this.typedText = '',
+     this.priceText = '',
      this.isChecked = false,
   });
   @override
   // TODO: implement props
-  List<Object> get props => [selectedValue, typedText, isChecked];
+  List<Object> get props => [selectedValue, priceText,descriptionText, isChecked];
 
   GymFeaturesState copyWith({
     String? selectedValue,
-    String? typedText,
-    bool? isCHecked,
+    String? priceText,
+    String? descriptionText,
+    bool? isChecked, 
   }) {
     return GymFeaturesState(
       selectedValue: selectedValue ?? this.selectedValue,
-      typedText: typedText ?? this.typedText,
-      isChecked: isCHecked ?? this.isChecked,
+      priceText: priceText ?? this.priceText,
+      descriptionText: descriptionText ?? this.descriptionText,
+      isChecked: isChecked ?? this.isChecked,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'selectedValue': selectedValue,
-      'typedText': typedText,
+      'priceText': priceText,
+      'descriptionText': descriptionText,
       'isCHecked': isChecked,
     };
   }
@@ -39,8 +44,9 @@ class GymFeaturesState extends Equatable {
   factory GymFeaturesState.fromMap(Map<String, dynamic> map) {
     return GymFeaturesState(
       selectedValue: map['selectedValue'] as String,
-      typedText: map['typedText'] as String,
-      isChecked: map['isCHecked'] as bool,
+      priceText: map['priceText'] as String,
+      descriptionText: map['descriptionText'] as String,
+      isChecked: map['isChecked'] as bool,
     );
   }
 
@@ -50,4 +56,20 @@ class GymFeaturesState extends Equatable {
 
   @override
   bool get stringify => true;
+}
+
+class FeatureTyping extends GymFeaturesState{
+  const FeatureTyping() : super();
+  @override
+  List<Object> get props => super.props;
+}
+class FeatureAdded extends GymFeaturesState{
+    const FeatureAdded() : super();
+  @override
+  List<Object> get props => super.props;
+}
+class FeatureError extends GymFeaturesState{
+    const FeatureError() : super();
+  @override
+  List<Object> get props => super.props;
 }

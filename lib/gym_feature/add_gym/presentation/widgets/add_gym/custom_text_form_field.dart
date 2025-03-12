@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/cubits/gym_features/cubit/gym_features_cubit.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String? hintText;
@@ -17,9 +15,11 @@ class CustomTextFormField extends StatelessWidget {
   final String? optionalText;
   final int? maxLength;
   final BoxConstraints boxhight;
-  const CustomTextFormField(
+  ValueChanged<String> onChangeMethod;
+  CustomTextFormField(
       {super.key,
       this.hintText,
+      required this.onChangeMethod,
       required this.keyType,
       required this.lines,
       required this.controller,
@@ -53,9 +53,10 @@ class CustomTextFormField extends StatelessWidget {
         ),
         verticalSpace(5),
         TextFormField(
-          onChanged: (value) {
-            context.read<GymFeaturesCubit>().takeTypedText(value);
+          validator: (value) {
+            
           },
+          onChanged: onChangeMethod,
           maxLines: lines,
           maxLength: maxLength,
           buildCounter: maxLength != null
@@ -79,7 +80,6 @@ class CustomTextFormField extends StatelessWidget {
           controller: controller,
           style: TextStyles.fontCircularSpotify14LightBlackRegular,
           decoration: InputDecoration(
-<<<<<<< HEAD
             
             suffixIcon: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -88,20 +88,9 @@ class CustomTextFormField extends StatelessWidget {
             constraints: boxhight,
             contentPadding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
             errorBorder: OutlineInputBorder(
-=======
-              suffixIcon: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: widget,
-              ),
-              constraints: boxhight,
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-              errorBorder: OutlineInputBorder(
->>>>>>> 6960c59cbdd2850ea2c728ad4c139e54e2197e45
                 borderSide: const BorderSide(
                   width: 1.2,
                 ),
-<<<<<<< HEAD
                 borderRadius: BorderRadius.circular(20.r),),
             focusedErrorBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
@@ -124,28 +113,6 @@ class CustomTextFormField extends StatelessWidget {
             fillColor:                    const Color.fromARGB(255, 245, 245, 245),
             filled: true
           ),
-=======
-                borderRadius: BorderRadius.circular(8.r),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: AppPallete.redColor,
-                    width: 1.2,
-                  ),
-                  borderRadius: BorderRadius.circular(8.r)),
-              enabledBorder:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(8.r)),
-              focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                    color: AppPallete.lgWhiteColor,
-                    width: 1.2,
-                  ),
-                  borderRadius: BorderRadius.circular(8.r)),
-              hintText: hintText!,
-              hintStyle: TextStyle(color: Colors.grey.shade600, fontSize: 12.h),
-              fillColor: AppPallete.whiteColor,
-              filled: true),
->>>>>>> 6960c59cbdd2850ea2c728ad4c139e54e2197e45
         ),
       ],
     );

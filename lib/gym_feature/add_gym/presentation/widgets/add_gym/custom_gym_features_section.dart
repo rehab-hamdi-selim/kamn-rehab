@@ -8,9 +8,7 @@ import 'package:kamn/gym_feature/add_gym/presentation/cubits/gym_features/cubit/
 import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_check_bar.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_drop_down_menu.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_general_button.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_radio_button.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_text_form_field.dart';
-
 import '../../cubits/gym_features/cubit/gym_features_cubit.dart';
 
 // ignore: must_be_immutable
@@ -18,21 +16,26 @@ class CustomGymFeaturesSection extends StatefulWidget {
   const CustomGymFeaturesSection({super.key});
 
   @override
-  State<CustomGymFeaturesSection> createState() => _CustomGymFeaturesSectionState();
+  State<CustomGymFeaturesSection> createState() =>
+      _CustomGymFeaturesSectionState();
 }
 
 class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
-  late TextEditingController _menuController ;
-  late TextEditingController _priceController ;
-  late TextEditingController _descriptioncontroller ;
+  late TextEditingController _menuController;
+  late TextEditingController _priceController;
+  late TextEditingController _descriptioncontroller;
 
   @override
   void initState() {
-   _menuController = TextEditingController();
-  _priceController = TextEditingController();
-  _descriptioncontroller = TextEditingController();
+    _menuController = TextEditingController(
+        text: context.read<GymFeaturesCubit>().state.selectedValue);
+    _priceController = TextEditingController(
+        text: context.read<GymFeaturesCubit>().state.priceText);
+    _descriptioncontroller = TextEditingController(
+        text: context.read<GymFeaturesCubit>().state.descriptionText);
     super.initState();
   }
+
   @override
   void dispose() {
     _menuController.dispose();
@@ -47,8 +50,12 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
       create: (context) => GymFeaturesCubit(),
       child: BlocListener<GymFeaturesCubit, GymFeaturesState>(
         listener: (context, state) {
-          if(_menuController.text != state.selectedValue){
+          if (_menuController.text != state.selectedValue &&
+              _priceController.text != state.priceText &&
+              _descriptioncontroller.text != state.descriptionText) {
             _menuController.text = state.selectedValue;
+            _priceController.text = state.priceText;
+            _descriptioncontroller.text = state.descriptionText;
           }
         },
         child: SingleChildScrollView(
@@ -82,66 +89,77 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
                       child: Text('Facilities and Features',
                           style: TextStyles.fontRoboto15BlackRegular),
                     ),
-                    CustomDropDownMenu(controller: _menuController,),
+                    CustomDropDownMenu(
+                      controller: _menuController,
+                    ),
                     verticalSpace(16),
-                    CustomTextFormField(
-                      keyType: TextInputType.number,
-                      lines: 1,
-                      controller: _priceController,
-                      boxhight: BoxConstraints.tight(const Size.fromHeight(40)),
-                      maxLine: 1,
-                      label: 'Feature-Based Pricing',
-                      optionalText: '',
-                      hintText: '',
-                      widget: const Text('£GP'),
+                    BlocBuilder<GymFeaturesCubit, GymFeaturesState>(
+                      builder: (context, state) {
+                        return CustomTextFormField(
+                          onChangeMethod: (value) {
+                            context
+                                .read<GymFeaturesCubit>()
+                                .takePriceText(value);
+                          },
+                          keyType: TextInputType.number,
+                          lines: 1,
+                          controller: _priceController,
+                          boxhight:
+                              BoxConstraints.tight(const Size.fromHeight(40)),
+                          maxLine: 1,
+                          label: 'Feature-Based Pricing',
+                          optionalText: '',
+                          hintText: '',
+                          widget: const Text('£GP'),
+                        );
+                      },
                     ),
                     verticalSpace(8),
-<<<<<<< HEAD
-                    CustomCheckBar(
-=======
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomRadioButton(
-                          text: 'Free',
-                          activeColor: const Color(0xffFEFEFE),
-                          backgroundColor: AppPallete.blackColor,
-                        ),
-                        CustomRadioButton(
-                        text: '/ monthly',
-                          activeColor: const Color(0xffFEFEFE),
-                          backgroundColor: AppPallete.blueColor,
-                        ),
-                        CustomRadioButton(
-                       text: '/ session',
-                          activeColor: const Color(0xffFEFEFE),
-                          backgroundColor: AppPallete.greenColor,
-                        ),
-                      ],
->>>>>>> 6960c59cbdd2850ea2c728ad4c139e54e2197e45
-                    ),
+                    const CustomCheckBar(),
                     verticalSpace(8),
-                    CustomTextFormField(
-                      keyType: TextInputType.text,
-                      lines: 6,
-                      controller: _descriptioncontroller,
-                      hintText:
-                          'write description for the this feature you added',
-                      boxhight:
-                          BoxConstraints.tight(const Size.fromHeight(120)),
-                      label: 'Description',
-                      maxLine: 6,
-                      optionalText: '',
-                      maxLength: 100,
+                    BlocBuilder<GymFeaturesCubit, GymFeaturesState>(
+                      builder: (context, state) {
+                        return CustomTextFormField(
+                          onChangeMethod: (value) {
+                            context
+                                .read<GymFeaturesCubit>()
+                                .takeDescriptionText(value);
+                          },
+                          keyType: TextInputType.text,
+                          lines: 6,
+                          controller: _descriptioncontroller,
+                          hintText:
+                              'write description for the this feature you added',
+                          boxhight:
+                              BoxConstraints.tight(const Size.fromHeight(120)),
+                          label: 'Description',
+                          maxLine: 6,
+                          optionalText: '',
+                          maxLength: 100,
+                        );
+                      },
                     ),
                     verticalSpace(7),
                     Center(
-                        child: CustomGeneralButton(
-                      textButton: '+ Add Feature',
-                      ontab: () {},
-                      buttonWidth: 320.w,
-                      buttonColor: AppPallete.blackColor,
-                      buttonTextColor: AppPallete.lgWhiteColor,
+                        child: BlocConsumer<GymFeaturesCubit, GymFeaturesState>(
+                      listener: (context, state) {
+                        if(state is FeatureError){
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Try to add Feature'))
+                          );
+                        }
+                      },
+                      builder: (context, state) {
+                        return CustomGeneralButton(
+                          textButton: '+ Add Feature',
+                          ontab: () {
+                            context.read<GymFeaturesCubit>().addFeaturesButton(context);
+                          },
+                          buttonWidth: 320.w,
+                          buttonColor: AppPallete.blackColor,
+                          buttonTextColor: AppPallete.lgWhiteColor,
+                        );
+                      },
                     )),
                   ],
                 ),
@@ -168,7 +186,8 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
                     buttonTextColor: AppPallete.lgWhiteColor,
                   ),
                 ],
-              )
+              ),
+             
             ],
           ),
         ),
