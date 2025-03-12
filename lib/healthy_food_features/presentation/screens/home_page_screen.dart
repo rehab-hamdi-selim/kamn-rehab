@@ -26,10 +26,10 @@ class HomePageHealthyFoodScreen extends StatefulWidget {
 
 class _HomePageHealthyFoodScreenState extends State<HomePageHealthyFoodScreen> {
   final List<Category> categories = [
-    Category(name: "All", icon: ""),
-    Category(name: "Chicken", icon: IconLinks.chicken),
-    Category(name: "Vegan", icon: IconLinks.vegan),
-    Category(name: "Meat", icon: IconLinks.meat),
+    Category(name: "All", icon: "", foodItems: []),
+    Category(name: "Chicken", icon: IconLinks.chicken, foodItems: []),
+    Category(name: "Vegan", icon: IconLinks.vegan, foodItems: []),
+    Category(name: "Meat", icon: IconLinks.meat, foodItems: []),
   ];
 
   List<FoodItem> trendingFoods = [
