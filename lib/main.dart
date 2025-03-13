@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/custom_main_bloc_consumer.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/cubits/gym_features/cubit/gym_features_cubit.dart';
 import 'package:kamn/init_dependencies.dart';
 import 'core/common/cubit/firebase_remote_config/firebase_remote_config_cubit.dart';
 
@@ -35,6 +36,9 @@ class MyApp extends StatelessWidget {
             ..getStringValue('test')
             ..getStringValue('app_version'),
         ),
+        //Salah's Cubit
+        BlocProvider<GymFeaturesCubit>(create: (context)=> GymFeaturesCubit(),
+        )
       ],
       child: const ScreenUtilInit(
         designSize: Size(375, 812),
