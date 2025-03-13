@@ -15,11 +15,9 @@ class CustomTextFormField extends StatelessWidget {
   final String? optionalText;
   final int? maxLength;
   final BoxConstraints boxhight;
-  ValueChanged<String> onChangeMethod;
   CustomTextFormField(
       {super.key,
       this.hintText,
-      required this.onChangeMethod,
       required this.keyType,
       required this.lines,
       required this.controller,
@@ -55,7 +53,6 @@ class CustomTextFormField extends StatelessWidget {
           validator: (value) {
             
           },
-          onChanged: onChangeMethod,
           maxLines: lines,
           maxLength: maxLength,
           buildCounter: maxLength != null

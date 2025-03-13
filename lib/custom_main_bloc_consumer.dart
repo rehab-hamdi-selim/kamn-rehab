@@ -18,8 +18,7 @@ class CustomMainBlocConsumer extends StatelessWidget {
   const CustomMainBlocConsumer({super.key});
 
   @override
-  Widget build(BuildContext context) { 
-    
+  Widget build(BuildContext context) {
     final appUserCubit = context.read<AppUserCubit>();
 
     return BlocConsumer<AppUserCubit, AppUserState>(
@@ -60,15 +59,18 @@ class CustomMainBlocConsumer extends StatelessWidget {
       return const MainLoader();
     }
     if (state.isNotInstalled()) {
-      return const OnBoardingScreen();
+     return BlocProvider(
+        create: (context) => getIt<AddGymCubit>(),
+        child: AddGymScreen(),
+      );
     }
     if (state.isLoggedIn() || state.isGettedData() || state.isSuccess()) {
-      return ChoosePlanScreen();
       
+
       // return BlocProvider(
       //   create:(context)=> getIt<SelectCategoryCubit>()..getPlaygrounds(),
       //   child: const SelectCategoryScreen(),
-     // );
+      // );
     }
     if (state.isNotLoggedIn() || state.isClearUserData()) {
       return BlocProvider(
