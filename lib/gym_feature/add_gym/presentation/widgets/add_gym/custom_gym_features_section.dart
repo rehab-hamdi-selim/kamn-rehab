@@ -93,51 +93,32 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
                       controller: _menuController,
                     ),
                     verticalSpace(16),
-                    BlocBuilder<GymFeaturesCubit, GymFeaturesState>(
-                      builder: (context, state) {
-                        return CustomTextFormField(
-                          onChangeMethod: (value) {
-                            context
-                                .read<GymFeaturesCubit>()
-                                .takePriceText(value);
-                          },
-                          keyType: TextInputType.number,
-                          lines: 1,
-                          controller: _priceController,
-                          boxhight:
-                              BoxConstraints.tight(const Size.fromHeight(40)),
-                          maxLine: 1,
-                          label: 'Feature-Based Pricing',
-                          optionalText: '',
-                          hintText: '',
-                          widget: const Text('£GP'),
-                        );
-                      },
+
+                    CustomTextFormField(
+                      keyType: TextInputType.number,
+                      lines: 1,
+                      controller: _priceController,
+                      boxhight: BoxConstraints.tight(const Size.fromHeight(40)),
+                      label: 'Feature-Based Pricing',
+                      optionalText: '',
+                      hintText: '',
+                      widget: const Text('£GP'),
                     ),
                     verticalSpace(8),
-                    const CustomCheckBar(),
+                    CustomCheckBar(
+                    ),
                     verticalSpace(8),
-                    BlocBuilder<GymFeaturesCubit, GymFeaturesState>(
-                      builder: (context, state) {
-                        return CustomTextFormField(
-                          onChangeMethod: (value) {
-                            context
-                                .read<GymFeaturesCubit>()
-                                .takeDescriptionText(value);
-                          },
-                          keyType: TextInputType.text,
-                          lines: 6,
-                          controller: _descriptioncontroller,
-                          hintText:
-                              'write description for the this feature you added',
-                          boxhight:
-                              BoxConstraints.tight(const Size.fromHeight(120)),
-                          label: 'Description',
-                          maxLine: 6,
-                          optionalText: '',
-                          maxLength: 100,
-                        );
-                      },
+                    CustomTextFormField(
+                      keyType: TextInputType.text,
+                      lines: 6,
+                      controller: _descriptioncontroller,
+                      hintText:
+                          'write description for the this feature you added',
+                      boxhight:
+                          BoxConstraints.tight(const Size.fromHeight(120)),
+                      label: 'Description',
+                      optionalText: '',
+                      maxLength: 100,
                     ),
                     verticalSpace(7),
                     Center(
