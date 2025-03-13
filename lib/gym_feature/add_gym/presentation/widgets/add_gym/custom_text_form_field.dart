@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/cubits/gym_features/cubit/gym_features_cubit.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String? hintText;
@@ -17,9 +15,11 @@ class CustomTextFormField extends StatelessWidget {
   final String? optionalText;
   final int? maxLength;
   final BoxConstraints boxhight;
-  const CustomTextFormField(
+  ValueChanged<String> onChangeMethod;
+  CustomTextFormField(
       {super.key,
       this.hintText,
+      required this.onChangeMethod,
       required this.keyType,
       required this.lines,
       required this.controller,
@@ -52,9 +52,10 @@ class CustomTextFormField extends StatelessWidget {
         ),
         verticalSpace(5),
         TextFormField(
-          onChanged: (value) {
-            context.read<GymFeaturesCubit>().takeTypedText(value);
+          validator: (value) {
+            
           },
+          onChanged: onChangeMethod,
           maxLines: lines,
           maxLength: maxLength,
           buildCounter: maxLength != null
@@ -78,6 +79,7 @@ class CustomTextFormField extends StatelessWidget {
           controller: controller,
           style: TextStyles.fontCircularSpotify14LightBlackRegular,
           decoration: InputDecoration(
+
             suffixIcon: Padding(
               padding: const EdgeInsets.all(8.0),
               child: widget,

@@ -8,9 +8,7 @@ import 'package:kamn/gym_feature/add_gym/presentation/cubits/gym_features/cubit/
 import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_check_bar.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_drop_down_menu.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_general_button.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_radio_button.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_text_form_field.dart';
-
 import '../../cubits/gym_features/cubit/gym_features_cubit.dart';
 
 // ignore: must_be_immutable
@@ -18,21 +16,26 @@ class CustomGymFeaturesSection extends StatefulWidget {
   const CustomGymFeaturesSection({super.key});
 
   @override
-  State<CustomGymFeaturesSection> createState() => _CustomGymFeaturesSectionState();
+  State<CustomGymFeaturesSection> createState() =>
+      _CustomGymFeaturesSectionState();
 }
 
 class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
-  late TextEditingController _menuController ;
-  late TextEditingController _priceController ;
-  late TextEditingController _descriptioncontroller ;
+  late TextEditingController _menuController;
+  late TextEditingController _priceController;
+  late TextEditingController _descriptioncontroller;
 
   @override
   void initState() {
-   _menuController = TextEditingController();
-  _priceController = TextEditingController();
-  _descriptioncontroller = TextEditingController();
+    _menuController = TextEditingController(
+        text: context.read<GymFeaturesCubit>().state.selectedValue);
+    _priceController = TextEditingController(
+        text: context.read<GymFeaturesCubit>().state.priceText);
+    _descriptioncontroller = TextEditingController(
+        text: context.read<GymFeaturesCubit>().state.descriptionText);
     super.initState();
   }
+
   @override
   void dispose() {
     _menuController.dispose();
@@ -47,8 +50,12 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
       create: (context) => GymFeaturesCubit(),
       child: BlocListener<GymFeaturesCubit, GymFeaturesState>(
         listener: (context, state) {
-          if(_menuController.text != state.selectedValue){
+          if (_menuController.text != state.selectedValue &&
+              _priceController.text != state.priceText &&
+              _descriptioncontroller.text != state.descriptionText) {
             _menuController.text = state.selectedValue;
+            _priceController.text = state.priceText;
+            _descriptioncontroller.text = state.descriptionText;
           }
         },
         child: SingleChildScrollView(
@@ -82,8 +89,11 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
                       child: Text('Facilities and Features',
                           style: TextStyles.fontRoboto15BlackRegular),
                     ),
-                    CustomDropDownMenu(controller: _menuController,),
+                    CustomDropDownMenu(
+                      controller: _menuController,
+                    ),
                     verticalSpace(16),
+
                     CustomTextFormField(
                       keyType: TextInputType.number,
                       lines: 1,
@@ -112,12 +122,25 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
                     ),
                     verticalSpace(7),
                     Center(
-                        child: CustomGeneralButton(
-                      textButton: '+ Add Feature',
-                      ontab: () {},
-                      buttonWidth: 320.w,
-                      buttonColor: AppPallete.blackColor,
-                      buttonTextColor: AppPallete.lgWhiteColor,
+                        child: BlocConsumer<GymFeaturesCubit, GymFeaturesState>(
+                      listener: (context, state) {
+                        if(state is FeatureError){
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Try to add Feature'))
+                          );
+                        }
+                      },
+                      builder: (context, state) {
+                        return CustomGeneralButton(
+                          textButton: '+ Add Feature',
+                          ontab: () {
+                            context.read<GymFeaturesCubit>().addFeaturesButton(context);
+                          },
+                          buttonWidth: 320.w,
+                          buttonColor: AppPallete.blackColor,
+                          buttonTextColor: AppPallete.lgWhiteColor,
+                        );
+                      },
                     )),
                   ],
                 ),
@@ -144,7 +167,8 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
                     buttonTextColor: AppPallete.lgWhiteColor,
                   ),
                 ],
-              )
+              ),
+             
             ],
           ),
         ),
