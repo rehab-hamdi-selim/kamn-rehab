@@ -25,12 +25,12 @@ class ReusableRadioButtons<T> extends StatelessWidget {
       activeColor: Colors.black,
     ),
     RadioOption(
-      text: '/Session',
+      text: '/ Session',
       value: FeatureType.session,
       activeColor: Colors.green,
     ),
     RadioOption(
-      text: '/Month',
+      text: '/ Month',
       value: FeatureType.month,
       activeColor: Colors.blue,
     ),

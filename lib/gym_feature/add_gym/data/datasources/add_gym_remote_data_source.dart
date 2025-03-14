@@ -1,52 +1,65 @@
-// import 'dart:io';
+import 'dart:io';
 
-// import 'package:injectable/injectable.dart';
-// import 'package:kamn/gym_feature/add_gym/data/models/gym_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:injectable/injectable.dart';
+import 'package:kamn/core/const/firebase_collections.dart';
+import 'package:kamn/gym_feature/add_gym/data/models/gym_model.dart';
 
-// abstract class AddGymRemoteDataSource {
-//   Future<void> addGymRequest(GymRequestModel gymRequestModel);
-//   Future<Map<String,String>?> uploadImages(Map<String,File> images);
-// }
-// @Injectable(as:AddGymRemoteDataSource)
-// class AddGymRemoteDataSourceImpl implements AddGymRemoteDataSource {
-//   AddGymRemoteDataSourceImpl();
-  
+abstract class AddGymRemoteDataSource {
+  Future<GymRequestModel> addGymRequest(GymRequestModel gymRequestModel);
+  Future<Map<String, List<String>>> uploadImages(
+      Map<String, List<File>> imagesMap, void Function(int) onProgress);
+}
 
-//   @override
-//   Future<void> addGymRequest(GymRequestModel gymRequestModel) async {
-//     try {
-//       // TODO: Implement the actual API call to add gym request
-//       // This could involve Firebase, REST API, or other remote service
-      
-//       // Example implementation structure:
-//       // 1. Validate the gym request model
-//       // 2. Convert model to API format if needed
-//       // 3. Make the API call
-//       // 4. Handle the response
-//       // 5. Return success or throw appropriate error
-      
-//     } catch (e) {
-//       throw Exception('Failed to add gym request: $e');
-//     }
-//   }
-  
-//   @override
-//   Future<Map<String, String>?> uploadImages(Map<String, File> images) {
-//    Map<String, String> uploadedUrls = {};
+@Injectable(as: AddGymRemoteDataSource)
+class AddGymRemoteDataSourceImpl implements AddGymRemoteDataSource {
+  AddGymRemoteDataSourceImpl();
+  final storage = FirebaseStorage.instance;
+  final firestore= FirebaseFirestore.instance;
+  CollectionReference get _gymsCollection =>
+     firestore.collection(FirebaseCollections.gymRequest);
+  @override
+  Future<GymRequestModel> addGymRequest(GymRequestModel gymRequestModel) async {
+    try {
+     
+      var docRef = _gymsCollection.doc();
+      gymRequestModel.id;
+      await docRef.set(gymRequestModel.toMap());
+      return gymRequestModel;
+    } catch (e) {
+      throw Exception('Failed to add gym request: $e');
+    }
+  }
 
-//   for (var entry in images.entries) {
-//     final key = entry.key;
-//     final file = entry.value;
+  @override
+  Future<Map<String, List<String>>> uploadImages(
+      Map<String, List<File>> imagesMap, void Function(int) onProgress) async {
+    Map<String, List<String>> uploadedUrls = {};
+    int uploadedFiles = 0;
+    for (var entry in imagesMap.entries) {
+      String category = entry.key;
+      List<File> files = entry.value;
+      List<String> urls = [];
 
-//       final url = await uploadImageWithRetry(file, "$folder/$key.jpg");
-//       if (url != null) {
-//         uploadedUrls[key] = url;
-//       } else {
-//         throw Exception("Failed to upload image: $key");
-//       }
-    
-//   }
+      for (int i = 0; i < files.length; i++) {
+        File file = files[i];
+        String fileName =
+            '${DateTime.now().millisecondsSinceEpoch}_${file.path.split('/').last}';
+        Reference ref = storage.ref().child('uploads/$category/$fileName');
+        UploadTask uploadTask = ref.putFile(file);
 
-//   return Future.value(uploadedUrls);
-//   }
-// }
+        await uploadTask.whenComplete(() async {
+          String downloadUrl = await ref.getDownloadURL();
+          urls.add(downloadUrl);
+          uploadedFiles++;
+          onProgress(uploadedFiles);
+        });
+      }
+
+      uploadedUrls[category] = urls;
+    }
+
+    return uploadedUrls;
+  }
+}
