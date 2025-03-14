@@ -1,0 +1,34 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/theme/app_pallete.dart';
+import 'package:kamn/core/utils/custom_gym_button.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart';
+
+class CustomNavigationButtons extends StatelessWidget {
+  const CustomNavigationButtons({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+    spacing: 12.w,
+    children: [
+      CustomGymButton(
+        text: 'Back',
+        onPressed: () {
+        },
+        isBackButton: true,
+        foregroundColor: AppPallete.blackColor,
+        backgroundColor: AppPallete.ofWhiteColor,
+      ),
+      CustomGymButton(
+        text: 'Next',
+        onPressed: () {
+                  context.read<AddGymCubit>().checkMandatoryFields();
+
+        },
+      ),
+    ],
+  );
+  }
+}

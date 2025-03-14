@@ -357,9 +357,8 @@ class Feature {
   final String? id;
   final String? name;
   final String? logoId;
-
   final String? price;
-  final PricingOption? pricingOption;
+  final FeatureType? pricingOption;
   final String? description;
   Feature({
     this.id,
@@ -375,7 +374,7 @@ class Feature {
     String? name,
     String? logoId,
     String? price,
-    PricingOption? pricingOption,
+    FeatureType? pricingOption,
     String? description,
   }) {
     return Feature(
@@ -406,7 +405,7 @@ class Feature {
       logoId: map['logoId'] != null ? map['logoId'] as String : null,
       price: map['price'] != null ? map['price'] as String : null,
       pricingOption: map['pricingOption'] != null
-          ? PricingOption.values.byName(map['pricingOption'] as String)
+          ? FeatureType.values.byName(map['pricingOption'] as String)
           : null,
       description:
           map['description'] != null ? map['description'] as String : null,
@@ -573,9 +572,8 @@ class DiscountDuration {
 
 enum OfferType { monthly, annual }
 
-enum PricingOption {
+enum FeatureType {
   free,
   month,
   session,
-  year,
 }

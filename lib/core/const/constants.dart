@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
+import 'package:kamn/gym_feature/add_gym/domain/models/document_item.dart';
 
 class Constants {
   static const List<String> topics = [
@@ -10,7 +11,24 @@ class Constants {
     'Programming',
     'Entertainment',
   ];
-
+  static final List<DocumentItem> mandatoryDocuments = [
+    const DocumentItem(
+      title: 'Gym Operating License',
+      translation: 'رخصه تشغيل الجيم',
+      isValid: false,
+    ),
+    const DocumentItem(
+      title: 'ID or Passport of Owner',
+      translation: 'صورة البطاقة الشخصية أو جواز السفر لصاحب الملكيه/الجيم',
+      fontSize: 6,
+      isValid: false,
+    ),
+    const DocumentItem(
+      title: 'Ownership Contract',
+      translation: 'عقد ايجار او ملكيه المكان',
+      isValid: false,
+    ),
+  ];
   static const overview = 'Overview';
   static const salesOverView = 'Salesoverview';
   static const noConnectionErrorMessage = 'Not connected to a network!';

@@ -1,9 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
 import 'dart:io';
 
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
 
 enum AddGymStatus {
   initial,
@@ -15,8 +14,26 @@ enum AddGymStatus {
   logoLoading,
   gymImageLoading,
   gymImagePicked,
-  mandatoryFieldPicked
+  mandatoryFieldPicked,
+  radioSelected,
+  featureAdded
 }
+
+extension FeatureTypeColors on FeatureType {
+  Color getBackgroundColor(FeatureType? groupValue) {
+    Map<FeatureType, Color> activeColors = {
+      FeatureType.free: Colors.black,
+      FeatureType.session: Colors.green,
+      FeatureType.month: Colors.blue,
+    };
+    return this == groupValue ? activeColors[this]! : Colors.white;
+  }
+
+  Color getTextColor(FeatureType? groupValue) {
+    return this == groupValue ? Colors.white : Colors.black;
+  }
+}
+
 
 extension AddGymStateX on AddGymState {
   bool get isInitial => state == AddGymStatus.initial;
@@ -29,6 +46,8 @@ extension AddGymStateX on AddGymState {
   bool get isGymImageLoading => state == AddGymStatus.gymImageLoading;
   bool get isGymImagePicked => state == AddGymStatus.gymImagePicked;
   bool get isMandatoryFieldPicked => state == AddGymStatus.mandatoryFieldPicked;
+  bool get isRadioSelected =>state==AddGymStatus.radioSelected;
+  bool get isFeatureAdded => state==AddGymStatus.featureAdded;
 }
 
 class AddGymState {
@@ -38,12 +57,16 @@ class AddGymState {
   final MandatoryFields? mandatoryFields;
   final List<File>? gymImages;
    List<bool> isValid;
+   final FeatureType? featureType;
+   final List<Feature>? addedFeatures;
   AddGymState({
     required this.state,
     this.erorrMessage,
     this.logo,
     this.mandatoryFields,
     this.gymImages,
+    this.featureType,
+    this.addedFeatures,
     this.isValid=const [true,true,true]
   });
 
@@ -53,14 +76,18 @@ class AddGymState {
     AddGymStatus? state,
     String? erorrMessage,
     File? logo,
+    FeatureType? featureType,
     MandatoryFields? mandatoryFields,
     List<File>? gymImages,
-   List<bool>? isValid
+   List<bool>? isValid,
+   List<Feature>? addedFeatures,
   }) {
     return AddGymState(
       state: state ?? this.state,
       erorrMessage: erorrMessage ?? this.erorrMessage,
       logo: logo ?? this.logo,
+      featureType: featureType??this.featureType,
+      addedFeatures:addedFeatures ??this.addedFeatures,
       mandatoryFields: mandatoryFields ?? this.mandatoryFields,
       gymImages: gymImages ?? this.gymImages,
       isValid: isValid?? this.isValid
@@ -69,7 +96,7 @@ class AddGymState {
 
   @override
   String toString() {
-    return 'AddGymState(state: $state, erorrMessage: $erorrMessage, logo: $logo, mandatoryFields: $mandatoryFields, gymImages: $gymImages, isValid: $isValid)';
+    return 'AddGymState(state: $state, erorrMessage: $erorrMessage, logo: $logo, mandatoryFields: $mandatoryFields, gymImages: $gymImages, isValid: $isValid, featureType: $featureType)';
   }
 }
 extension MandatoryFieldsX on MandatoryFields {
