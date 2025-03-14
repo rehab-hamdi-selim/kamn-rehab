@@ -42,24 +42,27 @@ class _ChooseMempershipPlanScreenState extends State<ChooseMempershipPlanScreen>
         notificationIconFunction: () {},
         badgesIconFunction: () {},
       ),
-      body: Padding(
+      body: SingleChildScrollView(
+        child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const CustomTitleLogo(),
               SizedBox(height: 10.h),
-              Expanded(
+              SizedBox(
+                height: 410.h,
                 child: TabBarApp(
                   tabController: _tabController,
                 ),
               ),
+              SizedBox(height: 20.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: 150.w, // Adjust width as needed
-                    height: 50.h, // Adjust height as needed
+                    width: 150.w,
+                    height: 50.h,
                     child: OutlinedButton(
                       onPressed: () {},
                       style: OutlinedButton.styleFrom(
@@ -79,10 +82,10 @@ class _ChooseMempershipPlanScreenState extends State<ChooseMempershipPlanScreen>
                       ),
                     ),
                   ),
-                  const SizedBox(width: 10), // Space between buttons
+                  const SizedBox(width: 10),
                   SizedBox(
-                    width: 150.w, // Adjust width as needed
-                    height: 50.h, // Adjust height as needed
+                    width: 150.w,
+                    height: 50.h,
                     child: ElevatedButton(
                       onPressed: () {
                         _showDialog(
@@ -101,9 +104,12 @@ class _ChooseMempershipPlanScreenState extends State<ChooseMempershipPlanScreen>
                     ),
                   ),
                 ],
-              )
+              ),
+              SizedBox(height: 20.h), // Add bottom padding
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -117,58 +123,61 @@ Future<dynamic> _showDialog(BuildContext context, PlanModel plan) {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.r),
           ),
-          child: Padding(
-            padding: EdgeInsets.all(16.w),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Confirm Your Plan",
-                    style: TextStyles.fontCircularSpotify20AccentBlackMedium),
-                BuildMempershipCard(plan: plan),
-                SizedBox(height: 16.h),
-                Row(
-                  children: [
-                    const Icon(Icons.check_box, color: Colors.black),
-                    SizedBox(width: 10.h),
-                    const Text('Accept all condetions and terms'),
-                  ],
-                ),
-                SizedBox(height: 16.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      height: 40.h,
-                      width: 120.w,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: AppPallete.redColor,
-                        ),
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: const Text(
-                          "Cancel",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 40.h,
-                      width: 122.w,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: AppPallete.blackColor,
-                        ),
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: Text(
-                          "Proceed to Payment",
-                          style: TextStyles.fontCircularSpotify10White,
+          child: SingleChildScrollView(
+            // Make dialog scrollable too
+            child: Padding(
+              padding: EdgeInsets.all(16.w),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Confirm Your Plan",
+                      style: TextStyles.fontCircularSpotify20AccentBlackMedium),
+                  BuildMempershipCard(plan: plan),
+                  SizedBox(height: 16.h),
+                  Row(
+                    children: [
+                      const Icon(Icons.check_box, color: Colors.black),
+                      SizedBox(width: 10.h),
+                      const Text('Accept all condetions and terms'),
+                    ],
+                  ),
+                  SizedBox(height: 16.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        height: 40.h,
+                        width: 120.w,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: AppPallete.redColor,
+                          ),
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: const Text(
+                            "Cancel",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      SizedBox(
+                        height: 40.h,
+                        width: 122.w,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: AppPallete.blackColor,
+                          ),
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Text(
+                            "Proceed to Payment",
+                            style: TextStyles.fontCircularSpotify10White,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         );
