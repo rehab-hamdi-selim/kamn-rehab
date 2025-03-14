@@ -22,7 +22,11 @@ enum AddGymStatus {
   featureAdded,
   addGymLoading,
   addGymSuccess,
-  addGymError
+  addGymError,
+  uploadImagesSuccess,
+  uploadImagesError,
+  uploadImagesLoading
+
 }
 
 extension FeatureTypeColors on FeatureType {
@@ -52,6 +56,14 @@ extension AddGymStateX on AddGymState {
   bool get isGymImagePicked => state == AddGymStatus.gymImagePicked;
   bool get isMandatoryFieldPicked => state == AddGymStatus.mandatoryFieldPicked;
   bool get isRadioSelected => state == AddGymStatus.radioSelected;
+  bool get isFeatureAdded => state == AddGymStatus.featureAdded;
+  bool get isAddGymLoading => state == AddGymStatus.addGymLoading;
+  bool get isAddGymSuccess => state == AddGymStatus.addGymSuccess;
+  bool get isAddGymError => state == AddGymStatus.addGymError;
+  bool get isUploadImagesSuccess => state == AddGymStatus.uploadImagesSuccess;
+  bool get isUploadImagesError => state == AddGymStatus.uploadImagesError;
+  bool get isUploadImagesLoading => state == AddGymStatus.uploadImagesLoading;
+  
 }
 
 class AddGymState {

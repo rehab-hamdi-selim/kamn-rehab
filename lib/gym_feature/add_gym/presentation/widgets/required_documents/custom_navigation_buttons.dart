@@ -6,7 +6,8 @@ import 'package:kamn/core/utils/custom_gym_button.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart';
 
 class CustomNavigationButtons extends StatelessWidget {
-  const CustomNavigationButtons({super.key});
+  final VoidCallback onNextPressed;
+  const CustomNavigationButtons({super.key, required this.onNextPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +24,7 @@ class CustomNavigationButtons extends StatelessWidget {
       ),
       CustomGymButton(
         text: 'Next',
-        onPressed: () {
-                  context.read<AddGymCubit>().checkMandatoryFields();
-
-        },
+        onPressed: onNextPressed,
       ),
     ],
   );

@@ -78,13 +78,15 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
                 },
               ),
               verticalSpace(12),
-              BlocBuilder<AddGymCubit,AddGymState>(
+              BlocBuilder<AddGymCubit, AddGymState>(
                 builder: (context, state) {
                   return ReusableRadioButtons<FeatureType>(
                     groupValue: context.read<AddGymCubit>().state.featureType,
                     onChanged: (value) {
                       if (value != null) {
-                        context.read<AddGymCubit>().onChangeRadioSelection(value);
+                        context
+                            .read<AddGymCubit>()
+                            .onChangeRadioSelection(value);
                       }
                     },
                   );
@@ -125,9 +127,9 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
                         indent: 70.w,
                         thickness: .2,
                       ),
-                      SizedBox(width: double.infinity,
+                      SizedBox(
+                        width: double.infinity,
                         child: Wrap(
-                          
                           spacing: 5.w,
                           children: state.addedFeatures!
                               .map((element) => FittedBox(
@@ -149,7 +151,11 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
             ],
           ),
           verticalSpace(16.h),
-          const CustomNavigationButtons(),
+          CustomNavigationButtons(
+            onNextPressed: () {
+              context.read<AddGymCubit>().uploadImages();
+            },
+          ),
         ],
       ),
     );

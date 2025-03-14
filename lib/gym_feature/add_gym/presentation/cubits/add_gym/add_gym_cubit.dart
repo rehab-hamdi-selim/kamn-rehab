@@ -170,11 +170,8 @@ class AddGymCubit extends Cubit<AddGymState> {
     }
   }
 
-  GymRequestModel? prepareGymData() {
-    if (!checkMandatoryFields() || !key.currentState!.validate()) {
-      return null;
-    }
-    emit(state.copyWith(state: AddGymStatus.addGymLoading));
+  GymRequestModel prepareGymData() {
+
     final gymRequest = GymRequestModel(
       name: nameController.text,
       address: addressController.text,
@@ -192,15 +189,55 @@ class AddGymCubit extends Cubit<AddGymState> {
       operationLicenseImageUrl: state.imagesUrlMap!['mandatory']![0],
       ownerIdPassportImageUrl: state.imagesUrlMap!['mandatory']![1],
       ownershipContractImageUrl: state.imagesUrlMap!['mandatory']![2],
-      taxRegistrationImageUrl: state.imagesUrlMap!['mandatory']?[3],
+      taxRegistrationImageUrl: state.imagesUrlMap!['mandatory']!.length > 3 ? state.imagesUrlMap!['mandatory']![3] : null,
       phoneNumber: contactController.text.trim(),
     );
 
     return gymRequest;
   }
 
+  GymRequestModel prepareFakeGymData() {
+    return GymRequestModel(
+      name: "Fitness Plus Gym",
+      address: "123 Exercise Street, Fitness City",
+      contactNumber: "+1234567890",
+      description: "A state-of-the-art fitness facility with modern equipment",
+      scoialMediaLinks: [
+        ScoialMediaLink(name: 'facebook', link: 'https://facebook.com/fitnessplus'),
+        ScoialMediaLink(name: 'instagram', link: 'https://instagram.com/fitnessplus'),
+        ScoialMediaLink(name: 'x', link: 'https://x.com/fitnessplus'),
+      ],
+      logoUrl: 'https://example.com/logo.jpg',
+      imagesUrl: [
+        'https://example.com/gym1.jpg',
+        'https://example.com/gym2.jpg',
+        'https://example.com/gym3.jpg'
+      ],
+      features: [
+        Feature(
+          name: "Personal Training",
+          description: "One-on-one training sessions",
+          price: "50",
+          pricingOption: FeatureType.free
+        ),
+        Feature(
+          name: "Group Classes",
+          description: "Various group fitness classes",
+          price: "100",
+          pricingOption: FeatureType.free
+        )
+      ],
+      operationLicenseImageUrl: 'https://example.com/license.jpg',
+      ownerIdPassportImageUrl: 'https://example.com/passport.jpg',
+      ownershipContractImageUrl: 'https://example.com/contract.jpg',
+      taxRegistrationImageUrl: 'https://example.com/tax.jpg',
+      phoneNumber: "+1234567890"
+    );
+  }
+
   Future<void> addGymRequest() async {
-    final response = await repository.addGymRequest(prepareGymData()!);
+    emit(state.copyWith(state: AddGymStatus.addGymLoading));
+    final response = await repository.addGymRequest(prepareGymData());
     response.fold((error) {
       emit(state.copyWith(
           state: AddGymStatus.addGymError, erorrMessage: error.erorr));
@@ -228,20 +265,20 @@ class AddGymCubit extends Cubit<AddGymState> {
     final uploadResponse = await repository.uploadImages(imagesMap, (progress) {
       print("now on $progress");
       emit(state.copyWith(
-        state: AddGymStatus.addGymLoading,
+        state: AddGymStatus.uploadImagesLoading,
         uploadProgress: progress,
       ));
     });
 
     uploadResponse.fold((error) {
       emit(state.copyWith(
-        state: AddGymStatus.addGymError,
+        state: AddGymStatus.uploadImagesError,
         erorrMessage: error.erorr,
       ));
       return null;
     },
         (urls) => emit(state.copyWith(
-              state: AddGymStatus.addGymSuccess,
+              state: AddGymStatus.uploadImagesSuccess,
               imagesUrlMap: urls,
             )));
   }

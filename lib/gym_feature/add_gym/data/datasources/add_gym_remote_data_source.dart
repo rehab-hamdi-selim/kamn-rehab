@@ -44,8 +44,7 @@ class AddGymRemoteDataSourceImpl implements AddGymRemoteDataSource {
 
       for (int i = 0; i < files.length; i++) {
         File file = files[i];
-        String fileName =
-            '${DateTime.now().millisecondsSinceEpoch}_${file.path.split('/').last}';
+        String fileName = file.path.split('/').last;
         Reference ref = storage.ref().child('uploads/$category/$fileName');
         UploadTask uploadTask = ref.putFile(file);
 
