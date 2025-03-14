@@ -21,6 +21,7 @@ class CustomTaxRegistrationSection extends StatelessWidget {
       const CustomMandatoryField(
         title: 'Tax Registration',
         translation: 'البطاقة الضريبية او التسجيل الضريبي',
+        
       ),
     ],
   );

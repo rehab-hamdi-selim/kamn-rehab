@@ -1,7 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:kamn/gym_feature/add_gym/data/models/gym_model.dart';
 import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
 
 enum AddGymStatus {
@@ -16,7 +19,10 @@ enum AddGymStatus {
   gymImagePicked,
   mandatoryFieldPicked,
   radioSelected,
-  featureAdded
+  featureAdded,
+  addGymLoading,
+  addGymSuccess,
+  addGymError
 }
 
 extension FeatureTypeColors on FeatureType {
@@ -34,7 +40,6 @@ extension FeatureTypeColors on FeatureType {
   }
 }
 
-
 extension AddGymStateX on AddGymState {
   bool get isInitial => state == AddGymStatus.initial;
   bool get isLoading => state == AddGymStatus.loading;
@@ -46,8 +51,7 @@ extension AddGymStateX on AddGymState {
   bool get isGymImageLoading => state == AddGymStatus.gymImageLoading;
   bool get isGymImagePicked => state == AddGymStatus.gymImagePicked;
   bool get isMandatoryFieldPicked => state == AddGymStatus.mandatoryFieldPicked;
-  bool get isRadioSelected =>state==AddGymStatus.radioSelected;
-  bool get isFeatureAdded => state==AddGymStatus.featureAdded;
+  bool get isRadioSelected => state == AddGymStatus.radioSelected;
 }
 
 class AddGymState {
@@ -56,42 +60,50 @@ class AddGymState {
   final File? logo;
   final MandatoryFields? mandatoryFields;
   final List<File>? gymImages;
-   List<bool> isValid;
-   final FeatureType? featureType;
-   final List<Feature>? addedFeatures;
-  AddGymState({
-    required this.state,
-    this.erorrMessage,
-    this.logo,
-    this.mandatoryFields,
-    this.gymImages,
-    this.featureType,
-    this.addedFeatures,
-    this.isValid=const [true,true,true]
-  });
+  List<bool> isValid;
+  final FeatureType? featureType;
+  final List<Feature>? addedFeatures;
+  final Map<String, List<String>>? imagesUrlMap;
+  final GymRequestModel? gymRequest;
+  final int? uploadProgress;
+  AddGymState(
+      {required this.state,
+      this.erorrMessage,
+      this.logo,
+      this.mandatoryFields,
+      this.gymImages,
+      this.featureType,
+      this.addedFeatures,
+      this.imagesUrlMap,
+      this.gymRequest,
+      this.uploadProgress,
+      this.isValid = const [true, true, true]});
 
- 
   bool get isValidAll => isValid.every((element) => element);
-  AddGymState copyWith({
-    AddGymStatus? state,
-    String? erorrMessage,
-    File? logo,
-    FeatureType? featureType,
-    MandatoryFields? mandatoryFields,
-    List<File>? gymImages,
-   List<bool>? isValid,
-   List<Feature>? addedFeatures,
-  }) {
+  AddGymState copyWith(
+      {AddGymStatus? state,
+      String? erorrMessage,
+      File? logo,
+      FeatureType? featureType,
+      MandatoryFields? mandatoryFields,
+      List<File>? gymImages,
+      List<Feature>? addedFeatures,
+      Map<String, List<String>>? imagesUrlMap,
+      GymRequestModel? gymRequest,
+      int? uploadProgress,
+      List<bool>? isValid}) {
     return AddGymState(
-      state: state ?? this.state,
-      erorrMessage: erorrMessage ?? this.erorrMessage,
-      logo: logo ?? this.logo,
-      featureType: featureType??this.featureType,
-      addedFeatures:addedFeatures ??this.addedFeatures,
-      mandatoryFields: mandatoryFields ?? this.mandatoryFields,
-      gymImages: gymImages ?? this.gymImages,
-      isValid: isValid?? this.isValid
-    );
+        state: state ?? this.state,
+        erorrMessage: erorrMessage ?? this.erorrMessage,
+        logo: logo ?? this.logo,
+        featureType: featureType ?? this.featureType,
+        mandatoryFields: mandatoryFields ?? this.mandatoryFields,
+        gymImages: gymImages ?? this.gymImages,
+        addedFeatures: addedFeatures ?? this.addedFeatures,
+        imagesUrlMap: imagesUrlMap?? this.imagesUrlMap,
+        gymRequest: gymRequest??this.gymRequest,
+        uploadProgress: uploadProgress??this.uploadProgress,
+        isValid: isValid ?? this.isValid);
   }
 
   @override
@@ -99,15 +111,16 @@ class AddGymState {
     return 'AddGymState(state: $state, erorrMessage: $erorrMessage, logo: $logo, mandatoryFields: $mandatoryFields, gymImages: $gymImages, isValid: $isValid, featureType: $featureType)';
   }
 }
+
 extension MandatoryFieldsX on MandatoryFields {
   String get gymOperatingLicenseText => "Gym Operating License";
-  String get idOrPassportOfOwnerText => "ID or Passport of Owner"; 
+  String get idOrPassportOfOwnerText => "ID or Passport of Owner";
   String get ownershipContractText => "Ownership Contract";
   String get taxRegistrationText => "Tax Registration";
 
   bool get isGymOperatingLicensePicked => gymOperatingLicense != null;
-  bool get isIdOrPassportOfOwnerPicked => idOrPassportOfOwner!= null;
-  bool get isOwnershipContractPicked => ownershipContract!= null;
+  bool get isIdOrPassportOfOwnerPicked => idOrPassportOfOwner != null;
+  bool get isOwnershipContractPicked => ownershipContract != null;
   File? getFieldByText(String text) {
     switch (text) {
       case "Gym Operating License":
@@ -158,19 +171,18 @@ class MandatoryFields {
   @override
   bool operator ==(covariant MandatoryFields other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.ownershipContract == ownershipContract &&
-      other.idOrPassportOfOwner == idOrPassportOfOwner &&
-      other.gymOperatingLicense == gymOperatingLicense &&
-      other.taxRegistration == taxRegistration;
+
+    return other.ownershipContract == ownershipContract &&
+        other.idOrPassportOfOwner == idOrPassportOfOwner &&
+        other.gymOperatingLicense == gymOperatingLicense &&
+        other.taxRegistration == taxRegistration;
   }
 
   @override
   int get hashCode {
     return ownershipContract.hashCode ^
-      idOrPassportOfOwner.hashCode ^
-      gymOperatingLicense.hashCode ^
-      taxRegistration.hashCode;
+        idOrPassportOfOwner.hashCode ^
+        gymOperatingLicense.hashCode ^
+        taxRegistration.hashCode;
   }
 }

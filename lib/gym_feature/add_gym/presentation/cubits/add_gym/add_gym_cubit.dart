@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/core/utils/image_picker.dart';
+import 'package:kamn/gym_feature/add_gym/data/models/gym_model.dart';
+import 'package:kamn/gym_feature/add_gym/data/repositories/add_gym_repository.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_state.dart';
 import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
 
@@ -15,12 +17,15 @@ class AddGymCubit extends Cubit<AddGymState> {
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController facebookController = TextEditingController();
   final TextEditingController instagramController = TextEditingController();
+  final TextEditingController contactController = TextEditingController();
   final TextEditingController xController = TextEditingController();
   final TextEditingController menuController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
-  final TextEditingController featureDescriptionController = TextEditingController();
+  final TextEditingController featureDescriptionController =
+      TextEditingController();
 
-  AddGymCubit() : super(AddGymState(state: AddGymStatus.initial));
+  AddGymCubit({required this.repository})
+      : super(AddGymState(state: AddGymStatus.initial));
 
   @override
   Future<void> close() {
@@ -31,12 +36,14 @@ class AddGymCubit extends Cubit<AddGymState> {
     facebookController.dispose();
     instagramController.dispose();
     xController.dispose();
+    contactController.dispose();
     menuController.dispose();
     priceController.dispose();
     featureDescriptionController.dispose();
     return super.close();
   }
 
+  final AddGymRepository repository;
   final List<String> tabs = ["Gym Info", "Required Documents", "Gym Features"];
   final List<File> _gymImages = [];
   late TabController tabController;
@@ -115,25 +122,30 @@ class AddGymCubit extends Cubit<AddGymState> {
     ));
     return state.isValidAll;
   }
-  void addFeature() {
 
+  void addFeature() {
     emit(state.copyWith(
       state: AddGymStatus.featureAdded,
-      addedFeatures: [...state.addedFeatures??[], Feature(
-        name: menuController.text,
-        description: featureDescriptionController.text,
-        price: priceController.text,
-        pricingOption: state.featureType,
-        
-      )],
+      addedFeatures: [
+        ...state.addedFeatures ?? [],
+        Feature(
+          name: menuController.text,
+          description: featureDescriptionController.text,
+          price: priceController.text,
+          pricingOption: state.featureType,
+        )
+      ],
     ));
   }
+
   void onChangeRadioSelection(FeatureType newOption) {
     if (state.featureType == newOption) {
       return;
     }
-    emit(state.copyWith(state:AddGymStatus.radioSelected,featureType: newOption));
+    emit(state.copyWith(
+        state: AddGymStatus.radioSelected, featureType: newOption));
   }
+
   Future<void> pickMandatoryImages(String field) async {
     final image = await pickImage();
 
@@ -158,6 +170,79 @@ class AddGymCubit extends Cubit<AddGymState> {
     }
   }
 
+  GymRequestModel? prepareGymData() {
+    if (!checkMandatoryFields() || !key.currentState!.validate()) {
+      return null;
+    }
+    emit(state.copyWith(state: AddGymStatus.addGymLoading));
+    final gymRequest = GymRequestModel(
+      name: nameController.text,
+      address: addressController.text,
+      contactNumber: phoneController.text,
+      description: descriptionController.text,
+      scoialMediaLinks: [
+        ScoialMediaLink(name: 'facebook', link: facebookController.text.trim()),
+        ScoialMediaLink(
+            name: 'instagram', link: instagramController.text.trim()),
+        ScoialMediaLink(name: 'x', link: xController.text.trim()),
+      ],
+      logoUrl: state.imagesUrlMap!['logo']?.first,
+      imagesUrl: state.imagesUrlMap!['gymImages'],
+      features: state.addedFeatures ?? [],
+      operationLicenseImageUrl: state.imagesUrlMap!['mandatory']![0],
+      ownerIdPassportImageUrl: state.imagesUrlMap!['mandatory']![1],
+      ownershipContractImageUrl: state.imagesUrlMap!['mandatory']![2],
+      taxRegistrationImageUrl: state.imagesUrlMap!['mandatory']?[3],
+      phoneNumber: contactController.text.trim(),
+    );
 
-  
+    return gymRequest;
+  }
+
+  Future<void> addGymRequest() async {
+    final response = await repository.addGymRequest(prepareGymData()!);
+    response.fold((error) {
+      emit(state.copyWith(
+          state: AddGymStatus.addGymError, erorrMessage: error.erorr));
+    }, (success) {
+      emit(state.copyWith(
+          state: AddGymStatus.addGymSuccess, gymRequest: success));
+    });
+  }
+
+  Future<void> uploadImages() async {
+    emit(state.copyWith(state: AddGymStatus.addGymLoading));
+
+    final imagesMap = <String, List<File>>{
+      'logo': [state.logo!],
+      'gymImages': _gymImages,
+      'mandatory': [
+        state.mandatoryFields!.gymOperatingLicense!,
+        state.mandatoryFields!.idOrPassportOfOwner!,
+        state.mandatoryFields!.ownershipContract!,
+        if (state.mandatoryFields!.taxRegistration != null)
+          state.mandatoryFields!.taxRegistration!,
+      ],
+    };
+
+    final uploadResponse = await repository.uploadImages(imagesMap, (progress) {
+      print("now on $progress");
+      emit(state.copyWith(
+        state: AddGymStatus.addGymLoading,
+        uploadProgress: progress,
+      ));
+    });
+
+    uploadResponse.fold((error) {
+      emit(state.copyWith(
+        state: AddGymStatus.addGymError,
+        erorrMessage: error.erorr,
+      ));
+      return null;
+    },
+        (urls) => emit(state.copyWith(
+              state: AddGymStatus.addGymSuccess,
+              imagesUrlMap: urls,
+            )));
+  }
 }
