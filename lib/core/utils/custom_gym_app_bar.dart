@@ -7,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter_svg/svg.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
-import 'package:kamn/core/const/image_links.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
@@ -97,7 +96,7 @@ class CustomGymAppBar {
                       : null,
                   child: user?.profileImage == null
                       ? SvgPicture.asset(
-                          ImageLinks.defaultUserImage,
+                          'assets/icons/User07a.svg',
                           width: 60.r,
                           height: 60.r,
                         )
