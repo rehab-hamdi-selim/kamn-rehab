@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
+import 'package:kamn/gym_feature/add_gym/domain/models/document_item.dart';
 
 class Constants {
   static const List<String> topics = [
@@ -10,7 +11,24 @@ class Constants {
     'Programming',
     'Entertainment',
   ];
-
+  static final List<DocumentItem> mandatoryDocuments = [
+    const DocumentItem(
+      title: 'Gym Operating License',
+      translation: 'رخصه تشغيل الجيم',
+      isValid: false,
+    ),
+    const DocumentItem(
+      title: 'ID or Passport of Owner',
+      translation: 'صورة البطاقة الشخصية أو جواز السفر لصاحب الملكيه/الجيم',
+      fontSize: 6,
+      isValid: false,
+    ),
+    const DocumentItem(
+      title: 'Ownership Contract',
+      translation: 'عقد ايجار او ملكيه المكان',
+      isValid: false,
+    ),
+  ];
   static const overview = 'Overview';
   static const salesOverView = 'Salesoverview';
   static const noConnectionErrorMessage = 'Not connected to a network!';
@@ -82,11 +100,25 @@ class Constants {
   static const volleyball = "Volleyball";
   static const skyDiving = "Sky Diving";
   static const swimming = "Swimming";
+
   static const welcomeToManagementSystem = 'Welcome to\nManagement System';
   static const financialReports = 'Financial Reports';
   static const paymentOptions = 'Choose payment\noption';
   static const termsAndConditions = 'Terms and Conditions';
+  static const String restaurantName = "Sarah's House";
+  static const String foodTitle = "Quinoa Salad with Grilled Chicken";
+  static const String details =
+      "A delicious grilled chicken salad packed with vibrant greens, colorful vegetables, and topped with a light vinaigrette. The tender chicken adds a lean source of protein, while the mix of nuts and seeds provides healthy fats and essential micronutrients.";
+  static const String ingredientsTitle = "Ingredients";
+  static const String detailsTitle = "Details";
   static const termsAndConditionsContent = '''1. Introduction
+  
+  
+  
+  
+  
+  
+  
 
 Welcome to KAMN. By using our services, you agree to the following Terms of Service. Please read them carefully.
 
@@ -97,6 +129,12 @@ When paying by Visa, please note that the transaction may take between 24 to 48 
 3. Refund Policy
 
 If you request a refund, the processing time will follow the same timeframe as outlined in Section 2, taking between 24 to 48 hours based on your bank’s processing rules.''';
+
+  static const popularFood = 'Popular Food';
+  static const openRestaurants = 'Open Restaurants';
+  static const kCal = 'KCal';
+  static const egp = '£GP';
+  static const minute = 'min';
 
   static const List<String> egyptGovernorates = [
     "Cairo",
@@ -160,6 +198,7 @@ If you request a refund, the processing time will follow the same timeframe as o
     ),
   ];
 }
+
 class SportDetail {
   final String title;
   final Color color;

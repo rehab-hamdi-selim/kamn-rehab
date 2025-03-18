@@ -9,6 +9,25 @@ import 'package:kamn/custom_main_bloc_consumer.dart';
 import 'package:kamn/init_dependencies.dart';
 import 'core/common/cubit/firebase_remote_config/firebase_remote_config_cubit.dart';
 
+// void main() {
+//   runApp(
+//     ScreenUtilInit(
+//       designSize: const Size(375, 812), // Adjust based on your design
+//       minTextAdapt: true,  // Ensures proper text scaling
+//       builder: (context, child) {
+//         return MaterialApp(
+//           debugShowCheckedModeBanner: false,
+//           home: SearchingUiScreen(),
+//         );
+//       },
+//     ),
+//   );
+// }
+
+// ignore_for_file: use_build_context_synchronously
+
+
+
 void main() async {
   await initDependencies();
   configureDependencies();
@@ -61,4 +80,4 @@ class MyApp extends StatelessWidget {
 //               }
 //             },
 //             child: const CustomSplashScreen(),
-//           ),
+//           ),
