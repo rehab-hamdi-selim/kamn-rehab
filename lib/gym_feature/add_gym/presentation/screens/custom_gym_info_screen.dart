@@ -25,7 +25,8 @@ class CustomGymInfoScreen extends StatelessWidget {
           Row(
             children: [
               CustomGymButton(onPressed: () {
-                if (context.read<AddGymCubit>().key.currentState!.validate()==true) {
+                 context.read<AddGymCubit>().validateGymInfo();
+                if (context.read<AddGymCubit>().gymInfoKey.currentState!.validate()==true) {
                   context.read<AddGymCubit>().goToNextPage();
                 }
               }),

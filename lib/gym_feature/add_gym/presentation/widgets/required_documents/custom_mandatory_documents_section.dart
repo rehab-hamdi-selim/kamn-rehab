@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
+import 'package:kamn/core/helpers/validators.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/core/utils/custom_container.dart';
 import 'package:kamn/core/utils/custom_gym_text_form_field.dart';
@@ -43,11 +44,15 @@ class CustomMandatoryDocumentsSection extends StatelessWidget {
           },
         ),
         verticalSpace(12),
-        CustomGymTextFormField(
-          controller:context.read<AddGymCubit>().contactController,
-          label: 'Contact Number',
-          hint: 'Enter valid phone number',
-          optionalText: ' (Gym Phone)',
+        Form(
+          key: context.read<AddGymCubit>().requiredDocumentsKey,
+          child: CustomGymTextFormField(
+            controller:context.read<AddGymCubit>().contactController,
+            label: 'Contact Number',
+            hint: 'Enter valid phone number',
+            optionalText: ' (Gym Phone)',
+            valodator: phoneValidator,
+          ),
         ),
       ],
     );

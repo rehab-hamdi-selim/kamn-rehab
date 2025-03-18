@@ -18,7 +18,8 @@ class CustomTabBar extends StatelessWidget {
     return DefaultTabController(
       length: cubit.tabs.length,
       child: BlocBuilder<AddGymCubit, AddGymState>(
-        buildWhen: (previous, current) => current.isInitial||current.isSwipped,
+        buildWhen: (previous, current) =>
+            current.isInitial || current.isSwipped,
         builder: (context, state) {
           return Column(
             children: [
@@ -30,7 +31,7 @@ class CustomTabBar extends StatelessWidget {
                   borderRadius: BorderRadius.circular(25),
                   border: Border.all(color: Colors.grey.shade300),
                 ),
-                child: TabBar(
+                child: TabBar(onTap:(index){ _onTabTapped(index, cubit.tabController,context);},
                   controller: cubit.tabController,
                   dividerHeight: 0,
                   indicatorSize: TabBarIndicatorSize.tab,
@@ -57,8 +58,7 @@ class CustomTabBar extends StatelessWidget {
                   controller: cubit.tabController,
                   children: const [
                     CustomGymInfoScreen(),
-                     CustomRequiredDocumentsScreen(),
-                    CustomGymFeaturesSection(),
+                    CustomRequiredDocumentsScreen(),
                   ],
                 ),
               ),
@@ -68,4 +68,11 @@ class CustomTabBar extends StatelessWidget {
       ),
     );
   }
+void _onTabTapped(int index, TabController _tabController,BuildContext context) {
+  // Prevent switching tabs from index 0 no matter what
+  if (index == 1) {
+    context.read<AddGymCubit>().validateGymInfo();
+  }
+}
+  
 }

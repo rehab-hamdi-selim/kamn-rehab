@@ -17,13 +17,14 @@ class CustomNavigationButtons extends StatelessWidget {
       CustomGymButton(
         text: 'Back',
         onPressed: () {
+          context.read<AddGymCubit>().goToPreviousPage();
         },
         isBackButton: true,
         foregroundColor: AppPallete.blackColor,
         backgroundColor: AppPallete.ofWhiteColor,
       ),
       CustomGymButton(
-        text: 'Next',
+        text: 'Submit',
         onPressed: onNextPressed,
       ),
     ],

@@ -9,7 +9,7 @@ import 'package:kamn/gym_feature/add_gym/data/models/gym_model.dart';
 abstract class AddGymRemoteDataSource {
   Future<GymRequestModel> addGymRequest(GymRequestModel gymRequestModel);
   Future<Map<String, List<String>>> uploadImages(
-      Map<String, List<File>> imagesMap, void Function(int) onProgress);
+      Map<String, List<File>> imagesMap, void Function(double) onProgress);
 }
 
 @Injectable(as: AddGymRemoteDataSource)
@@ -34,9 +34,9 @@ class AddGymRemoteDataSourceImpl implements AddGymRemoteDataSource {
 
   @override
   Future<Map<String, List<String>>> uploadImages(
-      Map<String, List<File>> imagesMap, void Function(int) onProgress) async {
+      Map<String, List<File>> imagesMap, void Function(double) onProgress) async {
     Map<String, List<String>> uploadedUrls = {};
-    int uploadedFiles = 0;
+    double uploadedFiles = 0;
     for (var entry in imagesMap.entries) {
       String category = entry.key;
       List<File> files = entry.value;

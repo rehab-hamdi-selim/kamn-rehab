@@ -33,7 +33,7 @@ class CustomGymLogoInfoSection extends StatelessWidget {
           ),
           child: BlocBuilder<AddGymCubit, AddGymState>(
             builder: (context, state) {
-              if (state.isLogoLoading) {
+              if (state.state == AddGymStatus.logoLoading) {
                 return const LoadingIndicatorWidget();
               }
               if (state.logo != null) {
@@ -46,7 +46,7 @@ class CustomGymLogoInfoSection extends StatelessWidget {
       ),
       verticalSpace(12),
       Form(
-        key: context.read<AddGymCubit>().key,
+        key: context.read<AddGymCubit>().gymInfoKey,
         child: Column(
           children: [
             CustomGymTextFormField(

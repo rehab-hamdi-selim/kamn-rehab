@@ -1,8 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
 import 'dart:io';
 
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:kamn/gym_feature/add_gym/data/models/gym_model.dart';
 import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
@@ -25,8 +23,8 @@ enum AddGymStatus {
   addGymError,
   uploadImagesSuccess,
   uploadImagesError,
-  uploadImagesLoading
-
+  uploadImagesLoading,
+  checkBarTapped,
 }
 
 extension FeatureTypeColors on FeatureType {
@@ -63,7 +61,7 @@ extension AddGymStateX on AddGymState {
   bool get isUploadImagesSuccess => state == AddGymStatus.uploadImagesSuccess;
   bool get isUploadImagesError => state == AddGymStatus.uploadImagesError;
   bool get isUploadImagesLoading => state == AddGymStatus.uploadImagesLoading;
-  
+  bool get isCheckBarTapped => state == AddGymStatus.checkBarTapped;
 }
 
 class AddGymState {
@@ -77,7 +75,12 @@ class AddGymState {
   final List<Feature>? addedFeatures;
   final Map<String, List<String>>? imagesUrlMap;
   final GymRequestModel? gymRequest;
-  final int? uploadProgress;
+  final double? uploadProgress;
+  final bool? isGymInfoValid;
+  final bool? isAccept;
+  final bool? isConfirm;
+  final int? numberOfImages;
+
   AddGymState(
       {required this.state,
       this.erorrMessage,
@@ -88,7 +91,11 @@ class AddGymState {
       this.addedFeatures,
       this.imagesUrlMap,
       this.gymRequest,
-      this.uploadProgress,
+      this.uploadProgress=0,
+      this.isAccept=false,
+      this.isConfirm=false,
+      this.isGymInfoValid=false,
+      this.numberOfImages,
       this.isValid = const [true, true, true]});
 
   bool get isValidAll => isValid.every((element) => element);
@@ -102,7 +109,11 @@ class AddGymState {
       List<Feature>? addedFeatures,
       Map<String, List<String>>? imagesUrlMap,
       GymRequestModel? gymRequest,
-      int? uploadProgress,
+      double? uploadProgress,
+        bool? isAccept,
+   bool? isConfirm,
+      bool? isGymInfoValid,
+       int? numberOfImages,
       List<bool>? isValid}) {
     return AddGymState(
         state: state ?? this.state,
@@ -112,9 +123,13 @@ class AddGymState {
         mandatoryFields: mandatoryFields ?? this.mandatoryFields,
         gymImages: gymImages ?? this.gymImages,
         addedFeatures: addedFeatures ?? this.addedFeatures,
-        imagesUrlMap: imagesUrlMap?? this.imagesUrlMap,
-        gymRequest: gymRequest??this.gymRequest,
-        uploadProgress: uploadProgress??this.uploadProgress,
+        imagesUrlMap: imagesUrlMap ?? this.imagesUrlMap,
+        gymRequest: gymRequest ?? this.gymRequest,
+        isAccept: isAccept?? this.isAccept,
+        isConfirm: isConfirm?? this.isConfirm,
+        uploadProgress: uploadProgress ?? this.uploadProgress,
+        isGymInfoValid: isGymInfoValid ?? this.isGymInfoValid,
+        numberOfImages: numberOfImages?? this.numberOfImages,
         isValid: isValid ?? this.isValid);
   }
 

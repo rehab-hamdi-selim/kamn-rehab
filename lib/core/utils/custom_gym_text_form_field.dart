@@ -100,7 +100,7 @@ class CustomGymTextFormField extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(8.r)),
             hintText: hint,
-            helperText: helper,
+            helperText: helper,errorStyle: TextStyles.fontCircularSpotify10RedMedium,
             hintStyle: TextStyle(color: Colors.grey.shade600, fontSize: 12.h),
             helperStyle: TextStyles.fontCircularSpotify10StealGrayMedium,
             fillColor: enable == true ? AppPallete.whiteColor : Colors.grey.shade200,

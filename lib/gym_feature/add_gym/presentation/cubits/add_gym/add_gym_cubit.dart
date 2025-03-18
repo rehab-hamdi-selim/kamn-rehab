@@ -44,10 +44,11 @@ class AddGymCubit extends Cubit<AddGymState> {
   }
 
   final AddGymRepository repository;
-  final List<String> tabs = ["Gym Info", "Required Documents", "Gym Features"];
+  final List<String> tabs = ["Gym Info", "Required Documents"];
   final List<File> _gymImages = [];
   late TabController tabController;
-  final GlobalKey<FormState> key = GlobalKey<FormState>();
+  final GlobalKey<FormState> gymInfoKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> requiredDocumentsKey = GlobalKey<FormState>();
   List<File> get gymImages => List.unmodifiable(_gymImages);
 
   void initTabController(TickerProvider vsync) {
@@ -107,16 +108,13 @@ class AddGymCubit extends Cubit<AddGymState> {
     final mandatoryFields = state.mandatoryFields;
 
     var isValid = List<bool>.from(state.isValid);
-    if (mandatoryFields?.gymOperatingLicense == null) {
-      isValid[0] = false;
-    }
-    if (mandatoryFields?.idOrPassportOfOwner == null) {
-      isValid[1] = false;
-    }
-    if (mandatoryFields?.ownershipContract == null) {
-      isValid[2] = false;
-    }
-
+      isValid[0] = mandatoryFields?.gymOperatingLicense != null;
+    
+      isValid[1] = mandatoryFields?.idOrPassportOfOwner != null;
+    
+      isValid[2] = mandatoryFields?.ownershipContract != null;
+    
+    print(isValid);
     emit(state.copyWith(
       isValid: isValid,
     ));
@@ -170,74 +168,9 @@ class AddGymCubit extends Cubit<AddGymState> {
     }
   }
 
-  GymRequestModel prepareGymData() {
-
-    final gymRequest = GymRequestModel(
-      name: nameController.text,
-      address: addressController.text,
-      contactNumber: phoneController.text,
-      description: descriptionController.text,
-      scoialMediaLinks: [
-        ScoialMediaLink(name: 'facebook', link: facebookController.text.trim()),
-        ScoialMediaLink(
-            name: 'instagram', link: instagramController.text.trim()),
-        ScoialMediaLink(name: 'x', link: xController.text.trim()),
-      ],
-      logoUrl: state.imagesUrlMap!['logo']?.first,
-      imagesUrl: state.imagesUrlMap!['gymImages'],
-      features: state.addedFeatures ?? [],
-      operationLicenseImageUrl: state.imagesUrlMap!['mandatory']![0],
-      ownerIdPassportImageUrl: state.imagesUrlMap!['mandatory']![1],
-      ownershipContractImageUrl: state.imagesUrlMap!['mandatory']![2],
-      taxRegistrationImageUrl: state.imagesUrlMap!['mandatory']!.length > 3 ? state.imagesUrlMap!['mandatory']![3] : null,
-      phoneNumber: contactController.text.trim(),
-    );
-
-    return gymRequest;
-  }
-
-  GymRequestModel prepareFakeGymData() {
-    return GymRequestModel(
-      name: "Fitness Plus Gym",
-      address: "123 Exercise Street, Fitness City",
-      contactNumber: "+1234567890",
-      description: "A state-of-the-art fitness facility with modern equipment",
-      scoialMediaLinks: [
-        ScoialMediaLink(name: 'facebook', link: 'https://facebook.com/fitnessplus'),
-        ScoialMediaLink(name: 'instagram', link: 'https://instagram.com/fitnessplus'),
-        ScoialMediaLink(name: 'x', link: 'https://x.com/fitnessplus'),
-      ],
-      logoUrl: 'https://example.com/logo.jpg',
-      imagesUrl: [
-        'https://example.com/gym1.jpg',
-        'https://example.com/gym2.jpg',
-        'https://example.com/gym3.jpg'
-      ],
-      features: [
-        Feature(
-          name: "Personal Training",
-          description: "One-on-one training sessions",
-          price: "50",
-          pricingOption: FeatureType.free
-        ),
-        Feature(
-          name: "Group Classes",
-          description: "Various group fitness classes",
-          price: "100",
-          pricingOption: FeatureType.free
-        )
-      ],
-      operationLicenseImageUrl: 'https://example.com/license.jpg',
-      ownerIdPassportImageUrl: 'https://example.com/passport.jpg',
-      ownershipContractImageUrl: 'https://example.com/contract.jpg',
-      taxRegistrationImageUrl: 'https://example.com/tax.jpg',
-      phoneNumber: "+1234567890"
-    );
-  }
-
-  Future<void> addGymRequest() async {
+  Future<void> addGymRequest(GymRequestModel gym) async {
     emit(state.copyWith(state: AddGymStatus.addGymLoading));
-    final response = await repository.addGymRequest(prepareGymData());
+    final response = await repository.addGymRequest(gym);
     response.fold((error) {
       emit(state.copyWith(
           state: AddGymStatus.addGymError, erorrMessage: error.erorr));
@@ -251,7 +184,7 @@ class AddGymCubit extends Cubit<AddGymState> {
     emit(state.copyWith(state: AddGymStatus.addGymLoading));
 
     final imagesMap = <String, List<File>>{
-      'logo': [state.logo!],
+      'logo':state.logo==null?[]: [state.logo!],
       'gymImages': _gymImages,
       'mandatory': [
         state.mandatoryFields!.gymOperatingLicense!,
@@ -261,7 +194,9 @@ class AddGymCubit extends Cubit<AddGymState> {
           state.mandatoryFields!.taxRegistration!,
       ],
     };
+      final num = imagesMap.values.expand((list) => list).toList().length;
 
+  emit(state.copyWith( numberOfImages: num));
     final uploadResponse = await repository.uploadImages(imagesMap, (progress) {
       print("now on $progress");
       emit(state.copyWith(
@@ -281,5 +216,19 @@ class AddGymCubit extends Cubit<AddGymState> {
               state: AddGymStatus.uploadImagesSuccess,
               imagesUrlMap: urls,
             )));
+  }
+
+  void validateGymInfo() {
+    final isGymInfoValid = gymInfoKey.currentState?.validate() ?? false;
+    emit(state.copyWith(isGymInfoValid: isGymInfoValid));
+  }
+  void onAcceptTab(bool? value){
+    emit(state.copyWith(state: AddGymStatus.checkBarTapped,isAccept: !state.isAccept!));
+  }
+  void onConfirmTab(bool? value ){
+    emit(state.copyWith(state: AddGymStatus.checkBarTapped,isConfirm: !state.isConfirm!));
+  }
+  void reset(){
+    emit (state.copyWith(state:AddGymStatus.initial,uploadProgress: 0));
   }
 }

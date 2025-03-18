@@ -10,7 +10,7 @@ import 'package:kamn/gym_feature/add_gym/data/models/gym_model.dart';
 abstract class AddGymRepository {
   Future<Either<Faliure,GymRequestModel>> addGymRequest(GymRequestModel gymRequestModel);
   Future<Either<Faliure,Map<String, List<String>>>> uploadImages(
-      Map<String, List<File>> imagesMap, void Function(int) onProgress);
+      Map<String, List<File>> imagesMap, void Function(double) onProgress);
 }
 @Injectable(as: AddGymRepository)
 class AddGymRepositoryImpl implements AddGymRepository {
@@ -24,7 +24,7 @@ AddGymRemoteDataSource dataSource;
   }
 
   @override
-  Future<Either<Faliure, Map<String, List<String>>>> uploadImages(Map<String, List<File>> imagesMap, void Function(int p1) onProgress) {
+  Future<Either<Faliure, Map<String, List<String>>>> uploadImages(Map<String, List<File>> imagesMap, void Function(double p1) onProgress) {
     return executeTryAndCatchForRepository(() async {
       return await dataSource.uploadImages(imagesMap,onProgress);
     });

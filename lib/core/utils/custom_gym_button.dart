@@ -11,7 +11,9 @@ class CustomGymButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? foregroundColor;
   final IconData? icon;
+  final bool showIcon;
   final bool isBackButton;
+  final double? height;
 
   const CustomGymButton({
     super.key,
@@ -21,14 +23,15 @@ class CustomGymButton extends StatelessWidget {
     this.backgroundColor,
     this.foregroundColor,
     this.icon,
-    this.isBackButton = false,
+    this.showIcon = true,
+    this.isBackButton = false, this.height,
   });
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: SizedBox(
-        height: 50.h,
+        height:height?? 50.h,
         width: width,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -37,7 +40,7 @@ class CustomGymButton extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(70.r),
               side: isBackButton ? BorderSide(
-                color: AppPallete.blackColor,
+                color: AppPallete.lightGreyColor,
                 width: .3.w,
               ) : BorderSide.none,
             ),
@@ -47,19 +50,19 @@ class CustomGymButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (isBackButton) ...[                
-                Icon(
+                if (showIcon) Icon(
                   icon ?? Icons.arrow_back,
                   size: 15.h,
                   color: foregroundColor ?? AppPallete.whiteColor,
                 ),
-                horizontalSpace(8),
+                 if (showIcon)horizontalSpace(8),
                 Text(text),
               ] else ...[                
                 Text(text),
-                horizontalSpace(8),
-                Icon(
+                 if (showIcon)horizontalSpace(8),
+                if (showIcon) Icon(
                   icon ?? Icons.arrow_forward,
-                  size: 15  .h,
+                  size: 15.h,
                   color: foregroundColor ?? AppPallete.whiteColor,
                 ),
               ],

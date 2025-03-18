@@ -577,3 +577,54 @@ enum FeatureType {
   month,
   session,
 }
+
+class ScoialMediaLink {
+  final String? name;
+  final String? link;
+  ScoialMediaLink({
+    this.name,
+    this.link,
+  });
+  ScoialMediaLink copyWith({
+    String? name,
+    String? link,
+  }) {
+    return ScoialMediaLink(
+      name: name ?? this.name,
+      link: link ?? this.link,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'name': name,
+      'link': link,
+    };
+  }
+
+  factory ScoialMediaLink.fromMap(Map<String, dynamic> map) {
+    return ScoialMediaLink(
+      name: map['name'] != null ? map['name'] as String : null,
+      link: map['link'] != null ? map['link'] as String : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory ScoialMediaLink.fromJson(String source) =>
+      ScoialMediaLink.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() => 'ScoialMediaLink(name: $name, link: $link)';
+
+  @override
+  bool operator ==(covariant ScoialMediaLink other) {
+    if (identical(this, other)) return true;
+
+    return other.name == name && other.link == link;
+  }
+
+  @override
+  int get hashCode => name.hashCode ^ link.hashCode;
+}
+

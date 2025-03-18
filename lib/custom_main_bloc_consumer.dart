@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
+import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/routing/app_router.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
@@ -49,7 +50,7 @@ class CustomMainBlocConsumer extends StatelessWidget {
               scaffoldBackgroundColor: AppPallete.whiteColor,
             ),
             onGenerateRoute: AppRouter.generateRoute,
-            home: const RestaurantDetails());
+            home:  _buildHomeWidget(state,appUserCubit));
         //home: _buildHomeWidget(state, appUserCubit));
       },
     );
@@ -76,7 +77,6 @@ class CustomMainBlocConsumer extends StatelessWidget {
       // );
     }
     if (state.isNotLoggedIn() || state.isClearUserData()) {
-      return const SearchingUiScreen();
       // return BlocProvider(
       //   create: (context) => getIt<SignInCubit>(),
       //   child: const SignInScreen(),
