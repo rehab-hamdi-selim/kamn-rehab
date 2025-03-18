@@ -98,8 +98,8 @@ class CustomGymAppBar {
                   child: user?.profileImage == null
                       ? SvgPicture.asset(
                           ImageLinks.defaultUserImage,
-                          width: 60.r,
-                          height: 60.r,
+                          width: 25.r,
+                          height: 25.r,
                         )
                       : null,
                 )),
