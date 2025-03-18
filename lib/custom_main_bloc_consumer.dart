@@ -7,6 +7,7 @@ import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cub
 import 'package:kamn/gym_feature/add_gym/presentation/screens/add_gym_screen.dart';
 import 'package:kamn/gym_feature/gyms/presentation/screen/choose_mempership_plan_screen.dart';
 import 'package:kamn/gym_feature/gyms/presentation/screen/choose_plan_screen.dart';
+import 'package:kamn/gym_feature/gyms/presentation/screen/track_gym_request_submission_screen.dart';
 import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
 import 'package:kamn/playground_feature/authentication/presentation/screens/on_boarding_screen.dart';
 import 'core/common/cubit/app_user/app_user_cubit.dart';
@@ -18,8 +19,7 @@ class CustomMainBlocConsumer extends StatelessWidget {
   const CustomMainBlocConsumer({super.key});
 
   @override
-  Widget build(BuildContext context) { 
-    
+  Widget build(BuildContext context) {
     final appUserCubit = context.read<AppUserCubit>();
 
     return BlocConsumer<AppUserCubit, AppUserState>(
@@ -57,17 +57,17 @@ class CustomMainBlocConsumer extends StatelessWidget {
 
   Widget _buildHomeWidget(AppUserState state, AppUserCubit appUserCubit) {
     if (state.isInitial()) {
-      return const MainLoader();
+      return const TrackGymRequestSubmissionScreen();
     }
     if (state.isNotInstalled()) {
-      return const OnBoardingScreen();
+      return const TrackGymRequestSubmissionScreen();
     }
     if (state.isLoggedIn() || state.isGettedData() || state.isSuccess()) {
-      return ChoosePlanScreen();
+      return const TrackGymRequestSubmissionScreen();
       // return BlocProvider(
       //   create:(context)=> getIt<SelectCategoryCubit>()..getPlaygrounds(),
       //   child: const SelectCategoryScreen(),
-     // );
+      // );
     }
     if (state.isNotLoggedIn() || state.isClearUserData()) {
       return BlocProvider(
