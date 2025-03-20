@@ -35,10 +35,12 @@ class AppPallete {
   static const Color lightOrangeColor = Color(0xffFFC73C);
   static const Color deepOrangeColor = Color(0xffFF9D00);
   static const Color lightDeepOrangeColor = Color(0xFFFF9500);
+  static const Color vividVioletColor = Color(0xFF3B31FF);
   static const Color lightPinkColor = Color(0xffFFAFAF);
   static const Color pureRedColor = Color(0xffFF0000);
   static const Color dimGrayColor = Color(0xff6F6F6F);
   static const Color lightVoivetteColor = Color(0xffE166CB);
+  static const Color vividViolet = Color(0xfff5148ff);
   static const Color mediumLightGray = Color(0xffAFAFAF);
   static const Color stealGray = Color(0xff73737C);
   static const Color lightBlack = Color(0xff101010);
