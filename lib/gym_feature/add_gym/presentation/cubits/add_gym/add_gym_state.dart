@@ -1,9 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
 import 'dart:io';
-
-import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
 
 enum AddGymStatus {
   initial,
@@ -37,34 +33,30 @@ class AddGymState {
   final File? logo;
   final MandatoryFields? mandatoryFields;
   final List<File>? gymImages;
-   List<bool> isValid;
-  AddGymState({
-    required this.state,
-    this.erorrMessage,
-    this.logo,
-    this.mandatoryFields,
-    this.gymImages,
-    this.isValid=const [true,true,true]
-  });
+  List<bool> isValid;
+  AddGymState(
+      {required this.state,
+      this.erorrMessage,
+      this.logo,
+      this.mandatoryFields,
+      this.gymImages,
+      this.isValid = const [true, true, true]});
 
- 
   bool get isValidAll => isValid.every((element) => element);
-  AddGymState copyWith({
-    AddGymStatus? state,
-    String? erorrMessage,
-    File? logo,
-    MandatoryFields? mandatoryFields,
-    List<File>? gymImages,
-   List<bool>? isValid
-  }) {
+  AddGymState copyWith(
+      {AddGymStatus? state,
+      String? erorrMessage,
+      File? logo,
+      MandatoryFields? mandatoryFields,
+      List<File>? gymImages,
+      List<bool>? isValid}) {
     return AddGymState(
-      state: state ?? this.state,
-      erorrMessage: erorrMessage ?? this.erorrMessage,
-      logo: logo ?? this.logo,
-      mandatoryFields: mandatoryFields ?? this.mandatoryFields,
-      gymImages: gymImages ?? this.gymImages,
-      isValid: isValid?? this.isValid
-    );
+        state: state ?? this.state,
+        erorrMessage: erorrMessage ?? this.erorrMessage,
+        logo: logo ?? this.logo,
+        mandatoryFields: mandatoryFields ?? this.mandatoryFields,
+        gymImages: gymImages ?? this.gymImages,
+        isValid: isValid ?? this.isValid);
   }
 
   @override
@@ -72,15 +64,16 @@ class AddGymState {
     return 'AddGymState(state: $state, erorrMessage: $erorrMessage, logo: $logo, mandatoryFields: $mandatoryFields, gymImages: $gymImages, isValid: $isValid)';
   }
 }
+
 extension MandatoryFieldsX on MandatoryFields {
   String get gymOperatingLicenseText => "Gym Operating License";
-  String get idOrPassportOfOwnerText => "ID or Passport of Owner"; 
+  String get idOrPassportOfOwnerText => "ID or Passport of Owner";
   String get ownershipContractText => "Ownership Contract";
   String get taxRegistrationText => "Tax Registration";
 
   bool get isGymOperatingLicensePicked => gymOperatingLicense != null;
-  bool get isIdOrPassportOfOwnerPicked => idOrPassportOfOwner!= null;
-  bool get isOwnershipContractPicked => ownershipContract!= null;
+  bool get isIdOrPassportOfOwnerPicked => idOrPassportOfOwner != null;
+  bool get isOwnershipContractPicked => ownershipContract != null;
   File? getFieldByText(String text) {
     switch (text) {
       case "Gym Operating License":
@@ -131,19 +124,18 @@ class MandatoryFields {
   @override
   bool operator ==(covariant MandatoryFields other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.ownershipContract == ownershipContract &&
-      other.idOrPassportOfOwner == idOrPassportOfOwner &&
-      other.gymOperatingLicense == gymOperatingLicense &&
-      other.taxRegistration == taxRegistration;
+
+    return other.ownershipContract == ownershipContract &&
+        other.idOrPassportOfOwner == idOrPassportOfOwner &&
+        other.gymOperatingLicense == gymOperatingLicense &&
+        other.taxRegistration == taxRegistration;
   }
 
   @override
   int get hashCode {
     return ownershipContract.hashCode ^
-      idOrPassportOfOwner.hashCode ^
-      gymOperatingLicense.hashCode ^
-      taxRegistration.hashCode;
+        idOrPassportOfOwner.hashCode ^
+        gymOperatingLicense.hashCode ^
+        taxRegistration.hashCode;
   }
 }

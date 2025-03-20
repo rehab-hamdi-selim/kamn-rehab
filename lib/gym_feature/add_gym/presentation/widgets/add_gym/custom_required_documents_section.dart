@@ -11,7 +11,7 @@ import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_gym
 import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_mandatory_field.dart';
 
 class CustomRequiredDocumentsSection extends StatelessWidget {
-   CustomRequiredDocumentsSection({super.key});
+  CustomRequiredDocumentsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,18 +31,18 @@ class CustomRequiredDocumentsSection extends StatelessWidget {
   }
 
   final List<DocumentItem> mandatoryDocuments = [
-    DocumentItem(
+    const DocumentItem(
       title: 'Gym Operating License',
       translation: 'رخصه تشغيل الجيم',
       isValid: false,
     ),
-    DocumentItem(
+    const DocumentItem(
       title: 'ID or Passport of Owner',
       translation: 'صورة البطاقة الشخصية أو جواز السفر لصاحب الملكيه/الجيم',
       fontSize: 6,
       isValid: false,
     ),
-    DocumentItem(
+    const DocumentItem(
       title: 'Ownership Contract',
       translation: 'عقد ايجار او ملكيه المكان',
       isValid: false,
@@ -88,44 +88,44 @@ class CustomRequiredDocumentsSection extends StatelessWidget {
       ],
     );
   }
-  }
+}
 
-  Widget _buildDivider() {
-    return Divider(
-      color: AppPallete.grayColor,
-      thickness: 0.2.h,
-      indent: 73.w,
-      endIndent: 73.w,
-    );
-  }
+Widget _buildDivider() {
+  return Divider(
+    color: AppPallete.grayColor,
+    thickness: 0.2.h,
+    indent: 73.w,
+    endIndent: 73.w,
+  );
+}
 
-  Widget _buildTaxRegistrationSection(BuildContext context) {
-    return buildContainer(
-      alignment: CrossAxisAlignment.center,
-      horizontalPadding: 10,
-      children: [
-        Text(
-          'Optional Fields',
-          style: TextStyles.fontCircularSpotify16BlackMedium,
-        ),
-        verticalSpace(12),
-        const CustomMandatoryField(
-          title: 'Tax Registration',
-          translation: 'البطاقة الضريبية او التسجيل الضريبي',
-        ),
-      ],
-    );
-  }
+Widget _buildTaxRegistrationSection(BuildContext context) {
+  return buildContainer(
+    alignment: CrossAxisAlignment.center,
+    horizontalPadding: 10,
+    children: [
+      Text(
+        'Optional Fields',
+        style: TextStyles.fontCircularSpotify16BlackMedium,
+      ),
+      verticalSpace(12),
+      const CustomMandatoryField(
+        title: 'Tax Registration',
+        translation: 'البطاقة الضريبية او التسجيل الضريبي',
+      ),
+    ],
+  );
+}
 
-  Widget _buildNavigationButtons(BuildContext context) {
-    return Row(
-      // spacing: 12.w,
-      children: [
-        buildBackButton(context),
-        buildNextButton(context),
-      ],
-    );
-  }
+Widget _buildNavigationButtons(BuildContext context) {
+  return Row(
+    // spacing: 12.w,
+    children: [
+      buildBackButton(context),
+      buildNextButton(context),
+    ],
+  );
+}
 
 Widget buildBackButton(BuildContext context) {
   return Expanded(
@@ -134,15 +134,22 @@ Widget buildBackButton(BuildContext context) {
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
           backgroundColor: AppPallete.whiteColor,
-          foregroundColor: AppPallete.blackColor,side: const BorderSide(color: AppPallete.lightGreyColor,width: 0.3),
+          foregroundColor: AppPallete.blackColor,
+          side: const BorderSide(color: AppPallete.lightGreyColor, width: 0.3),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(70.r)),
         ),
-        onPressed: () {  context.read<AddGymCubit>().goToPreviousPage();},
+        onPressed: () {
+          context.read<AddGymCubit>().goToPreviousPage();
+        },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.arrow_back, size: 10.h,color: AppPallete.blackColor,),
+            Icon(
+              Icons.arrow_back,
+              size: 10.h,
+              color: AppPallete.blackColor,
+            ),
             horizontalSpace(8),
             const Text("Back"),
           ],

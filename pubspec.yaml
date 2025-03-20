@@ -67,6 +67,7 @@ dependencies:
   carousel_slider: ^5.0.0
   google_fonts: ^6.2.1
   firebase_database: ^11.3.4
+  flutter_check_box_rounded: ^3.3.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

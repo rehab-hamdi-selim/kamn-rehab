@@ -50,7 +50,7 @@ class CustomHomeCooks extends StatelessWidget {
                         image: DecorationImage(
                           image: foodItem.imageUrl.isNotEmpty
                               ? AssetImage(foodItem.imageUrl)
-                              : AssetImage('assets/placeholder.png'),
+                              : const AssetImage('assets/placeholder.png'),
                           fit: BoxFit.fill,
                         ),
                         shape: RoundedRectangleBorder(
@@ -105,7 +105,7 @@ class CustomHomeCooks extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(99),
         ),
-        shadows: [
+        shadows: const [
           BoxShadow(
             color: AppPallete.transparentBlack,
             blurRadius: 16,
@@ -120,7 +120,7 @@ class CustomHomeCooks extends StatelessWidget {
           Text(
             foodItem.rating.toString(),
             style: TextStyles.fontCircularSpotify10BlackRegular.copyWith(
-              color: Color(0xFF1F1F1F),
+              color: const Color(0xFF1F1F1F),
             ),
           ),
           SizedBox(width: 2.w),
@@ -140,11 +140,11 @@ class CustomHomeCooks extends StatelessWidget {
       height: 18.h,
       padding: const EdgeInsets.all(3),
       decoration: ShapeDecoration(
-        color: Color(0xFFFEFEFE),
+        color: const Color(0xFFFEFEFE),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(99),
         ),
-        shadows: [
+        shadows: const [
           BoxShadow(
             color: Color(0x14000000),
             blurRadius: 16,
@@ -200,7 +200,7 @@ class CustomHomeCooks extends StatelessWidget {
             ],
           ),
         ),
-        Spacer(),
+        const Spacer(),
         Text.rich(
           TextSpan(
             children: [

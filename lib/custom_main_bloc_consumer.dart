@@ -6,6 +6,9 @@ import 'package:kamn/core/routing/app_router.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/gym_feature/gyms/presentation/screen/choose_plan_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_gym_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_review_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/screen/meal_review_screen.dart';
+import 'package:kamn/home_cooked__features/presentation/screen/order_options_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/add_home_cook_screen.dart';
 
 import 'core/common/cubit/app_user/app_user_cubit.dart';
@@ -17,8 +20,7 @@ class CustomMainBlocConsumer extends StatelessWidget {
   //////
 
   @override
-  Widget build(BuildContext context) { 
-    
+  Widget build(BuildContext context) {
     final appUserCubit = context.read<AppUserCubit>();
 
     return BlocConsumer<AppUserCubit, AppUserState>(
@@ -49,6 +51,13 @@ class CustomMainBlocConsumer extends StatelessWidget {
               useMaterial3: true,
             ),
             onGenerateRoute: AppRouter.generateRoute,
+            home: BlocProvider(
+                create: (context) => MealReviewCubit(),
+                child: MealReviewScreen())
+            //OrderOptionsHomecook()
+            // MealReviewScreen()
+            );
+        //home: _buildHomeWidget(state, appUserCubit));
             home: _buildHomeWidget(state, appUserCubit));
       },
     );
@@ -67,11 +76,11 @@ class CustomMainBlocConsumer extends StatelessWidget {
       );
     }
     if (state.isLoggedIn() || state.isGettedData() || state.isSuccess()) {
-      return ChoosePlanScreen();
+      return const ChoosePlanScreen();
       // return BlocProvider(
       //   create:(context)=> getIt<SelectCategoryCubit>()..getPlaygrounds(),
       //   child: const SelectCategoryScreen(),
-     // );
+      // );
     }
     if (state.isNotLoggedIn() || state.isClearUserData()) {
       // return const SearchingUiScreen();

@@ -13,141 +13,128 @@ class CustomResturantsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-              child: ListView.builder(
-                itemCount: restaurants.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: Container(
-                      height: 116.h,
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            restaurants[index].imageUrl,
-                            width: 103.w,
-                          ),
-                          SizedBox(width: 10.w),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView.builder(
+        itemCount: restaurants.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: SizedBox(
+              height: 116.h,
+              child: Row(
+                children: [
+                  Image.asset(
+                    restaurants[index].imageUrl,
+                    width: 103.w,
+                  ),
+                  SizedBox(width: 10.w),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              restaurants[index].name,
+                              style:
+                                  TextStyles.fontCircularSpotify12BlackMedium,
+                            ),
+                            Row(
                               children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      restaurants[index].name,
-                                      style: TextStyles
-                                          .fontCircularSpotify12BlackMedium,
-                                    ),
-                                    Row(
-                                      children: [
-                                        SvgPicture.asset(
-                                            "assets/images/dish_photo.svg",
-                                            width: 10.w,
-                                            height: 10.h),
-                                        SizedBox(width: 4.w),
-                                        Text(
-                                          "${restaurants[index].deliveryTime} ${Constants.minute}",
-                                          style: TextStyles
-                                              .fontCircularSpotify8AccentBlackRegular,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                       IconLinks.location),
-                                    SizedBox(width: 4.w),
-                                    Text(
-                                      "Location",
-                                      style: TextStyles
-                                          .fontCircularSpotify10Gray2Regular,
-                                    ),
-                                  ],
-                                ),
+                                SvgPicture.asset("assets/images/dish_photo.svg",
+                                    width: 10.w, height: 10.h),
+                                SizedBox(width: 4.w),
                                 Text(
-                                  restaurants[index].description,
+                                  "${restaurants[index].deliveryTime} ${Constants.minute}",
                                   style: TextStyles
-                                      .fontCircularSpotify8StealGrayRegular,
-                                  maxLines: 1,overflow: TextOverflow.fade,
+                                      .fontCircularSpotify8AccentBlackRegular,
                                 ),
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Row(
-                                        spacing: 6.w,
-                                        children:
-                                            restaurants[index].tags.map((tag) {
-                                          return Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 5.w, vertical: 4.h),
-                                            decoration: BoxDecoration(
-                                              color: AppPallete.lgWhiteColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(29.23.r),
-                                            ),
-                                            child: Text(
-                                              "🥗" + tag,
-                                              style: TextStyles
-                                                  .fontCircularSpotify8AccentBlackRegular,
-                                            ),
-                                          );
-                                        }).toList(),
-                                      )),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 4.w, vertical: 5.h),
-                                      decoration: BoxDecoration(
-                                        color: AppPallete.lgWhiteColor,
-                                        borderRadius:
-                                            BorderRadius.circular(12.r),
-                                      ),
-                                      child: Text(
-                                          restaurants[index]
-                                                  .minPrice
-                                                  .toString() +
-                                              "-" +
-                                              restaurants[index]
-                                                  .maxPrice
-                                                  .toString() +
-                                              " £GP per week",
-                                          style: TextStyles
-                                              .fontCircularSpotify8StealGrayBold),
-                                    ),
-                                    InkWell(
-                                      onTap: () {},
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 6.86.w, vertical: 4.57.h),
-                                        decoration: BoxDecoration(
-                                          color: AppPallete.greenColor,
-                                          borderRadius:
-                                              BorderRadius.circular(57.17.r),
-                                        ),
-                                        child: Text(Constants.bookNow,
-                                            style: TextStyles.fontCircularSpotify8WhiteBold),
-                                      ),
-                                    )
-                                  ],
-                                )
                               ],
                             ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            SvgPicture.asset(IconLinks.location),
+                            SizedBox(width: 4.w),
+                            Text(
+                              "Location",
+                              style:
+                                  TextStyles.fontCircularSpotify10Gray2Regular,
+                            ),
+                          ],
+                        ),
+                        Text(
+                          restaurants[index].description,
+                          style:
+                              TextStyles.fontCircularSpotify8StealGrayRegular,
+                          maxLines: 1,
+                          overflow: TextOverflow.fade,
+                        ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Row(
+                                spacing: 6.w,
+                                children: restaurants[index].tags.map((tag) {
+                                  return Container(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 5.w, vertical: 4.h),
+                                    decoration: BoxDecoration(
+                                      color: AppPallete.lgWhiteColor,
+                                      borderRadius:
+                                          BorderRadius.circular(29.23.r),
+                                    ),
+                                    child: Text(
+                                      "🥗$tag",
+                                      style: TextStyles
+                                          .fontCircularSpotify8AccentBlackRegular,
+                                    ),
+                                  );
+                                }).toList(),
+                              )),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 4.w, vertical: 5.h),
+                              decoration: BoxDecoration(
+                                color: AppPallete.lgWhiteColor,
+                                borderRadius: BorderRadius.circular(12.r),
+                              ),
+                              child: Text(
+                                  "${restaurants[index].minPrice}-${restaurants[index].maxPrice} £GP per week",
+                                  style: TextStyles
+                                      .fontCircularSpotify8StealGrayBold),
+                            ),
+                            InkWell(
+                              onTap: () {},
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 6.86.w, vertical: 4.57.h),
+                                decoration: BoxDecoration(
+                                  color: AppPallete.greenColor,
+                                  borderRadius: BorderRadius.circular(57.17.r),
+                                ),
+                                child: Text(Constants.bookNow,
+                                    style: TextStyles
+                                        .fontCircularSpotify8WhiteBold),
+                              ),
+                            )
+                          ],
+                        )
+                      ],
                     ),
-                  );
-                },
+                  ),
+                ],
               ),
-            );
+            ),
+          );
+        },
+      ),
+    );
   }
 }

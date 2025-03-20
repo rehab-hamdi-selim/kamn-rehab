@@ -18,21 +18,23 @@ class CustomGymFeaturesSection extends StatefulWidget {
   const CustomGymFeaturesSection({super.key});
 
   @override
-  State<CustomGymFeaturesSection> createState() => _CustomGymFeaturesSectionState();
+  State<CustomGymFeaturesSection> createState() =>
+      _CustomGymFeaturesSectionState();
 }
 
 class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
-  late TextEditingController _menuController ;
-  late TextEditingController _priceController ;
-  late TextEditingController _descriptioncontroller ;
+  late TextEditingController _menuController;
+  late TextEditingController _priceController;
+  late TextEditingController _descriptioncontroller;
 
   @override
   void initState() {
-   _menuController = TextEditingController();
-  _priceController = TextEditingController();
-  _descriptioncontroller = TextEditingController();
+    _menuController = TextEditingController();
+    _priceController = TextEditingController();
+    _descriptioncontroller = TextEditingController();
     super.initState();
   }
+
   @override
   void dispose() {
     _menuController.dispose();
@@ -47,7 +49,7 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
       create: (context) => GymFeaturesCubit(),
       child: BlocListener<GymFeaturesCubit, GymFeaturesState>(
         listener: (context, state) {
-          if(_menuController.text != state.selectedValue){
+          if (_menuController.text != state.selectedValue) {
             _menuController.text = state.selectedValue;
           }
         },
@@ -82,7 +84,9 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
                       child: Text('Facilities and Features',
                           style: TextStyles.fontRoboto15BlackRegular),
                     ),
-                    CustomDropDownMenu(controller: _menuController,),
+                    CustomDropDownMenu(
+                      controller: _menuController,
+                    ),
                     verticalSpace(16),
                     CustomTextFormField(
                       keyType: TextInputType.number,
@@ -95,8 +99,7 @@ class _CustomGymFeaturesSectionState extends State<CustomGymFeaturesSection> {
                       widget: const Text('£GP'),
                     ),
                     verticalSpace(8),
-                    CustomCheckBar(
-                    ),
+                    const CustomCheckBar(),
                     verticalSpace(8),
                     CustomTextFormField(
                       keyType: TextInputType.text,

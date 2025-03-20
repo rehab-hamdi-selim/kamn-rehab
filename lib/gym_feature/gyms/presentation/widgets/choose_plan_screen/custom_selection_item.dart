@@ -56,12 +56,12 @@ class CustomSelectionItem extends StatelessWidget {
                 IconButton(
                   onPressed: () => decreaseQuantity(feature),
                   icon: Icon(Icons.remove, size: 14.sp),
-                 
                 ),
                 Text("$quantity"),
                 IconButton(
- style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.grey.shade100),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        WidgetStateProperty.all(Colors.grey.shade100),
                   ),
                   onPressed: () => increaseQuantity(feature),
                   icon: Icon(

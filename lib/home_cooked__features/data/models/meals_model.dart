@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:kamn/home_cooked__features/data/models/delivery_model.dart';
 
 class Meal {
   String id;
@@ -13,7 +14,8 @@ class Meal {
   List<String> imageUrls;
   bool isVerified;
   String verificationStatus; // Pending, Under Review, Approved
-  String orderOption; // Pick-up or Delivery
+  String orderOption;
+  DeliveryModel deliveryOption; // Pick-up or Delivery
 
   Meal({
     required this.id,
@@ -29,6 +31,7 @@ class Meal {
     required this.isVerified,
     required this.verificationStatus,
     required this.orderOption, // Only "Pick-up" or "Delivery"
+    required this.deliveryOption,
   });
 
   // Convert Meal object to a map for Firebase
@@ -47,6 +50,7 @@ class Meal {
       'isVerified': isVerified,
       'verificationStatus': verificationStatus,
       'orderOption': orderOption, // Removed time/day options
+      'deliveryOption': deliveryOption.toMap(),
     };
   }
 
@@ -66,13 +70,21 @@ class Meal {
       imageUrls: List<String>.from(data['imageUrls'] ?? []),
       isVerified: data['isVerified'] ?? false,
       verificationStatus: data['verificationStatus'] ?? 'Pending',
-      orderOption: data['orderOption'] ?? 'Pick-up', // Only Pick-up or Delivery
+      orderOption: data['orderOption'] ?? 'Pick-up',
+      deliveryOption: DeliveryModel.fromMap(data['deliveryOption'] ?? {}),
     );
   }
 }
 
+Future<Meal> getmealbyid(int id) async {
+  await Future.delayed(Duration(seconds: 2));
+  return fakeMeals.firstWhere((element) => element.id == id.toString());
+}
+
 List<Meal> fakeMeals = [
   Meal(
+    deliveryOption:
+        DeliveryModel(isDelivery: true, isPickup: false, deliveryFee: 10.0),
     id: '1',
     name: 'Keto Avocado Bowl',
     type: 'Breakfast',
@@ -84,14 +96,16 @@ List<Meal> fakeMeals = [
     details:
         'A delicious and nutritious keto-friendly avocado bowl, perfect for a low-carb diet.',
     imageUrls: [
-      'https://example.com/images/avocado_bowl_1.jpg',
-      'https://example.com/images/avocado_bowl_2.jpg'
+      'https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'https://images.pexels.com/photos/5840084/pexels-photo-5840084.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
     ],
     isVerified: true,
     verificationStatus: 'Approved',
     orderOption: 'Pick-up',
   ),
   Meal(
+    deliveryOption:
+        DeliveryModel(isDelivery: true, isPickup: false, deliveryFee: 10.0),
     id: '2',
     name: 'Quinoa Salad with Grilled Chicken',
     type: 'Lunch',
@@ -111,6 +125,8 @@ List<Meal> fakeMeals = [
     orderOption: 'Delivery',
   ),
   Meal(
+    deliveryOption:
+        DeliveryModel(isDelivery: false, isPickup: true, deliveryFee: 0.0),
     id: '3',
     name: 'Green Detox Smoothie',
     type: 'Snack',

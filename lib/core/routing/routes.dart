@@ -41,8 +41,7 @@ class Routes {
   static const String editProfileScreen = '/editProfileScreen';
   static const String gymScreen = '/gymScreen';
 
+  static const String addGymScreen = '/addGymScreen';
 
-
-    static const String addGymScreen='/addGymScreen';
-
+  static const String mealReview = '/mealReview';
 }
