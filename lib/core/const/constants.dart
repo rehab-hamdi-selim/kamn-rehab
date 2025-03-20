@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
+import 'package:kamn/gym_feature/add_gym/domain/models/document_item.dart';
 
 class Constants {
   static const List<String> topics = [
@@ -10,6 +11,26 @@ class Constants {
     'Programming',
     'Entertainment',
   ];
+
+  static final List<DocumentItem> mandatoryDocuments = [
+    const DocumentItem(
+      title: 'Electricity Bill',
+      translation: 'وصل الكهرباء',
+      isValid: false,
+    ),
+    const DocumentItem(
+      title: 'Gas Bill',
+      translation: 'وصل الغاز',
+      fontSize: 6,
+      isValid: false,
+    ),
+    const DocumentItem(
+      title: 'ID Card',
+      translation: 'صورة البطاقة الشخصية أو جواز السفر لصاحب الملكيه',
+      isValid: false,
+    ),
+  ];
+
   static const catrgories = 'Catrgories';
   static const vegan = 'Vegan';
   static const chicken = 'Chicken';

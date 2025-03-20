@@ -3,21 +3,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_state.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_gym_info_section.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_required_documents_section.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_gym_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_gym_state.dart';
+import 'package:kamn/home_cooked__features/presentation/screen/custom_home_-cook_info_screen.dart';
+import 'package:kamn/home_cooked__features/presentation/screen/verify_location_screen_screen.dart';
 
 class CustomTabBar extends StatelessWidget {
   const CustomTabBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<AddGymCubit>();
+    final cubit = context.read<AddHomeCookCubit>();
     return DefaultTabController(
       length: cubit.tabs.length,
-      child: BlocBuilder<AddGymCubit, AddGymState>(
-        buildWhen: (previous, current) => current.isInitial||current.isSwipped,
+      child: BlocBuilder<AddHomeCookCubit, AddGymState>(
+        buildWhen: (previous, current) =>
+            current.isInitial || current.isSwipped,
         builder: (context, state) {
           return Column(
             children: [
@@ -30,6 +31,9 @@ class CustomTabBar extends StatelessWidget {
                   border: Border.all(color: Colors.grey.shade300),
                 ),
                 child: TabBar(
+                  onTap: (index) {
+                    _onTabTapped(index, cubit.tabController, context);
+                  },
                   controller: cubit.tabController,
                   dividerHeight: 0,
                   indicatorSize: TabBarIndicatorSize.tab,
@@ -54,9 +58,9 @@ class CustomTabBar extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   controller: cubit.tabController,
-                  children: [
-                    CustomGymInfoSection(),
-                     CustomRequiredDocumentsSection(),
+                  children: const [
+                    CustomGymInfoScreen(),
+                    VerifyLocationScreenScreen(),
                   ],
                 ),
               ),
@@ -65,5 +69,13 @@ class CustomTabBar extends StatelessWidget {
         },
       ),
     );
+  }
+
+  void _onTabTapped(
+      int index, TabController _tabController, BuildContext context) {
+    // Prevent switching tabs from index 0 no matter what
+    if (index == 1) {
+      context.read<AddHomeCookCubit>().validateGymInfo();
+    }
   }
 }

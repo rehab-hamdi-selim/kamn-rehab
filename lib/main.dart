@@ -1,25 +1,50 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
+import 'package:kamn/core/di/di.dart';
 import 'package:kamn/custom_main_bloc_consumer.dart';
+import 'package:kamn/init_dependencies.dart';
+
+import 'core/common/cubit/firebase_remote_config/firebase_remote_config_cubit.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(
-    ScreenUtilInit(
-      designSize: const Size(375, 812), // Adjust based on your design
-      minTextAdapt: true, // Ensures proper text scaling
-      builder: (context, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: CustomMainBlocConsumer(),
-        );
-      },
-    ),
-  );
+  await initDependencies();
+  configureDependencies();
+  // runApp(  DevicePreview(
+  //   enabled: !kReleaseMode,
+  //   builder: (context) => const MyApp(), // Wrap your app
+  // ),);
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<AppUserCubit>()..isFirstInstallation(),
+        ),
+        BlocProvider(
+          create: (context) => FirebaseRemoteConfigCubit()
+            ..initListner()
+            ..getStringValue('test')
+            ..getStringValue('app_version'),
+        ),
+      ],
+      child: const ScreenUtilInit(
+        designSize: Size(375, 812),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        child: CustomMainBlocConsumer(),
+      ),
+    );
+  }
 }
 
 // ignore_for_file: use_build_context_synchronously
