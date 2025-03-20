@@ -11,8 +11,8 @@ class SubmissionPendingContainer extends StatelessWidget {
       children: [
         Row(
           children: [
-            SvgPicture.asset(
-              'assets/icons/pending.svg',
+            Image.asset(
+              'assets/icons/pending.png',
             ),
             //  Image.asset('assets/images/submission.png'),
             Text("Submission Pending",
