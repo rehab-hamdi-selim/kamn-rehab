@@ -206,7 +206,7 @@ class _HomePageHealthyFoodScreenState extends State<HomePageHealthyFoodScreen> {
             ),
             SizedBox(
               height: 200.h,
-              child: CustomResturantsList(),
+              child: const CustomResturantsList(),
             ),
           ],
         ),

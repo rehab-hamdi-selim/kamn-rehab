@@ -11,7 +11,7 @@ class CustomMealItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         height: 150.h,
         width: 160.w,
         child: Stack(
@@ -40,7 +40,7 @@ class CustomMealItem extends StatelessWidget {
                 width: 160.w,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25.r),
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                     colors: [
                       // AppPallete.green,
                       // Color.fromARGB(232, 231, 156, 121),
@@ -50,7 +50,7 @@ class CustomMealItem extends StatelessWidget {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                   ),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       color: Color.fromRGBO(
                           150, 150, 154, 0.15), // Transparent shadow
@@ -77,7 +77,7 @@ class CustomMealItem extends StatelessWidget {
             ),
             Container(
               height: 190.h,
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -126,7 +126,7 @@ class CustomMealItem extends StatelessWidget {
               child: CircleAvatar(
                 radius: 13.r,
                 backgroundColor: AppPallete.blackColor,
-                child: Icon(
+                child: const Icon(
                   Icons.add,
                   color: AppPallete.ofWhiteColor,
                 ),

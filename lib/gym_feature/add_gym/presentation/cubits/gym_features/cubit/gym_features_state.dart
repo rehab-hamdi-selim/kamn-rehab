@@ -8,9 +8,9 @@ class GymFeaturesState extends Equatable {
   final String typedText;
   final bool isChecked;
   const GymFeaturesState({
-     this.selectedValue = '',
-     this.typedText = '',
-     this.isChecked = false,
+    this.selectedValue = '',
+    this.typedText = '',
+    this.isChecked = false,
   });
   @override
   // TODO: implement props
@@ -24,7 +24,7 @@ class GymFeaturesState extends Equatable {
     return GymFeaturesState(
       selectedValue: selectedValue ?? this.selectedValue,
       typedText: typedText ?? this.typedText,
-      isChecked: isCHecked ?? this.isChecked,
+      isChecked: isCHecked ?? isChecked,
     );
   }
 
@@ -46,7 +46,8 @@ class GymFeaturesState extends Equatable {
 
   String toJson() => json.encode(toMap());
 
-  factory GymFeaturesState.fromJson(String source) => GymFeaturesState.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory GymFeaturesState.fromJson(String source) =>
+      GymFeaturesState.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   bool get stringify => true;

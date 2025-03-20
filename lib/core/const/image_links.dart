@@ -22,4 +22,7 @@ class ImageLinks {
   static const String plusBtn = "assets/images/plus_btn.png";
 
   static const String testrestaurant = 'assets/images/testrestaurant.png';
+
+  static const String background = 'assets/images/background.png';
+  static const String backgroundstyle = 'assets/images/backgroundstyle.png';
 }
