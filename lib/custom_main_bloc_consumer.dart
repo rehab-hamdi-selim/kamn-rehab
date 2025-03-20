@@ -10,6 +10,9 @@ import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit
 import 'package:kamn/home_cooked__features/presentation/screen/meal_review_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/order_options_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/add_home_cook_screen.dart';
+import 'package:kamn/healthy_food_features/presentation/screens/home_page_screen.dart';
+import 'package:kamn/home_cooked__features/presentation/screen/food_etails_info_screen.dart';
+import 'package:kamn/playground_feature/authentication/presentation/screens/on_boarding_screen.dart';
 
 import 'core/common/cubit/app_user/app_user_cubit.dart';
 import 'core/common/widget/main_loader.dart';
@@ -59,6 +62,7 @@ class CustomMainBlocConsumer extends StatelessWidget {
             );
         //home: _buildHomeWidget(state, appUserCubit));
             home: _buildHomeWidget(state, appUserCubit));
+            home: _buildHomeWidget(state, appUserCubit));
       },
     );
   }
@@ -83,7 +87,8 @@ class CustomMainBlocConsumer extends StatelessWidget {
       // );
     }
     if (state.isNotLoggedIn() || state.isClearUserData()) {
-      // return const SearchingUiScreen();
+      // return const FoodDetailsInfoScreen();
+      return const HomePageHealthyFoodScreen();
       // // return BlocProvider(
       //   create: (context) => getIt<SignInCubit>(),
       //   child: const SignInScreen(),

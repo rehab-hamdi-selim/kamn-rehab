@@ -56,7 +56,8 @@ List<Restaurant> restaurants = [
   Restaurant(
     categories: categories,
     name: "House of Diet",
-    imageUrl: ImageLinks.testrestaurant, //"assets/images/resturantTest.png",
+    imageUrl: ImageLinks.homCookiesTest,
+    //"assets/images/resturantTest.png",
     rating: 4.8,
     description:
         "Specializes in high-protein and low-carbllmealsddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd.",

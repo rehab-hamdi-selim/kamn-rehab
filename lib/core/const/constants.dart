@@ -36,6 +36,9 @@ class Constants {
   static const chicken = 'Chicken';
   static const meat = 'Meat';
   static const fish = 'Fish';
+  static const ingredients = "Ingredients";
+
+  static const save = 'Save';
 
   static const pickupor = 'Pick-up or Delivery:';
   static const pickup = '📍 Pick-up';
@@ -85,6 +88,7 @@ class Constants {
   static const pleaseName = 'please enter your name';
   static const addData = 'Add your data about your sevice';
   static const editData = 'Edit your data about your sevice';
+  static const edit = 'Edit';
   static const addGroundImage = 'Add ground Images';
   static const addOwnershipImage = 'Add Land ownership images';
   static const detailsClear = ' (make sure every detail is clear)';

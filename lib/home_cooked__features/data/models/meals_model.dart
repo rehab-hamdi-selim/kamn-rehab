@@ -96,8 +96,9 @@ List<Meal> fakeMeals = [
     details:
         'A delicious and nutritious keto-friendly avocado bowl, perfect for a low-carb diet.',
     imageUrls: [
-      'https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      'https://images.pexels.com/photos/5840084/pexels-photo-5840084.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+      "assets/images/meal_info_img.png"
+      "assets/images/meal_info_img.png"
+      "assets/images/meal_info_img.png"
     ],
     isVerified: true,
     verificationStatus: 'Approved',

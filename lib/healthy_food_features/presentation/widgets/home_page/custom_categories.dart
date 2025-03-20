@@ -31,12 +31,13 @@ class CustomCategories extends StatelessWidget {
           alignment: Alignment.topCenter,
           children: [
             Positioned(
-              top: 35.h,
+              top: 60.h,
+
               child: Container(
                 width: 160.w,
-                height: 155.h,
+                height: 200.h,
                 padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+                const EdgeInsets.only(top: 92, bottom: 2, right: 20, left: 40),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
@@ -50,19 +51,19 @@ class CustomCategories extends StatelessWidget {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(height: 45.h),
+                    SizedBox(height: 2.h),
                     Text(
                       title,
                       style: TextStyles.circularSpotify16BoldDarkBlack,
                     ),
-                    SizedBox(height: 4.h),
+                    SizedBox(height: 6.h),
                     Text(
                       description,
                       style: TextStyles.circularSpotify10LightGrey,
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 20),
                     Row(
                       children: [
                         Text.rich(
@@ -102,7 +103,9 @@ class CustomCategories extends StatelessWidget {
               ),
             ),
             Positioned(
+              top: 20,
               child: CircleAvatar(
+
                 radius: 60,
                 backgroundColor: Colors.transparent,
                 backgroundImage: AssetImage(
