@@ -65,26 +65,27 @@ class AddGymCubit extends Cubit<AddGymState> {
           gymImages: List.from(_gymImages)));
     }
   }
-bool checkMandatoryFields() {
-  final mandatoryFields = state.mandatoryFields;
-  
 
-var isValid = List<bool>.from(state.isValid);
-  if (mandatoryFields?.gymOperatingLicense == null) {
-    isValid[0] = false;
-  }
-  if (mandatoryFields?.idOrPassportOfOwner == null) {
-    isValid[1] = false;
-  }
-  if (mandatoryFields?.ownershipContract == null) {
-    isValid[2] = false;
+  bool checkMandatoryFields() {
+    final mandatoryFields = state.mandatoryFields;
+
+    var isValid = List<bool>.from(state.isValid);
+    if (mandatoryFields?.gymOperatingLicense == null) {
+      isValid[0] = false;
+    }
+    if (mandatoryFields?.idOrPassportOfOwner == null) {
+      isValid[1] = false;
+    }
+    if (mandatoryFields?.ownershipContract == null) {
+      isValid[2] = false;
+    }
+
+    emit(state.copyWith(
+      isValid: isValid,
+    ));
+    return state.isValidAll;
   }
 
-  emit(state.copyWith(
-    isValid: isValid,
-  ));
-  return state.isValidAll;
-}
   Future<void> pickMandatoryImages(String field) async {
     final image = await pickImage();
 

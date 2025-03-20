@@ -2,47 +2,24 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:kamn/home_cooked__features/presentation/screen/test.dart';
-
-// void main()async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp();
-//   runApp(
-//     ScreenUtilInit(
-//       designSize: const Size(375, 812), // Adjust based on your design
-//       minTextAdapt: true,  // Ensures proper text scaling
-//       builder: (context, child) {
-//         return MaterialApp(
-//           debugShowCheckedModeBanner: false,
-//           home: HomeCookedScreen(),
-//         );
-//       },
-//     ),
-//   );
-// }
-
-
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/custom_main_bloc_consumer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Home Cook Registration',
-      theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
-      ),
-      home: PersonalInfoScreen(),
-    );
-  }
+  runApp(
+    ScreenUtilInit(
+      designSize: const Size(375, 812), // Adjust based on your design
+      minTextAdapt: true, // Ensures proper text scaling
+      builder: (context, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: CustomMainBlocConsumer(),
+        );
+      },
+    ),
+  );
 }
 
 // ignore_for_file: use_build_context_synchronously
