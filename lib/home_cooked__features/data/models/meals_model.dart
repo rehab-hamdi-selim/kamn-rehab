@@ -84,8 +84,9 @@ List<Meal> fakeMeals = [
     details:
         'A delicious and nutritious keto-friendly avocado bowl, perfect for a low-carb diet.',
     imageUrls: [
-      'https://example.com/images/avocado_bowl_1.jpg',
-      'https://example.com/images/avocado_bowl_2.jpg'
+      "assets/images/meal_info_img.png"
+      "assets/images/meal_info_img.png"
+      "assets/images/meal_info_img.png"
     ],
     isVerified: true,
     verificationStatus: 'Approved',

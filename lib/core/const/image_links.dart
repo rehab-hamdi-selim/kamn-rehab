@@ -7,6 +7,9 @@ class ImageLinks {
   static const String profile_picture = 'assets/images/profile_picture.png';
   static const String user_picture = 'assets/images/user.png';
   static const String NotePencilIcon = "assets/images/NotePencil.png";
+  static const String editPin = "assets/images/edit_pin.png";
+  static const String check = "assets/images/Check.png";
+  static const String requred_star = "assets/images/requred_star.png";
   static const String serviceSuccessfullyAdded =
       'assets/images/success_service.png';
   static const String welcomeImg = 'assets/images/welcomeImg.png';
@@ -22,4 +25,6 @@ class ImageLinks {
   static const String plusBtn = "assets/images/plus_btn.png";
 
   static const String testrestaurant = 'assets/images/testrestaurant.png';
+  static const String cooking = 'assets/images/cooking-_1X1.png';
+
 }
