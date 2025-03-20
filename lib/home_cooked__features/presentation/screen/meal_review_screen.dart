@@ -97,8 +97,7 @@ class _MealReviewScreenState extends State<MealReviewScreen> {
                         children: [
                           Text(
                             Constants.profileVerification,
-                            style: TextStyles
-                                .fontCircularSpotify14mediumGrayRegular,
+                            style: TextStyles.fontCircularSpotify14GrayRegular,
                           ),
                           const CustomViewMealState(
                             state: "Pending",
@@ -109,10 +108,9 @@ class _MealReviewScreenState extends State<MealReviewScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            Constants.utilityBill,
-                            style: TextStyles
-                                .fontCircularSpotify14mediumGrayRegular,
-                          ),
+                              Constants.utilityBill,
+                              style:
+                                  TextStyles.fontCircularSpotify14GrayRegular),
                           const CustomViewMealState(
                             state: "Under Review",
                           )
@@ -173,7 +171,7 @@ class MealDetailsWidget extends StatelessWidget {
       children: [
         Text(
           Constants.mealName,
-          style: TextStyles.fontCircularSpotify14mediumGrayRegular,
+          style: TextStyles.fontCircularSpotify14GrayRegular,
         ),
         customTittleTextMealReview(title: mealRecap.name),
         verticalSpace(10),
@@ -183,7 +181,7 @@ class MealDetailsWidget extends StatelessWidget {
               children: [
                 Text(
                   Constants.cookingTime,
-                  style: TextStyles.fontCircularSpotify14mediumGrayRegular,
+                  style: TextStyles.fontCircularSpotify14GrayRegular,
                 ),
                 customTittleTextMealReview(
                     title: formatDuration(mealRecap.prepTime)),
@@ -194,7 +192,7 @@ class MealDetailsWidget extends StatelessWidget {
               children: [
                 Text(
                   Constants.mealPrice,
-                  style: TextStyles.fontCircularSpotify14mediumGrayRegular,
+                  style: TextStyles.fontCircularSpotify14GrayRegular,
                 ),
                 customTittleTextMealReview(
                     title: mealRecap.price.toString() + " " + Constants.eGP),
@@ -204,7 +202,7 @@ class MealDetailsWidget extends StatelessWidget {
         ),
         Text(
           Constants.specialtyTags,
-          style: TextStyles.fontCircularSpotify14mediumGrayRegular,
+          style: TextStyles.fontCircularSpotify14GrayRegular,
         ),
         customListView(list: mealRecap.specialtyTags),
       ],

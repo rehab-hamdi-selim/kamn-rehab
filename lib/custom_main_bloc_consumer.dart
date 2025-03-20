@@ -5,14 +5,11 @@ import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/routing/app_router.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/gym_feature/gyms/presentation/screen/choose_plan_screen.dart';
+import 'package:kamn/healthy_food_features/presentation/screens/home_page_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_gym_cubit.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_review_cubit.dart';
-import 'package:kamn/home_cooked__features/presentation/screen/meal_review_screen.dart';
-import 'package:kamn/home_cooked__features/presentation/screen/order_options_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/add_home_cook_screen.dart';
-import 'package:kamn/healthy_food_features/presentation/screens/home_page_screen.dart';
-import 'package:kamn/home_cooked__features/presentation/screen/food_etails_info_screen.dart';
-import 'package:kamn/playground_feature/authentication/presentation/screens/on_boarding_screen.dart';
+import 'package:kamn/home_cooked__features/presentation/screen/meal_review_screen.dart';
 
 import 'core/common/cubit/app_user/app_user_cubit.dart';
 import 'core/common/widget/main_loader.dart';
@@ -61,8 +58,6 @@ class CustomMainBlocConsumer extends StatelessWidget {
             // MealReviewScreen()
             );
         //home: _buildHomeWidget(state, appUserCubit));
-            home: _buildHomeWidget(state, appUserCubit));
-            home: _buildHomeWidget(state, appUserCubit));
       },
     );
   }

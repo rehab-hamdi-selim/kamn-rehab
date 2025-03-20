@@ -25,7 +25,7 @@ class CustomScreenHeader extends StatelessWidget {
         ),
         Text(
           subTitle,
-          style: TextStyles.fontCircularSpotify10DarkGrayRegular,
+          style: TextStyles.fontCircularSpotify8GrayRegular,
         ),
         verticalSpace(10),
       ],

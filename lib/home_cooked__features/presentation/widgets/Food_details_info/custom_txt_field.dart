@@ -12,8 +12,8 @@ Widget customTxtField(double height, double width, String hintText, TextEditingC
       controller: txtController,
       maxLines: maxLines,
       decoration: InputDecoration(
-        counterText: hasCounter ? '200' : null, 
-        counterStyle: TextStyles.fontCircularSpotify8GreenRegular,
+        counterText: hasCounter ? '200' : null,
+        counterStyle: TextStyles.fontCircularSpotify10GreenRegular,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
           borderSide: BorderSide(color: AppPallete.whiteGreyColor),

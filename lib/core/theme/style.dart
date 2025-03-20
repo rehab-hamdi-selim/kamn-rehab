@@ -802,4 +802,23 @@ class TextStyles {
       color: AppPallete.green2,
       fontWeight: FontWeightHelper.bold,
       fontSize: 10.h);
+  static TextStyle fontCircularSpotify14WhiteMedium = TextStyle(
+      // renamed from fontCircularSpotify15MediumBlack
+      fontFamily: "CircularSpotify",
+      color: AppPallete.whiteColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 14.h);
+
+  static TextStyle fontCircularSpotify12WhiteBold = TextStyle(
+      // renamed from font12CircularSpotifyTextBlackMedium
+      fontFamily: "CircularSpotify",
+      color: AppPallete.whiteColor,
+      fontWeight: FontWeightHelper.bold,
+      fontSize: 12.h);
+  static TextStyle circularSpotify14RegularGreycolor = TextStyle(
+    color: AppPallete.grayColor,
+    fontSize: 14.h,
+    fontFamily: 'CircularSpotifyTxT',
+    fontWeight: FontWeightHelper.regular,
+  );
 }
