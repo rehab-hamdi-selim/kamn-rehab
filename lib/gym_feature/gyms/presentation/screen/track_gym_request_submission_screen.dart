@@ -3,14 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/utils/custom_gym_app_bar.dart';
-import 'package:kamn/gym_feature/gyms/presentation/widgets/track_gym_request_submission_screen/build_timeline_tile.dart';
 import 'package:kamn/gym_feature/gyms/presentation/widgets/track_gym_request_submission_screen/contact_us.dart';
 import 'package:kamn/gym_feature/gyms/presentation/widgets/track_gym_request_submission_screen/go_to_services.dart';
+import 'package:kamn/gym_feature/gyms/presentation/widgets/track_gym_request_submission_screen/submission_incomplete.dart';
 import 'package:kamn/gym_feature/gyms/presentation/widgets/track_gym_request_submission_screen/submission_pending.dart';
 import 'package:timelines_plus/timelines_plus.dart';
 
 class TrackGymRequestSubmissionScreen extends StatelessWidget {
-   TrackGymRequestSubmissionScreen({super.key});
+  TrackGymRequestSubmissionScreen({super.key});
   final List<String> steps = const [
     "Submission Received",
     "Under Review",
@@ -28,11 +28,10 @@ class TrackGymRequestSubmissionScreen extends StatelessWidget {
     Colors.orange,
     Colors.grey,
   ];
-  final List<SvgPicture> icons =  [
+  final List<SvgPicture> icons = [
     SvgPicture.asset('assets/icons/check.svg'),
     SvgPicture.asset('assets/icons/under_review.svg'),
     SvgPicture.asset('assets/icons/approval.svg'),
-   
   ];
   final int currentStep = 2;
   @override
@@ -58,45 +57,57 @@ class TrackGymRequestSubmissionScreen extends StatelessWidget {
               child: Timeline.tileBuilder(
                 shrinkWrap: true, // Ensures it does not take unnecessary space
                 theme: TimelineThemeData(
-                            nodePosition: 0,
-              indicatorPosition: 0,
+                  nodePosition: 0,
+                  indicatorPosition: 0,
                   direction: Axis.vertical,
-                  connectorTheme: ConnectorThemeData(thickness: 2),
+                  connectorTheme: const ConnectorThemeData(thickness: 2),
                 ),
                 builder: TimelineTileBuilder.connected(
                   contentsAlign: ContentsAlign.basic, // Forces left alignment
                   itemCount: steps.length,
                   contentsBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.only(left: 8.0), // Pushes content to right of icons
+                    padding: const EdgeInsets.only(
+                        left: 8.0), // Pushes content to right of icons
                     child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start, // Ensures text aligns left
-                            children: [
-                              Text(
-              steps[index],
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: index < currentStep ? activeColors[index] : Colors.grey,
-              ),
-                              ),
-                              Text(
-              descriptions[index],
-              style: TextStyle(color: Colors.grey.shade600),
-                              ),
-                            ],
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start, // Ensures text aligns left
+                      children: [
+                        Text(
+                          steps[index],
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: index < currentStep
+                                ? activeColors[index]
+                                : Colors.grey,
+                          ),
+                        ),
+                        Text(
+                          descriptions[index],
+                          style: TextStyle(color: Colors.grey.shade600),
+                        ),
+                      ],
                     ),
                   ),
                   indicatorBuilder: (context, index) {
                     return DotIndicator(
-                            size: 25.r,
-                            color: index < currentStep ? activeColors[index] : Colors.grey,
-                            child: Padding(padding: EdgeInsets.all(4.r),child: icons[index]),
+                      size: 25.r,
+                      color: index < currentStep
+                          ? activeColors[index]
+                          : Colors.grey,
+                      child: Padding(
+                          padding: EdgeInsets.all(4.r), child: icons[index]),
                     );
                   },
-                  connectorBuilder: (context, index, connectorType) => SizedBox(height: 70.h,
-                    child: SolidLineConnector(space: 10.h,
-                    endIndent: 10.h,indent: 10.h,
-                      color: index < currentStep - 1 ? activeColors[index] : Colors.grey.shade300,
+                  connectorBuilder: (context, index, connectorType) => SizedBox(
+                    height: 70.h,
+                    child: SolidLineConnector(
+                      space: 10.h,
+                      endIndent: 10.h,
+                      indent: 10.h,
+                      color: index < currentStep - 1
+                          ? activeColors[index]
+                          : Colors.grey.shade300,
                     ),
                   ),
                 ),
@@ -151,7 +162,10 @@ class TrackGymRequestSubmissionScreen extends StatelessWidget {
             //     ),
             //   ),
             // ),
-
+            // const SubmissionIncomplete(),
+            // SizedBox(
+            //   height: 17.h,
+            // ),
             const ContactUs(),
             SizedBox(
               height: 17.h,

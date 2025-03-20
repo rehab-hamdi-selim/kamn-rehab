@@ -53,7 +53,7 @@ class CustomMainBlocConsumer extends StatelessWidget {
               scaffoldBackgroundColor: AppPallete.whiteColor,
             ),
             onGenerateRoute: AppRouter.generateRoute,
-            home:  _buildHomeWidget(state,appUserCubit));
+            home: _buildHomeWidget(state, appUserCubit));
         //home: _buildHomeWidget(state, appUserCubit));
       },
     );
@@ -61,22 +61,22 @@ class CustomMainBlocConsumer extends StatelessWidget {
 
   Widget _buildHomeWidget(AppUserState state, AppUserCubit appUserCubit) {
     if (state.isInitial()) {
-      return const MainLoader();
+      //  return const MainLoader();
 
       //////////////////
-      return  TrackGymRequestSubmissionScreen();
+      return TrackGymRequestSubmissionScreen();
     }
     if (state.isNotInstalled()) {
       //  return BlocProvider(
       //   create: (context) => getIt<AddGymCubit>(),
       //   child: const AddGymScreen(),
       // );
-      return  TrackGymRequestSubmissionScreen();
+      return TrackGymRequestSubmissionScreen();
     }
     if (state.isLoggedIn() || state.isGettedData() || state.isSuccess()) {
-      return const ChoosePlanScreen();
-      return const ChoosePlanScreen();
-      return  TrackGymRequestSubmissionScreen();
+      //  return const ChoosePlanScreen();
+      //    return const ChoosePlanScreen();
+      return TrackGymRequestSubmissionScreen();
       // return BlocProvider(
       //   create:(context)=> getIt<SelectCategoryCubit>()..getPlaygrounds(),
       //   child: const SelectCategoryScreen(),
@@ -91,5 +91,4 @@ class CustomMainBlocConsumer extends StatelessWidget {
     }
     return const MainLoader();
   }
-
 }
