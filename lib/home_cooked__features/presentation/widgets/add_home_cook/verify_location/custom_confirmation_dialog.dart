@@ -6,8 +6,8 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/core/utils/custom_hpme_cook_button.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
-import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_gym_cubit.dart';
-import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_gym_state.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_state.dart';
 
 class CustomConfirmationDialog extends StatelessWidget {
   const CustomConfirmationDialog({super.key});
@@ -16,7 +16,7 @@ class CustomConfirmationDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<AddHomeCookCubit>();
 
-    return BlocBuilder<AddHomeCookCubit, AddGymState>(
+    return BlocBuilder<AddHomeCookCubit, AddHomeCookState>(
       builder: (context, state) {
         return Dialog(
           insetPadding: EdgeInsets.symmetric(horizontal: 16.w),

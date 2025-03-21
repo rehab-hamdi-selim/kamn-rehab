@@ -7,8 +7,8 @@
 // import 'package:kamn/core/theme/style.dart';
 // import 'package:kamn/core/utils/custom_container.dart';
 // import 'package:kamn/core/utils/custom_dotted_border.dart';
-// import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart';
-// import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_state.dart';
+// import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_home_cook_cubit.dart';
+// import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_home_cook_state.dart';
 // import 'package:kamn/home_cooked__features/presentation/widgets/add_home_cook/gym_info/gym_logo_preview_widget.dart';
 //
 // class CustomGymPhozosSection extends StatelessWidget {

@@ -3,20 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_gym_cubit.dart';
-import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_gym_state.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_state.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/custom_home_-cook_info_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/verify_location_screen_screen.dart';
 
-class CustomTabBar extends StatelessWidget {
-  const CustomTabBar({super.key});
+class CustomHomeCookTabBar extends StatelessWidget {
+  const CustomHomeCookTabBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<AddHomeCookCubit>();
     return DefaultTabController(
       length: cubit.tabs.length,
-      child: BlocBuilder<AddHomeCookCubit, AddGymState>(
+      child: BlocBuilder<AddHomeCookCubit, AddHomeCookState>(
         buildWhen: (previous, current) =>
             current.isInitial || current.isSwipped,
         builder: (context, state) {

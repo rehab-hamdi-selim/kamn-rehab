@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/theme/app_pallete.dart';
 
 class CustomHomeAddress extends StatefulWidget {
   @override
@@ -20,9 +21,13 @@ class _AddressFormState extends State<CustomHomeAddress> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Address Form")),
-      body: Padding(
+    return Container(
+      decoration: BoxDecoration(
+        color: AppPallete.ofWhiteColor,
+        borderRadius: BorderRadius.circular(20.r),
+        border: Border.all(color: AppPallete.mediumLightGray, width: 0.2),
+      ),
+      child: Padding(
         padding: EdgeInsets.all(16.w),
         child: Form(
           key: _formKey,
@@ -36,11 +41,11 @@ class _AddressFormState extends State<CustomHomeAddress> {
                   onPressed: () {
                     // Handle GPS functionality
                   },
-                  icon: Icon(Icons.gps_fixed, size: 16.sp),
-                  label: Text("GPS", style: TextStyle(fontSize: 12.sp)),
+                  icon: Icon(Icons.gps_fixed, size: 10.sp),
+                  label: Text("GPS", style: TextStyle(fontSize: 8.sp)),
                   style: ElevatedButton.styleFrom(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+                        EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.r),
                     ),
@@ -48,12 +53,12 @@ class _AddressFormState extends State<CustomHomeAddress> {
                 ),
               ),
 
-              SizedBox(height: 10.h),
+              SizedBox(height: 5.h),
 
               // Home Address Field
               _buildTextField("Home Address *", homeAddressController),
 
-              SizedBox(height: 15.h),
+              SizedBox(height: 5.h),
 
               // Street & Building Number Fields
               Row(
@@ -101,10 +106,11 @@ class _AddressFormState extends State<CustomHomeAddress> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle(fontSize: 14.sp)),
+        Text(label, style: TextStyle(fontSize: 12.sp)),
         SizedBox(height: 5.h),
         TextFormField(
           controller: controller,
+          style: TextStyle(fontSize: 10),
           keyboardType: keyboardType,
           decoration: InputDecoration(
             border:

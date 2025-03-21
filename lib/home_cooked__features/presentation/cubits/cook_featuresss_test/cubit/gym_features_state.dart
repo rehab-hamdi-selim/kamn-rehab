@@ -3,12 +3,12 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class GymFeaturesState extends Equatable {
+class CookFeaturesState extends Equatable {
   final String selectedValue;
   final String typedText;
   final bool isChecked;
 
-  const GymFeaturesState({
+  const CookFeaturesState({
     this.selectedValue = '',
     this.typedText = '',
     this.isChecked = false,
@@ -17,12 +17,12 @@ class GymFeaturesState extends Equatable {
   @override
   List<Object> get props => [selectedValue, typedText, isChecked];
 
-  GymFeaturesState copyWith({
+  CookFeaturesState copyWith({
     String? selectedValue,
     String? typedText,
     bool? isCHecked,
   }) {
-    return GymFeaturesState(
+    return CookFeaturesState(
       selectedValue: selectedValue ?? this.selectedValue,
       typedText: typedText ?? this.typedText,
       isChecked: isCHecked ?? isChecked,
@@ -37,8 +37,8 @@ class GymFeaturesState extends Equatable {
     };
   }
 
-  factory GymFeaturesState.fromMap(Map<String, dynamic> map) {
-    return GymFeaturesState(
+  factory CookFeaturesState.fromMap(Map<String, dynamic> map) {
+    return CookFeaturesState(
       selectedValue: map['selectedValue'] as String,
       typedText: map['typedText'] as String,
       isChecked: map['isCHecked'] as bool,
@@ -47,8 +47,8 @@ class GymFeaturesState extends Equatable {
 
   String toJson() => json.encode(toMap());
 
-  factory GymFeaturesState.fromJson(String source) =>
-      GymFeaturesState.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory CookFeaturesState.fromJson(String source) =>
+      CookFeaturesState.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   bool get stringify => true;

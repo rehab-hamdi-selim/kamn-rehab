@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_cubit.dart';
 
 class UploadPromptWidget extends StatelessWidget {
   const UploadPromptWidget({super.key});
@@ -34,7 +34,7 @@ class UploadPromptWidget extends StatelessWidget {
             ),
             minimumSize: Size(157.w, 16.h),
           ),
-          onPressed: () => context.read<AddGymCubit>().pickLogoImage(),
+          onPressed: () => context.read<AddHomeCookCubit>().pickLogoImage(),
           child: Text(
             "Choose file",
             style: TextStyles.fontCircularSpotify8AccentBlackRegular,

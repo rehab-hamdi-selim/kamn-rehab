@@ -22,25 +22,32 @@ class HomeCookModel {
   final String? ownershipContractImageUrl;
   final String? taxRegistrationImageUrl;
   final String? comment;
+  final String? homeAddress;
+  final String? street;
+  final String? buildingNumber;
+  final String? apartment;
 
-  HomeCookModel({
-    this.id,
-    this.name,
-    this.address,
-    this.imagesUrl,
-    this.logoUrl,
-    this.description,
-    this.phoneNumber,
-    this.currentStatus,
-    this.contactNumber,
-    this.scoialMediaLinks,
-    this.serviceProviderId,
-    this.operationLicenseImageUrl,
-    this.ownerIdPassportImageUrl,
-    this.ownershipContractImageUrl,
-    this.taxRegistrationImageUrl,
-    this.comment,
-  });
+  HomeCookModel(
+      {this.id,
+      this.name,
+      this.address,
+      this.imagesUrl,
+      this.logoUrl,
+      this.description,
+      this.phoneNumber,
+      this.currentStatus,
+      this.contactNumber,
+      this.scoialMediaLinks,
+      this.serviceProviderId,
+      this.operationLicenseImageUrl,
+      this.ownerIdPassportImageUrl,
+      this.ownershipContractImageUrl,
+      this.taxRegistrationImageUrl,
+      this.comment,
+      this.apartment,
+      this.buildingNumber,
+      this.homeAddress,
+      this.street});
 
   HomeCookModel copyWith({
     String? id,
@@ -59,6 +66,10 @@ class HomeCookModel {
     String? ownershipContractImageUrl,
     String? taxRegistrationImageUrl,
     String? comment,
+    String? homeAddress,
+    String? street,
+    String? buildingNumber,
+    String? apartment,
   }) {
     return HomeCookModel(
       id: id ?? this.id,
@@ -81,6 +92,10 @@ class HomeCookModel {
       taxRegistrationImageUrl:
           taxRegistrationImageUrl ?? this.taxRegistrationImageUrl,
       comment: comment ?? this.comment,
+      homeAddress: homeAddress ?? this.homeAddress,
+      street: street ?? this.street,
+      buildingNumber: buildingNumber ?? this.buildingNumber,
+      apartment: apartment ?? this.apartment,
     );
   }
 
@@ -102,6 +117,10 @@ class HomeCookModel {
       'ownershipContractImageUrl': ownershipContractImageUrl,
       'taxRegistrationImageUrl': taxRegistrationImageUrl,
       'comment': comment,
+      'homeAddress': homeAddress,
+      'street': street,
+      'buildingNumber': buildingNumber,
+      'apartment': apartment,
     };
   }
 
@@ -147,6 +166,10 @@ class HomeCookModel {
           ? map['taxRegistrationImageUrl'] as String
           : null,
       comment: map['comment'] != null ? map['comment'] as String : null,
+      homeAddress: map['homeAddress'] ?? '',
+      street: map['street'] ?? '',
+      buildingNumber: map['buildingNumber'] ?? '',
+      apartment: map['apartment'] ?? '',
     );
   }
 
@@ -157,7 +180,7 @@ class HomeCookModel {
 
   @override
   String toString() {
-    return 'GymRequestModel(id: $id, name: $name, address: $address, imagesUrl: $imagesUrl, logoUrl: $logoUrl, description: $description, phoneNumber: $phoneNumber, currentStatus: $currentStatus, contactNumber: $contactNumber, scoialMediaLinks: $scoialMediaLinks, serviceProviderId: $serviceProviderId, operationLicenseImageUrl: $operationLicenseImageUrl, ownerIdPassportImageUrl: $ownerIdPassportImageUrl, ownershipContractImageUrl: $ownershipContractImageUrl, taxRegistrationImageUrl: $taxRegistrationImageUrl, comment: $comment)';
+    return 'GymRequestModel(id: $id, name: $name, address: $address, imagesUrl: $imagesUrl, logoUrl: $logoUrl, description: $description, phoneNumber: $phoneNumber, currentStatus: $currentStatus, contactNumber: $contactNumber, scoialMediaLinks: $scoialMediaLinks, serviceProviderId: $serviceProviderId, operationLicenseImageUrl: $operationLicenseImageUrl, ownerIdPassportImageUrl: $ownerIdPassportImageUrl, ownershipContractImageUrl: $ownershipContractImageUrl, taxRegistrationImageUrl: $taxRegistrationImageUrl, comment: $comment, homeAddress:$homeAddress,street:$street,buildingNumber:$buildingNumber,apartment:$apartment)';
   }
 
   @override
@@ -179,7 +202,11 @@ class HomeCookModel {
         other.ownerIdPassportImageUrl == ownerIdPassportImageUrl &&
         other.ownershipContractImageUrl == ownershipContractImageUrl &&
         other.taxRegistrationImageUrl == taxRegistrationImageUrl &&
-        other.comment == comment;
+        other.comment == comment &&
+        other.buildingNumber == buildingNumber &&
+        other.street == street &&
+        other.apartment == apartment &&
+        other.homeAddress == homeAddress;
   }
 
   @override
@@ -199,7 +226,11 @@ class HomeCookModel {
         ownerIdPassportImageUrl.hashCode ^
         ownershipContractImageUrl.hashCode ^
         taxRegistrationImageUrl.hashCode ^
-        comment.hashCode;
+        comment.hashCode ^
+        homeAddress.hashCode ^
+        apartment.hashCode ^
+        street.hashCode ^
+        buildingNumber.hashCode;
   }
 }
 

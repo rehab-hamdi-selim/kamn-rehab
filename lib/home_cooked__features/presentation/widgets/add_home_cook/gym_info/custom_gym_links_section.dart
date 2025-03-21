@@ -4,7 +4,7 @@ import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/core/utils/custom_container.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_scoial_text_form_field.dart';
-import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_gym_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_cubit.dart';
 
 class CustomGymLinksSection extends StatelessWidget {
   const CustomGymLinksSection({super.key});

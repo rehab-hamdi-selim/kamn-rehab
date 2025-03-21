@@ -2,9 +2,9 @@
 import 'dart:io';
 
 import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
-import 'package:kamn/home_cooked__features/data/models/gym_model_test.dart';
+import 'package:kamn/home_cooked__features/data/models/home_cook_model_test.dart';
 
-enum AddGymStatus {
+enum AddHomeCookStatus {
   initial,
   loading,
   success,
@@ -41,48 +41,51 @@ enum AddGymStatus {
 //   }
 // }
 
-extension AddGymStateX on AddGymState {
-  bool get isInitial => state == AddGymStatus.initial;
+extension AddGymStateX on AddHomeCookState {
+  bool get isInitial => state == AddHomeCookStatus.initial;
 
-  bool get isLoading => state == AddGymStatus.loading;
+  bool get isLoading => state == AddHomeCookStatus.loading;
 
-  bool get isSuccess => state == AddGymStatus.success;
+  bool get isSuccess => state == AddHomeCookStatus.success;
 
-  bool get isError => state == AddGymStatus.error;
+  bool get isError => state == AddHomeCookStatus.error;
 
-  bool get isSwipped => state == AddGymStatus.swipped;
+  bool get isSwipped => state == AddHomeCookStatus.swipped;
 
-  bool get isLogoPicked => state == AddGymStatus.logoPicked;
+  bool get isLogoPicked => state == AddHomeCookStatus.logoPicked;
 
-  bool get isLogoLoading => state == AddGymStatus.logoLoading;
+  bool get isLogoLoading => state == AddHomeCookStatus.logoLoading;
 
-  bool get isGymImageLoading => state == AddGymStatus.gymImageLoading;
+  bool get isGymImageLoading => state == AddHomeCookStatus.gymImageLoading;
 
-  bool get isGymImagePicked => state == AddGymStatus.gymImagePicked;
+  bool get isGymImagePicked => state == AddHomeCookStatus.gymImagePicked;
 
-  bool get isMandatoryFieldPicked => state == AddGymStatus.mandatoryFieldPicked;
+  bool get isMandatoryFieldPicked =>
+      state == AddHomeCookStatus.mandatoryFieldPicked;
 
-  bool get isRadioSelected => state == AddGymStatus.radioSelected;
+  bool get isRadioSelected => state == AddHomeCookStatus.radioSelected;
 
-  bool get isFeatureAdded => state == AddGymStatus.featureAdded;
+  bool get isFeatureAdded => state == AddHomeCookStatus.featureAdded;
 
-  bool get isAddGymLoading => state == AddGymStatus.addGymLoading;
+  bool get isAddGymLoading => state == AddHomeCookStatus.addGymLoading;
 
-  bool get isAddGymSuccess => state == AddGymStatus.addGymSuccess;
+  bool get isAddGymSuccess => state == AddHomeCookStatus.addGymSuccess;
 
-  bool get isAddGymError => state == AddGymStatus.addGymError;
+  bool get isAddGymError => state == AddHomeCookStatus.addGymError;
 
-  bool get isUploadImagesSuccess => state == AddGymStatus.uploadImagesSuccess;
+  bool get isUploadImagesSuccess =>
+      state == AddHomeCookStatus.uploadImagesSuccess;
 
-  bool get isUploadImagesError => state == AddGymStatus.uploadImagesError;
+  bool get isUploadImagesError => state == AddHomeCookStatus.uploadImagesError;
 
-  bool get isUploadImagesLoading => state == AddGymStatus.uploadImagesLoading;
+  bool get isUploadImagesLoading =>
+      state == AddHomeCookStatus.uploadImagesLoading;
 
-  bool get isCheckBarTapped => state == AddGymStatus.checkBarTapped;
+  bool get isCheckBarTapped => state == AddHomeCookStatus.checkBarTapped;
 }
 
-class AddGymState {
-  final AddGymStatus state;
+class AddHomeCookState {
+  final AddHomeCookStatus state;
   final String? erorrMessage;
   final File? logo;
   final MandatoryFields? mandatoryFields;
@@ -99,7 +102,7 @@ class AddGymState {
   final bool? isConfirm;
   final int? numberOfImages;
 
-  AddGymState(
+  AddHomeCookState(
       {required this.state,
       this.erorrMessage,
       this.logo,
@@ -118,8 +121,8 @@ class AddGymState {
 
   bool get isValidAll => isValid.every((element) => element);
 
-  AddGymState copyWith(
-      {AddGymStatus? state,
+  AddHomeCookState copyWith(
+      {AddHomeCookStatus? state,
       String? erorrMessage,
       File? logo,
       // FeatureType? featureType,
@@ -134,7 +137,7 @@ class AddGymState {
       bool? isGymInfoValid,
       int? numberOfImages,
       List<bool>? isValid}) {
-    return AddGymState(
+    return AddHomeCookState(
         state: state ?? this.state,
         erorrMessage: erorrMessage ?? this.erorrMessage,
         logo: logo ?? this.logo,

@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/cubits/gym_features/cubit/gym_features_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/cook_featuresss_test/cubit/cook_features_cubit.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String? hintText;
@@ -55,7 +55,7 @@ class CustomTextFormField extends StatelessWidget {
         verticalSpace(5),
         TextFormField(
           onChanged: (value) {
-            context.read<GymFeaturesCubit>().takeTypedText(value);
+            context.read<CookFeaturesCubit>().takeTypedText(value);
           },
           maxLines: lines,
           maxLength: maxLength,

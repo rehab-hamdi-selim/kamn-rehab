@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
-import 'package:kamn/home_cooked__features/data/models/gym_model_test.dart';
-import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_gym_cubit.dart';
-import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_gym_state.dart';
+import 'package:kamn/home_cooked__features/data/models/home_cook_model_test.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_state.dart';
 
-class CustomAddGymBlocListener extends StatelessWidget {
-  const CustomAddGymBlocListener({super.key, required this.child});
+class CustomAddHomeCookBlocListener extends StatelessWidget {
+  const CustomAddHomeCookBlocListener({super.key, required this.child});
 
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<AddHomeCookCubit>();
-    return BlocListener<AddHomeCookCubit, AddGymState>(
+    return BlocListener<AddHomeCookCubit, AddHomeCookState>(
       listener: (context, state) {
         if (state.isUploadImagesSuccess) {
           cubit.addGymRequest(prepareGymData(context));

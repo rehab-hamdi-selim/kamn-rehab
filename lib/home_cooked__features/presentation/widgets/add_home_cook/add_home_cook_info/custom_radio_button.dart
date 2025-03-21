@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/cubits/gym_features/cubit/gym_features_cubit.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/cubits/gym_features/cubit/gym_features_state.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/cook_featuresss_test/cubit/cook_features_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/cook_featuresss_test/cubit/gym_features_state.dart';
 
 class CustomRadioButton extends StatelessWidget {
   const CustomRadioButton(
@@ -18,7 +18,7 @@ class CustomRadioButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GymFeaturesCubit, GymFeaturesState>(
+    return BlocBuilder<CookFeaturesCubit, CookFeaturesState>(
       builder: (context, state) {
         return Container(
           padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
@@ -36,10 +36,10 @@ class CustomRadioButton extends StatelessWidget {
                       return null;
                     }),
                     value: text,
-                    groupValue: context.read<GymFeaturesCubit>().statusOption,
+                    groupValue: context.read<CookFeaturesCubit>().statusOption,
                     onChanged: (String? newValue) {
                       context
-                          .read<GymFeaturesCubit>()
+                          .read<CookFeaturesCubit>()
                           .onChangeStatusSelection(newValue!);
                     },
                   )),

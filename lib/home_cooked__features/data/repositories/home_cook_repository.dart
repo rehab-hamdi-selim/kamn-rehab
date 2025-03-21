@@ -5,27 +5,27 @@ import 'package:injectable/injectable.dart';
 import 'package:kamn/core/erorr/faliure.dart';
 import 'package:kamn/core/utils/try_and_catch.dart';
 import 'package:kamn/home_cooked__features/data/data_source/homeCooked_remote_data_source.dart';
-import 'package:kamn/home_cooked__features/data/models/gym_model_test.dart';
+import 'package:kamn/home_cooked__features/data/models/home_cook_model_test.dart';
 
-abstract class AddGymRepository {
-  Future<Either<Faliure, HomeCookModel>> addGymRequest(
+abstract class AddHomeCookRepository {
+  Future<Either<Faliure, HomeCookModel>> addHomeCookRequest(
       HomeCookModel gymRequestModel);
 
   Future<Either<Faliure, Map<String, List<String>>>> uploadImages(
       Map<String, List<File>> imagesMap, void Function(double) onProgress);
 }
 
-@Injectable(as: AddGymRepository)
-class AddGymRepositoryImpl implements AddGymRepository {
+@Injectable(as: AddHomeCookRepository)
+class AddHomeCookRepositoryImpl implements AddHomeCookRepository {
   AddHomeCookRemoteDataSource dataSource;
 
-  AddGymRepositoryImpl({required this.dataSource});
+  AddHomeCookRepositoryImpl({required this.dataSource});
 
   @override
-  Future<Either<Faliure, HomeCookModel>> addGymRequest(
+  Future<Either<Faliure, HomeCookModel>> addHomeCookRequest(
       HomeCookModel gymRequestModel) {
     return executeTryAndCatchForRepository(() async {
-      return await dataSource.addGymRequest(gymRequestModel);
+      return await dataSource.addCookRequest(gymRequestModel);
     });
   }
 

@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/cubits/gym_features/cubit/gym_features_state.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/cook_featuresss_test/cubit/gym_features_state.dart';
 
-class GymFeaturesCubit extends Cubit<GymFeaturesState> {
-  GymFeaturesCubit() : super(const GymFeaturesState());
+class CookFeaturesCubit extends Cubit<CookFeaturesState> {
+  CookFeaturesCubit() : super(const CookFeaturesState());
 
   String? statusOption;
 

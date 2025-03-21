@@ -8,8 +8,8 @@ import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/core/utils/custom_container.dart';
 import 'package:kamn/core/utils/custom_dotted_border.dart';
 import 'package:kamn/core/utils/custom_gym_text_form_field.dart';
-import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_gym_cubit.dart';
-import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_gym_state.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_state.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/add_home_cook/gym_info/gym_logo_preview_widget.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/add_home_cook/gym_info/loading_indicator_widget.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/add_home_cook/gym_info/upload_prompt_widget.dart';
@@ -31,9 +31,9 @@ class CustomGymLogoInfoSection extends StatelessWidget {
             color: AppPallete.whiteColor,
             borderRadius: BorderRadius.circular(12.r),
           ),
-          child: BlocBuilder<AddHomeCookCubit, AddGymState>(
+          child: BlocBuilder<AddHomeCookCubit, AddHomeCookState>(
             builder: (context, state) {
-              if (state.state == AddGymStatus.logoLoading) {
+              if (state.state == AddHomeCookStatus.logoLoading) {
                 return const LoadingIndicatorWidget();
               }
               if (state.logo != null) {

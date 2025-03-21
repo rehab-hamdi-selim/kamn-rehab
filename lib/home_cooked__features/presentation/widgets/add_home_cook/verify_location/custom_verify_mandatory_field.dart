@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_state.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_state.dart';
 
-class CustomMandatoryField extends StatefulWidget {
-  const CustomMandatoryField(
+class CustomVerifyMandatoryField extends StatefulWidget {
+  const CustomVerifyMandatoryField(
       {super.key,
       required this.title,
       required this.translation,
@@ -21,14 +21,15 @@ class CustomMandatoryField extends StatefulWidget {
   final int? index;
 
   @override
-  State<CustomMandatoryField> createState() => _CustomMandatoryFieldState();
+  State<CustomVerifyMandatoryField> createState() =>
+      _CustomMandatoryFieldState();
 }
 
-class _CustomMandatoryFieldState extends State<CustomMandatoryField> {
+class _CustomMandatoryFieldState extends State<CustomVerifyMandatoryField> {
   @override
   Widget build(BuildContext context) {
     final bool isValid = widget.index != null
-        ? context.watch<AddGymCubit>().state.isValid[widget.index!]
+        ? context.watch<AddHomeCookCubit>().state.isValid[widget.index!]
         : true;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +82,7 @@ class _CustomMandatoryFieldState extends State<CustomMandatoryField> {
                       ),
                       onPressed: () {
                         context
-                            .read<AddGymCubit>()
+                            .read<AddHomeCookCubit>()
                             .pickMandatoryImages(widget.title);
                       },
                       child: Text("Choose file",
@@ -96,7 +97,7 @@ class _CustomMandatoryFieldState extends State<CustomMandatoryField> {
                   ],
                 ),
                 if (context
-                        .watch<AddGymCubit>()
+                        .watch<AddHomeCookCubit>()
                         .state
                         .mandatoryFields
                         ?.getFieldByText(widget.title) !=
@@ -108,7 +109,7 @@ class _CustomMandatoryFieldState extends State<CustomMandatoryField> {
                     indent: 30.h,
                   ),
                 if (context
-                        .watch<AddGymCubit>()
+                        .watch<AddHomeCookCubit>()
                         .state
                         .mandatoryFields
                         ?.getFieldByText(widget.title) !=
@@ -116,7 +117,7 @@ class _CustomMandatoryFieldState extends State<CustomMandatoryField> {
                   Center(
                     child: Image.file(
                       (context
-                          .watch<AddGymCubit>()
+                          .watch<AddHomeCookCubit>()
                           .state
                           .mandatoryFields
                           ?.getFieldByText(widget.title))!,

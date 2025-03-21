@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_gym_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_cubit.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/add_home_cook/verify_location/custom_confirmation_dialog.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/add_home_cook/verify_location/custom_mandatory_documents_section.dart';
-import 'package:kamn/home_cooked__features/presentation/widgets/add_home_cook/verify_location/custom_navigation_buttons.dart';
-import 'package:kamn/home_cooked__features/presentation/widgets/add_home_cook/verify_location/custom_tax_registration_section.dart';
+import 'package:kamn/home_cooked__features/presentation/widgets/add_home_cook/verify_location/custom_navigation_HomeButton.dart';
 
 class VerifyLocationScreenScreen extends StatelessWidget {
   const VerifyLocationScreenScreen({super.key});
@@ -25,8 +24,7 @@ class VerifyLocationScreenScreen extends StatelessWidget {
             indent: 73.w,
             endIndent: 73.w,
           ),
-          const CustomTaxRegistrationSection(),
-          CustomNavigationButtons(
+          CustomHomeCookNavigationButtons(
             onNextPressed: () {
               cubit.checkMandatoryFields();
 

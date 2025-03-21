@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/core/utils/image_picker.dart';
-import 'package:kamn/home_cooked__features/data/models/gym_model_test.dart';
+import 'package:kamn/home_cooked__features/data/models/home_cook_model_test.dart';
 import 'package:kamn/home_cooked__features/data/repositories/home_cook_repository.dart';
-import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_gym_state.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_state.dart';
 
 @injectable
-class AddHomeCookCubit extends Cubit<AddGymState> {
+class AddHomeCookCubit extends Cubit<AddHomeCookState> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
@@ -24,7 +24,7 @@ class AddHomeCookCubit extends Cubit<AddGymState> {
       TextEditingController();
 
   AddHomeCookCubit({required this.repository})
-      : super(AddGymState(state: AddGymStatus.initial));
+      : super(AddHomeCookState(state: AddHomeCookStatus.initial));
 
   @override
   Future<void> close() {
@@ -42,8 +42,8 @@ class AddHomeCookCubit extends Cubit<AddGymState> {
     return super.close();
   }
 
-  final AddGymRepository repository;
-  final List<String> tabs = ["Gym Info", "Required Documents"];
+  final AddHomeCookRepository repository;
+  final List<String> tabs = ["Personal Info", "Location Verify"];
   final List<File> _gymImages = [];
   late TabController tabController;
   final GlobalKey<FormState> gymInfoKey = GlobalKey<FormState>();
@@ -56,7 +56,7 @@ class AddHomeCookCubit extends Cubit<AddGymState> {
         TabController(length: tabs.length, initialIndex: 0, vsync: vsync);
     tabController.addListener(() {
       emit(state.copyWith(
-        state: AddGymStatus.swipped,
+        state: AddHomeCookStatus.swipped,
       ));
     });
   }
@@ -74,11 +74,11 @@ class AddHomeCookCubit extends Cubit<AddGymState> {
   }
 
   Future<void> pickLogoImage() async {
-    emit(state.copyWith(state: AddGymStatus.logoLoading));
+    emit(state.copyWith(state: AddHomeCookStatus.logoLoading));
     final image = await pickImage();
     if (image != null) {
       emit(state.copyWith(
-        state: AddGymStatus.logoPicked,
+        state: AddHomeCookStatus.logoPicked,
         logo: image,
       ));
     }
@@ -89,7 +89,7 @@ class AddHomeCookCubit extends Cubit<AddGymState> {
     if (image != null) {
       _gymImages.add(image);
       emit(state.copyWith(
-          state: AddGymStatus.gymImagePicked,
+          state: AddHomeCookStatus.gymImagePicked,
           gymImages: List.from(_gymImages)));
     }
   }
@@ -99,7 +99,7 @@ class AddHomeCookCubit extends Cubit<AddGymState> {
     if (image != null) {
       _gymImages[index] = image;
       emit(state.copyWith(
-          state: AddGymStatus.gymImagePicked,
+          state: AddHomeCookStatus.gymImagePicked,
           gymImages: List.from(_gymImages)));
     }
   }
@@ -149,7 +149,7 @@ class AddHomeCookCubit extends Cubit<AddGymState> {
 
     if (image != null) {
       emit(state.copyWith(
-        state: AddGymStatus.mandatoryFieldPicked,
+        state: AddHomeCookStatus.mandatoryFieldPicked,
         mandatoryFields: (state.mandatoryFields ?? MandatoryFields()).copyWith(
           gymOperatingLicense: field == "Gym Operating License"
               ? image
@@ -169,11 +169,11 @@ class AddHomeCookCubit extends Cubit<AddGymState> {
   }
 
   Future<void> addGymRequest(HomeCookModel cook) async {
-    emit(state.copyWith(state: AddGymStatus.addGymLoading));
-    final response = await repository.addGymRequest(cook);
+    emit(state.copyWith(state: AddHomeCookStatus.addGymLoading));
+    final response = await repository.addHomeCookRequest(cook);
     response.fold((error) {
       emit(state.copyWith(
-          state: AddGymStatus.addGymError, erorrMessage: error.erorr));
+          state: AddHomeCookStatus.addGymError, erorrMessage: error.erorr));
     }, (success) {
       // emit(state.copyWith(
       //  state: AddGymStatus.addGymSuccess, gymRequest: success));
@@ -181,7 +181,7 @@ class AddHomeCookCubit extends Cubit<AddGymState> {
   }
 
   Future<void> uploadImages() async {
-    emit(state.copyWith(state: AddGymStatus.addGymLoading));
+    emit(state.copyWith(state: AddHomeCookStatus.addGymLoading));
 
     final imagesMap = <String, List<File>>{
       'logo': state.logo == null ? [] : [state.logo!],
@@ -200,20 +200,20 @@ class AddHomeCookCubit extends Cubit<AddGymState> {
     final uploadResponse = await repository.uploadImages(imagesMap, (progress) {
       print("now on $progress");
       emit(state.copyWith(
-        state: AddGymStatus.uploadImagesLoading,
+        state: AddHomeCookStatus.uploadImagesLoading,
         uploadProgress: progress,
       ));
     });
 
     uploadResponse.fold((error) {
       emit(state.copyWith(
-        state: AddGymStatus.uploadImagesError,
+        state: AddHomeCookStatus.uploadImagesError,
         erorrMessage: error.erorr,
       ));
       return null;
     },
         (urls) => emit(state.copyWith(
-              state: AddGymStatus.uploadImagesSuccess,
+          state: AddHomeCookStatus.uploadImagesSuccess,
               imagesUrlMap: urls,
             )));
   }
@@ -225,15 +225,15 @@ class AddHomeCookCubit extends Cubit<AddGymState> {
 
   void onAcceptTab(bool? value) {
     emit(state.copyWith(
-        state: AddGymStatus.checkBarTapped, isAccept: !state.isAccept!));
+        state: AddHomeCookStatus.checkBarTapped, isAccept: !state.isAccept!));
   }
 
   void onConfirmTab(bool? value) {
     emit(state.copyWith(
-        state: AddGymStatus.checkBarTapped, isConfirm: !state.isConfirm!));
+        state: AddHomeCookStatus.checkBarTapped, isConfirm: !state.isConfirm!));
   }
 
   void reset() {
-    emit(state.copyWith(state: AddGymStatus.initial, uploadProgress: 0));
+    emit(state.copyWith(state: AddHomeCookStatus.initial, uploadProgress: 0));
   }
 }

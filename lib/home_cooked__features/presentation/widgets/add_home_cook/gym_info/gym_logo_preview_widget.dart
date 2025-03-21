@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_cubit.dart';
 
 class GymLogoPreviewWidget extends StatelessWidget {
   final File logo;
@@ -35,8 +35,8 @@ class GymLogoPreviewWidget extends StatelessWidget {
           right: 0,
           child: InkWell(
             onTap: () => isLogo
-                ? context.read<AddGymCubit>().pickLogoImage()
-                : context.read<AddGymCubit>().replaceGymImage(index!),
+                ? context.read<AddHomeCookCubit>().pickLogoImage()
+                : context.read<AddHomeCookCubit>().replaceGymImage(index!),
             child: SvgPicture.asset('assets/icons/replace.svg'),
           ),
         ),
