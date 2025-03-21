@@ -16,6 +16,33 @@ class Constants {
   static const meat = 'Meat';
   static const fish = 'Fish';
 
+  static const pickupor = 'Pick-up or Delivery:';
+  static const pickup = '📍 Pick-up';
+  static const delivery = '🚚 Delivery';
+  static const deliveryFee = 'Delivery Fee';
+  static const howgetmeals = 'How will your customers get their meals?';
+  static const letCollectHomeAddress =
+      'Let customers collect from your home address.';
+  static const offerToDeliverMeals =
+      ' Offer to deliver meals — set your delivery radius (e.g., within 10 km)';
+
+  static const back = 'back';
+  static const next = 'Next';
+  static const editMealDetails = 'Edit Meal Details';
+  static const saveDraft = 'Save as a Draft';
+
+  static const mealRecap = 'Meal Recap';
+  static const letReviewYourMeal =
+      'Almost There! Let’s Review Your Meal" — Double-check your meal details before sharing them with the world.';
+  static const mealImages = 'Meal Images';
+  static const mealName = 'Meal Name';
+  static const cookingTime = 'Cooking Time';
+  static const mealPrice = 'Meal Price';
+  static const specialtyTags = 'Specialty Tags';
+  static const profileVerification = 'Profile Verification';
+  static const utilityBill = 'Utility Bill';
+  static const eGP = '£GP';
+
   static const overview = 'Overview';
   static const salesOverView = 'Salesoverview';
   static const noConnectionErrorMessage = 'Not connected to a network!';

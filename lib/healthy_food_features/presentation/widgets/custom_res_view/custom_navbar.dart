@@ -29,7 +29,7 @@ class CustomNavBar extends StatelessWidget {
               topRight: Radius.circular(35.r),
               topLeft: Radius.circular(35.r),
             ),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Color.fromRGBO(0, 0, 0, 0.08),
                 blurRadius: 10,
@@ -45,18 +45,23 @@ class CustomNavBar extends StatelessWidget {
             children: [
               ElevatedButton(
                 onPressed: () {},
-                child: Text(
-                  "Show services",
-                  style: TextStyles.fontCircularSpotify12WhiteRegular,
-                ),
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(170.w, 50.h),
                   padding: EdgeInsets.zero, // Remove extra padding
                   backgroundColor: AppPallete.green,
                 ),
+                child: Text(
+                  "Show services",
+                  style: TextStyles.fontCircularSpotify12WhiteRegular,
+                ),
               ),
               ElevatedButton(
                 onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(130.w, 50.h),
+                  padding: EdgeInsets.zero, // Remove extra padding
+                  backgroundColor: AppPallete.green,
+                ),
                 child: Row(
                   children: [
                     SvgPicture.asset(IconLinks.cart),
@@ -66,11 +71,6 @@ class CustomNavBar extends StatelessWidget {
                       style: TextStyles.fontCircularSpotify12WhiteRegular,
                     ),
                   ],
-                ),
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(130.w, 50.h),
-                  padding: EdgeInsets.zero, // Remove extra padding
-                  backgroundColor: AppPallete.green,
                 ),
               ),
             ],

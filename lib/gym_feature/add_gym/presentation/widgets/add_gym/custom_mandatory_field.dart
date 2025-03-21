@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,11 +8,16 @@ import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cub
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_state.dart';
 
 class CustomMandatoryField extends StatefulWidget {
-  const CustomMandatoryField({super.key, required this.title, required this.translation, this.fontSize,this.isValid=true});
+  const CustomMandatoryField(
+      {super.key,
+      required this.title,
+      required this.translation,
+      this.fontSize,
+      this.isValid = true});
   final String title;
   final String translation;
   final double? fontSize;
-   final bool isValid ;
+  final bool isValid;
 
   @override
   State<CustomMandatoryField> createState() => _CustomMandatoryFieldState();
@@ -48,19 +51,16 @@ class _CustomMandatoryFieldState extends State<CustomMandatoryField> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                         widget.title,
-                          style:
-                              TextStyles.fontCircularSpotify14BlackRegular.copyWith(
+                          widget.title,
+                          style: TextStyles.fontCircularSpotify14BlackRegular
+                              .copyWith(
                             color: widget.isValid ? null : AppPallete.redColor,
                           ),
                         ),
-                        Text(
-                          "(${widget.translation})",
-                          style: TextStyles.fontCircularSpotify8StealGrayRegular.copyWith(
-                            fontSize: widget.fontSize
-                          )
-                            
-                        ),
+                        Text("(${widget.translation})",
+                            style: TextStyles
+                                .fontCircularSpotify8StealGrayRegular
+                                .copyWith(fontSize: widget.fontSize)),
                       ],
                     ),
                     TextButton(
@@ -75,11 +75,14 @@ class _CustomMandatoryFieldState extends State<CustomMandatoryField> {
                         ),
                         minimumSize: Size(113.w, 15.h),
                       ),
-                      onPressed:(){
-                         context.read<AddGymCubit>().pickMandatoryImages(widget.title);
+                      onPressed: () {
+                        context
+                            .read<AddGymCubit>()
+                            .pickMandatoryImages(widget.title);
                       },
                       child: Text("Choose file",
-                          style: TextStyles.fontCircularSpotify8AccentBlackRegular
+                          style: TextStyles
+                              .fontCircularSpotify8AccentBlackRegular
                               .copyWith(
                             color: widget.isValid
                                 ? AppPallete.grayColor
@@ -88,17 +91,36 @@ class _CustomMandatoryFieldState extends State<CustomMandatoryField> {
                     ),
                   ],
                 ),
-                 if(context.watch<AddGymCubit>().state.mandatoryFields?.getFieldByText(widget.title)!=null)
-          Divider(color: AppPallete.lightGreyColor,thickness: .2,endIndent: 30.h,indent: 30.h,),
-          if(context.watch<AddGymCubit>().state.mandatoryFields?.getFieldByText(widget.title)!=null)
-          Center(
-          child: Image.file(
-           (context.watch<AddGymCubit>().state.mandatoryFields?.getFieldByText(widget.title))!,
-            height: 255.h,
-            width: 200.w,
-            fit: BoxFit.fill,
-          ),
-        ),
+                if (context
+                        .watch<AddGymCubit>()
+                        .state
+                        .mandatoryFields
+                        ?.getFieldByText(widget.title) !=
+                    null)
+                  Divider(
+                    color: AppPallete.lightGreyColor,
+                    thickness: .2,
+                    endIndent: 30.h,
+                    indent: 30.h,
+                  ),
+                if (context
+                        .watch<AddGymCubit>()
+                        .state
+                        .mandatoryFields
+                        ?.getFieldByText(widget.title) !=
+                    null)
+                  Center(
+                    child: Image.file(
+                      (context
+                          .watch<AddGymCubit>()
+                          .state
+                          .mandatoryFields
+                          ?.getFieldByText(widget.title))!,
+                      height: 255.h,
+                      width: 200.w,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
               ],
             ),
           ),
@@ -110,8 +132,6 @@ class _CustomMandatoryFieldState extends State<CustomMandatoryField> {
                 style: TextStyles.fontCircularSpotify8AccentBlackRegular
                     .copyWith(color: AppPallete.redColor)),
           ),
-          
-         
       ],
     );
   }

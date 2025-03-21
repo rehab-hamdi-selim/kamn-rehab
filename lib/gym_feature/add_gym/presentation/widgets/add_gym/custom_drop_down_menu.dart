@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,7 +29,7 @@ class CustomDropDownMenu extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GymFeaturesCubit,GymFeaturesState>(
+    return BlocBuilder<GymFeaturesCubit, GymFeaturesState>(
       builder: (context, state) {
         return DropdownMenu<String>(
           onSelected: (value) {
@@ -55,18 +53,15 @@ class CustomDropDownMenu extends StatelessWidget {
             elevation: WidgetStateProperty.all(20.r),
             backgroundColor: WidgetStateProperty.all(Colors.white),
           ),
-          
           inputDecorationTheme: InputDecorationTheme(
-            fillColor: AppPallete.whiteColor,
-            filled: true,
+              fillColor: AppPallete.whiteColor,
+              filled: true,
               contentPadding: const EdgeInsets.symmetric(horizontal: 16),
               constraints: BoxConstraints.tight(const Size.fromHeight(40)),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(11.r),borderSide:const BorderSide(
-                  color: AppPallete.lgGreyColor,
-                  width: 1.2
-                )
-              )),
+                  borderRadius: BorderRadius.circular(11.r),
+                  borderSide: const BorderSide(
+                      color: AppPallete.lgGreyColor, width: 1.2))),
         );
       },
     );

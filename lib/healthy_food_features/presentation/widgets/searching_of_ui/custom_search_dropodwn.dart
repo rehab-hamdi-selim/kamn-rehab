@@ -27,7 +27,7 @@ class _CustomSearchDropodwnState extends State<CustomSearchDropodwn> {
         decoration: BoxDecoration(
           color: AppPallete.whiteColor,
           borderRadius: BorderRadius.circular(33.sp),
-          border: Border.all(color:Color(0xffECF0F4)),
+          border: Border.all(color: const Color(0xffECF0F4)),
         ),
         padding: EdgeInsets.symmetric(horizontal: 10.w),
         child: DropdownButtonHideUnderline(
@@ -39,7 +39,7 @@ class _CustomSearchDropodwnState extends State<CustomSearchDropodwn> {
                 child: Text(
                   item,
                   overflow: TextOverflow.ellipsis,
-                 style:  TextStyles.fontCircularSpotify14BlackRegular,
+                  style: TextStyles.fontCircularSpotify14BlackRegular,
                 ),
               );
             }).toList(),
@@ -48,7 +48,10 @@ class _CustomSearchDropodwnState extends State<CustomSearchDropodwn> {
                 selectedValue = newValue!;
               });
             },
-            icon: Icon(Icons.arrow_drop_down, color: Color(0xff2A7737),),
+            icon: const Icon(
+              Icons.arrow_drop_down,
+              color: Color(0xff2A7737),
+            ),
           ),
         ),
       ),

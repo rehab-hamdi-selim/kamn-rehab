@@ -40,7 +40,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                   children: [
                     IconButton(
                         onPressed: () {},
-                        icon: Icon(Icons.arrow_circle_left_rounded)),
+                        icon: const Icon(Icons.arrow_circle_left_rounded)),
                     horizontalSpace(10),
                     Text(
                       currentRestaurant.name,
@@ -148,7 +148,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                             });
                           },
                           child: isExpandText
-                              ? SizedBox.shrink()
+                              ? const SizedBox.shrink()
                               : Text(
                                   "...see more",
                                   style: TextStyles
@@ -172,7 +172,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                     scrollDirection: Axis.horizontal,
                     children: currentRestaurant.categories.map((category) {
                       return category.name == "All"
-                          ? customAllCategButton()
+                          ? const customAllCategButton()
                           : CustomCategoryItem(
                               currentCateg: category,
                             );
@@ -196,7 +196,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
           ),
         ),
       ),
-      bottomNavigationBar: CustomNavBar(),
+      bottomNavigationBar: const CustomNavBar(),
     );
   }
 }
