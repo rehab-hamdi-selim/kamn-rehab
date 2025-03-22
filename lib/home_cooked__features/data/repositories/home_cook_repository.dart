@@ -9,7 +9,12 @@ import 'package:kamn/home_cooked__features/data/models/home_cook_model_test.dart
 
 abstract class AddHomeCookRepository {
   Future<Either<Faliure, HomeCookModel>> addHomeCookRequest(
-      HomeCookModel gymRequestModel);
+      HomeCookModel homeCookModel);
+
+  Future<Either<Faliure, void>> updateServiceProviderHomeCookAddDeliveryData(
+      HomeCookModel homeCookModel);
+
+  Future<Either<Faliure, HomeCookModel>> getServiceProviderHomeCook();
 
   Future<Either<Faliure, Map<String, List<String>>>> uploadImages(
       Map<String, List<File>> imagesMap, void Function(double) onProgress);
@@ -21,11 +26,29 @@ class AddHomeCookRepositoryImpl implements AddHomeCookRepository {
 
   AddHomeCookRepositoryImpl({required this.dataSource});
 
+  //mary
+
+  @override
+  Future<Either<Faliure, void>> updateServiceProviderHomeCookAddDeliveryData(
+      HomeCookModel homeCookModel) {
+    return executeTryAndCatchForRepository(() async {
+      return await dataSource
+          .updateServiceProviderHomeCookAddDeliveryData(homeCookModel);
+    });
+  }
+
+  @override
+  Future<Either<Faliure, HomeCookModel>> getServiceProviderHomeCook() {
+    return executeTryAndCatchForRepository(() async {
+      return await dataSource.getServiceProviderHomeCook();
+    });
+  }
+
   @override
   Future<Either<Faliure, HomeCookModel>> addHomeCookRequest(
-      HomeCookModel gymRequestModel) {
+      HomeCookModel homeCookModel) {
     return executeTryAndCatchForRepository(() async {
-      return await dataSource.addCookRequest(gymRequestModel);
+      return await dataSource.addHomeCookRequest(homeCookModel);
     });
   }
 

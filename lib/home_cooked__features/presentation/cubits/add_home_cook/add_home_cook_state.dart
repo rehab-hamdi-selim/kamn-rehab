@@ -12,18 +12,22 @@ enum AddHomeCookStatus {
   swipped,
   logoPicked,
   logoLoading,
-  gymImageLoading,
-  gymImagePicked,
+  homeCookImageLoading,
+  homeCookImagePicked,
   mandatoryFieldPicked,
   radioSelected,
   featureAdded,
-  addGymLoading,
-  addGymSuccess,
-  addGymError,
+  addHomeCookLoading,
+  addHomeCookSuccess,
+  addHomeCookError,
   uploadImagesSuccess,
   uploadImagesError,
   uploadImagesLoading,
   checkBarTapped,
+  nationalIdPicked,
+  getHomeCookLoading,
+  getHomeCookSuccess,
+  getHomeCookError,
 }
 
 // extension FeatureTypeColors on FeatureType {
@@ -56,9 +60,11 @@ extension AddGymStateX on AddHomeCookState {
 
   bool get isLogoLoading => state == AddHomeCookStatus.logoLoading;
 
-  bool get isGymImageLoading => state == AddHomeCookStatus.gymImageLoading;
+  bool get isHomeCookImageLoading =>
+      state == AddHomeCookStatus.homeCookImageLoading;
 
-  bool get isGymImagePicked => state == AddHomeCookStatus.gymImagePicked;
+  bool get isHomeCookImagePicked =>
+      state == AddHomeCookStatus.homeCookImagePicked;
 
   bool get isMandatoryFieldPicked =>
       state == AddHomeCookStatus.mandatoryFieldPicked;
@@ -67,11 +73,13 @@ extension AddGymStateX on AddHomeCookState {
 
   bool get isFeatureAdded => state == AddHomeCookStatus.featureAdded;
 
-  bool get isAddGymLoading => state == AddHomeCookStatus.addGymLoading;
+  bool get isAddHomeCookLoading =>
+      state == AddHomeCookStatus.addHomeCookLoading;
 
-  bool get isAddGymSuccess => state == AddHomeCookStatus.addGymSuccess;
+  bool get isAddHomeCookSuccess =>
+      state == AddHomeCookStatus.addHomeCookSuccess;
 
-  bool get isAddGymError => state == AddHomeCookStatus.addGymError;
+  bool get isAddHomeCookError => state == AddHomeCookStatus.addHomeCookError;
 
   bool get isUploadImagesSuccess =>
       state == AddHomeCookStatus.uploadImagesSuccess;
@@ -82,20 +90,23 @@ extension AddGymStateX on AddHomeCookState {
       state == AddHomeCookStatus.uploadImagesLoading;
 
   bool get isCheckBarTapped => state == AddHomeCookStatus.checkBarTapped;
+
+  bool get isNationalIdPicked => state == AddHomeCookStatus.nationalIdPicked;
 }
 
 class AddHomeCookState {
   final AddHomeCookStatus state;
   final String? erorrMessage;
   final File? logo;
-  final MandatoryFields? mandatoryFields;
-  final List<File>? gymImages;
+  final UtilityBill? utilityBill;
+  final NationalId? nationalId;
   List<bool> isValid;
+  List<bool> isValidNationalId;
 
   // final FeatureType? featureType;
   final List<Feature>? addedFeatures;
   final Map<String, List<String>>? imagesUrlMap;
-  final HomeCookModel? gymRequest;
+  final HomeCookModel? homeCookModel;
   final double? uploadProgress;
   final bool? isGymInfoValid;
   final bool? isAccept;
@@ -106,63 +117,69 @@ class AddHomeCookState {
       {required this.state,
       this.erorrMessage,
       this.logo,
-      this.mandatoryFields,
-      this.gymImages,
+      this.utilityBill,
+      this.nationalId,
       //this.featureType,
       this.addedFeatures,
       this.imagesUrlMap,
-      this.gymRequest,
+      this.homeCookModel,
       this.uploadProgress = 0,
       this.isAccept = false,
       this.isConfirm = false,
       this.isGymInfoValid = false,
       this.numberOfImages,
-      this.isValid = const [true, true, true]});
+      this.isValid = const [true, true, true],
+      this.isValidNationalId = const [true, true]});
 
   bool get isValidAll => isValid.every((element) => element);
+
+  bool get isValidNationalIdAll =>
+      isValidNationalId.every((element) => element);
 
   AddHomeCookState copyWith(
       {AddHomeCookStatus? state,
       String? erorrMessage,
       File? logo,
       // FeatureType? featureType,
-      MandatoryFields? mandatoryFields,
-      List<File>? gymImages,
+      UtilityBill? utilityBill,
+      NationalId? nationalId,
       List<Feature>? addedFeatures,
       Map<String, List<String>>? imagesUrlMap,
-      HomeCookModel? gymRequest,
+      HomeCookModel? homeCookModel,
       double? uploadProgress,
       bool? isAccept,
       bool? isConfirm,
       bool? isGymInfoValid,
       int? numberOfImages,
-      List<bool>? isValid}) {
+      List<bool>? isValid,
+      List<bool>? isValidNationalId}) {
     return AddHomeCookState(
         state: state ?? this.state,
         erorrMessage: erorrMessage ?? this.erorrMessage,
         logo: logo ?? this.logo,
         //featureType: featureType ?? this.featureType,
-        mandatoryFields: mandatoryFields ?? this.mandatoryFields,
-        gymImages: gymImages ?? this.gymImages,
+        utilityBill: utilityBill ?? this.utilityBill,
+        nationalId: nationalId ?? this.nationalId,
         addedFeatures: addedFeatures ?? this.addedFeatures,
         imagesUrlMap: imagesUrlMap ?? this.imagesUrlMap,
-        gymRequest: gymRequest ?? this.gymRequest,
+        homeCookModel: homeCookModel ?? this.homeCookModel,
         isAccept: isAccept ?? this.isAccept,
         isConfirm: isConfirm ?? this.isConfirm,
         uploadProgress: uploadProgress ?? this.uploadProgress,
         isGymInfoValid: isGymInfoValid ?? this.isGymInfoValid,
         numberOfImages: numberOfImages ?? this.numberOfImages,
-        isValid: isValid ?? this.isValid);
+        isValid: isValid ?? this.isValid,
+        isValidNationalId: isValidNationalId ?? this.isValidNationalId);
   }
 
   @override
   String toString() {
-    return 'AddGymState(state: $state, erorrMessage: $erorrMessage, logo: $logo, mandatoryFields: $mandatoryFields, gymImages: $gymImages, isValid: $isValid, )';
+    return 'AddGymState(state: $state, erorrMessage: $erorrMessage, logo: $logo, utilityBill: $utilityBill, nationalId: $nationalId, isValid: $isValid, isValidNationalId: $isValidNationalId, homeCookModel: $homeCookModel)';
   }
 }
 
-extension MandatoryFieldsX on MandatoryFields {
-  String get gymOperatingLicenseText => "Gym Operating License";
+extension UtilityBillX on UtilityBill {
+  String get electricityBillText => "Electricity Bill";
 
   String get idOrPassportOfOwnerText => "ID or Passport of Owner";
 
@@ -170,75 +187,114 @@ extension MandatoryFieldsX on MandatoryFields {
 
   String get taxRegistrationText => "Tax Registration";
 
-  bool get isGymOperatingLicensePicked => gymOperatingLicense != null;
+  bool get isElectricityBillPicked => electricityBill != null;
 
-  bool get isIdOrPassportOfOwnerPicked => idOrPassportOfOwner != null;
+  bool get isGasBillPicked => gasBill != null;
 
-  bool get isOwnershipContractPicked => ownershipContract != null;
+  bool get isLandlineBillPicked => landlineBill != null;
 
   File? getFieldByText(String text) {
     switch (text) {
-      case "Gym Operating License":
-        return gymOperatingLicense;
-      case "ID or Passport of Owner":
-        return idOrPassportOfOwner;
-      case "Ownership Contract":
-        return ownershipContract;
-      case "Tax Registration":
-        return taxRegistration;
+      case "Electricity Bill":
+        return electricityBill;
+      case "Gas Bill":
+        return gasBill;
+      case "Landline Bill":
+        return landlineBill;
       default:
         return null;
     }
   }
 }
 
-class MandatoryFields {
-  final File? ownershipContract;
-  final File? idOrPassportOfOwner;
-  final File? gymOperatingLicense;
-  final File? taxRegistration;
+class UtilityBill {
+  final File? electricityBill;
+  final File? gasBill;
+  final File? landlineBill;
 
-  MandatoryFields({
-    this.ownershipContract,
-    this.idOrPassportOfOwner,
-    this.gymOperatingLicense,
-    this.taxRegistration,
+  UtilityBill({
+    this.electricityBill,
+    this.gasBill,
+    this.landlineBill,
   });
 
-  MandatoryFields copyWith({
-    File? ownershipContract,
-    File? idOrPassportOfOwner,
-    File? gymOperatingLicense,
-    File? taxRegistration,
+  UtilityBill copyWith({
+    File? electricityBill,
+    File? gasBill,
+    File? landlineBill,
   }) {
-    return MandatoryFields(
-      ownershipContract: ownershipContract ?? this.ownershipContract,
-      idOrPassportOfOwner: idOrPassportOfOwner ?? this.idOrPassportOfOwner,
-      gymOperatingLicense: gymOperatingLicense ?? this.gymOperatingLicense,
-      taxRegistration: taxRegistration ?? this.taxRegistration,
+    return UtilityBill(
+      electricityBill: electricityBill ?? this.electricityBill,
+      gasBill: gasBill ?? this.gasBill,
+      landlineBill: landlineBill ?? this.landlineBill,
     );
   }
 
   @override
   String toString() {
-    return 'MandatoryFields(ownershipContract: $ownershipContract, idOrPassportOfOwner: $idOrPassportOfOwner, gymOperatingLicense: $gymOperatingLicense, taxRegistration: $taxRegistration)';
+    return 'UtilityBill(electricityBill: $electricityBill, gasBill: $gasBill, landlineBill: $landlineBill)';
   }
 
   @override
-  bool operator ==(covariant MandatoryFields other) {
+  bool operator ==(covariant UtilityBill other) {
     if (identical(this, other)) return true;
 
-    return other.ownershipContract == ownershipContract &&
-        other.idOrPassportOfOwner == idOrPassportOfOwner &&
-        other.gymOperatingLicense == gymOperatingLicense &&
-        other.taxRegistration == taxRegistration;
+    return other.electricityBill == electricityBill &&
+        other.gasBill == gasBill &&
+        other.landlineBill == landlineBill;
   }
 
   @override
   int get hashCode {
-    return ownershipContract.hashCode ^
-        idOrPassportOfOwner.hashCode ^
-        gymOperatingLicense.hashCode ^
-        taxRegistration.hashCode;
+    return electricityBill.hashCode ^ gasBill.hashCode ^ landlineBill.hashCode;
+  }
+}
+
+extension NationalIdX on NationalId {
+  String get frontText => "National ID Front";
+
+  String get backText => "National ID Back";
+
+  bool get isFrontPicked => front != null;
+
+  bool get isBackPicked => back != null;
+
+  File? getFieldByText(String text) {
+    switch (text) {
+      case "National ID Front":
+        return front;
+      case "National ID Back":
+        return back;
+      default:
+        return null;
+    }
+  }
+}
+
+class NationalId {
+  final File? front;
+  final File? back;
+
+  NationalId({this.front, this.back});
+
+  NationalId copyWith({File? front, File? back}) {
+    return NationalId(front: front ?? this.front, back: back ?? this.back);
+  }
+
+  @override
+  String toString() {
+    return 'NationalId(front: $front, back: $back)';
+  }
+
+  @override
+  bool operator ==(covariant NationalId other) {
+    if (identical(this, other)) return true;
+
+    return other.front == front && other.back == back;
+  }
+
+  @override
+  int get hashCode {
+    return front.hashCode ^ back.hashCode;
   }
 }

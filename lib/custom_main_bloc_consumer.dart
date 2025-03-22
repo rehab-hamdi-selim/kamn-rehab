@@ -6,7 +6,8 @@ import 'package:kamn/core/routing/app_router.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/gym_feature/gyms/presentation/screen/choose_plan_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_cubit.dart';
-import 'package:kamn/home_cooked__features/presentation/screen/add_home_cook_screen.dart';
+import 'package:kamn/home_cooked__features/presentation/screen/home_cook_screen.dart';
+import 'package:kamn/home_cooked__features/presentation/screen/home_cook_wraper_screen.dart';
 
 import 'core/common/cubit/app_user/app_user_cubit.dart';
 import 'core/common/widget/main_loader.dart';
@@ -49,8 +50,9 @@ class CustomMainBlocConsumer extends StatelessWidget {
             ),
             onGenerateRoute: AppRouter.generateRoute,
             home: BlocProvider(
-                create: (context) => getIt<AddHomeCookCubit>(),
-                child: HomeCookScreen())
+                create: (context) =>
+                    getIt<AddHomeCookCubit>()..getServiceProviderHomeCook(),
+                child: const HomeCookWrapperScreen())
             // OrderOptionsHomecook()
             // MealReviewScreen()
             );

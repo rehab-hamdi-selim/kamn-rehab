@@ -36,7 +36,7 @@ class GymLogoPreviewWidget extends StatelessWidget {
           child: InkWell(
             onTap: () => isLogo
                 ? context.read<AddHomeCookCubit>().pickLogoImage()
-                : context.read<AddHomeCookCubit>().replaceGymImage(index!),
+                : context.read<AddHomeCookCubit>().replaceHomeCookImage(index!),
             child: SvgPicture.asset('assets/icons/replace.svg'),
           ),
         ),

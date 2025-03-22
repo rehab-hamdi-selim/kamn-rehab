@@ -7,7 +7,12 @@ import 'package:kamn/core/const/firebase_collections.dart';
 import 'package:kamn/home_cooked__features/data/models/home_cook_model_test.dart';
 
 abstract class AddHomeCookRemoteDataSource {
-  Future<HomeCookModel> addCookRequest(HomeCookModel gymRequestModel);
+  Future<void> updateServiceProviderHomeCookAddDeliveryData(
+      HomeCookModel homeCookModel);
+
+  Future<HomeCookModel> getServiceProviderHomeCook();
+
+  Future<HomeCookModel> addHomeCookRequest(HomeCookModel gymRequestModel);
 
   Future<Map<String, List<String>>> uploadImages(
       Map<String, List<File>> imagesMap, void Function(double) onProgress);
@@ -20,15 +25,33 @@ class AddHomeCookRemoteDataSourceImpl implements AddHomeCookRemoteDataSource {
   final storage = FirebaseStorage.instance;
   final firestore = FirebaseFirestore.instance;
 
-  CollectionReference get _gymsCollection =>
+  CollectionReference get _homeCookCollection =>
       firestore.collection(FirebaseCollections.homeCookRequest);
 
+//mary
+
   @override
-  Future<HomeCookModel> addCookRequest(
+  Future<void> updateServiceProviderHomeCookAddDeliveryData(
+      HomeCookModel homeCookModel) async {
+    var docRef = _homeCookCollection.doc(homeCookModel.id);
+    await docRef.update(homeCookModel.toMap());
+  }
+
+//TODO: get service provider home cook with id just now for testing
+  @override
+  Future<HomeCookModel> getServiceProviderHomeCook() async {
+    var docRef = _homeCookCollection.doc("u0cBRLRyHcppREpHYdNf");
+    var docSnap = await docRef.get();
+
+    return HomeCookModel.fromMap(docSnap.data() as Map<String, dynamic>);
+  }
+
+  @override
+  Future<HomeCookModel> addHomeCookRequest(
       HomeCookModel homeCookRequestModel) async {
     try {
-      var docRef = _gymsCollection.doc();
-      homeCookRequestModel.id;
+      var docRef = _homeCookCollection.doc();
+      homeCookRequestModel = homeCookRequestModel.copyWith(id: docRef.id);
       await docRef.set(homeCookRequestModel.toMap());
       return homeCookRequestModel;
     } catch (e) {

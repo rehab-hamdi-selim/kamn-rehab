@@ -3,6 +3,11 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
+import 'package:kamn/core/common/entities/user_model.dart';
+import 'package:kamn/home_cooked__features/data/models/delivery_model.dart';
+
+import '../../../core/const/services_status_enum.dart';
+
 enum CurrentStatus { pending, accepted, rejected }
 
 class HomeCookModel {
@@ -13,41 +18,45 @@ class HomeCookModel {
   final String? logoUrl;
   final String? description;
   final String? phoneNumber;
-  final CurrentStatus? currentStatus;
+  final ServicesStatusEnum? currentStatus;
   final String? contactNumber;
   final List<ScoialMediaLink>? scoialMediaLinks;
-  final String? serviceProviderId;
-  final String? operationLicenseImageUrl;
-  final String? ownerIdPassportImageUrl;
-  final String? ownershipContractImageUrl;
-  final String? taxRegistrationImageUrl;
+  final UserModel? user;
+  final String? electricityBill;
+  final String? gasBill;
+  final String? landlineBill;
+  final String? nationalIdFrontImageUrl;
+  final String? nationalIdBackImageUrl;
   final String? comment;
   final String? homeAddress;
   final String? street;
   final String? buildingNumber;
   final String? apartment;
-
-  HomeCookModel(
-      {this.id,
-      this.name,
-      this.address,
-      this.imagesUrl,
-      this.logoUrl,
-      this.description,
-      this.phoneNumber,
-      this.currentStatus,
-      this.contactNumber,
-      this.scoialMediaLinks,
-      this.serviceProviderId,
-      this.operationLicenseImageUrl,
-      this.ownerIdPassportImageUrl,
-      this.ownershipContractImageUrl,
-      this.taxRegistrationImageUrl,
-      this.comment,
-      this.apartment,
-      this.buildingNumber,
-      this.homeAddress,
-      this.street});
+  final DeliveryModel? delivery;
+  HomeCookModel({
+    this.id,
+    this.name,
+    this.address,
+    this.imagesUrl,
+    this.logoUrl,
+    this.description,
+    this.phoneNumber,
+    this.currentStatus,
+    this.contactNumber,
+    this.scoialMediaLinks,
+    this.user,
+    this.electricityBill,
+    this.gasBill,
+    this.landlineBill,
+    this.nationalIdFrontImageUrl,
+    this.nationalIdBackImageUrl,
+    this.comment,
+    this.homeAddress,
+    this.street,
+    this.buildingNumber,
+    this.apartment,
+    this.delivery,
+  });
 
   HomeCookModel copyWith({
     String? id,
@@ -57,19 +66,21 @@ class HomeCookModel {
     String? logoUrl,
     String? description,
     String? phoneNumber,
-    CurrentStatus? currentStatus,
+    ServicesStatusEnum? currentStatus,
     String? contactNumber,
     List<ScoialMediaLink>? scoialMediaLinks,
-    String? serviceProviderId,
-    String? operationLicenseImageUrl,
-    String? ownerIdPassportImageUrl,
-    String? ownershipContractImageUrl,
-    String? taxRegistrationImageUrl,
+    UserModel? user,
+    String? electricityBill,
+    String? gasBill,
+    String? landlineBill,
+    String? nationalIdFrontImageUrl,
+    String? nationalIdBackImageUrl,
     String? comment,
     String? homeAddress,
     String? street,
     String? buildingNumber,
     String? apartment,
+    DeliveryModel? delivery,
   }) {
     return HomeCookModel(
       id: id ?? this.id,
@@ -82,94 +93,94 @@ class HomeCookModel {
       currentStatus: currentStatus ?? this.currentStatus,
       contactNumber: contactNumber ?? this.contactNumber,
       scoialMediaLinks: scoialMediaLinks ?? this.scoialMediaLinks,
-      serviceProviderId: serviceProviderId ?? this.serviceProviderId,
-      operationLicenseImageUrl:
-          operationLicenseImageUrl ?? this.operationLicenseImageUrl,
-      ownerIdPassportImageUrl:
-          ownerIdPassportImageUrl ?? this.ownerIdPassportImageUrl,
-      ownershipContractImageUrl:
-          ownershipContractImageUrl ?? this.ownershipContractImageUrl,
-      taxRegistrationImageUrl:
-          taxRegistrationImageUrl ?? this.taxRegistrationImageUrl,
+      user: user ?? this.user,
+      electricityBill: electricityBill ?? this.electricityBill,
+      gasBill: gasBill ?? this.gasBill,
+      landlineBill: landlineBill ?? this.landlineBill,
+      nationalIdFrontImageUrl:
+          nationalIdFrontImageUrl ?? this.nationalIdFrontImageUrl,
+      nationalIdBackImageUrl:
+          nationalIdBackImageUrl ?? this.nationalIdBackImageUrl,
       comment: comment ?? this.comment,
       homeAddress: homeAddress ?? this.homeAddress,
       street: street ?? this.street,
       buildingNumber: buildingNumber ?? this.buildingNumber,
       apartment: apartment ?? this.apartment,
+      delivery: delivery ?? this.delivery,
     );
   }
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'name': name,
-      'address': address,
-      'imagesUrl': imagesUrl,
-      'logoUrl': logoUrl,
-      'description': description,
-      'phoneNumber': phoneNumber,
-      'currentStatus': currentStatus?.name,
-      'contactNumber': contactNumber,
-      'scoialMediaLinks': scoialMediaLinks?.map((x) => x.toMap()).toList(),
-      'serviceProviderId': serviceProviderId,
-      'operationLicenseImageUrl': operationLicenseImageUrl,
-      'ownerIdPassportImageUrl': ownerIdPassportImageUrl,
-      'ownershipContractImageUrl': ownershipContractImageUrl,
-      'taxRegistrationImageUrl': taxRegistrationImageUrl,
-      'comment': comment,
-      'homeAddress': homeAddress,
-      'street': street,
-      'buildingNumber': buildingNumber,
-      'apartment': apartment,
-    };
+    final Map<String, dynamic> map = {};
+
+    if (id != null) map['id'] = id;
+    if (name != null) map['name'] = name;
+    if (address != null) map['address'] = address;
+    if (imagesUrl != null) map['imagesUrl'] = imagesUrl;
+    if (logoUrl != null) map['logoUrl'] = logoUrl;
+    if (description != null) map['description'] = description;
+    if (phoneNumber != null) map['phoneNumber'] = phoneNumber;
+    if (currentStatus != null) map['currentStatus'] = currentStatus?.name;
+    if (contactNumber != null) map['contactNumber'] = contactNumber;
+    if (scoialMediaLinks != null)
+      map['scoialMediaLinks'] =
+          scoialMediaLinks?.map((x) => x.toMap()).toList();
+    if (user != null) map['user'] = user?.toMap();
+    if (electricityBill != null) map['electricityBill'] = electricityBill;
+    if (gasBill != null) map['gasBill'] = gasBill;
+    if (landlineBill != null) map['landlineBill'] = landlineBill;
+    if (nationalIdFrontImageUrl != null)
+      map['nationalIdFrontImageUrl'] = nationalIdFrontImageUrl;
+    if (nationalIdBackImageUrl != null)
+      map['nationalIdBackImageUrl'] = nationalIdBackImageUrl;
+    if (comment != null) map['comment'] = comment;
+    if (homeAddress != null) map['homeAddress'] = homeAddress;
+    if (street != null) map['street'] = street;
+    if (buildingNumber != null) map['buildingNumber'] = buildingNumber;
+    if (apartment != null) map['apartment'] = apartment;
+    if (delivery != null) map['delivery'] = delivery?.toMap();
+    return map;
   }
 
   factory HomeCookModel.fromMap(Map<String, dynamic> map) {
     return HomeCookModel(
-      id: map['id'] != null ? map['id'] as String : null,
-      name: map['name'] != null ? map['name'] as String : null,
-      address: map['address'] != null ? map['address'] as String : null,
+      id: map['id'] as String? ?? '',
+      name: map['name'] as String? ?? '',
+      address: map['address'] as String? ?? '',
       imagesUrl: map['imagesUrl'] != null
-          ? List<String>.from((map['imagesUrl'] as List<String>))
-          : null,
-      logoUrl: map['logoUrl'] != null ? map['logoUrl'] as String : null,
-      description:
-          map['description'] != null ? map['description'] as String : null,
-      phoneNumber:
-          map['phoneNumber'] != null ? map['phoneNumber'] as String : null,
+          ? List<String>.from(
+              (map['imagesUrl'] as List).map((e) => e.toString()))
+          : [],
+      logoUrl: map['logoUrl'] as String? ?? '',
+      description: map['description'] as String? ?? '',
+      phoneNumber: map['phoneNumber'] as String? ?? '',
       currentStatus: map['currentStatus'] != null
-          ? CurrentStatus.values.firstWhere(
-              (element) => element.name == map['currentStatus'] as String)
-          : null,
-      contactNumber:
-          map['contactNumber'] != null ? map['contactNumber'] as String : null,
+          ? ServicesStatusEnum.values.byName(map['currentStatus'] as String)
+          : ServicesStatusEnum.pending,
+      contactNumber: map['contactNumber'] as String? ?? '',
       scoialMediaLinks: map['scoialMediaLinks'] != null
           ? List<ScoialMediaLink>.from(
-              (map['scoialMediaLinks'] as List<int>).map<ScoialMediaLink?>(
+              (map['scoialMediaLinks'] as List).map<ScoialMediaLink>(
                 (x) => ScoialMediaLink.fromMap(x as Map<String, dynamic>),
               ),
             )
+          : [],
+      user: map['user'] != null
+          ? UserModel.fromMap(map['user'] as Map<String, dynamic>)
           : null,
-      serviceProviderId: map['serviceProviderId'] != null
-          ? map['serviceProviderId'] as String
+      electricityBill: map['electricityBill'] as String? ?? '',
+      gasBill: map['gasBill'] as String? ?? '',
+      landlineBill: map['landlineBill'] as String? ?? '',
+      nationalIdFrontImageUrl: map['nationalIdFrontImageUrl'] as String? ?? '',
+      nationalIdBackImageUrl: map['nationalIdBackImageUrl'] as String? ?? '',
+      comment: map['comment'] as String? ?? '',
+      homeAddress: map['homeAddress'] as String? ?? '',
+      street: map['street'] as String? ?? '',
+      buildingNumber: map['buildingNumber'] as String? ?? '',
+      apartment: map['apartment'] as String? ?? '',
+      delivery: map['delivery'] != null
+          ? DeliveryModel.fromMap(map['delivery'] as Map<String, dynamic>)
           : null,
-      operationLicenseImageUrl: map['operationLicenseImageUrl'] != null
-          ? map['operationLicenseImageUrl'] as String
-          : null,
-      ownerIdPassportImageUrl: map['ownerIdPassportImageUrl'] != null
-          ? map['ownerIdPassportImageUrl'] as String
-          : null,
-      ownershipContractImageUrl: map['ownershipContractImageUrl'] != null
-          ? map['ownershipContractImageUrl'] as String
-          : null,
-      taxRegistrationImageUrl: map['taxRegistrationImageUrl'] != null
-          ? map['taxRegistrationImageUrl'] as String
-          : null,
-      comment: map['comment'] != null ? map['comment'] as String : null,
-      homeAddress: map['homeAddress'] ?? '',
-      street: map['street'] ?? '',
-      buildingNumber: map['buildingNumber'] ?? '',
-      apartment: map['apartment'] ?? '',
     );
   }
 
@@ -180,7 +191,7 @@ class HomeCookModel {
 
   @override
   String toString() {
-    return 'GymRequestModel(id: $id, name: $name, address: $address, imagesUrl: $imagesUrl, logoUrl: $logoUrl, description: $description, phoneNumber: $phoneNumber, currentStatus: $currentStatus, contactNumber: $contactNumber, scoialMediaLinks: $scoialMediaLinks, serviceProviderId: $serviceProviderId, operationLicenseImageUrl: $operationLicenseImageUrl, ownerIdPassportImageUrl: $ownerIdPassportImageUrl, ownershipContractImageUrl: $ownershipContractImageUrl, taxRegistrationImageUrl: $taxRegistrationImageUrl, comment: $comment, homeAddress:$homeAddress,street:$street,buildingNumber:$buildingNumber,apartment:$apartment)';
+    return 'HomeCookModel(id: $id, name: $name, address: $address, imagesUrl: $imagesUrl, logoUrl: $logoUrl, description: $description, phoneNumber: $phoneNumber, currentStatus: $currentStatus, contactNumber: $contactNumber, scoialMediaLinks: $scoialMediaLinks, user: $user, electricityBill: $electricityBill, gasBill: $gasBill, landlineBill: $landlineBill, nationalIdFrontImageUrl: $nationalIdFrontImageUrl, nationalIdBackImageUrl: $nationalIdBackImageUrl, comment: $comment, homeAddress: $homeAddress, street: $street, buildingNumber: $buildingNumber, apartment: $apartment, delivery: $delivery )';
   }
 
   @override
@@ -197,16 +208,18 @@ class HomeCookModel {
         other.currentStatus == currentStatus &&
         other.contactNumber == contactNumber &&
         listEquals(other.scoialMediaLinks, scoialMediaLinks) &&
-        other.serviceProviderId == serviceProviderId &&
-        other.operationLicenseImageUrl == operationLicenseImageUrl &&
-        other.ownerIdPassportImageUrl == ownerIdPassportImageUrl &&
-        other.ownershipContractImageUrl == ownershipContractImageUrl &&
-        other.taxRegistrationImageUrl == taxRegistrationImageUrl &&
+        other.user == user &&
+        other.electricityBill == electricityBill &&
+        other.gasBill == gasBill &&
+        other.landlineBill == landlineBill &&
+        other.nationalIdFrontImageUrl == nationalIdFrontImageUrl &&
+        other.nationalIdBackImageUrl == nationalIdBackImageUrl &&
         other.comment == comment &&
-        other.buildingNumber == buildingNumber &&
+        other.homeAddress == homeAddress &&
         other.street == street &&
+        other.buildingNumber == buildingNumber &&
         other.apartment == apartment &&
-        other.homeAddress == homeAddress;
+        other.delivery == delivery;
   }
 
   @override
@@ -221,16 +234,18 @@ class HomeCookModel {
         currentStatus.hashCode ^
         contactNumber.hashCode ^
         scoialMediaLinks.hashCode ^
-        serviceProviderId.hashCode ^
-        operationLicenseImageUrl.hashCode ^
-        ownerIdPassportImageUrl.hashCode ^
-        ownershipContractImageUrl.hashCode ^
-        taxRegistrationImageUrl.hashCode ^
+        user.hashCode ^
+        electricityBill.hashCode ^
+        gasBill.hashCode ^
+        landlineBill.hashCode ^
+        nationalIdFrontImageUrl.hashCode ^
+        nationalIdBackImageUrl.hashCode ^
         comment.hashCode ^
         homeAddress.hashCode ^
-        apartment.hashCode ^
         street.hashCode ^
-        buildingNumber.hashCode;
+        buildingNumber.hashCode ^
+        apartment.hashCode ^
+        delivery.hashCode;
   }
 }
 
@@ -254,16 +269,18 @@ class ScoialMediaLink {
   }
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'name': name,
-      'link': link,
-    };
+    final Map<String, dynamic> map = {};
+
+    if (name != null) map['name'] = name;
+    if (link != null) map['link'] = link;
+
+    return map;
   }
 
   factory ScoialMediaLink.fromMap(Map<String, dynamic> map) {
     return ScoialMediaLink(
-      name: map['name'] != null ? map['name'] as String : null,
-      link: map['link'] != null ? map['link'] as String : null,
+      name: map['name'] as String? ?? '',
+      link: map['link'] as String? ?? '',
     );
   }
 

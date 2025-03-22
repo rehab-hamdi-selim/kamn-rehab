@@ -9,6 +9,9 @@ import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_cubit.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_state.dart';
 
+import '../../../../../core/common/cubit/app_user/app_user_cubit.dart';
+import '../../../screen/food_etails_info_screen.dart';
+
 class CustomConfirmationDialog extends StatelessWidget {
   const CustomConfirmationDialog({super.key});
 
@@ -33,7 +36,7 @@ class CustomConfirmationDialog extends StatelessWidget {
                 // 🟢 Upload in Progress UI
                 if (state.isUploadImagesLoading ||
                     state.isLoading ||
-                    state.isAddGymLoading) ...[
+                    state.isAddHomeCookLoading) ...[
                   Center(
                     child: Column(
                       children: [
@@ -42,12 +45,12 @@ class CustomConfirmationDialog extends StatelessWidget {
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         LinearProgressIndicator(
                           value: state.uploadProgress! / state.numberOfImages!,
                           color: AppPallete.blackColor,
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         const Text("Uploading..."),
                       ],
                     ),
@@ -55,7 +58,8 @@ class CustomConfirmationDialog extends StatelessWidget {
                 ]
 
                 // ✅ Upload Success UI
-                else if (state.isAddGymSuccess) ...[
+                else if (state.isAddHomeCookSuccess &&
+                    context.read<AppUserCubit>().state.homeCookId != null) ...[
                   Center(
                     child: Column(
                       children: [
@@ -67,11 +71,15 @@ class CustomConfirmationDialog extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         ElevatedButton(
                           onPressed: () {
-                            Navigator.pop(context);
                             cubit.reset();
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const FoodDetailsInfoScreen()));
                           },
                           child: const Text("OK"),
                         ),

@@ -14,6 +14,38 @@ class Constants {
 
   static final List<DocumentItem> mandatoryDocuments = [
     const DocumentItem(
+      title: 'Gym Operating License',
+      translation: 'رخصه تشغيل الجيم',
+      isValid: false,
+    ),
+    const DocumentItem(
+      title: 'ID or Passport of Owner',
+      translation: 'صورة البطاقة الشخصية أو جواز السفر لصاحب الملكيه/الجيم',
+      fontSize: 6,
+      isValid: false,
+    ),
+    const DocumentItem(
+      title: 'Ownership Contract',
+      translation: 'عقد ايجار او ملكيه المكان',
+      isValid: false,
+    ),
+  ];
+
+  static final List<DocumentItem> nationalIdFrontAndBack = [
+    const DocumentItem(
+      title: 'National ID Front',
+      translation: 'صورة البطاقة الشخصية الأمامية',
+      isValid: false,
+    ),
+    const DocumentItem(
+      title: 'National ID Back',
+      translation: 'صورة البطاقة الشخصية الخلفية',
+      isValid: false,
+    ),
+  ];
+
+  static final List<DocumentItem> utilityDocuments = [
+    const DocumentItem(
       title: 'Electricity Bill',
       translation: 'وصل الكهرباء',
       isValid: false,
@@ -21,12 +53,11 @@ class Constants {
     const DocumentItem(
       title: 'Gas Bill',
       translation: 'وصل الغاز',
-      fontSize: 6,
       isValid: false,
     ),
     const DocumentItem(
-      title: 'ID Card',
-      translation: 'صورة البطاقة الشخصية أو جواز السفر لصاحب الملكيه',
+      title: 'Landline Bill',
+      translation: 'وصل الخط الأرضي',
       isValid: false,
     ),
   ];

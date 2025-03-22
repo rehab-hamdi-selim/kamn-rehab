@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/playground_feature/authentication/data/repositories/auth_repository.dart';
 
+import '../../../const/shared_pref_constans.dart';
 import '../../../helpers/secure_storage_helper.dart';
 import '../../entities/user_model.dart';
 
@@ -29,6 +30,26 @@ class AppUserCubit extends Cubit<AppUserState> {
         ));
       });
     }
+  }
+
+  Future<void> saveHomeCookId(String id) async {
+    final res = await SecureStorageHelper.saveData(
+        id, SharedPrefrencesConstans.homeCook);
+    res.fold((l) {
+      emit(state.copyWith(errorMessage: l));
+    }, (r) {
+      emit(state.copyWith(homeCookId: id));
+    });
+  }
+
+  Future<void> getHomeCookId() async {
+    final res = await SecureStorageHelper.getData<String>(
+        SharedPrefrencesConstans.homeCook);
+    res.fold((l) {
+      emit(state.copyWith(errorMessage: l));
+    }, (r) {
+      emit(state.copyWith(homeCookId: r));
+    });
   }
 
   Future<void> signOut() async {
@@ -143,12 +164,13 @@ class AppUserCubit extends Cubit<AppUserState> {
         user: null,
       ));
     });
- 
-}
- Future<void> updateUser (UserModel user,Map<String, dynamic> changedAttributes) async {
-  emit(state.copyWith(
-        state: AppUserStates.loading,
-      ));
+  }
+
+  Future<void> updateUser(
+      UserModel user, Map<String, dynamic> changedAttributes) async {
+    emit(state.copyWith(
+      state: AppUserStates.loading,
+    ));
     final res = await authRepository.updateUser(user.uid, changedAttributes);
     res.fold((l) {
       emit(state.copyWith(
@@ -163,7 +185,7 @@ class AppUserCubit extends Cubit<AppUserState> {
     });
   }
 
-  bool isSpammer(){
-    return state.user?.spamer??false;
+  bool isSpammer() {
+    return state.user?.spamer ?? false;
   }
 }

@@ -4,8 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_cubit.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/add_home_cook/verify_location/custom_confirmation_dialog.dart';
-import 'package:kamn/home_cooked__features/presentation/widgets/add_home_cook/verify_location/custom_mandatory_documents_section.dart';
+import 'package:kamn/home_cooked__features/presentation/widgets/add_home_cook/verify_location/custom_documents_section.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/add_home_cook/verify_location/custom_navigation_HomeButton.dart';
+
+import '../../../core/helpers/spacer.dart';
 
 class VerifyLocationScreenScreen extends StatelessWidget {
   const VerifyLocationScreenScreen({super.key});
@@ -17,7 +19,7 @@ class VerifyLocationScreenScreen extends StatelessWidget {
       child: Column(
         spacing: 16.h,
         children: [
-          const CustomMandatoryDocumentsSection(),
+          const CustomDocumentsSection(),
           Divider(
             color: AppPallete.grayColor,
             thickness: 0.2.h,
@@ -28,11 +30,14 @@ class VerifyLocationScreenScreen extends StatelessWidget {
             onNextPressed: () {
               cubit.checkMandatoryFields();
 
-              print(
-                  "1 ${cubit.state.isGymInfoValid} ${cubit.requiredDocumentsKey.currentState!.validate()} 3${cubit.state.isValidAll}");
+              //TODO: fix this key
+              // //${cubit.requiredDocumentsKey.currentState!.validate()}
+              print('''1 ${cubit.state.isGymInfoValid}
+                  3${cubit.state.isValidAll}
+                  ''');
 
               if (cubit.state.isGymInfoValid! &&
-                  cubit.requiredDocumentsKey.currentState!.validate() &&
+                  //  cubit.requiredDocumentsKey.currentState!.validate() &&
                   cubit.state.isValidAll) {
                 showDialog(
                     context: context,
@@ -44,6 +49,7 @@ class VerifyLocationScreenScreen extends StatelessWidget {
               }
             },
           ),
+          verticalSpace(32),
         ],
       ),
     );

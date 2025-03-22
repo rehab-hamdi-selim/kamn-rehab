@@ -15,7 +15,11 @@ enum AppUserStates {
   failureSaveData,
   clearUserData,
   loading,
-  updated
+  updated,
+  failureGetHomeCookId,
+  successGetHomeCookId,
+  failureSaveHomeCookId,
+  successSaveHomeCookId,
 }
 
 extension AppUserStateExtension on AppUserState {
@@ -38,12 +42,14 @@ class AppUserState {
   final AppUserStates state;
   final UserModel? user;
   final String? userIntialRoute;
+  final String? homeCookId;
   final String? errorMessage;
   AppUserState({
     required this.state,
     this.user,
     this.userIntialRoute,
     this.errorMessage,
+    this.homeCookId,
   });
 
   AppUserState copyWith({
@@ -51,18 +57,20 @@ class AppUserState {
     UserModel? user,
     String? errorMessage,
     String? userIntialRoute,
+    String? homeCookId,
   }) {
     return AppUserState(
       state: state ?? this.state,
       user: user ?? this.user,
       errorMessage: errorMessage ?? this.errorMessage,
       userIntialRoute: userIntialRoute ?? this.userIntialRoute,
+      homeCookId: homeCookId ?? this.homeCookId,
     );
   }
 
   @override
   String toString() =>
-      'AppUserState(state: $state, user: $user, errorMessage: $errorMessage )';
+      'AppUserState(state: $state, user: $user, errorMessage: $errorMessage, homeCookId: $homeCookId)';
 
   @override
   bool operator ==(covariant AppUserState other) {
@@ -70,9 +78,14 @@ class AppUserState {
 
     return other.state == state &&
         other.user == user &&
-        other.errorMessage == errorMessage;
+        other.errorMessage == errorMessage &&
+        other.homeCookId == homeCookId;
   }
 
   @override
-  int get hashCode => state.hashCode ^ user.hashCode ^ errorMessage.hashCode;
+  int get hashCode =>
+      state.hashCode ^
+      user.hashCode ^
+      errorMessage.hashCode ^
+      homeCookId.hashCode;
 }

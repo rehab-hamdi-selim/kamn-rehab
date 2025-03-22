@@ -8,6 +8,8 @@ import 'package:kamn/home_cooked__features/data/models/home_cook_model_test.dart
 import 'package:kamn/home_cooked__features/data/repositories/home_cook_repository.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_state.dart';
 
+import '../../../data/models/delivery_model.dart';
+
 @injectable
 class AddHomeCookCubit extends Cubit<AddHomeCookState> {
   final TextEditingController nameController = TextEditingController();
@@ -84,35 +86,35 @@ class AddHomeCookCubit extends Cubit<AddHomeCookState> {
     }
   }
 
-  Future<void> pickGymImage() async {
+  Future<void> pickHomeCookImage() async {
     final image = await pickImage();
     if (image != null) {
       _gymImages.add(image);
       emit(state.copyWith(
-          state: AddHomeCookStatus.gymImagePicked,
-          gymImages: List.from(_gymImages)));
+        state: AddHomeCookStatus.homeCookImagePicked,
+      ));
     }
   }
 
-  Future<void> replaceGymImage(int index) async {
+  Future<void> replaceHomeCookImage(int index) async {
     final image = await pickImage();
     if (image != null) {
       _gymImages[index] = image;
       emit(state.copyWith(
-          state: AddHomeCookStatus.gymImagePicked,
-          gymImages: List.from(_gymImages)));
+        state: AddHomeCookStatus.homeCookImagePicked,
+      ));
     }
   }
 
   bool checkMandatoryFields() {
-    final mandatoryFields = state.mandatoryFields;
+    final mandatoryFields = state.utilityBill;
 
     var isValid = List<bool>.from(state.isValid);
-    isValid[0] = mandatoryFields?.gymOperatingLicense != null;
+    isValid[0] = mandatoryFields?.electricityBill != null;
 
-    isValid[1] = mandatoryFields?.idOrPassportOfOwner != null;
+    isValid[1] = mandatoryFields?.gasBill != null;
 
-    isValid[2] = mandatoryFields?.ownershipContract != null;
+    isValid[2] = mandatoryFields?.landlineBill != null;
 
     print(isValid);
     emit(state.copyWith(
@@ -121,77 +123,76 @@ class AddHomeCookCubit extends Cubit<AddHomeCookState> {
     return state.isValidAll;
   }
 
-  // void addFeature() {
-  //   emit(state.copyWith(
-  //     state: AddGymStatus.featureAdded,
-  //     addedFeatures: [
-  //       ...state.addedFeatures ?? [],
-  //       Feature(
-  //         name: menuController.text,
-  //         description: featureDescriptionController.text,
-  //         price: priceController.text,
-  //
-  //       )
-  //     ],
-  //   ));
-  // }
+  bool checkNationalIdFields() {
+    final mandatoryFields = state.nationalId;
+    var isValidNationalId = List<bool>.from(state.isValidNationalId);
+    isValidNationalId[0] = mandatoryFields?.front != null;
+    isValidNationalId[1] = mandatoryFields?.back != null;
+    print(isValidNationalId);
+    emit(state.copyWith(
+      isValidNationalId: isValidNationalId,
+    ));
+    return state.isValidNationalIdAll;
+  }
 
-  // void onChangeRadioSelection(FeatureType newOption) {
-  //   if (state.featureType == newOption) {
-  //     return;
-  //   }
-  //   emit(state.copyWith(
-  //       state: AddGymStatus.radioSelected, featureType: newOption));
-  // }
-
-  Future<void> pickMandatoryImages(String field) async {
+  Future<void> pickUtilityImages(String field) async {
     final image = await pickImage();
-
     if (image != null) {
       emit(state.copyWith(
         state: AddHomeCookStatus.mandatoryFieldPicked,
-        mandatoryFields: (state.mandatoryFields ?? MandatoryFields()).copyWith(
-          gymOperatingLicense: field == "Gym Operating License"
+        utilityBill: (state.utilityBill ?? UtilityBill()).copyWith(
+          electricityBill: field == "Electricity Bill"
               ? image
-              : state.mandatoryFields?.gymOperatingLicense,
-          idOrPassportOfOwner: field == "ID or Passport of Owner"
+              : state.utilityBill?.electricityBill,
+          gasBill: field == "Gas Bill" ? image : state.utilityBill?.gasBill,
+          landlineBill: field == "Landline Bill"
               ? image
-              : state.mandatoryFields?.idOrPassportOfOwner,
-          ownershipContract: field == "Ownership Contract"
-              ? image
-              : state.mandatoryFields?.ownershipContract,
-          taxRegistration: field == "Tax Registration"
-              ? image
-              : state.mandatoryFields?.taxRegistration,
+              : state.utilityBill?.landlineBill,
         ),
       ));
     }
   }
 
-  Future<void> addGymRequest(HomeCookModel cook) async {
-    emit(state.copyWith(state: AddHomeCookStatus.addGymLoading));
+  Future<void> pickNationalIdImages(String field) async {
+    final image = await pickImage();
+    if (image != null) {
+      emit(state.copyWith(
+        state: AddHomeCookStatus.nationalIdPicked,
+        nationalId: (state.nationalId ?? NationalId()).copyWith(
+          front: field == "National ID Front" ? image : state.nationalId?.front,
+          back: field == "National ID Back" ? image : state.nationalId?.back,
+        ),
+      ));
+    }
+  }
+
+  Future<void> addHomeCook(HomeCookModel cook) async {
+    emit(state.copyWith(state: AddHomeCookStatus.addHomeCookLoading));
     final response = await repository.addHomeCookRequest(cook);
     response.fold((error) {
       emit(state.copyWith(
-          state: AddHomeCookStatus.addGymError, erorrMessage: error.erorr));
-    }, (success) {
-      // emit(state.copyWith(
-      //  state: AddGymStatus.addGymSuccess, gymRequest: success));
+          state: AddHomeCookStatus.addHomeCookError,
+          erorrMessage: error.erorr));
+    }, (homeCookModel) {
+      emit(state.copyWith(
+          state: AddHomeCookStatus.addHomeCookSuccess,
+          homeCookModel: homeCookModel));
     });
   }
 
   Future<void> uploadImages() async {
-    emit(state.copyWith(state: AddHomeCookStatus.addGymLoading));
+    emit(state.copyWith(state: AddHomeCookStatus.addHomeCookLoading));
 
     final imagesMap = <String, List<File>>{
       'logo': state.logo == null ? [] : [state.logo!],
-      'gymImages': _gymImages,
-      'mandatory': [
-        state.mandatoryFields!.gymOperatingLicense!,
-        state.mandatoryFields!.idOrPassportOfOwner!,
-        state.mandatoryFields!.ownershipContract!,
-        if (state.mandatoryFields!.taxRegistration != null)
-          state.mandatoryFields!.taxRegistration!,
+      'utility': [
+        state.utilityBill!.electricityBill!,
+        state.utilityBill!.gasBill!,
+        state.utilityBill!.landlineBill!,
+      ],
+      'nationalId': [
+        state.nationalId!.front!,
+        state.nationalId!.back!,
       ],
     };
     final num = imagesMap.values.expand((list) => list).toList().length;
@@ -213,7 +214,7 @@ class AddHomeCookCubit extends Cubit<AddHomeCookState> {
       return null;
     },
         (urls) => emit(state.copyWith(
-          state: AddHomeCookStatus.uploadImagesSuccess,
+              state: AddHomeCookStatus.uploadImagesSuccess,
               imagesUrlMap: urls,
             )));
   }
@@ -235,5 +236,41 @@ class AddHomeCookCubit extends Cubit<AddHomeCookState> {
 
   void reset() {
     emit(state.copyWith(state: AddHomeCookStatus.initial, uploadProgress: 0));
+  }
+
+//mary
+
+  Future<void> updateServiceProviderHomeCookAddDeliveryData(
+      DeliveryModel deliveryModel) async {
+    emit(state.copyWith(state: AddHomeCookStatus.addHomeCookLoading));
+    //update home cook in the state with delivery data and pass it to the repository
+    final response = await repository
+        .updateServiceProviderHomeCookAddDeliveryData(state.homeCookModel!);
+    response.fold((error) {
+      emit(state.copyWith(
+          //create new error state here
+          state: AddHomeCookStatus.addHomeCookError,
+          erorrMessage: error.erorr));
+    }, (_) {
+      //create new success state here
+      emit(state.copyWith(
+        state: AddHomeCookStatus.addHomeCookSuccess,
+        //update home cook in the state with delivery data
+      ));
+    });
+  }
+
+  Future<void> getServiceProviderHomeCook() async {
+    emit(state.copyWith(state: AddHomeCookStatus.getHomeCookLoading));
+    final response = await repository.getServiceProviderHomeCook();
+    response.fold((error) {
+      emit(state.copyWith(
+          state: AddHomeCookStatus.getHomeCookError,
+          erorrMessage: error.erorr));
+    }, (homeCookModel) {
+      emit(state.copyWith(
+          state: AddHomeCookStatus.getHomeCookSuccess,
+          homeCookModel: homeCookModel));
+    });
   }
 }

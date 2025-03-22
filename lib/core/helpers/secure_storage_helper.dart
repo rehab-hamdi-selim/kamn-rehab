@@ -14,6 +14,32 @@ class SecureStorageHelper {
   static final _storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
 
   // Save user data
+  static Future<Either<String, void>> saveData<T>(T data, String key) async {
+    try {
+      await _storage.write(
+        key: key,
+        value: jsonEncode(data),
+      );
+      return const Right(null);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  //get data
+  static Future<Either<String, T>> getData<T>(String key) async {
+    try {
+      final data = await _storage.read(key: key);
+      if (data != null) {
+        return Right(jsonDecode(data));
+      }
+      return const Left('Data not found');
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  // Save user data
   static Future<Either<String, void>> saveUserData(UserModel user) async {
     try {
       await _storage.write(
@@ -85,16 +111,20 @@ class SecureStorageHelper {
       return Left(e.toString());
     }
   }
-  static Future<void> saveStringList( List<String> list) async {
-  final jsonString = jsonEncode(list);
-  await _storage.write(key: _ratingListKey, value: jsonString,);
-}
 
-static Future<List<String>> getStringList() async {
-  final jsonString = await _storage.read(key: _ratingListKey);
-  if (jsonString != null) {
-    return List<String>.from(jsonDecode(jsonString));
+  static Future<void> saveStringList(List<String> list) async {
+    final jsonString = jsonEncode(list);
+    await _storage.write(
+      key: _ratingListKey,
+      value: jsonString,
+    );
   }
-  return [];
-}
+
+  static Future<List<String>> getStringList() async {
+    final jsonString = await _storage.read(key: _ratingListKey);
+    if (jsonString != null) {
+      return List<String>.from(jsonDecode(jsonString));
+    }
+    return [];
+  }
 }
