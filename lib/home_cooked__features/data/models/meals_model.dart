@@ -13,6 +13,7 @@ class Meal {
   String details;
   List<String> imageUrls;
   bool isVerified;
+
   String verificationStatus; // Pending, Under Review, Approved
   String orderOption;
   DeliveryModel deliveryOption; // Pick-up or Delivery
