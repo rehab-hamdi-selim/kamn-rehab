@@ -7,7 +7,7 @@ import 'package:kamn/core/const/image_links.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/home_cooked__features/data/models/meals_model.dart';
-import 'package:kamn/home_cooked__features/presentation/screen/edit_meal_pop_up_screen.dart';
+import 'package:kamn/home_cooked__features/presentation/screens/edit_meal_pop_up_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_container_meal.dart';
 
 class CustomContainerMealImages extends StatefulWidget {

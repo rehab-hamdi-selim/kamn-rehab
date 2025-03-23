@@ -98,7 +98,10 @@ class Constants {
       "A delicious grilled chicken salad packed with vibrant greens, colorful vegetables, and topped with a light vinaigrette. The tender chicken adds a lean source of protein, while the mix of nuts and seeds provides healthy fats and essential micronutrients.";
   static const String ingredientsTitle = "Ingredients";
   static const String detailsTitle = "Details";
-  static const termsAndConditionsContent = '''1. Introduction
+  static const termsAndConditionsContent = '''1. Introduction 
+  
+  
+  
   
   
   
@@ -122,6 +125,10 @@ If you request a refund, the processing time will follow the same timeframe as o
   static const kCal = 'KCal';
   static const egp = '£GP';
   static const minute = 'min';
+
+  static const edit = 'Edit';
+  static const save = 'Save';
+  static const ingredients = "Ingredients";
 
   static const List<String> egyptGovernorates = [
     "Cairo",

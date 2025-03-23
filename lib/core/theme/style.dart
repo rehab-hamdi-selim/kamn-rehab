@@ -796,4 +796,78 @@ class TextStyles {
       color: AppPallete.green2,
       fontWeight: FontWeightHelper.bold,
       fontSize: 10.h);
+
+  ////////////////////////////////////////
+  static TextStyle fontCircularSpotify14WhiteMedium = TextStyle(
+      // renamed from fontCircularSpotify15MediumBlack
+      fontFamily: "CircularSpotify",
+      color: AppPallete.whiteColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 14.h);
+  static TextStyle fontCircularSpotify17BlackRegular = TextStyle(
+      // renamed from font16LightColorCircularSpotifyRegular
+      fontFamily: "CircularSpotify",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 17.h);
+
+  static TextStyle fontCircularSpotify12WhiteBold = TextStyle(
+      // renamed from font12CircularSpotifyTextBlackMedium
+      fontFamily: "CircularSpotify",
+      color: AppPallete.whiteColor,
+      fontWeight: FontWeightHelper.bold,
+      fontSize: 12.h);
+  static TextStyle circularSpotify14RegularGreycolor = TextStyle(
+    color: AppPallete.grayColor,
+    fontSize: 14.h,
+    fontFamily: 'CircularSpotifyTxT',
+    fontWeight: FontWeightHelper.regular,
+  );
+  static TextStyle fontCircularSpotify8GreenRegular = TextStyle(
+      // renamed from font12CircularSpotifyTextBlackMedium
+      fontFamily: "CircularSpotify",
+      color: AppPallete.green2,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 8.h);
+  static TextStyle fontCircularSpotify16lightWhiteColorMedium = TextStyle(
+      fontFamily: "CircularSpotify",
+      color: AppPallete.lightWhiteColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 16.h);
+  static TextStyle fontCircularSpotify10lightWhiteColorMedium = TextStyle(
+      fontFamily: "CircularSpotify",
+      color: AppPallete.lightWhiteColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 10.h);
+  static TextStyle fontCircularSpotify12lightWhiteColorMedium = TextStyle(
+      fontFamily: "CircularSpotify",
+      color: AppPallete.lightWhiteColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 12.h);
+  static TextStyle fontCircularSpotify12veryLightGray2Medium = TextStyle(
+      fontFamily: "CircularSpotify",
+      color: AppPallete.grey,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 12.h);
+  static TextStyle fontCircularSpotify8BlackRegular = TextStyle(
+      // renamed from font12CircularSpotifyTextBlackMedium
+      fontFamily: "CircularSpotify",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 8.h);
+  static TextStyle fontCircularSpotify21AccentBlackColorMedium = TextStyle(
+      fontFamily: "CircularSpotify",
+      color: AppPallete.accentBlackColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 21.h);
+  static TextStyle fontCircularSpotify13DarkGreyColorrRegular = TextStyle(
+      fontFamily: "CircularSpotify",
+      color: AppPallete.darkGreyColor,
+      fontWeight: FontWeightHelper.regular,
+      fontSize: 12.h);
+  static TextStyle fontCircularSpotify15lightWiteColorMedium = TextStyle(
+      fontFamily: "CircularSpotify",
+      color: AppPallete.lightWiteColor,
+      fontWeight: FontWeightHelper.medium,
+      fontSize: 15.h);
 }

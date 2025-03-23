@@ -53,7 +53,7 @@ class _CustomTabContainerState extends State<CustomTabContainer> {
               isSelected: selectedTabIndex == widget.tabNames.indexOf(tabNames),
               title: tabNames.name,
               width: 4,
-              color: AppPallete.accentBlackColor,
+              //color: AppPallete.accentBlackColor,
             );
           }).toList(),
         ),

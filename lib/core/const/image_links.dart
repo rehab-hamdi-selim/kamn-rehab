@@ -22,4 +22,11 @@ class ImageLinks {
   static const String plusBtn = "assets/images/plus_btn.png";
 
   static const String testrestaurant = 'assets/images/testrestaurant.png';
+
+  static const String backgroundImage = 'assets/images/background.png';
+  static const String frame = 'assets/images/frame.png';
+  static const String cooking = 'assets/images/cooking-_1X1.png';
+  static const String check = 'assets/images/Check.png';
+  static const String editPin = 'assets/images/edit_pin.png';
+  static const String requred_star = 'assets/images/requred_star.png';
 }
