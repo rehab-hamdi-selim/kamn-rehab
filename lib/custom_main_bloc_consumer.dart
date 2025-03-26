@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
+import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/routing/app_router.dart';
+import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/screens/add_gym_screen.dart';
 import 'package:kamn/gym_feature/gyms/presentation/pages/gyms_screen.dart';
 import 'package:kamn/gym_feature/gyms/presentation/screen/choose_plan_screen.dart';
 import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
-import 'package:kamn/playground_feature/authentication/presentation/screens/on_boarding_screen.dart';
 import 'core/common/cubit/app_user/app_user_cubit.dart';
 import 'core/common/widget/main_loader.dart';
-import 'core/di/di.dart';
-import 'playground_feature/authentication/presentation/screens/sign_in_screen.dart';
+import 'healthy_food_features/presentation/screens/home_page_screen.dart';
 
 class CustomMainBlocConsumer extends StatelessWidget {
   const CustomMainBlocConsumer({super.key});
+
+  //////
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +47,12 @@ class CustomMainBlocConsumer extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
+              scaffoldBackgroundColor: AppPallete.whiteColor,
             ),
             onGenerateRoute: AppRouter.generateRoute,
-            home: _buildHomeWidget(state, appUserCubit));
+            home:  _buildHomeWidget(state,appUserCubit));
+        //home: _buildHomeWidget(state, appUserCubit));
       },
     );
   }
@@ -57,26 +60,28 @@ class CustomMainBlocConsumer extends StatelessWidget {
   Widget _buildHomeWidget(AppUserState state, AppUserCubit appUserCubit) {
     if (state.isInitial()) {
       return const MainLoader();
+
+      //////////////////
     }
     if (state.isNotInstalled()) {
-     return BlocProvider(
+       return BlocProvider(
         create: (context) => getIt<AddGymCubit>(),
         child: AddGymScreen(),
       );
     }
     if (state.isLoggedIn() || state.isGettedData() || state.isSuccess()) {
-      
-
+      return const ChoosePlanScreen();
+      return const ChoosePlanScreen();
       // return BlocProvider(
       //   create:(context)=> getIt<SelectCategoryCubit>()..getPlaygrounds(),
       //   child: const SelectCategoryScreen(),
       // );
     }
     if (state.isNotLoggedIn() || state.isClearUserData()) {
-      return BlocProvider(
-        create: (context) => getIt<SignInCubit>(),
-        child: const SignInScreen(),
-      );
+      // return BlocProvider(
+      //   create: (context) => getIt<SignInCubit>(),
+      //   child: const SignInScreen(),
+      // );
     }
     return const MainLoader();
   }

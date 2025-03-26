@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:kamn/gym_feature/add_gym/data/models/gym_model.dart';
+import 'package:kamn/gym_feature/add_gym/data/models/gym_request_model.dart';
 
 class GymModel {
   final String? id;
@@ -357,9 +357,8 @@ class Feature {
   final String? id;
   final String? name;
   final String? logoId;
-
   final String? price;
-  final PricingOption? pricingOption;
+  final FeatureType? pricingOption;
   final String? description;
   Feature({
     this.id,
@@ -375,7 +374,7 @@ class Feature {
     String? name,
     String? logoId,
     String? price,
-    PricingOption? pricingOption,
+    FeatureType? pricingOption,
     String? description,
   }) {
     return Feature(
@@ -406,7 +405,7 @@ class Feature {
       logoId: map['logoId'] != null ? map['logoId'] as String : null,
       price: map['price'] != null ? map['price'] as String : null,
       pricingOption: map['pricingOption'] != null
-          ? PricingOption.values.byName(map['pricingOption'] as String)
+          ? FeatureType.values.byName(map['pricingOption'] as String)
           : null,
       description:
           map['description'] != null ? map['description'] as String : null,
@@ -573,9 +572,59 @@ class DiscountDuration {
 
 enum OfferType { monthly, annual }
 
-enum PricingOption {
+enum FeatureType {
   free,
   month,
   session,
-  year,
 }
+
+class ScoialMediaLink {
+  final String? name;
+  final String? link;
+  ScoialMediaLink({
+    this.name,
+    this.link,
+  });
+  ScoialMediaLink copyWith({
+    String? name,
+    String? link,
+  }) {
+    return ScoialMediaLink(
+      name: name ?? this.name,
+      link: link ?? this.link,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'name': name,
+      'link': link,
+    };
+  }
+
+  factory ScoialMediaLink.fromMap(Map<String, dynamic> map) {
+    return ScoialMediaLink(
+      name: map['name'] != null ? map['name'] as String : null,
+      link: map['link'] != null ? map['link'] as String : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory ScoialMediaLink.fromJson(String source) =>
+      ScoialMediaLink.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() => 'ScoialMediaLink(name: $name, link: $link)';
+
+  @override
+  bool operator ==(covariant ScoialMediaLink other) {
+    if (identical(this, other)) return true;
+
+    return other.name == name && other.link == link;
+  }
+
+  @override
+  int get hashCode => name.hashCode ^ link.hashCode;
+}
+

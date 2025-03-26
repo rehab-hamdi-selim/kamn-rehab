@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
@@ -8,14 +10,14 @@ class CustomTextFormField extends StatelessWidget {
   final String? hintText;
   final TextEditingController controller;
   final TextInputType keyType;
-  final String? sufixText;
   final Widget? widget;
   final int? lines;
   final String label;
   final String? optionalText;
   final int? maxLength;
   final BoxConstraints boxhight;
-  CustomTextFormField(
+  final List<TextInputFormatter>? inputFormatters;
+  const CustomTextFormField(
       {super.key,
       this.hintText,
       required this.keyType,
@@ -25,8 +27,8 @@ class CustomTextFormField extends StatelessWidget {
       this.maxLength,
       required this.label,
       this.optionalText,
-      this.sufixText,
-      this.widget});
+      this.widget,
+      this.inputFormatters});
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +75,7 @@ class CustomTextFormField extends StatelessWidget {
                 }
               : null,
           keyboardType: keyType,
+          inputFormatters: inputFormatters,
           controller: controller,
           style: TextStyles.fontCircularSpotify14LightBlackRegular,
           decoration: InputDecoration(
@@ -82,7 +85,8 @@ class CustomTextFormField extends StatelessWidget {
               child: widget,
             ),
             constraints: boxhight,
-            contentPadding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+            contentPadding:
+                EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
             errorBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
                   width: 1.2,
@@ -94,8 +98,8 @@ class CustomTextFormField extends StatelessWidget {
                   width: 1.2,
                 ),
                 borderRadius: BorderRadius.circular(20.r)),
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20.r)),
+            enabledBorder:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(20.r)),
             focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(
                 color: AppPallete.grayColor,
@@ -112,5 +116,4 @@ class CustomTextFormField extends StatelessWidget {
       ],
     );
   }
-
 }

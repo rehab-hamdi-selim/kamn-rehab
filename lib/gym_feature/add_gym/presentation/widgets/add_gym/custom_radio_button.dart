@@ -30,6 +30,8 @@ class CustomRadioButton extends StatelessWidget {
                   child: Radio<String>(
                     activeColor: activeColor,
                     fillColor: WidgetStateProperty.resolveWith((state) {
+                      return null;
+                    
                    
                     }),
                     value: text,

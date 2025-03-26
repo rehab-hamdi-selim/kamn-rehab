@@ -15,8 +15,7 @@ class GymFeaturesState extends Equatable {
      this.isChecked = false,
   });
   @override
-  // TODO: implement props
-  List<Object> get props => [selectedValue, priceText,descriptionText, isChecked];
+  List<Object> get props => [selectedValue, typedText, isChecked];
 
   GymFeaturesState copyWith({
     String? selectedValue,
@@ -26,9 +25,8 @@ class GymFeaturesState extends Equatable {
   }) {
     return GymFeaturesState(
       selectedValue: selectedValue ?? this.selectedValue,
-      priceText: priceText ?? this.priceText,
-      descriptionText: descriptionText ?? this.descriptionText,
-      isChecked: isChecked ?? this.isChecked,
+      typedText: typedText ?? this.typedText,
+      isChecked: isCHecked ?? isChecked,
     );
   }
 
