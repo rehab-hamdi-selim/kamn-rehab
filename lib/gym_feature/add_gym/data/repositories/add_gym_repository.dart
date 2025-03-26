@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:kamn/core/erorr/faliure.dart';
 import 'package:kamn/core/utils/try_and_catch.dart';
 import 'package:kamn/gym_feature/add_gym/data/datasources/add_gym_remote_data_source.dart';
-import 'package:kamn/gym_feature/add_gym/data/models/gym_model.dart';
+import 'package:kamn/gym_feature/add_gym/data/models/gym_request_model.dart';
 
 abstract class AddGymRepository {
   Future<Either<Faliure,GymRequestModel>> addGymRequest(GymRequestModel gymRequestModel);

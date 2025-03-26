@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/core/utils/image_picker.dart';
-import 'package:kamn/gym_feature/add_gym/data/models/gym_model.dart';
+import 'package:kamn/gym_feature/add_gym/data/models/gym_request_model.dart';
 import 'package:kamn/gym_feature/add_gym/data/repositories/add_gym_repository.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_state.dart';
 import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';

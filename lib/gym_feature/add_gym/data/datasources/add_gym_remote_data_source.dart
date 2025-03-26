@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/core/const/firebase_collections.dart';
-import 'package:kamn/gym_feature/add_gym/data/models/gym_model.dart';
+import 'package:kamn/gym_feature/add_gym/data/models/gym_request_model.dart';
 
 abstract class AddGymRemoteDataSource {
   Future<GymRequestModel> addGymRequest(GymRequestModel gymRequestModel);
@@ -24,7 +24,7 @@ class AddGymRemoteDataSourceImpl implements AddGymRemoteDataSource {
     try {
      
       var docRef = _gymsCollection.doc();
-      gymRequestModel.id;
+     gymRequestModel= gymRequestModel.copyWith(id: docRef.id);
       await docRef.set(gymRequestModel.toMap());
       return gymRequestModel;
     } catch (e) {
