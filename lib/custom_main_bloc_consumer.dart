@@ -5,6 +5,7 @@ import 'package:kamn/core/routing/app_router.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/screens/add_gym_screen.dart';
+import 'package:kamn/gym_feature/gyms/presentation/screen/gym_details_screen.dart';
 import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
 import 'package:kamn/playground_feature/authentication/presentation/screens/on_boarding_screen.dart';
 import 'package:kamn/playground_feature/sports/presentation/cubits/select_category_cubit/select_category_cubit.dart';
@@ -50,7 +51,9 @@ class CustomMainBlocConsumer extends StatelessWidget {
               useMaterial3: true,
             ),
             onGenerateRoute: AppRouter.generateRoute,
-            home: _buildHomeWidget(state, appUserCubit));
+            home:GymDetailsScreen()
+            // _buildHomeWidget(state, appUserCubit)
+            );
       },
     );
   }

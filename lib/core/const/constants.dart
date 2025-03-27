@@ -127,6 +127,23 @@ If you request a refund, the processing time will follow the same timeframe as o
     "Sohag",
     "South Sinai"
   ];
+   static final List<String> imgList = [
+    "assets/images/slider_image.jpeg",
+    "assets/images/slider_image.jpeg",
+    "assets/images/slider_image.jpeg",
+  ];
+ static final List features = [
+    "🛁 Hot Tubs & Recovery Zone ",
+    "🔥 Sauna & Steam Room",
+    "🧒 Childcare Services ",
+    "🏋️‍♀️ State-of-the-Art Equipment ",
+    "🧘 Yoga & Pilates Classes",
+    "🎉 Exclusive Member Events ",
+    "🚿 Spacious Locker Rooms ",
+    "💃 Diverse Group Classes  ",
+    "🍹 Juice Bar & Café ",
+    "🌐 Free WIFI "
+  ];
 
   static num kImageSliderHeight = 380.h;
   static num additionHightToToolBar = 300.h;
