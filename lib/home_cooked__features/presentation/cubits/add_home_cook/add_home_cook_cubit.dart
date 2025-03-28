@@ -46,12 +46,12 @@ class AddHomeCookCubit extends Cubit<AddHomeCookState> {
 
   final AddHomeCookRepository repository;
   final List<String> tabs = ["Personal Info", "Location Verify"];
-  final List<File> _gymImages = [];
+  final List<File> _homeCookImages = [];
   late TabController tabController;
-  final GlobalKey<FormState> gymInfoKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> homeCookInfoKey = GlobalKey<FormState>();
   final GlobalKey<FormState> requiredDocumentsKey = GlobalKey<FormState>();
 
-  List<File> get gymImages => List.unmodifiable(_gymImages);
+  List<File> get homeCookImages => List.unmodifiable(_homeCookImages);
 
   void initTabController(TickerProvider vsync) {
     tabController =
@@ -89,7 +89,7 @@ class AddHomeCookCubit extends Cubit<AddHomeCookState> {
   Future<void> pickHomeCookImage() async {
     final image = await pickImage();
     if (image != null) {
-      _gymImages.add(image);
+      _homeCookImages.add(image);
       emit(state.copyWith(
         state: AddHomeCookStatus.homeCookImagePicked,
       ));
@@ -99,7 +99,7 @@ class AddHomeCookCubit extends Cubit<AddHomeCookState> {
   Future<void> replaceHomeCookImage(int index) async {
     final image = await pickImage();
     if (image != null) {
-      _gymImages[index] = image;
+      _homeCookImages[index] = image;
       emit(state.copyWith(
         state: AddHomeCookStatus.homeCookImagePicked,
       ));
@@ -219,8 +219,8 @@ class AddHomeCookCubit extends Cubit<AddHomeCookState> {
             )));
   }
 
-  void validateGymInfo() {
-    final isGymInfoValid = gymInfoKey.currentState?.validate() ?? false;
+  void validateHomeCookInfo() {
+    final isGymInfoValid = homeCookInfoKey.currentState?.validate() ?? false;
     emit(state.copyWith(isGymInfoValid: isGymInfoValid));
   }
 

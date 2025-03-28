@@ -23,10 +23,10 @@ class CustomGymInfoScreen extends StatelessWidget {
           Row(
             children: [
               CustomCookButton(onPressed: () {
-                context.read<AddHomeCookCubit>().validateGymInfo();
+                context.read<AddHomeCookCubit>().validateHomeCookInfo();
                 if (context
                         .read<AddHomeCookCubit>()
-                        .gymInfoKey
+                        .homeCookInfoKey
                         .currentState!
                         .validate() ==
                     true) {

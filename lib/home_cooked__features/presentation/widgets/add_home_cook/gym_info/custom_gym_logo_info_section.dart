@@ -46,7 +46,7 @@ class CustomGymLogoInfoSection extends StatelessWidget {
       ),
       verticalSpace(12),
       Form(
-        key: context.read<AddHomeCookCubit>().gymInfoKey,
+        key: context.read<AddHomeCookCubit>().homeCookInfoKey,
         child: Column(
           children: [
             CustomGymTextFormField(
