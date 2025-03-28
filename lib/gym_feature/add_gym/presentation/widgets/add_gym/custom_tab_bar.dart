@@ -68,7 +68,7 @@ class CustomTabBar extends StatelessWidget {
       ),
     );
   }
-void _onTabTapped(int index, TabController _tabController,BuildContext context) {
+void _onTabTapped(int index, TabController tabController,BuildContext context) {
   // Prevent switching tabs from index 0 no matter what
   if (index == 1) {
     context.read<AddGymCubit>().validateGymInfo();

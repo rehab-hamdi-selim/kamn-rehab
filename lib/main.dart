@@ -3,14 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/core/common/class/custom_splash_screen.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/di/di.dart';
-import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/custom_main_bloc_consumer.dart';
 import 'package:kamn/init_dependencies.dart';
 import 'core/common/cubit/firebase_remote_config/firebase_remote_config_cubit.dart';
-import 'healthy_food_features/presentation/screens/searching_ui_screen.dart';
 
 // void main() {
 //   runApp(
@@ -29,15 +26,7 @@ import 'healthy_food_features/presentation/screens/searching_ui_screen.dart';
 
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
-import 'package:kamn/core/di/di.dart';
-import 'package:kamn/custom_main_bloc_consumer.dart';
-import 'package:kamn/init_dependencies.dart';
 
-import 'core/common/cubit/firebase_remote_config/firebase_remote_config_cubit.dart';
 
 void main() async {
   await initDependencies();
