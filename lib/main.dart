@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/custom_main_bloc_consumer.dart';
+import 'package:kamn/gym_feature/gyms/presentation/Cubit/Carousel/carousel_cubit.dart';
 import 'package:kamn/init_dependencies.dart';
 import 'core/common/cubit/firebase_remote_config/firebase_remote_config_cubit.dart';
 
@@ -28,6 +29,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+      create: (context) => CarouselPageCubit(),),
         BlocProvider(
           create: (context) => getIt<AppUserCubit>()..isFirstInstallation(),
         ),
