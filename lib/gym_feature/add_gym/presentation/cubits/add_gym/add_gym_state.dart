@@ -2,7 +2,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:kamn/gym_feature/add_gym/data/models/gym_model.dart';
+import 'package:kamn/gym_feature/add_gym/data/models/gym_request_model.dart';
 import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
 
 enum AddGymStatus {
@@ -99,6 +99,7 @@ class AddGymState {
       this.isValid = const [true, true, true]});
 
   bool get isValidAll => isValid.every((element) => element);
+  
   AddGymState copyWith(
       {AddGymStatus? state,
       String? erorrMessage,

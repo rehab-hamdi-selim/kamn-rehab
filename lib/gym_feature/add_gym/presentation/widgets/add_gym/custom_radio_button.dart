@@ -25,8 +25,8 @@ class CustomRadioButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               SizedBox(
-                  width: 25.w,
-                  height: 37.h,
+                  width: 20.w,
+                  height: 30.h,
                   child: Radio<String>(
                     activeColor: activeColor,
                     fillColor: WidgetStateProperty.resolveWith((state) {
@@ -35,12 +35,10 @@ class CustomRadioButton extends StatelessWidget {
                    
                     }),
                     value: text,
-                    groupValue:                      context.read<GymFeaturesCubit>().statusOption,
+                    groupValue:'',
                         
-                    onChanged: (String? newValue) {
-                     context
-                        .read<GymFeaturesCubit>()
-                        .onChangeStatusSelection(newValue!);
+                    onChanged: (value) {
+                      context.read<GymFeaturesCubit>().takeisChecked(state.isChecked);
                     },
                   )),
               Text(text,
