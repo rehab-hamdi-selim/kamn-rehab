@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
+import 'package:kamn/gym_feature/add_gym/data/models/gym_request_model.dart';
 
 class GymModel {
   final String? id;

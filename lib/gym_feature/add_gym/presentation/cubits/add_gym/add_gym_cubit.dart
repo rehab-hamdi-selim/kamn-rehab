@@ -3,8 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kamn/core/helpers/secure_storage_helper.dart';
 import 'package:kamn/core/utils/image_picker.dart';
-import 'package:kamn/gym_feature/add_gym/data/models/gym_model.dart';
+import 'package:kamn/gym_feature/add_gym/data/models/gym_request_model.dart';
 import 'package:kamn/gym_feature/add_gym/data/repositories/add_gym_repository.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_state.dart';
 import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
@@ -175,9 +176,41 @@ class AddGymCubit extends Cubit<AddGymState> {
       emit(state.copyWith(
           state: AddGymStatus.addGymError, erorrMessage: error.erorr));
     }, (success) {
+      // Save gym ID to secure storage after successful creation
       emit(state.copyWith(
           state: AddGymStatus.addGymSuccess, gymRequest: success));
     });
+  }
+
+  // New function to save gym ID to secure storage
+  Future<void> saveGymIdToSecureStorage(String gymId) async {
+    final response = await SecureStorageHelper.saveGymId(gymId);
+    response.fold(
+      (error) {
+        emit(state.copyWith(
+          state: AddGymStatus.secureStorageError,
+          erorrMessage: "Failed to save gym ID: $error",
+        ));
+      },
+      (_) {
+        print("Gym ID saved to secure storage");
+        // Successfully saved, no need to update state
+      },
+    );
+  }
+
+  // New function to get gym ID from secure storage
+  Future<void> getGymIdFromSecureStorage() async {
+    final response = await SecureStorageHelper.getGymId();
+    return response.fold(
+      (error) {
+        emit(state.copyWith(
+          state: AddGymStatus.secureStorageError,
+          erorrMessage: "Failed to get gym ID: $error",
+        ));
+      },
+      (gymId) => emit(state.copyWith(state: AddGymStatus.secureStorageSuccess, gymId: gymId))
+    );
   }
 
   Future<void> uploadImages() async {
