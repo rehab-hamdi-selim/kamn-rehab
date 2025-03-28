@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/gym_feature/gyms/presentation/widgets/track_gym_request_submission_screen/submission_incomplete.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/widgets/track_gym_request_submission_screen/submission_incomplete.dart';
 
 class GoToServices extends StatelessWidget {
   const GoToServices({super.key});

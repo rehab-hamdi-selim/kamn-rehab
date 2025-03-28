@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:kamn/core/theme/app_pallete.dart';
+import 'package:kamn/gym_feature/add_gym/data/models/gym_request_model.dart';
 
 enum TrackSubmissionStatus {
   initial,
@@ -12,7 +13,9 @@ enum TrackSubmissionStatus {
   error,
   submissionReceived,
   underReview,
-  approved
+  approved,
+  pending,
+  rejected
 }
 
 class TrackSubmissionState {
@@ -20,6 +23,7 @@ class TrackSubmissionState {
   final String? errorMessage;
   final List<bool?> stepsCompleted;
    final List<StepInfo> stepsInfo;
+   final GymRequestModel? gymRequestModel;
 
   
 static final List<StepInfo> defaultStepsInfo = [
@@ -46,22 +50,25 @@ static final List<StepInfo> defaultStepsInfo = [
     ),
   ];
   TrackSubmissionState({
+    List<StepInfo>? stepsInfo, // Optional parameter
     required this.status,
     this.errorMessage,
-    this.stepsCompleted = const [true, false, null],
-   List<StepInfo>? stepsInfo, // Optional parameter
+    this.stepsCompleted = const [true, null,true],
+    this.gymRequestModel,
   }) : stepsInfo = stepsInfo ?? List.from(defaultStepsInfo); 
   TrackSubmissionState copyWith({
     TrackSubmissionStatus? status,
     String? errorMessage,
     List<bool?>? stepsCompleted,
-    List<StepInfo>? stepsInfo
+    List<StepInfo>? stepsInfo,
+    GymRequestModel? gymRequestModel,
   }) {
     return TrackSubmissionState(
       status: status ?? this.status,
       errorMessage: errorMessage ?? this.errorMessage,
       stepsCompleted: stepsCompleted ?? this.stepsCompleted,
-      stepsInfo:stepsInfo  ?? this.stepsInfo,
+      stepsInfo: stepsInfo ?? this.stepsInfo,
+      gymRequestModel: gymRequestModel ?? this.gymRequestModel,
     );
   }
 
@@ -69,7 +76,7 @@ static final List<StepInfo> defaultStepsInfo = [
 
   @override
   String toString() {
-    return 'TrackSubmissionState(status: $status, errorMessage: $errorMessage, stepsCompleted: $stepsCompleted, : stepsInfo: $stepsInfo)';
+    return 'TrackSubmissionState(status: $status, errorMessage: $errorMessage, stepsCompleted: $stepsCompleted, stepsInfo: $stepsInfo,)';
   }
 }
 
@@ -82,6 +89,8 @@ extension TrackSubmissionStateX on TrackSubmissionState {
       status == TrackSubmissionStatus.submissionReceived;
   bool get isUnderReview => status == TrackSubmissionStatus.underReview;
   bool get isApproved => status == TrackSubmissionStatus.approved;
+  bool get isPending => status == TrackSubmissionStatus.pending;
+  bool get isRejected => status == TrackSubmissionStatus.rejected;
 }
 extension StepsInfoX on StepInfo {
   Color get color {

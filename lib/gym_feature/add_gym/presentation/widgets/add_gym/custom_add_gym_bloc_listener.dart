@@ -25,7 +25,7 @@ class CustomAddGymBlocListener extends StatelessWidget {
         }
         if (state.isSecureStorageSuccess) {
           if (state.gymId != null) {
-            Navigator.pushNamed(context, Routes.gymScreen);
+            Navigator.pushNamed(context, Routes.trackGymSubmission,arguments: state.gymId);
           }
         }
       },
