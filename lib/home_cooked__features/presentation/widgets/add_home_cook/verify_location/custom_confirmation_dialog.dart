@@ -79,7 +79,7 @@ class CustomConfirmationDialog extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const FoodDetailsInfoScreen()));
+                                        const EditMealScreen()));
                           },
                           child: const Text("OK"),
                         ),

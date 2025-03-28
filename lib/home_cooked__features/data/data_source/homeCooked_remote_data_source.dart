@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/core/const/firebase_collections.dart';
 import 'package:kamn/home_cooked__features/data/models/home_cook_model_test.dart';
+import 'package:kamn/home_cooked__features/data/models/meals_model.dart';
 
 abstract class AddHomeCookRemoteDataSource {
   Future<void> updateServiceProviderHomeCookAddDeliveryData(
@@ -13,6 +14,12 @@ abstract class AddHomeCookRemoteDataSource {
   Future<HomeCookModel> getServiceProviderHomeCook();
 
   Future<HomeCookModel> addHomeCookRequest(HomeCookModel gymRequestModel);
+
+  Future<List<Map<String, dynamic>>> getMeals(String homeCookId);
+
+  Future<void> addMealModel(MealModel mealModel,String homeCookId);
+
+  Future<void> updateMealModel(MealModel mealModel, String homeCookId);  
 
   Future<Map<String, List<String>>> uploadImages(
       Map<String, List<File>> imagesMap, void Function(double) onProgress);
@@ -27,6 +34,16 @@ class AddHomeCookRemoteDataSourceImpl implements AddHomeCookRemoteDataSource {
 
   CollectionReference get _homeCookCollection =>
       firestore.collection(FirebaseCollections.homeCookRequest);
+
+CollectionReference<Object?> getMealsCollection(String homeCookId) {
+  return firestore
+      .collection(FirebaseCollections.homeCookRequest)
+      .doc(homeCookId)
+      .collection(FirebaseCollections.meal);
+}
+
+
+
 
 //mary
 
@@ -46,6 +63,21 @@ class AddHomeCookRemoteDataSourceImpl implements AddHomeCookRemoteDataSource {
     return HomeCookModel.fromMap(docSnap.data() as Map<String, dynamic>);
   }
 
+
+  @override
+
+  Future<void> addMealModel(MealModel mealModel, String homeCookId) async {
+     var docMeal = getMealsCollection(homeCookId).doc();
+      await docMeal.set(mealModel.toMap());
+   
+  }
+
+  @override
+Future<void> updateMealModel(MealModel mealModel, String homeCookId) async {
+  var docMeal = getMealsCollection(homeCookId).doc(mealModel.id);
+  await docMeal.update(mealModel.toMap());
+}
+
   @override
   Future<HomeCookModel> addHomeCookRequest(
       HomeCookModel homeCookRequestModel) async {
@@ -58,6 +90,18 @@ class AddHomeCookRemoteDataSourceImpl implements AddHomeCookRemoteDataSource {
       throw Exception('Failed to add gym request: $e');
     }
   }
+
+  @override
+ Future<List<Map<String, dynamic>>> getMeals(String homeCookId) async {
+  var docRef = getMealsCollection(homeCookId);  
+  var docSnap = await docRef.get();  
+
+  return docSnap.docs.map((element) {  
+    return element.data() as Map<String, dynamic>; // ✅ Explicitly cast the data
+  }).toList();
+}
+
+
 
   @override
   Future<Map<String, List<String>>> uploadImages(

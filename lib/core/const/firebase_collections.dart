@@ -7,4 +7,5 @@ class FirebaseCollections {
   static const String reservations = 'reservation';
   static const String notifications = 'notifications';
   static const String homeCookRequest = 'homeCook';
+  static const String meal = 'meal';
 }

@@ -6,8 +6,8 @@ import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/home_cooked__features/data/models/meals_model.dart';
-import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_review_cubit.dart';
-import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_review_state.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_state.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/order_options/custom_Container.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/order_options/custom_button.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/order_options/custom_img_builder.dart';
@@ -27,9 +27,7 @@ class _MealReviewScreenState extends State<MealReviewScreen> {
   void initState() {
     super.initState();
     // Call getMeal with the appropriate meal ID
-    context
-        .read<MealReviewCubit>()
-        .getMeal(1); // Replace 1 with the actual meal ID
+  
   }
 
   @override
@@ -54,7 +52,7 @@ class _MealReviewScreenState extends State<MealReviewScreen> {
                 ),
 
                 // CustomImageBuilder(mealImages: mealRecap.imageUrls),
-                BlocBuilder<MealReviewCubit, MealReviewState>(
+                BlocBuilder<MealCubit, MealState>(
                   builder: (context, state) {
                     if (state.isLoading) {
                       return Center(child: CircularProgressIndicator());
@@ -73,7 +71,7 @@ class _MealReviewScreenState extends State<MealReviewScreen> {
                 //mealDetails
                 CustomContainer(
                     heigh: 197.h,
-                    content: BlocBuilder<MealReviewCubit, MealReviewState>(
+                    content: BlocBuilder<MealCubit, MealState>(
                       builder: (context, state) {
                         if (state.isLoading) {
                           return Center(child: CircularProgressIndicator());
@@ -162,7 +160,7 @@ class MealDetailsWidget extends StatelessWidget {
     required this.mealRecap,
   });
 
-  final Meal mealRecap;
+  final MealModel mealRecap;
 
   @override
   Widget build(BuildContext context) {

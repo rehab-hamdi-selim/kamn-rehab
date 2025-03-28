@@ -1,37 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_state.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/Food_details_info/custom_speciality_tags.dart';
 
-class CustomSpecialityDropdownWithTags extends StatefulWidget {
-  @override
-  _CustomSpecialityDropdownWithTagsState createState() =>
-      _CustomSpecialityDropdownWithTagsState();
-}
+// class CustomSpecialityDropdownWithTags extends StatefulWidget {
+//   @override
+//   _CustomSpecialityDropdownWithTagsState createState() =>
+//       _CustomSpecialityDropdownWithTagsState();
+// }
 
-class _CustomSpecialityDropdownWithTagsState
-    extends State<CustomSpecialityDropdownWithTags> {
-  String? selectedValue;
+class CustomSpecialityDropdownWithTags extends StatelessWidget {
   final List<String> mealOptions = [
     "Keto", "Vegan", "Vegetarian", "Gluten Free", "Dairy Free"
   ];
-  List<String> selectedTags = [];
-
-  void addTag(String tag) {
-    if (!selectedTags.contains(tag)) {
-      setState(() {
-        selectedTags.add(tag);
-      });
-    }
-  }
-
-  void removeTag(String tag) {
-    setState(() {
-      selectedTags.remove(tag);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -48,10 +33,10 @@ class _CustomSpecialityDropdownWithTagsState
             isExpanded: true,
             value: null, // Keep value null to allow multiple selections
             onChanged: (newValue) {
-              if (newValue != null) {
-                addTag(newValue);
-              }
-            },
+                  if (newValue != null) {
+                    context.read<MealCubit>().addSpecialtyTag(newValue);
+                  }
+                },
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.r),
@@ -80,10 +65,20 @@ class _CustomSpecialityDropdownWithTagsState
         SizedBox(height: 10.h),
 
         // Display selected tags
-        Wrap(
-          spacing: 8.w,
-          runSpacing: 8.h,
-          children: selectedTags.map((tag) => CustomSpecialityTag(tag, removeTag)).toList(),
+            BlocBuilder<MealCubit, MealState>(
+          buildWhen: (previous, current) => previous.specialtyTags != current.specialtyTags,
+          builder: (context, state) {
+            return Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: state.specialtyTags.map((tag) {
+                return CustomSpecialityTag(
+                  tag,
+                  (tag) => context.read<MealCubit>().removeSpecialtyTag(tag),
+                );
+              }).toList(),
+            );
+          },
         ),
       ],
     );

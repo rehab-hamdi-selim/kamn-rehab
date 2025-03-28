@@ -12,6 +12,7 @@ import '../../../data/models/delivery_model.dart';
 
 @injectable
 class AddHomeCookCubit extends Cubit<AddHomeCookState> {
+  //for add homeCook
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
@@ -24,6 +25,9 @@ class AddHomeCookCubit extends Cubit<AddHomeCookState> {
   final TextEditingController priceController = TextEditingController();
   final TextEditingController featureDescriptionController =
       TextEditingController();
+
+
+      
 
   AddHomeCookCubit({required this.repository})
       : super(AddHomeCookState(state: AddHomeCookStatus.initial));

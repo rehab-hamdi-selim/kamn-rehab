@@ -1,23 +1,22 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:kamn/home_cooked__features/data/models/delivery_model.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
 
-class Meal {
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
+
+
+class MealModel {
   String id;
   String name;
   String type; // Breakfast, Lunch, Dinner, Snack
   int prepTime; // in minutes
   int calories;
   double price;
-  List<String> specialtyTags; // Vegan, Keto, etc.
-  List<String> ingredients;
+  List<dynamic> specialtyTags; // Vegan, Keto, etc.
+  List<dynamic> ingredients;
   String details;
-  List<String> imageUrls;
-  bool isVerified;
-  String verificationStatus; // Pending, Under Review, Approved
-  String orderOption;
-  DeliveryModel deliveryOption; // Pick-up or Delivery
-
-  Meal({
+  List<dynamic> imageUrls;
+  MealModel({
     required this.id,
     required this.name,
     required this.type,
@@ -28,15 +27,38 @@ class Meal {
     required this.ingredients,
     required this.details,
     required this.imageUrls,
-    required this.isVerified,
-    required this.verificationStatus,
-    required this.orderOption, // Only "Pick-up" or "Delivery"
-    required this.deliveryOption,
   });
 
-  // Convert Meal object to a map for Firebase
+
+
+  MealModel copyWith({
+    String? id,
+    String? name,
+    String? type,
+    int? prepTime,
+    int? calories,
+    double? price,
+    List<dynamic>? specialtyTags,
+    List<dynamic>? ingredients,
+    String? details,
+    List<dynamic>? imageUrls,
+  }) {
+    return MealModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      type: type ?? this.type,
+      prepTime: prepTime ?? this.prepTime,
+      calories: calories ?? this.calories,
+      price: price ?? this.price,
+      specialtyTags: specialtyTags ?? this.specialtyTags,
+      ingredients: ingredients ?? this.ingredients,
+      details: details ?? this.details,
+      imageUrls: imageUrls ?? this.imageUrls,
+    );
+  }
+
   Map<String, dynamic> toMap() {
-    return {
+    return <String, dynamic>{
       'id': id,
       'name': name,
       'type': type,
@@ -47,44 +69,93 @@ class Meal {
       'ingredients': ingredients,
       'details': details,
       'imageUrls': imageUrls,
-      'isVerified': isVerified,
-      'verificationStatus': verificationStatus,
-      'orderOption': orderOption, // Removed time/day options
-      'deliveryOption': deliveryOption.toMap(),
     };
   }
 
+  factory MealModel.fromMap(Map<String, dynamic> map) {
+    return MealModel(
+      id: map['id'] as String,
+      name: map['name'] as String,
+      type: map['type'] as String,
+      prepTime: map['prepTime'] as int,
+      calories: map['calories'] as int,
+      price: map['price'] as double,
+      specialtyTags: List<dynamic>.from((map['specialtyTags'] as List<dynamic>)),
+      ingredients: List<dynamic>.from((map['ingredients'] as List<dynamic>)),
+      details: map['details'] as String,
+      imageUrls: List<dynamic>.from((map['imageUrls'] as List<dynamic>)),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory MealModel.fromJson(String source) => MealModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'Meal(id: $id, name: $name, type: $type, prepTime: $prepTime, calories: $calories, price: $price, specialtyTags: $specialtyTags, ingredients: $ingredients, details: $details, imageUrls: $imageUrls)';
+  }
+
+  @override
+  bool operator ==(covariant MealModel other) {
+    if (identical(this, other)) return true;
+  
+    return 
+      other.id == id &&
+      other.name == name &&
+      other.type == type &&
+      other.prepTime == prepTime &&
+      other.calories == calories &&
+      other.price == price &&
+      listEquals(other.specialtyTags, specialtyTags) &&
+      listEquals(other.ingredients, ingredients) &&
+      other.details == details &&
+      listEquals(other.imageUrls, imageUrls);
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+      name.hashCode ^
+      type.hashCode ^
+      prepTime.hashCode ^
+      calories.hashCode ^
+      price.hashCode ^
+      specialtyTags.hashCode ^
+      ingredients.hashCode ^
+      details.hashCode ^
+      imageUrls.hashCode;
+  }
+
+
+
   // Create Meal object from Firebase snapshot
-  factory Meal.fromSnapshot(DocumentSnapshot snapshot) {
+  factory MealModel.fromSnapshot(DocumentSnapshot snapshot) {
     var data = snapshot.data() as Map<String, dynamic>;
-    return Meal(
+    return MealModel(
       id: snapshot.id,
       name: data['name'] ?? '',
       type: data['type'] ?? '',
       prepTime: data['prepTime'] ?? 0,
       calories: data['calories'] ?? 0,
       price: (data['price'] ?? 0).toDouble(),
-      specialtyTags: List<String>.from(data['specialtyTags'] ?? []),
-      ingredients: List<String>.from(data['ingredients'] ?? []),
+      specialtyTags: List<dynamic>.from(data['specialtyTags'] ?? []),
+      ingredients: List<dynamic>.from(data['ingredients'] ?? []),
       details: data['details'] ?? '',
-      imageUrls: List<String>.from(data['imageUrls'] ?? []),
-      isVerified: data['isVerified'] ?? false,
-      verificationStatus: data['verificationStatus'] ?? 'Pending',
-      orderOption: data['orderOption'] ?? 'Pick-up',
-      deliveryOption: DeliveryModel.fromMap(data['deliveryOption'] ?? {}),
+      imageUrls: List<dynamic>.from(data['imageUrls'] ?? []),
+   
     );
   }
 }
 
-Future<Meal> getmealbyid(int id) async {
+Future<MealModel> getmealbyid(int id) async {
   await Future.delayed(Duration(seconds: 2));
   return fakeMeals.firstWhere((element) => element.id == id.toString());
 }
 
-List<Meal> fakeMeals = [
-  Meal(
-    deliveryOption:
-        DeliveryModel(isDelivery: true, isPickup: false, deliveryFee: 10.0),
+List<MealModel> fakeMeals = [
+  MealModel(
+ 
     id: '1',
     name: 'Keto Avocado Bowl',
     type: 'Breakfast',
@@ -100,13 +171,10 @@ List<Meal> fakeMeals = [
       "assets/images/meal_info_img.png"
       "assets/images/meal_info_img.png"
     ],
-    isVerified: true,
-    verificationStatus: 'Approved',
-    orderOption: 'Pick-up',
+ 
   ),
-  Meal(
-    deliveryOption:
-        DeliveryModel(isDelivery: true, isPickup: false, deliveryFee: 10.0),
+  MealModel(
+ 
     id: '2',
     name: 'Quinoa Salad with Grilled Chicken',
     type: 'Lunch',
@@ -121,13 +189,10 @@ List<Meal> fakeMeals = [
       'https://example.com/images/quinoa_salad_1.jpg',
       'https://example.com/images/quinoa_salad_2.jpg'
     ],
-    isVerified: true,
-    verificationStatus: 'Approved',
-    orderOption: 'Delivery',
+  
   ),
-  Meal(
-    deliveryOption:
-        DeliveryModel(isDelivery: false, isPickup: true, deliveryFee: 0.0),
+  MealModel(
+  
     id: '3',
     name: 'Green Detox Smoothie',
     type: 'Snack',
@@ -142,8 +207,6 @@ List<Meal> fakeMeals = [
       'https://example.com/images/detox_smoothie_1.jpg',
       'https://example.com/images/detox_smoothie_2.jpg'
     ],
-    isVerified: false,
-    verificationStatus: 'Pending',
-    orderOption: 'Pick-up',
+
   ),
 ];
