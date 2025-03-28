@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
+import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/core/utils/custom_gym_button.dart';
@@ -31,17 +32,22 @@ class CustomConfirmationDialog extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // 🟢 Upload in Progress UI
-                if (state.isUploadImagesLoading || state.isLoading||state.isAddGymLoading) ...[
+                if (state.isUploadImagesLoading ||
+                    state.isLoading ||
+                    state.isAddGymLoading) ...[
                   Center(
                     child: Column(
                       children: [
                         Text(
-                          "${((state.uploadProgress!/state.numberOfImages!) * 100).toInt()}%",
+                          "${((state.uploadProgress! / state.numberOfImages!) * 100).toInt()}%",
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(height: 10),
-                        LinearProgressIndicator(value: state.uploadProgress  !/ state.numberOfImages!,color: AppPallete.blackColor,),
+                        LinearProgressIndicator(
+                          value: state.uploadProgress! / state.numberOfImages!,
+                          color: AppPallete.blackColor,
+                        ),
                         SizedBox(height: 20),
                         const Text("Uploading..."),
                       ],
@@ -54,15 +60,19 @@ class CustomConfirmationDialog extends StatelessWidget {
                   Center(
                     child: Column(
                       children: [
-                        const Icon(Icons.check_circle, color: Colors.green, size: 50),
+                        const Icon(Icons.check_circle,
+                            color: Colors.green, size: 50),
                         const SizedBox(height: 10),
                         const Text(
                           "Upload Successful!",
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(height: 20),
                         ElevatedButton(
-                          onPressed: () { Navigator.pop(context);cubit.reset();},
+                          onPressed: () {
+                            Navigator.pushNamed(context, Routes.gymScreen);
+                          },
                           child: const Text("OK"),
                         ),
                       ],

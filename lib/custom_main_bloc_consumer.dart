@@ -64,7 +64,7 @@ class CustomMainBlocConsumer extends StatelessWidget {
     }
     if (state.isNotInstalled()) {
        return BlocProvider(
-        create: (context) => getIt<AddGymCubit>(),
+        create: (context) => getIt<AddGymCubit>()..getGymIdFromSecureStorage(),
         child: const AddGymScreen(),
       );
     }

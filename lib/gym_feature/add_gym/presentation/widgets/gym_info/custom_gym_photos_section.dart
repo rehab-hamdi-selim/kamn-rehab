@@ -28,7 +28,7 @@ class CustomGymPhotosSection extends StatelessWidget {
             separatorBuilder: (_, __) => horizontalSpace(8),
             itemCount: 3,
             itemBuilder: (_, index) => CustomDottedUploadImageBox(
-                width: 121.w, height: 94.h, index: index),
+                width: 121.w, height: 98.h, index: index),
           ),
         ),
       ],
@@ -46,9 +46,9 @@ class CustomDottedUploadImageBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomDottedBorder(
       child: Container(
-        width: 121.w,
-        height: 94.h,
-        padding: EdgeInsets.symmetric(vertical: 10.h),
+        width: width,
+        height: height,
+        padding: EdgeInsets.symmetric(vertical: 8.h), // Reduced padding
         decoration: BoxDecoration(
             color: AppPallete.whiteColor,
             borderRadius: BorderRadius.all(Radius.circular(12.r))),
@@ -56,33 +56,38 @@ class CustomDottedUploadImageBox extends StatelessWidget {
           builder: (context, state) {
             if ((state.gymImages?.isNotEmpty ?? false) &&
                 state.gymImages!.length > index) {
-              return GymLogoPreviewWidget(logo:  state.gymImages![index],
+              return GymLogoPreviewWidget(logo: state.gymImages![index],
                   isLogo: false, index: index);
             }
-            return Column(children: [
-              SvgPicture.asset(
-                'assets/icons/insert_image.svg',
-                width: 25.w,
-              ),
-              TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: AppPallete.whiteColor,
-                  side: const BorderSide(
-                    color: AppPallete.lightGreyColor,
-                    width: 0.27,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(3.5),
-                  ),
-                  minimumSize: Size(61.w, 16.h),
+            return Column(
+              mainAxisSize: MainAxisSize.min, // Make column take minimum space
+              mainAxisAlignment: MainAxisAlignment.center, // Center content vertically
+              children: [
+                SvgPicture.asset(
+                  'assets/icons/insert_image.svg',
+                  width: 22.w, // Slightly reduced size
                 ),
-                onPressed: () {
-                  context.read<AddGymCubit>().pickGymImage();
-                },
-                child: Text("Choose file",
-                    style: TextStyles.fontCircularSpotify8AccentBlackRegular),
-              ),
-            ]);
+                TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: AppPallete.whiteColor,
+                    side: const BorderSide(
+                      color: AppPallete.lightGreyColor,
+                      width: 0.27,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(3.5),
+                    ),
+                    minimumSize: Size(55.w, 10.h), // Reduced height
+                    padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 4.w), // Add minimal padding
+                  ),
+                  onPressed: () {
+                    context.read<AddGymCubit>().pickGymImage();
+                  },
+                  child: Text("Choose file",
+                      style: TextStyles.fontCircularSpotify8AccentBlackRegular),
+                ),
+              ],
+            );
           },
         ),
       ),
