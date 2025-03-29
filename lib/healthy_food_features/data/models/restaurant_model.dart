@@ -79,7 +79,7 @@ List<Restaurant> restaurants = [
   Restaurant(
     categories: categories,
     name: "FitFuel Restaurant",
-    imageUrl: "assets/images/resturantTest.png",
+    imageUrl: ImageLinks.testrestaurant,
     rating: 4.7,
     description: "Perfect choice for healthy eating.",
     tags: ["Meal Prep", "High-Protein", "Vegan Balance"],
