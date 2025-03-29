@@ -29,7 +29,7 @@ class SearchingUiScreen extends StatelessWidget {
 
             // Popular Food Grid
             SizedBox(
-              height: 202.h,
+              height: 400.h,
               child: SingleChildScrollView(child: CustomPopularFoodGridCard()),
             ),
             verticalSpace(12.h),
