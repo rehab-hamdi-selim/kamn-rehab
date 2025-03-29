@@ -33,7 +33,7 @@ class AddHomeCookRemoteDataSourceImpl implements AddHomeCookRemoteDataSource {
   @override
   Future<void> updateServiceProviderHomeCookAddDeliveryData(
       HomeCookModel homeCookModel) async {
-    var docRef = _homeCookCollection.doc(homeCookModel.id);
+    var docRef = _homeCookCollection.doc("u0cBRLRyHcppREpHYdNf");
     await docRef.update(homeCookModel.toMap());
   }
 

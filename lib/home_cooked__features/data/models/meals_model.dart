@@ -14,7 +14,7 @@ class Meal {
   List<String> imageUrls;
   bool isVerified;
 
-  String verificationStatus; // Pending, Under Review, Approved
+  String verificationStatus; //Pending, Under Review, Approved
   String orderOption;
   DeliveryModel deliveryOption; // Pick-up or Delivery
 
@@ -98,8 +98,8 @@ List<Meal> fakeMeals = [
         'A delicious and nutritious keto-friendly avocado bowl, perfect for a low-carb diet.',
     imageUrls: [
       "assets/images/meal_info_img.png"
-      "assets/images/meal_info_img.png"
-      "assets/images/meal_info_img.png"
+          "assets/images/meal_info_img.png"
+          "assets/images/meal_info_img.png"
     ],
     isVerified: true,
     verificationStatus: 'Approved',
