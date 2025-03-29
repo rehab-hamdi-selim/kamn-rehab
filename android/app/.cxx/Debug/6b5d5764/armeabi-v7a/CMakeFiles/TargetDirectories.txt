@@ -1,0 +1,2 @@
+D:/DARTS/flutter/2025/kamen app/home_cooked_statemanagement/kamn/android/app/.cxx/Debug/6b5d5764/armeabi-v7a/CMakeFiles/edit_cache.dir
+D:/DARTS/flutter/2025/kamen app/home_cooked_statemanagement/kamn/android/app/.cxx/Debug/6b5d5764/armeabi-v7a/CMakeFiles/rebuild_cache.dir

@@ -1,7 +1,7 @@
 class DeliveryModel {
   bool isDelivery = false;
   bool isPickup = false;
-  double? deliveryFee;
+  double? deliveryFee = 0.0;
 
   DeliveryModel({
     this.deliveryFee,
