@@ -1,4 +1,7 @@
 class ImageLinks {
+  static const String salt = 'assets/images/Salt.svg';
+
+
   static const String ring = 'assets/image/ring.png';
   static const String cube = 'assets/image/cube.png';
   static const String fivedim = 'assets/image/5dim.png';
@@ -18,4 +21,5 @@ class ImageLinks {
   static const String fruitSaladImg = 'assets/images/salad_1.png';
   static const String homCookiesTest = 'assets/images/homCookiesTest.png';
   static const String ellips = 'assets/images/Ellips.png';
+
 }
