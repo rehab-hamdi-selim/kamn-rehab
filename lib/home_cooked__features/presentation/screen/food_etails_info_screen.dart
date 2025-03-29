@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kamn/core/const/icon_links.dart';
 import 'package:kamn/home_cooked__features/data/models/meals_model.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_cubit.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/Food_details_info/custom_positioned_homeCook_name.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/Food_details_info/custom_positioned_btns.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/Food_details_info/positionesd_homeCook_details.dart';
@@ -12,14 +14,14 @@ List<String> fakeMealsimgs = [
       "assets/images/meal_info_img.png"
 ];
 
-class FoodDetailsInfoScreen extends StatefulWidget {
-  const FoodDetailsInfoScreen({super.key});
+class EditMealScreen extends StatefulWidget {
+  const EditMealScreen({super.key});
 
   @override
-  State<FoodDetailsInfoScreen> createState() => _FoodDetailsInfoScreenState();
+  State<EditMealScreen> createState() => _EditMealScreenState();
 }
 
-class _FoodDetailsInfoScreenState extends State<FoodDetailsInfoScreen> {
+class _EditMealScreenState extends State<EditMealScreen> {
   late PageController _pageController;
 
   int _currentPage = 0;
@@ -56,6 +58,7 @@ class _FoodDetailsInfoScreenState extends State<FoodDetailsInfoScreen> {
 
   @override
   Widget build(BuildContext context) {
+  final cubitselectedMeal =  context.read<MealCubit>().state.selectedMeal;
     return Scaffold(
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
@@ -133,7 +136,7 @@ class _FoodDetailsInfoScreenState extends State<FoodDetailsInfoScreen> {
             //**** resturant name ***//
             customPositionedHomeCookName(),
             /// **Details Container**
-            PositionesdHomecookDetails(),
+            PositionesdHomecookDetails( ),
           ],
         ),
       ),

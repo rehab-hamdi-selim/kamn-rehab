@@ -85,6 +85,7 @@ class Constants {
   static const next = 'Next';
   static const editMealDetails = 'Edit Meal Details';
   static const saveDraft = 'Save as a Draft';
+  static const addMeal = 'Add your meal';
 
   static const mealRecap = 'Meal Recap';
   static const letReviewYourMeal =

@@ -6,7 +6,7 @@ import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/screens/add_gym_screen.dart';
 import 'package:kamn/gym_feature/gyms/presentation/pages/gyms_screen.dart';
-import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_review_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_cubit.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/meal_review_screen.dart';
 import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
 import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_up_cubit/sign_up_cubit.dart';
@@ -304,7 +304,7 @@ class AppRouter {
       case Routes.mealReview:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-                create: (context) => getIt<MealReviewCubit>(),
+                create: (context) => getIt<MealCubit>(),
                 child: MealReviewScreen()));
 
       default:

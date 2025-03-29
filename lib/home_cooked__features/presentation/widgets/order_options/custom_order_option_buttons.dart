@@ -8,7 +8,7 @@ import '../../../../core/theme/style.dart';
 import '../../../../core/utils/alert_dialog_utils.dart';
 import '../../../data/models/delivery_model.dart';
 import '../../../data/models/home_cook_model_test.dart';
-import '../../cubits/order_options/order_options_cubit.dart';
+import '../../cubits/meal_review_cubit/meal_cubit.dart';
 
 class CustomOrderOptionsBusttons extends StatelessWidget {
   const CustomOrderOptionsBusttons({
@@ -16,7 +16,7 @@ class CustomOrderOptionsBusttons extends StatelessWidget {
     required this.cubit,
     required this.currentHomeCookModel,
   });
-  final OrderOptionsCubit cubit;
+  final MealCubit cubit;
   final HomeCookModel currentHomeCookModel;
 
   @override

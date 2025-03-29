@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/const/image_links.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_cubit.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/edit_meal_pop_up_screen.dart';
 
 class CustomFoodDetailsFooter extends StatelessWidget {
@@ -12,11 +14,24 @@ class CustomFoodDetailsFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<MealCubit>();
     return Row(
       children: [
         Builder(
           builder: (context) => ElevatedButton(
             onPressed: () {
+              showModalBottomSheet(
+                    context: context,
+                    isScrollControlled:
+                        true, // Allows the bottom sheet to take full height
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(20.r)),
+                    ),
+                    builder: (context) => BlocProvider.value(
+                          value: cubit,
+                          child: EditMealPopUpScreen(),
+                        ));
               showModalBottomSheet(
                 context: context,
                 isScrollControlled: true, // Allows the bottom sheet to take full height

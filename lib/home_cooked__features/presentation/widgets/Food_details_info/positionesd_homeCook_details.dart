@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/healthy_food_features/data/models/category_data.dart';
 import 'package:kamn/home_cooked__features/data/models/meals_model.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_cubit.dart' show MealCubit;
 import 'package:kamn/home_cooked__features/presentation/widgets/Food_details_info/custom_food_details_footer.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/Food_details_info/custom_food_details_info.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/Food_details_info/custom_homecook_ingredients.dart';
@@ -33,7 +36,7 @@ class PositionesdHomecookDetails extends StatelessWidget {
           children: [
             verticalSpace(7.h),
             Text(
-              fakeMeals[0].name,
+              context.read<MealCubit>().state.selectedMeal!.name??"",
               style: TextStyles.fontCircularSpotify21BlackBold,
             ),
             verticalSpace(10.h),
@@ -57,10 +60,10 @@ class PositionesdHomecookDetails extends StatelessWidget {
               style: TextStyles.fontCircularSpotify17BlackRegular,
             ),
             verticalSpace(10.h),
-            CustomHomecookIngredients(),
-            Spacer(),
+          CustomHomecookIngredients(ingredients: ingredients,),
+         const   Spacer(),
             //**** footer */
-            CustomFoodDetailsFooter(),
+         const   CustomFoodDetailsFooter(),
           ],
         ),
       ),

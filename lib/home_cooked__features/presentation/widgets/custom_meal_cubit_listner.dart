@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kamn/home_cooked__features/presentation/cubits/order_options/order_options_cubit.dart';
-
+import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_state.dart';
 import '../../../core/utils/alert_dialog_utils.dart';
-import '../cubits/order_options/order_options_state.dart';
+import '../cubits/meal_review_cubit/meal_cubit.dart';
 
 class CustomMealCubitListner extends StatelessWidget {
   final Widget child;
@@ -12,23 +11,16 @@ class CustomMealCubitListner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<OrderOptionsCubit, OrderOptionsState>(
+    return BlocListener<MealCubit, MealState>(
         listener: (context, state) {
-          if (state.isLoading) {
-            showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (context) =>
-                  const Center(child: CircularProgressIndicator()),
-            );
-          } else if (state.isSuccess) {
+          if (state.isAddDeliveryOptionLoading) {
             Navigator.of(context).pop(); // Close the loading dialog
             AlertDialogUtils.showAlert(
               context: context,
               content: "Delivery option added successfully!",
               title: "Success",
             );
-          } else if (state.isError) {
+          } else if (state.isAddDeliveryOptionError) {
             Navigator.of(context).pop();
             AlertDialogUtils.showAlert(
               context: context,

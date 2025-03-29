@@ -1,4 +1,5 @@
 import 'package:kamn/core/const/icon_links.dart';
+import 'package:kamn/core/const/image_links.dart';
 import 'package:kamn/healthy_food_features/data/models/food_item_model.dart';
 
 class Category {
@@ -46,12 +47,13 @@ List<Category> categories = [
 
 List<Category> ingredients = [
   Category(name: 'Salt', icon: 'assets/images/Salt.svg'),
-  Category(name: 'Chicken', icon: 'assets/icons/chicken.svg'),
-  Category(name: 'Onion (Allergy)', icon: 'assets/icons/onion.svg'),
-  Category(name: 'Garlic', icon: 'assets/icons/garlic.svg'),
-  Category(name: 'Chili pepper', icon: 'assets/icons/chili.svg'),
-  Category(name: 'Broccoli', icon: 'assets/icons/broccoli.svg'),
-  Category(name: 'Cucumber', icon: 'assets/icons/cucumber.svg'),
-  Category(name: 'Orange', icon: 'assets/icons/orange.svg'),
-  Category(name: 'Walnut', icon: 'assets/icons/walnut.svg'),
+  Category(name: 'Chicken', icon: 'assets/images/chicken_selected.svg'),
+  Category(name: 'Broccoli', icon: 'assets/images/broccoli_selected.svg'),
+  Category(name: 'Orange', icon: 'assets/images/Orange_selected.svg'),
+  Category(name: 'Chili', icon: 'assets/images/chili_selected.svg'),
+  Category(name: 'Onion', icon: 'assets/images/Onion_selected.svg'),
+  Category(name: 'Garlic', icon: 'assets/images/Garlic_selected.svg'),
+  Category(name: 'walnut', icon: 'assets/images/walnut_selected.svg'),
+  Category(name: 'Ginger', icon: 'assets/images/Ginger_selected.svg'),
+  Category(name: 'Cucumber', icon: 'assets/images/cucumber_selected.svg'),
 ];
