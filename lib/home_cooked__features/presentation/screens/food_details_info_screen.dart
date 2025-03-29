@@ -27,7 +27,7 @@ class _FoodDetailsInfoScreenState extends State<FoodDetailsInfoScreen> {
   late PageController _pageController;
 
   int _currentPage = 0;
-  // Track the current page index
+  /////// Track the current page index
   @override
   void initState() {
     super.initState();
