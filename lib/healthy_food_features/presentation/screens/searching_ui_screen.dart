@@ -14,13 +14,13 @@ class SearchingUiScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Appbar
             CustomSearchAppbar(),
-            verticalSpace(10.h),
+            verticalSpace(24.h),
             Text(
               Constants.popularFood,
               style: TextStyles.fontCircularSpotify21BlackRegular,
@@ -29,7 +29,7 @@ class SearchingUiScreen extends StatelessWidget {
 
             // Popular Food Grid
             SizedBox(
-              height: 350.h,
+              height: 202.h,
               child: SingleChildScrollView(child: CustomPopularFoodGridCard()),
             ),
             verticalSpace(12.h),

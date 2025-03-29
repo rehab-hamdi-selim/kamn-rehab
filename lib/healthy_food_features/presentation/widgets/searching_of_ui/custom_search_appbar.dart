@@ -9,6 +9,7 @@ Widget CustomSearchAppbar() {
   return Row(
     children: [
       IconButton(
+        padding: EdgeInsets.zero,
         onPressed: () {},
         icon: SvgPicture.asset(
           IconLinks.backArrow,
@@ -18,7 +19,7 @@ Widget CustomSearchAppbar() {
       ),
       horizontalSpace(10.5.w),
       CustomSearchDropodwn(),
-      horizontalSpace(20.5.w),
+      horizontalSpace(10.5.w),
       IconButton(
         onPressed: () {},
         icon: SvgPicture.asset(
