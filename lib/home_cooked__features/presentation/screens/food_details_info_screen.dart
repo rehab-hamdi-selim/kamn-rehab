@@ -37,6 +37,8 @@ class _FoodDetailsInfoScreenState extends State<FoodDetailsInfoScreen> {
   void _goToNextImage() {
     if (_currentPage < fakeMeals.length - 1) {
       _pageController.nextPage(
+
+
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
