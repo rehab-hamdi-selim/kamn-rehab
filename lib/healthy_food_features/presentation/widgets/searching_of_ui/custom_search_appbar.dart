@@ -7,34 +7,34 @@ import 'package:kamn/healthy_food_features/presentation/widgets/searching_of_ui/
 
 Widget CustomSearchAppbar() {
   return Row(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: SvgPicture.asset(
-                      IconLinks.backArrow,
-                      width: 24.w,
-                      height: 24.h,
-                    ),
-                  ),
-                  horizontalSpace(6.3.w),
-                  CustomSearchDropodwn(),
-                  horizontalSpace(30.w),
-                  IconButton(
-                    onPressed: () {},
-                    icon: SvgPicture.asset(
-                      IconLinks.search,
-                      width: 46.w,
-                      height: 46.h,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: SvgPicture.asset(
-                      IconLinks.filter,
-                      width: 46.w,
-                      height: 46.h,
-                    ),
-                  ),
-                ],
-              );
+    children: [
+      IconButton(
+        onPressed: () {},
+        icon: SvgPicture.asset(
+          IconLinks.backArrow,
+          width: 24.w,
+          height: 24.h,
+        ),
+      ),
+      horizontalSpace(10.5.w),
+      CustomSearchDropodwn(),
+      horizontalSpace(20.5.w),
+      IconButton(
+        onPressed: () {},
+        icon: SvgPicture.asset(
+          IconLinks.search,
+          width: 46.w,
+          height: 46.h,
+        ),
+      ),
+      IconButton(
+        onPressed: () {},
+        icon: SvgPicture.asset(
+          IconLinks.filter,
+          width: 46.w,
+          height: 46.h,
+        ),
+      ),
+    ],
+  );
 }

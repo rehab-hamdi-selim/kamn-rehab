@@ -7,7 +7,6 @@ import 'package:kamn/healthy_food_features/presentation/widgets/searching_of_ui/
 import 'package:kamn/healthy_food_features/presentation/widgets/searching_of_ui/custom_search_appbar.dart';
 import 'package:kamn/core/const/constants.dart';
 
-
 class SearchingUiScreen extends StatelessWidget {
   const SearchingUiScreen({super.key});
 
