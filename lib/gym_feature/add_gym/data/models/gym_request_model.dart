@@ -109,13 +109,18 @@ class GymRequestModel {
       id: map['id'] != null ? map['id'] as String : null,
       name: map['name'] != null ? map['name'] as String : null,
       address: map['address'] != null ? map['address'] as String : null,
-      imagesUrl: map['imagesUrl'] != null ? List<String>.from((map['imagesUrl'] as List<String>)) : null,
+      imagesUrl: map['imagesUrl'] != null 
+          ? List<String>.from((map['imagesUrl'] as List<dynamic>).map((x) => x.toString())) 
+          : null,
       logoUrl: map['logoUrl'] != null ? map['logoUrl'] as String : null,
       description: map['description'] != null ? map['description'] as String : null,
       phoneNumber: map['phoneNumber'] != null ? map['phoneNumber'] as String : null,
       currentStatus: map['currentStatus'] != null ? CurrentStatus.values.firstWhere((element) => element.name == map['currentStatus'] as String) : null,
       contactNumber: map['contactNumber'] != null ? map['contactNumber'] as String : null,
-      scoialMediaLinks: map['scoialMediaLinks'] != null ? List<ScoialMediaLink>.from((map['scoialMediaLinks'] as List<int>).map<ScoialMediaLink?>((x) => ScoialMediaLink.fromMap(x as Map<String,dynamic>),),) : null,
+      scoialMediaLinks: map['scoialMediaLinks'] != null 
+          ? List<ScoialMediaLink>.from((map['scoialMediaLinks'] as List<dynamic>)
+              .map<ScoialMediaLink>((x) => ScoialMediaLink.fromMap(x as Map<String, dynamic>)))
+          : null,
       serviceProviderId: map['serviceProviderId'] != null ? map['serviceProviderId'] as String : null,
       operationLicenseImageUrl: map['operationLicenseImageUrl'] != null ? map['operationLicenseImageUrl'] as String : null,
       ownerIdPassportImageUrl: map['ownerIdPassportImageUrl'] != null ? map['ownerIdPassportImageUrl'] as String : null,

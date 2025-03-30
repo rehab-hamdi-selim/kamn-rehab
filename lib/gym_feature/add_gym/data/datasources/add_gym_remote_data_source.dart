@@ -5,13 +5,14 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/core/const/firebase_collections.dart';
+import 'package:kamn/core/helpers/secure_storage_helper.dart';
 import 'package:kamn/gym_feature/add_gym/data/models/gym_request_model.dart';
 
 abstract class AddGymRemoteDataSource {
   Future<GymRequestModel> addGymRequest(GymRequestModel gymRequestModel);
   Future<Map<String, List<String>>> uploadImages(
       Map<String, List<File>> imagesMap, void Function(double) onProgress);
-
+  Future<GymRequestModel?> getGymById(String gymId);
 }
 
 @Injectable(as: AddGymRemoteDataSource)
@@ -19,8 +20,6 @@ class AddGymRemoteDataSourceImpl implements AddGymRemoteDataSource {
   AddGymRemoteDataSourceImpl();
   final storage = FirebaseStorage.instance;
   final firestore = FirebaseFirestore.instance;
-  final _secureStorage = const FlutterSecureStorage();
-  static const String _gymIdKey = 'gym_id_key';
   
   CollectionReference get _gymsCollection =>
      firestore.collection(FirebaseCollections.gym);
@@ -30,17 +29,28 @@ class AddGymRemoteDataSourceImpl implements AddGymRemoteDataSource {
     try {
       var docRef = _gymsCollection.doc();
       gymRequestModel = gymRequestModel.copyWith(id: docRef.id);
-      await docRef.set(gymRequestModel.toMap());
-      
-      // Save gym ID to secure storage after successful creation
-      
+      await docRef.set(gymRequestModel.toMap());      
       return gymRequestModel;
     } catch (e) {
       throw Exception('Failed to add gym request: $e');
     }
   }
 
-  
+  @override
+  Future<GymRequestModel?> getGymById(String gymId) async {
+    try {
+      final docSnapshot = await _gymsCollection.doc(gymId).get();
+      
+      if (docSnapshot.exists) {
+        final data = docSnapshot.data() as Map<String, dynamic>;
+        return GymRequestModel.fromMap(data);
+      }
+      
+      return null;
+    } catch (e) {
+      throw Exception('Failed to get gym by ID: $e');
+    }
+  }
 
   @override
   Future<Map<String, List<String>>> uploadImages(
