@@ -11,6 +11,7 @@ class SecureStorageHelper {
   static const String _userKey = 'user_data';
   static const String _firstTime = 'first_time';
   static const String _ratingListKey = 'ratingList';
+  static const String _gymIdKey = 'gym_id_key';
   static final _storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
 
   // Save user data
@@ -85,16 +86,55 @@ class SecureStorageHelper {
       return Left(e.toString());
     }
   }
-  static Future<void> saveStringList( List<String> list) async {
-  final jsonString = jsonEncode(list);
-  await _storage.write(key: _ratingListKey, value: jsonString,);
-}
-
-static Future<List<String>> getStringList() async {
-  final jsonString = await _storage.read(key: _ratingListKey);
-  if (jsonString != null) {
-    return List<String>.from(jsonDecode(jsonString));
+  // Save gym ID
+  static Future<Either<String, void>> saveGymId(String gymId) async {
+    try {
+      await _storage.write(
+        key: _gymIdKey,
+        value: gymId,
+      );
+      print("Gym ID saved: $gymId");
+      return const Right(null);
+    } catch (e) {
+      print("Error saving gym ID: ${e.toString()}");
+      return Left(e.toString());
+    }
   }
-  return [];
-}
+
+  // Get gym ID
+  static Future<Either<String, String?>> getGymId() async {
+    try {
+      final gymId = await _storage.read(key: _gymIdKey);
+      print("Retrieved gym ID: $gymId");
+      return Right(gymId);
+    } catch (e) {
+      print("Error retrieving gym ID: ${e.toString()}");
+      return Left(e.toString());
+    }
+  }
+
+  // Delete gym ID
+  static Future<Either<String, void>> deleteGymId() async {
+    try {
+      await _storage.delete(key: _gymIdKey);
+      print("Gym ID deleted");
+      return const Right(null);
+    } catch (e) {
+      print("Error deleting gym ID: ${e.toString()}");
+      return Left(e.toString());
+    }
+  }
+
+  static Future<void> saveStringList(List<String> list) async {
+    final jsonString = jsonEncode(list);
+    await _storage.write(key: _ratingListKey, value: jsonString,);
+  }
+
+  static Future<List<String>> getStringList() async {
+    final jsonString = await _storage.read(key: _ratingListKey);
+    if (jsonString != null) {
+      return List<String>.from(jsonDecode(jsonString));
+    }
+    return [];
+  }
 }

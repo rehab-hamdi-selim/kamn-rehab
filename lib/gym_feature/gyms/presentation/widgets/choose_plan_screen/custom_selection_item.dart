@@ -27,36 +27,42 @@ class CustomSelectionItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(20), // Use ScreenUtil for radius
+          borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                Text("${feature.icon} ${feature.name}",
-                    style: TextStyle(
-                      fontSize: 10.sp, // Use ScreenUtil for font size
-                    )),
-                SizedBox(width: 5.w), // Use ScreenUtil for width
-                CustomBadge(
-                  label: "${feature.price}${feature.unit}",
-                  color: feature.badgeColor,
-                ),
-              ],
+            Expanded(
+              child: Row(
+                children: [
+                  Flexible(
+                    child: Text(
+                      "${feature.icon} ${feature.name}",
+                      style: TextStyle(fontSize: 10.sp),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                  ),
+                  SizedBox(width: 5.w),
+                  CustomBadge(
+                    label: "${feature.price}${feature.unit}",
+                    color: feature.badgeColor,
+                  ),
+                ],
+              ),
             ),
             Row(
               children: [
                 IconButton(
                   onPressed: () => decreaseQuantity(feature),
                   icon: Icon(Icons.remove, size: 14.sp),
-                  style: ButtonStyle(
-                    backgroundColor:
-                        WidgetStateProperty.all(Colors.grey.shade100),
-                  ),
+                 
                 ),
                 Text("$quantity"),
                 IconButton(
+ style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all(Colors.grey.shade100),
+                  ),
                   onPressed: () => increaseQuantity(feature),
                   icon: Icon(
                     Icons.add,
