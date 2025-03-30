@@ -627,4 +627,3 @@ class ScoialMediaLink {
   @override
   int get hashCode => name.hashCode ^ link.hashCode;
 }
-
