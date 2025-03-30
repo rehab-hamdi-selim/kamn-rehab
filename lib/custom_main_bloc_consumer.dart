@@ -7,6 +7,7 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/screens/add_gym_screen.dart';
+import 'package:kamn/gym_feature/gyms/presentation/screen/gym_details_screen.dart';
 import 'package:kamn/gym_feature/gyms/presentation/screen/choose_plan_screen.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/screens/track_gym_request_submission_screen.dart';
 import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
