@@ -1,31 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/constants.dart';
-import 'package:kamn/core/const/image_links.dart';
 import 'package:kamn/core/helpers/spacer.dart';
-import 'package:kamn/core/theme/app_pallete.dart';
+import 'package:kamn/core/helpers/validators.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/healthy_food_features/data/models/category_data.dart';
+import 'package:kamn/home_cooked__features/data/models/meals_model.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_state.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/Food_details_info/custom_homecook_ingredients.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/Food_details_info/custom_meal_type_selection.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/Food_details_info/custom_reqired_txt.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/Food_details_info/custom_specialty_dropdown.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/Food_details_info/custom_txt_field.dart';
+import 'package:kamn/home_cooked__features/presentation/widgets/add_home_cook/add_home_cook_info/custom_save_button.dart';
+import 'package:uuid/uuid.dart';
 
 class EditMealPopUpScreen extends StatefulWidget {
   @override
   _EditMealPopUpScreenState createState() => _EditMealPopUpScreenState();
 }
 
-TextEditingController mealNameController = TextEditingController();
-TextEditingController prepController = TextEditingController();
-TextEditingController kcalController = TextEditingController();
-TextEditingController priceController = TextEditingController();
-TextEditingController descriptionController = TextEditingController();
-
 class _EditMealPopUpScreenState extends State<EditMealPopUpScreen> {
-  String selectedMealType = "Breakfast";
+  
   @override
   Widget build(BuildContext context) {
+  final mealCubit = context.read<MealCubit>();
+  final selectedMeal = mealCubit.state.selectedMeal;
+  String selectedMealType = selectedMeal!.type;
+
     return Container(
       width: double.infinity,
       height: MediaQuery.of(context).size.height * 0.9,
@@ -56,40 +60,81 @@ class _EditMealPopUpScreenState extends State<EditMealPopUpScreen> {
                   Text("Meal Type",
                       style: TextStyles.circularSpotify14RegularDarkBlack),
                   verticalSpace(7.h),
-                  CustomMealTypeSelection(
-                    selectedMealType: selectedMealType,
-                    onMealTypeSelected: (mealType) {
-                      setState(() {
-                        selectedMealType =
-                            mealType; // Update selected meal type
-                      });
+                  BlocBuilder<MealCubit, MealState>(
+                    builder: (context, state) {
+                      return CustomMealTypeSelection(
+                        selectedMealType: selectedMeal!.type,
+                        //selectedMealType: state.selectedMealType,
+                        onMealTypeSelected: (mealType) {
+                          mealCubit.changeSelectedType(mealType);
+                        },
+                      );
                     },
                   ),
                   verticalSpace(12.h),
-                  customRequiredTxt("Meal Name"),
-                  verticalSpace(7.h),
-                  customTxtField(
-                      35.73.h, 315.w, "Enter Meal Name", mealNameController,false,1,""),
-                  verticalSpace(12.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      customRequiredTxt("Prep time"),
-                      customRequiredTxt("🔥 ${Constants.kCal}"),
-                    ],
+                  Form(
+                    key: mealCubit.updateMealKey,
+                    child: Column(children: [
+                      customRequiredTxt("Meal Name"),
+                      verticalSpace(7.h),
+                      CustomTxtField(
+                        text: selectedMeal!.name.toString(),
+                        hasCounter: false,
+                        height: 35.73.h,
+                        width: 315.w,
+                        hintText: "Enter Meal Name",
+                        txtController: mealCubit.mealNameController,
+                        valodator: emptyValidator,
+                      ),
+                      verticalSpace(12.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          customRequiredTxt("Prep time"),
+                          customRequiredTxt("🔥 ${Constants.kCal}"),
+                        ],
+                      ),
+                      verticalSpace(7.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          CustomTxtField(
+                            text: selectedMeal.prepTime.toString(),
+                            hasCounter: false,
+                            height: 35.73.h,
+                            width: 120.w,
+                            hintText: "00:00",
+                            txtController: mealCubit.prepController,
+                            suffixtext: Constants.minute,
+                            valodator: numbersValidator,
+                          ),
+                          CustomTxtField(
+                            text: selectedMeal.calories.toString(),
+                            hasCounter: false,
+                            height: 35.73.h,
+                            width: 120.w,
+                            hintText: "0",
+                            txtController: mealCubit.kcalController,
+                            suffixtext: "🔥",
+                            valodator: numbersValidator,
+                          ),
+                        ],
+                      ),
+                      verticalSpace(12.h),
+                      customRequiredTxt("Price"),
+                      CustomTxtField(
+                        text: selectedMeal.price.toString(),
+                        hasCounter: false,
+                        height: 35.73.h,
+                        width: 315.w,
+                        hintText: "Enter price",
+                        txtController: mealCubit.priceController,
+                        suffixtext: Constants.egp,
+                        valodator: numbersValidator,
+                      ),
+                    ]),
                   ),
-                  verticalSpace(7.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      customTxtField(35.73.h, 120.w, "00:00", prepController,false,1,Constants.minute),
-                      customTxtField(35.73.h, 120.w, "0", kcalController,false,1,"🔥"),
-                    ],
-                  ),
-                  verticalSpace(12.h),
-                  customRequiredTxt("Price"),
-                  customTxtField(
-                      35.73.h, 315.w, "Enter price", priceController,false,1,Constants.egp),
+                  ///***** TAGS ****///
                   verticalSpace(12.h),
                   customRequiredTxt("Specialty Tags"),
                   verticalSpace(7.h),
@@ -111,39 +156,115 @@ class _EditMealPopUpScreenState extends State<EditMealPopUpScreen> {
                     style: TextStyles.fontCircularSpotify8StealGrayRegular,
                   ),
                   verticalSpace(12.h),
-                  CustomHomecookIngredients(),
+                  // CustomHomecookIngredients(
+                  //   ingredients: ingredients,
+                  // ),
+CustomHomecookIngredients(
+  ingredients: ingredients, // Pass all available ingredients
+  selectedIngredients: selectedMeal.ingredients.cast<String>(), // Ensure correct type
+)
+,
+
                   verticalSpace(12.h),
                   Text("Details",
                       style: TextStyles.circularSpotify14RegularDarkBlack),
                   verticalSpace(7.h),
-                  customTxtField(
-                      111.h, 315.w, "Enter description", descriptionController,true,7,""),
+                  CustomTxtField(
+                    text: selectedMeal.details.toString(),
+                    hasCounter: true,
+                    height: 111.h,
+                    width: 315.w,
+                    hintText: "Enter description",
+                    txtController: mealCubit.descriptionController,
+                    maxLines: 7,
+                  ),
                   verticalSpace(20.h),
                 ],
               ),
             ),
           ),
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              fixedSize: Size(315.w, 50.h),
-              foregroundColor: AppPallete.whiteColor,
-              backgroundColor: AppPallete.blackColor,
-              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.r),
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(ImageLinks.check, width: 14.w, height: 14.h),
-                horizontalSpace(10.w),
-                Text(Constants.save,
-                    style: TextStyles.fontCircularSpotify14WhiteMedium),
-              ],
-            ),
+          
+          BlocConsumer<MealCubit, MealState>(
+  listener: (context, state) {
+    if (state.isUpdateMealLoading) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          content: Row(
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(width: 20),
+              Text("Updating Meal..."),
+            ],
           ),
+        ),
+      );
+    } else if (state.isUpdateMealSuccess) {
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Meal updated successfully!")),
+      );
+      Navigator.pop(context);
+    } else if (state.isUpdateMealError) {
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Error: ${state.error}")),
+      );
+    }
+  },
+  builder: (context, state) {
+    return CustomSaveButton(
+      onPressed: () {
+        print("ID: ${selectedMeal.id}");
+        if (mealCubit.updateMealKey.currentState!.validate()) {
+          MealModel updatedMeal = selectedMeal.copyWith(
+            name: mealCubit.mealNameController.text,
+            type: context.read<MealCubit>().state.selectedMealType,
+            prepTime: int.parse(mealCubit.prepController.text),
+            calories: int.parse(mealCubit.kcalController.text),
+            price: double.parse(mealCubit.priceController.text),
+            ingredients: mealCubit.state.ingredients,
+            details: mealCubit.descriptionController.text,
+            id:  selectedMeal.id,
+            specialtyTags: mealCubit.state.specialtyTags,
+            imageUrls: [""],
+          );
+          if (updatedMeal == selectedMeal){
+            return;
+          }
+          else{
+            mealCubit.updateMeal(updatedMeal);
+            print(updatedMeal);
+          }
+        }
+      },
+      title: Constants.save,
+    );
+  },
+),
+          
+          
+          
+          // CustomSaveButton(
+          //     onPressed: () {
+          //       if (mealCubit.updateMealKey.currentState!.validate()) {
+          //         MealModel mealmodel = MealModel(
+          //           name: mealCubit.mealNameController.text,
+          //           type: context.read<MealCubit>().state.selectedMealType,
+          //           prepTime: int.parse(mealCubit.prepController.text),
+          //           calories: int.parse(mealCubit.kcalController.text),
+          //           price: double.parse(mealCubit.priceController.text),
+          //           ingredients: mealCubit.state.ingredients,
+          //           details: mealCubit.descriptionController.text,
+          //           id: Uuid().v4(),
+          //           specialtyTags: mealCubit.state.specialtyTags,
+          //           imageUrls: [""],
+          //         );
+          //         mealCubit.updateMeal(mealmodel);
+          //         print(mealmodel);
+          //       }
+          //     },
+          //     title: Constants.addMeal),
           verticalSpace(10.h),
         ],
       ),
