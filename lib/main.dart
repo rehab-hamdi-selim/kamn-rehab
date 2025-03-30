@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/home_cooked__features/presentation/screens/meal_info_screen.dart';
-
 // void main() async {
 //   await initDependencies();
 //   configureDependencies();
@@ -40,8 +38,12 @@ import 'package:kamn/home_cooked__features/presentation/screens/meal_info_screen
 //     );
 //   }
 // }
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:kamn/home_cooked__features/presentation/screens/meal_info_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting('en', null); // Ensure locale is initialized
   runApp(
     ScreenUtilInit(
       designSize: const Size(375, 812), // Adjust based on your design
