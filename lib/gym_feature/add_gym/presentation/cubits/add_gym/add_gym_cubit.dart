@@ -20,10 +20,7 @@ class AddGymCubit extends Cubit<AddGymState> {
   final TextEditingController instagramController = TextEditingController();
   final TextEditingController contactController = TextEditingController();
   final TextEditingController xController = TextEditingController();
-  final TextEditingController menuController = TextEditingController();
-  final TextEditingController priceController = TextEditingController();
-  final TextEditingController featureDescriptionController =
-      TextEditingController();
+ 
 
   AddGymCubit({required this.repository})
       : super(AddGymState(state: AddGymStatus.initial));
@@ -38,9 +35,6 @@ class AddGymCubit extends Cubit<AddGymState> {
     instagramController.dispose();
     xController.dispose();
     contactController.dispose();
-    menuController.dispose();
-    priceController.dispose();
-    featureDescriptionController.dispose();
     return super.close();
   }
 
@@ -122,28 +116,9 @@ class AddGymCubit extends Cubit<AddGymState> {
     return state.isValidAll;
   }
 
-  void addFeature() {
-    emit(state.copyWith(
-      state: AddGymStatus.featureAdded,
-      addedFeatures: [
-        ...state.addedFeatures ?? [],
-        Feature(
-          name: menuController.text,
-          description: featureDescriptionController.text,
-          price: priceController.text,
-          pricingOption: state.featureType,
-        )
-      ],
-    ));
-  }
 
-  void onChangeRadioSelection(FeatureType newOption) {
-    if (state.featureType == newOption) {
-      return;
-    }
-    emit(state.copyWith(
-        state: AddGymStatus.radioSelected, featureType: newOption));
-  }
+
+ 
 
   Future<void> pickMandatoryImages(String field) async {
     final image = await pickImage();

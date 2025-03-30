@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_state.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/cubits/cubit/create_gym_feature_cubit.dart';
 import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
 
 class FeatureBox extends StatelessWidget {
@@ -11,6 +13,7 @@ class FeatureBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<CreateGymFeatureCubit>();
     return Container(
       decoration: BoxDecoration(
           color: AppPallete.whiteColor,
@@ -32,10 +35,13 @@ class FeatureBox extends StatelessWidget {
               style: TextStyles.fontCircularSpotify8WhiteMedium,
             ),
           ),
-          Icon(
-            Icons.close,
-            color: AppPallete.blackColor,
-            size: 12.r,
+          GestureDetector(
+            onDoubleTap: () => cubit.removeFeature(feature),
+            child: Icon(
+              Icons.close,
+              color: AppPallete.blackColor,
+              size: 12.r,
+            ),
           )
         ],
       ),

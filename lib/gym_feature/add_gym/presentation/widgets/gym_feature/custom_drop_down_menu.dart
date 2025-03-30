@@ -28,7 +28,10 @@ class CustomDropDownMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownMenu<String>(
+    // Wrap with Material widget to provide the necessary context for TextField
+    return Material(
+      color: Colors.transparent, // Make it transparent to not affect appearance
+      child: DropdownMenu<String>(
           onSelected: (value) {
             if (value != null) {
               // context.read<GymFeaturesCubit>().takeSelectedValue(value);
@@ -71,7 +74,7 @@ class CustomDropDownMenu extends StatelessWidget {
               ),
             ),
           ),
-        );
+     ) );
     
 }
 }
