@@ -7,6 +7,8 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/screens/add_gym_screen.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/screens/membership_offer_screen.dart';
+import 'package:kamn/gym_feature/gyms/presentation/pages/gyms_screen.dart';
 import 'package:kamn/gym_feature/gyms/presentation/screen/choose_plan_screen.dart';
 import 'package:kamn/gym_feature/gyms/presentation/screen/track_gym_request_submission_screen.dart';
 import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
@@ -67,6 +69,7 @@ class CustomMainBlocConsumer extends StatelessWidget {
       return TrackSubmissionScreen();
     }
     if (state.isNotInstalled()) {
+
        return BlocProvider(
         create: (context) => getIt<AddGymCubit>()..getGymIdFromSecureStorage(),
         child: const AddGymScreen(),
@@ -75,7 +78,7 @@ class CustomMainBlocConsumer extends StatelessWidget {
     if (state.isLoggedIn() || state.isGettedData() || state.isSuccess()) {
       //  return const ChoosePlanScreen();
       //    return const ChoosePlanScreen();
-      return TrackSubmissionScreen();
+      return const MembershipOfferScreen();
       // return BlocProvider(
       //   create:(context)=> getIt<SelectCategoryCubit>()..getPlaygrounds(),
       //   child: const SelectCategoryScreen(),
