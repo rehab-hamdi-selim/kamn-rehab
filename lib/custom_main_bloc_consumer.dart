@@ -62,10 +62,11 @@ class CustomMainBlocConsumer extends StatelessWidget {
       return TrackSubmissionScreen();
     }
     if (state.isNotInstalled()) {
-      return BlocProvider(
-        create: (context) => getIt<AddGymCubit>(),
-        child: const MembershipOfferScreen(),
-      );
+      //  return BlocProvider(
+      //   create: (context) => getIt<AddGymCubit>(),
+      //   child: const AddGymScreen(),
+      // );
+      return TrackSubmissionScreen();
     }
     if (state.isLoggedIn() || state.isGettedData() || state.isSuccess()) {
       //  return const ChoosePlanScreen();

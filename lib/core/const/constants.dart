@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/gym_feature/add_gym/domain/models/document_item.dart';
+import 'package:kamn/gym_feature/add_gym/data/models/document_item.dart';
 
 class Constants {
   static const List<String> topics = [
