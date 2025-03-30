@@ -25,6 +25,8 @@ enum AddGymStatus {
   uploadImagesError,
   uploadImagesLoading,
   checkBarTapped,
+  secureStorageError,
+  secureStorageSuccess,
 }
 
 extension FeatureTypeColors on FeatureType {
@@ -62,6 +64,8 @@ extension AddGymStateX on AddGymState {
   bool get isUploadImagesError => state == AddGymStatus.uploadImagesError;
   bool get isUploadImagesLoading => state == AddGymStatus.uploadImagesLoading;
   bool get isCheckBarTapped => state == AddGymStatus.checkBarTapped;
+  bool get isSecureStorageError => state == AddGymStatus.secureStorageError;
+  bool get isSecureStorageSuccess => state == AddGymStatus.secureStorageSuccess;
 }
 
 class AddGymState {
@@ -80,6 +84,7 @@ class AddGymState {
   final bool? isAccept;
   final bool? isConfirm;
   final int? numberOfImages;
+  final String? gymId;
 
   AddGymState(
       {required this.state,
@@ -96,6 +101,7 @@ class AddGymState {
       this.isConfirm=false,
       this.isGymInfoValid=false,
       this.numberOfImages,
+      this.gymId,
       this.isValid = const [true, true, true]});
 
   bool get isValidAll => isValid.every((element) => element);
@@ -114,6 +120,7 @@ class AddGymState {
         bool? isAccept,
    bool? isConfirm,
       bool? isGymInfoValid,
+      String? gymId,
        int? numberOfImages,
       List<bool>? isValid}) {
     return AddGymState(
@@ -128,6 +135,7 @@ class AddGymState {
         gymRequest: gymRequest ?? this.gymRequest,
         isAccept: isAccept?? this.isAccept,
         isConfirm: isConfirm?? this.isConfirm,
+        gymId: gymId?? this.gymId,
         uploadProgress: uploadProgress ?? this.uploadProgress,
         isGymInfoValid: isGymInfoValid ?? this.isGymInfoValid,
         numberOfImages: numberOfImages?? this.numberOfImages,
@@ -136,7 +144,7 @@ class AddGymState {
 
   @override
   String toString() {
-    return 'AddGymState(state: $state, erorrMessage: $erorrMessage, logo: $logo, mandatoryFields: $mandatoryFields, gymImages: $gymImages, isValid: $isValid, featureType: $featureType)';
+    return 'AddGymState(state: $state, erorrMessage: $erorrMessage, logo: $logo, mandatoryFields: $mandatoryFields, gymImages: $gymImages, isValid: $isValid, featureType: $featureType, addedFeatures: $addedFeatures, imagesUrlMap: $imagesUrlMap, gymRequest: $gymRequest, uploadProgress: $uploadProgress, isGymInfoValid: $isGymInfoValid, isAccept: $isAccept, isConfirm: $isConfirm, numberOfImages: $numberOfImages, gymId: $gymId)';
   }
 }
 

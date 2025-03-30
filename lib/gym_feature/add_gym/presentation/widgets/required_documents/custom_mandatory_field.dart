@@ -8,7 +8,7 @@ import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_state.dart';
 
-class CustomMandatoryField extends StatefulWidget {
+class CustomMandatoryField extends StatelessWidget {
   const CustomMandatoryField(
       {super.key,
       required this.title,
@@ -21,14 +21,9 @@ class CustomMandatoryField extends StatefulWidget {
   final int? index;
 
   @override
-  State<CustomMandatoryField> createState() => _CustomMandatoryFieldState();
-}
-
-class _CustomMandatoryFieldState extends State<CustomMandatoryField> {
-  @override
   Widget build(BuildContext context) {
-    final bool isValid = widget.index != null
-        ? context.watch<AddGymCubit>().state.isValid[widget.index!]
+    final bool isValid = index != null
+        ? context.watch<AddGymCubit>().state.isValid[index!]
         : true;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,16 +50,16 @@ class _CustomMandatoryFieldState extends State<CustomMandatoryField> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.title,
+                          title,
                           style: TextStyles.fontCircularSpotify14BlackRegular
                               .copyWith(
                             color: isValid ? null : AppPallete.redColor,
                           ),
                         ),
-                        Text("(${widget.translation})",
+                        Text("($translation)",
                             style: TextStyles
                                 .fontCircularSpotify8StealGrayRegular
-                                .copyWith(fontSize: widget.fontSize)),
+                                .copyWith(fontSize: fontSize)),
                       ],
                     ),
                     TextButton(
@@ -80,7 +75,7 @@ class _CustomMandatoryFieldState extends State<CustomMandatoryField> {
                         minimumSize: Size(113.w, 15.h),
                       ),
                       onPressed: () {
-                        context.read<AddGymCubit>().pickMandatoryImages(widget.title);
+                        context.read<AddGymCubit>().pickMandatoryImages(title);
                       },
                       child: Text("Choose file",
                           style: TextStyles
@@ -97,7 +92,7 @@ class _CustomMandatoryFieldState extends State<CustomMandatoryField> {
                         .watch<AddGymCubit>()
                         .state
                         .mandatoryFields
-                        ?.getFieldByText(widget.title) !=
+                        ?.getFieldByText(title) !=
                     null)
                   Divider(
                     color: AppPallete.lightGreyColor,
@@ -109,7 +104,7 @@ class _CustomMandatoryFieldState extends State<CustomMandatoryField> {
                         .watch<AddGymCubit>()
                         .state
                         .mandatoryFields
-                        ?.getFieldByText(widget.title) !=
+                        ?.getFieldByText(title) !=
                     null)
                   Center(
                     child: Image.file(
@@ -117,7 +112,7 @@ class _CustomMandatoryFieldState extends State<CustomMandatoryField> {
                           .watch<AddGymCubit>()
                           .state
                           .mandatoryFields
-                          ?.getFieldByText(widget.title))!,
+                          ?.getFieldByText(title))!,
                       height: 255.h,
                       width: 200.w,
                       fit: BoxFit.fill,

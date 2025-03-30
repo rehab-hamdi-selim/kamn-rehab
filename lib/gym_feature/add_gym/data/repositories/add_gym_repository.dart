@@ -11,11 +11,14 @@ abstract class AddGymRepository {
   Future<Either<Faliure,GymRequestModel>> addGymRequest(GymRequestModel gymRequestModel);
   Future<Either<Faliure,Map<String, List<String>>>> uploadImages(
       Map<String, List<File>> imagesMap, void Function(double) onProgress);
+
 }
+
 @Injectable(as: AddGymRepository)
 class AddGymRepositoryImpl implements AddGymRepository {
-AddGymRemoteDataSource dataSource;
+  AddGymRemoteDataSource dataSource;
   AddGymRepositoryImpl({required this.dataSource});
+  
   @override
   Future<Either<Faliure, GymRequestModel>> addGymRequest(GymRequestModel gymRequestModel) {
     return executeTryAndCatchForRepository(() async {
@@ -28,4 +31,6 @@ AddGymRemoteDataSource dataSource;
     return executeTryAndCatchForRepository(() async {
       return await dataSource.uploadImages(imagesMap,onProgress);
     });
-  }}
+  }
+  
+}
