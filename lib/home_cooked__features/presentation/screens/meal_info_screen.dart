@@ -44,36 +44,27 @@ class _MealInfoScreenState extends State<MealInfoScreen> {
             vertical: 16.h,
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const CircularBackButton(),
               SizedBox(
-                height: 32.h,
+                height: 27.h,
               ),
-              Row(
-                children: [
-                  Text(
-                    'Add Home Cook Data',
-                    style:
-                        TextStyles.fontCircularSpotify21AccentBlackColorMedium,
-                  ),
-                ],
+              Text(
+                'Add Home Cook Data',
+                style: TextStyles.fontCircularSpotify21AccentBlackColorMedium,
               ),
               SizedBox(
-                height: 16.h,
+                height: 2.h,
               ),
-              Row(
-                children: [
-                  Text(
-                    'Set Up Your Home Cook Profile',
-                    style:
-                        TextStyles.fontCircularSpotify13DarkGreyColorrRegular,
-                  ),
-                ],
+              Text(
+                'Set Up Your Home Cook Profile',
+                style: TextStyles.fontCircularSpotify13DarkGreyColorrRegular,
               ),
               SizedBox(height: 19.h),
-              CustomTabContainer(
-                tabNames: tabNames,
-              ),
+              // CustomTabContainer(
+              //   tabNames: tabNames,
+              // ),
               SizedBox(height: 19.h),
               Expanded(
                 child: ListView(
