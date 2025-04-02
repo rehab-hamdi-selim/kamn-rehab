@@ -7,7 +7,6 @@ import 'package:kamn/healthy_food_features/presentation/widgets/searching_of_ui/
 import 'package:kamn/healthy_food_features/presentation/widgets/searching_of_ui/custom_search_appbar.dart';
 import 'package:kamn/core/const/constants.dart';
 
-
 class SearchingUiScreen extends StatelessWidget {
   const SearchingUiScreen({super.key});
 
@@ -15,13 +14,13 @@ class SearchingUiScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Appbar
             CustomSearchAppbar(),
-            verticalSpace(10.h),
+            verticalSpace(24.h),
             Text(
               Constants.popularFood,
               style: TextStyles.fontCircularSpotify21BlackRegular,
@@ -30,7 +29,7 @@ class SearchingUiScreen extends StatelessWidget {
 
             // Popular Food Grid
             SizedBox(
-              height: 350.h,
+              height: 400.h,
               child: SingleChildScrollView(child: CustomPopularFoodGridCard()),
             ),
             verticalSpace(12.h),
