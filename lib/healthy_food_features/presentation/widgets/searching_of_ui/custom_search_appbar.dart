@@ -7,6 +7,7 @@ import 'package:kamn/healthy_food_features/presentation/widgets/searching_of_ui/
 
 Widget CustomSearchAppbar() {
   return Row(
+    mainAxisSize: MainAxisSize.min,
     children: [
       IconButton(
         padding: EdgeInsets.zero,
@@ -18,9 +19,10 @@ Widget CustomSearchAppbar() {
         ),
       ),
       horizontalSpace(10.5.w),
-      CustomSearchDropodwn(),
-      horizontalSpace(10.5.w),
+      const CustomSearchDropodwn(),
+      horizontalSpace(41.w),
       IconButton(
+        padding: EdgeInsets.zero,
         onPressed: () {},
         icon: SvgPicture.asset(
           IconLinks.search,
@@ -28,7 +30,9 @@ Widget CustomSearchAppbar() {
           height: 46.h,
         ),
       ),
+      horizontalSpace(6.w),
       IconButton(
+        padding: EdgeInsets.zero,
         onPressed: () {},
         icon: SvgPicture.asset(
           IconLinks.filter,
