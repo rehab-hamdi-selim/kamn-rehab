@@ -53,8 +53,9 @@ class CustomPopularFoodGridCard extends StatelessWidget {
               // Main Container
               Container(
                 width: 160.w,
-                height: 202.h,
+                height: 210.h,
                 decoration: BoxDecoration(
+                  color: Colors.yellow,
                   gradient: const LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -76,30 +77,29 @@ class CustomPopularFoodGridCard extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    verticalSpace(112.h),
+                    verticalSpace(81.h),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0.w),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          verticalSpace(3.h),
+                          verticalSpace(50.h),
                           Text(
                             "🔥${trendingFoods[index].calories} ${Constants.kCal}",
                             style:
                                 TextStyles.fontCircularSpotify8StealGrayRegular,
                           ),
-                          verticalSpace(2.h),
                           Text(
                             trendingFoods[index].name,
                             style: TextStyles.fontCircularSpotify14BlackBold,
                           ),
-                          verticalSpace(0.5.h),
+                          // verticalSpace(0.5.h),
                           Text(
                             trendingFoods[index].tags.toString(),
                             style:
                                 TextStyles.fontCircularSpotify8StealGrayLight,
                           ),
-                          verticalSpace(1.h),
+                          // verticalSpace(5.h),
                           Row(
                             children: [
                               Text(
@@ -107,7 +107,7 @@ class CustomPopularFoodGridCard extends StatelessWidget {
                                 style:
                                     TextStyles.fontCircularSpotify14BlackBold,
                               ),
-                              horizontalSpace(1.w),
+                              // horizontalSpace(1.w),
                               Text(
                                 Constants.egp,
                                 style: TextStyles
@@ -122,7 +122,7 @@ class CustomPopularFoodGridCard extends StatelessWidget {
                 ),
               ),
               Positioned(
-                  bottom: 9.h,
+                  bottom: 8.h,
                   right: 7.w,
                   child: IconButton(
                     onPressed: () {},
@@ -136,6 +136,7 @@ class CustomPopularFoodGridCard extends StatelessWidget {
               Positioned(
                 top: -15.h,
                 child: Container(
+                  padding: EdgeInsets.all(0),
                   width: 147.w,
                   height: 147.h,
                   child: Image.asset(

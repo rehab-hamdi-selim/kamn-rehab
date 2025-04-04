@@ -14,7 +14,7 @@ class SearchingUiScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(16.0.w),
+        padding: EdgeInsets.all(16.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -32,13 +32,13 @@ class SearchingUiScreen extends StatelessWidget {
               height: 400.h,
               child: SingleChildScrollView(child: CustomPopularFoodGridCard()),
             ),
-            verticalSpace(12.h),
+            verticalSpace(24.h),
 
             Text(
               Constants.openRestaurants,
               style: TextStyles.fontCircularSpotify21BlackRegular,
             ),
-            verticalSpace(10.h),
+            verticalSpace(16.h),
 
             // Resturants
             CustomResturantsList(),

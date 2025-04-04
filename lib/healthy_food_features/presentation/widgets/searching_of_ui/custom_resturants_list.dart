@@ -17,24 +17,24 @@ class CustomResturantsList extends StatelessWidget {
         itemCount: restaurants.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.only(right: 8, top: 16),
+            padding: EdgeInsets.only(right: 8.w, top: 16.h),
             child: Container(
               decoration: BoxDecoration(
                 color: AppPallete.whiteColor,
                 borderRadius: BorderRadius.circular(12),
               ),
               height: 116.h,
+              width: 343.w,
               child: Row(
                 children: [
                   Image.asset(
                     restaurants[index].imageUrl,
                     width: 103.w,
                   ),
-                  SizedBox(width: 10.w),
+                  SizedBox(width: 16.w),
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 10.h, horizontal: 16.w),
+                      padding: EdgeInsets.all(8.0.w),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
