@@ -19,7 +19,7 @@ Widget CustomSearchAppbar() {
         ),
       ),
       horizontalSpace(10.5.w),
-      CustomSearchDropodwn(),
+      const CustomSearchDropodwn(),
       horizontalSpace(41.w),
       IconButton(
         padding: EdgeInsets.zero,
