@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/days_container.dart';
 
 class OpenContainer extends StatelessWidget {
   const OpenContainer({super.key});
@@ -61,18 +62,55 @@ class OpenContainer extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                            'Enable this option if the gym operates 24/7 without specific opening hours. If disabled, you must set the daily opening and closing times.',
-                            style: TextStyles
-                                .fontCircularSpotify10darkGreyColorRegular
-                                .copyWith(
-                              fontWeight: FontWeight.w500,
-                            ),
-                            softWrap: true),
+                          'Enable this option if the gym operates 24/7 without specific opening hours. If disabled, you must set the daily opening and closing times.',
+                          style: TextStyles
+                              .fontCircularSpotify10darkGreyColorRegular
+                              .copyWith(
+                            fontWeight: FontWeight.w500,
+                          ),
+                          softWrap: true,
+                        ),
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: 12.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'Gym Operating Hours',
+                          style: TextStyles.fontCircularSpotify16BlackMedium
+                              .copyWith(
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'Set your gym’s weekly schedule to help users know when to visit.',
+                          style: TextStyles
+                              .fontCircularSpotify10darkGreyColorRegular
+                              .copyWith(
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12.h,
+                  ),
                 ],
-              )
+              ),
+              SizedBox(width: 296.7.w, child: DaysContainer())
             ],
           ),
         ),
