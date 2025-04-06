@@ -14,7 +14,10 @@ class InprogressPage extends StatelessWidget {
         padding: EdgeInsets.only(bottom: 16.h),
         itemCount: 4,
         itemBuilder: (context, index) {
-          return CardInProgress();
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: CardInProgress(),
+          );
         });
   }
 }
