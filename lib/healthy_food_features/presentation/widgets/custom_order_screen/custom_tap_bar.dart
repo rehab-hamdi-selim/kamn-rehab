@@ -15,7 +15,7 @@ class _CustomTabScreenState extends State<CustomTabScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return Expanded(
       child: Column(
         children: [
           SizedBox(height: 20.h),
@@ -87,18 +87,14 @@ class _CustomTabScreenState extends State<CustomTabScreen> {
             ),
           ),
           SizedBox(height: 32.h),
-          IndexedStack(
-            index: isFirstActive ? 0 : 1,
-            children: [
-              InprogressPage(),
-              InprogressPage(),
-              // Center(
-              //   child: Text(
-              //     "محتوى History",
-              //     style: TextStyle(fontSize: 20.sp),
-              //   ),
-              // ),
-            ],
+          Expanded(
+            child: IndexedStack(
+              index: isFirstActive ? 0 : 1,
+              children: [
+                InprogressPage(),
+                InprogressPage(),
+              ],
+            ),
           ),
         ],
       ),
