@@ -13,8 +13,8 @@ class CustomMealCubitListner extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<MealCubit, MealState>(
         listener: (context, state) {
-          if (state.isAddDeliveryOptionLoading) {
-            Navigator.of(context).pop(); // Close the loading dialog
+          if (state.isAddDeliveryOptionSuccess) {
+            //Navigator.of(context).pop(); // Close the loading dialog
             AlertDialogUtils.showAlert(
               context: context,
               content: "Delivery option added successfully!",
@@ -29,6 +29,13 @@ class CustomMealCubitListner extends StatelessWidget {
               firstbutton: "OK",
             );
           }
+          //  else if (state.isAddDeliveryOptionLoading) {
+          //   AlertDialogUtils.showAlert(
+          //     context: context,
+          //     content: "loading",
+          //     title: "loading",
+          //   );
+          // }
         },
         child: child);
   }
