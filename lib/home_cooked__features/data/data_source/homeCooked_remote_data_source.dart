@@ -67,9 +67,8 @@ CollectionReference<Object?> getMealsCollection(String homeCookId) {
   @override
 
   Future<void> addMealModel(MealModel mealModel, String homeCookId) async {
-     var docMeal = getMealsCollection(homeCookId).doc();
+     var docMeal = getMealsCollection(homeCookId).doc(mealModel.id);
       await docMeal.set(mealModel.toMap());
-   
   }
 
   @override

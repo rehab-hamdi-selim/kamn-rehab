@@ -26,6 +26,8 @@ class _AddMealPopUpScreenState extends State<AddMealPopUpScreen> {
   @override
   Widget build(BuildContext context) {
     final mealCubit = context.read<MealCubit>();
+      final selectedMeal = mealCubit.state.selectedMeal;
+
     return Container(
       width: double.infinity,
       height: MediaQuery.of(context).size.height * 0.9,
@@ -150,7 +152,6 @@ class _AddMealPopUpScreenState extends State<AddMealPopUpScreen> {
                   CustomHomecookIngredients(
                     ingredients: ingredients,
                   ),
-
                   verticalSpace(12.h),
                   Text("Details",
                       style: TextStyles.circularSpotify14RegularDarkBlack),
@@ -177,7 +178,7 @@ class _AddMealPopUpScreenState extends State<AddMealPopUpScreen> {
                     prepTime: int.parse(mealCubit.prepController.text),
                     calories: int.parse(mealCubit.kcalController.text),
                     price: double.parse(mealCubit.priceController.text),
-                    ingredients: mealCubit.state.ingredients,
+                    ingredients: mealCubit.state.selectedIngredients,
                     details: mealCubit.descriptionController.text,
                     id: Uuid().v4(),
                     specialtyTags: mealCubit.state.specialtyTags,

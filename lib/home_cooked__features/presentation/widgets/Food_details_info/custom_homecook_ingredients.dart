@@ -13,7 +13,11 @@ class CustomHomecookIngredients extends StatelessWidget {
   final List<Category> ingredients;
   final List<String> selectedIngredients;
 
-  const CustomHomecookIngredients({super.key, required this.ingredients,this.selectedIngredients = const []});
+  const CustomHomecookIngredients({
+    super.key,
+    required this.ingredients,
+    this.selectedIngredients = const [],
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +43,12 @@ class CustomHomecookIngredients extends StatelessWidget {
               itemCount: ingredients.length,
               itemBuilder: (context, index) {
                 final ingredient = ingredients[index];
-                // final isSelected = state.ingredients.contains(ingredient.name);
-                final isSelected = selectedIngredients.contains(ingredient.name);
+                
+                // Ensure selected ingredients are fetched correctly
+                final isSelected = state.selectedIngredients.contains(ingredient.name);
+                //  final isSelected = state.ingredients.contains(ingredient.name);
+                //final isSelected = state.selectedIngredients.contains(ingredient.name);
+                //final isSelected = selectedIngredients.contains(ingredient.name);
                 return _ingredientItem(context, ingredient, isSelected);
               },
             ),
@@ -50,12 +58,9 @@ class CustomHomecookIngredients extends StatelessWidget {
     );
   }
 
-  Widget _ingredientItem(
-      BuildContext context, Category ingredient, bool isSelected) {
+  Widget _ingredientItem(BuildContext context, Category ingredient, bool isSelected) {
     return InkWell(
-      onTap: () => context
-          .read<MealCubit>()
-          .toggleSelection(ingredient.name),
+      onTap: () => context.read<MealCubit>().toggleSelection(ingredient.name),
       child: SizedBox(
         height: 75.h,
         child: Column(
