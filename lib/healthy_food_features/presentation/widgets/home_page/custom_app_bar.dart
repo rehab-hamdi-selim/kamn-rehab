@@ -47,6 +47,7 @@ class CustomAppBar extends StatelessWidget {
                   child: Container(
                     width: 10.75.w,
                     height: 7.68.h,
+                    /////
                     decoration: const ShapeDecoration(
                       color: AppPallete.darkGreenColor,
                       shape: StarBorder.polygon(
