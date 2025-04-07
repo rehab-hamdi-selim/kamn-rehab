@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -39,6 +41,7 @@ class MealCubit extends Cubit<MealState> {
         error: error.erorr,
       ));
     }, (success) {
+      log("message updated home: success data");
       emit(state.copyWith(state: MealStatus.addDeliveryOptionSuccess));
     });
   }

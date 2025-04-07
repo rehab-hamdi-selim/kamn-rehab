@@ -17,9 +17,9 @@ abstract class AddHomeCookRemoteDataSource {
 
   Future<List<Map<String, dynamic>>> getMeals(String homeCookId);
 
-  Future<void> addMealModel(MealModel mealModel,String homeCookId);
+  Future<void> addMealModel(MealModel mealModel, String homeCookId);
 
-  Future<void> updateMealModel(MealModel mealModel, String homeCookId);  
+  Future<void> updateMealModel(MealModel mealModel, String homeCookId);
 
   Future<Map<String, List<String>>> uploadImages(
       Map<String, List<File>> imagesMap, void Function(double) onProgress);
@@ -35,21 +35,19 @@ class AddHomeCookRemoteDataSourceImpl implements AddHomeCookRemoteDataSource {
   CollectionReference get _homeCookCollection =>
       firestore.collection(FirebaseCollections.homeCookRequest);
 
-CollectionReference<Object?> getMealsCollection(String homeCookId) {
-  return firestore
-      .collection(FirebaseCollections.homeCookRequest)
-      .doc(homeCookId)
-      .collection(FirebaseCollections.meal);
-}
-
-
-
+  CollectionReference<Object?> getMealsCollection(String homeCookId) {
+    return firestore
+        .collection(FirebaseCollections.homeCookRequest)
+        .doc(homeCookId)
+        .collection(FirebaseCollections.meal);
+  }
 
 //mary
 
   @override
   Future<void> updateServiceProviderHomeCookAddDeliveryData(
       HomeCookModel homeCookModel) async {
+    //e9d5af41-1156-4b6f-aac1-075a057c742b
     var docRef = _homeCookCollection.doc("u0cBRLRyHcppREpHYdNf");
     await docRef.update(homeCookModel.toMap());
   }
@@ -63,20 +61,17 @@ CollectionReference<Object?> getMealsCollection(String homeCookId) {
     return HomeCookModel.fromMap(docSnap.data() as Map<String, dynamic>);
   }
 
-
   @override
-
   Future<void> addMealModel(MealModel mealModel, String homeCookId) async {
-     var docMeal = getMealsCollection(homeCookId).doc();
-      await docMeal.set(mealModel.toMap());
-   
+    var docMeal = getMealsCollection(homeCookId).doc();
+    await docMeal.set(mealModel.toMap());
   }
 
   @override
-Future<void> updateMealModel(MealModel mealModel, String homeCookId) async {
-  var docMeal = getMealsCollection(homeCookId).doc(mealModel.id);
-  await docMeal.update(mealModel.toMap());
-}
+  Future<void> updateMealModel(MealModel mealModel, String homeCookId) async {
+    var docMeal = getMealsCollection(homeCookId).doc(mealModel.id);
+    await docMeal.update(mealModel.toMap());
+  }
 
   @override
   Future<HomeCookModel> addHomeCookRequest(
@@ -92,16 +87,15 @@ Future<void> updateMealModel(MealModel mealModel, String homeCookId) async {
   }
 
   @override
- Future<List<Map<String, dynamic>>> getMeals(String homeCookId) async {
-  var docRef = getMealsCollection(homeCookId);  
-  var docSnap = await docRef.get();  
+  Future<List<Map<String, dynamic>>> getMeals(String homeCookId) async {
+    var docRef = getMealsCollection(homeCookId);
+    var docSnap = await docRef.get();
 
-  return docSnap.docs.map((element) {  
-    return element.data() as Map<String, dynamic>; // ✅ Explicitly cast the data
-  }).toList();
-}
-
-
+    return docSnap.docs.map((element) {
+      return element.data()
+          as Map<String, dynamic>; // ✅ Explicitly cast the data
+    }).toList();
+  }
 
   @override
   Future<Map<String, List<String>>> uploadImages(

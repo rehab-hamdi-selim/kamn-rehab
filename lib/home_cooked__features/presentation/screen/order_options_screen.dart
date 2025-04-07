@@ -7,6 +7,7 @@ import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/helpers/validators.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/core/utils/alert_dialog_utils.dart';
 import 'package:kamn/home_cooked__features/data/models/home_cook_model_test.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_state.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/order_options/custom_Container.dart';
@@ -23,11 +24,13 @@ import '../widgets/custom_meal_cubit_listner.dart';
 //edit
 class OrderOptionsHomecook extends StatelessWidget {
   OrderOptionsHomecook({super.key});
-  HomeCookModel currentHomeCookModel = HomeCookModel();
+  // HomeCookModel();
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<MealCubit>();
+    HomeCookModel currentHomeCookModel = cubit.state.homeCookModel!;
+
     return Scaffold(
         backgroundColor: AppPallete.whiteColor,
         body: CustomMealCubitListner(
@@ -43,7 +46,9 @@ class OrderOptionsHomecook extends StatelessWidget {
                       //  title: "Add Home Cook Data",
 
                       //just to make sure you access the homecook model sucess
-                      title: cubit.state.homeCookModel?.name ?? "",
+
+                      title: "Add Home Cook Data",
+                      // cubit.state.homeCookModel?.name ?? "",
                       subTitle: "Set Up Your Home Cook Profile",
                     ),
                     const CustomNavBarOrderOptions(),

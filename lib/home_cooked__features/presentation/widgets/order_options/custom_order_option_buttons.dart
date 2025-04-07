@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/order_options/custom_button.dart';
 
@@ -25,7 +27,9 @@ class CustomOrderOptionsBusttons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CustomButton(
-          onTap: () {},
+          onTap: () {
+            // log("hoooooomeee model: ${cubit.state.homeCookModel}");
+          },
           backcolor: AppPallete.ofWhiteColor,
           content: [
             const Icon(
@@ -42,18 +46,14 @@ class CustomOrderOptionsBusttons extends StatelessWidget {
             onTap: () {
               if (cubit.state.isDeliverySelected ||
                   cubit.state.isPickupSelected) {
-                if (cubit.deliveryformKey.currentState!.validate()) {
-                  cubit.uploadDeliveryOption(
-                    currentHomeCookModel.copyWith(
-                      delivery: DeliveryModel(
-                          isDelivery: cubit.state.isDeliverySelected,
-                          isPickup: cubit.state.isPickupSelected,
-                          deliveryFee: cubit.deliveryFeeController!.text.isEmpty
-                              ? null
-                              : double.tryParse(
-                                  cubit.deliveryFeeController!.text)),
-                    ),
-                  );
+                if (cubit.state.isDeliverySelected) {
+                  // validate the delivery fee text field
+                  //validate only if the delivery option is selected
+                  if (cubit.deliveryformKey.currentState!.validate()) {
+                    UpdateDeliveryData();
+                  }
+                } else {
+                  UpdateDeliveryData();
                 }
               } else {
                 // alert if checkbox is not selected
@@ -75,6 +75,19 @@ class CustomOrderOptionsBusttons extends StatelessWidget {
               ),
             ])
       ],
+    );
+  }
+
+  UpdateDeliveryData() {
+    cubit.uploadDeliveryOption(
+      currentHomeCookModel.copyWith(
+        delivery: DeliveryModel(
+            isDelivery: cubit.state.isDeliverySelected,
+            isPickup: cubit.state.isPickupSelected,
+            deliveryFee: cubit.deliveryFeeController!.text.isEmpty
+                ? null
+                : double.tryParse(cubit.deliveryFeeController!.text)),
+      ),
     );
   }
 }

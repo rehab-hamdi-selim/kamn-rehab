@@ -32,10 +32,7 @@ class HomeCookWrapperScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => BlocProvider(
-                              create: (context) => MealCubit(
-                                  AddHomeCookRepositoryImpl(
-                                      dataSource:
-                                          AddHomeCookRemoteDataSourceImpl()))
+                              create: (context) => getIt<MealCubit>()
                                 ..getMeals("u0cBRLRyHcppREpHYdNf")
                                 ..initServiceProviderHomeCook(
                                     state.homeCookModel!),
