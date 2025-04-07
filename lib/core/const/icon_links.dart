@@ -20,12 +20,10 @@ class IconLinks {
   static const String ellipse = 'assets/icons/Ellipse.svg';
   static const String arrow = 'assets/icons/arrow_icon.svg';
   static const String backArrow = "assets/icons/back_arrow.svg";
-  static const String nextArrow = "assets/icons/next_arrow_btn.svg";
-  static const String backArrowBTN = "assets/icons/Back_arrow_btn.svg";
+
   static const String search = "assets/icons/Search_icon.svg";
   static const String filter = "assets/icons/Filter_icon.svg";
   static const String location = "assets/images/location_tag.svg";
-  static const String favorite = "assets/icons/favorite_meal_info_icon.svg";
 
   static const String addtofavRest = 'assets/icons/addtofavRest.svg';
 

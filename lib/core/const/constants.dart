@@ -210,10 +210,6 @@ If you request a refund, the processing time will follow the same timeframe as o
   static const egp = '£GP';
   static const minute = 'min';
 
-  static const edit = 'Edit';
-  static const save = 'Save';
-  static const ingredients = "Ingredients";
-
   static const List<String> egyptGovernorates = [
     "Cairo",
     "Giza",

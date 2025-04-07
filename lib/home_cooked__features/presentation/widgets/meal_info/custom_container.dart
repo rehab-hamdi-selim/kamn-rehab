@@ -150,11 +150,11 @@ class CustomContainer extends StatelessWidget {
                 Text(
                   'Pending Verification',
                   textAlign: TextAlign.center,
-                  style: TextStyles.fontCircularSpotify16lightWhiteColorMedium,
+                  style: TextStyles.fontCircularSpotify10White,
                 ),
                 Text(
                   'Your personal information and utility bill are under review. ',
-                  style: TextStyles.fontCircularSpotify12lightWhiteColorMedium,
+                  style: TextStyles.fontCircularSpotify10White,
                 ),
                 SizedBox(
                   height: 10.h,
@@ -170,8 +170,7 @@ class CustomContainer extends StatelessWidget {
                   TextSpan(
                     text:
                         'Once verified, your meals will be visible to customers.\n',
-                    style:
-                        TextStyles.fontCircularSpotify12lightWhiteColorMedium,
+                    style: TextStyles.fontCircularSpotify10White,
                   ),
                   TextSpan(
                       text: '.',
@@ -181,8 +180,7 @@ class CustomContainer extends StatelessWidget {
                           color: Colors.white)),
                   TextSpan(
                     text: 'Approval usually takes 1-2 business days.\n',
-                    style:
-                        TextStyles.fontCircularSpotify12lightWhiteColorMedium,
+                    style: TextStyles.fontCircularSpotify10White,
                   ),
                   TextSpan(
                       text: '.',
@@ -193,8 +191,7 @@ class CustomContainer extends StatelessWidget {
                   TextSpan(
                     text:
                         ' Double-check your uploaded utility bill is clear and matches your home address.',
-                    style:
-                        TextStyles.fontCircularSpotify12lightWhiteColorMedium,
+                    style: TextStyles.fontCircularSpotify10White,
                   ),
                 ]))
               ],
