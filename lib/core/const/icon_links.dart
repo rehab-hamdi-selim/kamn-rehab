@@ -28,9 +28,18 @@ class IconLinks {
   static const String favorite = "assets/icons/favorite_meal_info_icon.svg";
 
   static const String addtofavRest = 'assets/icons/addtofavRest.svg';
+
   // static const String vegan = 'assets/icons/vegan 1.svg';
   static const String chickenleg = 'assets/icons/chicken-leg 1.svg';
   static const String steak = 'assets/icons/steak 1.svg';
   static const String fish = 'assets/icons/fish 1.svg';
+
   // static const String cart = 'assets/icons/Cart Large .svg';
+
+  static const String pen = 'assets/icons/pen.svg';
+  static const String backArrowBTN = 'assets/icons/Back_arrow_btn.svg';
+  static const String nextArrow = 'assets/icons/next_arrow_btn.svg';
+  static const String trashBin = 'assets/icons/TrashBin.svg';
+  static const String favorite = 'assets/icons/favorite_meal_info_icon.svg';
+  static const String defaultUserImage = "assets/icons/default_user_image.svg";
 }
