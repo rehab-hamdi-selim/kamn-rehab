@@ -8,7 +8,7 @@ import 'package:kamn/home_cooked__features/data/models/meals_model.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_icon.dart';
 
 class CustomContainerMeal extends StatelessWidget {
-  final List<Meal> meals;
+  final List<MealModel> meals;
 
   const CustomContainerMeal({super.key, required this.meals});
 
@@ -56,7 +56,7 @@ class CustomContainerMeal extends StatelessWidget {
                                   ),
                                   child: Text(label,
                                       style: TextStyles
-                                          .fontCircularSpotify8BlackRegular),
+                                          .fontCircularSpotify7BlackRegular),
                                 ))
                             .toList(),
                       ),

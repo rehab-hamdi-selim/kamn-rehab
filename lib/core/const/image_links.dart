@@ -27,7 +27,10 @@ class ImageLinks {
   static const String testrestaurant = 'assets/images/testrestaurant.png';
   static const String cooking = 'assets/images/cooking-_1X1.png';
 
-
   static const String background = 'assets/images/background.png';
   static const String backgroundstyle = 'assets/images/backgroundstyle.png';
+
+  static String frame = "";
+
+  static String backgroundImage = "";
 }

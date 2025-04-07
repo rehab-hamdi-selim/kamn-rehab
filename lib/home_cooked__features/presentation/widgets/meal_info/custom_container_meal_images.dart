@@ -8,7 +8,6 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/home_cooked__features/data/models/meals_model.dart';
 import 'package:kamn/home_cooked__features/presentation/screens/edit_meal_pop_up_screen.dart';
-import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_container_meal.dart';
 
 class CustomContainerMealImages extends StatefulWidget {
   const CustomContainerMealImages({super.key});
@@ -32,8 +31,8 @@ class _CustomContainerMealImagesState extends State<CustomContainerMealImages> {
     }
   }
 
-  List<Meal> fakeMeals = [
-    Meal(
+  List<MealModel> fakeMeals = [
+    MealModel(
       id: '1',
       name: 'Keto Avocado Bowl',
       type: 'Breakfast',
@@ -49,11 +48,11 @@ class _CustomContainerMealImagesState extends State<CustomContainerMealImages> {
         ImageLinks.testrestaurant,
         ImageLinks.testrestaurant,
       ],
-      isVerified: true,
-      verificationStatus: 'Approved',
-      orderOption: 'Pick-up',
+      // isVerified: true,
+      // verificationStatus: 'Approved',
+      // orderOption: 'Pick-up',
     ),
-    Meal(
+    MealModel(
       id: '2',
       name: 'Quinoa Salad with Grilled Chicken',
       type: 'Lunch',
@@ -69,11 +68,11 @@ class _CustomContainerMealImagesState extends State<CustomContainerMealImages> {
         ImageLinks.testrestaurant,
         ImageLinks.testrestaurant,
       ],
-      isVerified: true,
-      verificationStatus: 'Approved',
-      orderOption: 'Delivery',
+      // isVerified: true,
+      // verificationStatus: 'Approved',
+      // orderOption: 'Delivery',
     ),
-    Meal(
+    MealModel(
       id: '3',
       name: 'Green Detox Smoothie',
       type: 'Snack',
@@ -89,9 +88,9 @@ class _CustomContainerMealImagesState extends State<CustomContainerMealImages> {
         ImageLinks.testrestaurant,
         ImageLinks.testrestaurant,
       ],
-      isVerified: false,
-      verificationStatus: 'Pending',
-      orderOption: 'Pick-up',
+      // isVerified: false,
+      // verificationStatus: 'Pending',
+      // orderOption: 'Pick-up',
     ),
   ];
 

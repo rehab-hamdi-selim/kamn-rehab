@@ -827,4 +827,12 @@ class TextStyles {
     fontFamily: 'CircularSpotifyTxT',
     fontWeight: FontWeightHelper.regular,
   );
+
+  static var fontCircularSpotify12veryLightGray2Medium;
+
+  static var fontCircularSpotify15lightWiteColorMedium;
+
+  static var fontCircularSpotify13DarkGreyColorrRegular;
+
+  static var fontCircularSpotify21AccentBlackColorMedium;
 }
