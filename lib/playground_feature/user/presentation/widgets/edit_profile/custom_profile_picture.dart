@@ -87,13 +87,13 @@ class CustomProfilePicture extends StatelessWidget {
                               child: CircleAvatar(
                                 radius: currentSize, // Responsive radius
                                 backgroundColor: AppPallete.orangeAccentColor,
-                                backgroundImage: user?.profileImage != null ||
-                                        state.picturePicked != null
-                                    ? state.picturePicked != null
-                                        ? FileImage(state.picturePicked!)
-                                        : CachedNetworkImageProvider(
-                                            user!.profileImage!)
-                                    : null,
+                                // backgroundImage: user?.profileImage != null ||
+                                //         state.picturePicked != null
+                                //     ? state.picturePicked != null
+                                //         ? FileImage(state.picturePicked!)
+                                //         : CachedNetworkImageProvider(
+                                //             user!.profileImage!)
+                                //     : null,
                                 child: state.profilePictureUrl == null &&
                                         user?.profileImage == null &&
                                         state.picturePicked == null

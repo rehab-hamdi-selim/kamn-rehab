@@ -71,6 +71,7 @@ class CardInProgress extends StatelessWidget {
                   Text(
                     'Quinoa Salad with Grilled Chicken',
                     style: TextStyles.fontCircularSpotify12BlackMedium,
+                    softWrap: true,
                   ),
                   Text('Kitchen: Sarah’s House',
                       style: TextStyles.fontCircularSpotify10StealGrayMedium),
@@ -107,24 +108,12 @@ class CardInProgress extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(width: 120.w),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 3.0),
-                    child: SvgPicture.asset('assets/icons/star.svg',
-                        width: 14, height: 14),
-                  ),
-                  SizedBox(
-                    width: 4.w,
-                  ),
-                  Text('Rate',
-                      style:
-                          TextStyles.fontCircularSpotify14AccentOrangekMedium),
-                ],
-              ),
+              SizedBox(width: 100.w),
+              Text('Cancel',
+                  style: TextStyles.fontCircularSpotify14AccentBlackMedium
+                      .copyWith(color: AppPallete.redColor)),
               SizedBox(
-                width: 16.w,
+                width: 24.w,
               ),
               Container(
                 width: 91.w,
@@ -135,7 +124,7 @@ class CardInProgress extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    'Order Again',
+                    ' Track Order',
                     style: TextStyles.fontCircularSpotify12BlackMedium
                         .copyWith(color: AppPallete.whiteColor),
                   ),

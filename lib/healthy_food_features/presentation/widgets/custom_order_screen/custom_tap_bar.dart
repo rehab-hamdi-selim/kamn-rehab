@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/custom_order_screen/In_progress_page.dart';
+import 'package:kamn/healthy_food_features/presentation/widgets/custom_order_screen/custom_history_card.dart';
+import 'package:kamn/healthy_food_features/presentation/widgets/custom_order_screen/history_page.dart';
 
 class CustomTabScreen extends StatefulWidget {
   const CustomTabScreen({super.key});
@@ -90,10 +92,7 @@ class _CustomTabScreenState extends State<CustomTabScreen> {
           Expanded(
             child: IndexedStack(
               index: isFirstActive ? 0 : 1,
-              children: [
-                InprogressPage(),
-                InprogressPage(),
-              ],
+              children: [InprogressPage(), HistoryPage()],
             ),
           ),
         ],
