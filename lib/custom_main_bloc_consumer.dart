@@ -5,6 +5,7 @@ import 'package:kamn/core/routing/app_router.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/screens/add_gym_screen.dart';
+import 'package:kamn/healthy_food_features/presentation/screens/my_cart_screen.dart';
 import 'package:kamn/healthy_food_features/presentation/screens/order_screen.dart';
 import 'package:kamn/healthy_food_features/presentation/screens/searching_ui_screen.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/searching_of_ui/custom_searching.dart';
@@ -53,7 +54,7 @@ class CustomMainBlocConsumer extends StatelessWidget {
               useMaterial3: true,
             ),
             onGenerateRoute: AppRouter.generateRoute,
-            home: const OrderScreen());
+            home: const MyCartScreen());
         //home: _buildHomeWidget(state, appUserCubit));
       },
     );

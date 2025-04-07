@@ -54,12 +54,15 @@ class CardMycart extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                width: 47.w,
+                width: 40.w,
               ),
               Padding(
                 padding: EdgeInsets.only(bottom: 40.h),
-                child: SvgPicture.asset('assets/icons/delete.svg',
-                    width: 25.w, height: 25.h),
+                child: SvgPicture.asset(
+                  'assets/icons/delete.svg',
+                  width: 20,
+                  height: 20,
+                ),
               ),
             ],
           ),
@@ -86,7 +89,7 @@ class CardMycart extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(width: 120.w),
+              SizedBox(width: 100.w),
               Counter()
             ],
           ),

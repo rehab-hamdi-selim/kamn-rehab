@@ -22,7 +22,7 @@ class _CounterState extends State<Counter> {
           IconButton(
             icon: Icon(
               Icons.remove,
-              size: 16.sp,
+              size: 18.sp,
               weight: 500,
               color: Color(0xff205B2A),
             ),
@@ -36,7 +36,7 @@ class _CounterState extends State<Counter> {
           Text(
             '$counter', // عرض الرقم الحالي
             style: TextStyle(
-                fontSize: 16,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.w500,
                 color: Color(0xff205B2A)),
           ),
@@ -44,7 +44,7 @@ class _CounterState extends State<Counter> {
           IconButton(
             icon: Icon(
               Icons.add,
-              size: 16.sp,
+              size: 18.sp,
               weight: 500,
               color: Color(0xff205B2A),
             ),
