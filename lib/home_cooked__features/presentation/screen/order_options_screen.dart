@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/const/image_links.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/helpers/validators.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/core/const/constants.dart';
+import 'package:kamn/core/utils/alert_dialog_utils.dart';
 import 'package:kamn/home_cooked__features/data/models/home_cook_model_test.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_state.dart';
-
 import 'package:kamn/home_cooked__features/presentation/widgets/order_options/custom_Container.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/order_options/custom_checkbox_tile.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/order_options/custom_navbar.dart';
@@ -17,16 +17,20 @@ import 'package:kamn/home_cooked__features/presentation/widgets/order_options/cu
 import 'package:kamn/home_cooked__features/presentation/widgets/order_options/custom_screen_header.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/order_options/custom_textfield.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/order_options/custom_tittle_text.dart';
+
 import '../cubits/meal_review_cubit/meal_cubit.dart';
 import '../widgets/custom_meal_cubit_listner.dart';
 
+//edit
 class OrderOptionsHomecook extends StatelessWidget {
   OrderOptionsHomecook({super.key});
-  HomeCookModel currentHomeCookModel = HomeCookModel();
+  // HomeCookModel();
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<MealCubit>();
+    HomeCookModel currentHomeCookModel = cubit.state.homeCookModel!;
+
     return Scaffold(
         backgroundColor: AppPallete.whiteColor,
         body: CustomMealCubitListner(
@@ -42,7 +46,9 @@ class OrderOptionsHomecook extends StatelessWidget {
                       //  title: "Add Home Cook Data",
 
                       //just to make sure you access the homecook model sucess
-                      title: cubit.state.homeCookModel?.name ?? "",
+
+                      title: "Add Home Cook Data",
+                      // cubit.state.homeCookModel?.name ?? "",
                       subTitle: "Set Up Your Home Cook Profile",
                     ),
                     const CustomNavBarOrderOptions(),

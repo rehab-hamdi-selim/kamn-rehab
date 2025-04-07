@@ -16,13 +16,7 @@ class CustomCheckBox extends StatelessWidget {
       borderWidth: 2.w,
       //checkedWidget: Icon(Icons.abc, color: AppPallete.greenColor, size: 20),
       onTap: onTap,
-      // (bool? value) {
-      //   // setState(() {
-      //   //   isChecked = value ?? false;
-      //   // }
 
-      //   // );
-      // },
       animationDuration: Duration(milliseconds: 200),
     );
   }
