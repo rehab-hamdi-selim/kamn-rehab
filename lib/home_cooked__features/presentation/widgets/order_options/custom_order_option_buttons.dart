@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/order_options/custom_button.dart';
 
@@ -28,6 +26,7 @@ class CustomOrderOptionsBusttons extends StatelessWidget {
       children: [
         CustomButton(
           onTap: () {
+            /////////////////////////////////////////////
             // log("hoooooomeee model: ${cubit.state.homeCookModel}");
           },
           backcolor: AppPallete.ofWhiteColor,
