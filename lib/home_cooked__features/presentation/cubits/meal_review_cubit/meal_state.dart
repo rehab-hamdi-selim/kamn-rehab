@@ -63,7 +63,7 @@ class MealState {
     this.isPickupSelected = false,
     this.isDeliverySelected = false,
     this.selectedMealType = "Breakfast",
-    this.specialtyTags = const ["Keto"],
+    this.specialtyTags = const [],
     this.ingredients = const [],
     this.selectedIngredients = const [],
   });
