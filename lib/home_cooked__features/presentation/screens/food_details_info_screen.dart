@@ -15,7 +15,7 @@ List<String> fakeMealsimgs = [
   "assets/images/meal_info_img.png"
       "assets/images/meal_info_img.png"
 ];
-
+//////////////////////////////////////////////////////////////////////////
 class FoodDetailsInfoScreen extends StatefulWidget {
   const FoodDetailsInfoScreen({super.key});
 
