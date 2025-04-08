@@ -75,10 +75,12 @@ class MealCubit extends Cubit<MealState> {
   }
 
   void selectedMeal(MealModel mealModel) {
-    emit(state.copyWith(
-        selectedMeal: mealModel,
-        selectedIngredients: List<String>.from(mealModel.ingredients)));
-  }
+  emit(state.copyWith(
+    selectedMeal: mealModel,
+    selectedIngredients: List<String>.from(mealModel.ingredients),
+  ));
+}
+
 
   void addMeal(MealModel mealModel) async {
     final res = await homeCookRepository.addMealModel(
