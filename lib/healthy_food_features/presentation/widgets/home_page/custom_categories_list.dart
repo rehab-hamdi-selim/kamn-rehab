@@ -1,42 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/healthy_food_features/data/models/food_item_model.dart';
+import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/healthy_food_features/data/models/test_meal_model.dart';
+import 'package:kamn/healthy_food_features/presentation/cubit/test_meals_cubit.dart';
 
 import 'custom_categories.dart';
 
 class CustomCategoriesList extends StatelessWidget {
-  final List<FoodItem> foodItems;
-
   const CustomCategoriesList({
     super.key,
-    required this.foodItems,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      physics: const BouncingScrollPhysics(),
-      itemCount: foodItems.length,
-      scrollDirection: Axis.horizontal,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 1,
-        childAspectRatio: 1.53.h,
-        crossAxisSpacing: 6.w,
-      ),
-      itemBuilder: (context, index) {
-        final foodItem = foodItems[index];
-        return Padding(
-          padding: const EdgeInsets.only(
-            left: 5,
-            right: 5,
-            top: 20,
-          ),
-          child: CustomCategories(
-            title: foodItem.name,
-            image: foodItem.imageUrl,
-            price: foodItem.price.toString(),
-            calories: foodItem.calories.toString(),
-            description: foodItem.tags.join(", "),
+    return BlocBuilder<TestMealsCubit, TestMealsState>(
+      builder: (context, state) {
+        if (state.status == TestMealsStatus.loading) {
+          return SizedBox(
+            height: 200.h,
+            child: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+
+        if (state.status == TestMealsStatus.error) {
+          return SizedBox(
+            height: 200.h,
+            child: Center(
+              child: Text(
+                'Error: ${state.errorMessage}',
+                style: TextStyles.fontCircularSpotify14BlackRegular,
+              ),
+            ),
+          );
+        }
+
+        if (state.status == TestMealsStatus.initial) {
+          return SizedBox(height: 200.h);
+        }
+
+        return SizedBox(
+          height: 200.h,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            itemCount: state.meals.length,
+            itemBuilder: (context, index) {
+              final meal = state.meals[index];
+              return Padding(
+                padding: EdgeInsets.only(
+                  left: 5.w,
+                  right: 5.w,
+                  top: 20.h,
+                ),
+                child: CustomCategories(
+                  title: meal.name,
+                  image: meal.imageUrls.first,
+                  price: meal.price.toString(),
+                  calories: meal.calories.toString(),
+                  description: meal.specialtyTags.join(", "),
+                  meal: meal,
+                ),
+              );
+            },
           ),
         );
       },

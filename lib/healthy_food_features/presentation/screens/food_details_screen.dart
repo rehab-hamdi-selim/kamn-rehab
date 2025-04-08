@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/constants.dart';
+import 'package:kamn/healthy_food_features/data/models/test_meal_model.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/food_details/custom_details_text.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/food_details/custom_ingrediants_food.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/food_details/custom_rating_row.dart';
@@ -11,18 +12,18 @@ import 'package:kamn/healthy_food_features/presentation/widgets/food_details/cus
 import '../widgets/food_details/custom_order_section.dart';
 
 class FoodDetailsScreen extends StatefulWidget {
+  final TestMealModel meal;
+
+  const FoodDetailsScreen({
+    super.key,
+    required this.meal,
+  });
+
   @override
   _FoodDetailsScreenState createState() => _FoodDetailsScreenState();
 }
 
 class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
-  final List<String> foodImages = [
-    'assets/images/food.png',
-    'assets/images/food.png',
-    'assets/images/food.png',
-    'assets/images/food.png',
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,14 +37,21 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
             child: Stack(
               children: [
                 CarouselSlider(
-                  items: foodImages.map((image) {
+                  items: widget.meal.imageUrls.map((imageUrl) {
                     return ClipRRect(
                       borderRadius:
                           BorderRadius.vertical(bottom: Radius.circular(30.r)),
-                      child: Image.asset(
-                        image,
+                      child: Image.network(
+                        imageUrl,
                         fit: BoxFit.cover,
                         width: double.infinity,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset(
+                            'assets/images/food.png',
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                          );
+                        },
                       ),
                     );
                   }).toList(),
@@ -90,23 +98,26 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomRestaurantBadge(),
+                      const CustomRestaurantBadge(),
                       SizedBox(height: 16.h),
-                      CustomText(Constants.foodTitle, 24.sp, FontWeight.bold),
+                      CustomText(widget.meal.name, 24.sp, FontWeight.bold),
                       SizedBox(height: 8.h),
-                      CustomRatingRow(),
+                      const CustomRatingRow(),
                       SizedBox(height: 16.h),
                       CustomText(
                           Constants.detailsTitle, 18.sp, FontWeight.bold),
                       SizedBox(height: 8.h),
-                      CustomDetailsText(),
+                      CustomDetailsText(text: widget.meal.details),
                       SizedBox(height: 16.h),
                       CustomText(
                           Constants.ingredientsTitle, 18.sp, FontWeight.bold),
                       SizedBox(height: 8.h),
-                      CustomIngredients(),
+                      CustomIngredients(ingredients: widget.meal.ingredients),
                       SizedBox(height: 20.h),
-                      CustomOrderSection(),
+                      CustomOrderSection(
+                        price: widget.meal.price,
+                        meal: widget.meal,
+                      ),
                     ],
                   ),
                 ),

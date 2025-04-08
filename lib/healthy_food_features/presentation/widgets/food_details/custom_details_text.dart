@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomDetailsText extends StatefulWidget {
-  const CustomDetailsText({super.key});
+  final String text;
+
+  const CustomDetailsText({
+    super.key,
+    required this.text,
+  });
 
   @override
   State<CustomDetailsText> createState() => _CustomDetailsTextState();
@@ -23,7 +28,7 @@ class _CustomDetailsTextState extends State<CustomDetailsText> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            'A delicious grilled chicken salad packed with vibrant greens, colorful vegetables, and topped with a light vinaigrette. The tender chicken adds a lean source of protein, while the mix of nuts and seeds provides healthy fats and essential micronutrients.',
+            widget.text,
             style: GoogleFonts.poppins(
               fontSize: 14,
               color: Colors.black54,

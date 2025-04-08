@@ -96,9 +96,7 @@ class SearchingOfHomePageScreen extends StatelessWidget {
               ),
               SizedBox(
                 height: 280.h,
-                child: CustomCategoriesList(
-                  foodItems: trendingFoods,
-                ),
+                child: const CustomCategoriesList(),
               ),
             ],
           ),

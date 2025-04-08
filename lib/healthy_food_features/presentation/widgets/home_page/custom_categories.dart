@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/healthy_food_features/data/models/test_meal_model.dart';
+import 'package:kamn/healthy_food_features/presentation/screens/food_details_screen.dart';
 
+import '../../../../core/common/cubit/app_user/app_user_cubit.dart';
 import '../../../../core/theme/style.dart';
 
 class CustomCategories extends StatelessWidget {
@@ -9,7 +13,7 @@ class CustomCategories extends StatelessWidget {
   final String price;
   final String calories;
   final String description;
-  final VoidCallback? onTap;
+  final TestMealModel meal;
 
   const CustomCategories({
     super.key,
@@ -18,14 +22,23 @@ class CustomCategories extends StatelessWidget {
     required this.price,
     required this.calories,
     required this.description,
-    this.onTap,
+    required this.meal,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        context.read<AppUserCubit>().getMealQuantity(meal.id);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => FoodDetailsScreen(meal: meal),
+          ),
+        );
+      },
       child: Container(
+        width: 160.w,
         color: Colors.transparent,
         child: Stack(
           alignment: Alignment.topCenter,
@@ -35,14 +48,13 @@ class CustomCategories extends StatelessWidget {
               child: Container(
                 width: 160.w,
                 height: 155.h,
-                padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+                padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(16.r),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.1),
+                      color: Colors.black.withOpacity(0.1),
                       blurRadius: 6,
                       spreadRadius: 0,
                     ),
@@ -56,13 +68,17 @@ class CustomCategories extends StatelessWidget {
                     Text(
                       title,
                       style: TextStyles.circularSpotify16BoldDarkBlack,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     SizedBox(height: 4.h),
                     Text(
                       description,
                       style: TextStyles.circularSpotify10LightGrey,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8.h),
                     Row(
                       children: [
                         Text.rich(
@@ -102,11 +118,39 @@ class CustomCategories extends StatelessWidget {
               ),
             ),
             Positioned(
-              child: CircleAvatar(
-                radius: 60,
-                backgroundColor: Colors.transparent,
-                backgroundImage: AssetImage(
-                  image,
+              child: Container(
+                width: 120.w,
+                height: 120.h,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.grey.shade200,
+                ),
+                child: ClipOval(
+                  child: Image.network(
+                    image,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Center(
+                        child: Icon(
+                          Icons.restaurant,
+                          size: 40.h,
+                          color: Colors.grey.shade400,
+                        ),
+                      );
+                    },
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  loadingProgress.expectedTotalBytes!
+                              : null,
+                          strokeWidth: 2,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
