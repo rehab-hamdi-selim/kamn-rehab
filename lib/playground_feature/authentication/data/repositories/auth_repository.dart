@@ -23,8 +23,8 @@ abstract interface class AuthRepository {
   Future<Either<Faliure, void>> googleSignOut();
   Future<Either<Faliure, UserModel>> googleAuth();
   Future<Either<Faliure, bool>> checkUesrSignin();
-  Future<Either<Faliure, void>> updateUser(String uid,Map<String, dynamic> data);
-
+  Future<Either<Faliure, void>> updateUser(
+      String uid, Map<String, dynamic> data);
 }
 
 @Injectable(as: AuthRepository)
@@ -51,12 +51,15 @@ class AuthRepositoryImpl implements AuthRepository {
       final userModel = UserModel(
           signFrom: SignInMethods.emailAndPassword.name,
           uid: userCredential.user!.uid,
-          profileImage: userCredential.user?.photoURL ,
-          phoneNumber: userCredential.user?.phoneNumber ,
+          profileImage: userCredential.user?.photoURL ?? '',
+          phoneNumber: userCredential.user?.phoneNumber ?? '',
           email: email,
           name: name,
           createdAt: DateTime.now(),
-          type: type);
+          type: type,
+          city: '',
+          spamer: false,
+          cartMeals: []);
 
       return userModel;
     });
@@ -120,12 +123,15 @@ class AuthRepositoryImpl implements AuthRepository {
         return UserModel(
             signFrom: SignInMethods.google.name,
             type: 'normal',
-            profileImage: userCredential.user?.photoURL,
-            phoneNumber: userCredential.user?.phoneNumber ,
+            profileImage: userCredential.user?.photoURL ?? '',
+            phoneNumber: userCredential.user?.phoneNumber ?? '',
             uid: userCredential.user!.uid,
             email: userCredential.user!.email!,
             name: userCredential.user!.displayName!,
-            createdAt: DateTime.now());
+            createdAt: DateTime.now(),
+            city: '',
+            spamer: false,
+            cartMeals: []);
       }
     });
   }
@@ -143,10 +149,11 @@ class AuthRepositoryImpl implements AuthRepository {
       return await _authDataSource.checkUesrSignin();
     });
   }
-  
+
   @override
-  Future<Either<Faliure, void>> updateUser(String uid, Map<String, dynamic> data)async {
-  return await executeTryAndCatchForRepository(() async {
+  Future<Either<Faliure, void>> updateUser(
+      String uid, Map<String, dynamic> data) async {
+    return await executeTryAndCatchForRepository(() async {
       return await _authDataSource.updateUser(uid, data);
     });
   }

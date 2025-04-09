@@ -27,7 +27,6 @@ import 'healthy_food_features/presentation/screens/searching_ui_screen.dart';
 //   );
 // }
 
-
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
@@ -58,14 +57,15 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => getIt<AppUserCubit>()..isFirstInstallation(),
+          create: (context) => getIt<AppUserCubit>()
+            ..getUser(uid: "uGTn2GsdCMeTTjsrIERAfbLXaYW2"),
         ),
-        BlocProvider(
-          create: (context) => FirebaseRemoteConfigCubit()
-            ..initListner()
-            ..getStringValue('test')
-            ..getStringValue('app_version'),
-        ),
+        // BlocProvider(
+        //   create: (context) => FirebaseRemoteConfigCubit()
+        //     ..initListner()
+        //     ..getStringValue('test')
+        //     ..getStringValue('app_version'),
+        // ),
       ],
       child: const ScreenUtilInit(
         designSize: Size(375, 812),

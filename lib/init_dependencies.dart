@@ -8,7 +8,6 @@ import 'package:kamn/firebase_options.dart';
 
 import 'core/erorr/custom_error_screen.dart';
 import 'core/helpers/bloc_observer.dart';
-import 'core/utils/location_permission_handler.dart';
 
 Future<void> initDependencies() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,8 +15,8 @@ Future<void> initDependencies() async {
   await ScreenUtil.ensureScreenSize();
 
   // Request both permissions and location check
-  await LocationPermissionHandler.checkAndRequestPermission();
-  await LocationPermissionHandler.handleLocationPermission();
+  // await LocationPermissionHandler.checkAndRequestPermission();
+  // await LocationPermissionHandler.handleLocationPermission();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

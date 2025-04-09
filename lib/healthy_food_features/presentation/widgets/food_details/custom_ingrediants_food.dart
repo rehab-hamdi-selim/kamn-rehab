@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:kamn/healthy_food_features/data/models/category_data.dart';
 
 class CustomIngredients extends StatelessWidget {
-  Category? category;
+  final List<String> ingredients;
 
-  CustomIngredients({super.key}); // Accept a single category
+  const CustomIngredients({
+    super.key,
+    required this.ingredients,
+  });
 
   @override
   Widget build(BuildContext context) {
-    if (category?.ingredients == null || category!.ingredients!.isEmpty) {
+    if (ingredients.isEmpty) {
       return const Center(child: Text("No ingredients available"));
     }
 
@@ -21,22 +22,21 @@ class CustomIngredients extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 5, // 5 items per row
+            crossAxisCount: 5,
             childAspectRatio: 1.2,
             crossAxisSpacing: 2,
             mainAxisSpacing: 1,
           ),
-          itemCount: category?.ingredients!.length,
-          // Use category.ingredients
+          itemCount: ingredients.length,
           itemBuilder: (context, index) {
-            return _ingredientItem(category!.ingredients![index]);
+            return _ingredientItem(ingredients[index]);
           },
         ),
       ],
     );
   }
 
-  Widget _ingredientItem(Category ingredient) {
+  Widget _ingredientItem(String ingredient) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -44,19 +44,18 @@ class CustomIngredients extends StatelessWidget {
           width: 40,
           height: 40,
           decoration: BoxDecoration(
-            color: Colors.green[50], // Light green background
+            color: Colors.green[50],
             borderRadius: BorderRadius.circular(10),
           ),
-          child: SvgPicture.asset(
-            ingredient.icon,
-            width: 20,
-            height: 20,
-            fit: BoxFit.contain,
+          child: Icon(
+            Icons.restaurant,
+            size: 20,
+            color: Colors.green[700],
           ),
         ),
         const SizedBox(height: 6),
         Text(
-          ingredient.name,
+          ingredient,
           textAlign: TextAlign.center,
           style: GoogleFonts.poppins(
             fontSize: 10,
