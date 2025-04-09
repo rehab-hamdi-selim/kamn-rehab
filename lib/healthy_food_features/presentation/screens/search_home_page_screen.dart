@@ -62,7 +62,7 @@ class SearchingOfHomePageScreen extends StatelessWidget {
                 'Recent Keywords',
                 style: TextStyles.fontCircularSpotify20AccentBlackMedium,
               ),
-              SizedBox(height: 20.h),
+              SizedBox(height: 21.h),
               GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),

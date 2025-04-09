@@ -81,6 +81,10 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
               ],
             ),
           ),
+
+
+          ////////////
+          ///////////
           Positioned(
             top: 250.h,
             left: 0,

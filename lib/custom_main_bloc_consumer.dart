@@ -7,6 +7,8 @@ import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cub
 import 'package:kamn/gym_feature/add_gym/presentation/screens/add_gym_screen.dart';
 import 'package:kamn/healthy_food_features/presentation/cubit/test_meals_cubit.dart';
 import 'package:kamn/healthy_food_features/presentation/screens/home_page_screen.dart';
+import 'package:kamn/healthy_food_features/presentation/screens/my_cart_screen.dart';
+import 'package:kamn/healthy_food_features/presentation/screens/order_screen.dart';
 import 'package:kamn/healthy_food_features/presentation/screens/searching_ui_screen.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/searching_of_ui/custom_searching.dart';
 import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
@@ -52,6 +54,8 @@ class CustomMainBlocConsumer extends StatelessWidget {
               useMaterial3: true,
             ),
             onGenerateRoute: AppRouter.generateRoute,
+            home: const MyCartScreen());
+        //home: _buildHomeWidget(state, appUserCubit));
             home: BlocProvider(
               create: (context) => getIt<TestMealsCubit>()..getTestMeals(),
               child: const HomePageHealthyFoodScreen(),
@@ -79,7 +83,7 @@ class CustomMainBlocConsumer extends StatelessWidget {
       // );
     }
     if (state.isNotLoggedIn() || state.isClearUserData()) {
-      return const SearchingUiScreen();
+      return const OrderScreen();
       // return BlocProvider(
       //   create: (context) => getIt<SignInCubit>(),
       //   child: const SignInScreen(),
