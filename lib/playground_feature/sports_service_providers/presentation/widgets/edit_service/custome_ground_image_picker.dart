@@ -58,8 +58,12 @@ class CustomeGroundImagePicker extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => ViewFullImage(
-                                        imageUrl:element is String ? element : element.path,
-                                        tag: element is String ? null : element.path,
+                                        imageUrl: element is String
+                                            ? element
+                                            : element.path,
+                                        tag: element is String
+                                            ? null
+                                            : element.path,
                                       )));
                         },
                         child: Stack(
@@ -73,12 +77,12 @@ class CustomeGroundImagePicker extends StatelessWidget {
                                 margin: EdgeInsets.symmetric(horizontal: 5.w),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
-                                  image: DecorationImage(
-                                    image: element is String
-                                        ? CachedNetworkImageProvider(element)
-                                        : FileImage(element),
-                                    fit: BoxFit.cover,
-                                  ),
+                                  // image: DecorationImage(
+                                  //   image: element is String
+                                  //       ? CachedNetworkImageProvider(element)
+                                  //       : FileImage(element),
+                                  //   fit: BoxFit.cover,
+                                  // ),
                                 ),
                               ),
                             ),
