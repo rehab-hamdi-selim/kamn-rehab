@@ -8,6 +8,7 @@ import '../../../core/common/entities/meal_cart_model.dart';
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 //////////////////////////////
+  //////////////////////////add data
   @override
   Widget build(BuildContext context) {
     return Scaffold(
