@@ -7,6 +7,7 @@ import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit
 import 'package:kamn/home_cooked__features/presentation/screen/add_meal_test.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/food_etails_info_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/home_cook_screen.dart';
+import 'package:kamn/home_cooked__features/presentation/screen/meal_info_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/order_options_screen.dart';
 
 import '../cubits/add_home_cook/add_home_cook_cubit.dart';
@@ -32,11 +33,14 @@ class HomeCookWrapperScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => BlocProvider(
-                              create: (context) => getIt<MealCubit>()
-                                ..getMeals("u0cBRLRyHcppREpHYdNf")
-                                ..initServiceProviderHomeCook(
-                                    state.homeCookModel!),
-                              child: AddMealTest(),
+                            create: (context) => getIt<MealCubit>()
+                              ..getMeals(state.homeCookModel!.id!
+                                  //"u0cBRLRyHcppREpHYdNf"
+                                  )
+                              ..initServiceProviderHomeCook(
+                                  state.homeCookModel!),
+                            child: MealInfoScreen()
+                            //AddMealTest(),
                             )));
               }
             },

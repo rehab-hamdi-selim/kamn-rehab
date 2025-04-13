@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_frame.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/weekday_selector.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class CustomWeeklyMeal extends StatefulWidget {
   const CustomWeeklyMeal({super.key});
@@ -12,24 +14,33 @@ class CustomWeeklyMeal extends StatefulWidget {
 }
 
 class _CustomWeeklyMealState extends State<CustomWeeklyMeal> {
+  initState() {
+    super.initState();
+    _initializeLocaleData();
+  }
+
+  void _initializeLocaleData() async {
+    await initializeDateFormatting('en', null);
+  }
+
   bool isSwitched = false;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 320.h,
-      child: Container(
+      child: CustomFrame(
         width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-        decoration: BoxDecoration(
-          color: Colors.white30,
-          borderRadius: BorderRadius.circular(16.r),
-          border: Border.all(
-            width: 0.20.w,
-            color: AppPallete.lightGreyColor,
-          ),
-        ),
-        child: Column(
+        // padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+        // decoration: BoxDecoration(
+        //   color: Colors.white30,
+        //   borderRadius: BorderRadius.circular(16.r),
+        //   border: Border.all(
+        //     width: 0.20.w,
+        //     color: AppPallete.lightGreyColor,
+        //   ),
+        // ),
+        content: Column(
           children: [
             Row(
               children: [
@@ -37,7 +48,7 @@ class _CustomWeeklyMealState extends State<CustomWeeklyMeal> {
                   width: 227.w,
                   child: Text(
                     'Weekly Meal Schedule — Add Meals by Day',
-                    style: TextStyles.fontCircularSpotify20AccentBlackMedium,
+                    style: TextStyles.fontCircularSpotify17Blackmedium,
                   ),
                 ),
                 const Spacer(),
@@ -58,7 +69,7 @@ class _CustomWeeklyMealState extends State<CustomWeeklyMeal> {
               width: 303.w,
               child: Text(
                 'Organizing your meals by day helps customers plan their orders ahead of time, especially those following strict meal plans.',
-                style: TextStyles.fontCircularSpotify13DarkGreyColorrRegular,
+                style: TextStyles.fontCircularSpotify10AccentBlackColorMedium,
               ),
             ),
             Container(),
@@ -69,7 +80,7 @@ class _CustomWeeklyMealState extends State<CustomWeeklyMeal> {
               width: 295.w,
               child: Text(
                 'Save time by assigning this meal to multiple days — perfect for recurring favorites or daily specials.',
-                style: TextStyles.fontCircularSpotify13DarkGreyColorrRegular,
+                style: TextStyles.fontCircularSpotify10AccentBlackColorMedium,
               ),
             ),
             SizedBox(height: 10.h),

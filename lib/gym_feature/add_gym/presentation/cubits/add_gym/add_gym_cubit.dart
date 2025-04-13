@@ -42,7 +42,10 @@ class AddGymCubit extends Cubit<AddGymState> {
     emit(state.copyWith(state: AddGymStatus.logoLoading));
     final image = await pickImage();
     if (image != null) {
-      emit(state.copyWith(state: AddGymStatus.logoPicked, logo: image,));
+      emit(state.copyWith(
+        state: AddGymStatus.logoPicked,
+        logo: image,
+      ));
     }
   }
 

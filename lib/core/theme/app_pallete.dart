@@ -76,6 +76,8 @@ class AppPallete {
   static const Color ofWhiteColor4 = Color(0xffFFFFFF);
   static const Color green = Color(0xff205B2A);
 
+  static const Color greyborder = Color(0xFFE5E7EB);
+
   static const Color greyColor2 = Color(0xffF9F9F9);
   static const Color greytrans = Color(0x38BBBBBB);
   static const Color greenAccentColor = Color(0xff8BA805);

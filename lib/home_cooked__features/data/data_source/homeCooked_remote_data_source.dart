@@ -21,8 +21,14 @@ abstract class AddHomeCookRemoteDataSource {
 
   Future<void> updateMealModel(MealModel mealModel, String homeCookId);
 
+  Future<void> deleteMeal(MealModel mealModel, String homeCookId);
+  Stream<List<Map<String, dynamic>>> getMealsStream(String homeCookId);
+
   Future<Map<String, List<String>>> uploadImages(
       Map<String, List<File>> imagesMap, void Function(double) onProgress);
+
+  Future<List<String>> uploadMealImages(
+      List<File> images, void Function(double) onProgress);
 }
 
 @Injectable(as: AddHomeCookRemoteDataSource)
@@ -35,11 +41,21 @@ class AddHomeCookRemoteDataSourceImpl implements AddHomeCookRemoteDataSource {
   CollectionReference get _homeCookCollection =>
       firestore.collection(FirebaseCollections.homeCookRequest);
 
-  CollectionReference<Object?> getMealsCollection(String homeCookId) {
-    return firestore
-        .collection(FirebaseCollections.homeCookRequest)
-        .doc(homeCookId)
-        .collection(FirebaseCollections.meal);
+  // CollectionReference<Object?> getMealsCollection(String homeCookId) {
+  //   return   firestore.collection(FirebaseCollections.meal);
+
+  //   // firestore
+  //   //     .collection(FirebaseCollections.homeCookRequest)
+  //   //     .doc(homeCookId)
+  //   //     .collection(FirebaseCollections.meal);
+  // }
+  CollectionReference<Object?> getMealsCollection() {
+    return firestore.collection(FirebaseCollections.meal);
+
+    // firestore
+    //     .collection(FirebaseCollections.homeCookRequest)
+    //     .doc(homeCookId)
+    //     .collection(FirebaseCollections.meal);
   }
 
 //mary
@@ -63,13 +79,13 @@ class AddHomeCookRemoteDataSourceImpl implements AddHomeCookRemoteDataSource {
 
   @override
   Future<void> addMealModel(MealModel mealModel, String homeCookId) async {
-    var docMeal = getMealsCollection(homeCookId).doc(mealModel.id);
+    var docMeal = getMealsCollection().doc(mealModel.id);
     await docMeal.set(mealModel.toMap());
   }
 
   @override
   Future<void> updateMealModel(MealModel mealModel, String homeCookId) async {
-    var docMeal = getMealsCollection(homeCookId).doc(mealModel.id);
+    var docMeal = getMealsCollection().doc(mealModel.id);
     await docMeal.update(mealModel.toMap());
   }
 
@@ -86,15 +102,70 @@ class AddHomeCookRemoteDataSourceImpl implements AddHomeCookRemoteDataSource {
     }
   }
 
+////////////////////////////
+  ///
+  ///
+  ///
+  ///
+  ///
+  @override
+  Stream<List<Map<String, dynamic>>> getMealsStream(String homeCookId) {
+    var docRef = getMealsCollection()
+        // .where('homeCookId', isEqualTo: homeCookId) // Filter by homeCookId
+        .orderBy('time', descending: true);
+    return docRef
+        .snapshots() //Stream<List<Map<String, dynamic>>>
+        .map((snapshot) {
+      return snapshot.docs //List<Map<String, dynamic>>
+          .map((doc) => doc.data() as Map<String, dynamic>)
+          .toList();
+    });
+  }
+
+////////////////
   @override
   Future<List<Map<String, dynamic>>> getMeals(String homeCookId) async {
-    var docRef = getMealsCollection(homeCookId);
+    var docRef = getMealsCollection();
+    //.orderBy('date', descending: true);
+    //var docSnap = await docRef.snapshots().listen((f) {});
     var docSnap = await docRef.get();
-
     return docSnap.docs.map((element) {
       return element.data()
           as Map<String, dynamic>; // ✅ Explicitly cast the data
     }).toList();
+  }
+
+  @override
+  Future<void> deleteMeal(MealModel mealModel, String homeCookId) async {
+    var docMeal = getMealsCollection().doc(mealModel.id);
+    await docMeal.delete();
+  }
+
+////////////////////////////////////
+  ///
+  ///
+  @override
+  Future<List<String>> uploadMealImages(
+      List<File> images, void Function(double) onProgress) async {
+    List<String> uploadedUrls = [];
+    double uploadedFiles = 0;
+
+    for (int i = 0; i < images.length; i++) {
+      File file = images[i];
+
+      String fileName = file.path.split('/').last;
+      Reference ref = storage.ref().child('uploads/mealImages/$fileName');
+      UploadTask uploadTask = ref.putFile(file);
+
+      await uploadTask.whenComplete(() async {
+        String downloadUrl = await ref.getDownloadURL();
+        uploadedUrls.add(downloadUrl);
+        uploadedFiles++;
+        onProgress(uploadedFiles / images.length); // نسبة مئوية
+      });
+    }
+
+    return uploadedUrls;
   }
 
   @override

@@ -26,9 +26,6 @@ class AddHomeCookCubit extends Cubit<AddHomeCookState> {
   final TextEditingController featureDescriptionController =
       TextEditingController();
 
-
-      
-
   AddHomeCookCubit({required this.repository})
       : super(AddHomeCookState(state: AddHomeCookStatus.initial));
 
