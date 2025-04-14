@@ -8,16 +8,11 @@ import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/membership_offer/membership_offer_cubit.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/screens/add_gym_screen.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/screens/membership_offer_plan.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/screens/membership_offer_screen.dart';
-import 'package:kamn/gym_feature/gyms/presentation/screen/gym_details_screen.dart';
-import 'package:kamn/gym_feature/gyms/presentation/screen/choose_plan_screen.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/screens/track_gym_request_submission_screen.dart';
-import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
-import 'package:kamn/playground_feature/authentication/presentation/screens/on_boarding_screen.dart';
+import 'package:kamn/gym_feature/gyms/presentation/screen/track_gym_request_submission_screen.dart';
 import 'core/common/cubit/app_user/app_user_cubit.dart';
 import 'core/common/widget/main_loader.dart';
-import 'core/di/di.dart';
-import 'playground_feature/authentication/presentation/screens/sign_in_screen.dart';
 
 class CustomMainBlocConsumer extends StatelessWidget {
   const CustomMainBlocConsumer({super.key});
@@ -67,6 +62,7 @@ class CustomMainBlocConsumer extends StatelessWidget {
       //  return const MainLoader();
 
       //////////////////
+      return TrackSubmissionScreen();
     }
     if (state.isNotInstalled()) {
       return BlocProvider(
@@ -81,6 +77,7 @@ class CustomMainBlocConsumer extends StatelessWidget {
     if (state.isLoggedIn() || state.isGettedData() || state.isSuccess()) {
       //  return const ChoosePlanScreen();
       //    return const ChoosePlanScreen();
+      return const MembershipOfferPlan();
       // return BlocProvider(
       //   create:(context)=> getIt<SelectCategoryCubit>()..getPlaygrounds(),
       //   child: const SelectCategoryScreen(),

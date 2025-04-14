@@ -24,6 +24,8 @@ class AddGymRemoteDataSourceImpl implements AddGymRemoteDataSource {
   AddGymRemoteDataSourceImpl();
   final storage = FirebaseStorage.instance;
   final firestore = FirebaseFirestore.instance;
+  final _secureStorage = const FlutterSecureStorage();
+  static const String _gymIdKey = 'gym_id_key';
   
   CollectionReference get _gymsCollection =>
      firestore.collection(FirebaseCollections.gym);
@@ -33,28 +35,17 @@ class AddGymRemoteDataSourceImpl implements AddGymRemoteDataSource {
     try {
       var docRef = _gymsCollection.doc();
       gymRequestModel = gymRequestModel.copyWith(id: docRef.id);
-      await docRef.set(gymRequestModel.toMap());      
+      await docRef.set(gymRequestModel.toMap());
+      
+      // Save gym ID to secure storage after successful creation
+      
       return gymRequestModel;
     } catch (e) {
       throw Exception('Failed to add gym request: $e');
     }
   }
 
-  @override
-  Future<GymRequestModel?> getGymById(String gymId) async {
-    try {
-      final docSnapshot = await _gymsCollection.doc(gymId).get();
-      
-      if (docSnapshot.exists) {
-        final data = docSnapshot.data() as Map<String, dynamic>;
-        return GymRequestModel.fromMap(data);
-      }
-      
-      return null;
-    } catch (e) {
-      throw Exception('Failed to get gym by ID: $e');
-    }
-  }
+  
 
   @override
   Future<Map<String, List<String>>> uploadImages(
@@ -106,4 +97,21 @@ Future<void> addGymFeatures(String gymId, List<Feature> features) {
     }
   });
 }
+
+ 
+  @override
+  Future<GymRequestModel?> getGymById(String gymId) async {
+    try {
+      final docSnapshot = await _gymsCollection.doc(gymId).get();
+      
+      if (docSnapshot.exists) {
+        final data = docSnapshot.data() as Map<String, dynamic>;
+        return GymRequestModel.fromMap(data);
+      }
+      
+      return null;
+    } catch (e) {
+      throw Exception('Failed to get gym by ID: $e');
+    }
+  }
 }
