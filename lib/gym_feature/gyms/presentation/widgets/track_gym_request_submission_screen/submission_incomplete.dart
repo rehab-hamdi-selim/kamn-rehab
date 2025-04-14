@@ -97,7 +97,7 @@ class SubmissionIncomplete extends StatelessWidget {
           const AddMempershipOfferCard(),
         ],
       ),
-      bottomNavigationBar: const GoToServices(),
+      bottomNavigationBar:  GoToServices(gymId: "",),
     );
   }
 }
