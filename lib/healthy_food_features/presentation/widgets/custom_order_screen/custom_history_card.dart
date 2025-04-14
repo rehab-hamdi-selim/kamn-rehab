@@ -1,11 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/healthy_food_features/data/models/order_model.dart';
 
 class CardHistory extends StatelessWidget {
-  const CardHistory({super.key});
+  CardHistory({super.key, required this.item, required this.index});
+  final OrderModel item;
+  int index;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,7 @@ class CardHistory extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Aug 14 . 8:11 AM',
+                item.createdAt.toString(),
                 style: TextStyles.fontCircularSpotify10BlackMedium,
               ),
               Container(
@@ -36,7 +40,7 @@ class CardHistory extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      'Delivered',
+                      item.status,
                       style:
                           TextStyles.fontCircularSpotify10BlackMedium.copyWith(
                         color: AppPallete.grayColor,
@@ -54,9 +58,9 @@ class CardHistory extends StatelessWidget {
                 width: 61.w,
                 height: 51.h,
                 decoration: BoxDecoration(
-                    image: const DecorationImage(
-                      image: AssetImage(
-                        "assets/images/food.png",
+                    image: DecorationImage(
+                      image: NetworkImage(
+                        item.meals.first.imageUrls.first,
                       ),
                       fit: BoxFit.cover,
                     ),
@@ -69,13 +73,13 @@ class CardHistory extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Quinoa Salad with Grilled Chicken',
+                    item.meals.first.name,
                     style: TextStyles.fontCircularSpotify12BlackMedium,
                     softWrap: true,
                   ),
                   Text('Kitchen: Sarah’s House',
                       style: TextStyles.fontCircularSpotify10StealGrayMedium),
-                  Text('Order-ID: 987654321',
+                  Text(item.orderId,
                       style: TextStyles.fontCircularSpotify10StealGrayMedium),
                 ],
               )
@@ -97,7 +101,7 @@ class CardHistory extends StatelessWidget {
                             color: AppPallete.darkGreenColor,
                           )),
                       Text(
-                        '25.00',
+                        item.meals.first.price.toString(),
                         style: TextStyles.fontCircularSpotify12BlackMedium,
                       ),
                     ],

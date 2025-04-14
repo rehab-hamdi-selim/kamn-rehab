@@ -66,6 +66,7 @@ class TestMealModel extends Equatable {
     List<String>? ingredients,
     String? details,
     List<String>? imageUrls,
+    required int quantity,
   }) {
     return TestMealModel(
       id: id ?? this.id,
@@ -94,4 +95,6 @@ class TestMealModel extends Equatable {
         details,
         imageUrls,
       ];
+
+  get quantity => null;
 }

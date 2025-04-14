@@ -1,0 +1,47 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:kamn/core/common/entities/meal_cart_model.dart';
+import 'package:kamn/healthy_food_features/data/models/order_model.dart';
+
+abstract class OrderRepository {
+  Future<void> createOrder({
+    required List<MealCartModel> cartItems,
+    required String userId,
+  });
+  Future<List<OrderModel>> fetchOrders(String userId);
+}
+
+class OrderRepositoryImpl implements OrderRepository {
+  final FirebaseFirestore firestore;
+
+  OrderRepositoryImpl({FirebaseFirestore? firestore})
+      : firestore = firestore ?? FirebaseFirestore.instance;
+
+  @override
+  Future<void> createOrder({
+    required List<MealCartModel> cartItems,
+    required String userId,
+  }) async {
+    final orderId = firestore.collection('orders').doc().id;
+
+    final newOrder = OrderModel(
+      orderId: orderId,
+      userId: userId,
+      status: 'Pending',
+      meals: cartItems,
+      total: 100.0,
+      createdAt: DateTime.now(),
+    );
+
+    await firestore.collection('orders').doc(orderId).set(newOrder.toJson());
+  }
+
+  @override
+  Future<List<OrderModel>> fetchOrders(String userId) async {
+    final snapshot = await firestore
+        .collection('orders')
+        .where('userId', isEqualTo: userId)
+        .get();
+
+    return snapshot.docs.map((doc) => OrderModel.fromJson(doc.data())).toList();
+  }
+}

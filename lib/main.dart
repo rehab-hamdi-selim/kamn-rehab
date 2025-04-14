@@ -35,14 +35,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
+import 'package:kamn/core/common/cubit/cubit/cart_cubit.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/custom_main_bloc_consumer.dart';
+import 'package:kamn/healthy_food_features/data/repositories/order_repo.dart';
+import 'package:kamn/healthy_food_features/presentation/cubit/order_cubit.dart';
 import 'package:kamn/healthy_food_features/presentation/screens/my_cart_screen.dart';
 import 'package:kamn/healthy_food_features/presentation/screens/order_screen.dart';
 import 'package:kamn/init_dependencies.dart';
 
 import 'core/common/cubit/firebase_remote_config/firebase_remote_config_cubit.dart';
-
 
 // void main() {
 //   runApp(DashboardApp());
@@ -93,12 +95,10 @@ class MyApp extends StatelessWidget {
           create: (context) => getIt<AppUserCubit>()
             ..getUser(uid: "uGTn2GsdCMeTTjsrIERAfbLXaYW2"),
         ),
-        // BlocProvider(
-        //   create: (context) => FirebaseRemoteConfigCubit()
-        //     ..initListner()
-        //     ..getStringValue('test')
-        //     ..getStringValue('app_version'),
-        // ),
+        BlocProvider(create: (context) => CartCubit()),
+        BlocProvider(
+          create: (context) => OrderCubit(OrderRepositoryImpl()),
+        ),
       ],
       child: const ScreenUtilInit(
         designSize: Size(375, 812),
@@ -109,7 +109,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 
 // BlocListener<AppUserCubit, AppUserState>(
 //             listener: (context, state) async {
