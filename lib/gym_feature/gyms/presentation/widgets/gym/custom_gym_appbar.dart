@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart' as badges;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +10,6 @@ import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/routing/routes.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:badges/badges.dart' as badges;
 
 class CustomGymAppbar extends StatelessWidget implements PreferredSizeWidget {
   const CustomGymAppbar({super.key});
@@ -17,26 +17,23 @@ class CustomGymAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      surfaceTintColor: Colors.white,
       backgroundColor: AppPallete.lightWiteColor,
       leading: InkWell(
         onTap: () {
           Navigator.pop(context);
-        },
-        child: Padding(
-          padding: EdgeInsets.all(15.0.h),
+          },
           child: Container(
-            padding: EdgeInsets.all(3.h),
+            margin: const EdgeInsets.all(10),
+            width: 30,
+            height: 30,
             decoration: const BoxDecoration(
-              color: AppPallete.accentBlackColor,
-              shape: BoxShape.circle,
+                color: AppPallete.blackColor, shape: BoxShape.circle),
+            child: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
             ),
-            child: Icon(
-              Icons.arrow_back_rounded,
-              size: 20.h,
-              color: AppPallete.lightGreyColor,
-            ),
-          ),
-        ),
+          )
       ),
       title: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -48,26 +45,37 @@ class CustomGymAppbar extends StatelessWidget implements PreferredSizeWidget {
             child: Hero(
                 tag: context.watch<AppUserCubit>().state.user?.uid ?? '',
                 child: CircleAvatar(
-                  radius: 20.r, // Responsive radius
+                  radius: 21.r, // Responsive radius
                   backgroundColor: AppPallete.blackColor,
-                  backgroundImage:
-                      context.watch<AppUserCubit>().state.user?.profileImage !=
-                              null
-                          ? CachedNetworkImageProvider(context
-                              .watch<AppUserCubit>()
-                              .state
-                              .user!
-                              .profileImage!)
-                          : null,
-                  child:
-                      context.watch<AppUserCubit>().state.user?.profileImage ==
-                              null
-                          ? SvgPicture.asset(
+                  child: ClipOval(
+                    child: context
+                                .watch<AppUserCubit>()
+                                .state
+                                .user
+                                ?.profileImage !=
+                            null
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 5.0),
+                            child: CachedNetworkImage(
+                              imageUrl: context
+                                  .watch<AppUserCubit>()
+                                  .state
+                                  .user!
+                                  .profileImage!,
+                              width: 40.r,
+                              height: 40.r,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                        : Padding(
+                            padding: const EdgeInsets.only(top: 5.0),
+                            child: SvgPicture.asset(
                               ImageLinks.defaultUserImage,
                               width: 60.r,
                               height: 60.r,
-                            )
-                          : null,
+                            ),
+                          ),
+                  ),
                 )),
           ),
           horizontalSpace(11.w),
@@ -84,23 +92,12 @@ class CustomGymAppbar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       actions: [
-        InkWell(
-          onTap: () {},
-          child: CircleAvatar(
-            backgroundColor: AppPallete.lighttColor2,
-            radius: 18.0.r,
-            child: Icon(
-              Icons.search_rounded,
-              color: AppPallete.blackColor,
-              size: 32.h,
-            ),
-          ),
-        ),
+       
         horizontalSpace(4.w),
         badges.Badge(
           ignorePointer: false,
           onTap: () {},
-          position: badges.BadgePosition.topEnd(top: 5.h, end: 5.w),
+          position: badges.BadgePosition.topEnd(top: 6.h, end: 6.w),
           showBadge: true,
           child: InkWell(
             onTap: () {},
@@ -110,7 +107,7 @@ class CustomGymAppbar extends StatelessWidget implements PreferredSizeWidget {
               child: Icon(
                 Icons.notifications_none_outlined,
                 color: AppPallete.blackColor,
-                size: 32.h,
+                size: 30.h,
               ),
             ),
           ),

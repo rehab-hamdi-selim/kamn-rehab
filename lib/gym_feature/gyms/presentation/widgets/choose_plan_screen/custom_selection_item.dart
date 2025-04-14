@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/theme/app_pallete.dart';
+import 'package:kamn/gym_feature/gyms/data/models/features_model.dart';
 
 import 'custom_badge.dart';
-import 'failure_model.dart';
 
 class CustomSelectionItem extends StatelessWidget {
-  final Feature feature;
+  final FeatureModel feature;
   final int quantity;
   final Function increaseQuantity;
   final Function decreaseQuantity;
@@ -37,7 +38,7 @@ class CustomSelectionItem extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Text(
-                      "${feature.icon} ${feature.name}",
+                      " ${feature.name}",
                       style: TextStyle(fontSize: 10.sp),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
@@ -45,8 +46,8 @@ class CustomSelectionItem extends StatelessWidget {
                   ),
                   SizedBox(width: 5.w),
                   CustomBadge(
-                    label: "${feature.price}${feature.unit}",
-                    color: feature.badgeColor,
+                    label: "${feature.price}/month",
+                    color: AppPallete.blueColor,
                   ),
                 ],
               ),

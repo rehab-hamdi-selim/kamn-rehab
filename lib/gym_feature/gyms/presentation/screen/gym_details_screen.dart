@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/gym_feature/gyms/data/models/gym_details_model.dart';
 import 'package:kamn/gym_feature/gyms/presentation/widgets/gym_details/buttons_row.dart';
 import 'package:kamn/gym_feature/gyms/presentation/widgets/gym_details/features_section.dart';
 import 'package:kamn/gym_feature/gyms/presentation/widgets/gym_details/gym_owner_row.dart';
@@ -15,7 +15,18 @@ import 'package:kamn/gym_feature/gyms/presentation/widgets/gym_details/read_more
 import 'package:kamn/gym_feature/gyms/presentation/widgets/gym_details/social_links_section.dart';
 
 class GymDetailsScreen extends StatelessWidget {
-  const GymDetailsScreen({super.key});
+  const GymDetailsScreen(
+      {super.key,
+      required this.imgs,
+      required this.logo,
+      required this.location,
+      required this.id,
+      required this.gymName,
+      required this.gymDescription,
+      required this.gymLinksList});
+  final List<String> imgs;
+  final String logo, location, id, gymName, gymDescription;
+  final List<ScoialMediaLink> gymLinksList;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +36,7 @@ class GymDetailsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ImageStack(imgList: Constants.imgList),
+            ImageStack(imgList: imgs),
             Container(
               decoration: const BoxDecoration(
                   color: Colors.white,
@@ -38,38 +49,46 @@ class GymDetailsScreen extends StatelessWidget {
                   spacing: 3,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const LogoRow(),
+                    LogoRow(
+                      logo: logo,
+                      gymName: gymName,
+                    ),
                     const SizedBox(height: 8),
-                    const Row(
+                    Row(
                       spacing: 5,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            LocationContainer(),
-                            SizedBox(height: 8),
-                            RatingRow(),
+                            LocationContainer(
+                              location: location,
+                            ),
+                            const SizedBox(height: 8),
+                            const RatingRow(),
                           ],
                         ),
-                        Spacer(),
-                        PriceContainer(),
+                        const Spacer(),
+                        const PriceContainer(),
                       ],
                     ),
                     const SizedBox(height: 16),
-                    const ReadMoreText(),
+                    ReadMoreText(
+                      gymDescription: gymDescription,
+                    ),
                     const SizedBox(height: 16),
-                    Text("Features",
-                        style:
-                            TextStyles.fontCircularSpotify20AccentBlackMedium),
-                    FeaturesSection(features: Constants.features),
+                  FeaturesSection(
+                      gymId: id,
+                    ),
                     const OpenInContainer(),
                     const SizedBox(height: 8),
                     Text("Gym Links",
                         style:
                             TextStyles.fontCircularSpotify20AccentBlackMedium),
                     const SizedBox(height: 8),
-                    const SocialLinksSection(),
+                    SocialLinksSection(
+                      gymLinksList: gymLinksList,
+                    ),
                     const SizedBox(height: 16),
                     Text("Gym Owner",
                         style:

@@ -22,7 +22,13 @@ Future<void> initDependencies() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+try {
+    // Then fetch and activate remote config
+    await FirebaseRemoteConfig.instance.fetchAndActivate();
+  } catch (e) {
+    print('Remote config error: $e');
+    // Handle the error gracefully
+  }
   //custom error screen
   customErorrScreen();
 
@@ -59,5 +65,7 @@ Future<void> initDependencies() async {
     // Add other default values here
   });
 
-  await FirebaseRemoteConfig.instance.fetchAndActivate();
+  // await FirebaseRemoteConfig.instance.fetchAndActivate(
+    
+  // );
 }

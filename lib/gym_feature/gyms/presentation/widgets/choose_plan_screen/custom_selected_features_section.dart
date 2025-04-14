@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/gym_feature/gyms/data/models/features_model.dart';
 import 'package:kamn/gym_feature/gyms/presentation/widgets/choose_plan_screen/custom_selection_item.dart';
 import 'package:kamn/gym_feature/gyms/presentation/widgets/choose_plan_screen/failure_model.dart';
 
 class CustomSelectedFeaturesSection extends StatelessWidget {
-  final Map<Feature, int> selectedFeatures;
+  final Map<FeatureModel, int> selectedFeatures;
   final Function increaseQuantity;
   final Function decreaseQuantity;
   final int totalPrice;
