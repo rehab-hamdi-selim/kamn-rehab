@@ -22,9 +22,8 @@ Widget buildSocialLink({
       children: [
         ElevatedButton.icon(
           onPressed: () {},
-          icon: Icon(icon, color: Colors.white),
           label: Text(text,
-              style: TextStyles.fontCircularSpotify10BlackMedium.copyWith(
+              style: TextStyles.fontCircularSpotify12BlackMedium.copyWith(
                   color: Colors.white, fontWeight: FontWeightHelper.bold)),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,

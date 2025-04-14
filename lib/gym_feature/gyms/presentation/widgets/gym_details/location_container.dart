@@ -4,8 +4,9 @@ import 'package:kamn/core/theme/style.dart';
 
 class LocationContainer extends StatelessWidget {
   const LocationContainer({
-    super.key,
+    super.key, required this.location,
   });
+  final String location;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class LocationContainer extends StatelessWidget {
             size: 10,
           ),
           Text(
-            "Alexendria, San Stefano",
+            location,
             style: TextStyles.fontCircularSpotify8AccentBlackRegular,
           ),
         ],

@@ -5,14 +5,16 @@ import 'package:kamn/core/theme/style.dart';
 class LogoRow extends StatelessWidget {
   const LogoRow({
     super.key,
+    required this.logo, required this.gymName,
   });
+  final String logo, gymName;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image.asset(
-          "assets/images/gym.png", 
+        Image.network(
+          logo,
           width: 50,
           height: 50,
         ),
@@ -20,7 +22,7 @@ class LogoRow extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Gold's Gym",
+            Text(gymName,
                 style: TextStyles.fontCircularSpotify10BlackMedium
                     .copyWith(fontSize: 21.h)),
             Text("@goldsgymalex",

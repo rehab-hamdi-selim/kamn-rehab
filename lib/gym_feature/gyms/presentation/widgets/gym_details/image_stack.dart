@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/gym_feature/gyms/presentation/Cubit/Carousel/carousel_cubit.dart';
 import 'package:kamn/gym_feature/gyms/presentation/Cubit/Carousel/carousel_state.dart';
 
@@ -34,10 +35,10 @@ class ImageStack extends StatelessWidget {
                           Colors.black.withOpacity(0.2),
                           BlendMode.darken,
                         ),
-                        child: Image.asset(
+                        child: Image.network(
                           item,
                           fit: BoxFit.cover,
-                          width: double.infinity,
+                          width: 400.w,
                         ),
                       ),
                     ),
@@ -95,16 +96,21 @@ class ImageStack extends StatelessWidget {
         Positioned(
             top: 50,
             left: 20,
-            child: Container(
-              padding: const EdgeInsets.all(3),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.black,
-                border: Border.all(color: Colors.white),
-              ),
-              child: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                padding: const EdgeInsets.all(3),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.black,
+                  border: Border.all(color: Colors.white),
+                ),
+                child: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
               ),
             ))
       ],

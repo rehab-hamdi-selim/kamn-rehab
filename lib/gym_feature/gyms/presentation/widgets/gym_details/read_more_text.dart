@@ -5,15 +5,15 @@ import 'package:kamn/core/theme/style.dart';
 
 class ReadMoreText extends StatelessWidget {
   const ReadMoreText({
-    super.key,
+    super.key, required this.gymDescription,
   });
 
+  final String gymDescription;
   @override
   Widget build(BuildContext context) {
     return Text.rich(TextSpan(children: [
       TextSpan(
-        text:
-            "Gold's Gym is your ultimate fitness destination, offering world-class facilities, top-tier trainers, and a community focused on achieving results. Our spacious gym floor is equipped with cutting-edge...",
+        text: gymDescription,
         style: TextStyles.fontCircularSpotify14LightBlackRegular
             .copyWith(fontWeight: FontWeightHelper.light),
       ),
