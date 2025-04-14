@@ -17,8 +17,7 @@ class CustomFoodDetailsFooter extends StatelessWidget {
     final cubit = context.read<MealCubit>();
     return Row(
       children: [
-        Builder(
-          builder: (context) => ElevatedButton(
+        ElevatedButton(
             onPressed: () {
               showModalBottomSheet(
                     context: context,
@@ -32,14 +31,7 @@ class CustomFoodDetailsFooter extends StatelessWidget {
                           value: cubit,
                           child: EditMealPopUpScreen(),
                         ));
-              showModalBottomSheet(
-                context: context,
-                isScrollControlled: true, // Allows the bottom sheet to take full height
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
-                ),
-                builder: (context) => EditMealPopUpScreen(),
-              );
+           
             },
             style: ElevatedButton.styleFrom(
               fixedSize: Size(160.w, 50.h),
@@ -61,7 +53,7 @@ class CustomFoodDetailsFooter extends StatelessWidget {
               ],
             ),
           ),
-        ),
+        
         Spacer(),
         ElevatedButton(
           onPressed: () {},

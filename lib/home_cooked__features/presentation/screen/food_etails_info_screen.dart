@@ -59,6 +59,7 @@ class _EditMealScreenState extends State<EditMealScreen> {
   @override
   Widget build(BuildContext context) {
   final cubitselectedMeal =  context.read<MealCubit>().state.selectedMeal;
+  final cubitTEst = context.read<MealCubit>();
     return Scaffold(
       body: SizedBox(
         height: MediaQuery.of(context).size.height,

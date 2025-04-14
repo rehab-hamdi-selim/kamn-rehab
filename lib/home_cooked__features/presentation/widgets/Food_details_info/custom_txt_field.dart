@@ -39,6 +39,7 @@ class CustomTxtField extends StatelessWidget {
         maxLines: maxLines,
         decoration: InputDecoration(
           labelText: text,
+          //label: text != null ? Text(text!, style: TextStyles.fontCircularSpotify12GrayRegular,) : null,
           counterText: hasCounter ? '200' : null,
           counterStyle: TextStyles.fontCircularSpotify10GreenRegular,
           border: OutlineInputBorder(

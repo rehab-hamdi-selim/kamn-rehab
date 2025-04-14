@@ -1,6 +1,8 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_cubit.dart';
@@ -17,6 +19,9 @@ class CustomSpecialityDropdownWithTags extends StatelessWidget {
   final List<String> mealOptions = [
     "Keto", "Vegan", "Vegetarian", "Gluten Free", "Dairy Free"
   ];
+  CustomSpecialityDropdownWithTags({
+    super.key,
+  });
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -66,7 +71,7 @@ class CustomSpecialityDropdownWithTags extends StatelessWidget {
 
         // Display selected tags
             BlocBuilder<MealCubit, MealState>(
-          buildWhen: (previous, current) => previous.specialtyTags != current.specialtyTags,
+          //buildWhen: (previous, current) => previous.specialtyTags != current.specialtyTags,
           builder: (context, state) {
             return Wrap(
               spacing: 8,

@@ -16,6 +16,8 @@ import 'package:kamn/home_cooked__features/presentation/widgets/Food_details_inf
 import 'package:kamn/home_cooked__features/presentation/widgets/Food_details_info/custom_txt_field.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/add_home_cook/add_home_cook_info/custom_save_button.dart';
 
+import '../widgets/Food_details_info/custom_homecook_ingredients_for_update.dart';
+
 //edit mafdy basha
 class EditMealPopUpScreen extends StatefulWidget {
   @override
@@ -27,7 +29,6 @@ class _EditMealPopUpScreenState extends State<EditMealPopUpScreen> {
   Widget build(BuildContext context) {
     final mealCubit = context.read<MealCubit>();
     final selectedMeal = mealCubit.state.selectedMeal;
-    String selectedMealType = selectedMeal!.type;
 
     return Container(
       width: double.infinity,
@@ -140,7 +141,14 @@ class _EditMealPopUpScreenState extends State<EditMealPopUpScreen> {
                   verticalSpace(12.h),
                   customRequiredTxt("Specialty Tags"),
                   verticalSpace(7.h),
-                  Center(child: CustomSpecialityDropdownWithTags()),
+                  BlocBuilder<MealCubit, MealState>(
+                    builder: (context, state) {
+                      return Center(
+                        child: CustomSpecialityDropdownWithTags(
+                        ),
+                      );
+                    },
+                  ),
                   verticalSpace(10.h),
                   Center(
                     child: Text(
@@ -163,7 +171,7 @@ class _EditMealPopUpScreenState extends State<EditMealPopUpScreen> {
 //   selectedIngredients: selectedMeal.ingredients.cast<String>(), // Ensure correct type
 // )
 
-                  CustomHomecookIngredients(
+                  CustomHomecookIngredientsForUpdate(
                     ingredients: ingredients,
                     selectedIngredients:
                         selectedMeal?.ingredients.cast<String>() ?? [],
@@ -217,7 +225,8 @@ class _EditMealPopUpScreenState extends State<EditMealPopUpScreen> {
               }
             },
             builder: (context, state) {
-              return CustomSaveButton(
+              return state.isUpdateMealLoading?CircularProgressIndicator():
+               CustomSaveButton(
                 onPressed: () {
                   print("ID: ${selectedMeal.id}");
                   if (mealCubit.updateMealKey.currentState!.validate()) {
