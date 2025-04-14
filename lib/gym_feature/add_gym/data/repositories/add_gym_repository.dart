@@ -11,7 +11,7 @@ abstract class AddGymRepository {
   Future<Either<Faliure,GymRequestModel>> addGymRequest(GymRequestModel gymRequestModel);
   Future<Either<Faliure,Map<String, List<String>>>> uploadImages(
       Map<String, List<File>> imagesMap, void Function(double) onProgress);
-  Future<Either<Faliure, GymRequestModel?>> getGymById(String gymId);
+
 }
 
 @Injectable(as: AddGymRepository)
@@ -33,10 +33,4 @@ class AddGymRepositoryImpl implements AddGymRepository {
     });
   }
   
-  @override
-  Future<Either<Faliure, GymRequestModel?>> getGymById(String gymId) {
-    return executeTryAndCatchForRepository(() async {
-      return await dataSource.getGymById(gymId);
-    });
-  }
 }

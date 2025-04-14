@@ -39,8 +39,10 @@ class Routes {
   static const String notificationDetailsScreen = '/notificationDetailsScreen';
   static const String selectCategoryScreen = '/selectCategoryScreen';
   static const String editProfileScreen = '/editProfileScreen';
-
   static const String gymScreen = '/gymScreen';
-  static const String addGymScreen = '/addGymScreen';
-  static const String trackGymSubmission = '/trackGymSubmission';
+
+
+
+    static const String addGymScreen='/addGymScreen';
+
 }
