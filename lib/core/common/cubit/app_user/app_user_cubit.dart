@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/healthy_food_features/data/models/test_meal_model.dart';
 import 'package:kamn/healthy_food_features/domain/repositories/user_cart_repository.dart';
+import 'package:kamn/healthy_food_features/presentation/widgets/custom_my_cart/convert.dart';
 import 'package:kamn/playground_feature/authentication/data/repositories/auth_repository.dart';
 
 import '../../../helpers/secure_storage_helper.dart';
@@ -216,6 +217,10 @@ class AppUserCubit extends Cubit<AppUserState> {
     }
   }
 
+  double getCartTotalFromState() {
+    return _userCartRepository.getCartTotal(state.cartView);
+  }
+
   Future<void> removeFromCart(TestMealModel meal) async {
     try {
       emit(state.copyWith(cartState: AppUserCartStates.loading));
@@ -246,6 +251,42 @@ class AppUserCubit extends Cubit<AppUserState> {
         errorMessage: 'Failed to remove item from cart',
       ));
     }
+  }
+
+  void increaseQuantity(String mealId) {
+    final updatedCart = state.cartView.map((item) {
+      if (item.id == mealId) {
+        return item.copyWith(
+            quantity: item.quantity + 1); // زيادة الكمية بمقدار 1
+      }
+      return item;
+    }).toList();
+
+    // استخدام الدالة لتحويل TestMealModel إلى MealCartModel
+    final mealCartModels =
+        updatedCart.map((meal) => convertToMealCartModel(meal)).toList();
+
+    emit(state.copyWith(
+      cartView: mealCartModels, // استخدم قائمة MealCartModel هنا
+    ));
+  }
+
+  void decreaseQuantity(String mealId) {
+    final updatedCart = state.cartView.map((item) {
+      if (item.id == mealId && item.quantity > 1) {
+        return item.copyWith(
+            quantity: item.quantity - 1); // تقليل الكمية بمقدار 1
+      }
+      return item;
+    }).toList();
+
+    // استخدام الدالة لتحويل TestMealModel إلى MealCartModel
+    final mealCartModels =
+        updatedCart.map((meal) => convertToMealCartModel(meal)).toList();
+
+    emit(state.copyWith(
+      cartView: mealCartModels, // استخدم قائمة MealCartModel هنا
+    ));
   }
 
   void _updateCartView(List<TestMealModel> cart) {

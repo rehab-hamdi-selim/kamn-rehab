@@ -1,18 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:kamn/core/common/entities/meal_cart_model.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/healthy_food_features/data/models/order_model.dart';
 
-class CardInProgress extends StatelessWidget {
-  const CardInProgress({super.key});
+class CardInProgress extends StatefulWidget {
+  CardInProgress({
+    super.key,
+    required this.item,
+    // required this.meals,
+    // required this.index
+  });
+  final OrderModel item;
 
   @override
+  State<CardInProgress> createState() => _CardInProgressState();
+}
+
+class _CardInProgressState extends State<CardInProgress> {
+  // final List<MealCartModel> meals;
+  @override
   Widget build(BuildContext context) {
+    String? selectedMeal;
+    final meals = widget.item.meals;
     return Container(
       padding: EdgeInsets.all(10.w),
       width: 343.w,
-      height: 145.h,
+      height: 170.h,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.sp),
@@ -24,7 +40,7 @@ class CardInProgress extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Aug 14 . 8:11 AM',
+                widget.item.createdAt.toString(),
                 style: TextStyles.fontCircularSpotify10BlackMedium,
               ),
               Container(
@@ -36,7 +52,7 @@ class CardInProgress extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      'in progress',
+                      widget.item.status,
                       style:
                           TextStyles.fontCircularSpotify10BlackMedium.copyWith(
                         color: AppPallete.goldenbrown,
@@ -54,10 +70,9 @@ class CardInProgress extends StatelessWidget {
                 width: 61.w,
                 height: 51.h,
                 decoration: BoxDecoration(
-                    image: const DecorationImage(
-                      image: AssetImage(
-                        "assets/images/food.png",
-                      ),
+                    image: DecorationImage(
+                      image:
+                          NetworkImage(widget.item.meals.first.imageUrls.first),
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.circular(16.sp)),
@@ -68,17 +83,61 @@ class CardInProgress extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Quinoa Salad with Grilled Chicken',
-                    style: TextStyles.fontCircularSpotify12BlackMedium,
-                    softWrap: true,
+                  SizedBox(
+                    width: 254.w,
+                    child: Row(
+                      children: [
+                        Text(
+                          widget.item.meals.first.name,
+                          style: TextStyles.fontCircularSpotify12BlackMedium,
+                          softWrap: true,
+                        ),
+                        Spacer(
+                          flex: 3,
+                        ),
+                        Expanded(
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                              value: selectedMeal,
+                              hint: Text(
+                                '1- Item',
+                                style: TextStyles.circularSpotify10LightGrey,
+                              ),
+                              isExpanded: true,
+                              icon: SvgPicture.asset(
+                                'assets/icons/drop_dwon.svg',
+                              ),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  selectedMeal = newValue;
+                                });
+                              },
+                              items: meals.map((meal) {
+                                return DropdownMenuItem<String>(
+                                  value: meal.name,
+                                  child: Text(meal.name),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   Text('Kitchen: Sarah’s House',
                       style: TextStyles.fontCircularSpotify10StealGrayMedium),
-                  Text('Order-ID: 987654321',
+                  Text(widget.item.orderId,
                       style: TextStyles.fontCircularSpotify10StealGrayMedium),
                 ],
-              )
+              ),
+              // Spacer(),
+              // Text(
+              //   '1- Item',
+              //   style: TextStyles.circularSpotify10LightGrey,
+              // ),
+              // SvgPicture.asset(
+              //   'assets/icons/drop_dwon.svg',
+              // )
             ],
           ),
           SizedBox(
@@ -97,7 +156,7 @@ class CardInProgress extends StatelessWidget {
                             color: AppPallete.darkGreenColor,
                           )),
                       Text(
-                        '25.00',
+                        widget.item.meals.first.price.toString(),
                         style: TextStyles.fontCircularSpotify12BlackMedium,
                       ),
                     ],

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:kamn/core/common/entities/meal_cart_model.dart';
 import 'package:kamn/healthy_food_features/data/models/test_meal_model.dart';
 
 abstract class UserCartDataSource {
@@ -11,7 +12,6 @@ class UserCartDataSourceImpl implements UserCartDataSource {
 
   UserCartDataSourceImpl(this.firestore);
 
-  @override
   Future<List<TestMealModel>> getUserCart(String userId) async {
     final doc = await firestore.collection('users').doc(userId).get();
     final data = doc.data();
@@ -28,4 +28,31 @@ class UserCartDataSourceImpl implements UserCartDataSource {
     await userRef.update(
         {'my_healthFood_cart': meals.map((meal) => meal.toJson()).toList()});
   }
+
+ 
+
+  // @override
+  // Future<double> getTotalFromUserCart(String userId) async {
+  //   try {
+  //     final doc = await firestore.collection('users').doc(userId).get();
+  //     final data = doc.data();
+
+  //     if (data == null || !data.containsKey('my_healthFood_cart')) {
+  //       return 0.0;
+  //     }
+
+  //     final cartData = data['my_healthFood_cart'] as List<dynamic>;
+
+  //     double total = 0.0;
+  //     for (var item in cartData) {
+  //       final meal = MealCartModel.fromJson(item as Map<String, dynamic>);
+  //       total += meal.price * meal.quantity;
+  //     }
+
+  //     return total;
+  //   } catch (e) {
+  //     print('Error fetching user cart total: $e');
+  //     return 0.0;
+  //   }
+  // }
 }

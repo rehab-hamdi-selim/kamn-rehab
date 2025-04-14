@@ -1,12 +1,63 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
+import 'package:kamn/core/common/entities/meal_cart_model.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/custom_my_cart/counter.dart';
 
 class CardMycart extends StatelessWidget {
-  const CardMycart({super.key});
+  final MealCartModel item;
+
+  const CardMycart({super.key, required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    return Dismissible(
+        key: Key(item.id),
+        background: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12.sp),
+            border: Border(
+              right: BorderSide(
+                color: const Color(0xffF8DB8A),
+                width: 5.sp,
+              ),
+            ),
+            color: const Color(0xffFFDB81),
+          ),
+          alignment: Alignment.centerLeft,
+          padding: const EdgeInsets.only(left: 20),
+          child: SvgPicture.asset("assets/icons/pen.svg"),
+        ),
+        secondaryBackground: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12.sp),
+            border: Border(
+              right: BorderSide(
+                color: AppPallete.redColor,
+                width: 5.sp,
+              ),
+            ),
+            color: const Color(0xffF8C0C0),
+          ),
+          alignment: Alignment.centerRight,
+          padding: const EdgeInsets.only(right: 20),
+          child: SvgPicture.asset("assets/icons/delete.svg"),
+        ),
+        child: Container_cart_card(item: item));
+  }
+}
+
+class Container_cart_card extends StatelessWidget {
+  const Container_cart_card({
+    super.key,
+    required this.item,
+  });
+
+  final MealCartModel item;
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +66,7 @@ class CardMycart extends StatelessWidget {
       width: 343.w,
       height: 134.h,
       decoration: BoxDecoration(
+        border: Border.all(color: AppPallete.gray2, width: 0.5),
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.sp),
       ),
@@ -27,9 +79,9 @@ class CardMycart extends StatelessWidget {
                 width: 82.w,
                 height: 68.h,
                 decoration: BoxDecoration(
-                    image: const DecorationImage(
-                      image: AssetImage(
-                        "assets/images/food.png",
+                    image: DecorationImage(
+                      image: NetworkImage(
+                        item.imageUrls.first,
                       ),
                       fit: BoxFit.cover,
                     ),
@@ -44,12 +96,12 @@ class CardMycart extends StatelessWidget {
                   Container(
                     width: 165.w,
                     child: Text(
-                      'Quinoa Salad with Grilled Chicken',
+                      item.name,
                       style: TextStyles.fontCircularSpotify14AccentBlackMedium,
                       softWrap: true,
                     ),
                   ),
-                  Text('Kitchen: Sarah’s House',
+                  Text('Kitchen: ${item.prepTime}',
                       style: TextStyles.fontCircularSpotify10StealGrayMedium),
                 ],
               ),
@@ -81,7 +133,7 @@ class CardMycart extends StatelessWidget {
                               color: AppPallete.darkGreenColor,
                             )),
                         Text(
-                          '25.00',
+                          item.price.toString(),
                           style: TextStyles.fontCircularSpotify21BlackRegular,
                         ),
                       ],
@@ -90,7 +142,15 @@ class CardMycart extends StatelessWidget {
                 ],
               ),
               SizedBox(width: 100.w),
-              Counter()
+              Counter(
+                counter: item.quantity,
+                onIncrease: () {
+                  context.read<AppUserCubit>().increaseQuantity(item.id);
+                },
+                onDecrease: () {
+                  context.read<AppUserCubit>().decreaseQuantity(item.id);
+                },
+              )
             ],
           ),
         ],

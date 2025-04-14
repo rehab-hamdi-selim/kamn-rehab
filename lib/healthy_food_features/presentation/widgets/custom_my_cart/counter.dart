@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Counter extends StatefulWidget {
-  const Counter({super.key});
+class Counter extends StatelessWidget {
+  Counter(
+      {super.key,
+      required this.counter,
+      required this.onDecrease,
+      required this.onIncrease});
+  int counter;
+  final VoidCallback onIncrease;
+  final VoidCallback onDecrease;
 
-  @override
-  State<Counter> createState() => _CounterState();
-}
-
-class _CounterState extends State<Counter> {
-  int counter = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,21 +21,16 @@ class _CounterState extends State<Counter> {
         children: [
           // زر ناقص
           IconButton(
-            icon: Icon(
-              Icons.remove,
-              size: 18.sp,
-              weight: 500,
-              color: Color(0xff205B2A),
-            ),
-            onPressed: () {
-              setState(() {
-                counter--; // تقليل الرقم
-              });
-            },
-          ),
+              icon: Icon(
+                Icons.remove,
+                size: 18.sp,
+                weight: 500,
+                color: Color(0xff205B2A),
+              ),
+              onPressed: onDecrease),
           // الرقم المعروض في المنتصف
           Text(
-            '$counter', // عرض الرقم الحالي
+            counter.toString(), // عرض الرقم الحالي
             style: TextStyle(
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w500,
@@ -48,11 +44,7 @@ class _CounterState extends State<Counter> {
               weight: 500,
               color: Color(0xff205B2A),
             ),
-            onPressed: () {
-              setState(() {
-                counter++; // زيادة الرقم
-              });
-            },
+            onPressed: onIncrease,
           ),
         ],
       ),
