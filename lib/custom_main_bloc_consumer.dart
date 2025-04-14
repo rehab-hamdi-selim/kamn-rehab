@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/core/routing/app_router.dart';
-import 'package:kamn/healthy_food_features/presentation/screens/cart_screen.dart';
 import 'package:kamn/healthy_food_features/presentation/screens/my_cart_screen.dart';
 import 'package:kamn/healthy_food_features/presentation/screens/order_screen.dart';
 import 'package:kamn/playground_feature/authentication/presentation/screens/on_boarding_screen.dart';
@@ -22,6 +21,7 @@ class CustomMainBlocConsumer extends StatelessWidget {
 
     return BlocConsumer<AppUserCubit, AppUserState>(
         listener: (context, state) async {
+      ////////////////////
       // if (state.isInstalled()) {
       //   appUserCubit.isUserLoggedIn();
       // } else if (state.isLoggedIn()) {
