@@ -21,7 +21,7 @@ class CustomMainBlocConsumer extends StatelessWidget {
 
     return BlocConsumer<AppUserCubit, AppUserState>(
         listener: (context, state) async {
-      ////////////////////
+      ///////////////////////
       // if (state.isInstalled()) {
       //   appUserCubit.isUserLoggedIn();
       // } else if (state.isLoggedIn()) {
