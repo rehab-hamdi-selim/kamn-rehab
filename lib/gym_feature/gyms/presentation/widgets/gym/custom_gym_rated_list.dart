@@ -40,6 +40,8 @@ class CustomGymRatedList extends StatelessWidget {
                 final updatedGym = state.gymDetails;
                 print(updatedGym?.scoialMediaLinks);
                 context.read<GymDetailsCubit>().getGymFeatures(gym.id);
+                context.read<GymDetailsCubit>().getGymPlans(gym.id);
+                print(state.gymPlans);
 
                 Navigator.push(
                     context,
@@ -51,8 +53,7 @@ class CustomGymRatedList extends StatelessWidget {
                               id: gym.id,
                               gymName: gym.name,
                               gymDescription: gym.description,
-                              gymLinksList:
-                                  gym.scoialMediaLinks ?? [], 
+                              gymLinksList: gym.scoialMediaLinks ?? [],
                             )));
               },
             );

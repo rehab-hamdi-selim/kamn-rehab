@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/gym_feature/gyms/presentation/screen/choose_mempership_plan_screen.dart';
 import 'package:kamn/gym_feature/gyms/presentation/screen/choose_plan_screen.dart';
 
 class ButtonsRow extends StatelessWidget {
@@ -42,7 +43,12 @@ class ButtonsRow extends StatelessWidget {
         const SizedBox(width: 10),
         Expanded(
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => ChooseMempershipPlanScreen()));
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.black,
               minimumSize: const Size(210, 55),

@@ -1,5 +1,7 @@
 import 'package:kamn/gym_feature/gyms/data/models/features_model.dart';
 import 'package:kamn/gym_feature/gyms/data/models/gym_details_model.dart';
+import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
+import 'package:kamn/gym_feature/gyms/data/models/plan_model.dart';
 
 enum GymDetailsStatus {
   initial,
@@ -9,6 +11,9 @@ enum GymDetailsStatus {
   featuresLoading,
   featuresSuccess,
   featuresError,
+  plansLoading,
+  plansSuccess,
+  plansError,
 }
 
 extension GymDetailsStateX on GymDetailsState {
@@ -19,6 +24,9 @@ extension GymDetailsStateX on GymDetailsState {
   bool get isFeaturesLoading => state == GymDetailsStatus.featuresLoading;
   bool get isFeaturesSuccess => state == GymDetailsStatus.featuresSuccess;
   bool get isFeaturesError => state == GymDetailsStatus.featuresError;
+  bool get plansLoading => state == GymDetailsStatus.plansLoading;
+  bool get plansSuccess => state == GymDetailsStatus.plansSuccess;
+  bool get plansError => state == GymDetailsStatus.plansError;
 }
 
 class GymDetailsState {
@@ -27,6 +35,7 @@ class GymDetailsState {
   final GymDetailsModel? gymDetails;
   final List<GymDetailsModel>? allGyms;
   final List<FeatureModel>? gymFeatures;
+  final List<Plan>? gymPlans;
   final   Map<FeatureModel, int>? selectedFeatures ;
   
 
@@ -38,6 +47,7 @@ class GymDetailsState {
     this.allGyms,
     this.gymFeatures,
     this.selectedFeatures,
+    this.gymPlans
   });
 
   GymDetailsState copyWith({
@@ -46,6 +56,7 @@ class GymDetailsState {
     GymDetailsModel? gymDetails,
     List<GymDetailsModel>? allGyms,
     List<FeatureModel>? gymFeatures,
+    List<Plan>? gymPlans,
      Map<FeatureModel, int>? selectedFeatures
     
   }) {
@@ -55,7 +66,8 @@ class GymDetailsState {
       gymDetails: gymDetails ?? this.gymDetails,
       allGyms: allGyms ?? this.allGyms,
       gymFeatures: gymFeatures ?? this.gymFeatures,
-      selectedFeatures: selectedFeatures??this.selectedFeatures
+      selectedFeatures: selectedFeatures??this.selectedFeatures, 
+      gymPlans:gymPlans??this.gymPlans 
     );
   }
 
