@@ -5,6 +5,7 @@ import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/helpers/validators.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/core/utils/alert_dialog_utils.dart';
 import 'package:kamn/healthy_food_features/data/models/category_data.dart';
 import 'package:kamn/home_cooked__features/data/models/meals_model.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_cubit.dart';
@@ -26,7 +27,7 @@ class _AddMealPopUpScreenState extends State<AddMealPopUpScreen> {
   @override
   Widget build(BuildContext context) {
     final mealCubit = context.read<MealCubit>();
-      final selectedMeal = mealCubit.state.selectedMeal;
+    final selectedMeal = mealCubit.state.selectedMeal;
 
     return Container(
       width: double.infinity,
@@ -127,6 +128,7 @@ class _AddMealPopUpScreenState extends State<AddMealPopUpScreen> {
                       ),
                     ]),
                   ),
+
                   ///***** TAGS ****///
                   verticalSpace(12.h),
                   customRequiredTxt("Specialty Tags"),
@@ -169,26 +171,48 @@ class _AddMealPopUpScreenState extends State<AddMealPopUpScreen> {
               ),
             ),
           ),
-          CustomSaveButton(
-              onPressed: () {
-                if (mealCubit.addMealKey.currentState!.validate()) {
-                  MealModel mealmodel = MealModel(
-                    name: mealCubit.mealNameController.text,
-                    type: context.read<MealCubit>().state.selectedMealType,
-                    prepTime: int.parse(mealCubit.prepController.text),
-                    calories: int.parse(mealCubit.kcalController.text),
-                    price: double.parse(mealCubit.priceController.text),
-                    ingredients: mealCubit.state.selectedIngredients,
-                    details: mealCubit.descriptionController.text,
-                    id: Uuid().v4(),
-                    specialtyTags: mealCubit.state.specialtyTags,
-                    imageUrls: [""],
-                  );
-                  mealCubit.addMeal(mealmodel);
-                  print(mealmodel);
-                }
-              },
-              title: Constants.addMeal),
+          BlocConsumer<MealCubit, MealState>(
+            listener: (context, state) {
+              if (state.isAddMealSuccess) {
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Meal Added successfully!")),
+                );
+              }
+              if (state.isAddMealError) {
+                Navigator.pop(context);
+                AlertDialogUtils.showAlert(
+                  context: context,
+                  content: state.error ?? "Error",
+                  title: "Error",
+                  firstbutton: "OK",
+                );
+              }
+            },
+            builder: (context, state) {
+              return state.isAddMealLoading?CircularProgressIndicator():
+              CustomSaveButton(
+                  onPressed: () {
+                    if (mealCubit.addMealKey.currentState!.validate()) {
+                      MealModel mealmodel = MealModel(
+                        name: mealCubit.mealNameController.text,
+                        type: context.read<MealCubit>().state.selectedMealType,
+                        prepTime: int.parse(mealCubit.prepController.text),
+                        calories: int.parse(mealCubit.kcalController.text),
+                        price: double.parse(mealCubit.priceController.text),
+                        ingredients: mealCubit.state.selectedIngredients,
+                        details: mealCubit.descriptionController.text,
+                        id: Uuid().v4(),
+                        specialtyTags: mealCubit.state.specialtyTags,
+                        imageUrls: [""],
+                      );
+                      mealCubit.addMeal(mealmodel);
+                      print(mealmodel);
+                    }
+                  },
+                  title: Constants.addMeal);
+            },
+          ),
           verticalSpace(10.h),
         ],
       ),

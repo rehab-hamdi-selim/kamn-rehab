@@ -25,7 +25,7 @@ extension MealReviewExtension on MealState {
   bool get isSuccess => state == MealStatus.success;
   bool get isError => state == MealStatus.error;
   bool get isAddMealLoading => state == MealStatus.addMealLoading;
-  bool get isAddMealLoaded => state == MealStatus.addMealSuccess;
+  bool get isAddMealSuccess => state == MealStatus.addMealSuccess;
   bool get isAddMealError => state == MealStatus.addMealError;
   bool get isUpdateMealLoading => state == MealStatus.updateMealLoading;
   bool get isUpdateMealSuccess => state == MealStatus.updateMealSuccess;

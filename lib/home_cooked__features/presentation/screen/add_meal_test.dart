@@ -44,6 +44,7 @@ class AddMealTest extends StatelessWidget {
         children: [
           ElevatedButton(
               onPressed: () {
+                cubit.clearSelectedMeal();
                 showModalBottomSheet(
                     context: context,
                     isScrollControlled:

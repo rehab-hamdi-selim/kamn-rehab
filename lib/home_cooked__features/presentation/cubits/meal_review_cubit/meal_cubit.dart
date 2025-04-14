@@ -75,12 +75,25 @@ class MealCubit extends Cubit<MealState> {
   }
 
   void selectedMeal(MealModel mealModel) {
-  emit(state.copyWith(
-    selectedMeal: mealModel,
-    selectedIngredients: List<String>.from(mealModel.ingredients),
-  ));
-}
+    emit(state.copyWith(
+      selectedMeal: mealModel,
+      selectedIngredients: List<String>.from(mealModel.ingredients),
+      specialtyTags: List<String>.from(mealModel.specialtyTags),
+    ));
+  }
 
+  void clearSelectedMeal() {
+    mealNameController.clear();
+    prepController.clear();
+    kcalController.clear();
+    priceController.clear();
+    descriptionController.clear();
+    emit(state.copyWith(
+      selectedMealType : "Breakfast",
+      selectedIngredients: [],
+      specialtyTags: [],
+    ));
+  }
 
   void addMeal(MealModel mealModel) async {
     final res = await homeCookRepository.addMealModel(
@@ -88,17 +101,36 @@ class MealCubit extends Cubit<MealState> {
     res.fold(
         (l) => emit(
             state.copyWith(state: MealStatus.addMealError, error: l.erorr)),
-        (r) => emit(state.copyWith(state: MealStatus.addMealSuccess)));
+        (r) {emit(state.copyWith(state: MealStatus.addMealSuccess,myMeals: [...state.myMeals!,mealModel] ));} );
   }
 
-  void updateMeal(MealModel mealModel) async {
-    final res = await homeCookRepository.updateMealModel(
-        mealModel, "u0cBRLRyHcppREpHYdNf");
-    res.fold(
-        (l) => emit(
-            state.copyWith(state: MealStatus.updateMealError, error: l.erorr)),
-        (r) => emit(state.copyWith(state: MealStatus.updateMealSuccess)));
-  }
+void updateMeal(MealModel mealModel) async {
+  final res = await homeCookRepository.updateMealModel(
+    mealModel,
+    "u0cBRLRyHcppREpHYdNf",
+  );
+
+  res.fold(
+    (l) => emit(state.copyWith(
+      state: MealStatus.updateMealError,
+      error: l.erorr,
+    )),
+    (r) {
+      final updatedMeals = List<MealModel>.from(state.myMeals!);
+      final index = updatedMeals.indexWhere((meal) => meal.id == mealModel.id);
+
+      if (index != -1) {
+        updatedMeals[index] = mealModel;
+      }
+
+      emit(state.copyWith(
+        state: MealStatus.updateMealSuccess,
+        myMeals: updatedMeals,
+      ));
+    },
+  );
+}
+
 
   void changeSelectedType(String type) {
     emit(state.copyWith(selectedMealType: type));
@@ -116,6 +148,10 @@ class MealCubit extends Cubit<MealState> {
     List<String> updatedTags = List.from(state.specialtyTags);
     updatedTags.remove(tag);
     emit(state.copyWith(specialtyTags: updatedTags));
+  }
+
+  void setSpecialtyTags(List<String> tags) {
+    emit(state.copyWith(specialtyTags: tags));
   }
 
 // void toggleSelection(String ingredientName) {
@@ -143,4 +179,27 @@ class MealCubit extends Cubit<MealState> {
     emit(state.copyWith(selectedIngredients: updatedIngredients));
     print("Updated Ingredients: ${state.selectedIngredients}");
   }
+
+
+   void toggleSelectionforUpdate(String ingredientName) {
+  final updatedIngredients = List<String>.from(state.selectedIngredients);
+
+  if (updatedIngredients.contains(ingredientName)) {
+    updatedIngredients.remove(ingredientName);
+  } else {
+    updatedIngredients.add(ingredientName);
+  }
+
+  final updatedMeal = state.selectedMeal!.copyWith(
+    ingredients: updatedIngredients,
+  );
+
+  emit(state.copyWith(
+    selectedIngredients: updatedIngredients,
+    selectedMeal: updatedMeal,
+  ));
+
+  print("Updated Ingredients for Update: $updatedIngredients");
+}
+
 }
