@@ -4,8 +4,13 @@ import 'package:kamn/core/common/class/custom_splash_screen.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/routing/routes.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/cubits/create_gym_feature/create_gym_feature_cubit.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/screens/add_gym_screen.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/screens/create_gym_features_screen.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/screens/membership_offer_screen.dart';
+import 'package:kamn/gym_feature/gyms/presentation/cubit/track_submission/track_submission_cubit.dart';
 import 'package:kamn/gym_feature/gyms/presentation/pages/gyms_screen.dart';
+import 'package:kamn/gym_feature/gyms/presentation/screen/track_gym_request_submission_screen.dart';
 import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
 import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_up_cubit/sign_up_cubit.dart';
 import 'package:kamn/playground_feature/payment/presentation/cubits/procced_payment_cubit/procced_payment_cubit.dart';
@@ -299,6 +304,21 @@ class AppRouter {
             builder: (context) => const AddGymScreen());
       case Routes.gymScreen:
         return MaterialPageRoute(builder: (context) => const GymsScreen());
+      case Routes.trackGymSubmission:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<TrackSubmissionCubit>(),
+                  child:  TrackSubmissionScreen(),
+                ));
+      case Routes.gymFeaturesScreen:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<CreateGymFeatureCubit>(),
+                  child:   CreateGymFeaturesScreen( gymId: settings.arguments as String ,),
+                ));
+      case Routes.membershipOfferScreen:
+        return MaterialPageRoute(
+            builder: (context) => const MembershipOfferScreen());
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(

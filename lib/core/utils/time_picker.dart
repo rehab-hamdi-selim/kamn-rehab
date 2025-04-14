@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 Future<TimeOfDay?> selectTime(BuildContext context) async {
   final TimeOfDay? picked = await showTimePicker(
@@ -10,6 +11,25 @@ Future<TimeOfDay?> selectTime(BuildContext context) async {
   } else {
     return null;
   }
+}
+
+TimeOfDay parseTimeOfDay(String timeStr) {
+  // Remove non-breaking spaces and trim whitespace
+  try {
+    timeStr = timeStr.replaceAll('\u00A0', ' ').trim();
+    final format = DateFormat('h:mm a');
+    final dateTime = format.parse(timeStr);
+    return TimeOfDay(hour: dateTime.hour, minute: dateTime.minute);
+  } on Exception catch (e) {
+    print("Error parsing time: $e");
+    return TimeOfDay.now();
+  }
+}
+String formatTimeOfDay(TimeOfDay tod) {
+  final now = DateTime.now();
+  final dt = DateTime(now.year, now.month, now.day, tod.hour, tod.minute);
+  final format = DateFormat('hh:mm'); // e.g., 02:30 AM
+  return format.format(dt);
 }
 
 List<DateTime>? calculateIntervals(

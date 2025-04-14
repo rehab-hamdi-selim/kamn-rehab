@@ -44,5 +44,7 @@ class Routes {
 
 
     static const String addGymScreen='/addGymScreen';
-
+  static const String trackGymSubmission = '/trackGymSubmission';
+  static const String gymFeaturesScreen = '/gymFeaturesScreen';
+  static const String membershipOfferScreen = '/membershipOfferScreen';
 }

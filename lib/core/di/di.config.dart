@@ -18,6 +18,12 @@ import '../../gym_feature/add_gym/data/repositories/add_gym_repository.dart'
     as _i573;
 import '../../gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart'
     as _i1045;
+import '../../gym_feature/add_gym/presentation/cubits/create_gym_feature/create_gym_feature_cubit.dart'
+    as _i749;
+import '../../gym_feature/add_gym/presentation/cubits/membership_offer/membership_offer_cubit.dart'
+    as _i429;
+import '../../gym_feature/add_gym/presentation/cubits/track_submission/track_submission_cubit.dart'
+    as _i667;
 import '../../playground_feature/admin/data/data_source/analytics_data_source.dart'
     as _i366;
 import '../../playground_feature/admin/data/data_source/second_page_data_source.dart'
@@ -215,6 +221,12 @@ extension GetItInjectableX on _i174.GetIt {
         remoteDataSource: gh<_i382.SportsRemoteDataSource>()));
     gh.factory<_i1045.AddGymCubit>(
         () => _i1045.AddGymCubit(repository: gh<_i573.AddGymRepository>()));
+    gh.factory<_i749.CreateGymFeatureCubit>(() =>
+        _i749.CreateGymFeatureCubit(repository: gh<_i573.AddGymRepository>()));
+    gh.factory<_i429.MembershipOfferCubit>(() =>
+        _i429.MembershipOfferCubit(repository: gh<_i573.AddGymRepository>()));
+    gh.factory<_i667.TrackSubmissionCubit>(() =>
+        _i667.TrackSubmissionCubit(repository: gh<_i573.AddGymRepository>()));
     gh.factory<_i616.ServiceProviderGroundsCubit>(
         () => _i616.ServiceProviderGroundsCubit(
               getPlaygroundUsecase: gh<_i447.GetServicesFromFirebaseUsecase>(),

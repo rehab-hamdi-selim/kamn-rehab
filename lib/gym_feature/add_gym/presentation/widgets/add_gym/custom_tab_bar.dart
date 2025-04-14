@@ -5,7 +5,7 @@ import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_state.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/screens/custom_gym_features_section.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/screens/create_gym_features_screen.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/screens/custom_gym_info_screen.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/screens/custom_required_documents_screen.dart';
 

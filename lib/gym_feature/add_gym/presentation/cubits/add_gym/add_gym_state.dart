@@ -76,8 +76,6 @@ class AddGymState {
   final MandatoryFields? mandatoryFields;
   final List<File>? gymImages;
   List<bool> isValid;
-  final FeatureType? featureType;
-  final List<Feature>? addedFeatures;
   final Map<String, List<String>>? imagesUrlMap;
   final GymRequestModel? gymRequest;
   final double? uploadProgress;
@@ -93,8 +91,6 @@ class AddGymState {
       this.logo,
       this.mandatoryFields,
       this.gymImages,
-      this.featureType,
-      this.addedFeatures,
       this.imagesUrlMap,
       this.gymRequest,
       this.uploadProgress=0,
@@ -128,10 +124,8 @@ class AddGymState {
         state: state ?? this.state,
         erorrMessage: erorrMessage ?? this.erorrMessage,
         logo: logo ?? this.logo,
-        featureType: featureType ?? this.featureType,
         mandatoryFields: mandatoryFields ?? this.mandatoryFields,
         gymImages: gymImages ?? this.gymImages,
-        addedFeatures: addedFeatures ?? this.addedFeatures,
         imagesUrlMap: imagesUrlMap ?? this.imagesUrlMap,
         gymRequest: gymRequest ?? this.gymRequest,
         isAccept: isAccept?? this.isAccept,
@@ -145,7 +139,7 @@ class AddGymState {
 
   @override
   String toString() {
-    return 'AddGymState(state: $state, erorrMessage: $erorrMessage, logo: $logo, mandatoryFields: $mandatoryFields, gymImages: $gymImages, isValid: $isValid, featureType: $featureType, addedFeatures: $addedFeatures, imagesUrlMap: $imagesUrlMap, gymRequest: $gymRequest, uploadProgress: $uploadProgress, isGymInfoValid: $isGymInfoValid, isAccept: $isAccept, isConfirm: $isConfirm, numberOfImages: $numberOfImages, gymId: $gymId)';
+    return 'AddGymState(state: $state, erorrMessage: $erorrMessage, logo: $logo, mandatoryFields: $mandatoryFields, gymImages: $gymImages, isValid: $isValid, imagesUrlMap: $imagesUrlMap, gymRequest: $gymRequest, uploadProgress: $uploadProgress, isGymInfoValid: $isGymInfoValid, isAccept: $isAccept, isConfirm: $isConfirm, numberOfImages: $numberOfImages, gymId: $gymId)';
   }
 }
 
