@@ -6,13 +6,17 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/core/const/firebase_collections.dart';
 import 'package:kamn/core/helpers/secure_storage_helper.dart';
+import 'package:kamn/core/utils/try_and_catch.dart';
 import 'package:kamn/gym_feature/add_gym/data/models/gym_request_model.dart';
+import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
 
 abstract class AddGymRemoteDataSource {
   Future<GymRequestModel> addGymRequest(GymRequestModel gymRequestModel);
   Future<Map<String, List<String>>> uploadImages(
       Map<String, List<File>> imagesMap, void Function(double) onProgress);
   Future<GymRequestModel?> getGymById(String gymId);
+  Future<List<Map<String,dynamic>>> getAllGyms();
+  Future<void> addGymFeatures(String gymId, List<Feature> features);
 }
 
 @Injectable(as: AddGymRemoteDataSource)
@@ -81,4 +85,25 @@ class AddGymRemoteDataSourceImpl implements AddGymRemoteDataSource {
 
     return uploadedUrls;
   }
+  
+  @override
+  Future<List<Map<String, dynamic>>> getAllGyms() {
+ return executeTryAndCatchForDataLayer(()async{
+   var querySnapshot = await _gymsCollection.get();
+      return querySnapshot.docs
+          .map((doc) => doc.data() as Map<String, dynamic>)
+          .toList();
+ });
+  }
+  
+@override
+Future<void> addGymFeatures(String gymId, List<Feature> features) {
+  return executeTryAndCatchForDataLayer(() async {
+    final featuresCollection = _gymsCollection.doc(gymId).collection('features');
+
+    for (final feature in features) {
+       await featuresCollection.doc(feature.id).set(feature.toMap());
+    }
+  });
+}
 }

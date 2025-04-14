@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/gym_feature/add_gym/data/repositories/add_gym_repository.dart';
 import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
+import 'package:uuid/uuid.dart';
 
 part 'create_gym_feature_state.dart';
 @injectable
@@ -24,6 +25,7 @@ class CreateGymFeatureCubit extends Cubit<CreateGymFeatureState> {
           description: featureDescriptionController.text,
           price: priceController.text,
           pricingOption: state.featureType,
+          id: const Uuid().v4(),
         )
       ],
     ));
@@ -53,7 +55,14 @@ class CreateGymFeatureCubit extends Cubit<CreateGymFeatureState> {
     emit(state.copyWith(
         status: CreateGymFeatureStatus.radioSelected, featureType: newOption));
   }
-  
+  void submitFeatures(String gymId) async {
+    emit(state.copyWith(status: CreateGymFeatureStatus.loading));
+    final result = await repository.addGymFeatures(gymId, state.addedFeatures??[]);
+    result.fold(
+      (l) => emit(state.copyWith(status: CreateGymFeatureStatus.failure)),
+      (r) => emit(state.copyWith(status: CreateGymFeatureStatus.success)),
+    );
+  }
   @override
   Future<void> close() {
     menuController.dispose();

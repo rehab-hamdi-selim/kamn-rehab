@@ -239,4 +239,14 @@ class AddGymCubit extends Cubit<AddGymState> {
   void reset(){
     emit (state.copyWith(state:AddGymStatus.initial,uploadProgress: 0));
   }
+
+  void getGyms() async {
+    final response = await repository.getAllGyms(); 
+    response.fold((error) {
+      emit(state.copyWith(
+          state: AddGymStatus.error, erorrMessage: error.erorr)); 
+    }, (success) {
+     print(success); 
+    });
+  }
 }

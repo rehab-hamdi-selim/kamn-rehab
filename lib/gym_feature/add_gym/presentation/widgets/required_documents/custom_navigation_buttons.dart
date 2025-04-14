@@ -14,18 +14,22 @@ class CustomNavigationButtons extends StatelessWidget {
     return Row(
     spacing: 12.w,
     children: [
-      CustomGymButton(
-        text: 'Back',
-        onPressed: () {
-          context.read<AddGymCubit>().goToPreviousPage();
-        },
-        isBackButton: true,
-        foregroundColor: AppPallete.blackColor,
-        backgroundColor: AppPallete.ofWhiteColor,
+      Expanded(
+        child: CustomGymButton(
+          text: 'Back',
+          onPressed: () {
+            context.read<AddGymCubit>().goToPreviousPage();
+          },
+          isBackButton: true,
+          foregroundColor: AppPallete.blackColor,
+          backgroundColor: AppPallete.ofWhiteColor,
+        ),
       ),
-      CustomGymButton(
-        text: 'Submit',
-        onPressed: onNextPressed,
+      Expanded(
+        child: CustomGymButton(
+          text: 'Submit',
+          onPressed: onNextPressed,
+        ),
       ),
     ],
   );

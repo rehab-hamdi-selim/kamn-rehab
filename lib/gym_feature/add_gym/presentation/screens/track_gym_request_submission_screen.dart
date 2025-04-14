@@ -126,7 +126,7 @@ class TrackSubmissionScreen extends StatelessWidget {
               SizedBox(
                 height: 17.h,
               ),
-              const GoToServices(),
+               GoToServices(gymId: gymId,),
             ],
           ),
         ),

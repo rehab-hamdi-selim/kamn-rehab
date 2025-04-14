@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_state.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/cubits/cubit/create_gym_feature_cubit.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/cubits/create_gym_feature/create_gym_feature_cubit.dart';
 import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
 
 class FeatureBox extends StatelessWidget {

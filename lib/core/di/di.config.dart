@@ -19,8 +19,10 @@ import '../../gym_feature/add_gym/data/repositories/add_gym_repository.dart'
     as _i573;
 import '../../gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart'
     as _i1045;
-import '../../gym_feature/add_gym/presentation/cubits/cubit/create_gym_feature_cubit.dart'
-    as _i616;
+import '../../gym_feature/add_gym/presentation/cubits/create_gym_feature/create_gym_feature_cubit.dart'
+    as _i749;
+import '../../gym_feature/add_gym/presentation/cubits/membership_offer/membership_offer_cubit.dart'
+    as _i429;
 import '../../gym_feature/add_gym/presentation/cubits/track_submission/track_submission_cubit.dart'
     as _i667;
 import '../../playground_feature/admin/data/data_source/analytics_data_source.dart'
@@ -128,7 +130,6 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
-
     gh.factory<_i89.SignInViewModel>(() => _i89.SignInViewModel());
     gh.factory<_i505.SignUpViewModel>(() => _i505.SignUpViewModel());
     gh.factory<_i557.PaymentOptionsViewModel>(
@@ -159,18 +160,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i307.AuthRepository>(() => _i307.AuthRepositoryImpl(
         authDataSource: gh<_i774.AuthRemoteDataSource>()));
     gh.factory<_i130.AnalyticsRepository>(() => _i130.AnalyticsRepositoryImpl(
-        dataSource: gh<_i366.AnalyticsDataSource>())); 
-
-
-
+        dataSource: gh<_i366.AnalyticsDataSource>()));
     gh.factory<_i126.AddGymRemoteDataSource>(
         () => _i126.AddGymRemoteDataSourceImpl());
-
-
-    
-
-
-
     gh.factory<_i4.SecondPageDataSource>(() =>
         _i4.SecondPageDataSourceImpl(firestore: gh<_i158.FirestoreService>()));
     gh.factory<_i680.UserRemoteDataSource>(() => _i680.UserRemoteDataSourceImpl(
@@ -224,23 +216,16 @@ extension GetItInjectableX on _i174.GetIt {
             repository: gh<_i231.ServiceProvidersRepository>()));
     gh.factory<_i609.UserRepository>(() => _i609.UserRepositoryImpl(
         userRemoteDataSource: gh<_i680.UserRemoteDataSource>()));
-
     gh.factory<_i573.AddGymRepository>(() => _i573.AddGymRepositoryImpl(
         dataSource: gh<_i126.AddGymRemoteDataSource>()));
-
-
-
     gh.factory<_i201.SportsRepository>(() => _i201.SportsRepositoryImpl(
         remoteDataSource: gh<_i382.SportsRemoteDataSource>()));
-
-
     gh.factory<_i1045.AddGymCubit>(
         () => _i1045.AddGymCubit(repository: gh<_i573.AddGymRepository>()));
-
-
-        
-    gh.factory<_i616.CreateGymFeatureCubit>(() =>
-        _i616.CreateGymFeatureCubit(repository: gh<_i573.AddGymRepository>()));
+    gh.factory<_i749.CreateGymFeatureCubit>(() =>
+        _i749.CreateGymFeatureCubit(repository: gh<_i573.AddGymRepository>()));
+    gh.factory<_i429.MembershipOfferCubit>(() =>
+        _i429.MembershipOfferCubit(repository: gh<_i573.AddGymRepository>()));
     gh.factory<_i667.TrackSubmissionCubit>(() =>
         _i667.TrackSubmissionCubit(repository: gh<_i573.AddGymRepository>()));
     gh.factory<_i616.ServiceProviderGroundsCubit>(
