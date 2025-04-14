@@ -19,8 +19,10 @@ import '../../gym_feature/add_gym/data/repositories/add_gym_repository.dart'
     as _i573;
 import '../../gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart'
     as _i1045;
-import '../../gym_feature/add_gym/presentation/cubits/cubit/create_gym_feature_cubit.dart'
-    as _i616;
+import '../../gym_feature/add_gym/presentation/cubits/create_gym_feature/create_gym_feature_cubit.dart'
+    as _i749;
+import '../../gym_feature/add_gym/presentation/cubits/membership_offer/membership_offer_cubit.dart'
+    as _i429;
 import '../../gym_feature/add_gym/presentation/cubits/track_submission/track_submission_cubit.dart'
     as _i667;
 import '../../gym_feature/gyms/data/datasources/gym_remote_data_source.dart'
@@ -165,6 +167,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i906.GymDetailsRemoteDataSource>(
         () => _i906.GymDetailsRemoteDataSourceImpl());
     gh.factory<_i130.AnalyticsRepository>(() => _i130.AnalyticsRepositoryImpl(
+        dataSource: gh<_i366.AnalyticsDataSource>()));
         dataSource: gh<_i366.AnalyticsDataSource>()));
     gh.factory<_i126.AddGymRemoteDataSource>(
         () => _i126.AddGymRemoteDataSourceImpl());

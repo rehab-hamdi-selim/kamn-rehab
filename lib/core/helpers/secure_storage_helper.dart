@@ -86,6 +86,7 @@ class SecureStorageHelper {
       return Left(e.toString());
     }
   }
+
   // Save gym ID
   static Future<Either<String, void>> saveGymId(String gymId) async {
     try {
@@ -113,6 +114,13 @@ class SecureStorageHelper {
     }
   }
 
+  // Get gym ID
+  static Future<String?>? getGymIdDirect() async {
+    final gymId = await _storage.read(key: _gymIdKey);
+    print("Retrieved gym ID: $gymId");
+    return gymId;
+  }
+
   // Delete gym ID
   static Future<Either<String, void>> deleteGymId() async {
     try {
@@ -127,7 +135,10 @@ class SecureStorageHelper {
 
   static Future<void> saveStringList(List<String> list) async {
     final jsonString = jsonEncode(list);
-    await _storage.write(key: _ratingListKey, value: jsonString,);
+    await _storage.write(
+      key: _ratingListKey,
+      value: jsonString,
+    );
   }
 
   static Future<List<String>> getStringList() async {

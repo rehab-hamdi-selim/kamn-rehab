@@ -175,7 +175,6 @@
 				54DC7C1D8BFAFE9916794074 /* [CP] Check Pods Manifest.lock */,
 				331C807D294A63A400263BE5 /* Sources */,
 				331C807F294A63A400263BE5 /* Resources */,
-				E1655FE45EE999B3ABF24B47 /* Frameworks */,
 			);
 			buildRules = (
 			);

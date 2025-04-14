@@ -53,7 +53,7 @@ static final List<StepInfo> defaultStepsInfo = [
     List<StepInfo>? stepsInfo, // Optional parameter
     required this.status,
     this.errorMessage,
-    this.stepsCompleted = const [true, null,true],
+    this.stepsCompleted = const [null, null,null],
     this.gymRequestModel,
   }) : stepsInfo = stepsInfo ?? List.from(defaultStepsInfo); 
   TrackSubmissionState copyWith({

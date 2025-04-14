@@ -3,13 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/common/class/custom_splash_screen.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/di/di.dart';
+import 'package:kamn/core/helpers/secure_storage_helper.dart';
 import 'package:kamn/core/routing/routes.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/cubits/cubit/create_gym_feature_cubit.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/cubits/track_submission/track_submission_cubit.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/cubits/create_gym_feature/create_gym_feature_cubit.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/cubits/membership_offer/membership_offer_cubit.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/screens/add_gym_screen.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/screens/create_gym_features_screen.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/screens/membership_offer_screen.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/cubits/track_submission/track_submission_cubit.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/screens/select_plan_features_screen.dart';
+import 'package:kamn/gym_feature/gyms/presentation/pages/gyms_screen.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/screens/track_gym_request_submission_screen.dart';
-import 'package:kamn/gym_feature/gyms/presentation/screen/gyms_screen.dart';
 import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
 import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_up_cubit/sign_up_cubit.dart';
 import 'package:kamn/playground_feature/payment/presentation/cubits/procced_payment_cubit/procced_payment_cubit.dart';
@@ -305,15 +309,34 @@ class AppRouter {
       case Routes.trackGymSubmission:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
-                  create: (context) => getIt<TrackSubmissionCubit>(),
-                  child:  TrackSubmissionScreen(gymId: settings.arguments as String,),
+                  create: (context) => getIt<TrackSubmissionCubit>()
+                    ..getGym(settings.arguments as String)..check(),
+                  child: TrackSubmissionScreen(
+                    gymId: settings.arguments as String,
+                  ),
                 ));
       case Routes.gymFeaturesScreen:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                   create: (context) => getIt<CreateGymFeatureCubit>(),
-                  child:  const CreateGymFeaturesScreen(),
+                  child: CreateGymFeaturesScreen(
+                    gymId: settings.arguments as String,
+                  ),
                 ));
+      case Routes.membershipOfferScreen:
+        return MaterialPageRoute(
+            builder: (context) =>  BlocProvider(
+        create: (context) => getIt<MembershipOfferCubit>()..getGymIdFromSecureStorage(),
+        child: const MembershipOfferScreen(),
+      ));
+      // case Routes.selectPlanFeaturesScreen:
+      //   return MaterialPageRoute(
+      //       builder: (_) => BlocProvider.value(
+      //               value: context.read<MembershipOfferCubit>()
+      //                 ..getFeatures(settings.arguments as String),
+      //               child: const SelectPlanFeaturesScreen(),
+      //             ));
+
       default:
         return MaterialPageRoute(
             builder: (context) => Scaffold(

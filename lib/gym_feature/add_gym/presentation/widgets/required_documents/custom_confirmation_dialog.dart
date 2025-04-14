@@ -134,27 +134,31 @@ class CustomConfirmationDialog extends StatelessWidget {
                   Row(
                     spacing: 32.w,
                     children: [
-                      CustomGymButton(
-                        height: 30.h,
-                        showIcon: false,
-                        text: 'Edit',
-                        onPressed: () => Navigator.pop(context),
-                        isBackButton: true,
-                        foregroundColor: AppPallete.blackColor,
-                        backgroundColor: AppPallete.ofWhiteColor,
+                      Expanded(
+                        child: CustomGymButton(
+                          height: 30.h,
+                          showIcon: false,
+                          text: 'Edit',
+                          onPressed: () => Navigator.pop(context),
+                          isBackButton: true,
+                          foregroundColor: AppPallete.blackColor,
+                          backgroundColor: AppPallete.ofWhiteColor,
+                        ),
                       ),
-                      CustomGymButton(
-                        height: 30.h,
-                        showIcon: false,
-                        text: 'Continue',
-                        onPressed: () {
-                          if (cubit.state.isAccept! && cubit.state.isConfirm!) {
-                            cubit.uploadImages();
-                          } else {
-                            showSnackBar(context,
-                                "Please accept all conditions and confirm that the information is accurate");
-                          }
-                        },
+                      Expanded(
+                        child: CustomGymButton(
+                          height: 30.h,
+                          showIcon: false,
+                          text: 'Continue',
+                          onPressed: () {
+                            if (cubit.state.isAccept! && cubit.state.isConfirm!) {
+                              cubit.uploadImages();
+                            } else {
+                              showSnackBar(context,
+                                  "Please accept all conditions and confirm that the information is accurate");
+                            }
+                          },
+                        ),
                       ),
                     ],
                   ),

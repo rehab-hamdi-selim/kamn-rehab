@@ -42,7 +42,9 @@ class MyApp extends StatelessWidget {
             ..getStringValue('app_version'),
         ),
         //Salah's Cubit
-       
+        BlocProvider<GymFeaturesCubit>(
+          create: (context) => GymFeaturesCubit(),
+        )
       ],
       child: const ScreenUtilInit(
         designSize: Size(375, 812),
