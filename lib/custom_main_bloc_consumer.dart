@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/core/di/di.dart';
+import 'package:kamn/core/helpers/secure_storage_helper.dart';
 import 'package:kamn/core/routing/app_router.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/membership_offer/membership_offer_cubit.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/screens/add_gym_screen.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/screens/membership_offer_plan.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/screens/select_plan_features_screen.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/screens/membership_offer_screen.dart';
-import 'package:kamn/gym_feature/gyms/presentation/screen/track_gym_request_submission_screen.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/screens/track_gym_request_submission_screen.dart';
 import 'core/common/cubit/app_user/app_user_cubit.dart';
 import 'core/common/widget/main_loader.dart';
 
@@ -62,22 +63,22 @@ class CustomMainBlocConsumer extends StatelessWidget {
       //  return const MainLoader();
 
       //////////////////
-      return TrackSubmissionScreen();
+      // return TrackSubmissionScreen();
     }
     if (state.isNotInstalled()) {
-      return BlocProvider(
-        create: (context) => getIt<MembershipOfferCubit>(),
-        child: const MembershipOfferScreen(),
-      );
-      //  return BlocProvider(
-      //   create: (context) => getIt<AddGymCubit>()..getGymIdFromSecureStorage(),
-      //   child: const AddGymScreen(),
+      // return BlocProvider(
+      //   create: (context) => getIt<MembershipOfferCubit>()..getGymIdFromSecureStorage(),
+      //   child: const MembershipOfferScreen(),
       // );
+         return BlocProvider(
+        create: (context) => getIt<AddGymCubit>()..getGymIdFromSecureStorage(),
+        child: const AddGymScreen(),
+      );
+   
     }
     if (state.isLoggedIn() || state.isGettedData() || state.isSuccess()) {
       //  return const ChoosePlanScreen();
       //    return const ChoosePlanScreen();
-      return const MembershipOfferPlan();
       // return BlocProvider(
       //   create:(context)=> getIt<SelectCategoryCubit>()..getPlaygrounds(),
       //   child: const SelectCategoryScreen(),

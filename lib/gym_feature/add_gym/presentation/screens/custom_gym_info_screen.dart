@@ -24,17 +24,19 @@ class CustomGymInfoScreen extends StatelessWidget {
           const CustomGymLinksSection(),
           Row(
             children: [
-              CustomGymButton(onPressed: () {
-                context.read<AddGymCubit>().validateGymInfo();
-                if (context
-                        .read<AddGymCubit>()
-                        .gymInfoKey
-                        .currentState!
-                        .validate() ==
-                    true) {
-                  context.read<AddGymCubit>().goToNextPage();
-                }
-              }),
+              Expanded(
+                child: CustomGymButton(onPressed: () {
+                  context.read<AddGymCubit>().validateGymInfo();
+                  if (context
+                          .read<AddGymCubit>()
+                          .gymInfoKey
+                          .currentState!
+                          .validate() ==
+                      true) {
+                    context.read<AddGymCubit>().goToNextPage();
+                  }
+                }),
+              ),
             ],
           ),
         ],

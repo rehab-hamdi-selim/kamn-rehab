@@ -72,7 +72,7 @@ class _DaysOfWeekSelectorState extends State<DaysOfWeekSelector> {
                               width: 0.5,
                             ),
                           ),
-                          color: state.isSelected(day)
+                          color: state.isDaySelected(day)
                               ? AppPallete.lightGreenColor.withOpacity(0.3)
                               : AppPallete.whiteColor,
                         ),
@@ -84,13 +84,13 @@ class _DaysOfWeekSelectorState extends State<DaysOfWeekSelector> {
                               style: TextStyles
                                   .fontCircularSpotify12RegularDarkGreyColor
                                   .copyWith(
-                                color: state.isSelected(day)
+                                color: state.isDaySelected(day)
                                     ? AppPallete.greenColor
                                     : AppPallete.darkGrayColor,
                               ),
                             ),
                             verticalSpace(4),
-                            if (state.isSelected(day))
+                            if (state.isDaySelected(day))
                               Icon(
                                 Icons.check_circle,
                                 color: AppPallete.greenColor,

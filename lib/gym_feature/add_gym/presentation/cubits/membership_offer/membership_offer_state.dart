@@ -4,11 +4,18 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
+
 enum MembershipOfferStatus {
   initial,
   loading,
   success,
   error,
+  secureStorageSuccess,
+  secureStorageError,
+  successAddPlan,
+  succesGetFeatures
+  
 }
 
 extension MembershipOfferStateX on MembershipOfferState {
@@ -16,17 +23,29 @@ extension MembershipOfferStateX on MembershipOfferState {
   bool get isLoading => status == MembershipOfferStatus.loading;
   bool get isSuccess => status == MembershipOfferStatus.success;
   bool get isError => status == MembershipOfferStatus.error;
+  bool get isSecureStorageSuccess => status == MembershipOfferStatus.secureStorageSuccess;
+  bool get isSecureStorageError => status == MembershipOfferStatus.secureStorageError;
+  bool get isSuccessAddPlan => status == MembershipOfferStatus.successAddPlan;
+  bool get isSuccessGetFeatures => status == MembershipOfferStatus.succesGetFeatures;
 
-  bool isSelected(String day) {
+  bool isDaySelected(String day) {
     if (selectedDays == null) {
       return false;
     }
     return selectedDays!.contains(day);
   }
+  bool isFeatureSelected(Feature feature) {
+    if (selectedFeature == null) {
+      return false;
+    }
+    return selectedFeature!.contains(feature);
+  }
+
 }
 
 class MembershipOfferState {
   final MembershipOfferStatus status;
+  final String? gymId;
   final String? errorMessage;
   final String? offerName;
   final String? price;
@@ -42,9 +61,12 @@ class MembershipOfferState {
   final PlanDuration? planDuration;
   final DateTime? discountStartDate;
   final DateTime? discountEndDate;
+  final List<Feature>? features;
+  final List<Feature>? selectedFeature;
 
   const MembershipOfferState({
     required this.status,
+    this.gymId,
     this.errorMessage,
     this.offerName,
     this.price,
@@ -60,10 +82,13 @@ class MembershipOfferState {
     this.planDuration,
     this.discountStartDate,
     this.discountEndDate,
+    this.features,
+    this.selectedFeature,
   });
 
   MembershipOfferState copyWith({
     MembershipOfferStatus? status,
+    String? gymId,
     String? errorMessage,
     String? offerName,
     String? price,
@@ -79,9 +104,12 @@ class MembershipOfferState {
     PlanDuration? planDuration,
     DateTime? discountStartDate,
     DateTime? discountEndDate,
+    List<Feature>? features,
+    List<Feature>? selectedFeature,
   }) {
     return MembershipOfferState(
       status: status ?? this.status,
+      gymId: gymId ?? this.gymId,
       errorMessage: errorMessage ?? this.errorMessage,
       offerName: offerName ?? this.offerName,
       price: price ?? this.price,
@@ -97,12 +125,18 @@ class MembershipOfferState {
       planDuration: planDuration ?? this.planDuration,
       discountStartDate: discountStartDate ?? this.discountStartDate,
       discountEndDate: discountEndDate ?? this.discountEndDate,
+      features: features ?? this.features,
+      selectedFeature: selectedFeature ?? this.selectedFeature,
     );
   }
 
+  // @override
+  // String toString() {
+  //   return 'MembershipOfferState(status: $status, gymId: $gymId, errorMessage: $errorMessage, offerName: $offerName, price: $price, priceAfterDiscount: $priceAfterDiscount, notes: $notes, is24Hours: $is24Hours, is247Days: $is247Days, isDiscount: $isDiscount, selectedDays: $selectedDays, startTime: $startTime, endTime: $endTime, intervals: $intervals, planDuration: $planDuration, discountStartDate: $discountStartDate, discountEndDate: $discountEndDate, features: $features, selectedFeature: $selectedFeature)';
+  // }
   @override
   String toString() {
-    return 'MembershipOfferState(status: $status, errorMessage: $errorMessage, offerName: $offerName, price: $price, priceAfterDiscount: $priceAfterDiscount, notes: $notes, is24Hours: $is24Hours, is247Days: $is247Days, isDiscount: $isDiscount, selectedDays: $selectedDays, startTime: $startTime, endTime: $endTime, intervals: $intervals, planDuration: $planDuration, discountStartDate: $discountStartDate, discountEndDate: $discountEndDate)';
+    return 'MembershipOfferState(status: $status,)';
   }
 }
 class IntervalSelected {

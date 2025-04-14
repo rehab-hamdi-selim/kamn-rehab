@@ -1,40 +1,79 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kamn/core/helpers/secure_storage_helper.dart';
 import 'package:kamn/gym_feature/add_gym/data/repositories/add_gym_repository.dart';
-import 'package:kamn/gym_feature/add_gym/domain/models/membership_plan.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/membership_offer/membership_offer_state.dart';
+import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
 
 @injectable
 class MembershipOfferCubit extends Cubit<MembershipOfferState> {
   MembershipOfferCubit({required this.repository})
       : super(
-            const MembershipOfferState(status: MembershipOfferStatus.initial)){
-              discountPercentageController.addListener((){
-                if(discountPercentageController.text.isNotEmpty){
-                 refresh();
-                }
-
-              });
-            }
+            const MembershipOfferState(status: MembershipOfferStatus.initial)) {
+    discountPercentageController.addListener(() {
+      if (discountPercentageController.text.isNotEmpty) {
+        refresh();
+      }
+    });
+  }
 
   final AddGymRepository repository;
   final TextEditingController offerNameController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController freeMonthsController = TextEditingController();
-  final TextEditingController discountPercentageController = TextEditingController();
-  final TextEditingController priceAfterDiscountController = TextEditingController();
+  final TextEditingController discountPercentageController =
+      TextEditingController();
+  final TextEditingController priceAfterDiscountController =
+      TextEditingController();
   final TextEditingController notesController = TextEditingController();
-  
-  
-  void refresh(){
+
+  Future<void> getFeatures(String gymId) async {
+    emit(state.copyWith(status: MembershipOfferStatus.loading));
+    final result = await repository.getFeaturesOfSpecificGym(gymId);
+    result.fold(
+        (l) => emit(state.copyWith(status: MembershipOfferStatus.error)),
+        (r) => emit(state.copyWith(
+            status: MembershipOfferStatus.succesGetFeatures, features: r)));
+  }
+
+  Future<void> addPlan(String gymId) async {
     emit(state.copyWith(
-      status: state.status, 
+      status: MembershipOfferStatus.loading,
+    ));
+    final result = await repository.addGymPlan(gymId, createPlan());
+    result.fold(
+      (l) => emit(state.copyWith(status: MembershipOfferStatus.error)),
+      (r) => emit(state.copyWith(status: MembershipOfferStatus.successAddPlan)),
+    );
+  }
+
+  void addFeatureToPlan(Feature feature) {
+    final currentFeatures = state.selectedFeature ?? [];
+
+    if (currentFeatures.contains(feature)) {
+      emit(state.copyWith(
+        selectedFeature: currentFeatures.where((f) => f != feature).toList(),
+      ));
+    } else {
+      emit(state.copyWith(
+        selectedFeature: [...currentFeatures, feature],
+      ));
+    }
+  }
+
+  void refresh() {
+    emit(state.copyWith(
+      status: state.status,
     ));
   }
+
   void addInterval() {
     // Check if required fields are available
-    if (state.startTime == null || state.endTime == null || state.selectedDays == null || state.selectedDays!.isEmpty) {
+    if (state.startTime == null ||
+        state.endTime == null ||
+        state.selectedDays == null ||
+        state.selectedDays!.isEmpty) {
       return;
     }
 
@@ -45,7 +84,7 @@ class MembershipOfferCubit extends Cubit<MembershipOfferState> {
     );
 
     final currentIntervals = state.intervals ?? [];
-    
+
     emit(state.copyWith(
       intervals: [...currentIntervals, interval],
       // Reset selection after adding interval
@@ -112,45 +151,57 @@ class MembershipOfferCubit extends Cubit<MembershipOfferState> {
       status: MembershipOfferStatus.initial,
     ));
   }
+
   void updatedDiscountStartDate(DateTime date) {
     emit(state.copyWith(
       discountStartDate: date,
     ));
   }
+
   void updatedDiscountEndDate(DateTime date) {
     emit(state.copyWith(
       discountEndDate: date,
     ));
   }
+
   void updatePriceAfterDiscount(double price) {
-      priceAfterDiscountController.text = price.toStringAsFixed(2);
+    priceAfterDiscountController.text = price.toStringAsFixed(2);
+    emit(state.copyWith(
+      priceAfterDiscount: price.toString(),
+    ));
+  }
+
+  Plan createPlan() {
+    return Plan(
+      planName: offerNameController.text,
+      price: priceController.text,
+      freeMonths: freeMonthsController.text,
+      isDiscount: state.isDiscount ?? false,
+      discountPercentage: discountPercentageController.text,
+      priceAfterDiscount: priceAfterDiscountController.text,
+      discountStartDate: state.discountStartDate,
+      discountEndDate: state.discountEndDate,
+      planDuration: state.planDuration,
+      is247Days: state.is247Days ?? false,
+      is24Hours: state.is24Hours ?? false,
+      intervals: state.intervals,
+      notes: notesController.text,
+      features: state.selectedFeature ?? [], // Add selected features
+    );
+  }
+
+  Future<void> getGymIdFromSecureStorage() async {
+    final response = await SecureStorageHelper.getGymId();
+    return response.fold((error) {
       emit(state.copyWith(
-        priceAfterDiscount: price.toString(),
+        status: MembershipOfferStatus.secureStorageError,
+        errorMessage: "Failed to get gym ID: $error",
       ));
-    }
-  void submitMembershipPlan() {
-      final plan = MembershipPlan(
-        planName: offerNameController.text,
-        price: priceController.text,
-        freeMonths: freeMonthsController.text,
-        isDiscount: state.isDiscount ?? false,
-        discountPercentage: discountPercentageController.text,
-        priceAfterDiscount: priceAfterDiscountController.text,
-        discountStartDate: state.discountStartDate,
-        discountEndDate: state.discountEndDate,
-        planDuration: state.planDuration,
-        is247Days: state.is247Days ?? false,
-        is24Hours: state.is24Hours ?? false,
-        intervals: state.intervals,
-        notes: notesController.text,
-      );
-  
-      // Print the collected data
-      print(plan.toString());
-      
-      // TODO: Add your API call or database operation here
-    }
-  
+    },
+        (gymId) => emit(state.copyWith(
+            status: MembershipOfferStatus.secureStorageSuccess, gymId: gymId)));
+  }
+
   @override
   Future<void> close() {
     offerNameController.dispose();
@@ -159,7 +210,8 @@ class MembershipOfferCubit extends Cubit<MembershipOfferState> {
     discountPercentageController.dispose();
     priceAfterDiscountController.dispose();
     notesController.dispose();
-    discountPercentageController.removeListener((){});
+    discountPercentageController.removeListener(() {});
+    print("clossssssssssssssssssssssssssse");
     return super.close();
   }
 }

@@ -2,10 +2,8 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/core/const/firebase_collections.dart';
-import 'package:kamn/core/helpers/secure_storage_helper.dart';
 import 'package:kamn/core/utils/try_and_catch.dart';
 import 'package:kamn/gym_feature/add_gym/data/models/gym_request_model.dart';
 import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
@@ -16,7 +14,10 @@ abstract class AddGymRemoteDataSource {
       Map<String, List<File>> imagesMap, void Function(double) onProgress);
   Future<GymRequestModel?> getGymById(String gymId);
   Future<List<Map<String,dynamic>>> getAllGyms();
+  Future<List<Map<String,dynamic>>> getFeatureOfSpecificGym(String gymId);
   Future<void> addGymFeatures(String gymId, List<Feature> features);
+  Future<void> addGymPlan(String gymId,Plan plan);
+  
 }
 
 @Injectable(as: AddGymRemoteDataSource)
@@ -24,8 +25,7 @@ class AddGymRemoteDataSourceImpl implements AddGymRemoteDataSource {
   AddGymRemoteDataSourceImpl();
   final storage = FirebaseStorage.instance;
   final firestore = FirebaseFirestore.instance;
-  final _secureStorage = const FlutterSecureStorage();
-  static const String _gymIdKey = 'gym_id_key';
+  
   
   CollectionReference get _gymsCollection =>
      firestore.collection(FirebaseCollections.gym);
@@ -113,5 +113,25 @@ Future<void> addGymFeatures(String gymId, List<Feature> features) {
     } catch (e) {
       throw Exception('Failed to get gym by ID: $e');
     }
+  }
+  
+  @override
+  Future<List<Map<String, dynamic>>> getFeatureOfSpecificGym(String gymId) {
+    return executeTryAndCatchForDataLayer(() async {
+      final featuresCollection = _gymsCollection.doc(gymId).collection(FirebaseCollections.features);
+      final querySnapshot = await featuresCollection.get();
+      return querySnapshot.docs
+          .map((doc) => doc.data())
+          .toList();
+    });
+  }
+  
+  @override
+  Future<void> addGymPlan(String gymId, Plan plan) {
+    return executeTryAndCatchForDataLayer(() async {
+      final docRef = _gymsCollection.doc(gymId).collection(FirebaseCollections.plans).doc();
+      plan = plan.copyWith(planId: docRef.id);
+      await docRef.set(plan.toMap());
+    });
   }
 }

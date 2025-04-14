@@ -8,15 +8,17 @@ import 'package:kamn/gym_feature/add_gym/presentation/cubits/create_gym_feature/
 import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
 
 class FeatureBox extends StatelessWidget {
-  const FeatureBox({super.key, required this.feature});
+  const FeatureBox({super.key, required this.feature,required this.onTapClose,  this.isSelected=false});
   final Feature feature;
+  final void Function(Feature feature) onTapClose;
+  final bool? isSelected;
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<CreateGymFeatureCubit>();
+    // final cubit = context.read<CreateGymFeatureCubit>();
     return Container(
       decoration: BoxDecoration(
-          color: AppPallete.whiteColor,
+          color:isSelected!?AppPallete.lightGreenColor.withOpacity(.3): AppPallete.whiteColor,
           borderRadius: BorderRadius.circular(30.r)),
       padding: EdgeInsets.all(5.w),
       child: Row(
@@ -36,10 +38,10 @@ class FeatureBox extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onDoubleTap: () => cubit.removeFeature(feature),
+            onDoubleTap: () =>isSelected!?null: onTapClose(feature),
             child: Icon(
-              Icons.close,
-              color: AppPallete.blackColor,
+             isSelected!?Icons.check_circle: Icons.close,
+              color:isSelected!? AppPallete.greenColor: AppPallete.blackColor,
               size: 12.r,
             ),
           )

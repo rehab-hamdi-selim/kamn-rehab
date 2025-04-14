@@ -2,18 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/gym_feature/gyms/presentation/widgets/track_gym_request_submission_screen/add_mempership_offer_card.dart';
-import 'package:kamn/gym_feature/gyms/presentation/widgets/track_gym_request_submission_screen/go_to_services.dart';
 
 class SubmissionIncomplete extends StatelessWidget {
   const SubmissionIncomplete({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          SizedBox(
+    return   SizedBox(
             height: 180.h,
             width: double.infinity,
             child: Container(
@@ -93,11 +88,6 @@ class SubmissionIncomplete extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          const AddMempershipOfferCard(),
-        ],
-      ),
-      bottomNavigationBar:  GoToServices(gymId: "",),
-    );
+          );
   }
 }

@@ -147,6 +147,7 @@ class CreateGymFeaturesScreen extends StatelessWidget {
                                     .map((element) => FittedBox(
                                           child: FeatureBox(
                                             feature: element,
+                                            onTapClose: context.read<CreateGymFeatureCubit>().removeFeature,
                                           ),
                                         ))
                                     .toList(),

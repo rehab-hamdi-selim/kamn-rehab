@@ -15,17 +15,17 @@ class CustomAddGymBlocListener extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<AddGymCubit>();
     return BlocListener<AddGymCubit, AddGymState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state.isUploadImagesSuccess) {
-          cubit.addGymRequest(prepareGymData(context));
+         await cubit.addGymRequest(prepareGymData(context));
         }
         if (state.isAddGymSuccess) {
           print("success adding gym");
-          cubit.saveGymIdToSecureStorage(state.gymRequest?.id ?? "");
+        await  cubit.saveGymIdToSecureStorage(state.gymRequest?.id ?? "");
         }
         if (state.isSecureStorageSuccess) {
           if (state.gymId != null) {
-            Navigator.pushNamed(context, Routes.gymScreen);
+            Navigator.pushNamed(context, Routes.trackGymSubmission,arguments: state.gymId);
           }
         }
       },

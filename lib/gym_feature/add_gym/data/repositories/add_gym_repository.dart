@@ -15,6 +15,10 @@ abstract class AddGymRepository {
   Future<Either<Faliure, GymRequestModel?>> getGymById(String gymId);
   Future<Either<Faliure,List<GymRequestModel>>> getAllGyms();
   Future<Either<Faliure, void>> addGymFeatures(String gymId, List<Feature> features);
+  Future<Either<Faliure, List<Feature>>> getFeaturesOfSpecificGym(String gymId);
+    Future<Either<Faliure,void>> addGymPlan(String gymId,Plan plan);
+
+
 
 }
 
@@ -56,6 +60,21 @@ class AddGymRepositoryImpl implements AddGymRepository {
   Future<Either<Faliure, void>> addGymFeatures(String gymId, List<Feature> features) {
     return executeTryAndCatchForRepository(() async {
       return await dataSource.addGymFeatures(gymId, features);
+    });
+  }
+  
+  @override
+  Future<Either<Faliure, List<Feature>>> getFeaturesOfSpecificGym(String gymId) {
+    return executeTryAndCatchForRepository(() async {
+      final response= await dataSource.getFeatureOfSpecificGym(gymId);
+      return response.map((e) => Feature.fromMap(e)).toList();
+    });
+  }
+  
+  @override
+  Future<Either<Faliure, void>> addGymPlan(String gymId, Plan plan) {
+    return executeTryAndCatchForRepository(() async {
+      return await dataSource.addGymPlan(gymId, plan); 
     });
   }
 }
