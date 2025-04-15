@@ -15,7 +15,11 @@ import 'package:kamn/home_cooked__features/presentation/widgets/Food_details_inf
 
 class CustomSpecialityDropdownWithTags extends StatelessWidget {
   final List<String> mealOptions = [
-    "Keto", "Vegan", "Vegetarian", "Gluten Free", "Dairy Free"
+    "Keto",
+    "Vegan",
+    "Vegetarian",
+    "Gluten Free",
+    "Dairy Free"
   ];
   @override
   Widget build(BuildContext context) {
@@ -33,10 +37,10 @@ class CustomSpecialityDropdownWithTags extends StatelessWidget {
             isExpanded: true,
             value: null, // Keep value null to allow multiple selections
             onChanged: (newValue) {
-                  if (newValue != null) {
-                    context.read<MealCubit>().addSpecialtyTag(newValue);
-                  }
-                },
+              if (newValue != null) {
+                context.read<MealCubit>().addSpecialtyTag(newValue);
+              }
+            },
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.r),
@@ -50,13 +54,16 @@ class CustomSpecialityDropdownWithTags extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10.r),
                 borderSide: BorderSide(color: AppPallete.lgGreyColor, width: 2),
               ),
-              contentPadding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
             ),
-            hint: Text("Select Meal", style: TextStyles.fontCircularSpotify12GrayRegular),
+            hint: Text("Select Meal",
+                style: TextStyles.fontCircularSpotify12GrayRegular),
             items: mealOptions.map((String meal) {
               return DropdownMenuItem<String>(
                 value: meal,
-                child: Text(meal, style: TextStyles.fontCircularSpotify14GrayRegular),
+                child: Text(meal,
+                    style: TextStyles.fontCircularSpotify14GrayRegular),
               );
             }).toList(),
           ),
@@ -65,8 +72,9 @@ class CustomSpecialityDropdownWithTags extends StatelessWidget {
         SizedBox(height: 10.h),
 
         // Display selected tags
-            BlocBuilder<MealCubit, MealState>(
-          buildWhen: (previous, current) => previous.specialtyTags != current.specialtyTags,
+        BlocBuilder<MealCubit, MealState>(
+          buildWhen: (previous, current) =>
+              previous.specialtyTags != current.specialtyTags,
           builder: (context, state) {
             return Wrap(
               spacing: 8,
