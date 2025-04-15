@@ -21,6 +21,7 @@ class CustomTopRatedItemRightSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
@@ -36,7 +37,7 @@ class CustomTopRatedItemRightSection extends StatelessWidget {
         verticalSpace(4.h),
         Text(
           gymDescription,
-          style: TextStyles.fontCircularSpotify10LightRegular,
+          style: TextStyles.fontCircularSpotify10BlackRegular,
         ),
         ListTile(
           leading: const Icon(

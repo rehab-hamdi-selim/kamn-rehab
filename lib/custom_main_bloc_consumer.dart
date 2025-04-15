@@ -7,11 +7,10 @@ import 'package:kamn/core/routing/app_router.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/cubits/membership_offer/membership_offer_cubit.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/screens/add_gym_screen.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/screens/select_plan_features_screen.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/screens/membership_offer_screen.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/screens/track_gym_request_submission_screen.dart';
+import 'package:kamn/gym_feature/gyms/presentation/Cubit/gym_details/gymdetails_cubit.dart';
+import 'package:kamn/gym_feature/gyms/presentation/pages/gyms_screen.dart';
+
 import 'core/common/cubit/app_user/app_user_cubit.dart';
 import 'core/common/widget/main_loader.dart';
 
@@ -52,8 +51,11 @@ class CustomMainBlocConsumer extends StatelessWidget {
               scaffoldBackgroundColor: AppPallete.whiteColor,
             ),
             onGenerateRoute: AppRouter.generateRoute,
-            home: _buildHomeWidget(state, appUserCubit));
-        //home: _buildHomeWidget(state, appUserCubit));
+            home: BlocProvider(
+              create: (context) => getIt<GymDetailsCubit>(),
+              child: const GymsScreen(),
+            ));
+        // home: _buildHomeWidget(state, appUserCubit));
       },
     );
   }
@@ -70,11 +72,10 @@ class CustomMainBlocConsumer extends StatelessWidget {
       //   create: (context) => getIt<MembershipOfferCubit>()..getGymIdFromSecureStorage(),
       //   child: const MembershipOfferScreen(),
       // );
-         return BlocProvider(
+      return BlocProvider(
         create: (context) => getIt<AddGymCubit>()..getGymIdFromSecureStorage(),
         child: const AddGymScreen(),
       );
-   
     }
     if (state.isLoggedIn() || state.isGettedData() || state.isSuccess()) {
       //  return const ChoosePlanScreen();

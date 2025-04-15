@@ -6,34 +6,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/custom_main_bloc_consumer.dart';
-import 'package:kamn/init_dependencies.dart';
-import 'core/common/cubit/firebase_remote_config/firebase_remote_config_cubit.dart';
-
-// void main() {
-//   runApp(
-//     ScreenUtilInit(
-//       designSize: const Size(375, 812), // Adjust based on your design
-//       minTextAdapt: true,  // Ensures proper text scaling
-//       builder: (context, child) {
-//         return MaterialApp(
-//           debugShowCheckedModeBanner: false,
-//           home: SearchingUiScreen(),
-//         );
-//       },
-//     ),
-//   );
-// }
-
-// ignore_for_file: use_build_context_synchronously
-
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
-import 'package:kamn/core/di/di.dart';
-import 'package:kamn/custom_main_bloc_consumer.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/gym_features/cubit/gym_features_cubit.dart';
+import 'package:kamn/gym_feature/gyms/presentation/Cubit/Carousel/carousel_cubit.dart';
+import 'package:kamn/gym_feature/gyms/presentation/Cubit/gym_details/gymdetails_cubit.dart';
 import 'package:kamn/init_dependencies.dart';
+
+import 'core/common/cubit/firebase_remote_config/firebase_remote_config_cubit.dart';
 
 void main() async {
   await initDependencies();
@@ -52,6 +30,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => getIt<GymDetailsCubit>()),
+        BlocProvider(
+      create: (context) => CarouselPageCubit(),),
         BlocProvider(
           create: (context) => getIt<AppUserCubit>()..isFirstInstallation(),
         ),

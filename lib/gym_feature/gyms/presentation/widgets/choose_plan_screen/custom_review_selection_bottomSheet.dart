@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/theme/app_pallete.dart';
+import 'package:kamn/gym_feature/gyms/data/models/features_model.dart';
 import 'package:kamn/gym_feature/gyms/presentation/widgets/choose_plan_screen/custom_badge.dart';
 
 import 'failure_model.dart';
 
 class CustomReviewSelectionBottomSheet extends StatelessWidget {
-  final Map<Feature, int> selectedFeatures;
+  final Map<FeatureModel, int> selectedFeatures;
   final int totalPrice;
   final VoidCallback onEditSelection;
 
@@ -60,15 +62,15 @@ class CustomReviewSelectionBottomSheet extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "${feature.icon} ${feature.name}",
+                        " ${feature.name}",
                         style: TextStyle(
                             fontSize: 10.sp, // Use ScreenUtil for font size
                             color: Colors.black),
                       ),
                       SizedBox(width: 5.w), // Use ScreenUtil for width
                       CustomBadge(
-                        label: "${feature.price}${feature.unit}",
-                        color: feature.badgeColor,
+                        label: "${feature.price}/month",
+                        color: AppPallete.blueColor,
                       ),
                       SizedBox(width: 10.w), // Use ScreenUtil for width
                       Text(

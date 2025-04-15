@@ -25,6 +25,11 @@ import '../../gym_feature/add_gym/presentation/cubits/membership_offer/membershi
     as _i429;
 import '../../gym_feature/add_gym/presentation/cubits/track_submission/track_submission_cubit.dart'
     as _i667;
+import '../../gym_feature/gyms/data/datasources/gym_remote_data_source.dart'
+    as _i906;
+import '../../gym_feature/gyms/data/repo/gym_details_repo.dart' as _i1060;
+import '../../gym_feature/gyms/presentation/Cubit/gym_details/gymdetails_cubit.dart'
+    as _i1027;
 import '../../playground_feature/admin/data/data_source/analytics_data_source.dart'
     as _i366;
 import '../../playground_feature/admin/data/data_source/second_page_data_source.dart'
@@ -159,12 +164,17 @@ extension GetItInjectableX on _i174.GetIt {
             ));
     gh.factory<_i307.AuthRepository>(() => _i307.AuthRepositoryImpl(
         authDataSource: gh<_i774.AuthRemoteDataSource>()));
+    gh.factory<_i906.GymDetailsRemoteDataSource>(
+        () => _i906.GymDetailsRemoteDataSourceImpl());
     gh.factory<_i130.AnalyticsRepository>(() => _i130.AnalyticsRepositoryImpl(
         dataSource: gh<_i366.AnalyticsDataSource>()));
     gh.factory<_i126.AddGymRemoteDataSource>(
         () => _i126.AddGymRemoteDataSourceImpl());
     gh.factory<_i4.SecondPageDataSource>(() =>
         _i4.SecondPageDataSourceImpl(firestore: gh<_i158.FirestoreService>()));
+    gh.factory<_i1060.GymDetailsRepository>(() =>
+        _i1060.GymDetailsRepositoryImpl(
+            gh<_i906.GymDetailsRemoteDataSource>()));
     gh.factory<_i680.UserRemoteDataSource>(() => _i680.UserRemoteDataSourceImpl(
         firestoreService: gh<_i158.FirestoreService>()));
     gh.factory<_i317.SecondPageRepository>(() => _i317.SecondPageRepositoryImpl(
@@ -173,6 +183,8 @@ extension GetItInjectableX on _i174.GetIt {
           authRepository: gh<_i307.AuthRepository>(),
           signInViewModel: gh<_i89.SignInViewModel>(),
         ));
+    gh.factory<_i1027.GymDetailsCubit>(() =>
+        _i1027.GymDetailsCubit(repository: gh<_i1060.GymDetailsRepository>()));
     gh.factory<_i231.ServiceProvidersRepository>(() =>
         _i231.ServiceProvidersRepositoryImpl(
             dataSource: gh<_i348.ServiceProvidersRemoteDataSource>()));

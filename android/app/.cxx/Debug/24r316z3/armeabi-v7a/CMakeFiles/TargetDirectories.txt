@@ -1,0 +1,2 @@
+/Users/ok/training/kamn/android/app/.cxx/Debug/24r316z3/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/ok/training/kamn/android/app/.cxx/Debug/24r316z3/armeabi-v7a/CMakeFiles/rebuild_cache.dir

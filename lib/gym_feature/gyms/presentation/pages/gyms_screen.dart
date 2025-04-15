@@ -6,7 +6,7 @@ import 'package:kamn/gym_feature/gyms/presentation/widgets/gym/custom_gym_appbar
 import 'package:kamn/gym_feature/gyms/presentation/widgets/gym/custom_gym_fit_list.dart';
 import 'package:kamn/gym_feature/gyms/presentation/widgets/gym/custom_gym_head_title.dart';
 import 'package:kamn/gym_feature/gyms/presentation/widgets/gym/custom_gym_rated_list.dart';
-
+import 'package:kamn/gym_feature/gyms/presentation/widgets/gym/search_row.dart';
 class GymsScreen extends StatelessWidget {
   const GymsScreen({super.key});
 
@@ -18,9 +18,12 @@ class GymsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
           child: Column(
             children: [
+              const SearchRow(),
+              verticalSpace(20.h),
+
               CustomGymHeadTitle(
                 title: 'Find Your Fit',
                 onTap: () {},
@@ -32,7 +35,11 @@ class GymsScreen extends StatelessWidget {
                 title: 'Top Rated',
                 onTap: () {},
               ),
-              const CustomGymRatedList(),
+              Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: const Color(0xfff5f5f5)),
+                  child: const CustomGymRatedList()),
             ],
           ),
         ),
@@ -40,3 +47,4 @@ class GymsScreen extends StatelessWidget {
     );
   }
 }
+

@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/gym_feature/gyms/presentation/screen/choose_mempership_plan_screen.dart';
+import 'package:kamn/gym_feature/gyms/presentation/screen/choose_plan_screen.dart';
+
+class ButtonsRow extends StatelessWidget {
+  const ButtonsRow({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const ChoosePlanScreen()));
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black,
+              minimumSize: const Size(210, 55),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25),
+              ),
+            ),
+            child: Row(
+              spacing: 5,
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Make Your Plan",
+                    style: TextStyles.fontCircularSpotify12BlackMedium
+                        .copyWith(color: Colors.white, fontSize: 14)),
+                const Icon(Icons.add_circle_outline_outlined,
+                    color: Colors.white),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => ChooseMempershipPlanScreen()));
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black,
+              minimumSize: const Size(210, 55),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25),
+              ),
+            ),
+            child: Text("Select Offer",
+                style: TextStyles.fontCircularSpotify14AccentBlackMedium
+                    .copyWith(color: Colors.white)),
+          ),
+        ),
+      ],
+    );
+  }
+}
