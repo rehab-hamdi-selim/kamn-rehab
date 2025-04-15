@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/core/utils/custom_gym_app_bar.dart';
+import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
 import 'package:kamn/gym_feature/gyms/data/models/plan_model.dart';
 import 'package:kamn/gym_feature/gyms/presentation/widgets/choose_mempership_screen/build_mempership_card.dart';
 import 'package:kamn/gym_feature/gyms/presentation/widgets/choose_mempership_screen/custom_title_logo.dart';
@@ -90,7 +91,7 @@ class _ChooseMempershipPlanScreenState extends State<ChooseMempershipPlanScreen>
                       onPressed: () {
                         _showDialog(
                           context,
-                          PlanModel.fakeList[_tabController.index],
+                          
                         );
                       },
                       style: ElevatedButton.styleFrom(
@@ -114,7 +115,7 @@ class _ChooseMempershipPlanScreenState extends State<ChooseMempershipPlanScreen>
   }
 }
 
-Future<dynamic> _showDialog(BuildContext context, PlanModel plan) {
+Future<dynamic> _showDialog(BuildContext context) {
   return showDialog(
       context: context,
       builder: (context) {
@@ -133,7 +134,7 @@ Future<dynamic> _showDialog(BuildContext context, PlanModel plan) {
                 children: [
                   Text("Confirm Your Plan",
                       style: TextStyles.fontCircularSpotify20AccentBlackMedium),
-                  BuildMempershipCard(plan: plan),
+                  BuildMempershipCard(),
                   SizedBox(height: 16.h),
                   Row(
                     children: [

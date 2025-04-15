@@ -1,10 +1,8 @@
-
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-
-import 'package:kamn/gym_feature/add_gym/data/models/gym_request_model.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/cubits/membership_offer/membership_offer_state.dart';
+import 'package:flutter/material.dart';
 
 class GymModel {
   final String? id;
@@ -219,7 +217,7 @@ class Plan {
   final String? priceAfterDiscount;
   final DateTime? discountStartDate;
   final DateTime? discountEndDate;
-  final String? planId;  // Added planId
+  final String? planId; // Added planId
   final PlanDuration? planDuration;
   final bool? is247Days;
   final bool? is24Hours;
@@ -235,7 +233,7 @@ class Plan {
     this.priceAfterDiscount,
     this.discountStartDate,
     this.discountEndDate,
-    this.planId,  // Added to constructor
+    this.planId, // Added to constructor
     this.planDuration,
     required this.is247Days,
     required this.is24Hours,
@@ -253,7 +251,7 @@ class Plan {
     String? priceAfterDiscount,
     DateTime? discountStartDate,
     DateTime? discountEndDate,
-    String? planId,  // Added to copyWith
+    String? planId, // Added to copyWith
     PlanDuration? planDuration,
     bool? is247Days,
     bool? is24Hours,
@@ -270,7 +268,7 @@ class Plan {
       priceAfterDiscount: priceAfterDiscount ?? this.priceAfterDiscount,
       discountStartDate: discountStartDate ?? this.discountStartDate,
       discountEndDate: discountEndDate ?? this.discountEndDate,
-      planId: planId ?? this.planId,  // Added to copyWith return
+      planId: planId ?? this.planId, // Added to copyWith return
       planDuration: planDuration ?? this.planDuration,
       is247Days: is247Days ?? this.is247Days,
       is24Hours: is24Hours ?? this.is24Hours,
@@ -290,7 +288,7 @@ class Plan {
       'priceAfterDiscount': priceAfterDiscount,
       'discountStartDate': discountStartDate?.millisecondsSinceEpoch,
       'discountEndDate': discountEndDate?.millisecondsSinceEpoch,
-      'planId': planId,  // Added to toMap
+      'planId': planId, // Added to toMap
       'planDuration': planDuration?.displayName,
       'is247Days': is247Days,
       'is24Hours': is24Hours,
@@ -300,30 +298,46 @@ class Plan {
     };
   }
 
-  factory Plan.fromMap(Map<String, dynamic> map) {
+factory Plan.fromMap(Map<String, dynamic> map) {
     return Plan(
-      planName: map['planName'] as String,
-      price: map['price'] as String,
-      freeMonths: map['freeMonths'] != null ? map['freeMonths'] as String : null,
-      isDiscount: map['isDiscount'] as bool,
-      discountPercentage: map['discountPercentage'] != null ? map['discountPercentage'] as String : null,
-      priceAfterDiscount: map['priceAfterDiscount'] != null ? map['priceAfterDiscount'] as String : null,
-      discountStartDate: map['discountStartDate'] != null ? DateTime.fromMillisecondsSinceEpoch(map['discountStartDate'] as int) : null,
-      discountEndDate: map['discountEndDate'] != null ? DateTime.fromMillisecondsSinceEpoch(map['discountEndDate'] as int) : null,
-      planId: map['planId'] != null ? map['planId'] as String : null,  // Added to fromMap
-      planDuration: map['planDuration'] != null 
-          ? PlanDuration.values.firstWhere(
-              (duration) => duration.displayName == map['planDuration'] as String,
-              orElse: () => PlanDuration.monthly)
+      planName: map['planName']?.toString()?? '',
+      price: map['price']?.toString()?? '',
+      freeMonths: map['freeMonths'] ?.toString() ?? '',
+      isDiscount: map['isDiscount'] as bool? ?? false,
+      discountPercentage: map['discountPercentage']?.toString() ?? '',
+      priceAfterDiscount: map['priceAfterDiscount']?.toString() ?? '',
+      discountStartDate: map['discountStartDate'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['discountStartDate'] as int)
           : null,
-      is247Days: map['is247Days'] as bool,
-      is24Hours: map['is24Hours'] as bool,
-      intervals: map['intervals'] != null ? List<IntervalSelected>.from((map['intervals'] as List<int>).map<IntervalSelected?>((x) => IntervalSelected.fromMap(x as Map<String,dynamic>),),) : null,
-      notes: map['notes'] != null ? map['notes'] as String : null,
-      features: List<Feature>.from((map['features'] as List<int>).map<Feature>((x) => Feature.fromMap(x as Map<String,dynamic>),),),
+      discountEndDate: map['discountEndDate'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['discountEndDate'] as int)
+          : null,
+      planId: map['planId'] as String? ?? '',
+      planDuration: map['planDuration'] != null
+          ? PlanDuration.values.firstWhere(
+              (duration) => duration.displayName == map['planDuration'],
+              orElse: () => PlanDuration.monthly,
+            )
+          : null,
+      is247Days: map['is247Days'] as bool? ?? false,
+      is24Hours: map['is24Hours'] as bool? ?? false,
+      intervals: map['intervals'] != null
+          ? List<IntervalSelected>.from(
+              (map['intervals'] as List<dynamic>).map<IntervalSelected>(
+                (x) => IntervalSelected.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
+      notes: map['notes']?.toString() ?? '',
+      features: map['features'] != null
+          ? List<Feature>.from(
+              (map['features'] as List<dynamic>).map<Feature>(
+                (x) => Feature.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : [],
     );
   }
-
   String toJson() => json.encode(toMap());
 
   factory Plan.fromJson(String source) =>
@@ -337,40 +351,39 @@ class Plan {
   @override
   bool operator ==(covariant Plan other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.planName == planName &&
-      other.price == price &&
-      other.freeMonths == freeMonths &&
-      other.isDiscount == isDiscount &&
-      other.discountPercentage == discountPercentage &&
-      other.priceAfterDiscount == priceAfterDiscount &&
-      other.discountStartDate == discountStartDate &&
-      other.discountEndDate == discountEndDate &&
-      other.planDuration == planDuration &&
-      other.is247Days == is247Days &&
-      other.is24Hours == is24Hours &&
-      listEquals(other.intervals, intervals) &&
-      other.notes == notes &&
-      listEquals(other.features, features);
+
+    return other.planName == planName &&
+        other.price == price &&
+        other.freeMonths == freeMonths &&
+        other.isDiscount == isDiscount &&
+        other.discountPercentage == discountPercentage &&
+        other.priceAfterDiscount == priceAfterDiscount &&
+        other.discountStartDate == discountStartDate &&
+        other.discountEndDate == discountEndDate &&
+        other.planDuration == planDuration &&
+        other.is247Days == is247Days &&
+        other.is24Hours == is24Hours &&
+        listEquals(other.intervals, intervals) &&
+        other.notes == notes &&
+        listEquals(other.features, features);
   }
 
   @override
   int get hashCode {
     return planName.hashCode ^
-      price.hashCode ^
-      freeMonths.hashCode ^
-      isDiscount.hashCode ^
-      discountPercentage.hashCode ^
-      priceAfterDiscount.hashCode ^
-      discountStartDate.hashCode ^
-      discountEndDate.hashCode ^
-      planDuration.hashCode ^
-      is247Days.hashCode ^
-      is24Hours.hashCode ^
-      intervals.hashCode ^
-      notes.hashCode ^
-      features.hashCode;
+        price.hashCode ^
+        freeMonths.hashCode ^
+        isDiscount.hashCode ^
+        discountPercentage.hashCode ^
+        priceAfterDiscount.hashCode ^
+        discountStartDate.hashCode ^
+        discountEndDate.hashCode ^
+        planDuration.hashCode ^
+        is247Days.hashCode ^
+        is24Hours.hashCode ^
+        intervals.hashCode ^
+        notes.hashCode ^
+        features.hashCode;
   }
 }
 
@@ -647,4 +660,87 @@ class ScoialMediaLink {
 
   @override
   int get hashCode => name.hashCode ^ link.hashCode;
+}
+class IntervalSelected {
+  final TimeOfDay start;
+  final TimeOfDay end;
+  final List<String> days;
+
+  const IntervalSelected({
+    required this.start,
+    required this.end,
+    required this.days,
+  });
+
+  IntervalSelected copyWith({
+    TimeOfDay? start,
+    TimeOfDay? end,
+    List<String>? days,
+  }) {
+    return IntervalSelected(
+      start: start ?? this.start,
+      end: end ?? this.end,
+      days: days ?? this.days,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'start': '${start.hour}:${start.minute}',
+      'end': '${end.hour}:${end.minute}',
+      'days': days,
+    };
+  }
+
+  factory IntervalSelected.fromMap(Map<String, dynamic> map) {
+    final startParts = (map['start'] as String).split(':');
+    final endParts = (map['end'] as String).split(':');
+
+    return IntervalSelected(
+      start: TimeOfDay(
+          hour: int.parse(startParts[0]), minute: int.parse(startParts[1])),
+      end: TimeOfDay(
+          hour: int.parse(endParts[0]), minute: int.parse(endParts[1])),
+      days: List<String>.from(map['days'] as List),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory IntervalSelected.fromJson(String source) =>
+      IntervalSelected.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() => 'Interval(start: $start, end: $end, days: $days)';
+
+  @override
+  bool operator ==(covariant IntervalSelected other) {
+    if (identical(this, other)) return true;
+
+    return other.start == start &&
+        other.end == end &&
+        listEquals(other.days, days);
+  }
+
+  @override
+  int get hashCode => start.hashCode ^ end.hashCode ^ days.hashCode;
+}
+
+enum PlanDuration {
+  monthly,
+  annual,
+  quarterly,
+}
+
+extension PlanDurationX on PlanDuration {
+  String get displayName {
+    switch (this) {
+      case PlanDuration.monthly:
+        return 'Monthly';
+      case PlanDuration.annual:
+        return 'Annual';
+      case PlanDuration.quarterly:
+        return 'Quarterly';
+    }
+  }
 }

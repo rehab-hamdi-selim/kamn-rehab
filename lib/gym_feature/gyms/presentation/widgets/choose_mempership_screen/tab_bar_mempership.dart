@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/gym_feature/gyms/data/models/plan_model.dart';
+import 'package:kamn/gym_feature/gyms/presentation/Cubit/gym_details/gymdetails_cubit.dart';
+import 'package:kamn/gym_feature/gyms/presentation/Cubit/gym_details/gymdetails_state.dart';
 import 'package:kamn/gym_feature/gyms/presentation/widgets/choose_mempership_screen/build_mempership_card.dart';
 
 class TabBarApp extends StatelessWidget {
@@ -52,19 +54,22 @@ class TabBarApp extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(
-          child: TabBarView(
-            controller: tabController,
-            children: PlanModel.fakeList
-                .map(
-                  (element) => SingleChildScrollView(
-                    child: BuildMempershipCard(
-                      plan: element,
-                    ),
-                  ),
-                )
-                .toList(),
-          ),
+        BlocBuilder<GymDetailsCubit, GymDetailsState>(
+          builder: (context, state) {
+            return Expanded(
+              child: TabBarView(
+                controller: tabController,
+                children: state.gymPlans!
+                    .map(
+                      (element) => const SingleChildScrollView(
+                        child: BuildMempershipCard(
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
+            );
+          },
         ),
       ],
     );
