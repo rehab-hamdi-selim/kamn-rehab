@@ -51,11 +51,11 @@ class CustomMainBlocConsumer extends StatelessWidget {
               scaffoldBackgroundColor: AppPallete.whiteColor,
             ),
             onGenerateRoute: AppRouter.generateRoute,
-            // home: BlocProvider(
-            //   create: (context) => getIt<GymDetailsCubit>(),
-            //   child: const GymsScreen(),
-            // ));
-        home: _buildHomeWidget(state, appUserCubit));
+            home: BlocProvider(
+              create: (context) => getIt<GymDetailsCubit>(),
+              child: const GymsScreen(),
+            ));
+        // home: _buildHomeWidget(state, appUserCubit));
       },
     );
   }

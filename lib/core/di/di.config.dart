@@ -12,6 +12,7 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart' as _i627;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:kamn/gym_feature/gyms/presentation/Cubit/gym_details/gymdetails_cubit.dart' as _i111;
 
 import '../../gym_feature/add_gym/data/datasources/add_gym_remote_data_source.dart'
     as _i126;
@@ -28,8 +29,6 @@ import '../../gym_feature/add_gym/presentation/cubits/track_submission/track_sub
 import '../../gym_feature/gyms/data/datasources/gym_remote_data_source.dart'
     as _i906;
 import '../../gym_feature/gyms/data/repo/gym_details_repo.dart' as _i1060;
-import '../../gym_feature/gyms/presentation/cubit/gym_details/gymdetails_cubit.dart'
-    as _i983;
 import '../../playground_feature/admin/data/data_source/analytics_data_source.dart'
     as _i366;
 import '../../playground_feature/admin/data/data_source/second_page_data_source.dart'
@@ -166,6 +165,8 @@ extension GetItInjectableX on _i174.GetIt {
         authDataSource: gh<_i774.AuthRemoteDataSource>()));
     gh.factory<_i906.GymDetailsRemoteDataSource>(
         () => _i906.GymDetailsRemoteDataSourceImpl());
+    gh.factory<_i111.GymDetailsCubit>(
+        () => _i111.GymDetailsCubit(repository: gh<_i1060.GymDetailsRepository>()));
     gh.factory<_i130.AnalyticsRepository>(() => _i130.AnalyticsRepositoryImpl(
         dataSource: gh<_i366.AnalyticsDataSource>()));
     gh.factory<_i126.AddGymRemoteDataSource>(
@@ -183,8 +184,6 @@ extension GetItInjectableX on _i174.GetIt {
           authRepository: gh<_i307.AuthRepository>(),
           signInViewModel: gh<_i89.SignInViewModel>(),
         ));
-    gh.factory<_i983.GymDetailsCubit>(() =>
-        _i983.GymDetailsCubit(repository: gh<_i1060.GymDetailsRepository>()));
     gh.factory<_i231.ServiceProvidersRepository>(() =>
         _i231.ServiceProvidersRepositoryImpl(
             dataSource: gh<_i348.ServiceProvidersRemoteDataSource>()));
