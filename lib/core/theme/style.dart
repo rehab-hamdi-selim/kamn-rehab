@@ -529,6 +529,12 @@ class TextStyles {
       fontFamily: "CircularSpotify",
       color: AppPallete.whiteColor,
       fontSize: 10.h);
+  static TextStyle fontCircularSpotify10WhiteMedium = TextStyle(
+      // renamed from fontCircularSpotify10Medium
+      fontFamily: "CircularSpotify",
+      fontWeight: FontWeightHelper.medium,
+      color: AppPallete.whiteColor,
+      fontSize: 10.h);
   static TextStyle fontCircularSpotify10AccentBlackColorMedium = TextStyle(
       // renamed from fontCircularSpotify10Medium
       fontFamily: "CircularSpotify",
@@ -690,6 +696,12 @@ class TextStyles {
       fontFamily: "CircularSpotify",
       color: AppPallete.blackColor,
       fontWeight: FontWeightHelper.regular,
+      fontSize: 17.h);
+  static TextStyle fontCircularSpotify17Blackmedium = TextStyle(
+      // renamed from font16LightColorCircularSpotifyRegular
+      fontFamily: "CircularSpotify",
+      color: AppPallete.blackColor,
+      fontWeight: FontWeightHelper.medium,
       fontSize: 17.h);
   static TextStyle fontCircularSpotify18LightMedium = TextStyle(
       // renamed from fontCircularSpotify18Medium

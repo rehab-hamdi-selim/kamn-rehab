@@ -5,6 +5,7 @@ import 'package:kamn/home_cooked__features/data/models/meals_model.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_cubit.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/add_meal_pop_up_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/food_etails_info_screen.dart';
+import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_meal_list.dart';
 
 import '../../../core/common/widget/main_loader.dart';
 import '../cubits/meal_review_cubit/meal_state.dart';
@@ -58,42 +59,7 @@ class AddMealTest extends StatelessWidget {
                         ));
               },
               child: const Text("Add Meal")),
-
-              
-          BlocBuilder<MealCubit, MealState>(
-            builder: (context, state) {
-              if (state.isLoading || state.isInitial) {
-                return const Expanded(child: MainLoader());
-              }
-              if (state.myMeals == null ||
-                  state.myMeals!.isEmpty ||
-                  state.isError) {
-                return const Expanded(
-                  child: Center(
-                    child: Text(
-                      "Oops, No Meals Found",
-                      style: TextStyle(fontSize: 16, color: Colors.black),
-                    ),
-                  ),
-                );
-              }
-              return Expanded(
-                  child: ListView.builder(
-                itemCount: cubit.state.myMeals!.length,
-                itemBuilder: (context, index) {
-                  final meal = cubit.state.myMeals![index];
-                  return InkWell(
-                    onTap: () => navigateToEditMealScreen(meal),
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 200.h,
-                      child: Text(meal.name),
-                    ),
-                  );
-                },
-              ));
-            },
-          ),
+          CustomMealList(cubit: cubit),
         ],
       ),
     );

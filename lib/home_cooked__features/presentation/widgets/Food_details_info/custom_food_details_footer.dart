@@ -21,22 +21,25 @@ class CustomFoodDetailsFooter extends StatelessWidget {
           builder: (context) => ElevatedButton(
             onPressed: () {
               showModalBottomSheet(
-                    context: context,
-                    isScrollControlled:
-                        true, // Allows the bottom sheet to take full height
-                    shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(20.r)),
-                    ),
-                    builder: (context) => BlocProvider.value(
-                          value: cubit,
-                          child: EditMealPopUpScreen(),
-                        ));
+                  context: context,
+                  isScrollControlled:
+                      true, // Allows the bottom sheet to take full height
+                  shape: RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(20.r)),
+                  ),
+                  builder: (context) => BlocProvider.value(
+                        value: cubit,
+                        child: EditMealPopUpScreen(),
+                      ));
+
               showModalBottomSheet(
                 context: context,
-                isScrollControlled: true, // Allows the bottom sheet to take full height
+                isScrollControlled:
+                    true, // Allows the bottom sheet to take full height
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(20.r)),
                 ),
                 builder: (context) => EditMealPopUpScreen(),
               );

@@ -1,9 +1,11 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:kamn/home_cooked__features/data/models/delivery_model.dart';
+
+enum MealModelStatus { PENDING, ACCEPTED, REJECTED }
 
 class MealModel {
   String id;
@@ -16,6 +18,9 @@ class MealModel {
   List<dynamic> ingredients;
   String details;
   List<dynamic> imageUrls;
+  String homeCookId;
+  Timestamp? time; // ✅ NEW
+  MealModelStatus? status;
 
   MealModel({
     required this.id,
@@ -28,6 +33,9 @@ class MealModel {
     required this.ingredients,
     required this.details,
     required this.imageUrls,
+    required this.homeCookId,
+    this.time, // ✅ optional
+    this.status = MealModelStatus.PENDING, // ✅ optional
   });
 
   MealModel copyWith({
@@ -44,6 +52,8 @@ class MealModel {
     bool? isVerified,
     String? verificationStatus,
     String? orderOption,
+    String? homeCookId, // ✅ NEW
+    MealModelStatus? status,
   }) {
     return MealModel(
       id: id ?? this.id,
@@ -56,6 +66,8 @@ class MealModel {
       ingredients: ingredients ?? this.ingredients,
       details: details ?? this.details,
       imageUrls: imageUrls ?? this.imageUrls,
+      homeCookId: homeCookId ?? this.homeCookId, // ✅ NEW
+      status: status ?? this.status,
     );
   }
 
@@ -71,6 +83,9 @@ class MealModel {
       'ingredients': ingredients,
       'details': details,
       'imageUrls': imageUrls,
+      'homeCookId': homeCookId, // ✅ NEW
+      'time': time ?? FieldValue.serverTimestamp(), // ✅
+      'status': status.toString().split('.').last, // تحويل الـ enum إلى String
     };
   }
 
@@ -87,6 +102,13 @@ class MealModel {
       ingredients: List<dynamic>.from((map['ingredients'] as List<dynamic>)),
       details: map['details'] as String,
       imageUrls: List<dynamic>.from((map['imageUrls'] as List<dynamic>)),
+      homeCookId: map['homeCookId'] as String, // ✅ NEW
+      time: map['time'] as Timestamp?, // ✅
+
+      status: MealModelStatus.values.firstWhere(
+        (e) => e.toString().split('.').last == map['status'],
+        orElse: () => MealModelStatus.PENDING,
+      ),
     );
   }
 
@@ -113,7 +135,9 @@ class MealModel {
         listEquals(other.specialtyTags, specialtyTags) &&
         listEquals(other.ingredients, ingredients) &&
         other.details == details &&
-        listEquals(other.imageUrls, imageUrls);
+        listEquals(other.imageUrls, imageUrls) &&
+        other.status == status &&
+        other.homeCookId == homeCookId; // ✅ NEW
   }
 
   @override
@@ -127,7 +151,9 @@ class MealModel {
         specialtyTags.hashCode ^
         ingredients.hashCode ^
         details.hashCode ^
-        imageUrls.hashCode;
+        imageUrls.hashCode ^
+        status.hashCode ^
+        homeCookId.hashCode; // ✅ NEW;
   }
 }
 
@@ -153,6 +179,7 @@ List<MealModel> fakeMeals = [
           "assets/images/meal_info_img.png"
           "assets/images/meal_info_img.png"
     ],
+    homeCookId: 'u0cBRLRyHcppREpHYdNf', // Added homeCookId
   ),
   MealModel(
     id: '2',
@@ -169,6 +196,7 @@ List<MealModel> fakeMeals = [
       'https://example.com/images/quinoa_salad_1.jpg',
       'https://example.com/images/quinoa_salad_2.jpg'
     ],
+    homeCookId: 'u0cBRLRyHcppREpHYdNf', // Added homeCookId
   ),
   MealModel(
     id: '3',
@@ -185,5 +213,6 @@ List<MealModel> fakeMeals = [
       'https://example.com/images/detox_smoothie_1.jpg',
       'https://example.com/images/detox_smoothie_2.jpg'
     ],
+    homeCookId: 'u0cBRLRyHcppREpHYdNf', // Added homeCookId
   ),
 ];
