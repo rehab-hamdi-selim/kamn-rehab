@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:kamn/home_cooked__features/data/models/home_cook_model_test.dart';
 import 'package:kamn/home_cooked__features/data/models/meals_model.dart';
 
@@ -15,6 +17,14 @@ enum MealStatus {
   addDeliveryOptionLoading,
   addDeliveryOptionSuccess,
   addDeliveryOptionError,
+  deleteMealLoading,
+  deleteMealSuccess,
+  deleteMealError,
+
+  mealImageSuccess,
+  mealImageError,
+  mealImageLoading,
+  mealImagePicked,
 }
 
 ///
@@ -36,6 +46,15 @@ extension MealReviewExtension on MealState {
       state == MealStatus.addDeliveryOptionSuccess;
   bool get isAddDeliveryOptionError =>
       state == MealStatus.addDeliveryOptionError;
+
+  bool get isDeleteMealLoading => state == MealStatus.deleteMealLoading;
+  bool get isDeleteMealSuccess => state == MealStatus.deleteMealSuccess;
+  bool get isDeleteMealError => state == MealStatus.deleteMealError;
+
+  bool get isMealImageLoading => state == MealStatus.mealImageLoading;
+  bool get isMealImageSuccess => state == MealStatus.mealImageSuccess;
+  bool get isMealImageError => state == MealStatus.mealImageError;
+  bool get isMealImagePicked => state == MealStatus.mealImagePicked;
 }
 
 class MealState {
@@ -51,22 +70,23 @@ class MealState {
   List<String> specialtyTags = [];
   List<String> ingredients = [];
   List<String> selectedIngredients = [];
+  List<File?> mealImages;
   //  final Map<String, List<PlaygroundModel>>? playgroundsMap;
 
-  MealState({
-    required this.state,
-    this.error,
-    this.meal,
-    this.selectedMeal,
-    this.myMeals,
-    this.homeCookModel,
-    this.isPickupSelected = false,
-    this.isDeliverySelected = false,
-    this.selectedMealType = "Breakfast",
-    this.specialtyTags = const [],
-    this.ingredients = const [],
-    this.selectedIngredients = const [],
-  });
+  MealState(
+      {required this.state,
+      this.error,
+      this.meal,
+      this.selectedMeal,
+      this.myMeals,
+      this.homeCookModel,
+      this.isPickupSelected = false,
+      this.isDeliverySelected = false,
+      this.selectedMealType = "Breakfast",
+      this.specialtyTags = const [],
+      this.ingredients = const [],
+      this.selectedIngredients = const [],
+      this.mealImages = const [null, null, null]});
 
   MealState copyWith({
     MealStatus? state,
@@ -81,6 +101,7 @@ class MealState {
     List<MealModel>? myMeals,
     List<String>? ingredients,
     List<String>? selectedIngredients,
+    List<File?>? mealImages,
     //  Map<String, List<PlaygroundModel>>? playgroundsMap,
   }) {
     return MealState(
@@ -96,6 +117,7 @@ class MealState {
       specialtyTags: specialtyTags ?? this.specialtyTags,
       ingredients: ingredients ?? this.ingredients,
       selectedIngredients: selectedIngredients ?? this.selectedIngredients,
+      mealImages: mealImages ?? this.mealImages,
 
       // playgroundsMap: playgroundsMap ?? this.playgroundsMap,
     );
@@ -122,6 +144,7 @@ class MealState {
         other.ingredients == ingredients &&
         other.selectedIngredients == selectedIngredients &&
         other.isPickupSelected == isPickupSelected &&
+        other.mealImages == mealImages &&
         other.isDeliverySelected == isDeliverySelected;
   }
 
@@ -137,7 +160,7 @@ class MealState {
         specialtyTags.hashCode ^
         ingredients.hashCode ^
         selectedIngredients.hashCode ^
-        isPickupSelected.hashCode ^
+        mealImages.hashCode ^
         isDeliverySelected.hashCode;
   }
 }

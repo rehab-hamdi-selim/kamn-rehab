@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -60,7 +61,7 @@ class AddMealTest extends StatelessWidget {
               },
               child: const Text("Add Meal")),
 
-              
+
           BlocBuilder<MealCubit, MealState>(
             builder: (context, state) {
               if (state.isLoading || state.isInitial) {

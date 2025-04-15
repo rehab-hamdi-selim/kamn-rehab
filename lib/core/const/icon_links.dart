@@ -40,4 +40,10 @@ class IconLinks {
   static const String trashBin = 'assets/icons/TrashBin.svg';
   static const String favorite = 'assets/icons/favorite_meal_info_icon.svg';
   static const String defaultUserImage = "assets/icons/default_user_image.svg";
+
+  //crud
+  static const String trashBinVector = 'assets/icons/TrashBin2.svg';
+  static const String penEdit = 'assets/icons/Pen.svg';
+
+  static const String durationCook = 'assets/icons/cookingdura.svg';
 }

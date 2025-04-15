@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -193,8 +194,9 @@ class _AddMealPopUpScreenState extends State<AddMealPopUpScreen> {
               return state.isAddMealLoading?CircularProgressIndicator():
               CustomSaveButton(
                   onPressed: () {
-                    if (mealCubit.addMealKey.currentState!.validate()) {
-                      MealModel mealmodel = MealModel(
+                    print("homeeeeeeid :${mealCubit.state.homeCookModel!.id!}");if (mealCubit.addMealKey.currentState!.validate()) {
+                      MealModel mealmodel = MealModel(// date: DateTime.now(),
+                    homeCookId: mealCubit.state.homeCookModel!.id!,
                         name: mealCubit.mealNameController.text,
                         type: context.read<MealCubit>().state.selectedMealType,
                         prepTime: int.parse(mealCubit.prepController.text),

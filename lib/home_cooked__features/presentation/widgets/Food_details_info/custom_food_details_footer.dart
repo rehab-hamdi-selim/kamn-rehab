@@ -31,7 +31,7 @@ class CustomFoodDetailsFooter extends StatelessWidget {
                           value: cubit,
                           child: EditMealPopUpScreen(),
                         ));
-           
+
             },
             style: ElevatedButton.styleFrom(
               fixedSize: Size(160.w, 50.h),
@@ -53,7 +53,7 @@ class CustomFoodDetailsFooter extends StatelessWidget {
               ],
             ),
           ),
-        
+
         Spacer(),
         ElevatedButton(
           onPressed: () {},

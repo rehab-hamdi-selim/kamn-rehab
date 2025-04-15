@@ -8,7 +8,7 @@ import 'package:kamn/home_cooked__features/data/models/delivery_model.dart';
 
 import '../../../core/const/services_status_enum.dart';
 
-enum CurrentStatus { pending, accepted, rejected }
+enum CurrentStatus { PENDING, ACCEPTED, REJECTED }
 
 class HomeCookModel {
   final String? id;
@@ -33,6 +33,8 @@ class HomeCookModel {
   final String? buildingNumber;
   final String? apartment;
   final DeliveryModel? delivery;
+  CurrentStatus? status;
+
   HomeCookModel({
     this.id,
     this.name,
@@ -56,6 +58,7 @@ class HomeCookModel {
     this.buildingNumber,
     this.apartment,
     this.delivery,
+    this.status = CurrentStatus.PENDING, // ✅ optional
   });
 
   HomeCookModel copyWith({
@@ -81,6 +84,7 @@ class HomeCookModel {
     String? buildingNumber,
     String? apartment,
     DeliveryModel? delivery,
+    CurrentStatus? status,
   }) {
     return HomeCookModel(
       id: id ?? this.id,
@@ -107,6 +111,7 @@ class HomeCookModel {
       buildingNumber: buildingNumber ?? this.buildingNumber,
       apartment: apartment ?? this.apartment,
       delivery: delivery ?? this.delivery,
+      status: status ?? this.status,
     );
   }
 
@@ -139,6 +144,9 @@ class HomeCookModel {
     if (buildingNumber != null) map['buildingNumber'] = buildingNumber;
     if (apartment != null) map['apartment'] = apartment;
     if (delivery != null) map['delivery'] = delivery?.toMap();
+    if (status != null)
+      map['status'] =
+          status.toString().split('.').last; // تحويل الـ enum إلى String
     return map;
   }
 
@@ -181,6 +189,12 @@ class HomeCookModel {
       delivery: map['delivery'] != null
           ? DeliveryModel.fromMap(map['delivery'] as Map<String, dynamic>)
           : null,
+      status: map['status'] != null
+          ? CurrentStatus.values.firstWhere(
+              (e) => e.toString().split('.').last == map['status'],
+              orElse: () => CurrentStatus.PENDING,
+            )
+          : CurrentStatus.PENDING,
     );
   }
 
