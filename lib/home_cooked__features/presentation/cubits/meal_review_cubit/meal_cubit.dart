@@ -3,11 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kamn/core/utils/image_picker.dart';
-import 'package:kamn/healthy_food_features/data/models/category_data.dart';
 import 'package:kamn/home_cooked__features/data/models/home_cook_model_test.dart';
 import 'package:kamn/home_cooked__features/data/models/meals_model.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_state.dart';
@@ -257,14 +254,6 @@ class MealCubit extends Cubit<MealState> {
     ));
   }
 
-  void addMeal(MealModel mealModel) async {
-    final res = await homeCookRepository.addMealModel(
-        mealModel, "u0cBRLRyHcppREpHYdNf");
-    res.fold(
-        (l) => emit(
-            state.copyWith(state: MealStatus.addMealError, error: l.erorr)),
-        (r) {emit(state.copyWith(state: MealStatus.addMealSuccess,myMeals: [...state.myMeals!,mealModel] ));} );
-  }
 ///////
 
   void updateMeal(MealModel mealModel) async {
