@@ -8,6 +8,7 @@ abstract class GymDetailsRemoteDataSource {
   Future<GymDetailsModel?> getGymById(String gymId);
   Future<List<GymDetailsModel>> getAllGyms();
   Future<List<Map<String, dynamic>>> getGymFeatures(String gymId);
+  Future<List<Map<String, dynamic>>> getGymPlans(String gymId);
 }
 
 @Injectable(as: GymDetailsRemoteDataSource)
@@ -67,6 +68,16 @@ class GymDetailsRemoteDataSourceImpl implements GymDetailsRemoteDataSource {
           await _gymsCollection.doc(gymId).collection('features').get();
       print("featuresssss${featuresSnapshot.docs.length} features found");
       return featuresSnapshot.docs.map((doc) => doc.data()).toList();
+    });
+  }
+  
+  @override
+  Future<List<Map<String, dynamic>>> getGymPlans(String gymId) {
+   return executeTryAndCatchForDataLayer(() async {
+      final plansSnapshot =
+          await _gymsCollection.doc(gymId).collection('plans').get();
+      print("plans${plansSnapshot.docs.length} plans found");
+      return plansSnapshot.docs.map((doc) => doc.data()).toList();
     });
   }
 }

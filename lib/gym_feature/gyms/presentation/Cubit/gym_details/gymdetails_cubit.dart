@@ -138,6 +138,22 @@ class GymDetailsCubit extends Cubit<GymDetailsState> {
       return sum + (price * entry.value);
     });
   }
+  Future<void> getGymPlans(String gymId) async {
+    emit(state.copyWith(state: GymDetailsStatus.plansLoading));
+
+    final plans = await repository.getGymPlans(gymId);
+    plans.fold((l) {
+      emit(state.copyWith(
+        state: GymDetailsStatus.plansError,
+        errorMessage: l.toString(),
+      ));
+    }, (r) {
+      emit(state.copyWith(
+        state: GymDetailsStatus.plansSuccess,
+        gymPlans: r,
+      ));
+    });
+  }
 
   void reset() {
     emit(state.copyWith(
