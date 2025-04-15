@@ -32,26 +32,7 @@ class MealCubit extends Cubit<MealState> {
   final deliveryformKey = GlobalKey<FormState>();
   final ImagePicker _picker = ImagePicker();
 
-  // Future<void> pickMealImage(int index) async {
-  //   final image = await pickImage();
-  //   if (image != null) {
-  //     _mealImages.add(image);
-  //     emit(state.copyWith(
-  //         state: MealStatus.mealImagePicked,
-  //         mealImages: List.from(_mealImages)));
-  //   }
-  // }
-
   Future<void> pickImageMeal(int index) async {
-    // final File? image =
-    //     await pickImage(); // your helper that picks & compresses
-
-    // if (image != null) {
-    //   _mealImages[index] = image;
-
-    //   emit(state.copyWith(state: MealStatus.mealImagePicked,mealImages: List.from(_mealImages)));
-    // }
-
     final XFile? pickedFile =
         await _picker.pickImage(source: ImageSource.gallery);
 
@@ -68,15 +49,6 @@ class MealCubit extends Cubit<MealState> {
       print("picker is null");
     }
   }
-  // Future<void> pickImageMeal(int index) async {
-  //    final image = await pickImage();
-  //  // final XFile? pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-  //   if (pickedFile != null) {
-  //     final newImages = List<File?>.from(state.images);
-  //     newImages[index] = File(pickedFile.path);
-  //     emit(state.copyWith(images: newImages));
-  //   }
-  // }
 
   Future<void> uploadMealImages() async {
     emit(state.copyWith(
@@ -91,29 +63,147 @@ class MealCubit extends Cubit<MealState> {
       //  // uploadProgress: progress,
     });
 
-    uploadResponse.fold((error) {
+    uploadResponse.fold(
+      (error) {
+        emit(state.copyWith(
+          state: MealStatus.mealImageError,
+          error: error.erorr,
+        ));
+
+        print("errorimage is:${error.erorr}");
+
+        return null;
+      },
+      (newUrls) {
+        // final oldUrls = state.selectedMeal?.imageUrls ?? [];
+
+        final List oldUrls = (state.selectedMeal?.imageUrls != null &&
+                state.selectedMeal!.imageUrls.isNotEmpty)
+            ? state.selectedMeal!.imageUrls
+                .where((img) => img.trim().isNotEmpty)
+                .toList()
+            : [];
+
+        // Combine old and new URLs
+        final updatedUrls = [...oldUrls, ...newUrls];
+
+        // Update the meal with the combined image URLs
+        updateimgMeal(state.selectedMeal!.copyWith(
+          imageUrls: updatedUrls,
+        ));
+
+        print("updatedmeal is:${state.selectedMeal}");
+      },
+    );
+  }
+
+  void getMeals(String homeCookId) async {
+    emit(state.copyWith(state: MealStatus.loading));
+    final result = await homeCookRepository.getMeals(homeCookId);
+    result.fold((error) {
       emit(state.copyWith(
-        state: MealStatus.mealImageError,
+        state: MealStatus.error,
         error: error.erorr,
       ));
+    }, (myMeal) {
+      emit(state.copyWith(
+          state: MealStatus.success, myMeals: myMeal, selectedMeal: myMeal[0]));
+    });
 
-      print("errorimage is:${error.erorr}");
-
-      return null;
-    },
-        (urls) => {
-              updateMeal(state.selectedMeal!.copyWith(
-                imageUrls: urls,
-              )),
-              print("updatedmeal is:${state.selectedMeal}"),
-            }
-        // emit(state.copyWith(
-        //       state: AddHomeCookStatus.uploadImagesSuccess,
-        //       imagesUrlMap: urls,
-        //     ))
-
-        );
+    // emit(state.copyWith(state: MealStatus.loading));
+    // emit(state.copyWith(
+    //   state: MealStatus.success,
+    //   myMeals: fakeMeals,
+    //   selectedMeal: fakeMeals[0],
+    // ));
+    // homeCookRepository.getMealsStream(homeCookId).listen((result) {
+    //   result.fold(
+    //     (error) =>
+    //         emit(state.copyWith(state: MealStatus.error, error: error.erorr)),
+    //     (meals) => emit(state.copyWith(
+    //       state: MealStatus.success,
+    //       myMeals: meals,
+    //       selectedMeal: meals[0],
+    //     )),
+    //   );
+    // });
   }
+
+  void addMeal(MealModel mealModel) async {
+    final res = await homeCookRepository.addMealModel(
+        mealModel, "u0cBRLRyHcppREpHYdNf");
+    res.fold(
+      (l) =>
+          emit(state.copyWith(state: MealStatus.addMealError, error: l.erorr)),
+      (r) {
+        // final List<MealModel> updatedMeals =
+        //     List<MealModel>.from(state.myMeals ?? [])..add(mealModel);
+
+        final List<MealModel> updatedMeals =
+            List<MealModel>.from(state.myMeals ?? []);
+        updatedMeals.insert(0, mealModel); // insert at index 0 (beginning)
+
+        emit(state.copyWith(
+          state: MealStatus.addMealSuccess,
+          selectedMeal: mealModel,
+          myMeals: updatedMeals,
+        ));
+      },
+    );
+  }
+
+  void deleteMeal(MealModel mealModel) async {
+    final res =
+        await homeCookRepository.deleteMeal(mealModel, "u0cBRLRyHcppREpHYdNf");
+    // print("deleteMeal");
+
+    res.fold(
+        (l) => emit(
+            state.copyWith(state: MealStatus.deleteMealError, error: l.erorr)),
+        (r) {
+      emit(state.copyWith(
+          state: MealStatus.deleteMealSuccess,
+          myMeals: state.myMeals
+              ?.where((meal) => meal.id != mealModel.id)
+              .toList()));
+    });
+  }
+
+  void updateimgMeal(MealModel mealModel) async {
+    final res = await homeCookRepository.updateMealModel(
+        mealModel, "u0cBRLRyHcppREpHYdNf");
+    res.fold(
+        (l) => emit(
+            state.copyWith(state: MealStatus.updateMealError, error: l.erorr)),
+        (r) {
+      final List<MealModel> updatedMeals = (state.myMeals ?? []).map((meal) {
+        return meal.id == mealModel.id ? mealModel : meal;
+      }).toList();
+      emit(state.copyWith(
+        state: MealStatus.updateMealSuccess,
+        selectedMeal: mealModel,
+        myMeals: updatedMeals,
+        mealImages: [null, null, null],
+      ));
+      //  selectNewdMeal(mealModel);
+    });
+  }
+
+  void selectNewdMeal(MealModel mealModel) {
+    emit(state.copyWith(
+      selectedMeal: mealModel,
+      mealImages: [null, null, null],
+      // selectedIngredients: List<String>.from(mealModel.ingredients),
+    ));
+  }
+
+  void resetFlags() {
+    emit(state.copyWith(
+      state: MealStatus.success,
+    ));
+  }
+
+/////////////////
 
   Future<void> uploadDeliveryOption(HomeCookModel homeCookModel) async {
     emit(state.copyWith(state: MealStatus.loading));
@@ -140,47 +230,6 @@ class MealCubit extends Cubit<MealState> {
     emit(state.copyWith(isDeliverySelected: isDeliverySelected));
   }
 
-  void getMeals(String homeCookId) {
-    // emit(state.copyWith(state: MealStatus.loading));
-    // final result = await homeCookRepository.getMeals(homeCookId);
-    // result.fold((error) {
-    //   emit(state.copyWith(
-    //     state: MealStatus.error,
-    //     error: error.erorr,
-    //   ));
-    // },
-    // (myMeal) {
-    //   emit(state.copyWith(
-    //       state: MealStatus.success, myMeals: myMeal, selectedMeal: myMeal[0]));
-    // });
-
-///////
-    // emit(state.copyWith(state: MealStatus.loading));
-
-    // homeCookRepository.getMealsStream().listen((meals) {
-    //   emit(state.copyWith(
-    //     state: MealStatus.success,
-    //     myMeals: meals.map((e) => MealModel.fromMap(e)).toList(),
-    //     selectedMeal: meals.isNotEmpty ? MealModel.fromMap(meals.first) : null,
-    //   ));
-    // }, onError: (error) {
-    //   emit(state.copyWith(
-    //     state: MealStatus.error,
-    //     error: error.toString(),
-    //   ));
-    // });
-
-    emit(state.copyWith(state: MealStatus.loading));
-    homeCookRepository.getMealsStream(homeCookId).listen((result) {
-      result.fold(
-        (error) =>
-            emit(state.copyWith(state: MealStatus.error, error: error.erorr)),
-        (meals) => emit(state.copyWith(
-            state: MealStatus.success, myMeals: meals, selectedMeal: meals[0])),
-      );
-    });
-  }
-
   void initServiceProviderHomeCook(HomeCookModel homeCookModel) {
     emit(state.copyWith(
       homeCookModel: homeCookModel,
@@ -192,30 +241,6 @@ class MealCubit extends Cubit<MealState> {
       selectedMeal: mealModel,
       selectedIngredients: List<String>.from(mealModel.ingredients),
     ));
-  }
-
-  void addMeal(MealModel mealModel) async {
-    final res = await homeCookRepository.addMealModel(
-        mealModel, "u0cBRLRyHcppREpHYdNf");
-    res.fold(
-        (l) => emit(
-            state.copyWith(state: MealStatus.addMealError, error: l.erorr)),
-        (r) => emit(state.copyWith(
-              state: MealStatus.addMealSuccess,
-            )));
-  }
-
-  //////
-
-  void deleteMeal(MealModel mealModel) async {
-    final res =
-        await homeCookRepository.deleteMeal(mealModel, "u0cBRLRyHcppREpHYdNf");
-    // print("deleteMeal");
-
-    res.fold(
-        (l) => emit(
-            state.copyWith(state: MealStatus.deleteMealError, error: l.erorr)),
-        (r) => emit(state.copyWith(state: MealStatus.deleteMealSuccess)));
   }
 
 ///////

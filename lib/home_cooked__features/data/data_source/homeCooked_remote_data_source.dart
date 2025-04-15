@@ -125,7 +125,7 @@ class AddHomeCookRemoteDataSourceImpl implements AddHomeCookRemoteDataSource {
 ////////////////
   @override
   Future<List<Map<String, dynamic>>> getMeals(String homeCookId) async {
-    var docRef = getMealsCollection();
+    var docRef = getMealsCollection().orderBy('time', descending: true);
     //.orderBy('date', descending: true);
     //var docSnap = await docRef.snapshots().listen((f) {});
     var docSnap = await docRef.get();

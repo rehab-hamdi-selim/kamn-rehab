@@ -38,6 +38,7 @@ class CustomContainerMealImages extends StatelessWidget {
     return SingleChildScrollView(
       child: CustomFrame(
         width: double.infinity,
+        // heigh: 555.h,
         content:
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text('Meal Images',
@@ -52,15 +53,66 @@ class CustomContainerMealImages extends StatelessWidget {
             child: BlocBuilder<MealCubit, MealState>(
               builder: (context, state) {
                 List<File?> _images = state.mealImages;
+                // List imageUrls = state.selectedMeal?.imageUrls ;
                 print("imaaaag: ${_images}");
 
                 return ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  itemCount: _images.length,
+                  itemCount: 3,
+                  //    _images.length,
                   separatorBuilder: (context, index) => SizedBox(width: 16.w),
                   itemBuilder: (context, index) {
+                    final File? localImage = state.mealImages.length > index
+                        ? state.mealImages[index]
+                        : null;
+
+                    final imageUrls = state.selectedMeal?.imageUrls;
+                    final String? firestoreUrl = (imageUrls != null &&
+                            index >= 0 &&
+                            index < imageUrls.length &&
+                            imageUrls[index] != null &&
+                            imageUrls[index].isNotEmpty)
+                        ? imageUrls[index]
+                        : null;
+
+                    print("imaaaagurll: $firestoreUrl");
+                    // final String? firestoreUrl =
+                    //     (state.selectedMeal?.imageUrls != null &&
+                    //             state.selectedMeal!.imageUrls!.length > index)
+                    //         ? state.selectedMeal!.imageUrls[index]
+                    //         : null;
+                    // print("imaaaagurll: ${firestoreUrl}");
+
+                    Widget displayedImage;
+
+                    if (localImage != null) {
+                      // If a new local image is picked
+                      displayedImage = Image.file(
+                        localImage,
+                        width: 122.w,
+                        height: 94.h,
+                        fit: BoxFit.cover,
+                      );
+                    } else if (firestoreUrl != null) {
+                      // If an image URL is available from Firestore
+                      displayedImage = Image.network(
+                        firestoreUrl,
+                        width: 122.w,
+                        height: 94.h,
+                        fit: BoxFit.cover,
+                      );
+                    } else {
+                      // If no image is available, show the static image
+                      displayedImage = const CustomStaticImg();
+                    }
+
                     return GestureDetector(
-                      onTap: () => mealCubit.pickImageMeal(index),
+                      onTap: () {
+                        if (firestoreUrl != null) {
+                        } else {
+                          mealCubit.pickImageMeal(index);
+                        }
+                      },
                       //_pickImage(index),
                       child: Container(
                         width: 121.w,
@@ -73,22 +125,49 @@ class CustomContainerMealImages extends StatelessWidget {
                             color: Colors.grey.shade400,
                           ),
                         ),
-                        child: _images[index] == null
-                            ? CustomStaticImg()
-                            : ClipRRect(
-                                borderRadius: BorderRadius.circular(12.r),
-                                child: Image.file(
-                                  _images[index]!,
-                                  width: 122.w,
-                                  height: 94.h,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12.r),
+                          child: displayedImage,
+                        ),
+
+                        // _images[index] == null
+                        //     ? CustomStaticImg()
+                        //     : ClipRRect(
+                        //         borderRadius: BorderRadius.circular(12.r),
+                        //         child: Image.file(
+                        //           _images[index]!,
+                        //           width: 122.w,
+                        //           height: 94.h,
+                        //           fit: BoxFit.cover,
+                        //         ),
+                        //       ),
                       ),
                     );
                   },
                 );
               },
+            ),
+          ),
+          SizedBox(height: 10.h),
+          GestureDetector(
+            onTap: () {
+              mealCubit.uploadMealImages();
+            },
+            child: Container(
+              width: double.infinity,
+              height: 42.h,
+              padding: const EdgeInsets.all(10.64),
+              decoration: ShapeDecoration(
+                color: const Color(0xFF0C0C0C),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(69.20),
+                ),
+              ),
+              child: Text(
+                'upload images',
+                style: TextStyles.fontCircularSpotify10WhiteMedium,
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
           SizedBox(height: 10.h),
@@ -133,7 +212,7 @@ class CustomContainerMealImages extends StatelessWidget {
           SizedBox(
             height: 10.h,
           ),
-          CustomMealList(cubit: mealCubit),
+          Container(height: 250.h, child: CustomMealList(cubit: mealCubit)),
         ]),
       ),
     );

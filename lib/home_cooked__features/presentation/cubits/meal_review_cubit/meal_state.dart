@@ -86,7 +86,7 @@ class MealState {
       this.specialtyTags = const [],
       this.ingredients = const [],
       this.selectedIngredients = const [],
-      this.mealImages = const [null, null, null, null]});
+      this.mealImages = const [null, null, null]});
 
   MealState copyWith({
     MealStatus? state,

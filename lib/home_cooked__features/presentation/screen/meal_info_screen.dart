@@ -11,26 +11,10 @@ import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_container_meal_images.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_meal_list.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_next_button.dart';
-import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_tab_container.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_weekly_meal.dart';
 
 class MealInfoScreen extends StatelessWidget {
   MealInfoScreen({super.key});
-
-  // final List<TabsName> tabNames = [
-  //   TabsName(
-  //     name: 'Personal Info',
-  //   ),
-  //   TabsName(
-  //     name: 'Location Verify',
-  //   ),
-  //   TabsName(
-  //     name: 'Meal Info',
-  //   ),
-  //   TabsName(
-  //     name: 'Order Options',
-  //   ),
-  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -82,9 +66,7 @@ class MealInfoScreen extends StatelessWidget {
                     SizedBox(width: 8.w),
                     Flexible(
                       child: CustomNextButton(
-                        ontap: () {
-                          cubit.uploadMealImages();
-                        },
+                        ontap: () {},
                         text: 'Next',
                         icons: Icons.arrow_forward_ios,
                         color: AppPallete.accentBlackColor,

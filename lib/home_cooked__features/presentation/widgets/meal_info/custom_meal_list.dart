@@ -34,7 +34,8 @@ class CustomMealList extends StatelessWidget {
             ),
           );
         } else if (state.myMeals == null || state.myMeals!.isEmpty) {
-          return const Center(
+          return Container(
+            height: 50.h,
             child: Text(
               "Oops, No Meals Found",
               style: TextStyle(fontSize: 16, color: Colors.black),
@@ -42,30 +43,35 @@ class CustomMealList extends StatelessWidget {
           );
         } else {
           return SizedBox(
-              height: 300.h,
+              //height: 200.h,
               child: ListView.builder(
-                itemCount: cubit.state.myMeals!.length,
-                itemBuilder: (context, index) {
-                  final meal = cubit.state.myMeals![index];
-                  final bool isSelected = meal == cubit.state.selectedMeal;
-                  return SizedBox(
-                    width: double.infinity,
-                    child: custom_meal_item(meal: meal, isSelected: isSelected),
-                  );
-                },
-              ));
+            // shrinkWrap: true, // Important!
+            // physics: NeverScrollableScrollPhysics(), // Avoid double scroll
+            itemCount: cubit.state.myMeals!.length,
+            itemBuilder: (context, index) {
+              final meal = cubit.state.myMeals![index];
+              final bool isSelected = meal == cubit.state.selectedMeal;
+              return SizedBox(
+                width: double.infinity,
+                child: custom_meal_item(meal: meal, isSelected: isSelected),
+              );
+            },
+          ));
         }
       },
       listener: (BuildContext context, MealState state) {
-        if (state.isDeleteMealError) {
+        if (state.isMealImageError ||
+            state.isDeleteMealError ||
+            state.isUpdateMealError) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                "Oops, Error Deleting Meal${state.error}",
+                "Oops, Error  ${state.error}",
                 style: TextStyle(fontSize: 16, color: Colors.black),
               ),
             ),
           );
+          context.read<MealCubit>().resetFlags();
         }
         if (state.isMealImageLoading) {
           AlertDialogUtils.showAlert(
@@ -74,21 +80,28 @@ class CustomMealList extends StatelessWidget {
             title: "loading",
           );
         } else if (state.isUpdateMealSuccess) {
+          Navigator.of(context).pop();
+
           AlertDialogUtils.showAlert(
             context: context,
             content: "image uploaded successfully",
             title: "Success",
           );
-        } else if (state.isMealImageError ||
-            state.isDeleteMealError ||
-            state.isUpdateMealError) {
-          AlertDialogUtils.showAlert(
-            context: context,
-            content: state.error ?? "Error",
-            title: "Error",
-            firstbutton: "OK",
-          );
+          context.read<MealCubit>().resetFlags();
         }
+        //  else if (state.isMealImageError ||
+        //     state.isDeleteMealError ||
+        //     state.isUpdateMealError) {
+        //   AlertDialogUtils.showAlert(
+        //     firstAction: () {
+        //      context.read<MealCubit>().resetFlags();
+        //     },
+        //     context: context,
+        //     content: state.error ?? "Error",
+        //     title: "Error",
+        //     firstbutton: "OK",
+        //   );
+        // }
       },
     );
   }
@@ -107,7 +120,7 @@ class custom_meal_item extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.read<MealCubit>().selectedMeal(meal);
+        context.read<MealCubit>().selectNewdMeal(meal);
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 8.h),

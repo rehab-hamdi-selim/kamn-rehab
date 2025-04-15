@@ -35,11 +35,11 @@ class CustomMealDetails extends StatelessWidget {
             child: meal.imageUrls.isNotEmpty && meal.imageUrls[0].isNotEmpty
                 ? Image.network(
                     meal.imageUrls[0],
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) {
                       // alternative image in case of error
                       return Image.asset('assets/images/welcomeImg.png',
-                          fit: BoxFit.fill);
+                          fit: BoxFit.cover);
                     },
                   )
                 : Image.asset(
