@@ -5,6 +5,7 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/home_cooked__features/data/models/tabs_model.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/screen/order_options_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/circular_back_button.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_back_button.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_container.dart';
@@ -66,7 +67,15 @@ class MealInfoScreen extends StatelessWidget {
                     SizedBox(width: 8.w),
                     Flexible(
                       child: CustomNextButton(
-                        ontap: () {},
+                        ontap: () {
+                          // cubit.selectedMeal(mealModel);
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => BlocProvider.value(
+                              value: cubit,
+                              child: OrderOptionsHomecook(),
+                            ),
+                          ));
+                        },
                         text: 'Next',
                         icons: Icons.arrow_forward_ios,
                         color: AppPallete.accentBlackColor,

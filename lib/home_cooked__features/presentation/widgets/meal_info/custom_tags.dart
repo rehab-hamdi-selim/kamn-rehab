@@ -9,6 +9,7 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/home_cooked__features/data/models/meals_model.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/screen/food_etails_info_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_speciality_tag.dart';
 
 class CustomTags extends StatelessWidget {
@@ -21,6 +22,18 @@ class CustomTags extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<MealCubit>();
+
+    void navigateToEditMealScreen(MealModel mealModel) {
+      cubit.selectedMeal(mealModel);
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => BlocProvider.value(
+          value: cubit,
+          child: const EditMealScreen(),
+        ),
+      ));
+    }
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -49,6 +62,7 @@ class CustomTags extends StatelessWidget {
               icon: IconLinks.penEdit,
               onTap: () {
                 //edit
+                navigateToEditMealScreen(meal);
               },
             ),
             horizontalSpace(6),
