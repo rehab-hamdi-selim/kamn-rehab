@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/gym_feature/gyms/data/models/features_model.dart';
+import 'package:kamn/core/theme/font_weight_helper.dart';
+import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_state.dart';
+import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
 import 'package:kamn/gym_feature/gyms/presentation/widgets/choose_plan_screen/custom_badge.dart';
 
-import 'failure_model.dart';
 
 class CustomReviewSelectionBottomSheet extends StatelessWidget {
-  final Map<FeatureModel, int> selectedFeatures;
+  final Map<Feature, int> selectedFeatures;
   final int totalPrice;
   final VoidCallback onEditSelection;
 
@@ -50,61 +52,102 @@ class CustomReviewSelectionBottomSheet extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 20.h), // Use ScreenUtil for height
-          ...selectedFeatures.entries.map((entry) {
-            final feature = entry.key;
-            final quantity = entry.value;
-            return Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.h),
-              // Use ScreenUtil for padding
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        " ${feature.name}",
-                        style: TextStyle(
-                            fontSize: 10.sp, // Use ScreenUtil for font size
-                            color: Colors.black),
-                      ),
-                      SizedBox(width: 5.w), // Use ScreenUtil for width
-                      CustomBadge(
-                        label: "${feature.price}/month",
-                        color: AppPallete.blueColor,
-                      ),
-                      SizedBox(width: 10.w), // Use ScreenUtil for width
-                      Text(
-                        "total: ${feature.price * quantity}£EGP",
-                        style: TextStyle(
-                          fontSize: 10.sp, // Use ScreenUtil for font size
-                          fontWeight: FontWeight.w700,
-                          color: Colors.grey.shade300,
+          Container(
+            padding: EdgeInsets.all(10.w), // Use ScreenUtil for padding,
+            decoration: BoxDecoration(
+              color: AppPallete.ofWhiteColor,
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Column(
+              children: [
+                ...selectedFeatures.entries.map((entry) {
+                  final feature = entry.key;
+                  final quantity = entry.value;
+                  return Container(
+                    margin: EdgeInsets.only(bottom: 5.h),
+                    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                    decoration: const BoxDecoration(
+                      color: AppPallete.whiteColor,
+                      borderRadius: BorderRadius.all(Radius.circular(29)),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Text(
+                                feature.name ?? '',
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              SizedBox(width: 8.w),
+                              CustomBadge(
+                                label: "${feature.price}/${feature.pricingOption?.name}",
+                                color: feature.pricingOption!.getBackgroundColor(feature.pricingOption),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "$quantity",
-                        style: TextStyle(
-                          fontSize: 10.sp, // Use ScreenUtil for font size
-                          color: Colors.grey,
+                        Row(
+                          children: [
+                            Text(
+                              "${(feature.price ?? "0") * quantity}£EGP",
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(left: 8.w),
+                              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
+                              decoration: BoxDecoration(
+                                color: Colors.grey.shade200,
+                                borderRadius: BorderRadius.circular(40.r),
+                              ),
+                              child: Text(
+                                "×$quantity",
+                                style: TextStyle(
+                                  fontSize: 11.sp,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            );
-          }),
+                      ],
+                    ),
+                  );
+                }).toList(),
+              ],
+            ),
+          ),
           const Divider(),
           Center(
-            child: Text(
-              "Total: $totalPrice£EGP",
-              style: TextStyle(
-                fontSize: 10.sp, // Use ScreenUtil for font size
-                fontWeight: FontWeight.bold,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50.r),
+                border: Border.all(
+                  color: Colors.black,
+                  width: 0.5.w, // Use ScreenUtil for border width
+                ),
+              ),
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "Total: ",
+                      style: TextStyles.fontCircularSpotify12BlackRegular.copyWith(fontWeight: FontWeightHelper.light)
+                    ),
+                    TextSpan(
+                      text: "$totalPrice£GP",
+                      style:TextStyles.fontCircularSpotify12BlackMedium
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -115,13 +158,12 @@ class CustomReviewSelectionBottomSheet extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: onEditSelection,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
+                    backgroundColor: AppPallete.lightYellow,
                     padding: EdgeInsets.symmetric(vertical: 14.h),
                     // Use ScreenUtil for padding
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25.w),
                       // Use ScreenUtil for radius
-                      side: const BorderSide(color: Colors.black),
                     ),
                   ),
                   child: Text(

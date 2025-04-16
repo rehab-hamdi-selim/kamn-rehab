@@ -6,6 +6,7 @@ import 'package:kamn/gym_feature/add_gym/presentation/cubits/membership_offer/me
 import 'package:kamn/gym_feature/add_gym/presentation/cubits/membership_offer/membership_offer_state.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/widgets/membership_screen/headline_with_dropdown.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/widgets/membership_screen/headline_with_text_field.dart';
+import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
 
 class OfferNameContainer extends StatelessWidget {
   const OfferNameContainer({super.key});

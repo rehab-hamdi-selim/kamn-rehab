@@ -24,17 +24,27 @@ class SearchRow extends StatelessWidget {
                 contentPadding: const EdgeInsets.only(top: 10),
                 border: InputBorder.none,
                 hintText: "Search",
-                hintStyle: TextStyles.fontCircularSpotify10GrayRegular,
-                prefixIcon: const Icon(
-                  Icons.search,
-                  color: AppPallete.lgGreyColor,
+                hintStyle: TextStyles.fontCircularSpotify12GrayRegular,
+                prefixIcon: Padding(
+                  padding:  EdgeInsets.only(
+                    top: 13.h,
+                    left: 15.w,
+                    right: 9.w,
+                    bottom: 13.h,
+                  ),
+                  child: SvgPicture.asset(
+                    "assets/icons/search.svg",
+                    width: 13.w,
+                    height: 13.h,
+                    color: AppPallete.lgGreyColor,
+                  ),
                 )),
           ),
         ),
         ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                     EdgeInsets.symmetric(horizontal: 7.5.h, vertical: 9.w),
                 minimumSize: const Size(80, 40),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),

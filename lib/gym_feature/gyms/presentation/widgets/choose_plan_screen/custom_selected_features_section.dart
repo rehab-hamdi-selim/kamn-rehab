@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/gym_feature/gyms/data/models/features_model.dart';
+import 'package:kamn/core/helpers/spacer.dart';
+import 'package:kamn/core/theme/app_pallete.dart';
+import 'package:kamn/core/theme/font_weight_helper.dart';
+import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
 import 'package:kamn/gym_feature/gyms/presentation/widgets/choose_plan_screen/custom_selection_item.dart';
-import 'package:kamn/gym_feature/gyms/presentation/widgets/choose_plan_screen/failure_model.dart';
 
 class CustomSelectedFeaturesSection extends StatelessWidget {
-  final Map<FeatureModel, int> selectedFeatures;
+  final Map<Feature, int> selectedFeatures;
   final Function increaseQuantity;
   final Function decreaseQuantity;
   final int totalPrice;
@@ -29,7 +32,7 @@ class CustomSelectedFeaturesSection extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.w),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
             "Your Selection:",
@@ -64,14 +67,38 @@ class CustomSelectedFeaturesSection extends StatelessWidget {
             ),
           ),
           const Divider(),
-          Center(
-            child: Text(
-              "Total: $totalPrice£EGP",
-              style: TextStyle(
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w300,
+           Center(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50.r),
+                color: AppPallete.whiteColor,
+                border: Border.all(
+                  color: Colors.black,
+                  width: 0.5.w, // Use ScreenUtil for border width
+                ),
+              ),
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "Total: ",
+                      style: TextStyles.fontCircularSpotify12BlackRegular.copyWith(fontWeight: FontWeightHelper.light)
+                    ),
+                    TextSpan(
+                      text: "$totalPrice£GP",
+                      style:TextStyles.fontCircularSpotify12BlackMedium
+                    ),
+                  ],
+                ),
               ),
             ),
+          ),
+          verticalSpace(10),
+          Text(
+            "Longer plans offer better discounts! Choose wisely.",
+            style: TextStyles.fontCircularSpotify8GrayRegular,
+            textAlign: TextAlign.center,
           ),
         ],
       ),

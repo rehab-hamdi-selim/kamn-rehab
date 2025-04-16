@@ -329,13 +329,7 @@ class AppRouter {
         create: (context) => getIt<MembershipOfferCubit>()..getGymIdFromSecureStorage(),
         child: const MembershipOfferScreen(),
       ));
-      // case Routes.selectPlanFeaturesScreen:
-      //   return MaterialPageRoute(
-      //       builder: (_) => BlocProvider.value(
-      //               value: context.read<MembershipOfferCubit>()
-      //                 ..getFeatures(settings.arguments as String),
-      //               child: const SelectPlanFeaturesScreen(),
-      //             ));
+      
 
       default:
         return MaterialPageRoute(

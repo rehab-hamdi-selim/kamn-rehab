@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
 import 'package:kamn/gym_feature/gyms/presentation/Cubit/gym_details/gymdetails_cubit.dart';
 import 'package:kamn/gym_feature/gyms/presentation/Cubit/gym_details/gymdetails_state.dart';
 import 'package:kamn/gym_feature/gyms/presentation/widgets/choose_plan_screen/custom_feature_selection_list.dart';
@@ -8,84 +9,9 @@ import 'package:kamn/gym_feature/gyms/presentation/widgets/choose_plan_screen/cu
 import 'package:kamn/gym_feature/gyms/presentation/widgets/choose_plan_screen/custom_selected_features_section.dart';
 import 'package:kamn/gym_feature/gyms/presentation/widgets/choose_plan_screen/custom_title_logo.dart';
 
-class ChoosePlanScreen extends StatefulWidget {
-  const ChoosePlanScreen({super.key});
-
-  @override
-  State<ChoosePlanScreen> createState() => _ChoosePlanScreenState();
-}
-
-class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
-  // final List<FeaturesModel> features = [
-  //   FeaturesModel(
-  //       name: "Hot Tubs",
-  //       price: 120,
-  //       unit: "/month",
-  //       icon: "🛁",
-  //       badgeColor: Colors.blue),
-  //   FeaturesModel(
-  //       name: "Sauna",
-  //       price: 50,
-  //       unit: "/session",
-  //       icon: "♨️",
-  //       badgeColor: Colors.orange),
-  //   FeaturesModel(
-  //       name: "Swimming Pool",
-  //       price: 20,
-  //       unit: "/session",
-  //       icon: "🏊",
-  //       badgeColor: Colors.cyan),
-  //   FeaturesModel(
-  //       name: "Juice Bar",
-  //       price: 40,
-  //       unit: "/month",
-  //       icon: "🍹",
-  //       badgeColor: Colors.purple),
-  //   FeaturesModel(
-  //       name: "Childcare Services",
-  //       price: 60,
-  //       unit: "/session",
-  //       icon: "👶",
-  //       badgeColor: Colors.teal),
-  //   FeaturesModel(
-  //       name: "State-of-the-Art Equipment",
-  //       price: 120,
-  //       unit: "/month",
-  //       icon: "💪",
-  //       badgeColor: Colors.red),
-  //   FeaturesModel(
-  //       name: "Yoga Classes",
-  //       price: 120,
-  //       unit: "/month",
-  //       icon: "🧘",
-  //       badgeColor: Colors.green),
-  //   FeaturesModel(
-  //       name: "Exclusive Events",
-  //       price: 120,
-  //       unit: "/month",
-  //       icon: "🎉",
-  //       badgeColor: Colors.amber),
-  //   FeaturesModel(
-  //       name: "Diverse Classes",
-  //       price: 50,
-  //       unit: "/session",
-  //       icon: "🏋️",
-  //       badgeColor: Colors.green),
-  //   FeaturesModel(
-  //       name: "Locker Rooms",
-  //       price: 20,
-  //       unit: "/month",
-  //       icon: "🔒",
-  //       badgeColor: Colors.blueGrey),
-  //   FeaturesModel(
-  //       name: "Free WiFi",
-  //       price: 0,
-  //       unit: "Free",
-  //       icon: "🌐",
-  //       badgeColor: Colors.black),
-  // ];
-
-
+class ChoosePlanScreen extends StatelessWidget {
+  const ChoosePlanScreen({super.key, required this.gymModel});
+final GymModel gymModel;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GymDetailsCubit, GymDetailsState>(
@@ -94,7 +20,7 @@ class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
         showModalBottomSheet(
           context: context,
           isScrollControlled: true,
-          builder: (context) {
+          builder: (_) {
         return CustomReviewSelectionBottomSheet(
               selectedFeatures: state.selectedFeatures ?? {},
               totalPrice: context.read<GymDetailsCubit>().totalPrice,
@@ -122,7 +48,8 @@ class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CustomTitleLogo(),
+                       CustomTitleLogo(logo: gymModel.logoUrl??'',),
+                            if(state.gymFeatures!=null&&state.gymFeatures!.isNotEmpty)// Use ScreenUtil for heigh
 
                       Container(
                         padding: const EdgeInsets.all(8),
@@ -132,7 +59,7 @@ class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
                             border: Border.all(color: Colors.grey.shade300)),
                         child: Column(
                           children: [
-                            SizedBox(height: 10.h), // Use ScreenUtil for height
+                            SizedBox(height: 10.h),
                             CustomFeatureSelectionList(
                               toggleFeature:
                                   context.read<GymDetailsCubit>().toggleFeature,
@@ -143,6 +70,7 @@ class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
                         ),
                       ),
                       SizedBox(height: 10.h),
+                      
                       CustomSelectedFeaturesSection(
                         selectedFeatures: state.selectedFeatures ?? {},
                         increaseQuantity:
@@ -158,7 +86,9 @@ class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
                         children: [
                           Expanded(
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
                                 padding: EdgeInsets.symmetric(vertical: 14.h),
@@ -183,7 +113,7 @@ class _ChoosePlanScreenState extends State<ChoosePlanScreen> {
                           Expanded(
                             child: ElevatedButton(
                               onPressed: () {
-                                showReviewBottomSheet();
+                                showReviewBottomSheet( );
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.black,

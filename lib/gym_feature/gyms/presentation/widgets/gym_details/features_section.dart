@@ -17,7 +17,7 @@ class FeaturesSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GymDetailsCubit, GymDetailsState>(
       builder: (context, state) {
-        
+        print(state.gymFeatures);
         if (state.isFeaturesLoading) {
           return const Center(
             child: SizedBox(
@@ -28,12 +28,10 @@ class FeaturesSection extends StatelessWidget {
           );
         }
 
-        
         if (state.gymFeatures?.isEmpty ?? true) {
-          return const SizedBox(); 
+          return const SizedBox();
         }
 
-        
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -41,35 +39,30 @@ class FeaturesSection extends StatelessWidget {
                 ? const SizedBox()
                 : Text("Features",
                     style: TextStyles.fontCircularSpotify20AccentBlackMedium),
-            SizedBox(
-              width: 900.w,
-              height: (state.gymFeatures?.length)! * 30,
-              child: GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  padding: EdgeInsets.zero,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 3,
-                      mainAxisSpacing: 15,
-                      childAspectRatio: 6),
-                  itemCount: state.gymFeatures!.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      decoration: BoxDecoration(
-                          color: AppPallete.shadeOfGray,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Center(
-                        child: Text(
-                          state.gymFeatures![index].name,
-                          style: TextStyles
-                              .fontCircularSpotify8AccentBlackRegular
-                              .copyWith(
-                                  fontSize: 10, fontWeight: FontWeight.w500),
-                          textDirection: TextDirection.ltr,
-                        ),
-                      ),
-                    );
-                  }),
+            SizedBox(height: 10.h),
+            Wrap(
+              spacing: 8.w,
+              runSpacing: 4.h,
+              children: state.gymFeatures!.map((feature) {
+                return Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 4.w,
+                    vertical: 3.h,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppPallete.shadeOfGray,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text(
+                    feature.name ?? '',
+                    style: TextStyles.fontCircularSpotify8AccentBlackRegular
+                        .copyWith(
+                      fontSize: 10, 
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                );
+              }).toList(),
             ),
           ],
         );

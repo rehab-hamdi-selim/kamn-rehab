@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 
@@ -12,12 +13,11 @@ class PriceContainer extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: Container(
-        height: 30,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(50),
             color: AppPallete.shadeOfGray),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          padding:  EdgeInsets.symmetric(horizontal: 5.w,vertical: 3.h),
           child: Row(
             spacing: 5,
             children: [

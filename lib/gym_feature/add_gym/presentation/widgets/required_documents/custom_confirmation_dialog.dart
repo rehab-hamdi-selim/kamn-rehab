@@ -71,7 +71,7 @@ class CustomConfirmationDialog extends StatelessWidget {
                         SizedBox(height: 20),
                         ElevatedButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, Routes.gymScreen);
+                            Navigator.pushNamed(context, Routes.trackGymSubmission);
                           },
                           child: const Text("OK"),
                         ),

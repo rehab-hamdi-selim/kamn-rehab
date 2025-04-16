@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class CustomTitleLogo extends StatelessWidget {
-  const CustomTitleLogo({super.key});
+  const CustomTitleLogo({super.key, required this.logo});
+  final String logo;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +36,13 @@ class CustomTitleLogo extends StatelessWidget {
             radius: 30.w, // Responsive radius using ScreenUtil
             backgroundColor:
                 Colors.transparent, // Optional: Transparent background
-            child: SvgPicture.network(
-              "https://cdn.brandfetch.io/idzjac_teo/theme/dark/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B",
-              fit: BoxFit.cover,
+            child: ClipOval(
+              child: CachedNetworkImage(
+                imageUrl: logo,
+                fit: BoxFit.cover,
+                placeholder: (context, url) => const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+              ),
             ),
           ),
         ),

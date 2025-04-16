@@ -52,7 +52,7 @@ class CustomMainBlocConsumer extends StatelessWidget {
             ),
             onGenerateRoute: AppRouter.generateRoute,
             home: BlocProvider(
-              create: (context) => getIt<GymDetailsCubit>(),
+              create: (context) => getIt<GymDetailsCubit>()..fetchAllGyms(),
               child: const GymsScreen(),
             ));
         // home: _buildHomeWidget(state, appUserCubit));

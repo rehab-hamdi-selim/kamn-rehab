@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 
@@ -12,7 +13,7 @@ class RatingRow extends StatelessWidget {
     return Row(
       children: [
         Container(
-          width: 40,
+          padding:  EdgeInsets.all(4.w),
           decoration: BoxDecoration(
               color: AppPallete.shadeOfGray,
               borderRadius: BorderRadius.circular(10)),

@@ -81,6 +81,7 @@ class AppPallete {
   static const Color green = Color(0xff205B2A);
   static const Color lightBlue = Color(0xff2841BD);
   static const Color lighterBlue = Color(0xff889DDD);
+  static const Color lightYellow = Color(0xffFFDB81);
 
   static const List<Color> radialGradientForSearchUi = [
     Color.fromARGB(5, 96, 96, 96), // Very weak in the center
@@ -101,4 +102,18 @@ class AppPallete {
     Color.fromARGB(4, 96, 96, 96),
     Color.fromARGB(2, 96, 96, 96), // Very weak at the edges
   ];
+
+  static const Color instagramYellow = Color(0xFFFFBE0B);
+  static const Color instagramOrange = Color(0xFFFB5607);
+  static const Color instagramPink = Color(0xFFFF006E);
+
+  static const LinearGradient instagramGradient = LinearGradient(
+    colors: [
+      instagramYellow,
+      instagramOrange,
+      instagramPink,
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 }

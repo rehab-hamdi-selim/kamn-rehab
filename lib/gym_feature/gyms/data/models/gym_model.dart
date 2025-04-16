@@ -9,7 +9,7 @@ class GymModel {
   final String? name;
   final String? uniqueName;
   final String? address;
-  final List<String>? imageUrl;
+  final List<String>? imagesUrl;
   final String? logoUrl;
   final String? description;
   final String? phoneNumber;
@@ -26,7 +26,7 @@ class GymModel {
     this.name,
     this.uniqueName,
     this.address,
-    this.imageUrl,
+    this.imagesUrl,
     this.logoUrl,
     this.description,
     this.phoneNumber,
@@ -45,7 +45,7 @@ class GymModel {
     String? name,
     String? uniqueName,
     String? address,
-    List<String>? imageUrl,
+    List<String>? imagesUrl,
     String? logoUrl,
     String? description,
     String? phoneNumber,
@@ -63,7 +63,7 @@ class GymModel {
       name: name ?? this.name,
       uniqueName: uniqueName ?? this.uniqueName,
       address: address ?? this.address,
-      imageUrl: imageUrl ?? this.imageUrl,
+      imagesUrl: imagesUrl ?? this.imagesUrl,
       logoUrl: logoUrl ?? this.logoUrl,
       description: description ?? this.description,
       phoneNumber: phoneNumber ?? this.phoneNumber,
@@ -84,7 +84,7 @@ class GymModel {
       'name': name,
       'uniqueName': uniqueName,
       'address': address,
-      'imageUrl': imageUrl,
+      'imagesUrl': imagesUrl,
       'logoUrl': logoUrl,
       'description': description,
       'phoneNumber': phoneNumber,
@@ -106,8 +106,8 @@ class GymModel {
       uniqueName:
           map['uniqueName'] != null ? map['uniqueName'] as String : null,
       address: map['address'] != null ? map['address'] as String : null,
-      imageUrl: map['imageUrl'] != null
-          ? List<String>.from((map['imageUrl'] as List<String>))
+      imagesUrl: map['imagesUrl'] != null
+          ? List<String>.from((map['imagesUrl'] as List<dynamic>))
           : null,
       logoUrl: map['logoUrl'] != null ? map['logoUrl'] as String : null,
       description:
@@ -129,7 +129,7 @@ class GymModel {
           : null,
       scoialMediaLinks: map['scoialMediaLinks'] != null
           ? List<ScoialMediaLink>.from(
-              (map['scoialMediaLinks'] as List<int>).map<ScoialMediaLink?>(
+              (map['scoialMediaLinks'] as List<dynamic>).map<ScoialMediaLink?>(
                 (x) => ScoialMediaLink.fromMap(x as Map<String, dynamic>),
               ),
             )
@@ -162,7 +162,7 @@ class GymModel {
 
   @override
   String toString() {
-    return 'GymModel(id: $id, name: $name, uniqueName: $uniqueName, address: $address, imageUrl: $imageUrl, logoUrl: $logoUrl, description: $description, phoneNumber: $phoneNumber, ratings: $ratings, reviews: $reviews, offers: $offers, scoialMediaLinks: $scoialMediaLinks, features: $features, openDuration: $openDuration, isFullTimeAccess: $isFullTimeAccess, userId: $userId)';
+    return 'GymModel(id: $id, name: $name, uniqueName: $uniqueName, address: $address, imageUrl: $imagesUrl, logoUrl: $logoUrl, description: $description, phoneNumber: $phoneNumber, ratings: $ratings, reviews: $reviews, offers: $offers, scoialMediaLinks: $scoialMediaLinks, features: $features, openDuration: $openDuration, isFullTimeAccess: $isFullTimeAccess, userId: $userId)';
   }
 
   @override
@@ -173,7 +173,7 @@ class GymModel {
         other.name == name &&
         other.uniqueName == uniqueName &&
         other.address == address &&
-        listEquals(other.imageUrl, imageUrl) &&
+        listEquals(other.imagesUrl, imagesUrl) &&
         other.logoUrl == logoUrl &&
         other.description == description &&
         other.phoneNumber == phoneNumber &&
@@ -193,7 +193,7 @@ class GymModel {
         name.hashCode ^
         uniqueName.hashCode ^
         address.hashCode ^
-        imageUrl.hashCode ^
+        imagesUrl.hashCode ^
         logoUrl.hashCode ^
         description.hashCode ^
         phoneNumber.hashCode ^

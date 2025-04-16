@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/core/const/firebase_collections.dart';
 import 'package:kamn/core/utils/try_and_catch.dart';
-import 'package:kamn/gym_feature/gyms/data/models/gym_details_model.dart';
+import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
 
 abstract class GymDetailsRemoteDataSource {
-  Future<GymDetailsModel?> getGymById(String gymId);
-  Future<List<GymDetailsModel>> getAllGyms();
+  Future<GymModel?> getGymById(String gymId);
+  Future<List<GymModel>> getAllGyms();
   Future<List<Map<String, dynamic>>> getGymFeatures(String gymId);
   Future<List<Map<String, dynamic>>> getGymPlans(String gymId);
 }
@@ -20,14 +20,14 @@ class GymDetailsRemoteDataSourceImpl implements GymDetailsRemoteDataSource {
       firestore.collection(FirebaseCollections.gym);
 
   @override
-  Future<GymDetailsModel?> getGymById(String gymId) async {
+  Future<GymModel?> getGymById(String gymId) async {
     try {
       final docSnapshot = await _gymsCollection.doc(gymId).get();
 
       if (docSnapshot.exists) {
         final data = docSnapshot.data() as Map<String, dynamic>;
         print("dattttttta${data["scoialMediaLinks"]}");
-        return GymDetailsModel.fromJson(data);
+        return GymModel.fromMap(data);
       }
 
       return null;
@@ -37,7 +37,7 @@ class GymDetailsRemoteDataSourceImpl implements GymDetailsRemoteDataSource {
   }
 
   @override
-  Future<List<GymDetailsModel>> getAllGyms() async {
+  Future<List<GymModel>> getAllGyms() async {
     try {
       final querySnapshot = await _gymsCollection.get();
 
@@ -54,7 +54,7 @@ class GymDetailsRemoteDataSourceImpl implements GymDetailsRemoteDataSource {
           data['imagesUrl'] = [];
         }
 
-        return GymDetailsModel.fromJson(data);
+        return GymModel.fromMap(data);
       }).toList();
     } catch (e) {
       throw Exception('Failed to get all gyms: $e');
@@ -65,7 +65,7 @@ class GymDetailsRemoteDataSourceImpl implements GymDetailsRemoteDataSource {
   Future<List<Map<String, dynamic>>> getGymFeatures(String gymId) async {
     return executeTryAndCatchForDataLayer(() async {
       final featuresSnapshot =
-          await _gymsCollection.doc(gymId).collection('features').get();
+          await _gymsCollection.doc(gymId).collection(FirebaseCollections.features).get();
       print("featuresssss${featuresSnapshot.docs.length} features found");
       return featuresSnapshot.docs.map((doc) => doc.data()).toList();
     });

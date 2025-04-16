@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kamn/gym_feature/gyms/data/models/features_model.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/features_offer.dart';
+import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
 import 'package:kamn/gym_feature/gyms/data/repo/gym_details_repo.dart';
 import 'package:kamn/gym_feature/gyms/presentation/Cubit/gym_details/gymdetails_state.dart';
 
@@ -14,28 +15,28 @@ class GymDetailsCubit extends Cubit<GymDetailsState> {
           selectedFeatures: {},
         ));
 
-  Future<void> fetchGymDetails(String gymId) async {
-    emit(state.copyWith(state: GymDetailsStatus.loading));
-    try {
-      final gymDetails = await repository.getGymDetails(gymId);
-      if (gymDetails != null) {
-        emit(state.copyWith(
-          state: GymDetailsStatus.success,
-          gymDetails: gymDetails,
-        ));
-      } else {
-        emit(state.copyWith(
-          state: GymDetailsStatus.error,
-          errorMessage: 'Gym not found',
-        ));
-      }
-    } catch (e) {
-      emit(state.copyWith(
-        state: GymDetailsStatus.error,
-        errorMessage: 'Failed to load gym details: $e',
-      ));
-    }
-  }
+  // Future<void> fetchGymDetails(String gymId) async {
+  //   emit(state.copyWith(state: GymDetailsStatus.loading));
+  //   try {
+  //     final gymDetails = await repository.getGymDetails(gymId);
+  //     if (gymDetails != null) {
+  //       emit(state.copyWith(
+  //         state: GymDetailsStatus.success,
+  //         gymDetails: gymDetails,
+  //       ));
+  //     } else {
+  //       emit(state.copyWith(
+  //         state: GymDetailsStatus.error,
+  //         errorMessage: 'Gym not found',
+  //       ));
+  //     }
+  //   } catch (e) {
+  //     emit(state.copyWith(
+  //       state: GymDetailsStatus.error,
+  //       errorMessage: 'Failed to load gym details: $e',
+  //     ));
+  //   }
+  // }
 
   Future<void> fetchAllGyms() async {
     emit(state.copyWith(state: GymDetailsStatus.loading));
@@ -61,7 +62,7 @@ class GymDetailsCubit extends Cubit<GymDetailsState> {
     features.fold((l) {
       emit(state.copyWith(
         state: GymDetailsStatus.featuresError,
-        errorMessage: l.toString(),
+        errorMessage: l.erorr,
       ));
     }, (r) {
       emit(state.copyWith(
@@ -71,54 +72,56 @@ class GymDetailsCubit extends Cubit<GymDetailsState> {
     });
   }
 
-  void toggleFeature(FeatureModel feature) {
+  void toggleFeature(Feature feature) {
+    final updatedSelectedFeatures = Map<Feature, int>.from(state.selectedFeatures ?? {});
     
-    final updatedSelectedFeatures =
-        Map<FeatureModel, int>.from(state.selectedFeatures ?? {});
-
     if (updatedSelectedFeatures.containsKey(feature)) {
       updatedSelectedFeatures.remove(feature);
     } else {
       updatedSelectedFeatures[feature] = 1;
     }
-
-    emit(state.copyWith(selectedFeatures: updatedSelectedFeatures));
+    
+    _emitUpdatedFeatures(updatedSelectedFeatures);
   }
 
-  void increaseQuantity(FeatureModel feature) {
+  void increaseQuantity(Feature feature) {
+    if (!state.selectedFeatures!.containsKey(feature)) return;
     
-    final updatedSelectedFeatures =
-        Map<FeatureModel, int>.from(state.selectedFeatures ?? {});
-
-    if (updatedSelectedFeatures.containsKey(feature)) {
-      updatedSelectedFeatures[feature] = updatedSelectedFeatures[feature]! + 1;
-    }
-
-    emit(state.copyWith(selectedFeatures: updatedSelectedFeatures));
+    final updatedSelectedFeatures = Map<Feature, int>.from(state.selectedFeatures!);
+    updatedSelectedFeatures[feature] = (updatedSelectedFeatures[feature] ?? 0) + 1;
+    
+    _emitUpdatedFeatures(updatedSelectedFeatures);
   }
 
-  void decreaseQuantity(FeatureModel feature) {
+  void decreaseQuantity(Feature feature) {
+    if (!state.selectedFeatures!.containsKey(feature)) return;
     
-    final updatedSelectedFeatures =
-        Map<FeatureModel, int>.from(state.selectedFeatures ?? {});
-
-    if (updatedSelectedFeatures.containsKey(feature) &&
-        updatedSelectedFeatures[feature]! > 1) {
-      updatedSelectedFeatures[feature] = updatedSelectedFeatures[feature]! - 1;
+    final updatedSelectedFeatures = Map<Feature, int>.from(state.selectedFeatures!);
+    final currentQuantity = updatedSelectedFeatures[feature] ?? 0;
+    
+    if (currentQuantity > 1) {
+      updatedSelectedFeatures[feature] = currentQuantity - 1;
     } else {
       updatedSelectedFeatures.remove(feature);
     }
-
-    emit(state.copyWith(selectedFeatures: updatedSelectedFeatures));
+    
+    _emitUpdatedFeatures(updatedSelectedFeatures);
   }
 
-  void removeFeature(FeatureModel feature) {
+  void removeFeature(Feature feature) {
+    if (!state.selectedFeatures!.containsKey(feature)) return;
     
-    final updatedSelectedFeatures =
-        Map<FeatureModel, int>.from(state.selectedFeatures ?? {});
+    final updatedSelectedFeatures = Map<Feature, int>.from(state.selectedFeatures!);
     updatedSelectedFeatures.remove(feature);
+    
+    _emitUpdatedFeatures(updatedSelectedFeatures);
+  }
 
-    emit(state.copyWith(selectedFeatures: updatedSelectedFeatures));
+  void _emitUpdatedFeatures(Map<Feature, int> features) {
+    emit(state.copyWith(
+      selectedFeatures: features,
+      state: features.isEmpty ? GymDetailsStatus.initial : GymDetailsStatus.success,
+    ));
   }
 
   int get totalPrice {
@@ -129,7 +132,7 @@ class GymDetailsCubit extends Cubit<GymDetailsState> {
       try {
         
         String priceStr =
-            entry.key.price.trim().replaceAll(RegExp(r'[^\d]'), '');
+            entry.key.price!.trim().replaceAll(RegExp(r'[^\d]'), '');
         price = int.tryParse(priceStr) ?? 0;
       } catch (e) {
         
@@ -162,4 +165,16 @@ class GymDetailsCubit extends Cubit<GymDetailsState> {
       gymDetails: null,
     ));
   }
+
+  void selectPlan(Plan plan) {
+      if (state.selectedPlan?.planId == plan.planId) {
+        emit(state.copyWith(selectedPlan: null));
+      } else {
+        emit(state.copyWith(selectedPlan: plan));
+      }
+    }
+  
+    void clearSelectedPlan() {
+      emit(state.copyWith(selectedPlan: null));
+    }
 }

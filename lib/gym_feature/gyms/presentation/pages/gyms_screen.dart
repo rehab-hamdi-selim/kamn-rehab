@@ -35,11 +35,7 @@ class GymsScreen extends StatelessWidget {
                 title: 'Top Rated',
                 onTap: () {},
               ),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: const Color(0xfff5f5f5)),
-                  child: const CustomGymRatedList()),
+              const CustomGymRatedList(),
             ],
           ),
         ),

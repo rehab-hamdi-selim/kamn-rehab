@@ -1,7 +1,5 @@
-import 'package:kamn/gym_feature/gyms/data/models/features_model.dart';
-import 'package:kamn/gym_feature/gyms/data/models/gym_details_model.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
-import 'package:kamn/gym_feature/gyms/data/models/plan_model.dart';
 
 enum GymDetailsStatus {
   initial,
@@ -29,14 +27,15 @@ extension GymDetailsStateX on GymDetailsState {
   bool get plansError => state == GymDetailsStatus.plansError;
 }
 
-class GymDetailsState {
+class GymDetailsState  {
   final GymDetailsStatus state;
   final String? errorMessage;
-  final GymDetailsModel? gymDetails;
-  final List<GymDetailsModel>? allGyms;
-  final List<FeatureModel>? gymFeatures;
+  final GymModel? gymDetails;
+  final List<GymModel>? allGyms;
+  final List<Feature>? gymFeatures;
   final List<Plan>? gymPlans;
-  final   Map<FeatureModel, int>? selectedFeatures ;
+  final Map<Feature, int>? selectedFeatures ;
+  final Plan? selectedPlan;
   
 
 
@@ -46,19 +45,18 @@ class GymDetailsState {
     this.gymDetails,
     this.allGyms,
     this.gymFeatures,
-    this.selectedFeatures,
-    this.gymPlans
+    this.gymPlans,
+     this.selectedFeatures,this.selectedPlan
   });
 
   GymDetailsState copyWith({
     GymDetailsStatus? state,
     String? errorMessage,
-    GymDetailsModel? gymDetails,
-    List<GymDetailsModel>? allGyms,
-    List<FeatureModel>? gymFeatures,
+    GymModel? gymDetails,
+    List<GymModel>? allGyms,
+    List<Feature>? gymFeatures,
     List<Plan>? gymPlans,
-     Map<FeatureModel, int>? selectedFeatures
-    
+    Map<Feature, int>? selectedFeatures,   Plan? selectedPlan,
   }) {
     return GymDetailsState(
       state: state ?? this.state,
@@ -66,8 +64,9 @@ class GymDetailsState {
       gymDetails: gymDetails ?? this.gymDetails,
       allGyms: allGyms ?? this.allGyms,
       gymFeatures: gymFeatures ?? this.gymFeatures,
-      selectedFeatures: selectedFeatures??this.selectedFeatures, 
-      gymPlans:gymPlans??this.gymPlans 
+      gymPlans: gymPlans ?? this.gymPlans,
+      selectedFeatures:selectedFeatures  ?? this.selectedFeatures,
+      selectedPlan:selectedPlan  ?? this.selectedPlan,
     );
   }
 
@@ -75,4 +74,6 @@ class GymDetailsState {
   String toString() {
     return 'GymDetailsState(state: $state, errorMessage: $errorMessage, gymDetails: $gymDetails, allGyms: $allGyms)';
   }
+
+  
 }
