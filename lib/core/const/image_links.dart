@@ -30,6 +30,9 @@ class ImageLinks {
   static const String background = 'assets/images/background.png';
   static const String backgroundstyle = 'assets/images/backgroundstyle.png';
 
+  static const String emptyimg = 'assets/images/emptyimg.png';
+  static const String uploadimg = 'assets/images/uploadimg.svg';
+
   static String frame = "";
 
   static String backgroundImage = "";

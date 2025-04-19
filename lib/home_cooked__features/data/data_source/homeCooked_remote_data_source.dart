@@ -17,7 +17,7 @@ abstract class AddHomeCookRemoteDataSource {
 
   Future<List<Map<String, dynamic>>> getMeals(String homeCookId);
 
-  Future<void> addMealModel(MealModel mealModel, String homeCookId);
+  Future<void> addMealModel(MealModel mealModel);
 
   Future<void> updateMealModel(MealModel mealModel, String homeCookId);
 
@@ -78,7 +78,7 @@ class AddHomeCookRemoteDataSourceImpl implements AddHomeCookRemoteDataSource {
   }
 
   @override
-  Future<void> addMealModel(MealModel mealModel, String homeCookId) async {
+  Future<void> addMealModel(MealModel mealModel) async {
     var docMeal = getMealsCollection().doc(mealModel.id);
     await docMeal.set(mealModel.toMap());
   }
@@ -125,7 +125,9 @@ class AddHomeCookRemoteDataSourceImpl implements AddHomeCookRemoteDataSource {
 ////////////////
   @override
   Future<List<Map<String, dynamic>>> getMeals(String homeCookId) async {
-    var docRef = getMealsCollection().orderBy('time', descending: true);
+    var docRef = getMealsCollection()
+        .where("homeCookId", isEqualTo: homeCookId)
+        .orderBy('time', descending: true);
     //.orderBy('date', descending: true);
     //var docSnap = await docRef.snapshots().listen((f) {});
     var docSnap = await docRef.get();

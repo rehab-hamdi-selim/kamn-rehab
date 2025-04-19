@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/const/icon_links.dart';
+import 'package:kamn/core/const/image_links.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
@@ -38,12 +39,12 @@ class CustomMealDetails extends StatelessWidget {
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) {
                       // alternative image in case of error
-                      return Image.asset('assets/images/welcomeImg.png',
+                      return Image.asset(ImageLinks.emptyimg,
                           fit: BoxFit.cover);
                     },
                   )
                 : Image.asset(
-                    'assets/images/welcomeImg.png',
+                    ImageLinks.emptyimg,
                     fit: BoxFit.fill,
                   ),
           ),
