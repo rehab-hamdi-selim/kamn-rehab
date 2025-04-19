@@ -8,6 +8,7 @@ import 'package:kamn/healthy_food_features/presentation/screens/order_screen.dar
 import 'package:kamn/playground_feature/authentication/presentation/screens/on_boarding_screen.dart';
 import 'package:kamn/playground_feature/sports/presentation/cubits/select_category_cubit/select_category_cubit.dart';
 import 'package:kamn/playground_feature/sports/presentation/screens/select_category_screen.dart';
+import 'package:kamn/healthy_food_features/presentation/screens/track_order.dart';
 
 import 'core/common/cubit/app_user/app_user_cubit.dart';
 import 'core/common/widget/main_loader.dart';
@@ -47,7 +48,7 @@ class CustomMainBlocConsumer extends StatelessWidget {
             useMaterial3: true,
           ),
           onGenerateRoute: AppRouter.generateRoute,
-          home: const MyCartScreen());
+          home: MyCartScreen());
     });
     //home: _buildHomeWidget(state, appUserCubit));
   }

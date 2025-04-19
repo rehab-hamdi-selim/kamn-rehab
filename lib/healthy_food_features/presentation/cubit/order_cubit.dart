@@ -33,4 +33,14 @@ class OrderCubit extends Cubit<OrderState> {
       emit(OrderFailure(e.toString()));
     }
   }
+
+  Future<void> fetchOrderById(String orderId) async {
+    emit(OrderLoading());
+    try {
+      final order = await repository.fetchOrderById(orderId);
+      emit(SingleOrderLoaded(order)); // 👈 محتاج تضيف الحالة دي
+    } catch (e) {
+      emit(OrderFailure(e.toString()));
+    }
+  }
 }

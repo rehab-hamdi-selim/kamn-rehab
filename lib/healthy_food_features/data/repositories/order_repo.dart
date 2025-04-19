@@ -8,6 +8,7 @@ abstract class OrderRepository {
     required String userId,
   });
   Future<List<OrderModel>> fetchOrders(String userId);
+  Future<OrderModel> fetchOrderById(String orderId);
 }
 
 class OrderRepositoryImpl implements OrderRepository {
@@ -43,5 +44,19 @@ class OrderRepositoryImpl implements OrderRepository {
         .get();
 
     return snapshot.docs.map((doc) => OrderModel.fromJson(doc.data())).toList();
+  }
+
+  @override
+  Future<OrderModel> fetchOrderById(String orderId) async {
+    final doc = await FirebaseFirestore.instance
+        .collection('orders')
+        .doc(orderId)
+        .get();
+
+    if (doc.exists) {
+      return OrderModel.fromFirestore(doc);
+    } else {
+      throw Exception('Order not found');
+    }
   }
 }
