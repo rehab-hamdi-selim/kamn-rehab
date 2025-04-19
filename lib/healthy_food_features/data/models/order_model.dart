@@ -29,6 +29,10 @@ class OrderModel {
     };
   }
 
+  factory OrderModel.fromFirestore(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
+    return OrderModel.fromJson(data);
+  }
   factory OrderModel.fromJson(Map<String, dynamic> json) {
     return OrderModel(
       orderId: json['orderId'],

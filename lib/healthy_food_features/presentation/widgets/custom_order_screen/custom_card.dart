@@ -5,6 +5,7 @@ import 'package:kamn/core/common/entities/meal_cart_model.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/healthy_food_features/data/models/order_model.dart';
+import 'package:kamn/healthy_food_features/presentation/screens/track_order.dart';
 
 class CardInProgress extends StatefulWidget {
   CardInProgress({
@@ -167,25 +168,37 @@ class _CardInProgressState extends State<CardInProgress> {
                   )
                 ],
               ),
-              SizedBox(width: 100.w),
+              SizedBox(width: 95.w),
               Text('Cancel',
                   style: TextStyles.fontCircularSpotify14AccentBlackMedium
                       .copyWith(color: AppPallete.redColor)),
               SizedBox(
-                width: 24.w,
+                width: 20.w,
               ),
-              Container(
-                width: 91.w,
-                height: 34.h,
-                decoration: BoxDecoration(
-                  color: AppPallete.blackColor,
-                  borderRadius: BorderRadius.circular(16.sp),
-                ),
-                child: Center(
-                  child: Text(
-                    ' Track Order',
-                    style: TextStyles.fontCircularSpotify12BlackMedium
-                        .copyWith(color: AppPallete.whiteColor),
+              GestureDetector(
+                onTap: () {
+                  print(
+                      "+++++++++++++++++++++++++++++++++++++++++++++++${widget.item.meals}");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => TrackOrderScreen(id: widget.item.orderId),
+                    ),
+                  );
+                },
+                child: Container(
+                  width: 91.w,
+                  height: 34.h,
+                  decoration: BoxDecoration(
+                    color: AppPallete.blackColor,
+                    borderRadius: BorderRadius.circular(16.sp),
+                  ),
+                  child: Center(
+                    child: Text(
+                      ' Track Order',
+                      style: TextStyles.fontCircularSpotify12BlackMedium
+                          .copyWith(color: AppPallete.whiteColor),
+                    ),
                   ),
                 ),
               )

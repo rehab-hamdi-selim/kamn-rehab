@@ -14,6 +14,11 @@ class OrderFailure extends OrderState {
   OrderFailure(this.message);
 }
 
+class SingleOrderLoaded extends OrderState {
+  final OrderModel order;
+  SingleOrderLoaded(this.order);
+}
+
 class OrderLoaded extends OrderState {
   final List<OrderModel> orders;
   OrderLoaded(this.orders);
