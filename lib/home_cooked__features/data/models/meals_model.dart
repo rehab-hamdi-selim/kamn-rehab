@@ -35,6 +35,7 @@ class MealModel {
     this.time, // ✅ optional
     this.status = MealModelStatus.ACCEPTED, // ✅ optional
   });
+  //////
 
   MealModel copyWith({
     String? id,
