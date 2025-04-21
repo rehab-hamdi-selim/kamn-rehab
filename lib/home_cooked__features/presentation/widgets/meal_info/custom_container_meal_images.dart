@@ -1,24 +1,20 @@
 import 'dart:io';
 
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:kamn/core/const/image_links.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/core/utils/alert_dialog_utils.dart';
-import 'package:kamn/core/utils/image_picker.dart';
 import 'package:kamn/home_cooked__features/data/models/home_cook_model_test.dart';
-import 'package:kamn/home_cooked__features/data/models/meals_model.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_cubit.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_state.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/add_meal_pop_up_screen.dart';
-import 'package:kamn/home_cooked__features/presentation/screen/edit_meal_pop_up_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_frame.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_meal_list.dart';
-import 'package:dotted_border/dotted_border.dart';
 
 class CustomContainerMealImages extends StatelessWidget {
   const CustomContainerMealImages({super.key, required this.mealCubit});
@@ -224,7 +220,7 @@ class CustomContainerMealImages extends StatelessWidget {
           SizedBox(height: 10.h),
           GestureDetector(
             onTap: () {
-              if (mealCubit.state.homeCookModel!.status !=
+              if (mealCubit.state.homeCookModel!.status ==
                   CurrentStatus.ACCEPTED) {
                 AlertDialogUtils.showAlert(
                   firstAction: () {

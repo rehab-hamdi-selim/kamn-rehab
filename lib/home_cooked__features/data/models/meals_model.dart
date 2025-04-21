@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
-import 'package:kamn/home_cooked__features/data/models/delivery_model.dart';
-
 enum MealModelStatus { PENDING, ACCEPTED, REJECTED }
 
 class MealModel {
@@ -35,7 +33,7 @@ class MealModel {
     required this.imageUrls,
     required this.homeCookId,
     this.time, // ✅ optional
-    this.status = MealModelStatus.PENDING, // ✅ optional
+    this.status = MealModelStatus.ACCEPTED, // ✅ optional
   });
 
   MealModel copyWith({
