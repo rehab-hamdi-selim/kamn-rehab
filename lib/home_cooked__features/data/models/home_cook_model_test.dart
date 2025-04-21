@@ -2,7 +2,6 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-
 import 'package:kamn/core/common/entities/user_model.dart';
 import 'package:kamn/home_cooked__features/data/models/delivery_model.dart';
 
@@ -58,7 +57,7 @@ class HomeCookModel {
     this.buildingNumber,
     this.apartment,
     this.delivery,
-    this.status = CurrentStatus.PENDING, // ✅ optional
+    this.status = CurrentStatus.ACCEPTED, // ✅ optional
   });
 
   HomeCookModel copyWith({

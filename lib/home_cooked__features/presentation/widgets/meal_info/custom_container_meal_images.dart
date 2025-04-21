@@ -1,18 +1,18 @@
 import 'dart:io';
 
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:kamn/core/const/image_links.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/core/utils/image_picker.dart';
-import 'package:kamn/home_cooked__features/data/models/meals_model.dart';
+import 'package:kamn/core/utils/alert_dialog_utils.dart';
+import 'package:kamn/home_cooked__features/data/models/home_cook_model_test.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_cubit.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_state.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/add_meal_pop_up_screen.dart';
-import 'package:kamn/home_cooked__features/presentation/screen/edit_meal_pop_up_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_frame.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_meal_list.dart';
 
@@ -114,34 +114,58 @@ class CustomContainerMealImages extends StatelessWidget {
                         }
                       },
                       //_pickImage(index),
-                      child: Container(
-                        width: 121.w,
-                        height: 94.h,
-                        decoration: BoxDecoration(
-                          color: AppPallete.ofWhiteColor4,
-                          borderRadius: BorderRadius.circular(12.r),
-                          border: Border.all(
-                            width: 0.2.w,
-                            color: Colors.grey.shade400,
+
+                      child: DottedBorder(
+                        color: Colors.grey.shade400,
+                        strokeWidth: 0.5.w,
+                        dashPattern: [12, 8], // 6 units dash, 3 units gap
+                        borderType: BorderType.RRect,
+                        radius: Radius.circular(16.r),
+                        child: Container(
+                          width: 121.w,
+                          height: 94.h,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15.r),
+                            border: Border.all(
+                              width: 0.5.w,
+                              color: AppPallete.ofWhiteColor4,
+                            ),
+                            color: AppPallete.ofWhiteColor4, // background color
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15.r),
+                            child: displayedImage,
                           ),
                         ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12.r),
-                          child: displayedImage,
-                        ),
-
-                        // _images[index] == null
-                        //     ? CustomStaticImg()
-                        //     : ClipRRect(
-                        //         borderRadius: BorderRadius.circular(12.r),
-                        //         child: Image.file(
-                        //           _images[index]!,
-                        //           width: 122.w,
-                        //           height: 94.h,
-                        //           fit: BoxFit.cover,
-                        //         ),
-                        //       ),
                       ),
+                      // child: Container(
+                      //   width: 121.w,
+                      //   height: 94.h,
+                      //   decoration: BoxDecoration(
+                      //     color: AppPallete.ofWhiteColor4,
+                      //     borderRadius: BorderRadius.circular(12.r),
+                      //     border: Border.all(
+                      //       width: 0.2.w,
+                      //       color: Colors.grey.shade400,
+                      //     ),
+                      //   ),
+                      //   child: ClipRRect(
+                      //     borderRadius: BorderRadius.circular(12.r),
+                      //     child: displayedImage,
+                      //   ),
+
+                      //   // _images[index] == null
+                      //   //     ? CustomStaticImg()
+                      //   //     : ClipRRect(
+                      //   //         borderRadius: BorderRadius.circular(12.r),
+                      //   //         child: Image.file(
+                      //   //           _images[index]!,
+                      //   //           width: 122.w,
+                      //   //           height: 94.h,
+                      //   //           fit: BoxFit.cover,
+                      //   //         ),
+                      //   //       ),
+                      // ),
                     );
                   },
                 );
@@ -151,7 +175,21 @@ class CustomContainerMealImages extends StatelessWidget {
           SizedBox(height: 10.h),
           GestureDetector(
             onTap: () {
-              mealCubit.uploadMealImages();
+              if (mealCubit.state.homeCookModel!.status !=
+                  CurrentStatus.ACCEPTED) {
+                AlertDialogUtils.showAlert(
+                  firstAction: () {
+                    Navigator.of(context).pop();
+                  },
+                  context: context,
+                  content:
+                      "You can't upload images until your profile is approved.",
+                  title: "Profile not approved",
+                  firstbutton: "OK",
+                );
+              } else {
+                mealCubit.uploadMealImages();
+              }
             },
             child: Container(
               width: double.infinity,
@@ -181,7 +219,23 @@ class CustomContainerMealImages extends StatelessWidget {
           ),
           SizedBox(height: 10.h),
           GestureDetector(
-            onTap: () => _openAddMealBottomSheet(context, mealCubit),
+            onTap: () {
+              if (mealCubit.state.homeCookModel!.status ==
+                  CurrentStatus.ACCEPTED) {
+                AlertDialogUtils.showAlert(
+                  firstAction: () {
+                    Navigator.of(context).pop();
+                  },
+                  context: context,
+                  content:
+                      "You can't  add meals until your profile is approved.",
+                  title: "Profile not approved",
+                  firstbutton: "OK",
+                );
+              } else {
+                _openAddMealBottomSheet(context, mealCubit);
+              }
+            },
             child: Container(
               width: double.infinity,
               height: 42.h,
@@ -229,8 +283,8 @@ class CustomStaticImg extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(
-          ImageLinks.welcomeImg,
+        SvgPicture.asset(
+          ImageLinks.uploadimg,
           height: 15.h,
           fit: BoxFit.cover,
         ),

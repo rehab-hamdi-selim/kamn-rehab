@@ -18,8 +18,7 @@ abstract class AddHomeCookRepository {
   Future<Either<Faliure, void>> updateServiceProviderHomeCookAddDeliveryData(
       HomeCookModel homeCookModel);
 
-  Future<Either<Faliure, void>> addMealModel(
-      MealModel mealModel, String homeCookId);
+  Future<Either<Faliure, void>> addMealModel(MealModel mealModel);
 
   Future<Either<Faliure, void>> updateMealModel(
       MealModel mealModel, String homeCookId);
@@ -62,10 +61,11 @@ class AddHomeCookRepositoryImpl implements AddHomeCookRepository {
   }
 
   @override
-  Future<Either<Faliure, void>> addMealModel(
-      MealModel mealModel, String homeCookId) {
+  Future<Either<Faliure, void>> addMealModel(MealModel mealModel) {
     return executeTryAndCatchForRepository(() async {
-      return await dataSource.addMealModel(mealModel, homeCookId);
+      return await dataSource.addMealModel(
+        mealModel,
+      );
     });
   }
 

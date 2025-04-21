@@ -103,6 +103,13 @@ class MealCubit extends Cubit<MealState> {
         error: error.erorr,
       ));
     }, (myMeal) {
+      if (myMeal.isEmpty) {
+        emit(state.copyWith(
+          state: MealStatus.success,
+          myMeals: myMeal,
+        ));
+        return;
+      }
       emit(state.copyWith(
           state: MealStatus.success, myMeals: myMeal, selectedMeal: myMeal[0]));
     });
@@ -127,8 +134,7 @@ class MealCubit extends Cubit<MealState> {
   }
 
   void addMeal(MealModel mealModel) async {
-    final res = await homeCookRepository.addMealModel(
-        mealModel, "u0cBRLRyHcppREpHYdNf");
+    final res = await homeCookRepository.addMealModel(mealModel);
     res.fold(
       (l) =>
           emit(state.copyWith(state: MealStatus.addMealError, error: l.erorr)),
