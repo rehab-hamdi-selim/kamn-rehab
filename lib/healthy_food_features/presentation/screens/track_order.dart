@@ -32,7 +32,9 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
               borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
             ),
             backgroundColor: Color(0xffFFFFFF),
-            builder: (context) => Bottom_sheet(),
+            builder: (context) => Bottom_sheet(
+              orderId: widget.id,
+            ),
           );
         },
         child: Padding(
@@ -42,7 +44,10 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
               const SizedBox(
                 height: 16,
               ),
-              CustomAppBarTrackOrder(),
+              CustomAppBarTrackOrder(
+                onTap: () {},
+                screenName: 'Track  Order',
+              ),
               const Order_line(),
             ],
           ),
@@ -53,10 +58,14 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
 }
 
 class Bottom_sheet extends StatelessWidget {
-  Bottom_sheet({super.key});
-
+  Bottom_sheet({super.key, required this.orderId});
+  String orderId;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(width: 375.w, child: CustomTabScreenBtnSheet());
+    return SizedBox(
+        width: 375.w,
+        child: CustomTabScreenBtnSheet(
+          orderId: orderId,
+        ));
   }
 }

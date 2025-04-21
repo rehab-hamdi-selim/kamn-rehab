@@ -27,22 +27,19 @@ class _OrderDeliveryState extends State<OrderDelivery> {
           final order = state.order;
           final meals = order.meals;
 
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                const ResturantCard(),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: meals.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return CustomCardTrackOrder(
-                      item: meals[index],
-                    );
-                  },
-                )
-              ],
-            ),
+          return Column(
+            children: [
+              const ResturantCard(),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: meals.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return CustomCardTrackOrder(
+                    item: meals[index],
+                  );
+                },
+              )
+            ],
           );
         } else if (state is OrderFailure) {
           return Center(

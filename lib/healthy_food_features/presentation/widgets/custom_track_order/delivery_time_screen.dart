@@ -1,14 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/healthy_food_features/presentation/widgets/custom_track_order/chat_delivery.dart';
 import 'package:rive/rive.dart';
 
 class DeliveryTimeScreen extends StatelessWidget {
-  DeliveryTimeScreen({super.key});
-
+  DeliveryTimeScreen({super.key, required this.orderId});
+  String orderId;
   @override
   Widget build(BuildContext context) {
+    final userId = context.read<AppUserCubit>().state.user!.uid;
+
     return Column(
       children: [
         Text('50 min',
@@ -84,15 +90,29 @@ class DeliveryTimeScreen extends StatelessWidget {
               SizedBox(
                 width: 7.w,
               ),
-              Container(
-                width: 45.w,
-                height: 45.h,
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: const Color(0xff87E697)),
-                child: SvgPicture.asset(
-                  'assets/icons/chat.svg',
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ChatScreen(
+                        currentUserId: userId,
+                        receiverId: userId,
+                        orderId: orderId,
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  width: 45.w,
+                  height: 45.h,
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: const Color(0xff87E697)),
+                  child: SvgPicture.asset(
+                    'assets/icons/chat.svg',
+                  ),
                 ),
               )
             ],
@@ -133,7 +153,7 @@ class TimelineStep extends StatelessWidget {
             Expanded(
               child: Text(
                 title,
-                overflow: TextOverflow.visible, // يخلي النص يبين كله
+                overflow: TextOverflow.visible,
                 style: TextStyle(
                   fontSize: 13,
                   color: isActive

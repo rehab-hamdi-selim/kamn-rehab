@@ -9,10 +9,8 @@ import 'package:kamn/healthy_food_features/presentation/widgets/custom_track_ord
 import 'package:kamn/healthy_food_features/presentation/widgets/custom_track_order/order_Delivery.dart';
 
 class CustomTabScreenBtnSheet extends StatefulWidget {
-  CustomTabScreenBtnSheet({
-    super.key,
-  });
-
+  CustomTabScreenBtnSheet({super.key, required this.orderId});
+  String orderId;
   @override
   State<CustomTabScreenBtnSheet> createState() =>
       _CustomTabScreenBtnSheetState();
@@ -97,7 +95,9 @@ class _CustomTabScreenBtnSheetState extends State<CustomTabScreenBtnSheet> {
         IndexedStack(
           index: isFirstActive ? 0 : 1,
           children: [
-            DeliveryTimeScreen(),
+            DeliveryTimeScreen(
+              orderId: widget.orderId,
+            ),
             OrderDelivery(),
           ],
         ),

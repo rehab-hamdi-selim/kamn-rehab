@@ -27,104 +27,76 @@ class _CustomCardTrackOrderState extends State<CustomCardTrackOrder> {
   Widget build(BuildContext context) {
     String? selectedMeal;
     // final meals = widget.item;
-    return Container(
-      padding: EdgeInsets.all(10.w),
-      width: 315.w,
-      height: 170.h,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.sp),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                widget.item.prepTime.toString(),
-                style: TextStyles.fontCircularSpotify10BlackMedium,
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          Row(
-            children: [
-              Container(
-                width: 61.w,
-                height: 51.h,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(widget.item.imageUrls.first),
-                      fit: BoxFit.cover,
-                    ),
-                    borderRadius: BorderRadius.circular(16.sp)),
-              ),
-              SizedBox(
-                width: 8.w,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 254.w,
-                    child: Row(
-                      children: [
-                        Text(
-                          widget.item.name,
-                          style: TextStyles.fontCircularSpotify12BlackMedium,
-                          softWrap: true,
-                        ),
-                        Spacer(
-                          flex: 3,
-                        ),
-                        Text(widget.item.quantity.toString()),
-                        Text("item")
-                      ],
-                    ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        padding: EdgeInsets.all(8),
+        width: 315.w,
+        height: 65.h,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.sp),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 61.w,
+              height: 51.h,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(widget.item.imageUrls.first),
+                    fit: BoxFit.cover,
                   ),
-                  Text('Kitchen: Sarah’s House',
-                      style: TextStyles.fontCircularSpotify10StealGrayMedium),
-                  Text(widget.item.id,
-                      style: TextStyles.fontCircularSpotify10StealGrayMedium),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          Row(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text('£GP ',
-                          style: TextStyles.fontCircularSpotify12BlackMedium
-                              .copyWith(
-                            color: AppPallete.darkGreenColor,
-                          )),
-                      Text(
-                        widget.item.price.toString(),
-                        style: TextStyles.fontCircularSpotify12BlackMedium,
-                      ),
-                    ],
-                  ),
-                  Text(
-                    'View details',
-                    style: TextStyles.fontCircularSpotify10StealGrayMedium,
-                  )
-                ],
-              ),
-            ],
-          ),
-        ],
+                  borderRadius: BorderRadius.circular(16.sp)),
+            ),
+            SizedBox(
+              width: 8.w,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.item.name,
+                  style: TextStyles.fontCircularSpotify12BlackMedium,
+                  softWrap: true,
+                ),
+                Text('Kitchen: Sarah’s House',
+                    style: TextStyles.fontCircularSpotify10StealGrayMedium),
+                Text(widget.item.id,
+                    style: TextStyles.fontCircularSpotify10StealGrayMedium),
+              ],
+            ),
+            Spacer(
+              flex: 1,
+            ),
+            Column(
+              children: [
+                Row(
+                  children: [
+                    Text(widget.item.quantity.toString()),
+                    Text("item")
+                  ],
+                ),
+                Spacer(
+                  flex: 1,
+                ),
+                Row(
+                  children: [
+                    Text('£GP ',
+                        style: TextStyles.fontCircularSpotify12BlackMedium
+                            .copyWith(
+                          color: AppPallete.darkGreenColor,
+                        )),
+                    Text(
+                      widget.item.price.toString(),
+                      style: TextStyles.fontCircularSpotify12BlackMedium,
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
-    ;
   }
 }
