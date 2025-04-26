@@ -15,30 +15,25 @@ class CustomIngredients extends StatelessWidget {
       return const Center(child: Text("No ingredients available"));
     }
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 5,
-            childAspectRatio: 1.2,
-            crossAxisSpacing: 2,
-            mainAxisSpacing: 1,
-          ),
-          itemCount: ingredients.length,
-          itemBuilder: (context, index) {
-            return _ingredientItem(ingredients[index]);
-          },
-        ),
-      ],
+    return SizedBox(
+      height: 80,
+      child: ListView.builder(
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: ingredients.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: _ingredientItem(ingredients[index]),
+          );
+        },
+      ),
     );
   }
 
   Widget _ingredientItem(String ingredient) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
           width: 40,
@@ -53,7 +48,7 @@ class CustomIngredients extends StatelessWidget {
             color: Colors.green[700],
           ),
         ),
-        const SizedBox(height: 6),
+        const SizedBox(height: 10),
         Text(
           ingredient,
           textAlign: TextAlign.center,

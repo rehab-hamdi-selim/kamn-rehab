@@ -8,8 +8,6 @@ import 'package:kamn/healthy_food_features/presentation/widgets/home_page/custom
 import 'package:kamn/healthy_food_features/presentation/widgets/home_page/custom_search_bar.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/home_page/rounded_border_button.dart';
 
-import '../../data/models/food_item_model.dart';
-
 class SearchingOfHomePageScreen extends StatelessWidget {
   const SearchingOfHomePageScreen({super.key});
 

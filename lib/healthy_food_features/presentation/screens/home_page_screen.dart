@@ -13,7 +13,6 @@ import 'package:kamn/healthy_food_features/presentation/widgets/home_page/custom
 import 'package:kamn/healthy_food_features/presentation/widgets/home_page/custom_resturants_list.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/home_page/custom_search_bar.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/home_page/custom_tab_bar.dart';
-import 'package:kamn/healthy_food_features/presentation/widgets/home_page/custom_test_meals_grid.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/home_page/view_more_button.dart';
 import '../../../core/const/image_links.dart';
 import '../../../core/theme/app_pallete.dart';
@@ -105,6 +104,7 @@ class _HomePageHealthyFoodScreenState extends State<HomePageHealthyFoodScreen> {
           child: ListView(
             physics: const BouncingScrollPhysics(),
             children: [
+              SizedBox(height: 30.h),
               const CustomAppBar(),
               SizedBox(height: 32.h),
               Row(
@@ -146,11 +146,8 @@ class _HomePageHealthyFoodScreenState extends State<HomePageHealthyFoodScreen> {
               ),
               SizedBox(height: 16.h),
               CustomTabBar(categories: categories),
-              SizedBox(
-                height: 280.h,
-                child: const CustomCategoriesList(),
-              ),
-              SizedBox(height: 16.h),
+              const CustomCategoriesList(),
+              SizedBox(height: 32.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -175,7 +172,7 @@ class _HomePageHealthyFoodScreenState extends State<HomePageHealthyFoodScreen> {
               SizedBox(
                 height: 250.h,
                 child: CustomHomeCooksList(
-                  foodItems: homeCooks,
+                  foodItem: homeCooks,
                 ),
               ),
               SizedBox(

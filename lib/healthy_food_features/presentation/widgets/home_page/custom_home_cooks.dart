@@ -5,6 +5,8 @@ import 'package:kamn/core/const/icon_links.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/healthy_food_features/data/models/food_item_model.dart';
+import 'package:kamn/healthy_food_features/data/models/test_meal_model.dart';
+import 'package:kamn/healthy_food_features/presentation/screens/food_details_screen.dart';
 
 class CustomHomeCooks extends StatelessWidget {
   const CustomHomeCooks({
@@ -12,85 +14,114 @@ class CustomHomeCooks extends StatelessWidget {
     required this.foodItem,
   });
 
-  final FoodItem foodItem;
+  final TestMealModel foodItem;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 280.h,
-      child: Stack(
-        children: [
-          Container(
-            width: 160.w,
-            height: 260.h,
-            decoration: BoxDecoration(
-              color: AppPallete.whiteColor,
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: AppPallete.blackColor.withValues(
-                    alpha: 0.1,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => FoodDetailsScreen(meal: foodItem),
+          ),
+        );
+      },
+      child: SizedBox(
+        width: 160.w,
+        height: 180.h,
+        child: Stack(
+          children: [
+            Container(
+              width: 160.w,
+              height: 180.h,
+              decoration: BoxDecoration(
+                color: AppPallete.whiteColor,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppPallete.blackColor.withValues(
+                      alpha: 0.1,
+                    ),
+                    blurRadius: 6,
+                    spreadRadius: 0,
                   ),
-                  blurRadius: 6,
-                  spreadRadius: 0,
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Container(
-                      width: 160.w,
-                      height: 85.h,
-                      decoration: ShapeDecoration(
-                        image: DecorationImage(
-                          image: foodItem.imageUrl.isNotEmpty
-                              ? AssetImage(foodItem.imageUrl)
-                              : AssetImage('assets/placeholder.png'),
-                          fit: BoxFit.fill,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: -10.h,
-                      left: 8.w,
-                      child: _buildRating(),
-                    ),
-                    Positioned(
-                      bottom: -10.h,
-                      right: 8.w,
-                      child: _buildFavoriteIcon(),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Stack(
+                    clipBehavior: Clip.none,
                     children: [
-                      SizedBox(height: 16.h),
-                      Text(
-                        foodItem.name,
-                        style: TextStyles.fontCircularSpotify15MediumBlack,
+                      Container(
+                        width: 160.w,
+                        height: 85.h,
+                        decoration: ShapeDecoration(
+                          image: DecorationImage(
+                            image: foodItem.imageUrls.isNotEmpty
+                                ? NetworkImage(foodItem.imageUrls.first)
+                                : AssetImage('assets/placeholder.png'),
+                            fit: BoxFit.fill,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                        ),
                       ),
-                      SizedBox(height: 4.h),
-                      _buildTags(),
-                      SizedBox(height: 8.h),
-                      _buildCaloriesAndPrice(),
+                      Positioned(
+                        bottom: -10.h,
+                        left: 8.w,
+                        child: _buildRating(),
+                      ),
+                      Positioned(
+                        bottom: -10.h,
+                        right: 8.w,
+                        child: _buildFavoriteIcon(),
+                      ),
                     ],
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 10.h),
+                        Row(
+                          children: [
+                            Text('Sarah’s Kitchen',
+                                style:
+                                    TextStyles.fontCircularSpotify8GrayRegular),
+                            Spacer(
+                              flex: 1,
+                            ),
+                            SvgPicture.asset('assets/icons/cooking.svg'),
+                            Text(
+                              foodItem.prepTime.toString() + 'min',
+                              style: TextStyles
+                                  .fontCircularSpotify16BlackRegular
+                                  .copyWith(fontSize: 6),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 4.h),
+                        Text(
+                          foodItem.name,
+                          style: TextStyles.fontCircularSpotify12BlackMedium,
+                        ),
+                        SizedBox(height: 4.h),
+                        _buildTags(),
+                        SizedBox(height: 5.h),
+                        _buildCaloriesAndPrice(),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -117,12 +148,12 @@ class CustomHomeCooks extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            foodItem.rating.toString(),
-            style: TextStyles.fontCircularSpotify10BlackRegular.copyWith(
-              color: Color(0xFF1F1F1F),
-            ),
-          ),
+          // Text(
+          //   foodItems.rating.toString(),
+          //   style: TextStyles.fontCircularSpotify10BlackRegular.copyWith(
+          //     color: Color(0xFF1F1F1F),
+          //   ),
+          // ),
           SizedBox(width: 2.w),
           SvgPicture.asset(
             IconLinks.star,
@@ -166,7 +197,7 @@ class CustomHomeCooks extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         spacing: 6.w,
-        children: foodItem.tags.map((tag) {
+        children: foodItem.ingredients.map((tag) {
           return Container(
             padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 4.h),
             decoration: BoxDecoration(
@@ -194,7 +225,7 @@ class CustomHomeCooks extends StatelessWidget {
                 style: TextStyles.circularSpotify10LightGrey,
               ),
               TextSpan(
-                text: '${foodItem.calories} kcal',
+                text: foodItem.calories.toString() + ' kcal',
                 style: TextStyles.circularSpotify10LightGrey,
               ),
             ],
@@ -205,7 +236,7 @@ class CustomHomeCooks extends StatelessWidget {
           TextSpan(
             children: [
               TextSpan(
-                text: '${foodItem.price} ',
+                text: foodItem.price.toString(),
                 style: TextStyles.circularSpotify14BoldDarkBlack,
               ),
               TextSpan(

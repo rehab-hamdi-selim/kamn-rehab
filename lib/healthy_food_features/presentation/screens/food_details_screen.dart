@@ -82,7 +82,6 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
             ),
           ),
 
-
           ////////////
           ///////////
           Positioned(
@@ -97,11 +96,14 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
               ),
               child: Container(
                 color: Colors.white,
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 16.w,
+                ),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(height: 16.h),
                       const CustomRestaurantBadge(),
                       SizedBox(height: 16.h),
                       CustomText(widget.meal.name, 24.sp, FontWeight.bold),
@@ -117,17 +119,19 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                           Constants.ingredientsTitle, 18.sp, FontWeight.bold),
                       SizedBox(height: 8.h),
                       CustomIngredients(ingredients: widget.meal.ingredients),
-                      SizedBox(height: 20.h),
-                      CustomOrderSection(
-                        price: widget.meal.price,
-                        meal: widget.meal,
-                      ),
                     ],
                   ),
                 ),
               ),
             ),
           ),
+          Positioned(
+            bottom: 16,
+            child: CustomOrderSection(
+              price: widget.meal.price,
+              meal: widget.meal,
+            ),
+          )
         ],
       ),
     );
