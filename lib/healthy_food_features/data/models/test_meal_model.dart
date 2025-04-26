@@ -4,6 +4,7 @@ class TestMealModel extends Equatable {
   final String id;
   final String name;
   final String type;
+
   final int prepTime;
   final int calories;
   final double price;

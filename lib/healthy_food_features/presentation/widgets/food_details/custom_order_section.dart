@@ -5,6 +5,7 @@ import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/core/common/widget/loader.dart';
 import 'package:kamn/healthy_food_features/data/models/test_meal_model.dart';
+import 'package:kamn/healthy_food_features/presentation/screens/my_cart_screen.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/food_details/custom_text.dart';
 import 'package:kamn/healthy_food_features/presentation/screens/cart_screen.dart';
 
@@ -23,11 +24,9 @@ class CustomOrderSection extends StatelessWidget {
     return BlocBuilder<AppUserCubit, AppUserState>(
       builder: (context, state) {
         final quantity = state.currentMealQuantity ?? 1;
-        if (state.isLoadingCart()) {
-          return const CircularProgressIndicator();
-        }
+
         return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Row(
               children: [
@@ -47,6 +46,9 @@ class CustomOrderSection extends StatelessWidget {
                   },
                 ),
               ],
+            ),
+            SizedBox(
+              width: 100.w,
             ),
             ElevatedButton(
               onPressed: () {
@@ -77,7 +79,7 @@ class CustomOrderSection extends StatelessWidget {
       context.read<AppUserCubit>().getCartWithQuantities();
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const CartScreen()),
+        MaterialPageRoute(builder: (context) => const MyCartScreen()),
       );
     } else {
       context.read<AppUserCubit>().addToCart(meal);

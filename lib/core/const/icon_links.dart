@@ -24,10 +24,10 @@ class IconLinks {
   static const String filter = "assets/icons/Filter_icon.svg";
   static const String location = "assets/images/location_tag.svg";
 
-  static const String addtofavRest = 'assets/icons/addtofavRest.svg';
+  // static const String addtofavRest = 'assets/icons/addtofavRest.svg';
   // static const String vegan = 'assets/icons/vegan 1.svg';
-  static const String chickenleg = 'assets/icons/chicken-leg 1.svg';
-  static const String steak = 'assets/icons/steak 1.svg';
+  static const String chickenleg = 'assets/icons/chickenTest.svg';
+  static const String steak = 'assets/icons/Meat.svg';
   static const String fish = 'assets/icons/fish 1.svg';
   // static const String cart = 'assets/icons/Cart Large .svg';
 }

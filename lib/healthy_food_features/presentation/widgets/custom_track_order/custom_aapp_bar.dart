@@ -3,7 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:kamn/core/theme/style.dart';
 
 class CustomAppBarTrackOrder extends StatelessWidget {
-  CustomAppBarTrackOrder({super.key});
+  CustomAppBarTrackOrder(
+      {super.key, required this.onTap, required this.screenName});
+
+  String screenName;
+  Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +18,7 @@ class CustomAppBarTrackOrder extends StatelessWidget {
           icon: SvgPicture.asset('assets/icons/back_arrow.svg'),
         ),
         Text(
-          'Track Order',
+          screenName,
           style: TextStyles.fontCircularSpotify21BlackMedium,
         )
       ],
