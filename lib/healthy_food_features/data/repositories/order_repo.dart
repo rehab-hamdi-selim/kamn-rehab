@@ -9,6 +9,13 @@ abstract class OrderRepository {
   });
   Future<List<OrderModel>> fetchOrders(String userId);
   Future<OrderModel> fetchOrderById(String orderId);
+  Future<void> sendMessage({
+    required String orderId,
+    required String senderId,
+    required String receiverId,
+    required String text,
+  });
+  Stream<List<Map<String, dynamic>>> messageStream(String orderId);
 }
 
 class OrderRepositoryImpl implements OrderRepository {
@@ -58,5 +65,34 @@ class OrderRepositoryImpl implements OrderRepository {
     } else {
       throw Exception('Order not found');
     }
+  }
+
+  @override
+  Future<void> sendMessage(
+      {required String orderId,
+      required String senderId,
+      required String receiverId,
+      required String text}) async {
+    await FirebaseFirestore.instance
+        .collection('orders')
+        .doc(orderId)
+        .collection('messages')
+        .add({
+      'senderId': senderId,
+      'receiverId': receiverId,
+      'text': text,
+      'timestamp': FieldValue.serverTimestamp(),
+    });
+  }
+
+  @override
+  Stream<List<Map<String, dynamic>>> messageStream(String orderId) {
+    return FirebaseFirestore.instance
+        .collection('orders')
+        .doc(orderId)
+        .collection('messages')
+        .orderBy('timestamp', descending: false)
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
 }

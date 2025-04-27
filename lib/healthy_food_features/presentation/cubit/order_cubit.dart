@@ -38,7 +38,37 @@ class OrderCubit extends Cubit<OrderState> {
     emit(OrderLoading());
     try {
       final order = await repository.fetchOrderById(orderId);
-      emit(SingleOrderLoaded(order)); // 👈 محتاج تضيف الحالة دي
+      emit(SingleOrderLoaded(order));
+    } catch (e) {
+      emit(OrderFailure(e.toString()));
+    }
+  }
+
+  Future<void> sendMessage({
+    required String orderId,
+    required String senderId,
+    required String receiverId,
+    required String text,
+  }) async {
+    try {
+      await repository.sendMessage(
+        orderId: orderId,
+        senderId: senderId,
+        receiverId: receiverId,
+        text: text,
+      );
+      emit(OrderMessageSent());
+      streamMessages(orderId);
+    } catch (e) {
+      emit(OrderFailure(e.toString()));
+    }
+  }
+
+  // بث حي للرسائل (stream)
+  void streamMessages(String orderId) {
+    try {
+      final stream = repository.messageStream(orderId);
+      emit(OrderMessagesStream(stream));
     } catch (e) {
       emit(OrderFailure(e.toString()));
     }

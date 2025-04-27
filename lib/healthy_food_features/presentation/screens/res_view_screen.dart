@@ -8,13 +8,14 @@ import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/healthy_food_features/data/models/food_item_model.dart';
 import 'package:kamn/healthy_food_features/data/models/restaurant_model.dart';
+import 'package:kamn/healthy_food_features/data/models/test_meal_model.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/custom_meal_item/custom_meal_item.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/custom_res_view/custom_categ_item.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/custom_res_view/custom_navbar.dart';
 
 class RestaurantDetails extends StatefulWidget {
-  const RestaurantDetails({super.key});
-
+  RestaurantDetails({super.key, required this.meal});
+  TestMealModel meal;
   @override
   State<RestaurantDetails> createState() => _RestaurantDetailsState();
 }
@@ -43,7 +44,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                         icon: Icon(Icons.arrow_circle_left_rounded)),
                     horizontalSpace(10),
                     Text(
-                      currentRestaurant.name,
+                      widget.meal.name,
                       style: TextStyles.fontCircularSpotify21BlackMedium,
                     ),
                   ],
@@ -59,7 +60,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(18.r)),
                         image: DecorationImage(
-                            image: AssetImage(currentRestaurant.imageUrl),
+                            image: NetworkImage(widget.meal.imageUrls.first),
                             fit: BoxFit.fill)),
                     child: Align(
                       alignment: Alignment.bottomRight,
@@ -69,7 +70,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                           backgroundColor: AppPallete.whiteColor,
                           radius: 25.r, // Adjust the size as needed
                           child: SvgPicture.asset(
-                            IconLinks.addtofavRest,
+                            'assets/icons/heart.svg',
                             width: 24.w, // Adjust width
                             height: 24.h, // Adjust height
                           ),
@@ -85,7 +86,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          currentRestaurant.name,
+                          widget.meal.name,
                           style: TextStyles.fontCircularSpotify21BlackBold,
                         ),
                         Row(children: [
@@ -134,7 +135,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                   child: Column(
                     children: [
                       Text(
-                        currentRestaurant.description,
+                        widget.meal.details,
                         overflow: isExpandText
                             ? TextOverflow.visible
                             : TextOverflow.ellipsis,
