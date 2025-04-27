@@ -6,17 +6,22 @@ import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/common/entities/meal_cart_model.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/healthy_food_features/data/models/test_meal_model.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/custom_my_cart/counter.dart';
 
 class CardMycart extends StatelessWidget {
   final MealCartModel item;
+  late TestMealModel? testMealMode;
 
-  const CardMycart({super.key, required this.item});
+  CardMycart({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
     return Dismissible(
         key: Key(item.id),
+        onDismissed: (direction) {
+          context.read<AppUserCubit>().removeFromCart(item);
+        },
         background: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.sp),
