@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/di/di.dart';
 import 'package:kamn/core/helpers/spacer.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
@@ -8,9 +9,10 @@ import 'package:kamn/core/utils/custom_hpme_cook_button.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_cubit.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_state.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/screen/meal_info_screen.dart';
 
 import '../../../../../core/common/cubit/app_user/app_user_cubit.dart';
-import '../../../screen/food_etails_info_screen.dart';
 
 class CustomConfirmationDialog extends StatelessWidget {
   const CustomConfirmationDialog({super.key});
@@ -78,8 +80,16 @@ class CustomConfirmationDialog extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        const EditMealScreen()));
+                                    builder: (context) => BlocProvider(
+                                        create: (context) => getIt<MealCubit>()
+                                          ..getMeals(state.homeCookModel!.id!
+                                              //"u0cBRLRyHcppREpHYdNf"
+                                              )
+                                          ..initServiceProviderHomeCook(
+                                              state.homeCookModel!),
+                                        child: MealInfoScreen()
+                                        //AddMealTest(),
+                                        )));
                           },
                           child: const Text("OK"),
                         ),

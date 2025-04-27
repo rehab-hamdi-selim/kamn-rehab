@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_frame.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/weekday_selector.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 class CustomWeeklyMeal extends StatefulWidget {
   const CustomWeeklyMeal({super.key});
@@ -96,7 +96,7 @@ class _CustomWeeklyMealState extends State<CustomWeeklyMeal> {
               ),
               child: Text(
                 'Add time',
-                style: TextStyles.fontCircularSpotify15lightWiteColorMedium,
+                style: TextStyles.fontCircularSpotify10White,
                 textAlign: TextAlign.center,
               ),
             ),

@@ -15,10 +15,11 @@ class HomeCookWrapperScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           BlocConsumer<AddHomeCookCubit, AddHomeCookState>(
             listener: (context, state) {
-              if (state.state == AddHomeCookStatus.getHomeCookError) {
+              if (state.state == AddHomeCookStatus.success) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -30,12 +31,12 @@ class HomeCookWrapperScreen extends StatelessWidget {
                         builder: (context) => BlocProvider(
                             create: (context) => getIt<MealCubit>()
                               ..getMeals(state.homeCookModel!.id!
-                                  //"u0cBRLRyHcppREpHYdNf"
+                                    //"u0cBRLRyHcppREpHYdNf"
                                   )
-                              ..initServiceProviderHomeCook(
-                                  state.homeCookModel!),
-                            child: MealInfoScreen()
-                            //AddMealTest(),
+                                  ..initServiceProviderHomeCook(
+                                      state.homeCookModel!),
+                                child: MealInfoScreen()
+                              //AddMealTest(),
                             )));
               }
             },

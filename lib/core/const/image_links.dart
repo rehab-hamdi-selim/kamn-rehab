@@ -33,7 +33,8 @@ class ImageLinks {
   static const String emptyimg = 'assets/images/emptyimg.png';
   static const String uploadimg = 'assets/images/uploadimg.svg';
 
-  static String frame = "";
+  static String frame = "assets/images/frame1.png";
+  static String frame2 = "assets/images/Frame2.png";
 
-  static String backgroundImage = "";
+  static String backgroundImage = "assets/images/frame1.png";
 }

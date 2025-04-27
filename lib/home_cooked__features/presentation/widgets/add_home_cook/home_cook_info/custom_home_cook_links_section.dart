@@ -6,8 +6,8 @@ import 'package:kamn/core/utils/custom_container.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/widgets/add_gym/custom_scoial_text_form_field.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_cubit.dart';
 
-class CustomGymLinksSection extends StatelessWidget {
-  const CustomGymLinksSection({super.key});
+class CustomHomeCookLinksSection extends StatelessWidget {
+  const CustomHomeCookLinksSection({super.key});
 
   @override
   Widget build(BuildContext context) {

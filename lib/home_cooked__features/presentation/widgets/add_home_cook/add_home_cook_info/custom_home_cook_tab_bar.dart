@@ -6,6 +6,8 @@ import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_cubit.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_state.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/home_-cook_info_screen.dart';
+import 'package:kamn/home_cooked__features/presentation/screen/meal_info_screen.dart';
+import 'package:kamn/home_cooked__features/presentation/screen/order_options_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/verify_location_screen_screen.dart';
 
 class CustomHomeCookTabBar extends StatelessWidget {
@@ -24,7 +26,7 @@ class CustomHomeCookTabBar extends StatelessWidget {
             children: [
               SizedBox(height: 20.h),
               Container(
-                height: 47.h,
+                height: 50.h,
                 padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25),
@@ -34,6 +36,7 @@ class CustomHomeCookTabBar extends StatelessWidget {
                   onTap: (index) {
                     _onTabTapped(index, cubit.tabController, context);
                   },
+                  labelPadding: EdgeInsets.symmetric(horizontal: 12),
                   controller: cubit.tabController,
                   dividerHeight: 0,
                   indicatorSize: TabBarIndicatorSize.tab,
@@ -42,6 +45,7 @@ class CustomHomeCookTabBar extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   labelColor: Colors.white,
+                  isScrollable: true,
                   unselectedLabelColor: Colors.black,
                   labelStyle: TextStyles.fontCircularSpotify12WhiteRegular,
                   unselectedLabelStyle:
@@ -58,9 +62,11 @@ class CustomHomeCookTabBar extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   controller: cubit.tabController,
-                  children: const [
-                    CustomGymInfoScreen(),
-                    VerifyLocationScreenScreen(),
+                  children: [
+                    const HomeCookInfoScreen(),
+                    const VerifyLocationScreenScreen(),
+                    MealInfoScreen(),
+                    OrderOptionsHomeCookScreen()
                   ],
                 ),
               ),

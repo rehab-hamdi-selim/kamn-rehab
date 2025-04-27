@@ -16,8 +16,8 @@ class CircularBackButton extends StatelessWidget {
           backgroundColor: AppPallete.accentBlackColor,
           child: Center(
             child: SvgPicture.asset(
-              height: 12.h,
-              width: 12.w,
+              height: 10.h,
+              width: 10.w,
               IconLinks.arrow,
             ),
           ),

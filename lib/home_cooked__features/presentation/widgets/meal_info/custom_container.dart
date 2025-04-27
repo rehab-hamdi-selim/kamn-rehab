@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/image_links.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/home_cooked__features/data/models/home_cook_model_test.dart';
-import 'package:kamn/home_cooked__features/data/models/meals_model.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_cubit.dart';
-import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_state.dart';
 
 // class CustomContainer extends StatelessWidget {
 //   const CustomContainer({super.key, required this.mealCubit});
@@ -84,7 +81,7 @@ class CustomContainer extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(13.r),
         image: DecorationImage(
-          image: AssetImage(ImageLinks.backgroundImage),
+          image: AssetImage(ImageLinks.frame2),
           fit: BoxFit.cover,
         ),
       ),

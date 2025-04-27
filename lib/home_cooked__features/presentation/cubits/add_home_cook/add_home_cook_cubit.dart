@@ -26,6 +26,12 @@ class AddHomeCookCubit extends Cubit<AddHomeCookState> {
   final TextEditingController featureDescriptionController =
       TextEditingController();
 
+  final TextEditingController homeAddressController = TextEditingController();
+  final TextEditingController streetController = TextEditingController();
+  final TextEditingController buildingNumberController =
+      TextEditingController();
+  final TextEditingController apartmentController = TextEditingController();
+
   AddHomeCookCubit({required this.repository})
       : super(AddHomeCookState(state: AddHomeCookStatus.initial));
 
@@ -42,15 +48,26 @@ class AddHomeCookCubit extends Cubit<AddHomeCookState> {
     menuController.dispose();
     priceController.dispose();
     featureDescriptionController.dispose();
+    homeAddressController.dispose();
+    streetController.dispose();
+    buildingNumberController.dispose();
+    apartmentController.dispose();
     return super.close();
   }
 
   final AddHomeCookRepository repository;
-  final List<String> tabs = ["Personal Info", "Location Verify"];
+  final List<String> tabs = [
+    "Personal Info",
+    "Location Verify",
+    "Meal Info",
+    "Order Options"
+  ];
   final List<File> _homeCookImages = [];
   late TabController tabController;
   final GlobalKey<FormState> homeCookInfoKey = GlobalKey<FormState>();
-  final GlobalKey<FormState> requiredDocumentsKey = GlobalKey<FormState>();
+
+  //final GlobalKey<FormState> requiredDocumentsKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> addressCookVerifyKey = GlobalKey<FormState>();
 
   List<File> get homeCookImages => List.unmodifiable(_homeCookImages);
 
@@ -221,8 +238,9 @@ class AddHomeCookCubit extends Cubit<AddHomeCookState> {
   }
 
   void validateHomeCookInfo() {
-    final isGymInfoValid = homeCookInfoKey.currentState?.validate() ?? false;
-    emit(state.copyWith(isGymInfoValid: isGymInfoValid));
+    final isHomeCookInfoValid =
+        homeCookInfoKey.currentState?.validate() ?? false;
+    emit(state.copyWith(isHomeCookInfoValid: isHomeCookInfoValid));
   }
 
   void onAcceptTab(bool? value) {

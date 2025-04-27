@@ -1,24 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/helpers/spacer.dart';
+import 'package:kamn/core/helpers/validators.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
+import 'package:kamn/core/utils/custom_gym_text_form_field.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_cubit.dart';
 
-class CustomHomeAddress extends StatefulWidget {
-  @override
-  _AddressFormState createState() => _AddressFormState();
-}
-
-class _AddressFormState extends State<CustomHomeAddress> {
-  final _formKey = GlobalKey<FormState>();
-
-  final TextEditingController homeAddressController =
-      TextEditingController(text: "Alexandria, San Stefano, Egypt");
-  final TextEditingController streetController =
-      TextEditingController(text: "San Stefano");
-  final TextEditingController buildingNumberController =
-      TextEditingController(text: "12");
-  final TextEditingController apartmentController =
-      TextEditingController(text: "5");
-
+class CustomHomeAddress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,9 +17,9 @@ class _AddressFormState extends State<CustomHomeAddress> {
         border: Border.all(color: AppPallete.mediumLightGray, width: 0.2),
       ),
       child: Padding(
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.all(11.w),
         child: Form(
-          key: _formKey,
+          key: context.read<AddHomeCookCubit>().addressCookVerifyKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -56,37 +45,56 @@ class _AddressFormState extends State<CustomHomeAddress> {
               SizedBox(height: 5.h),
 
               // Home Address Field
-              _buildTextField("Home Address *", homeAddressController),
-
-              SizedBox(height: 5.h),
+              CustomGymTextFormField(
+                valodator: emptyValidator,
+                controller:
+                    context.read<AddHomeCookCubit>().homeAddressController,
+                label: ' Home Address *',
+                hint: 'enter your Address',
+                helper: "Alexandria, San Stefano, Egypt.....",
+              ),
+              verticalSpace(12.h),
 
               // Street & Building Number Fields
               Row(
                 children: [
                   Expanded(
-                    child: _buildTextField("Street", streetController),
+                    child: CustomGymTextFormField(
+                      valodator: emptyValidator,
+                      controller:
+                          context.read<AddHomeCookCubit>().streetController,
+                      label: '  Street *',
+                      hint: 'enter your Address',
+                      helper: "San Stefano.....",
+                    ),
                   ),
                   SizedBox(width: 10.w),
                   Expanded(
-                    child: _buildTextField(
-                      "Building Number",
-                      buildingNumberController,
-                      keyboardType: TextInputType.number,
+                    child: CustomGymTextFormField(
+                      valodator: emptyValidator,
+                      controller: context
+                          .read<AddHomeCookCubit>()
+                          .buildingNumberController,
+                      label: '  Building Number *',
+                      hint: 'enter building num',
+                      helper: "12.....",
                     ),
                   ),
                 ],
               ),
 
-              SizedBox(height: 15.h),
+              verticalSpace(12.h),
 
               // Apartment Field
-              _buildTextField(
-                "Apartment",
-                apartmentController,
-                keyboardType: TextInputType.number,
+              CustomGymTextFormField(
+                valodator: emptyValidator,
+                controller: context.read<AddHomeCookCubit>().streetController,
+                label: '    Apartment ',
+                hint: 'enter your apartment num',
+                helper: "12.....",
               ),
 
-              SizedBox(height: 10.h),
+              verticalSpace(12.h),
 
               // Info Text
               Text(
@@ -97,27 +105,6 @@ class _AddressFormState extends State<CustomHomeAddress> {
           ),
         ),
       ),
-    );
-  }
-
-  // Reusable TextField Widget
-  Widget _buildTextField(String label, TextEditingController controller,
-      {TextInputType keyboardType = TextInputType.text}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label, style: TextStyle(fontSize: 12.sp)),
-        SizedBox(height: 5.h),
-        TextFormField(
-          controller: controller,
-          style: TextStyle(fontSize: 10),
-          keyboardType: keyboardType,
-          decoration: InputDecoration(
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(10.r)),
-          ),
-        ),
-      ],
     );
   }
 }

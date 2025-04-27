@@ -28,15 +28,16 @@ class VerifyLocationScreenScreen extends StatelessWidget {
           ),
           CustomHomeCookNavigationButtons(
             onNextPressed: () {
+              cubit.addressCookVerifyKey.currentState!.validate();
               cubit.checkMandatoryFields();
 
               //TODO: fix this key
               // //${cubit.requiredDocumentsKey.currentState!.validate()}
-              print('''1 ${cubit.state.isGymInfoValid}
+              print('''1 ${cubit.state.isHomeCookValid}
                   3${cubit.state.isValidAll}
                   ''');
 
-              if (cubit.state.isGymInfoValid! &&
+              if (cubit.state.isHomeCookValid! &&
                   //  cubit.requiredDocumentsKey.currentState!.validate() &&
                   cubit.state.isValidAll) {
                 showDialog(

@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/utils/custom_hpme_cook_button.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_cubit.dart';
-import 'package:kamn/home_cooked__features/presentation/widgets/add_home_cook/gym_info/custom_gym_links_section.dart';
-import 'package:kamn/home_cooked__features/presentation/widgets/add_home_cook/gym_info/custom_gym_logo_info_section.dart';
+import 'package:kamn/home_cooked__features/presentation/widgets/add_home_cook/home_cook_info/custom_home_cook_links_section.dart';
 
 import '../../../core/helpers/spacer.dart';
+import '../widgets/add_home_cook/home_cook_info/custom_home_cook_logo_info_section.dart';
 
-class CustomGymInfoScreen extends StatelessWidget {
-  const CustomGymInfoScreen({super.key});
+class HomeCookInfoScreen extends StatelessWidget {
+  const HomeCookInfoScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +17,9 @@ class CustomGymInfoScreen extends StatelessWidget {
       child: Column(
         spacing: 16.h,
         children: [
-          const CustomGymLogoInfoSection(),
+          const CustomHomeCookLogoInfoSection(),
           // const CustomGymPhotosSection(),
-          const CustomGymLinksSection(),
+          const CustomHomeCookLinksSection(),
           Row(
             children: [
               CustomCookButton(onPressed: () {

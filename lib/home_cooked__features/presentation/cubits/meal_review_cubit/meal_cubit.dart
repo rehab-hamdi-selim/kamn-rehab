@@ -200,6 +200,11 @@ class MealCubit extends Cubit<MealState> {
     ));
   }
 
+  initController() {
+    mealNameController.text = state.selectedMeal?.name ?? "";
+    descriptionController.text = state.selectedMeal?.details ?? "";
+  }
+
   void resetFlags() {
     emit(state.copyWith(
       state: MealStatus.success,

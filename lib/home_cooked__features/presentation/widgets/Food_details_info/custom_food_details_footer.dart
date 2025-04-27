@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/constants.dart';
 import 'package:kamn/core/const/image_links.dart';
 import 'package:kamn/core/helpers/spacer.dart';
@@ -20,17 +20,17 @@ class CustomFoodDetailsFooter extends StatelessWidget {
         ElevatedButton(
             onPressed: () {
               showModalBottomSheet(
-                    context: context,
-                    isScrollControlled:
-                        true, // Allows the bottom sheet to take full height
-                    shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(20.r)),
-                    ),
-                    builder: (context) => BlocProvider.value(
-                          value: cubit,
-                          child: EditMealPopUpScreen(),
-                        ));
+                  context: context,
+                isScrollControlled:
+                    true, // Allows the bottom sheet to take full height
+                shape: RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(20.r)),
+                ),
+                builder: (_) => BlocProvider.value(
+                      value: cubit..initController(),
+                      child: EditMealPopUpScreen(),
+                    ));
 
             },
             style: ElevatedButton.styleFrom(

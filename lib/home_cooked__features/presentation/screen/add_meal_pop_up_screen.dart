@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -78,7 +77,7 @@ class _AddMealPopUpScreenState extends State<AddMealPopUpScreen> {
                       verticalSpace(7.h),
                       CustomTxtField(
                         hasCounter: false,
-                        height: 35.73.h,
+                        height: 40.73.h,
                         width: 315.w,
                         hintText: "Enter Meal Name",
                         txtController: mealCubit.mealNameController,
@@ -210,7 +209,7 @@ class _AddMealPopUpScreenState extends State<AddMealPopUpScreen> {
                       );
                       mealCubit.addMeal(mealmodel);
                       print(mealmodel);
-                    }
+                        }
                   },
                   title: Constants.addMeal);
             },

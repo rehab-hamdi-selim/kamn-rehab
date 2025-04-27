@@ -45,7 +45,7 @@ enum AddHomeCookStatus {
 //   }
 // }
 
-extension AddGymStateX on AddHomeCookState {
+extension AddHomeCookStateX on AddHomeCookState {
   bool get isInitial => state == AddHomeCookStatus.initial;
 
   bool get isLoading => state == AddHomeCookStatus.loading;
@@ -108,7 +108,7 @@ class AddHomeCookState {
   final Map<String, List<String>>? imagesUrlMap;
   final HomeCookModel? homeCookModel;
   final double? uploadProgress;
-  final bool? isGymInfoValid;
+  final bool? isHomeCookValid;
   final bool? isAccept;
   final bool? isConfirm;
   final int? numberOfImages;
@@ -126,7 +126,7 @@ class AddHomeCookState {
       this.uploadProgress = 0,
       this.isAccept = false,
       this.isConfirm = false,
-      this.isGymInfoValid = false,
+      this.isHomeCookValid = false,
       this.numberOfImages,
       this.isValid = const [true, true, true],
       this.isValidNationalId = const [true, true]});
@@ -149,7 +149,7 @@ class AddHomeCookState {
       double? uploadProgress,
       bool? isAccept,
       bool? isConfirm,
-      bool? isGymInfoValid,
+      bool? isHomeCookInfoValid,
       int? numberOfImages,
       List<bool>? isValid,
       List<bool>? isValidNationalId}) {
@@ -166,7 +166,7 @@ class AddHomeCookState {
         isAccept: isAccept ?? this.isAccept,
         isConfirm: isConfirm ?? this.isConfirm,
         uploadProgress: uploadProgress ?? this.uploadProgress,
-        isGymInfoValid: isGymInfoValid ?? this.isGymInfoValid,
+        isHomeCookValid: isHomeCookInfoValid ?? this.isHomeCookValid,
         numberOfImages: numberOfImages ?? this.numberOfImages,
         isValid: isValid ?? this.isValid,
         isValidNationalId: isValidNationalId ?? this.isValidNationalId);
@@ -174,7 +174,7 @@ class AddHomeCookState {
 
   @override
   String toString() {
-    return 'AddGymState(state: $state, erorrMessage: $erorrMessage, logo: $logo, utilityBill: $utilityBill, nationalId: $nationalId, isValid: $isValid, isValidNationalId: $isValidNationalId, homeCookModel: $homeCookModel)';
+    return 'AddHomeCookState(state: $state, erorrMessage: $erorrMessage, logo: $logo, utilityBill: $utilityBill, nationalId: $nationalId, isValid: $isValid, isValidNationalId: $isValidNationalId, homeCookModel: $homeCookModel)';
   }
 }
 

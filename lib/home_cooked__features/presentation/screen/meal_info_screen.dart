@@ -3,14 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/home_cooked__features/data/models/tabs_model.dart';
+import 'package:kamn/core/utils/custom_hpme_cook_button.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_cubit.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_cubit.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/order_options_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/circular_back_button.dart';
-import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_back_button.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_container.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_container_meal_images.dart';
-import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_meal_list.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_next_button.dart';
 import 'package:kamn/home_cooked__features/presentation/widgets/meal_info/custom_weekly_meal.dart';
 
@@ -35,7 +34,7 @@ class MealInfoScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomHeaderMeal(),
+                CustomHeaderHomeCook(),
 
                 // CustomTabContainer(
                 //   tabNames: tabNames,
@@ -57,12 +56,21 @@ class MealInfoScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Flexible(
-                      child: CustomBackButton(
+                    Flexible(
+                      child: CustomCookButton(
                         text: 'Back',
-                        icons: Icons.arrow_back_ios,
-                        color: AppPallete.ofWhiteColor,
+                        onPressed: () {
+                          context.read<AddHomeCookCubit>().goToPreviousPage();
+                        },
+                        isBackButton: true,
+                        foregroundColor: AppPallete.blackColor,
+                        backgroundColor: AppPallete.ofWhiteColor,
                       ),
+                      // child: CustomBackButton(
+                      //   text: 'Back',
+                      //   icons: Icons.arrow_back_ios,
+                      //   color: AppPallete.ofWhiteColor,
+                      // ),
                     ),
                     SizedBox(width: 8.w),
                     Flexible(
@@ -72,7 +80,7 @@ class MealInfoScreen extends StatelessWidget {
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => BlocProvider.value(
                               value: cubit,
-                              child: OrderOptionsHomecook(),
+                              child: OrderOptionsHomeCookScreen(),
                             ),
                           ));
                         },
@@ -99,8 +107,8 @@ class MealInfoScreen extends StatelessWidget {
   }
 }
 
-class CustomHeaderMeal extends StatelessWidget {
-  const CustomHeaderMeal({
+class CustomHeaderHomeCook extends StatelessWidget {
+  const CustomHeaderHomeCook({
     super.key,
   });
 
@@ -115,16 +123,16 @@ class CustomHeaderMeal extends StatelessWidget {
         ),
         Text(
           'Add Home Cook Data',
-          style: TextStyles.fontCircularSpotify21AccentBlackColorMedium,
+          style: TextStyles.fontCircularSpotify20AccentBlackMedium,
         ),
         SizedBox(
           height: 2.h,
         ),
         Text(
           'Set Up Your Home Cook Profile',
-          style: TextStyles.fontCircularSpotify13DarkGreyColorrRegular,
+          style: TextStyles.fontCircularSpotify14GrayRegular,
         ),
-        SizedBox(height: 19.h),
+        SizedBox(height: 10.h),
       ],
     );
   }

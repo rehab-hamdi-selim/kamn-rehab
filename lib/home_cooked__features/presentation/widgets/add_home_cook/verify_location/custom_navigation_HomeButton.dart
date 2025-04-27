@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
-import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_cubit.dart';
 
 import '../../../../../core/utils/custom_hpme_cook_button.dart';
 
@@ -20,7 +20,7 @@ class CustomHomeCookNavigationButtons extends StatelessWidget {
         CustomCookButton(
           text: 'Back',
           onPressed: () {
-            context.read<AddGymCubit>().goToPreviousPage();
+            context.read<AddHomeCookCubit>().goToPreviousPage();
           },
           isBackButton: true,
           foregroundColor: AppPallete.blackColor,
