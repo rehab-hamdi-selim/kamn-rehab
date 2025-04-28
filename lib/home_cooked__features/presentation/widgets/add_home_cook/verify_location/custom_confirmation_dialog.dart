@@ -77,19 +77,20 @@ class CustomConfirmationDialog extends StatelessWidget {
                         ElevatedButton(
                           onPressed: () {
                             cubit.reset();
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => BlocProvider(
-                                        create: (context) => getIt<MealCubit>()
-                                          ..getMeals(state.homeCookModel!.id!
-                                              //"u0cBRLRyHcppREpHYdNf"
-                                              )
-                                          ..initServiceProviderHomeCook(
-                                              state.homeCookModel!),
-                                        child: MealInfoScreen()
-                                        //AddMealTest(),
-                                        )));
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => BlocProvider(
+                            //             create: (context) => getIt<MealCubit>()
+                            //               ..getMeals(state.homeCookModel!.id!
+                            //                   //"u0cBRLRyHcppREpHYdNf"
+                            //                   )
+                            //               ..initServiceProviderHomeCook(
+                            //                   state.homeCookModel!),
+                            //             child: MealInfoScreen()
+                            //             //AddMealTest(),
+                            //             )));
+                            cubit.goToNextPage();
                           },
                           child: const Text("OK"),
                         ),

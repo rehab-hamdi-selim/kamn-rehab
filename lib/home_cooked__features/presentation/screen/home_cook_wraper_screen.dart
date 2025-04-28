@@ -24,11 +24,14 @@ class HomeCookWrapperScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => const HomeCookScreen()));
-              } else if (state.state == AddHomeCookStatus.getHomeCookSuccess) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => BlocProvider(
+              } 
+            },
+            builder: (context, state) {
+              if (state.state == AddHomeCookStatus.getHomeCookLoading) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              else if (state.state == AddHomeCookStatus.getHomeCookSuccess) {
+                 BlocProvider(
                             create: (context) => getIt<MealCubit>()
                               ..getMeals(state.homeCookModel!.id!
                                     //"u0cBRLRyHcppREpHYdNf"
@@ -37,12 +40,7 @@ class HomeCookWrapperScreen extends StatelessWidget {
                                       state.homeCookModel!),
                                 child: MealInfoScreen()
                               //AddMealTest(),
-                            )));
-              }
-            },
-            builder: (context, state) {
-              if (state.state == AddHomeCookStatus.getHomeCookLoading) {
-                return const Center(child: CircularProgressIndicator());
+                            );
               }
               return const Center(
                   child: Text('Welcome we will navigate to the next screen'));

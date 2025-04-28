@@ -6,6 +6,7 @@ import 'package:kamn/core/routing/app_router.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
 import 'package:kamn/gym_feature/gyms/presentation/screen/choose_plan_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_cubit.dart';
+import 'package:kamn/home_cooked__features/presentation/cubits/meal_review_cubit/meal_cubit.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/home_cook_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/home_cook_wraper_screen.dart';
 
@@ -49,13 +50,12 @@ class CustomMainBlocConsumer extends StatelessWidget {
               useMaterial3: true,
             ),
             onGenerateRoute: AppRouter.generateRoute,
-            home:
-                //MealInfoScreen());
-                BlocProvider(
-                    create: (context) =>
-                        getIt<AddHomeCookCubit>()..getServiceProviderHomeCook(),
-                    child: HomeCookWrapperScreen()));
-        //  home: _buildHomeWidget(state, appUserCubit));
+            //MealInfoScreen());
+            // BlocProvider(
+            //     create: (context) =>
+            //         getIt<AddHomeCookCubit>()..getServiceProviderHomeCook(),
+            //     child: HomeCookWrapperScreen()));
+            home: _buildHomeWidget(state, appUserCubit));
       },
     );
   }
@@ -67,8 +67,15 @@ class CustomMainBlocConsumer extends StatelessWidget {
       //////////////////
     }
     if (state.isNotInstalled()) {
-      return BlocProvider(
-        create: (context) => getIt<AddHomeCookCubit>(),
+      return MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => getIt<AddHomeCookCubit>(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<MealCubit>(),
+          ),
+        ],
         child: const HomeCookScreen(),
       );
     }

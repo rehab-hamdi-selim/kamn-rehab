@@ -6,6 +6,7 @@ import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_cubit.dart';
 import 'package:kamn/home_cooked__features/presentation/cubits/add_home_cook/add_home_cook_state.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/home_-cook_info_screen.dart';
+import 'package:kamn/home_cooked__features/presentation/screen/home_cook_wraper_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/meal_info_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/order_options_screen.dart';
 import 'package:kamn/home_cooked__features/presentation/screen/verify_location_screen_screen.dart';
@@ -65,7 +66,7 @@ class CustomHomeCookTabBar extends StatelessWidget {
                   children: [
                     const HomeCookInfoScreen(),
                     const VerifyLocationScreenScreen(),
-                    MealInfoScreen(),
+                    HomeCookWrapperScreen(),
                     OrderOptionsHomeCookScreen()
                   ],
                 ),
