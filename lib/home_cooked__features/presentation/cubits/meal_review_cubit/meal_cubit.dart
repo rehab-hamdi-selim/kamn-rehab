@@ -14,6 +14,7 @@ import '../../../data/repositories/home_cook_repository.dart';
 @injectable
 class MealCubit extends Cubit<MealState> {
   AddHomeCookRepository homeCookRepository;
+
   MealCubit(this.homeCookRepository)
       : super(MealState(state: MealStatus.initial));
 
@@ -22,12 +23,27 @@ class MealCubit extends Cubit<MealState> {
   final TextEditingController kcalController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
-
+  TextEditingController? deliveryFeeController = TextEditingController();
   final GlobalKey<FormState> addMealKey = GlobalKey<FormState>();
   final GlobalKey<FormState> updateMealKey = GlobalKey<FormState>();
-  TextEditingController? deliveryFeeController = TextEditingController();
+
   final deliveryformKey = GlobalKey<FormState>();
   final ImagePicker _picker = ImagePicker();
+
+  initController() {
+    mealNameController.text = state.selectedMeal?.name ?? "";
+    descriptionController.text = state.selectedMeal?.details ?? "";
+    prepController.text = state.selectedMeal?.prepTime.toString() ?? "";
+    priceController.text = state.selectedMeal?.price.toString() ?? "";
+
+    kcalController.text = state.selectedMeal?.calories.toString() ?? "";
+  }
+
+  void reset() {
+    emit(state.copyWith(
+      state: MealStatus.initial,
+    ));
+  }
 
   Future<void> pickImageMeal(int index) async {
     final XFile? pickedFile =
@@ -148,7 +164,8 @@ class MealCubit extends Cubit<MealState> {
 
         emit(state.copyWith(
           state: MealStatus.addMealSuccess,
-          selectedMeal: mealModel,
+
+          // selectedMeal: mealModel,
           myMeals: updatedMeals,
         ));
       },
@@ -200,10 +217,6 @@ class MealCubit extends Cubit<MealState> {
     ));
   }
 
-  initController() {
-    mealNameController.text = state.selectedMeal?.name ?? "";
-    descriptionController.text = state.selectedMeal?.details ?? "";
-  }
 
   void resetFlags() {
     emit(state.copyWith(

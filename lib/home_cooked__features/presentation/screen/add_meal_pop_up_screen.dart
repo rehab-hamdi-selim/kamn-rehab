@@ -175,10 +175,13 @@ class _AddMealPopUpScreenState extends State<AddMealPopUpScreen> {
             listener: (context, state) {
               if (state.isAddMealSuccess) {
                 Navigator.pop(context);
+                mealCubit.reset();
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text("Meal Added successfully!")),
                 );
+                mealCubit.reset();
               }
+
               if (state.isAddMealError) {
                 Navigator.pop(context);
                 AlertDialogUtils.showAlert(
