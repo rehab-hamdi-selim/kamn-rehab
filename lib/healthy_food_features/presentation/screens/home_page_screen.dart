@@ -8,10 +8,10 @@ import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/healthy_food_features/data/models/category_data.dart';
 import 'package:kamn/healthy_food_features/data/models/food_item_model.dart';
 import 'package:kamn/healthy_food_features/presentation/cubit/test_meals_cubit.dart';
+import 'package:kamn/healthy_food_features/presentation/screens/search_home_page_screen.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/home_page/custom_categories_list.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/home_page/custom_home_cooks_list.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/home_page/custom_resturants_list.dart';
-import 'package:kamn/healthy_food_features/presentation/widgets/home_page/custom_search_bar.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/home_page/custom_tab_bar.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/home_page/view_more_button.dart';
 import '../../../core/const/image_links.dart';
@@ -109,11 +109,60 @@ class _HomePageHealthyFoodScreenState extends State<HomePageHealthyFoodScreen> {
               SizedBox(height: 32.h),
               Row(
                 children: [
-                  const Expanded(
-                    child: CustomSearchBar(
-                      hintText: 'search...',
+                  // Expanded(
+                  //   child: InkWell(
+                  //     onTap: () {
+                  //       print('search bar +++++++++++');
+                  //       Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //           builder: (context) =>
+                  //               const SearchingOfHomePageScreen(),
+                  //         ),
+                  //       );
+                  //     },
+                  //     child: CustomSearchBar(
+                  //       hintText: 'search...',
+                  //     ),
+                  //   ),
+
+                  // ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BlocProvider.value(
+                            value: context.read<TestMealsCubit>(),
+                            child: const SearchingOfHomePageScreen(),
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: 280.w,
+                      height: 40.h,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.r),
+                        border: Border.all(
+                          color: AppPallete.tooLightGray,
+                        ),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.search,
+                              color: AppPallete.lightGrey,
+                            ),
+                            Text('Search......'),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
+
                   SizedBox(width: 16.w),
                   Container(
                     width: 46.w,
@@ -175,9 +224,9 @@ class _HomePageHealthyFoodScreenState extends State<HomePageHealthyFoodScreen> {
                   foodItem: homeCooks,
                 ),
               ),
-              SizedBox(
-                height: 12.h,
-              ),
+              // SizedBox(
+              //   height: 12.h,
+              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

@@ -6,6 +6,7 @@ import 'package:kamn/healthy_food_features/presentation/screens/cart_screen.dart
 import 'package:kamn/healthy_food_features/presentation/screens/home_page_screen.dart';
 import 'package:kamn/healthy_food_features/presentation/screens/my_cart_screen.dart';
 import 'package:kamn/healthy_food_features/presentation/screens/order_screen.dart';
+import 'package:kamn/healthy_food_features/presentation/screens/search_home_page_screen.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/custom_track_order/chat_delivery.dart';
 import 'package:kamn/playground_feature/authentication/presentation/screens/on_boarding_screen.dart';
 import 'package:kamn/playground_feature/sports/presentation/cubits/select_category_cubit/select_category_cubit.dart';
