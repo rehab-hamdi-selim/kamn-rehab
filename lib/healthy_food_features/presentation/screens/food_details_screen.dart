@@ -24,6 +24,8 @@ class FoodDetailsScreen extends StatefulWidget {
 }
 
 class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
+  bool liked = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,18 +67,18 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                 Positioned(
                   top: 40.h,
                   left: 16.w,
-                  child: _iconButton(
-                      Icons.arrow_back, () => Navigator.pop(context)),
+                  child: _iconButton(Icons.arrow_back,
+                      () => Navigator.pop(context), Colors.white, Colors.black),
                 ),
                 Positioned(
                   top: 200.h,
                   right: 16.w,
-                  child: _iconButton(Icons.favorite_border, () {}),
-                ),
-                Positioned(
-                  top: 100.h,
-                  right: 5.w,
-                  child: _iconButton(Icons.arrow_forward_rounded, () {}),
+                  child: _iconButton(
+                      liked ? Icons.favorite : Icons.favorite_border, () {
+                    setState(() {
+                      liked = !liked; // اعمل Toggle بين Like و Unlike
+                    });
+                  }, liked ? Colors.red : Colors.black, Colors.white),
                 ),
               ],
             ),
@@ -137,11 +139,11 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
     );
   }
 
-  Widget _iconButton(IconData icon, VoidCallback onPressed) {
+  Widget _iconButton(IconData icon, VoidCallback onPressed, Color color,
+      Color backgroundColor) {
     return CircleAvatar(
-      backgroundColor: Colors.white,
-      child: IconButton(
-          icon: Icon(icon, color: Colors.black), onPressed: onPressed),
+      backgroundColor: backgroundColor,
+      child: IconButton(icon: Icon(icon, color: color), onPressed: onPressed),
     );
   }
 }

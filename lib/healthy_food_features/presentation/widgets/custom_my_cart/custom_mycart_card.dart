@@ -21,23 +21,13 @@ class CardMycart extends StatelessWidget {
         key: Key(item.id),
         onDismissed: (direction) {
           context.read<AppUserCubit>().removeFromCart(item);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('${item.name} removed from cart'),
+            ),
+          );
         },
         background: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.sp),
-            border: Border(
-              right: BorderSide(
-                color: const Color(0xffF8DB8A),
-                width: 5.sp,
-              ),
-            ),
-            color: const Color(0xffFFDB81),
-          ),
-          alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.only(left: 20),
-          child: SvgPicture.asset("assets/icons/pen.svg"),
-        ),
-        secondaryBackground: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.sp),
             border: Border(

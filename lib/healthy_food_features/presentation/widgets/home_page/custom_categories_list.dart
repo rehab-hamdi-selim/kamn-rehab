@@ -7,10 +7,21 @@ import 'package:kamn/healthy_food_features/presentation/cubit/test_meals_cubit.d
 
 import 'custom_categories.dart';
 
-class CustomCategoriesList extends StatelessWidget {
+class CustomCategoriesList extends StatefulWidget {
   const CustomCategoriesList({
     super.key,
   });
+
+  @override
+  State<CustomCategoriesList> createState() => _CustomCategoriesListState();
+}
+
+class _CustomCategoriesListState extends State<CustomCategoriesList> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<TestMealsCubit>().getTestMeals();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +48,6 @@ class CustomCategoriesList extends StatelessWidget {
           );
         }
 
-        if (state.status == TestMealsStatus.initial) {
-          return SizedBox(height: 200.h);
-        }
-
         return SizedBox(
           height: 200.h,
           child: ListView.builder(
@@ -49,20 +56,8 @@ class CustomCategoriesList extends StatelessWidget {
             itemCount: state.meals.length,
             itemBuilder: (context, index) {
               final meal = state.meals[index];
-              return Padding(
-                padding: EdgeInsets.only(
-                  left: 5.w,
-                  right: 5.w,
-                  top: 20.h,
-                ),
-                child: CustomCategories(
-                  title: meal.name,
-                  image: meal.imageUrls.first,
-                  price: meal.price.toString(),
-                  calories: meal.calories.toString(),
-                  description: meal.specialtyTags.join(", "),
-                  meal: meal,
-                ),
+              return CustomCategories(
+                meal: meal,
               );
             },
           ),
