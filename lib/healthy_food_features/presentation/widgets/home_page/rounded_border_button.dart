@@ -12,7 +12,7 @@ class RoundedBorderButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IntrinsicWidth(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 9.h),
+        // padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 9.h),
         decoration: ShapeDecoration(
           shape: RoundedRectangleBorder(
             side: BorderSide(
@@ -24,9 +24,12 @@ class RoundedBorderButton extends StatelessWidget {
           ),
         ),
         child: Center(
-          child: Text(
-            text,
-            style: TextStyles.circularSpotify14RegularDarkBlack,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 9),
+            child: Text(
+              text,
+              style: TextStyles.circularSpotify14RegularDarkBlack,
+            ),
           ),
         ),
       ),

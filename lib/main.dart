@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 // import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,8 +39,12 @@ import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/common/cubit/cubit/cart_cubit.dart';
 import 'package:kamn/core/di/di.dart';
 import 'package:kamn/custom_main_bloc_consumer.dart';
+import 'package:kamn/healthy_food_features/data/data_sources/test_meals_data_source.dart';
 import 'package:kamn/healthy_food_features/data/repositories/order_repo.dart';
+import 'package:kamn/healthy_food_features/data/repositories/test_meals_repository_impl.dart';
+import 'package:kamn/healthy_food_features/domain/repositories/test_meals_repository.dart';
 import 'package:kamn/healthy_food_features/presentation/cubit/order_cubit.dart';
+import 'package:kamn/healthy_food_features/presentation/cubit/test_meals_cubit.dart';
 import 'package:kamn/healthy_food_features/presentation/screens/my_cart_screen.dart';
 import 'package:kamn/healthy_food_features/presentation/screens/order_screen.dart';
 import 'package:kamn/init_dependencies.dart';
@@ -99,6 +104,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => OrderCubit(OrderRepositoryImpl()),
         ),
+        BlocProvider(
+            create: (context) => TestMealsCubit(TestMealsRepositoryImpl(
+                TestMealsDataSourceImpl(FirebaseFirestore.instance)))),
       ],
       child: const ScreenUtilInit(
         designSize: Size(375, 812),

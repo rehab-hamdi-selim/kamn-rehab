@@ -228,6 +228,7 @@ class AppUserCubit extends Cubit<AppUserState> {
       // Find the first occurrence of the meal with the matching ID
       final updatedCart = List<TestMealModel>.from(state.cart);
       final index = updatedCart.indexWhere((item) => item.id == meal.id);
+      emit(state.copyWith(cart: updatedCart));
 
       if (index != -1) {
         // Remove only the first occurrence

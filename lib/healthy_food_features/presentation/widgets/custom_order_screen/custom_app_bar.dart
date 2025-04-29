@@ -10,7 +10,9 @@ class CustomAppBar extends StatelessWidget {
     return Row(
       children: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: SvgPicture.asset('assets/icons/back_arrow.svg'),
         ),
         Text(
