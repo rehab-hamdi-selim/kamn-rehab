@@ -45,13 +45,13 @@ List<Category> categories = [
 ];
 
 List<Category> ingredients = [
-  // Category(name: 'Salt', icon: 'assets/images/Salt.svg'),
-  // Category(name: 'Chicken', icon: 'assets/icons/chicken.svg'),
-  // Category(name: 'Onion (Allergy)', icon: 'assets/icons/onion.svg'),
-  // Category(name: 'Garlic', icon: 'assets/icons/garlic.svg'),
-  // // Category(name: 'Chili pepper', icon: 'assets/icons/chili.svg'),
-  // // Category(name: 'Broccoli', icon: 'assets/icons/broccoli.svg'),
-  // // Category(name: 'Cucumber', icon: 'assets/icons/cucumber.svg'),
-  // Category(name: 'Orange', icon: 'assets/icons/orange.svg'),
-  // Category(name: 'Walnut', icon: 'assets/icons/walnut.svg'),
+  Category(name: 'Salt', icon: 'assets/images/Salt.svg'),
+  Category(name: 'Chicken', icon: 'assets/icons/chicken.svg'),
+  Category(name: 'Onion (Allergy)', icon: 'assets/icons/onion.svg'),
+  Category(name: 'Garlic', icon: 'assets/icons/garlic.svg'),
+  Category(name: 'Chili pepper', icon: 'assets/icons/chili.svg'),
+  Category(name: 'Broccoli', icon: 'assets/icons/broccoli.svg'),
+  Category(name: 'Cucumber', icon: 'assets/icons/cucumber.svg'),
+  Category(name: 'Orange', icon: 'assets/icons/orange.svg'),
+  Category(name: 'Walnut', icon: 'assets/icons/walnut.svg'),
 ];
