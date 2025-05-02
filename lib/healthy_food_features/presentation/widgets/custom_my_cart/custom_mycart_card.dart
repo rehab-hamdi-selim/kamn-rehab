@@ -9,25 +9,26 @@ import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/healthy_food_features/data/models/test_meal_model.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/custom_my_cart/counter.dart';
 
-class CardMycart extends StatelessWidget {
+class CardMycart extends StatefulWidget {
   final MealCartModel item;
   late TestMealModel? testMealMode;
 
   CardMycart({super.key, required this.item});
 
   @override
+  State<CardMycart> createState() => _CardMycartState();
+}
+
+class _CardMycartState extends State<CardMycart> {
+  @override
   Widget build(BuildContext context) {
     return Dismissible(
-        key: Key(item.id),
-        onDismissed: (direction) {
-          context.read<AppUserCubit>().removeFromCart(item);
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('${item.name} removed from cart'),
-            ),
-          );
+        key: ValueKey(widget.item.id.toString()),
+        onDismissed: (direction) async {
+          await _handleDelete(context, widget.item);
         },
-        background: Container(
+        background: Container(),
+        secondaryBackground: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.sp),
             border: Border(
@@ -42,7 +43,7 @@ class CardMycart extends StatelessWidget {
           padding: const EdgeInsets.only(right: 20),
           child: SvgPicture.asset("assets/icons/delete.svg"),
         ),
-        child: Container_cart_card(item: item));
+        child: Container_cart_card(item: widget.item));
   }
 }
 
@@ -103,12 +104,17 @@ class Container_cart_card extends StatelessWidget {
               SizedBox(
                 width: 40.w,
               ),
-              Padding(
-                padding: EdgeInsets.only(bottom: 40.h),
-                child: SvgPicture.asset(
-                  'assets/icons/delete.svg',
-                  width: 20,
-                  height: 20,
+              GestureDetector(
+                onTap: () {
+                  _handleDelete(context, item);
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 40.h),
+                  child: SvgPicture.asset(
+                    'assets/icons/delete.svg',
+                    width: 20,
+                    height: 20,
+                  ),
                 ),
               ),
             ],
@@ -140,10 +146,10 @@ class Container_cart_card extends StatelessWidget {
               Counter(
                 counter: item.quantity,
                 onIncrease: () {
-                  context.read<AppUserCubit>().increaseQuantity(item.id);
+                  context.read<AppUserCubit>().addToCart(item);
                 },
                 onDecrease: () {
-                  context.read<AppUserCubit>().decreaseQuantity(item.id);
+                  context.read<AppUserCubit>().removeFromCart(item);
                 },
               )
             ],
@@ -152,4 +158,11 @@ class Container_cart_card extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<void> _handleDelete(BuildContext context, MealCartModel item) async {
+  await context.read<AppUserCubit>().deleteCartItem(item);
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text('${item.name} removed from cart')),
+  );
 }
