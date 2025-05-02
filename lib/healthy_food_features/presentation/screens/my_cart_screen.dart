@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,7 +7,6 @@ import 'package:kamn/core/common/cubit/cubit/cart_cubit.dart';
 import 'package:kamn/core/common/cubit/cubit/cart_state.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/healthy_food_features/data/models/order_model.dart';
 import 'package:kamn/healthy_food_features/presentation/cubit/order_cubit.dart';
 import 'package:kamn/healthy_food_features/presentation/screens/order_screen.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/custom_my_cart/custom_app_bar.dart';
@@ -46,7 +44,7 @@ class MyCartScreen extends StatelessWidget {
 
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: CardMycart(item: item),
+                        child: CardMycart(key: ObjectKey(item), item: item),
                       );
                     },
                   );

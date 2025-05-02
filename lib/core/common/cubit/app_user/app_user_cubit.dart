@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/healthy_food_features/data/models/test_meal_model.dart';
@@ -268,7 +267,8 @@ class AppUserCubit extends Cubit<AppUserState> {
 
       // حذف كل النسخ من الوجبة المحددة
       updatedCart.removeWhere((item) => item.id == meal.id);
-
+      _updateCartView(updatedCart);
+// emit(state.copyWith(cartView:[] ,cartState:AppUserCartStates.success),);
       await _userCartRepository.updateCart(updatedCart, state.user?.uid ?? '');
 
       _updateCartView(updatedCart);

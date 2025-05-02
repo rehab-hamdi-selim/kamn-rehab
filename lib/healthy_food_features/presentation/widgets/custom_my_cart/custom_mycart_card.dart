@@ -23,7 +23,7 @@ class _CardMycartState extends State<CardMycart> {
   @override
   Widget build(BuildContext context) {
     return Dismissible(
-        key: ValueKey(widget.item.id.toString()),
+        key: ObjectKey(widget.item),
         onDismissed: (direction) async {
           await _handleDelete(context, widget.item);
         },
