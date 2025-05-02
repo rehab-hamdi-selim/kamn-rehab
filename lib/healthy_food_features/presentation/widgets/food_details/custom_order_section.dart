@@ -71,12 +71,22 @@ class _CustomOrderSectionState extends State<CustomOrderSection> {
                 onDecrease: decreaseQuantity,
                 onIncrease: increaseQuantity,
               ),
-              Spacer(
+              const Spacer(
                 flex: 1,
               ),
               ElevatedButton(
                 onPressed: () {
-                  _handleOrder(context, true);
+                  context
+                      .read<AppUserCubit>()
+                      .addToCart(widget.meal, quantity: quantity);
+                  context.read<AppUserCubit>().getCartWithQuantities();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const MyCartScreen()),
+                  );
+
+                  // _handleOrder(context, true);
                 },
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
@@ -104,6 +114,8 @@ class _CustomOrderSectionState extends State<CustomOrderSection> {
   }
 
   void _handleOrder(BuildContext context, bool isGoToCart) {
+    context.read<AppUserCubit>().addToCart(widget.meal);
+
     if (isGoToCart) {
       context.read<AppUserCubit>().getCartWithQuantities();
 
@@ -111,8 +123,6 @@ class _CustomOrderSectionState extends State<CustomOrderSection> {
         context,
         MaterialPageRoute(builder: (context) => const MyCartScreen()),
       );
-    } else {
-      context.read<AppUserCubit>().addToCart(widget.meal);
     }
   }
 }
