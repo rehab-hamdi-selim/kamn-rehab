@@ -194,11 +194,12 @@ class AppUserCubit extends Cubit<AppUserState> {
   }
 
   // Cart methods
-  Future<void> addToCart(TestMealModel meal) async {
+  Future<void> addToCart(TestMealModel meal, {int quantity = 1}) async {
     try {
       emit(state.copyWith(cartState: AppUserCartStates.loading));
 
-      final updatedCart = List<TestMealModel>.from(state.cart)..add(meal);
+      final updatedCart = List<TestMealModel>.from(state.cart)
+        ..addAll(List.generate(quantity, (_) => meal)); // كرر الوجبة
       await _userCartRepository.updateCart(updatedCart, state.user?.uid ?? '');
 
       // Update cart view immediately after adding
@@ -219,6 +220,71 @@ class AppUserCubit extends Cubit<AppUserState> {
 
   double getCartTotalFromState() {
     return _userCartRepository.getCartTotal(state.cartView);
+  }
+
+  // Future<void> deleteCartItem(MealCartModel meal) async {
+  //   try {
+  //     emit(state.copyWith(cartState: AppUserCartStates.loading));
+
+  //     final userId = state.user?.uid;
+  //     if (userId == null) {
+  //       emit(state.copyWith(
+  //         cartState: AppUserCartStates.failure,
+  //         errorMessage: 'User not found',
+  //       ));
+  //       return;
+  //     }
+
+  //     // حذف من Firestore (لو بتستخدم docID == meal.id)
+  //     await FirebaseFirestore.instance.collection('test_meals').doc().delete();
+
+  //     // حذف من cart و cartView
+  //     final updatedCart = List<TestMealModel>.from(state.cart)
+  //       ..removeWhere((item) => item.id == meal.id);
+
+  //     final updatedCartView = List<MealCartModel>.from(state.cartView)
+  //       ..removeWhere((item) => item.id == meal.id);
+
+  //     emit(state.copyWith(
+  //       cart: updatedCart,
+  //       cartView: updatedCartView,
+  //       currentMealQuantity:
+  //           state.currentMealQuantity > 0 ? state.currentMealQuantity - 1 : 0,
+  //       cartState: AppUserCartStates.success,
+  //     ));
+  //   } catch (e) {
+  //     emit(state.copyWith(
+  //       cartState: AppUserCartStates.failure,
+  //       errorMessage: 'Failed to delete item: $e',
+  //     ));
+  //   }
+  // }
+  Future<void> deleteCartItem(TestMealModel meal) async {
+    try {
+      emit(state.copyWith(cartState: AppUserCartStates.loading));
+
+      final updatedCart = List<TestMealModel>.from(state.cart);
+
+      // حذف كل النسخ من الوجبة المحددة
+      updatedCart.removeWhere((item) => item.id == meal.id);
+      _updateCartView(updatedCart);
+// emit(state.copyWith(cartView:[] ,cartState:AppUserCartStates.success),);
+      await _userCartRepository.updateCart(updatedCart, state.user?.uid ?? '');
+
+      _updateCartView(updatedCart);
+      getMealQuantity(meal.id);
+
+      emit(state.copyWith(
+        cartState: AppUserCartStates.success,
+        cart: updatedCart,
+        currentMealQuantity: 0, // لأنه تم حذف كل الوجبة
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        cartState: AppUserCartStates.failure,
+        errorMessage: 'Failed to remove item from cart',
+      ));
+    }
   }
 
   Future<void> removeFromCart(TestMealModel meal) async {

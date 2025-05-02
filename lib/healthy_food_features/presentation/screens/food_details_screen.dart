@@ -24,6 +24,8 @@ class FoodDetailsScreen extends StatefulWidget {
 }
 
 class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
+  bool liked = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,23 +67,22 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                 Positioned(
                   top: 40.h,
                   left: 16.w,
-                  child: _iconButton(
-                      Icons.arrow_back, () => Navigator.pop(context)),
+                  child: _iconButton(Icons.arrow_back,
+                      () => Navigator.pop(context), Colors.white, Colors.black),
                 ),
                 Positioned(
                   top: 200.h,
                   right: 16.w,
-                  child: _iconButton(Icons.favorite_border, () {}),
-                ),
-                Positioned(
-                  top: 100.h,
-                  right: 5.w,
-                  child: _iconButton(Icons.arrow_forward_rounded, () {}),
+                  child: _iconButton(
+                      liked ? Icons.favorite : Icons.favorite_border, () {
+                    setState(() {
+                      liked = !liked; // اعمل Toggle بين Like و Unlike
+                    });
+                  }, liked ? Colors.red : Colors.black, Colors.white),
                 ),
               ],
             ),
           ),
-
 
           ////////////
           ///////////
@@ -97,11 +98,14 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
               ),
               child: Container(
                 color: Colors.white,
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 16.w,
+                ),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(height: 16.h),
                       const CustomRestaurantBadge(),
                       SizedBox(height: 16.h),
                       CustomText(widget.meal.name, 24.sp, FontWeight.bold),
@@ -117,27 +121,29 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                           Constants.ingredientsTitle, 18.sp, FontWeight.bold),
                       SizedBox(height: 8.h),
                       CustomIngredients(ingredients: widget.meal.ingredients),
-                      SizedBox(height: 20.h),
-                      CustomOrderSection(
-                        price: widget.meal.price,
-                        meal: widget.meal,
-                      ),
                     ],
                   ),
                 ),
               ),
             ),
           ),
+          Positioned(
+            bottom: 16,
+            child: CustomOrderSection(
+              price: widget.meal.price,
+              meal: widget.meal,
+            ),
+          )
         ],
       ),
     );
   }
 
-  Widget _iconButton(IconData icon, VoidCallback onPressed) {
+  Widget _iconButton(IconData icon, VoidCallback onPressed, Color color,
+      Color backgroundColor) {
     return CircleAvatar(
-      backgroundColor: Colors.white,
-      child: IconButton(
-          icon: Icon(icon, color: Colors.black), onPressed: onPressed),
+      backgroundColor: backgroundColor,
+      child: IconButton(icon: Icon(icon, color: color), onPressed: onPressed),
     );
   }
 }

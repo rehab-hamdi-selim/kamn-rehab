@@ -2,15 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/core/routing/app_router.dart';
+import 'package:kamn/healthy_food_features/presentation/screens/cart_screen.dart';
+import 'package:kamn/healthy_food_features/presentation/screens/home_page_screen.dart';
 import 'package:kamn/healthy_food_features/presentation/screens/my_cart_screen.dart';
 import 'package:kamn/healthy_food_features/presentation/screens/order_screen.dart';
+import 'package:kamn/healthy_food_features/presentation/screens/search_home_page_screen.dart';
+import 'package:kamn/healthy_food_features/presentation/widgets/custom_track_order/chat_delivery.dart';
 import 'package:kamn/playground_feature/authentication/presentation/screens/on_boarding_screen.dart';
 import 'package:kamn/playground_feature/sports/presentation/cubits/select_category_cubit/select_category_cubit.dart';
 import 'package:kamn/playground_feature/sports/presentation/screens/select_category_screen.dart';
+import 'package:kamn/healthy_food_features/presentation/screens/track_order.dart';
 
 import 'core/common/cubit/app_user/app_user_cubit.dart';
 import 'core/common/widget/main_loader.dart';
 import 'core/di/di.dart';
+
+final RouteObserver<ModalRoute<void>> routeObserver =
+    RouteObserver<ModalRoute<void>>();
 
 class CustomMainBlocConsumer extends StatelessWidget {
   const CustomMainBlocConsumer({super.key});
@@ -42,12 +50,13 @@ class CustomMainBlocConsumer extends StatelessWidget {
       return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
+          navigatorObservers: [routeObserver],
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
           onGenerateRoute: AppRouter.generateRoute,
-          home: const MyCartScreen());
+          home: HomePageHealthyFoodScreen());
     });
     //home: _buildHomeWidget(state, appUserCubit));
   }

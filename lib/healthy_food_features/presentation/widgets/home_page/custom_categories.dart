@@ -8,20 +8,20 @@ import '../../../../core/common/cubit/app_user/app_user_cubit.dart';
 import '../../../../core/theme/style.dart';
 
 class CustomCategories extends StatelessWidget {
-  final String title;
-  final String image;
-  final String price;
-  final String calories;
-  final String description;
+  // final String title;
+  // final String image;
+  // final String price;
+  // final String calories;
+  // final String description;
   final TestMealModel meal;
 
   const CustomCategories({
     super.key,
-    required this.title,
-    required this.image,
-    required this.price,
-    required this.calories,
-    required this.description,
+    // required this.title,
+    // required this.image,
+    // required this.price,
+    // required this.calories,
+    // required this.description,
     required this.meal,
   });
 
@@ -39,16 +39,16 @@ class CustomCategories extends StatelessWidget {
       },
       child: Container(
         width: 160.w,
-        color: Colors.transparent,
+        height: 170.h,
         child: Stack(
           alignment: Alignment.topCenter,
           children: [
             Positioned(
-              top: 35.h,
+              bottom: 0.h,
               child: Container(
                 width: 160.w,
-                height: 155.h,
-                padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
+                height: 160.h,
+                padding: EdgeInsets.symmetric(vertical: 0.h, horizontal: 16.w),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16.r),
@@ -57,28 +57,32 @@ class CustomCategories extends StatelessWidget {
                       color: Colors.black.withOpacity(0.1),
                       blurRadius: 6,
                       spreadRadius: 0,
+                      offset: Offset(0, 4),
                     ),
                   ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(height: 45.h),
+                    SizedBox(
+                      height: 100,
+                    ),
                     Text(
-                      title,
-                      style: TextStyles.circularSpotify16BoldDarkBlack,
+                      meal.name,
+                      style: TextStyles.fontRoboto14LightBlackRegular
+                          .copyWith(fontWeight: FontWeight.w700),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    SizedBox(height: 4.h),
                     Text(
-                      description,
-                      style: TextStyles.circularSpotify10LightGrey,
+                      meal.details,
+                      style: TextStyles.circularSpotify10LightGrey
+                          .copyWith(fontSize: 8),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    SizedBox(height: 8.h),
+                    SizedBox(height: 0.h),
                     Row(
                       children: [
                         Text.rich(
@@ -89,7 +93,7 @@ class CustomCategories extends StatelessWidget {
                                 style: TextStyles.circularSpotify10LightGrey,
                               ),
                               TextSpan(
-                                text: '$calories kcal',
+                                text: '${meal.calories} kcal',
                                 style: TextStyles.circularSpotify10LightGrey,
                               ),
                             ],
@@ -100,7 +104,7 @@ class CustomCategories extends StatelessWidget {
                           TextSpan(
                             children: [
                               TextSpan(
-                                text: '$price ',
+                                text: '${meal.price} ',
                                 style:
                                     TextStyles.circularSpotify14BoldDarkBlack,
                               ),
@@ -118,16 +122,17 @@ class CustomCategories extends StatelessWidget {
               ),
             ),
             Positioned(
+              bottom: 60.h,
               child: Container(
                 width: 120.w,
                 height: 120.h,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.grey.shade200,
+                  // color: Colors.grey.shade200,
                 ),
                 child: ClipOval(
                   child: Image.network(
-                    image,
+                    meal.imageUrls.first,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) {
                       return Center(

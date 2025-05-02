@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
+import 'package:kamn/core/common/cubit/cubit/cart_cubit.dart';
 import 'package:kamn/core/theme/style.dart';
+import 'package:kamn/healthy_food_features/presentation/screens/my_cart_screen.dart';
 import 'package:kamn/healthy_food_features/presentation/widgets/home_page/custom_icons.dart';
 
 import '../../../../core/const/icon_links.dart';
@@ -12,6 +16,8 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartItemsCount = context.watch<AppUserCubit>().state.cart.length;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -65,9 +71,17 @@ class CustomAppBar extends StatelessWidget {
           image: IconLinks.bell,
           index: 0,
         ),
-        const CustomIcons(
-          image: IconLinks.cart,
-          index: 6,
+        GestureDetector(
+          onTap: () {
+            // print(context.watch<AppUserCubit>().state.cart);
+
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => MyCartScreen()));
+          },
+          child: CustomIcons(
+            image: IconLinks.cart,
+            index: cartItemsCount,
+          ),
         ),
       ],
     );

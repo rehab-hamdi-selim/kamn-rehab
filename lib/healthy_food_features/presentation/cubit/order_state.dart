@@ -14,7 +14,24 @@ class OrderFailure extends OrderState {
   OrderFailure(this.message);
 }
 
+class SingleOrderLoaded extends OrderState {
+  final OrderModel order;
+  SingleOrderLoaded(this.order);
+}
+
 class OrderLoaded extends OrderState {
   final List<OrderModel> orders;
   OrderLoaded(this.orders);
+}
+
+class OrderMessageSent extends OrderState {}
+
+class OrderMessagesLoaded extends OrderState {
+  final List<Map<String, dynamic>> messages;
+  OrderMessagesLoaded(this.messages);
+}
+
+class OrderMessagesStream extends OrderState {
+  final Stream<List<Map<String, dynamic>>> messageStream;
+  OrderMessagesStream(this.messageStream);
 }

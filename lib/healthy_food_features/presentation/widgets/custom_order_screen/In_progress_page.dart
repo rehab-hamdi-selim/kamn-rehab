@@ -38,7 +38,7 @@ class InprogressPage extends StatelessWidget {
         print('Error: ${state.message}');
 
         return Center(
-          child: Text('Error: ${state.message}'),
+          child: Text('Error: ${state.message}+'),
         );
       } else {
         return Center(child: Text('Unexpected state'));
