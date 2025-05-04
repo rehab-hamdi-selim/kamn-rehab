@@ -162,6 +162,7 @@
 import 'package:kamn/healthy_food_features/data/models/test_meal_model.dart';
 
 class MealCartModel extends TestMealModel {
+  @override
   final int quantity;
 
   const MealCartModel({

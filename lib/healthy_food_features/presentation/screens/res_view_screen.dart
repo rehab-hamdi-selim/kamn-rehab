@@ -39,7 +39,9 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                 Row(
                   children: [
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                         icon: Icon(Icons.arrow_circle_left_rounded)),
                     horizontalSpace(10),
                     Text(
