@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
 import 'package:kamn/healthy_food_features/data/models/order_model.dart';
+import 'package:kamn/healthy_food_features/presentation/screens/my_cart_screen.dart';
 
 class CardHistory extends StatelessWidget {
   CardHistory({super.key, required this.item, required this.index});
@@ -138,11 +141,23 @@ class CardHistory extends StatelessWidget {
                   color: AppPallete.blackColor,
                   borderRadius: BorderRadius.circular(16.sp),
                 ),
-                child: Center(
-                  child: Text(
-                    'Order Again',
-                    style: TextStyles.fontCircularSpotify12BlackMedium
-                        .copyWith(color: AppPallete.whiteColor),
+                child: GestureDetector(
+                  onTap: () {
+                    context.read<AppUserCubit>().addToCart(item.meals[index],
+                        quantity: item.meals[index].quantity);
+                    context.read<AppUserCubit>().getCartWithQuantities();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MyCartScreen()),
+                    );
+                  },
+                  child: Center(
+                    child: Text(
+                      'Order Again',
+                      style: TextStyles.fontCircularSpotify12BlackMedium
+                          .copyWith(color: AppPallete.whiteColor),
+                    ),
                   ),
                 ),
               )

@@ -45,7 +45,9 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                 height: 16,
               ),
               CustomAppBarTrackOrder(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pop(context);
+                },
                 screenName: 'Track  Order',
               ),
               const Order_line(),

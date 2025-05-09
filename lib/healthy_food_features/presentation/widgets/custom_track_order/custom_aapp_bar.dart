@@ -14,7 +14,7 @@ class CustomAppBarTrackOrder extends StatelessWidget {
     return Row(
       children: [
         IconButton(
-          onPressed: () {},
+          onPressed: onTap,
           icon: SvgPicture.asset('assets/icons/back_arrow.svg'),
         ),
         Text(

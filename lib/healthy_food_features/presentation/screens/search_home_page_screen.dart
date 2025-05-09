@@ -39,11 +39,16 @@ class SearchingOfHomePageScreen extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.black,
-                      child: SvgPicture.asset(
-                        height: 15,
-                        IconLinks.arrow,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: CircleAvatar(
+                        backgroundColor: Colors.black,
+                        child: SvgPicture.asset(
+                          height: 15,
+                          IconLinks.arrow,
+                        ),
                       ),
                     ),
                     SizedBox(width: 10.w),
