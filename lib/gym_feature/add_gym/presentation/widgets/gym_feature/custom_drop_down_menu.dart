@@ -1,0 +1,80 @@
+
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kamn/core/theme/app_pallete.dart';
+
+
+class CustomDropDownMenu extends StatelessWidget {
+  final List<String> menuItems = [
+    '🛁 Hot Tubs',
+    '🙎 Personal Trainer',
+    '🔥 Sauna',
+    '🏊 Swimming Pool',
+    '🌐 Free WIFI',
+    '🧒 Childcare Services',
+    '🍹 Juice Bar',
+    '🏋️‍♀️ State-of-the-Art',
+    '🧘 Yoga Classes',
+    '🎉 Exclusive Events',
+    '💃 Diverse Classes',
+    '🔒Locker Rooms'
+  ];
+  final TextEditingController controller;
+
+  CustomDropDownMenu({
+    super.key,
+    required this.controller,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    // Wrap with Material widget to provide the necessary context for TextField
+    return Material(
+      color: Colors.transparent, // Make it transparent to not affect appearance
+      child: DropdownMenu<String>(
+          onSelected: (value) {
+            if (value != null) {
+              // context.read<GymFeaturesCubit>().takeSelectedValue(value);
+            }
+          },
+          controller: controller,
+          menuHeight: 350.h,
+          width: 320.w,
+          dropdownMenuEntries: menuItems
+              .map((String item) => DropdownMenuEntry(
+                    value: item, 
+                    label: item,
+                  ))
+              .toList(),
+          menuStyle: MenuStyle(
+            shape: WidgetStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.r),
+              ),
+            ),
+            elevation: WidgetStateProperty.all(20.r),
+            backgroundColor: WidgetStateProperty.all(Colors.white),
+            side: WidgetStateProperty.all(
+              const BorderSide(
+                color: AppPallete.tooLightGray,
+                width: 1.2,
+              ),
+            ),
+          ),trailingIcon: const Icon(Icons.keyboard_arrow_down),
+          inputDecorationTheme: InputDecorationTheme(
+            fillColor: AppPallete.whiteColor,
+            filled: true,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+            constraints: BoxConstraints.tight(const Size.fromHeight(40)),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.r),
+              borderSide: const BorderSide(
+                color: AppPallete.tooLightGray,
+                width: 1.2,
+              ),
+            ),
+          ),
+     ) );
+    
+}
+}

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/gym_feature/gyms/data/models/plan_model.dart';
+import 'package:kamn/gym_feature/gyms/data/models/gym_model.dart';
+import 'package:kamn/gym_feature/gyms/presentation/Cubit/gym_details/gymdetails_cubit.dart';
+import 'package:kamn/gym_feature/gyms/presentation/Cubit/gym_details/gymdetails_state.dart';
 import 'package:kamn/gym_feature/gyms/presentation/widgets/choose_mempership_screen/build_mempership_card.dart';
 
 class TabBarApp extends StatelessWidget {
@@ -52,19 +55,54 @@ class TabBarApp extends StatelessWidget {
             ),
           ),
         ),
-        Expanded(
-          child: TabBarView(
-            controller: tabController,
-            children: PlanModel.fakeList
-                .map(
-                  (element) => SingleChildScrollView(
-                    child: BuildMempershipCard(
-                      plan: element,
-                    ),
-                  ),
-                )
-                .toList(),
-          ),
+        BlocBuilder<GymDetailsCubit, GymDetailsState>(
+          builder: (context, state) {
+            if (state.gymPlans == null) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            if (state.gymPlans!.isEmpty) {
+              return Center(
+                child: Text(
+                  'No membership plans available',
+                  style: TextStyles.fontCircularSpotify14LightBlackRegular,
+                ),
+              );
+            }
+
+            return Expanded(
+              child: TabBarView(
+                controller: tabController,
+                children: List.generate(choices.length, (index) {
+                  final filteredPlans = state.gymPlans
+                          ?.where((plan) =>
+                              plan.planDuration?.name.toLowerCase() ==
+                              choices[index].toLowerCase())
+                          .toList() ??
+                      [];
+                  return ListView.builder(
+                      itemCount: filteredPlans.length,
+                      itemBuilder: (context, indexs) =>
+                          GestureDetector(
+                            onTap: () {
+                              context.read<GymDetailsCubit>().selectPlan(filteredPlans[indexs]);
+                            },
+                            child: BlocBuilder<GymDetailsCubit, GymDetailsState>(
+                              builder: (context, cardState) {
+                                return BuildMempershipCard(
+                                  selectedPlan: filteredPlans[indexs],
+                                  isSelected: cardState.selectedPlan?.planId == filteredPlans[indexs].planId,
+                                );
+                              },
+                            ),
+                          ),
+                  );
+                }),
+              ),
+            );
+          },
         ),
       ],
     );

@@ -2,15 +2,14 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-
-import 'package:kamn/gym_feature/add_gym/data/models/gym_model.dart';
+import 'package:flutter/material.dart';
 
 class GymModel {
   final String? id;
   final String? name;
   final String? uniqueName;
   final String? address;
-  final List<String>? imageUrl;
+  final List<String>? imagesUrl;
   final String? logoUrl;
   final String? description;
   final String? phoneNumber;
@@ -27,7 +26,7 @@ class GymModel {
     this.name,
     this.uniqueName,
     this.address,
-    this.imageUrl,
+    this.imagesUrl,
     this.logoUrl,
     this.description,
     this.phoneNumber,
@@ -46,7 +45,7 @@ class GymModel {
     String? name,
     String? uniqueName,
     String? address,
-    List<String>? imageUrl,
+    List<String>? imagesUrl,
     String? logoUrl,
     String? description,
     String? phoneNumber,
@@ -64,7 +63,7 @@ class GymModel {
       name: name ?? this.name,
       uniqueName: uniqueName ?? this.uniqueName,
       address: address ?? this.address,
-      imageUrl: imageUrl ?? this.imageUrl,
+      imagesUrl: imagesUrl ?? this.imagesUrl,
       logoUrl: logoUrl ?? this.logoUrl,
       description: description ?? this.description,
       phoneNumber: phoneNumber ?? this.phoneNumber,
@@ -85,7 +84,7 @@ class GymModel {
       'name': name,
       'uniqueName': uniqueName,
       'address': address,
-      'imageUrl': imageUrl,
+      'imagesUrl': imagesUrl,
       'logoUrl': logoUrl,
       'description': description,
       'phoneNumber': phoneNumber,
@@ -107,8 +106,8 @@ class GymModel {
       uniqueName:
           map['uniqueName'] != null ? map['uniqueName'] as String : null,
       address: map['address'] != null ? map['address'] as String : null,
-      imageUrl: map['imageUrl'] != null
-          ? List<String>.from((map['imageUrl'] as List<String>))
+      imagesUrl: map['imagesUrl'] != null
+          ? List<String>.from((map['imagesUrl'] as List<dynamic>))
           : null,
       logoUrl: map['logoUrl'] != null ? map['logoUrl'] as String : null,
       description:
@@ -119,18 +118,18 @@ class GymModel {
           ? List<double>.from((map['ratings'] as List<double>))
           : null,
       reviews: map['reviews'] != null
-          ? List<String>.from((map['reviews'] as List<String>))
+          ? List<String>.from((map['reviews'] as List<dynamic>))
           : null,
       offers: map['offers'] != null
           ? List<Plan>.from(
-              (map['offers'] as List<int>).map<Plan?>(
+              (map['offers'] as List<Plan>).map<Plan?>(
                 (x) => Plan.fromMap(x as Map<String, dynamic>),
               ),
             )
           : null,
       scoialMediaLinks: map['scoialMediaLinks'] != null
           ? List<ScoialMediaLink>.from(
-              (map['scoialMediaLinks'] as List<int>).map<ScoialMediaLink?>(
+              (map['scoialMediaLinks'] as List<dynamic>).map<ScoialMediaLink?>(
                 (x) => ScoialMediaLink.fromMap(x as Map<String, dynamic>),
               ),
             )
@@ -163,7 +162,7 @@ class GymModel {
 
   @override
   String toString() {
-    return 'GymModel(id: $id, name: $name, uniqueName: $uniqueName, address: $address, imageUrl: $imageUrl, logoUrl: $logoUrl, description: $description, phoneNumber: $phoneNumber, ratings: $ratings, reviews: $reviews, offers: $offers, scoialMediaLinks: $scoialMediaLinks, features: $features, openDuration: $openDuration, isFullTimeAccess: $isFullTimeAccess, userId: $userId)';
+    return 'GymModel(id: $id, name: $name, uniqueName: $uniqueName, address: $address, imageUrl: $imagesUrl, logoUrl: $logoUrl, description: $description, phoneNumber: $phoneNumber, ratings: $ratings, reviews: $reviews, offers: $offers, scoialMediaLinks: $scoialMediaLinks, features: $features, openDuration: $openDuration, isFullTimeAccess: $isFullTimeAccess, userId: $userId)';
   }
 
   @override
@@ -174,7 +173,7 @@ class GymModel {
         other.name == name &&
         other.uniqueName == uniqueName &&
         other.address == address &&
-        listEquals(other.imageUrl, imageUrl) &&
+        listEquals(other.imagesUrl, imagesUrl) &&
         other.logoUrl == logoUrl &&
         other.description == description &&
         other.phoneNumber == phoneNumber &&
@@ -194,7 +193,7 @@ class GymModel {
         name.hashCode ^
         uniqueName.hashCode ^
         address.hashCode ^
-        imageUrl.hashCode ^
+        imagesUrl.hashCode ^
         logoUrl.hashCode ^
         description.hashCode ^
         phoneNumber.hashCode ^
@@ -210,106 +209,135 @@ class GymModel {
 }
 
 class Plan {
-  final String? id;
-  final String? name;
-  final OfferType? type;
-  final String? duration;
+  final String? planName;
   final String? price;
-  final int? freeMonths;
-  final double? discountPercentage;
-  final DiscountDuration? discountDuration;
+  final String? freeMonths;
+  final bool? isDiscount;
+  final String? discountPercentage;
+  final String? priceAfterDiscount;
+  final DateTime? discountStartDate;
+  final DateTime? discountEndDate;
+  final String? planId; // Added planId
+  final PlanDuration? planDuration;
+  final bool? is247Days;
+  final bool? is24Hours;
+  final List<IntervalSelected>? intervals;
   final String? notes;
-  final List<OpenDuration>? openDuration;
-  final bool? isFullTimeAccess;
+  final List<Feature>? features;
   Plan({
-    this.id,
-    this.name,
-    this.type,
-    this.duration,
+    required this.planName,
     this.price,
     this.freeMonths,
+    required this.isDiscount,
     this.discountPercentage,
-    this.discountDuration,
+    this.priceAfterDiscount,
+    this.discountStartDate,
+    this.discountEndDate,
+    this.planId, // Added to constructor
+    this.planDuration,
+    required this.is247Days,
+    required this.is24Hours,
+    this.intervals,
     this.notes,
-    this.openDuration,
-    this.isFullTimeAccess,
+    required this.features,
   });
 
   Plan copyWith({
-    String? id,
-    String? name,
-    OfferType? type,
-    String? duration,
+    String? planName,
     String? price,
-    int? freeMonths,
-    double? discountPercentage,
-    DiscountDuration? discountDuration,
+    String? freeMonths,
+    bool? isDiscount,
+    String? discountPercentage,
+    String? priceAfterDiscount,
+    DateTime? discountStartDate,
+    DateTime? discountEndDate,
+    String? planId, // Added to copyWith
+    PlanDuration? planDuration,
+    bool? is247Days,
+    bool? is24Hours,
+    List<IntervalSelected>? intervals,
     String? notes,
-    List<OpenDuration>? openDuration,
-    bool? isFullTimeAccess,
+    List<Feature>? features,
   }) {
     return Plan(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      type: type ?? this.type,
-      duration: duration ?? this.duration,
+      planName: planName ?? this.planName,
       price: price ?? this.price,
       freeMonths: freeMonths ?? this.freeMonths,
+      isDiscount: isDiscount ?? this.isDiscount,
       discountPercentage: discountPercentage ?? this.discountPercentage,
-      discountDuration: discountDuration ?? this.discountDuration,
+      priceAfterDiscount: priceAfterDiscount ?? this.priceAfterDiscount,
+      discountStartDate: discountStartDate ?? this.discountStartDate,
+      discountEndDate: discountEndDate ?? this.discountEndDate,
+      planId: planId ?? this.planId, // Added to copyWith return
+      planDuration: planDuration ?? this.planDuration,
+      is247Days: is247Days ?? this.is247Days,
+      is24Hours: is24Hours ?? this.is24Hours,
+      intervals: intervals ?? this.intervals,
       notes: notes ?? this.notes,
-      openDuration: openDuration ?? this.openDuration,
-      isFullTimeAccess: isFullTimeAccess ?? this.isFullTimeAccess,
+      features: features ?? this.features,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
-      'name': name,
-      'type': type?.name,
-      'duration': duration,
+      'planName': planName,
       'price': price,
       'freeMonths': freeMonths,
+      'isDiscount': isDiscount,
       'discountPercentage': discountPercentage,
-      'discountDuration': discountDuration?.toMap(),
+      'priceAfterDiscount': priceAfterDiscount,
+      'discountStartDate': discountStartDate?.millisecondsSinceEpoch,
+      'discountEndDate': discountEndDate?.millisecondsSinceEpoch,
+      'planId': planId, // Added to toMap
+      'planDuration': planDuration?.displayName,
+      'is247Days': is247Days,
+      'is24Hours': is24Hours,
+      'intervals': intervals?.map((x) => x.toMap()).toList(),
       'notes': notes,
-      'openDuration': openDuration?.map((x) => x.toMap()).toList(),
-      'isFullTimeAccess': isFullTimeAccess,
+      'features': features?.map((x) => x.toMap()).toList(),
     };
   }
 
-  factory Plan.fromMap(Map<String, dynamic> map) {
+factory Plan.fromMap(Map<String, dynamic> map) {
     return Plan(
-      id: map['id'] != null ? map['id'] as String : null,
-      name: map['name'] != null ? map['name'] as String : null,
-      type: map['type'] != null
-          ? OfferType.values.byName(map['type'] as String)
+      planName: map['planName']?.toString()?? '',
+      price: map['price']?.toString()?? '',
+      freeMonths: map['freeMonths'] ?.toString() ?? '',
+      isDiscount: map['isDiscount'] as bool? ?? false,
+      discountPercentage: map['discountPercentage']?.toString() ?? '',
+      priceAfterDiscount: map['priceAfterDiscount']?.toString() ?? '',
+      discountStartDate: map['discountStartDate'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['discountStartDate'] as int)
           : null,
-      duration: map['duration'] != null ? map['duration'] as String : null,
-      price: map['price'] != null ? map['price'] as String : null,
-      freeMonths: map['freeMonths'] != null ? map['freeMonths'] as int : null,
-      discountPercentage: map['discountPercentage'] != null
-          ? map['discountPercentage'] as double
+      discountEndDate: map['discountEndDate'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['discountEndDate'] as int)
           : null,
-      discountDuration: map['discountDuration'] != null
-          ? DiscountDuration.fromMap(
-              map['discountDuration'] as Map<String, dynamic>)
+      planId: map['planId'] as String? ?? '',
+      planDuration: map['planDuration'] != null
+          ? PlanDuration.values.firstWhere(
+              (duration) => duration.displayName == map['planDuration'],
+              orElse: () => PlanDuration.monthly,
+            )
           : null,
-      notes: map['notes'] != null ? map['notes'] as String : null,
-      openDuration: map['openDuration'] != null
-          ? List<OpenDuration>.from(
-              (map['openDuration'] as List<int>).map<OpenDuration?>(
-                (x) => OpenDuration.fromMap(x as Map<String, dynamic>),
+      is247Days: map['is247Days'] as bool? ?? false,
+      is24Hours: map['is24Hours'] as bool? ?? false,
+      intervals: map['intervals'] != null
+          ? List<IntervalSelected>.from(
+              (map['intervals'] as List<dynamic>).map<IntervalSelected>(
+                (x) => IntervalSelected.fromMap(x as Map<String, dynamic>),
               ),
             )
           : null,
-      isFullTimeAccess: map['isFullTimeAccess'] != null
-          ? map['isFullTimeAccess'] as bool
-          : null,
+      notes: map['notes']?.toString() ?? '',
+      features: map['features'] != null
+          ? List<Feature>.from(
+              (map['features'] as List<dynamic>).map<Feature>(
+                (x) => Feature.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : [],
     );
   }
-
   String toJson() => json.encode(toMap());
 
   factory Plan.fromJson(String source) =>
@@ -317,39 +345,45 @@ class Plan {
 
   @override
   String toString() {
-    return 'Plan(id: $id, name: $name, type: $type, duration: $duration, price: $price, freeMonths: $freeMonths, discountPercentage: $discountPercentage, discountDuration: $discountDuration, notes: $notes, openDuration: $openDuration, isFullTimeAccess: $isFullTimeAccess)';
+    return 'Plan(planName: $planName, price: $price, freeMonths: $freeMonths, isDiscount: $isDiscount, discountPercentage: $discountPercentage, priceAfterDiscount: $priceAfterDiscount, discountStartDate: $discountStartDate, discountEndDate: $discountEndDate, planDuration: $planDuration, is247Days: $is247Days, is24Hours: $is24Hours, intervals: $intervals, notes: $notes, features: $features)';
   }
 
   @override
   bool operator ==(covariant Plan other) {
     if (identical(this, other)) return true;
 
-    return other.id == id &&
-        other.name == name &&
-        other.type == type &&
-        other.duration == duration &&
+    return other.planName == planName &&
         other.price == price &&
         other.freeMonths == freeMonths &&
+        other.isDiscount == isDiscount &&
         other.discountPercentage == discountPercentage &&
-        other.discountDuration == discountDuration &&
+        other.priceAfterDiscount == priceAfterDiscount &&
+        other.discountStartDate == discountStartDate &&
+        other.discountEndDate == discountEndDate &&
+        other.planDuration == planDuration &&
+        other.is247Days == is247Days &&
+        other.is24Hours == is24Hours &&
+        listEquals(other.intervals, intervals) &&
         other.notes == notes &&
-        listEquals(other.openDuration, openDuration) &&
-        other.isFullTimeAccess == isFullTimeAccess;
+        listEquals(other.features, features);
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        name.hashCode ^
-        type.hashCode ^
-        duration.hashCode ^
+    return planName.hashCode ^
         price.hashCode ^
         freeMonths.hashCode ^
+        isDiscount.hashCode ^
         discountPercentage.hashCode ^
-        discountDuration.hashCode ^
+        priceAfterDiscount.hashCode ^
+        discountStartDate.hashCode ^
+        discountEndDate.hashCode ^
+        planDuration.hashCode ^
+        is247Days.hashCode ^
+        is24Hours.hashCode ^
+        intervals.hashCode ^
         notes.hashCode ^
-        openDuration.hashCode ^
-        isFullTimeAccess.hashCode;
+        features.hashCode;
   }
 }
 
@@ -357,9 +391,8 @@ class Feature {
   final String? id;
   final String? name;
   final String? logoId;
-
   final String? price;
-  final PricingOption? pricingOption;
+  final FeatureType? pricingOption;
   final String? description;
   Feature({
     this.id,
@@ -375,7 +408,7 @@ class Feature {
     String? name,
     String? logoId,
     String? price,
-    PricingOption? pricingOption,
+    FeatureType? pricingOption,
     String? description,
   }) {
     return Feature(
@@ -406,7 +439,7 @@ class Feature {
       logoId: map['logoId'] != null ? map['logoId'] as String : null,
       price: map['price'] != null ? map['price'] as String : null,
       pricingOption: map['pricingOption'] != null
-          ? PricingOption.values.byName(map['pricingOption'] as String)
+          ? FeatureType.values.byName(map['pricingOption'] as String)
           : null,
       description:
           map['description'] != null ? map['description'] as String : null,
@@ -573,9 +606,141 @@ class DiscountDuration {
 
 enum OfferType { monthly, annual }
 
-enum PricingOption {
+enum FeatureType {
   free,
   month,
   session,
-  year,
+}
+
+class ScoialMediaLink {
+  final String? name;
+  final String? link;
+  ScoialMediaLink({
+    this.name,
+    this.link,
+  });
+  ScoialMediaLink copyWith({
+    String? name,
+    String? link,
+  }) {
+    return ScoialMediaLink(
+      name: name ?? this.name,
+      link: link ?? this.link,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'name': name,
+      'link': link,
+    };
+  }
+
+  factory ScoialMediaLink.fromMap(Map<String, dynamic> map) {
+    return ScoialMediaLink(
+      name: map['name'] != null ? map['name'] as String : null,
+      link: map['link'] != null ? map['link'] as String : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory ScoialMediaLink.fromJson(String source) =>
+      ScoialMediaLink.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() => 'ScoialMediaLink(name: $name, link: $link)';
+
+  @override
+  bool operator ==(covariant ScoialMediaLink other) {
+    if (identical(this, other)) return true;
+
+    return other.name == name && other.link == link;
+  }
+
+  @override
+  int get hashCode => name.hashCode ^ link.hashCode;
+}
+class IntervalSelected {
+  final TimeOfDay start;
+  final TimeOfDay end;
+  final List<String> days;
+
+  const IntervalSelected({
+    required this.start,
+    required this.end,
+    required this.days,
+  });
+
+  IntervalSelected copyWith({
+    TimeOfDay? start,
+    TimeOfDay? end,
+    List<String>? days,
+  }) {
+    return IntervalSelected(
+      start: start ?? this.start,
+      end: end ?? this.end,
+      days: days ?? this.days,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'start': '${start.hour}:${start.minute}',
+      'end': '${end.hour}:${end.minute}',
+      'days': days,
+    };
+  }
+
+  factory IntervalSelected.fromMap(Map<String, dynamic> map) {
+    final startParts = (map['start'] as String).split(':');
+    final endParts = (map['end'] as String).split(':');
+
+    return IntervalSelected(
+      start: TimeOfDay(
+          hour: int.parse(startParts[0]), minute: int.parse(startParts[1])),
+      end: TimeOfDay(
+          hour: int.parse(endParts[0]), minute: int.parse(endParts[1])),
+      days: List<String>.from(map['days'] as List),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory IntervalSelected.fromJson(String source) =>
+      IntervalSelected.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() => 'Interval(start: $start, end: $end, days: $days)';
+
+  @override
+  bool operator ==(covariant IntervalSelected other) {
+    if (identical(this, other)) return true;
+
+    return other.start == start &&
+        other.end == end &&
+        listEquals(other.days, days);
+  }
+
+  @override
+  int get hashCode => start.hashCode ^ end.hashCode ^ days.hashCode;
+}
+
+enum PlanDuration {
+  monthly,
+  annual,
+  quarterly,
+}
+
+extension PlanDurationX on PlanDuration {
+  String get displayName {
+    switch (this) {
+      case PlanDuration.monthly:
+        return 'Monthly';
+      case PlanDuration.annual:
+        return 'Annual';
+      case PlanDuration.quarterly:
+        return 'Quarterly';
+    }
+  }
 }

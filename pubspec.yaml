@@ -65,7 +65,12 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   device_preview: ^1.2.0
   carousel_slider: ^5.0.0
-  google_fonts: ^6.2.1
+  google_fonts: ^6.2.1 
+  timeline_tile: ^2.0.0
+  timelines_plus: ^1.0.6
+  readmore: ^3.0.0
+  
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

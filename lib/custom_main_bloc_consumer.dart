@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
+import 'package:kamn/core/di/di.dart';
+import 'package:kamn/core/helpers/secure_storage_helper.dart';
 import 'package:kamn/core/routing/app_router.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
-import 'package:kamn/gym_feature/gyms/presentation/screen/choose_plan_screen.dart';
-import 'package:kamn/healthy_food_features/presentation/screens/res_view_screen.dart'
-    show RestaurantDetails;
-import 'package:kamn/healthy_food_features/presentation/screens/searching_ui_screen.dart';
-import 'package:kamn/playground_feature/authentication/presentation/screens/on_boarding_screen.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart';
+import 'package:kamn/gym_feature/add_gym/presentation/screens/add_gym_screen.dart';
+import 'package:kamn/gym_feature/gyms/presentation/Cubit/gym_details/gymdetails_cubit.dart';
+import 'package:kamn/gym_feature/gyms/presentation/pages/gyms_screen.dart';
 
 import 'core/common/cubit/app_user/app_user_cubit.dart';
 import 'core/common/widget/main_loader.dart';
-import 'healthy_food_features/presentation/screens/home_page_screen.dart';
 
 class CustomMainBlocConsumer extends StatelessWidget {
   const CustomMainBlocConsumer({super.key});
@@ -51,30 +51,42 @@ class CustomMainBlocConsumer extends StatelessWidget {
               scaffoldBackgroundColor: AppPallete.whiteColor,
             ),
             onGenerateRoute: AppRouter.generateRoute,
-            home: const RestaurantDetails());
-        //home: _buildHomeWidget(state, appUserCubit));
+            home: BlocProvider(
+              create: (context) => getIt<GymDetailsCubit>()..fetchAllGyms(),
+              child: const GymsScreen(),
+            ));
+        // home: _buildHomeWidget(state, appUserCubit));
       },
     );
   }
 
   Widget _buildHomeWidget(AppUserState state, AppUserCubit appUserCubit) {
     if (state.isInitial()) {
-      return const MainLoader();
+      //  return const MainLoader();
 
       //////////////////
+      // return TrackSubmissionScreen();
     }
     if (state.isNotInstalled()) {
-      return const OnBoardingScreen();
+      // return BlocProvider(
+      //   create: (context) => getIt<MembershipOfferCubit>()..getGymIdFromSecureStorage(),
+      //   child: const MembershipOfferScreen(),
+      // );
+      return BlocProvider(
+        create: (context) => getIt<AddGymCubit>()..getGymIdFromSecureStorage(),
+        child: const AddGymScreen(),
+      );
     }
     if (state.isLoggedIn() || state.isGettedData() || state.isSuccess()) {
-      return const ChoosePlanScreen();
+      //  return const ChoosePlanScreen();
+      //    return const ChoosePlanScreen();
       // return BlocProvider(
       //   create:(context)=> getIt<SelectCategoryCubit>()..getPlaygrounds(),
       //   child: const SelectCategoryScreen(),
       // );
+      // );
     }
     if (state.isNotLoggedIn() || state.isClearUserData()) {
-      return const SearchingUiScreen();
       // return BlocProvider(
       //   create: (context) => getIt<SignInCubit>(),
       //   child: const SignInScreen(),

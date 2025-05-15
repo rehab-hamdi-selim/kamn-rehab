@@ -1,3 +1,4 @@
+// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
@@ -12,8 +13,23 @@ import 'package:firebase_remote_config/firebase_remote_config.dart' as _i627;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../gym_feature/add_gym/data/datasources/add_gym_remote_data_source.dart'
+    as _i126;
+import '../../gym_feature/add_gym/data/repositories/add_gym_repository.dart'
+    as _i573;
 import '../../gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cubit.dart'
     as _i1045;
+import '../../gym_feature/add_gym/presentation/cubits/create_gym_feature/create_gym_feature_cubit.dart'
+    as _i749;
+import '../../gym_feature/add_gym/presentation/cubits/membership_offer/membership_offer_cubit.dart'
+    as _i429;
+import '../../gym_feature/add_gym/presentation/cubits/track_submission/track_submission_cubit.dart'
+    as _i667;
+import '../../gym_feature/gyms/data/datasources/gym_remote_data_source.dart'
+    as _i906;
+import '../../gym_feature/gyms/data/repo/gym_details_repo.dart' as _i1060;
+import '../../gym_feature/gyms/presentation/Cubit/gym_details/gymdetails_cubit.dart'
+    as _i1027;
 import '../../playground_feature/admin/data/data_source/analytics_data_source.dart'
     as _i366;
 import '../../playground_feature/admin/data/data_source/second_page_data_source.dart'
@@ -119,7 +135,6 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
-    gh.factory<_i1045.AddGymCubit>(() => _i1045.AddGymCubit());
     gh.factory<_i89.SignInViewModel>(() => _i89.SignInViewModel());
     gh.factory<_i505.SignUpViewModel>(() => _i505.SignUpViewModel());
     gh.factory<_i557.PaymentOptionsViewModel>(
@@ -149,10 +164,17 @@ extension GetItInjectableX on _i174.GetIt {
             ));
     gh.factory<_i307.AuthRepository>(() => _i307.AuthRepositoryImpl(
         authDataSource: gh<_i774.AuthRemoteDataSource>()));
+    gh.factory<_i906.GymDetailsRemoteDataSource>(
+        () => _i906.GymDetailsRemoteDataSourceImpl());
     gh.factory<_i130.AnalyticsRepository>(() => _i130.AnalyticsRepositoryImpl(
         dataSource: gh<_i366.AnalyticsDataSource>()));
+    gh.factory<_i126.AddGymRemoteDataSource>(
+        () => _i126.AddGymRemoteDataSourceImpl());
     gh.factory<_i4.SecondPageDataSource>(() =>
         _i4.SecondPageDataSourceImpl(firestore: gh<_i158.FirestoreService>()));
+    gh.factory<_i1060.GymDetailsRepository>(() =>
+        _i1060.GymDetailsRepositoryImpl(
+            gh<_i906.GymDetailsRemoteDataSource>()));
     gh.factory<_i680.UserRemoteDataSource>(() => _i680.UserRemoteDataSourceImpl(
         firestoreService: gh<_i158.FirestoreService>()));
     gh.factory<_i317.SecondPageRepository>(() => _i317.SecondPageRepositoryImpl(
@@ -161,6 +183,8 @@ extension GetItInjectableX on _i174.GetIt {
           authRepository: gh<_i307.AuthRepository>(),
           signInViewModel: gh<_i89.SignInViewModel>(),
         ));
+    gh.factory<_i1027.GymDetailsCubit>(() =>
+        _i1027.GymDetailsCubit(repository: gh<_i1060.GymDetailsRepository>()));
     gh.factory<_i231.ServiceProvidersRepository>(() =>
         _i231.ServiceProvidersRepositoryImpl(
             dataSource: gh<_i348.ServiceProvidersRemoteDataSource>()));
@@ -204,8 +228,18 @@ extension GetItInjectableX on _i174.GetIt {
             repository: gh<_i231.ServiceProvidersRepository>()));
     gh.factory<_i609.UserRepository>(() => _i609.UserRepositoryImpl(
         userRemoteDataSource: gh<_i680.UserRemoteDataSource>()));
+    gh.factory<_i573.AddGymRepository>(() => _i573.AddGymRepositoryImpl(
+        dataSource: gh<_i126.AddGymRemoteDataSource>()));
     gh.factory<_i201.SportsRepository>(() => _i201.SportsRepositoryImpl(
         remoteDataSource: gh<_i382.SportsRemoteDataSource>()));
+    gh.factory<_i1045.AddGymCubit>(
+        () => _i1045.AddGymCubit(repository: gh<_i573.AddGymRepository>()));
+    gh.factory<_i749.CreateGymFeatureCubit>(() =>
+        _i749.CreateGymFeatureCubit(repository: gh<_i573.AddGymRepository>()));
+    gh.factory<_i429.MembershipOfferCubit>(() =>
+        _i429.MembershipOfferCubit(repository: gh<_i573.AddGymRepository>()));
+    gh.factory<_i667.TrackSubmissionCubit>(() =>
+        _i667.TrackSubmissionCubit(repository: gh<_i573.AddGymRepository>()));
     gh.factory<_i616.ServiceProviderGroundsCubit>(
         () => _i616.ServiceProviderGroundsCubit(
               getPlaygroundUsecase: gh<_i447.GetServicesFromFirebaseUsecase>(),

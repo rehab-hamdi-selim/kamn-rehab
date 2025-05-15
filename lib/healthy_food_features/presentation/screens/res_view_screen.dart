@@ -162,7 +162,7 @@ class _RestaurantDetailsState extends State<RestaurantDetails> {
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 5.h),
                   child: Text(
-                    Constants.catrgories,
+                   " Constants.catrgories",
                     style: TextStyles.fontCircularSpotify16BlackMedium,
                   ),
                 ),
