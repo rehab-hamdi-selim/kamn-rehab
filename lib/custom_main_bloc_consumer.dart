@@ -10,6 +10,8 @@ import 'package:kamn/gym_feature/add_gym/presentation/cubits/add_gym/add_gym_cub
 import 'package:kamn/gym_feature/add_gym/presentation/screens/add_gym_screen.dart';
 import 'package:kamn/gym_feature/gyms/presentation/Cubit/gym_details/gymdetails_cubit.dart';
 import 'package:kamn/gym_feature/gyms/presentation/pages/gyms_screen.dart';
+import 'package:kamn/main/presentation/cubit/bottom_nav_bar_cubit.dart';
+import 'package:kamn/main/presentation/main_interface.dart';
 
 import 'core/common/cubit/app_user/app_user_cubit.dart';
 import 'core/common/widget/main_loader.dart';
@@ -51,9 +53,13 @@ class CustomMainBlocConsumer extends StatelessWidget {
               scaffoldBackgroundColor: AppPallete.whiteColor,
             ),
             onGenerateRoute: AppRouter.generateRoute,
-            home: BlocProvider(
-              create: (context) => getIt<GymDetailsCubit>()..fetchAllGyms(),
-              child: const GymsScreen(),
+            home: MultiBlocProvider(
+            
+              providers: [
+                BlocProvider(create: (context) => getIt<GymDetailsCubit>()..fetchAllGyms(),),
+                BlocProvider(create: (context) => BottomNavBarCubit()),
+              ],
+              child: const HomeMainInterface(),
             ));
         // home: _buildHomeWidget(state, appUserCubit));
       },
