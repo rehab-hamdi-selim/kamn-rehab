@@ -156,4 +156,11 @@ class SecureStorageHelper {
     }
     return [];
   }
+  static Future<List<String>> getInterestedList() async {
+    final jsonString = await _storage.read(key: _interestedListKey);
+    if (jsonString != null) {
+      return List<String>.from(jsonDecode(jsonString));
+    }
+    return [];
+  }
 }

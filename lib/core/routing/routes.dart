@@ -57,5 +57,7 @@ class Routes {
 
     static const String onboradingFirst = '/onboradingFirst';
     static const String onboradingSecond = '/onboradingSecond';
+    static const String mainScreen = '/mainScreen';
+
 
 }

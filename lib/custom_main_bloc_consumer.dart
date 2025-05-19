@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/core/routing/app_router.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
+import 'package:kamn/main/presentation/cubit/bottom_nav_bar_cubit.dart';
+import 'package:kamn/main/presentation/main_interface.dart';
 import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
 import 'package:kamn/playground_feature/authentication/presentation/screens/main_onboaring.dart';
 import 'package:kamn/playground_feature/authentication/presentation/screens/on_boarding_screen.dart';
@@ -41,14 +43,14 @@ class CustomMainBlocConsumer extends StatelessWidget {
       },
       builder: (context, state) {
         return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Kamn',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          onGenerateRoute: AppRouter.generateRoute,
-          home: _buildHomeWidget(state, appUserCubit));
+            debugShowCheckedModeBanner: false,
+            title: 'Kamn',
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,
+            ),
+            onGenerateRoute: AppRouter.generateRoute,
+            home: _buildHomeWidget(state, appUserCubit));
       },
     );
   }
@@ -62,8 +64,8 @@ class CustomMainBlocConsumer extends StatelessWidget {
     }
     if (state.isLoggedIn() || state.isGettedData() || state.isSuccess()) {
       return BlocProvider(
-        create:(context)=> getIt<SelectCategoryCubit>()..getPlaygrounds(),
-        child: const SelectCategoryScreen(),
+        create: (context) => getIt<BottomNavBarCubit>(),
+        child: const HomeMainInterface(),
       );
     }
     if (state.isNotLoggedIn() || state.isClearUserData()) {

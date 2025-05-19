@@ -30,6 +30,7 @@ import '../../gym_feature/gyms/data/datasources/gym_remote_data_source.dart'
 import '../../gym_feature/gyms/data/repo/gym_details_repo.dart' as _i1060;
 import '../../gym_feature/gyms/presentation/Cubit/gym_details/gymdetails_cubit.dart'
     as _i1027;
+import '../../main/presentation/cubit/bottom_nav_bar_cubit.dart' as _i1042;
 import '../../playground_feature/admin/data/data_source/analytics_data_source.dart'
     as _i366;
 import '../../playground_feature/admin/data/data_source/second_page_data_source.dart'
@@ -148,6 +149,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i174.SportsGroundViewModel>(
         () => _i174.SportsGroundViewModel());
     gh.factory<_i1042.OnboardingCubit>(() => _i1042.OnboardingCubit());
+    gh.factory<_i1042.BottomNavBarCubit>(() => _i1042.BottomNavBarCubit());
     gh.lazySingleton<_i304.FirebaseStorageServices>(
         () => _i304.FirebaseStorageServices());
     gh.lazySingleton<_i158.FirestoreService>(() => _i158.FirestoreService());

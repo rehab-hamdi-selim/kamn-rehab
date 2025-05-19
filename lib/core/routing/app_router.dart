@@ -15,6 +15,8 @@ import 'package:kamn/gym_feature/add_gym/presentation/cubits/track_submission/tr
 import 'package:kamn/gym_feature/add_gym/presentation/screens/select_plan_features_screen.dart';
 import 'package:kamn/gym_feature/gyms/presentation/pages/gyms_screen.dart';
 import 'package:kamn/gym_feature/add_gym/presentation/screens/track_gym_request_submission_screen.dart';
+import 'package:kamn/main/presentation/cubit/bottom_nav_bar_cubit.dart';
+import 'package:kamn/main/presentation/main_interface.dart';
 import 'package:kamn/playground_feature/authentication/presentation/cubits/on_boarding/onboarding_cubit.dart';
 import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
 import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_up_cubit/sign_up_cubit.dart';
@@ -346,6 +348,12 @@ class AppRouter {
           create: (context) => getIt<OnboardingCubit>(),
           child: const OnBoardingSelcetInteresting(),
         ));
+      case Routes.mainScreen:
+        return SlidePageRoute(
+            page: BlocProvider(
+        create: (context) => getIt<BottomNavBarCubit>(),
+              child: const HomeMainInterface(),
+            ));
 
       default:
         return MaterialPageRoute(
