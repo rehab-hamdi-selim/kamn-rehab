@@ -11,6 +11,7 @@ class SecureStorageHelper {
   static const String _userKey = 'user_data';
   static const String _firstTime = 'first_time';
   static const String _ratingListKey = 'ratingList';
+  static const String _interestedListKey = 'interestedList';
   static const String _gymIdKey = 'gym_id_key';
   static final _storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
 
@@ -133,10 +134,17 @@ class SecureStorageHelper {
     }
   }
 
-  static Future<void> saveStringList(List<String> list) async {
+  static Future<void> saveRatingList(List<String> list) async {
     final jsonString = jsonEncode(list);
     await _storage.write(
       key: _ratingListKey,
+      value: jsonString,
+    );
+  }
+  static Future<void> saveInterestedList(List<String> list) async {
+    final jsonString = jsonEncode(list);
+    await _storage.write(
+      key: _interestedListKey,
       value: jsonString,
     );
   }
