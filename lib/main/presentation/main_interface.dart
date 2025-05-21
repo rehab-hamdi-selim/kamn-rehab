@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/helping_lists.dart';
 import 'package:kamn/main/presentation/cubit/bottom_nav_bar_cubit.dart';
 import 'package:kamn/main/presentation/cubit/bottom_nav_bar_state.dart';
-import 'package:kamn/main/presentation/widgets/custom_app_bar.dart';
 import 'package:kamn/main/presentation/widgets/custom_category_pills.dart';
-import 'package:kamn/main/presentation/widgets/custom_drawer.dart';
 import 'package:kamn/main/presentation/widgets/custom_explore_text.dart';
 import 'package:kamn/main/presentation/widgets/custom_feature_card.dart';
 import 'package:kamn/main/presentation/widgets/custom_features_text.dart';
-import 'package:kamn/main/presentation/widgets/custom_nav_bar.dart';
 import 'package:kamn/main/presentation/widgets/custom_search_row.dart';
 import 'package:kamn/main/presentation/widgets/custom_subscription_text.dart';
 
@@ -22,10 +18,9 @@ class HomeMainInterface extends StatelessWidget {
     return BlocBuilder<BottomNavBarCubit, BottomNavBarState>(
       builder: (context, state) {
         return Scaffold(
-          appBar: const PreferredSize(
-              preferredSize: Size.fromHeight(100), child: CustomeAppBar()),
+        
           backgroundColor: Colors.white,
-          drawer: const CustomDrawer(),
+  
           body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -70,17 +65,7 @@ class HomeMainInterface extends StatelessWidget {
               ),
             ),
           ),
-          bottomNavigationBar: Padding(
-            padding: EdgeInsets.only(right: 35.w, left: 35.w, bottom: 15.h),
-            child: CustomBottomNavigationBar(
-              onTap: (int index) {
-                context
-                    .read<BottomNavBarCubit>()
-                    .updateCurrentIndex(index: index);
-              },
-              currentIndex: state.currentIndex,
-            ),
-          ),
+          
         );
       },
     );
