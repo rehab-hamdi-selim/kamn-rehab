@@ -25,53 +25,51 @@ class HomeMainInterface extends StatelessWidget {
           appBar: const PreferredSize(
               preferredSize: Size.fromHeight(100), child: CustomeAppBar()),
           backgroundColor: Colors.white,
-          drawer: const CustomDrawer(),
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const CustomSearchRow(),
-                    const SizedBox(height: 20),
-                    const CustomExploreText(),
-                    const SizedBox(height: 10),
-                    const CustomCategoryPills(),
-                    const SizedBox(height: 20),
-                    const CustomeFeaturesText(),
-                    const SizedBox(height: 15),
-                    ...List.generate(3, (int index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: customFeatureCard(
-                            featuresTitle[index],
-                            featuresDes[index],
-                            featuresImg[index],
-                            featuresColor[index]),
-                      );
-                    }),
-                    const SizedBox(height: 20),
-                    const CustomSubscriptionText(),
-                    const SizedBox(height: 15),
-                    customFeatureCard(
-                      'My Subscriptions',
-                      'Track your active services & add more',
-                      'assets/images/sunscription.png',
-                      const LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [Colors.transparent, Colors.black87],
-                      ),
+          drawer: const CustomDrawer(),extendBody: true,
+          body: Padding(
+            padding: const EdgeInsets.only(top:16.0,left: 16.0,right: 16.0),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const CustomSearchRow(),
+                  const SizedBox(height: 20),
+                  const CustomExploreText(),
+                  const SizedBox(height: 10),
+                  const CustomCategoryPills(),
+                  const SizedBox(height: 20),
+                  const CustomeFeaturesText(),
+                  const SizedBox(height: 15),
+                  ...List.generate(3, (int index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: customFeatureCard(
+                          featuresTitle[index],
+                          featuresDes[index],
+                          featuresImg[index],
+                          featuresColor[index]),
+                    );
+                  }),
+                  const SizedBox(height: 20),
+                  const CustomSubscriptionText(),
+                  const SizedBox(height: 15),
+                  customFeatureCard(
+                    'My Subscriptions',
+                    'Track your active services & add more',
+                    'assets/images/sunscription.png',
+                    const LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Colors.transparent, Colors.black87],
                     ),
-                    const SizedBox(height: 80),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 80),
+                ],
               ),
             ),
           ),
           bottomNavigationBar: Padding(
-            padding: EdgeInsets.only(right: 35.w, left: 35.w, bottom: 15.h),
+            padding: EdgeInsets.only(right: 30.w, left: 30.w, bottom: 32.h),
             child: CustomBottomNavigationBar(
               onTap: (int index) {
                 context
