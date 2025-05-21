@@ -20,7 +20,7 @@ class HomeMainInterface extends StatelessWidget {
         return Scaffold(
         
           backgroundColor: Colors.white,
-  
+          drawer: const CustomDrawer(),
           body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -65,7 +65,17 @@ class HomeMainInterface extends StatelessWidget {
               ),
             ),
           ),
-          
+          bottomNavigationBar: Padding(
+            padding: EdgeInsets.only(right: 35.w, left: 35.w, bottom: 15.h),
+            child: CustomBottomNavigationBar(
+              onTap: (int index) {
+                context
+                    .read<BottomNavBarCubit>()
+                    .updateCurrentIndex(index: index);
+              },
+              currentIndex: state.currentIndex,
+            ),
+          ),
         );
       },
     );
