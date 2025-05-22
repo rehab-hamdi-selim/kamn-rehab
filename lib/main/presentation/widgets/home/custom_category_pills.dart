@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kamn/main/presentation/widgets/custom_category_pill.dart';
+import 'package:kamn/main/presentation/widgets/home/custom_category_pill.dart';
 
 class CustomCategoryPills extends StatelessWidget {
   const CustomCategoryPills({

@@ -4,9 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kamn/core/const/sizes.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/main/presentation/widgets/become_kamn_partner.dart';
-import 'package:kamn/main/presentation/widgets/build_menu_item.dart';
-import 'package:kamn/main/presentation/widgets/custom_drawer_header.dart';
+import 'package:kamn/main/presentation/widgets/home/become_kamn_partner.dart';
+import 'package:kamn/main/presentation/widgets/home/build_menu_item.dart';
+import 'package:kamn/main/presentation/widgets/home/custom_drawer_header.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});

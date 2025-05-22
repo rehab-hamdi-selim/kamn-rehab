@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kamn/core/const/image_links.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/main/presentation/widgets/custom_gradiant_text.dart';
-import 'package:kamn/main/presentation/widgets/custom_menu_container.dart';
+import 'package:kamn/main/presentation/widgets/home/custom_gradiant_text.dart';
+import 'package:kamn/main/presentation/widgets/home/custom_menu_container.dart';
 
 class CustomeAppBar extends StatelessWidget {
   const CustomeAppBar({

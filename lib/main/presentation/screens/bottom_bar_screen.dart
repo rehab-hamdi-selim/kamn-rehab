@@ -3,10 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/main/presentation/cubit/bottom_nav_bar_cubit.dart';
 import 'package:kamn/main/presentation/cubit/bottom_nav_bar_state.dart';
-import 'package:kamn/main/presentation/main_interface.dart';
-import 'package:kamn/main/presentation/widgets/custom_app_bar.dart';
-import 'package:kamn/main/presentation/widgets/custom_drawer.dart';
-import 'package:kamn/main/presentation/widgets/custom_nav_bar.dart';
+import 'package:kamn/main/presentation/screens/explore_screen.dart';
+import 'package:kamn/main/presentation/screens/main_interface.dart';
+import 'package:kamn/main/presentation/widgets/home/custom_app_bar.dart';
+import 'package:kamn/main/presentation/widgets/home/custom_drawer.dart';
+import 'package:kamn/main/presentation/widgets/home/custom_nav_bar.dart';
 
 class BottomBarScreen extends StatefulWidget {
   const BottomBarScreen({super.key});
@@ -19,9 +20,10 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-              drawer: const CustomDrawer(),
+      extendBody: true,
+      drawer: const CustomDrawer(),
       appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(100),
+        preferredSize: Size.fromHeight(120),
         child: CustomeAppBar(),
       ),
       body: BlocBuilder<BottomNavBarCubit, BottomNavBarState>(
@@ -29,6 +31,9 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
           return IndexedStack(
             index: state.currentIndex,
             children: const [
+              HomeMainInterface(),
+              ExploreScreen(),
+              HomeMainInterface(),
               HomeMainInterface(),
             ],
           );
