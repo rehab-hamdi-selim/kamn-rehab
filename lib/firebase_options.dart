@@ -60,6 +60,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '949016351169',
     projectId: 'kamn-5ad5c',
     storageBucket: 'kamn-5ad5c.appspot.com',
+    androidClientId: '949016351169-02b5m9mathhlupp5tilp1itijp2nss4h.apps.googleusercontent.com',
+    iosClientId: '949016351169-a44hc6ss8g93jp7p5q4kupe8u0nvnjj7.apps.googleusercontent.com',
     iosBundleId: 'com.example.kamn',
   );
 
