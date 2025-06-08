@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kamn/core/const/image_links.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/main/presentation/widgets/custom_gradiant_text.dart';
-import 'package:kamn/main/presentation/widgets/custom_menu_container.dart';
+import 'package:kamn/main/presentation/widgets/home/custom_gradiant_text.dart';
+import 'package:kamn/main/presentation/widgets/home/custom_menu_container.dart';
 import 'package:sliver_snap/sliver_snap.dart';
 
 class MyHomePage extends StatefulWidget {
