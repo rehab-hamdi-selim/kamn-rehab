@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kamn/core/common/cubit/app_user/app_user_state.dart';
 import 'package:kamn/core/routing/app_router.dart';
 import 'package:kamn/core/utils/show_snack_bar.dart';
+import 'package:kamn/main/presentation/screens/bottom_bar_screen.dart';
 import 'package:kamn/main/presentation/cubit/bottom_nav_bar_cubit.dart';
-import 'package:kamn/main/presentation/main_interface.dart';
+import 'package:kamn/main/presentation/screens/main_interface.dart';
 import 'package:kamn/playground_feature/authentication/presentation/cubits/sign_in_cubit/sign_in_cubit.dart';
 import 'package:kamn/playground_feature/authentication/presentation/screens/main_onboaring.dart';
 import 'package:kamn/playground_feature/authentication/presentation/screens/on_boarding_screen.dart';
@@ -50,7 +51,9 @@ class CustomMainBlocConsumer extends StatelessWidget {
               useMaterial3: true,
             ),
             onGenerateRoute: AppRouter.generateRoute,
-            home: _buildHomeWidget(state, appUserCubit));
+            home: const BottomBarScreen());
+            
+            //_buildHomeWidget(state, appUserCubit));
       },
     );
   }
