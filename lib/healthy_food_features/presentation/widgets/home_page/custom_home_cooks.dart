@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:kamn/core/const/icon_links.dart';
 import 'package:kamn/core/theme/app_pallete.dart';
 import 'package:kamn/core/theme/style.dart';
-import 'package:kamn/healthy_food_features/data/models/food_item_model.dart';
 import 'package:kamn/healthy_food_features/data/models/test_meal_model.dart';
 import 'package:kamn/healthy_food_features/presentation/screens/food_details_screen.dart';
 
