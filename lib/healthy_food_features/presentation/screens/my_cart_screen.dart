@@ -43,7 +43,8 @@ class MyCartScreen extends StatelessWidget {
                       final item = state.cartView[index];
 
                       return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        //hjvhch
+                        padding: EdgeInsets.symmetric(vertical: 8),
                         child: CardMycart(key: ObjectKey(item), item: item),
                       );
                     },

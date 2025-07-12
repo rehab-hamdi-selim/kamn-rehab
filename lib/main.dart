@@ -51,33 +51,33 @@ import 'package:kamn/init_dependencies.dart';
 
 import 'core/common/cubit/firebase_remote_config/firebase_remote_config_cubit.dart';
 
-// void main() {
-//   runApp(DashboardApp());
-// }
-//
-// class DashboardApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return ScreenUtilInit(
-//       designSize: Size(375, 812),
-//      minTextAdapt: true,
-//          splitScreenMode: true,
-//       builder: (context, child) {
-//         return MaterialApp(
-//           home: MyCartScreen(),
-//           debugShowCheckedModeBanner: false,
-//           builder: (context, widget) {
-//             // Optional: prevent font scaling across devices
-//             return MediaQuery(
-//               data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-//               child: widget!,
-//             );
-//           },
-//         );
-//       },
-//     );
-//   }
-// }
+void main() {
+  runApp(DashboardApp());
+}
+
+class DashboardApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ScreenUtilInit(
+      designSize: Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          home: MyCartScreen(),
+          debugShowCheckedModeBanner: false,
+          builder: (context, widget) {
+            // Optional: prevent font scaling across devices
+            return MediaQuery(
+              data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+              child: widget!,
+            );
+          },
+        );
+      },
+    );
+  }
+}
 
 void main() async {
   await initDependencies();
@@ -89,34 +89,34 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => getIt<AppUserCubit>()
-            ..getUser(uid: "uGTn2GsdCMeTTjsrIERAfbLXaYW2"),
-        ),
-        BlocProvider(create: (context) => CartCubit()),
-        BlocProvider(
-          create: (context) => OrderCubit(OrderRepositoryImpl()),
-        ),
-        BlocProvider(
-            create: (context) => TestMealsCubit(TestMealsRepositoryImpl(
-                TestMealsDataSourceImpl(FirebaseFirestore.instance)))),
-      ],
-      child: const ScreenUtilInit(
-        designSize: Size(375, 812),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        child: CustomMainBlocConsumer(),
-      ),
-    );
-  }
-}
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return MultiBlocProvider(
+//       providers: [
+//         BlocProvider(
+//           create: (context) => getIt<AppUserCubit>()
+//             ..getUser(uid: "uGTn2GsdCMeTTjsrIERAfbLXaYW2"),
+//         ),
+//         BlocProvider(create: (context) => CartCubit()),
+//         BlocProvider(
+//           create: (context) => OrderCubit(OrderRepositoryImpl()),
+//         ),
+//         BlocProvider(
+//             create: (context) => TestMealsCubit(TestMealsRepositoryImpl(
+//                 TestMealsDataSourceImpl(FirebaseFirestore.instance)))),
+//       ],
+//       child: const ScreenUtilInit(
+//         designSize: Size(375, 812),
+//         minTextAdapt: true,
+//         splitScreenMode: true,
+//         child: CustomMainBlocConsumer(),
+//       ),
+//     );
+//   }
+// }
 
 // BlocListener<AppUserCubit, AppUserState>(
 //             listener: (context, state) async {
