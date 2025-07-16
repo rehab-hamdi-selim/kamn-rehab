@@ -1,55 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:kamn/core/common/class/custom_splash_screen.dart';
-// import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
-// import 'package:kamn/core/di/di.dart';
-// import 'package:kamn/core/routing/routes.dart';
-// import 'package:kamn/custom_main_bloc_consumer.dart';
-// import 'package:kamn/healthy_food_features/presentation/screens/order_screen.dart';
-// import 'package:kamn/init_dependencies.dart';
-// import 'core/common/cubit/firebase_remote_config/firebase_remote_config_cubit.dart';
-// import 'healthy_food_features/presentation/screens/searching_ui_screen.dart';
-
-// void main() {
-//   runApp(
-//     ScreenUtilInit(
-//       designSize: const Size(375, 812), // Adjust based on your design
-//       minTextAdapt: true,  // Ensures proper text scaling
-//       builder: (context, child) {
-//         return MaterialApp(
-//           debugShowCheckedModeBanner: false,
-//           home: SearchingUiScreen(),
-//         );
-//       },
-//     ),
-//   );
-// }
-
-// ignore_for_file: use_build_context_synchronously
-
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:kamn/core/common/cubit/app_user/app_user_cubit.dart';
-import 'package:kamn/core/common/cubit/cubit/cart_cubit.dart';
-import 'package:kamn/core/di/di.dart';
-import 'package:kamn/custom_main_bloc_consumer.dart';
-import 'package:kamn/healthy_food_features/data/data_sources/test_meals_data_source.dart';
-import 'package:kamn/healthy_food_features/data/repositories/order_repo.dart';
-import 'package:kamn/healthy_food_features/data/repositories/test_meals_repository_impl.dart';
-import 'package:kamn/healthy_food_features/domain/repositories/test_meals_repository.dart';
-import 'package:kamn/healthy_food_features/presentation/cubit/order_cubit.dart';
-import 'package:kamn/healthy_food_features/presentation/cubit/test_meals_cubit.dart';
 import 'package:kamn/healthy_food_features/presentation/screens/my_cart_screen.dart';
-import 'package:kamn/healthy_food_features/presentation/screens/order_screen.dart';
-import 'package:kamn/init_dependencies.dart';
-
-import 'core/common/cubit/firebase_remote_config/firebase_remote_config_cubit.dart';
 
 void main() {
   runApp(DashboardApp());
@@ -79,15 +32,15 @@ class DashboardApp extends StatelessWidget {
   }
 }
 
-void main() async {
-  await initDependencies();
-  configureDependencies();
-  // runApp(  DevicePreview(
-  //   enabled: !kReleaseMode,
-  //   builder: (context) => const MyApp(), // Wrap your app
-  // ),);
-  runApp(const MyApp());
-}
+// void main() async {
+//   await initDependencies();
+//   configureDependencies();
+//   // runApp(  DevicePreview(
+//   //   enabled: !kReleaseMode,
+//   //   builder: (context) => const MyApp(), // Wrap your app
+//   // ),);
+//   runApp(const MyApp());
+// }
 
 // class MyApp extends StatelessWidget {
 //   const MyApp({super.key});
